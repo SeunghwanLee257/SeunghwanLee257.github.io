@@ -40,9 +40,31 @@
       font-size: 0.9rem;
       color: #414141;
     }
+    .lang-switch {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: #ffffff;
+      color: #d38334;
+      border: 2px solid #d38334;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease-in-out;
+      z-index: 1000;
+    }
+    .lang-switch:hover {
+      background-color: #d38334;
+      color: #fff;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
+  <a class="lang-switch" href="index_eng.html">US English</a>
   <header>
     <h1>🟫 WaLLLnut – 개인이 보호받는 안전한 세상을 위해</h1>
     <p>"AI와 로봇의 시대, 데이터 연산과 시스템 제어는 보호받으며 수행되어야 합니다."</p>
