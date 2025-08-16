@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WaLLLnut — Landing</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Icons / Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css" />
+
+  <!-- JS -->
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+  <!-- Skip link -->
+  <a href="#main" class="sr-only-focusable">본문으로 바로가기</a>
+
+  <!-- 고정 헤더 -->
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="주요 섹션">
+      <a href="#sec03">Technology</a>
+      <a href="#sec04">Service</a>
+      <a href="#sec05">Goal</a>
+      <a href="#sec06">Experience</a>
+      <a href="#sec07">Team</a>
+      <a href="#sec08">Advisors</a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- 섹션 01: 배너 / 카운트다운 -->
+    <section id="sec01" class="container" aria-labelledby="countdown-heading">
+      <div class="count-wrap" aria-label="countdown">
+        <div class="time-box" data-unit="days" title="hover 시 해당 유닛만 일시정지">
+          <div class="time-value" id="days">365</div>
+          <div class="time-label">DAYS</div>
+        </div>
+        <div class="time-box" data-unit="hours">
+          <div class="time-value" id="hours">24</div>
+          <div class="time-label">HOURS</div>
+        </div>
+        <div class="time-box" data-unit="seconds">
+          <div class="time-value" id="seconds">59</div>
+          <div class="time-label">SECONDS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션 02: 띠지 -->
+    <section id="sec02" aria-label="Slogan">
+      <div class="strip" role="img" aria-label="Green nature banner">
+        <p>
+          WaLLLnut’s vision is to ensure both <strong>“transparency”</strong> and <strong>“confidentiality”</strong> of data in the
+          next-generation internet infrastructure.
+        </p>
+      </div>
+    </section>
+
+    <!-- 섹션 03: Our Technology -->
+    <section id="sec03" class="container" aria-labelledby="tech-label">
+      <h2 id="tech-label" class="section-label">01. Our Technology</h2>
+
+      <!-- 부모 A -->
+      <div class="tech-split" role="tablist" aria-label="Technology Panels">
+        <!-- 자식 a (기본: 활성화) -->
+        <article
+          class="tech-panel active"
+          id="panel-a"
+          role="tabpanel"
+          aria-labelledby="tab-a"
+          aria-hidden="false"
+        >
+          <!-- 비활성 헤더(기본 활성이라 숨김) -->
+          <div class="inactive-head" aria-hidden="true">
+            <span class="inactive-title">
+              a. Technology
+              <span class="material-icons" aria-hidden="true">arrow_left</span>
+            </span>
+          </div>
+
+          <!-- 활성 콘텐츠 -->
+          <div class="inner">
+            <header class="content">
+              <h3 class="tech-title-lg" id="tab-a">Deterministic FHE16-based
+                Ultra-Low-Latency Bootstrapping</h3>
+              <p class="tech-subtitle">A 16-bit integer computation–centric deterministic FHE structure
+                that eliminates floating-point operations,
+                ensuring identical results regardless of the execution environment</p>
+              <p class="tech-body">
+                Achieves 2.89 ms bootstrapping through GINX gate 
+                optimization (suitable for real-time and low-latency applications) 
+                Structurally eliminates floating-point environment-specific error issues
+              </p>
+              <p class="tech-ref">Reference: ePrint 2024/1916</p>
+            </header>
+          </div>
+
+          <!-- 액션 영역 -->
+          <div class="actions morebtn">
+            <span class="action-icon" aria-hidden="true">
+              <span class="material-icons" aria-hidden="true">insights</span>
+            </span>
+            <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기">더보기</button>
+          </div>
+
+          <!-- 우하단 이미지 (데코레이션) -->
+          <img class="panel-thumb" src="" alt="" loading="lazy" />
+        </article>
+
+        <!-- 자식 b (기본: 비활성 + 배경 #DEDBD8) -->
+        <article
+          class="tech-panel inactive"
+          id="panel-b"
+          role="tabpanel"
+          aria-labelledby="tab-b"
+          aria-hidden="true"
+        >
+          <div class="inactive-head">
+            <span class="inactive-title">
+              b. Confidential Layer
+              <span class="material-icons" aria-hidden="true">arrow_left</span>
+            </span>
+          </div>
+
+          <div class="inner">
+            <header class="content">
+              <h3 class="tech-title-lg" id="tab-b">FHE16-based MPC (SSFHE)</h3>
+              <p class="tech-subtitle">Combines FHE16 with SPDZ-style LSSS-MPC to perform FHE encryption
+                and decryption within the MPC environment</p>
+              <p>Key Features</p>
+              <p class="tech-body">
+                Online phase: O(1) complexity for communication, computation, rounds, and input size
+                Offline phase: Only evaluation key (ev) generation required at O(n κ d²) complexity
+                CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)
+                Guarantees Circuit Privacy with active security in a dishonest majority setting
+              </p>
+              <p class="tech-ref">Reference: ePrint 2024/1916</p>
+            </header>
+          </div>
+
+          <div class="actions morebtn">
+            <span class="action-icon" aria-hidden="true">
+              <span class="material-icons" aria-hidden="true">lock</span>
+            </span>
+            <button class="more-btn" type="button" aria-label="Confidential Layer 더보기">더보기</button>
+          </div>
+
+          <img class="panel-thumb" src="" alt="" loading="lazy" />
+        </article>
+      </div>
+    </section>
+
+<!-- 섹션 04: Our Service (슬라이드) -->
+<section id="sec04" class="container" aria-labelledby="service-label">
+    <h2 id="service-label" class="section-label">02. Our Service</h2>
+  
+    <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
+      <div class="svc-track" id="svc-track">
+        <!-- Slide 1 -->
+        <article class="svc-item" aria-roledescription="slide" aria-current="true">
+          <div class="svc-top">
+            <!-- 왼쪽 고정 박스 (모든 슬라이드에 동일하게 위치) -->
+            <div class="svc-a" aria-hidden="true">
+              <!-- 내부 이미지 슬라이더 -->
+              <div class="svc-image-slider" id="svc-image-slider">
+                <div class="svc-image-item"></div>
+                <div class="svc-image-item"></div>
+                <div class="svc-image-item"></div>
+                <div class="svc-image-item"></div>
+              </div>
+            </div>
+
+            <!-- 반드시 class="svc-right" -->
+            <div class="svc-right">
+              <div class="svc-b">
+                <h3 class="svc-title">Confidential Layer</h3>
+                <p class="svc-desc">
+                  Normal transactions stay on-chain, while sensitive data/compute run
+                  in a confidential FHE layer—keeping state public.
+                </p>
+              </div>
+    
+              <div class="svc-bot">
+                <div class="svc-c">
+                  <img src="./asset/slide01.png" alt=""  style="width: ;"/>
+                  <div class="svc-c-meta">
+                    <div class="svc-c-title">Keyword</div>
+                    <div class="svc-c-title2">Hide</div>
+                    <div class="svc-c-ref">Encrypted data stays hidden</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+  
+        <!-- Slide 2 -->
+        <article class="svc-item" aria-roledescription="slide">
+          <div class="svc-top">
+            <div class="svc-a" aria-hidden="true"></div>
+            <div class="svc-right">
+              <div class="svc-b">
+                <h3 class="svc-title">Deterministic FHE</h3>
+                <p class="svc-desc">Ultra-low-latency bootstrapping with on-chain verifiability.</p>
+              </div>
+              <div class="svc-bot">
+                <div class="svc-c">
+                  <img src="./asset/slide02.png" alt="" />
+                  <div class="svc-c-meta">
+                    <div class="svc-c-title">Latency</div>
+                    <div class="svc-c-title2">Ultra Low</div>
+                    <div class="svc-c-ref">Internal benchmark references</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+  
+        <!-- Slide 3 -->
+        <article class="svc-item" aria-roledescription="slide">
+          <div class="svc-top">
+            <div class="svc-a" aria-hidden="true"></div>
+            <div class="svc-right">
+              <div class="svc-b">
+                <h3 class="svc-title">Another Service</h3>
+                <p class="svc-desc">Describe another capability with public docs/state.</p>
+              </div>
+              <div class="svc-bot">
+                <div class="svc-c">
+                  <img src="./asset/slide03.png" alt="" />
+                  <div class="svc-c-meta">
+                    <div class="svc-c-title">Status</div>
+                    <div class="svc-c-title2">Public</div>
+                    <div class="svc-c-ref">Open documentation available</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 4 -->
+        <article class="svc-item" aria-roledescription="slide">
+            <div class="svc-top">
+              <div class="svc-a" aria-hidden="true"></div>
+              <div class="svc-right">
+                <div class="svc-b">
+                  <h3 class="svc-title">Another Service</h3>
+                  <p class="svc-desc">Describe another capability with public docs/state.</p>
+                </div>
+                <div class="svc-bot">
+                  <div class="svc-c">
+                    <img src="./asset/slide04.png" alt="" />
+                    <div class="svc-c-meta">
+                      <div class="svc-c-title">Status</div>
+                      <div class="svc-c-title2">Public</div>
+                      <div class="svc-c-ref">Open documentation available</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </article>            
+      </div>
+  
+      <!-- 고정 컨트롤러(트랙 밖) -->
+      <div class="svc-cont">
+        <button class="svc-btn is-gray" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
+        <button class="svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
+        <button class="svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
+        <button class="svc-btn is-gray" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
+      </div>
+    </div>
+</section>
+  
+
+
+<!-- 섹션 05: Our Goal (큰 섹션 내부 타이틀 포함) -->
+<section id="sec05" class="container dot-bg" aria-labelledby="goal-label">
+    <div class="goal-wrap">
+      <h2 id="goal-label" class="section-label">03. Our Goal</h2>
+      <div class="goal-frame" aria-hidden="true">
+        <!-- 오렌지 손글씨 이미지를 실제 이미지로 교체하거나 임시로 텍스트 사용 -->
+        <span class="h3">Confidential Layer</span>
+      </div>
+      <div class="goal-caption">
+        <p class="p">
+          This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC), 
+          and Threshold Cryptography to enable the execution of verifiable computations 
+          on the blockchain while keeping sensitive data in a confidential state.
+        </p>
+      </div>
+      
+      <!-- 드롭다운 카드들 추가 -->
+      <div class="goal-dropdown-container">
+        <div class="goal-dropdown-card">
+          <button class="goal-dropdown-header" aria-expanded="false">
+            <span class="goal-dropdown-question">
+              What does Walnut actually do—and what are we confident about? 🫥💪
+            </span>
+            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="goal-dropdown-content">
+            <p class="goal-dropdown-text">
+              We're a research-driven company building on quantum-resistant FHE (Fully Homomorphic Encryption) 
+              and MPC (Multi-Party Computation) to make data security sustainable—decrypting only when necessary 
+              and extracting statistical insights when possible. 📊📈
+            </p>
+          </div>
+        </div>
+        
+        <div class="goal-dropdown-card">
+          <button class="goal-dropdown-header" aria-expanded="false">
+            <span class="goal-dropdown-question">
+              Hashes for Walnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
+            </span>
+            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="goal-dropdown-content">
+            <p class="goal-dropdown-text">
+              [드롭다운 내용을 여기에 추가하세요]
+            </p>
+          </div>
+        </div>
+        
+        <div class="goal-dropdown-card">
+          <button class="goal-dropdown-header" aria-expanded="false">
+            <span class="goal-dropdown-question">
+              So, what's in Walnut's product lineup? 🚀
+            </span>
+            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="goal-dropdown-content">
+            <p class="goal-dropdown-text">
+              [드롭다운 내용을 여기에 추가하세요]
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- 섹션 06: Our Experience -->
+    <section id="sec06" class="container" aria-labelledby="exp-label">
+        <h2 id="exp-label" class="section-label">04. Our Experience</h2>
+        
+        <!-- Property Section -->
+        <div class="property-container">
+            <div class="property-content">
+                <h3 class="property-title">waLLLnut's<br>Property<br>is,</h3>
+                
+                <div class="images-container">
+                    <div class="main-image">
+                        👥 Development Team Working
+                    </div>
+                    <div class="small-image">
+                        💻 Live Demo<br>Screen
+                    </div>
+                </div>
+            </div>
+
+            <ul class="property-features">
+                <li>Each private state is deterministically encrypted under FHE16 and recorded on-chain</li>
+                <li>Any state change can be verified by all network participants</li>
+                <li>State disclosure is propagated across the network via a Threshold Decryption protocol</li>
+            </ul>
+
+            <div class="architecture-diagram">
+                <div class="diagram-container">
+                    <div class="layer svm">Solana Mainchain (SVM)</div>
+                    <div class="layer accounts">Accounts</div>
+                    <div class="layer state-public">State Account (Public)</div>
+                    <div class="layer program-public">Program Account (Public)</div>
+                    <div class="layer program-conf">Program Account (Confidential)</div>
+                    <div class="layer state-conf">State Account (Confidential)</div>
+                    <div class="layer confidential">FHE CoProcessor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases Section -->
+        <div class="use-cases-section">
+            <div class="use-cases-title">Use Cases</div>
+            
+            <div class="use-case">
+                <h4 class="use-case-title">Protecting DeFi transaction data and preventing MEV</h4>
+                <p class="use-case-desc">Keep your crypto trades private so others can't peek at your orders.<br>Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</p>
+            </div>
+
+            <div class="use-case">
+                <h4 class="use-case-title">On-chain voting (selective anonymity + public verifiability)</h4>
+                <p class="use-case-desc">Vote on the blockchain while your identity and choice stay private.<br>Anyone can still verify the overall results are real.</p>
+            </div>
+
+            <div class="use-case">
+                <h4 class="use-case-title">Data marketplaces (perform computations without revealing raw data)</h4>
+                <p class="use-case-desc">Buy and sell insights without handing over your raw data.<br>The marketplace runs computations on protected data, so the originals stay private.</p>
+            </div>
+
+            <div class="use-case">
+                <h4 class="use-case-title">Privacy-preserving messaging/SNS</h4>
+                <p class="use-case-desc">Chat and share on social without giving up your privacy.<br>Your content stays encrypted, and you decide who sees what.</p>
+            </div>
+        </div>
+
+        <!-- Roadmap Section -->
+        <div class="roadmap-section">
+            <h2 class="roadmap-title">Roadmap</h2>
+            
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <div class="roadmap-date ongoing">Dec 2026</div>
+                    <div class="roadmap-content">
+                        Launch of SVM-based Confidential<br>Layer module
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-date">Dec 2027</div>
+                    <div class="roadmap-content">
+                        Launch of EVM-based Confidential<br>Layer module
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 섹션 07: Team Member (섹션 여백 없음) -->
+    <section id="sec07" class="container" aria-labelledby="team-label">
+        <h2 id="team-label" class="section-label">05. Team Member</h2>
+        
+        <div class="team-grid">
+            <!-- CEO -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-male">👨‍💼</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Seunghwan Lee (CEO)</div>
+                    <p class="member-description">
+                        Ph.D. in Electronic Engineering, Hanyang University;<br>
+                        Leads FHE16 R&D
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTO -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-male">👨‍💻</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Dohyuk Kim (CTO)</div>
+                    <p class="member-description">
+                        Ph.D. Candidate in Electronic Engineering, Hanyang University;<br>
+                        Experience in FHE commercialization and delivery
+                    </p>
+                </div>
+            </div>
+
+            <!-- CSO -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-male">👨‍🎓</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Dong-Joon Shin (CSO)</div>
+                    <p class="member-description">
+                        Professor of Electronic Engineering, Hanyang University;<br>
+                        Extensive academic-industry networking
+                    </p>
+                </div>
+            </div>
+
+            <!-- Yunsik Ham -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-male">👨‍⚡</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Yunsik Ham</div>
+                    <p class="member-description">
+                        Lead Blockchain Developer;<br>
+                        Experience leading multiple ZK + blockchain projects
+                    </p>
+                </div>
+            </div>
+
+            <!-- Youngjun Kim -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-male">👨‍🔧</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Youngjun Kim</div>
+                    <p class="member-description">
+                        Cryptography & Server Developer;<br>
+                        Experience in LWE coding and network implementation
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kiin Shin -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-female">👩‍🔬</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Kiin Shin</div>
+                    <p class="member-description">
+                        Ph.D. in Electronic Engineering, Hanyang University;<br>
+                        Leads FHE16 R&D
+                    </p>
+                </div>
+            </div>
+
+            <!-- Jin Shin -->
+            <div class="team-member">
+                <div class="member-avatar">
+                    <div class="avatar-female">👩‍⚗️</div>
+                </div>
+                <div class="member-info">
+                    <div class="member-name-role">Jin Shin</div>
+                    <p class="member-description">
+                        Ph.D. in Electronic Engineering, Hanyang University;<br>
+                        Leads FHE16 R&D
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 섹션 08: Advisors (배경 F2F2F2) -->
+    <section id="sec08" aria-labelledby="advisors-label">
+      <div class="container">
+
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer role="contentinfo">
+    <div class="container">
+      © 2025 WaLLLnut · All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
