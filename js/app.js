@@ -1,261 +1,429 @@
-// app.js
-(() => {
-    /* =========================
-       Section 01: Countdown
-       - 각 박스 hover 시 해당 유닛만 일시 정지
-       - 터치도 지원 (touchstart/touchend)
-       ========================= */
-    const daysEl   = document.getElementById('days');
-    const hoursEl  = document.getElementById('hours');
-    const secondsEl= document.getElementById('seconds');
-  
-    if (daysEl && hoursEl && secondsEl) {
-      // 필요 시 실제 목표 날짜/시간으로 바꿔줘
-      // 예: const TARGET = new Date('2025-12-01T00:00:00+09:00');
-      const TARGET = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000); // 임시 365일 후
-  
-      const paused = { days:false, hours:false, seconds:false };
-  
-      function setPauseHandlers(box) {
-        const unit = box.getAttribute('data-unit');
-        if (!unit) return;
-        const on = () => (paused[unit] = true);
-        const off = () => (paused[unit] = false);
-        box.addEventListener('mouseenter', on);
-        box.addEventListener('mouseleave', off);
-        box.addEventListener('touchstart', on, {passive:true});
-        box.addEventListener('touchend', off, {passive:true});
-        box.addEventListener('touchcancel', off, {passive:true});
-      }
-      document.querySelectorAll('.time-box').forEach(setPauseHandlers);
-  
-      function render() {
-        const now = new Date();
-        let diff = Math.max(0, Math.floor((TARGET - now) / 1000)); // 남은 초
-        const days = Math.floor(diff / 86400); diff %= 86400;
-        const hours = Math.floor(diff / 3600); diff %= 3600;
-        // 분은 UI에 없으므로 스킵
-        const seconds = diff % 60;
-  
-        if (!paused.days)    daysEl.textContent    = String(days);
-        if (!paused.hours)   hoursEl.textContent   = String(hours).padStart(2,'0');
-        if (!paused.seconds) secondsEl.textContent = String(seconds).padStart(2,'0');
-      }
-  
-      render();
-      setInterval(render, 1000);
-    }
-  
-    /* =========================
-       Section 03: Tech Split (a/b 토글)
-       - 비활성 패널 클릭 시 활성 전환
-       - 키보드 접근성(Enter/Space)
-       ========================= */
-    const panelA = document.getElementById('panel-a');
-    const panelB = document.getElementById('panel-b');
-  
-    function activate(panel, other) {
-      if (!panel || !other) return;
-      panel.classList.add('active');   panel.classList.remove('inactive');
-      other.classList.remove('active'); other.classList.add('inactive');
-      panel.setAttribute('aria-hidden', 'false');
-      other.setAttribute('aria-hidden', 'true');
-    }
-  
-    function wirePanel(panel, other) {
-      if (!panel) return;
-      panel.setAttribute('tabindex', '0');
-  
-      panel.addEventListener('click', (e) => {
-        // 내부 버튼 클릭 시 패널 토글 방지
-        if (e.target.closest('.more-btn')) return;
-        if (panel.classList.contains('inactive')) activate(panel, other);
-      });
-  
-      panel.addEventListener('keydown', (e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && panel.classList.contains('inactive')) {
-          e.preventDefault();
-          activate(panel, other);
-        }
-      });
-    }
-  
-    if (panelA && panelB) {
-      // 초기 상태: a 활성, b 비활성
-      activate(panelA, panelB);
-      wirePanel(panelA, panelB);
-      wirePanel(panelB, panelA);
-      // 더보기 버튼 기본 방지(동작은 추후 연결)
-      document.querySelectorAll('.more-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          // TODO: 링크 이동/모달 등 연결
-        });
-      });
-    }
-  
+/* =========================================================
+   WaLLLnut Landing - App Script (i18n + UI, safe edition)
+   ========================================================= */
+(function () {
+  'use strict';
 
-    // Service Slider Control
-document.addEventListener('DOMContentLoaded', function() {
-    const contentTrack = document.getElementById('svc-track');
-    const imageSlider = document.getElementById('svc-image-slider');
-    const slides = contentTrack.querySelectorAll('.svc-item');
-    const totalSlides = slides.length;
-    
-    let currentIndex = 0;
-    
-    // 버튼 요소들
-    const prevBtn = document.getElementById('svc-prev');
-    const nextBtn = document.getElementById('svc-next');
-    const firstBtn = document.getElementById('svc-first');
-    const lastBtn = document.getElementById('svc-last');
-    
-    // 슬라이드 이동 함수
-    function moveToSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= totalSlides) index = totalSlides - 1;
-      
-      currentIndex = index;
-      
-      // 메인 컨텐츠 슬라이더 이동
-      const translateX = -currentIndex * 100;
-      contentTrack.style.transform = `translateX(${translateX}%)`;
-      
-      // 왼쪽 이미지 슬라이더도 동시 이동 (첫 번째 슬라이드에만 있음)
-      if (imageSlider) {
-        imageSlider.style.transform = `translateX(${translateX}%)`;
+  /* -------- Helpers -------- */
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
+  var stripTags = function (h) { return String(h).replace(/<[^>]*>/g, ''); };
+  var norm = function (s) { return String(s).replace(/\s+/g, ' ').trim(); };
+
+  /* -------- i18n -------- */
+  var LANG_CODES = { en: 'eng', ko: 'kor' };
+  // 기존 딕셔너리가 window.I18N로 이미 주입돼 있다고 가정
+  var baseI18N = window.I18N || {};
+  window.I18N = baseI18N;
+
+  /* 번역 제외 */
+  var I18N_EXCLUDE = [
+    '.material-icons',
+    '.svc-title',
+    '.property-title',
+    '.inactive-title',
+    '.goal-dropdown-icon'
+  ];
+  var EXCLUDE_SELECTOR = I18N_EXCLUDE.join(',');
+
+  function isExcluded(el) {
+    if (!el) return false;
+    if (EXCLUDE_SELECTOR && el.closest(EXCLUDE_SELECTOR)) return true;
+    if (el.hasAttribute('data-no-i18n')) return true;
+    return false;
+  }
+
+  if (typeof window.applyI18n !== 'function') {
+    window.applyI18n = function applyI18n(lang) {
+      var fb = 'en';
+      document.documentElement.setAttribute('lang', lang);
+
+      if (EXCLUDE_SELECTOR) {
+        $$(EXCLUDE_SELECTOR).forEach(function (el) { el.removeAttribute('data-i18n'); });
       }
-      
-      // aria-current 업데이트
-      slides.forEach((slide, i) => {
-        slide.setAttribute('aria-current', i === currentIndex ? 'true' : 'false');
+
+      $$('[data-i18n]').forEach(function (el) {
+        if (isExcluded(el)) return;
+        var key = el.getAttribute('data-i18n');
+        var val =
+          (window.I18N[lang] && window.I18N[lang][key]) ||
+          (window.I18N[fb] && window.I18N[fb][key]) ||
+          '';
+        if (val) el.innerHTML = val;
       });
-      
-      // 버튼 상태 업데이트
-      updateButtonStates();
+    };
+  }
+
+  function getSavedLang() { try { return localStorage.getItem('lang'); } catch (e) { return null; } }
+  function saveLang(v) { try { localStorage.setItem('lang', v); } catch (e) {} }
+
+  function setLanguage(lang) {
+    saveLang(lang);
+    window.applyI18n(lang);
+    var btnText = $('#langBtnText');
+    if (btnText) btnText.textContent = LANG_CODES[lang] || lang;
+    var menu = $('#langMenu');
+    if (menu) {
+      $$('#langMenu [role="option"]').forEach(function (li) {
+        li.setAttribute('aria-selected', li.getAttribute('data-lang') === lang ? 'true' : 'false');
+      });
     }
-    
-    // 버튼 상태 업데이트
-    function updateButtonStates() {
-      // 첫 번째/이전 버튼
-      if (currentIndex === 0) {
-        firstBtn.classList.add('is-gray');
-        prevBtn.classList.add('is-gray');
-      } else {
-        firstBtn.classList.remove('is-gray');
-        prevBtn.classList.remove('is-gray');
-      }
-      
-      // 마지막/다음 버튼
-      if (currentIndex === totalSlides - 1) {
-        lastBtn.classList.add('is-gray');
-        nextBtn.classList.add('is-gray');
-      } else {
-        lastBtn.classList.remove('is-gray');
-        nextBtn.classList.remove('is-gray');
-      }
+  }
+
+  /* -------- i18n 오토와이어 -------- */
+  function setKey(el, key) {
+    if (!el) return;
+    if (isExcluded(el)) return;
+    if (!el.hasAttribute('data-i18n')) el.setAttribute('data-i18n', key);
+  }
+  function setKeyBySel(sel, key) { setKey($(sel), key); }
+  function setKeyList(sel, keys) {
+    var list = $$(sel);
+    keys.forEach(function (k, i) { if (list[i]) setKey(list[i], k); });
+  }
+
+  function autowireBySelectors() {
+    setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.exp','nav.team','nav.advisors']);
+
+    setKeyBySel('#tech-label','sec.tech');
+    setKeyBySel('#service-label','sec.service');
+    setKeyBySel('#goal-label','sec.goal');
+    setKeyBySel('#exp-label','sec.exp');
+    setKeyBySel('#team-label','sec.team');
+
+    setKeyList('#sec01 .time-label', ['label.days','label.hours','label.seconds']);
+    setKeyBySel('#sec02 .strip p', 'slogan');
+
+    // Tech A
+    setKeyBySel('#panel-a .tech-title-lg#tab-a', 'tech.a.title');
+    setKeyBySel('#panel-a .tech-subtitle', 'tech.a.subtitle');
+    setKeyBySel('#panel-a .tech-body', 'tech.a.body');
+    setKeyBySel('#panel-a .tech-ref', 'tech.a.ref');
+    $$('#panel-a .more-btn').forEach(function (b) { setKey(b, 'btn.more'); });
+
+    // Tech B
+    setKeyBySel('#panel-b .tech-title-lg#tab-b', 'tech.b.title');
+    setKeyBySel('#panel-b .tech-subtitle', 'tech.b.subtitle');
+    var contentB = $('#panel-b .content');
+    if (contentB) {
+      var ps = $$('.content p', $('#panel-b'));
+      var keyP = null;
+      ps.forEach(function (p) {
+        if (!p.classList.contains('tech-subtitle') && !p.classList.contains('tech-body') && !keyP) keyP = p;
+      });
+      if (keyP) setKey(keyP, 'tech.b.key');
     }
-    
-    // 이벤트 리스너
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < totalSlides - 1) {
-        moveToSlide(currentIndex + 1);
+    setKeyBySel('#panel-b .tech-body', 'tech.b.body');
+    setKeyBySel('#panel-b .tech-ref', 'tech.b.ref');
+    $$('#panel-b .more-btn').forEach(function (b) { setKey(b, 'btn.more'); });
+
+    // Service slides (titles are excluded)
+    function S(n, s) { return '.svc-item:nth-of-type(' + n + ') ' + s; }
+    setKeyBySel(S(1,'.svc-desc'), 'svc.1.desc');
+    setKeyBySel(S(1,'.svc-c-title'), 'svc.meta.keyword');
+    setKeyBySel(S(1,'.svc-c-title2'),'svc.1.meta.title2');
+    setKeyBySel(S(1,'.svc-c-ref'),   'svc.1.meta.ref');
+
+    setKeyBySel(S(2,'.svc-desc'), 'svc.2.desc');
+    setKeyBySel(S(2,'.svc-c-title'), 'svc.meta.keyword');
+    setKeyBySel(S(2,'.svc-c-title2'),'svc.2.meta.title2');
+    setKeyBySel(S(2,'.svc-c-ref'),   'svc.2.meta.ref');
+
+    setKeyBySel(S(3,'.svc-desc'), 'svc.3.desc');
+    setKeyBySel(S(3,'.svc-c-title'), 'svc.meta.keyword');
+    setKeyBySel(S(3,'.svc-c-title2'),'svc.3.meta.title2');
+    setKeyBySel(S(3,'.svc-c-ref'),   'svc.3.meta.ref');
+
+    setKeyBySel(S(4,'.svc-desc'), 'svc.4.desc');
+    setKeyBySel(S(4,'.svc-c-title'), 'svc.meta.keyword');
+    setKeyBySel(S(4,'.svc-c-title2'),'svc.4.meta.title2');
+    setKeyBySel(S(4,'.svc-c-ref'),   'svc.4.meta.ref');
+
+    // Goal
+    setKeyBySel('.goal-caption .p', 'goal.caption');
+    setKeyBySel('.goal-dropdown-card:nth-of-type(1) .goal-dropdown-question', 'goal.q1');
+    setKeyBySel('.goal-dropdown-card:nth-of-type(1) .goal-dropdown-content .goal-dropdown-text', 'goal.a1');
+
+    setKeyBySel('.goal-dropdown-card:nth-of-type(2) .goal-dropdown-question', 'goal.q2');
+    $$('.goal-dropdown-card:nth-of-type(2) .item-drop p:first-child')
+      .forEach(function (p) { setKey(p, 'goal.hash.disclose'); });
+
+    setKeyBySel('.goal-dropdown-card:nth-of-type(3) .goal-dropdown-question', 'goal.q3');
+    var ps3 = $$('.goal-dropdown-card:nth-of-type(3) .goal-dropdown-content .goal-dropdown-text');
+    if (ps3[0]) setKey(ps3[0], 'goal.a3.1');
+    if (ps3[1]) setKey(ps3[1], 'goal.a3.2');
+    if (ps3[2]) setKey(ps3[2], 'goal.a3.3');
+
+    // Use cases
+    setKeyBySel('.use-cases-title', 'usecases.title');
+    var u = $$('.use-cases-section .use-case');
+    if (u[0]) { setKey(u[0].querySelector('.use-case-title'), 'use1.title'); setKey(u[0].querySelector('.use-case-desc'), 'use1.desc'); }
+    if (u[1]) { setKey(u[1].querySelector('.use-case-title'), 'use2.title'); setKey(u[1].querySelector('.use-case-desc'), 'use2.desc'); }
+    if (u[2]) { setKey(u[2].querySelector('.use-case-title'), 'use3.title'); setKey(u[2].querySelector('.use-case-desc'), 'use3.desc'); }
+    if (u[3]) { setKey(u[3].querySelector('.use-case-title'), 'use4.title'); setKey(u[3].querySelector('.use-case-desc'), 'use4.desc'); }
+
+    // Property features
+    setKeyList('.property-features li', ['prop.f1','prop.f2','prop.f3']);
+
+    // Advisors / Footer
+    setKeyBySel('#sec08 .s08-comt-inner .s08-title','advisors.title');
+    var footerCopy = $('footer .container');
+    if (footerCopy && !footerCopy.hasAttribute('data-i18n')) footerCopy.setAttribute('data-i18n','footer.copy');
+  }
+
+  function autowireByTextMatch() {
+    var map = new Map();
+    var en = (window.I18N && window.I18N.en) || {};
+    Object.keys(en).forEach(function (k) { map.set(norm(stripTags(en[k])), k); });
+    var nodes = $$('main, header, footer')
+      .map(function (root) { return Array.prototype.slice.call(root.querySelectorAll('a,h1,h2,h3,h4,h5,h6,p,button,div,span,li')); })
+      .reduce(function (a, b) { return a.concat(b); }, [])
+      .filter(function (el) { return !el.hasAttribute('data-i18n') && !isExcluded(el); });
+
+    nodes.forEach(function (el) {
+      var key = map.get(norm(el.textContent || ''));
+      if (key) el.setAttribute('data-i18n', key);
+    });
+  }
+
+  /* -------- Language dropdown -------- */
+  function openLangMenu() {
+    var btn = $('#langBtn'), menu = $('#langMenu');
+    if (!btn || !menu) return;
+    menu.hidden = false; btn.setAttribute('aria-expanded', 'true');
+    var current = menu.querySelector('[aria-selected="true"]') || menu.querySelector('[role="option"]');
+    $$('#langMenu [role="option"]').forEach(function (li) { li.classList.remove('focused'); });
+    if (current) current.classList.add('focused');
+    document.addEventListener('click', onDocClick, { capture: true });
+    document.addEventListener('keydown', onMenuKeys);
+  }
+  function closeLangMenu() {
+    var btn = $('#langBtn'), menu = $('#langMenu');
+    if (!btn || !menu) return;
+    menu.hidden = true; btn.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', onDocClick, { capture: true });
+    document.removeEventListener('keydown', onMenuKeys);
+  }
+  function onDocClick(e) {
+    var menu = $('#langMenu'), btn = $('#langBtn');
+    if (!menu || !btn) return;
+    if (!menu.contains(e.target) && !btn.contains(e.target)) closeLangMenu();
+  }
+  function moveLangFocus(dir) {
+    var menu = $('#langMenu'); if (!menu || menu.hidden) return;
+    var list = $$('#langMenu [role="option"]'); if (!list.length) return;
+    var idx = -1;
+    for (var i = 0; i < list.length; i++) if (list[i].classList.contains('focused')) { idx = i; break; }
+    if (idx < 0) for (var j = 0; j < list.length; j++) if (list[j].getAttribute('aria-selected') === 'true') { idx = j; break; }
+    var next = (idx + dir + list.length) % list.length;
+    list.forEach(function (li) { li.classList.remove('focused'); });
+    list[next].classList.add('focused');
+    list[next].scrollIntoView({ block: 'nearest' });
+  }
+  function onMenuKeys(e) {
+    var menu = $('#langMenu'); if (!menu || menu.hidden) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); moveLangFocus(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); moveLangFocus(-1); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      var focused = menu.querySelector('.focused') || menu.querySelector('[aria-selected="true"]');
+      if (focused) chooseLang(focused);
+    } else if (e.key === 'Escape') {
+      e.preventDefault(); closeLangMenu(); var b = $('#langBtn'); if (b) b.focus();
+    }
+  }
+  function chooseLang(li) {
+    if (!li) return;
+    setLanguage(li.getAttribute('data-lang'));
+    closeLangMenu();
+    var b = $('#langBtn'); if (b) b.focus();
+  }
+
+  /* -------- Smooth nav scroll -------- */
+  function getHeaderOffset() {
+    var header = $('.header');
+    return header ? (header.getBoundingClientRect().height || 0) : 0;
+  }
+  function smoothScrollTo(targetSelector) {
+    var el = $(targetSelector);
+    if (!el) return;
+    var top = window.scrollY + el.getBoundingClientRect().top - getHeaderOffset() - 16;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+  function bindNavScroll() {
+    $$('.nav a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        smoothScrollTo(a.getAttribute('href'));
+      });
+    });
+  }
+
+  /* -------- Tech panels -------- */
+  function initTechPanels() {
+    var panels = $$('.tech-panel');
+    if (!panels.length) return;
+    function activate(panel) {
+      panels.forEach(function (p) {
+        var active = p === panel;
+        p.classList.toggle('active', active);
+        p.classList.toggle('inactive', !active);
+        p.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+    }
+    panels.forEach(function (p) {
+      var head = $('.inactive-head', p);
+      if (!head) return;
+      head.addEventListener('click', function () { activate(p); });
+      head.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(p); }
+      });
+      head.setAttribute('tabindex', '0');
+      head.setAttribute('role', 'button');
+      head.setAttribute('aria-controls', p.id || '');
+    });
+  }
+
+  /* -------- Service slider -------- */
+  function initServiceSlider() {
+    var track = $('#svc-track');
+    var items = $$('#svc-track .svc-item');
+    if (!track || !items.length) return;
+    var bF = $('#svc-first'), bP = $('#svc-prev'), bN = $('#svc-next'), bL = $('#svc-last');
+    var idx = 0;
+    function update() {
+      track.style.transform = 'translateX(' + (-(idx * 100)) + '%)';
+      items.forEach(function (it, i) { it.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+      if (bF) bF.disabled = (idx === 0);
+      if (bP) bP.disabled = (idx === 0);
+      if (bL) bL.disabled = (idx === items.length - 1);
+      if (bN) bN.disabled = (idx === items.length - 1);
+    }
+    function go(n) { idx = clamp(n, 0, items.length - 1); update(); }
+    if (bF) bF.addEventListener('click', function () { go(0); });
+    if (bP) bP.addEventListener('click', function () { go(idx - 1); });
+    if (bN) bN.addEventListener('click', function () { go(idx + 1); });
+    if (bL) bL.addEventListener('click', function () { go(items.length - 1); });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
+  /* -------- Goal accordion (B안: 정밀 애니메이션) -------- */
+  function initGoalAccordion() {
+    $$('.goal-dropdown-card').forEach(function (card) {
+      var btn = $('.goal-dropdown-header', card);
+      var content = $('.goal-dropdown-content', card);
+      if (!btn || !content) return;
+
+      // 초기 상태 반영
+      function setInitial() {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+        card.classList.toggle('open', isOpen);
+        content.style.overflow = 'hidden';
+        content.style.maxHeight = isOpen ? 'none' : '0px';
       }
-    });
-    
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        moveToSlide(currentIndex - 1);
-      }
-    });
-    
-    firstBtn.addEventListener('click', () => {
-      moveToSlide(0);
-    });
-    
-    lastBtn.addEventListener('click', () => {
-      moveToSlide(totalSlides - 1);
-    });
-    
-    // 키보드 네비게이션
-    document.addEventListener('keydown', (e) => {
-      if (document.activeElement.closest('#svc-slider')) {
-        switch(e.key) {
-          case 'ArrowLeft':
-            e.preventDefault();
-            prevBtn.click();
-            break;
-          case 'ArrowRight':
-            e.preventDefault();
-            nextBtn.click();
-            break;
-          case 'Home':
-            e.preventDefault();
-            firstBtn.click();
-            break;
-          case 'End':
-            e.preventDefault();
-            lastBtn.click();
-            break;
+      setInitial();
+
+      // 전환 종료 후 열림 상태면 auto처럼 동작하도록 max-height 해제
+      content.addEventListener('transitionend', function (e) {
+        if (e.propertyName !== 'max-height') return;
+        if (btn.getAttribute('aria-expanded') === 'true') {
+          content.style.maxHeight = 'none';
         }
-      }
-    });
-    
-    // 터치/스와이프 지원
-    let startX = 0;
-    let endX = 0;
-    
-    const slider = document.getElementById('svc-slider');
-    
-    slider.addEventListener('touchstart', (e) => {
-      startX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    slider.addEventListener('touchend', (e) => {
-      endX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-    
-    function handleSwipe() {
-      const threshold = 50; // 최소 스와이프 거리
-      const diff = startX - endX;
-      
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-          // 왼쪽으로 스와이프 (다음 슬라이드)
-          nextBtn.click();
+      });
+
+      btn.addEventListener('click', function () {
+        var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        if (!isOpen) {
+          // 열기: 상태 먼저 바꿔서 패딩/스타일 적용 → 0에서 내용 높이로
+          btn.setAttribute('aria-expanded', 'true');
+          card.classList.add('open');
+
+          // 시작 높이를 0으로 잡고 리플로우
+          content.style.maxHeight = '0px';
+          void content.offsetHeight; // reflow
+
+          // 패딩 적용된 상태에서 실제 콘텐츠 높이로 애니메이션
+          content.style.maxHeight = content.scrollHeight + 'px';
         } else {
-          // 오른쪽으로 스와이프 (이전 슬라이드)
-          prevBtn.click();
+          // 닫기: 현재 자연 높이를 픽셀로 고정 → 리플로우 → 0으로
+          if (content.style.maxHeight === '' || getComputedStyle(content).maxHeight === 'none') {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            void content.offsetHeight; // reflow
+          }
+          btn.setAttribute('aria-expanded', 'false');
+          card.classList.remove('open');
+          content.style.maxHeight = '0px';
         }
-      }
-    }
-    
-    // 초기 버튼 상태 설정
-    updateButtonStates();
-  });
-
-
-  // 드롭다운 기능
-    document.querySelectorAll('.goal-dropdown-header').forEach(button => {
-    button.addEventListener('click', () => {
-      const card = button.closest('.goal-dropdown-card');
-      const isOpen = card.classList.contains('open');
-      
-      // 다른 모든 카드 닫기
-      document.querySelectorAll('.goal-dropdown-card').forEach(c => {
-        c.classList.remove('open');
-        c.querySelector('.goal-dropdown-header').setAttribute('aria-expanded', 'false');
       });
-      
-      // 현재 카드 토글
-      if (!isOpen) {
-        card.classList.add('open');
-        button.setAttribute('aria-expanded', 'true');
-      }
     });
+  }
+
+  /* -------- Countdown (optional) -------- */
+  function initCountdown() {
+    var wrap = $('#sec01 .count-wrap');
+    if (!wrap) return;
+    var deadlineStr = wrap.getAttribute('data-deadline');
+    if (!deadlineStr) return;
+    var deadline = new Date(deadlineStr).getTime();
+    var elDays = $('#days'), elHours = $('#hours'), elSecs = $('#seconds');
+    if (!elDays || !elHours || !elSecs) return;
+    var paused = { days: false, hours: false, seconds: false };
+    $$('.time-box', wrap).forEach(function (box) {
+      var unit = box.getAttribute('data-unit');
+      box.addEventListener('mouseenter', function () { if (unit) paused[unit] = true; });
+      box.addEventListener('mouseleave', function () { if (unit) paused[unit] = false; });
+    });
+    function tick() {
+      var now = Date.now();
+      var dw = Math.max(0, Math.floor((deadline - now) / 1000));
+      var d = Math.floor(dw / (3600 * 24)); dw -= d * 3600 * 24;
+      var h = Math.floor(dw / 3600);        dw -= h * 3600;
+      var s = Math.floor(dw);
+      if (!paused.days)    elDays.textContent  = String(d);
+      if (!paused.hours)   elHours.textContent = String(h).padStart(2, '0');
+      if (!paused.seconds) elSecs.textContent  = String(s).padStart(2, '0');
+      if (deadline - now > 0) requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  /* -------- Init -------- */
+  document.addEventListener('DOMContentLoaded', function () {
+    var label = $('#langLabel');
+    if (label && !label.hasAttribute('data-i18n')) label.setAttribute('data-i18n', 'lang.label');
+
+    autowireBySelectors();
+    autowireByTextMatch();
+
+    var initial = getSavedLang() || 'en';
+    setLanguage(initial);
+
+    // Language dropdown
+    var langBtn = $('#langBtn');
+    var langMenu = $('#langMenu');
+    if (langBtn && langMenu) {
+      langBtn.addEventListener('click', function () {
+        var exp = langBtn.getAttribute('aria-expanded') === 'true';
+        if (exp) closeLangMenu(); else openLangMenu();
+      });
+      langBtn.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault(); openLangMenu();
+        }
+      });
+      langMenu.addEventListener('click', function (e) {
+        var li = e.target.closest('[role="option"]');
+        if (li) chooseLang(li);
+      });
+    }
+
+    bindNavScroll();
+    initTechPanels();
+    initServiceSlider();
+    initGoalAccordion();
+    initCountdown();
   });
-  
-  
-  })();
-  
+})();

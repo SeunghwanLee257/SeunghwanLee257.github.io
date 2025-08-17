@@ -33,6 +33,35 @@
         <a href="#sec08">Advisors</a>
       </nav>
     </div>
+    <!-- Language Dropdown -->
+    <div class="lang-dd" id="langDropdown">
+      <span id="langLabel" class="lang-dd-label" data-i18n="lang.label">Language</span>
+
+      <div class="lang-dd-wrap">
+        <button
+          type="button"
+          class="lang-dd-btn"
+          id="langBtn"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-labelledby="langLabel langBtn"
+          >
+          <span id="langBtnText">eng</span>
+          <svg class="caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 10l5 5 5-5z"></path>
+          </svg>
+        </button>
+
+        <ul class="lang-dd-menu" id="langMenu" role="listbox" aria-labelledby="langLabel" hidden>
+          <li role="option" data-lang="en" aria-selected="true">
+            <span class="lang-name">English</span><span class="lang-code">eng</span>
+          </li>
+          <li role="option" data-lang="ko" aria-selected="false">
+            <span class="lang-name">한국어</span><span class="lang-code">kor</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </header>
 
   <main id="main" tabindex="-1">
@@ -90,7 +119,7 @@
 
           <!-- 활성 콘텐츠 -->
           <div class="inner">
-            <header class="content">
+            <div class="content">
               <h3 class="tech-title-lg" id="tab-a">Deterministic FHE16-based
                 Ultra-Low-Latency Bootstrapping</h3>
               <p class="tech-subtitle">A 16-bit integer computation–centric deterministic FHE structure
@@ -102,15 +131,15 @@
                 Structurally eliminates floating-point environment-specific error issues
               </p>
               <p class="tech-ref">Reference: ePrint 2024/1916</p>
-            </header>
+            </div>
           </div>
 
           <!-- 액션 영역 -->
           <div class="actions morebtn">
             <span class="action-icon" aria-hidden="true">
-              <span class="material-icons" aria-hidden="true">insights</span>
+              <img src="./asset/sec03-1.svg" alt="">
             </span>
-            <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기">more details</button>
+            <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기"><a href="https://walllnut.gitbook.io/walllnut-docs/">more details</a></button>
           </div>
 
           <!-- 우하단 이미지 (데코레이션) -->
@@ -151,9 +180,10 @@
 
           <div class="actions morebtn">
             <span class="action-icon" aria-hidden="true">
-              <span class="material-icons" aria-hidden="true">lock</span>
+              <img src="./asset/sec03-2.svg" alt="">
+              <!-- <span class="material-icons" aria-hidden="true">lock</span> -->
             </span>
-            <button class="more-btn" type="button" aria-label="Confidential Layer 더보기">more details</button>
+            <button class="more-btn" type="button" aria-label="Confidential Layer 더보기"><a href="https://walllnut.gitbook.io/walllnut-docs/">more details</a></button>
           </div>
 
           <!-- <img class="panel-thumb" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" /> -->
@@ -262,7 +292,8 @@
             <div class="svc-b">
               <h3 class="svc-title">Confidential<br> Voting</h3>
               <p class="svc-desc">Demographic vote stats—<br>
-<strong>no disclosure of individual choices or identities.</strong></p>
+                <strong>no disclosure of individual choices or identities.</strong>
+              </p>
             </div>
             <div class="svc-bot">
               <div class="svc-c">
@@ -318,10 +349,7 @@
             <span class="goal-dropdown-question">
               What does Walnut actually do—and what are we confident about? 🫥💪
             </span>
-            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
           <div class="goal-dropdown-content">
             <p class="goal-dropdown-text">
@@ -337,10 +365,7 @@
             <span class="goal-dropdown-question">
               Hashes for Walnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
             </span>
-            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
           <div class="goal-dropdown-content">
             <div class="item-drop">
@@ -367,10 +392,7 @@
             <span class="goal-dropdown-question">
               So, what's in Walnut's product lineup? 🚀
             </span>
-            <svg class="goal-dropdown-icon" viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
           <div class="goal-dropdown-content">
             <p class="goal-dropdown-text">
