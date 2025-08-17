@@ -20,9 +20,6 @@
 </head>
 
 <body>
-  <!-- Skip link -->
-  <a href="#main" class="sr-only-focusable">본문으로 바로가기</a>
-
   <!-- 고정 헤더 -->
   <header class="header" role="banner">
     <nav class="nav" aria-label="주요 섹션">
@@ -37,8 +34,8 @@
 
   <main id="main" tabindex="-1">
     <!-- 섹션 01: 배너 / 카운트다운 -->
-    <section id="sec01" class="container" aria-labelledby="countdown-heading">
-      <div class="count-wrap" aria-label="countdown">
+    <section id="sec01" aria-labelledby="countdown-heading">
+      <div class="container count-wrap" aria-label="countdown">
         <div class="time-box" data-unit="days" title="hover 시 해당 유닛만 일시정지">
           <div class="time-value" id="days">365</div>
           <div class="time-label">DAYS</div>
@@ -80,10 +77,12 @@
         >
           <!-- 비활성 헤더(기본 활성이라 숨김) -->
           <div class="inactive-head" aria-hidden="true">
-            <span class="inactive-title">
-              a. Technology
-              <span class="material-icons" aria-hidden="true">arrow_left</span>
-            </span>
+            <img class="panel-thumb pt-1" src="./asset/tabs-inact-cha02.png" alt="" loading="lazy" />
+            <p class="inactive-title">
+              Deterministic FHE16-based
+              <br>Ultra-Low-Latency Bootstrapping
+              <p class="material-icons arrow-dwon" aria-hidden="true">arrow_right</p>
+            </p>
           </div>
 
           <!-- 활성 콘텐츠 -->
@@ -122,12 +121,13 @@
           role="tabpanel"
           aria-labelledby="tab-b"
           aria-hidden="true"
-        >
+          >
           <div class="inactive-head">
-            <span class="inactive-title">
-              b. Confidential Layer
-              <span class="material-icons" aria-hidden="true">arrow_left</span>
-            </span>
+            <img class="panel-thumb pt-2" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" />
+            <p class="inactive-title">
+              FHE16-based<br>MPC (SSFHE)
+              <p class="material-icons  arrow-up" aria-hidden="true">arrow_left</p>
+            </p>
           </div>
 
           <div class="inner">
@@ -153,17 +153,17 @@
             <button class="more-btn" type="button" aria-label="Confidential Layer 더보기">더보기</button>
           </div>
 
-          <img class="panel-thumb" src="" alt="" loading="lazy" />
+          <!-- <img class="panel-thumb" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" /> -->
         </article>
       </div>
     </section>
 
-<!-- 섹션 04: Our Service (슬라이드) -->
-<section id="sec04" class="container" aria-labelledby="service-label">
-    <h2 id="service-label" class="section-label">02. Our Service</h2>
+    <!-- 섹션 04: Our Service (슬라이드) -->
+    <section id="sec04" class="container" aria-labelledby="service-label">
+      <h2 id="service-label" class="section-label">02. Our Service</h2>
   
-    <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
-      <div class="svc-track" id="svc-track">
+      <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
+        <div class="svc-track" id="svc-track">
         <!-- Slide 1 -->
         <article class="svc-item" aria-roledescription="slide" aria-current="true">
           <div class="svc-top">
@@ -190,7 +190,7 @@
     
               <div class="svc-bot">
                 <div class="svc-c">
-                  <img src="./asset/slide01.png" alt=""  style="width: ;"/>
+                  <img class="s-img-1" src="./asset/slide01.png" alt=""/>
                   <div class="svc-c-meta">
                     <div class="svc-c-title">Keyword</div>
                     <div class="svc-c-title2">Hide</div>
@@ -208,16 +208,17 @@
             <div class="svc-a" aria-hidden="true"></div>
             <div class="svc-right">
               <div class="svc-b">
-                <h3 class="svc-title">Deterministic FHE</h3>
-                <p class="svc-desc">Ultra-low-latency bootstrapping with on-chain verifiability.</p>
+                <h3 class="svc-title">Confidential Layer <br>for Solana</h3>
+                <p class="svc-desc">On Solana, we apply <strong>FHE to sensitive state and code,</strong>
+                  enabling private execution <strong>hidden from external observers.</strong></p>
               </div>
               <div class="svc-bot">
                 <div class="svc-c">
-                  <img src="./asset/slide02.png" alt="" />
+                  <img class="s-img-2" src="./asset/slide02.png" alt="" />
                   <div class="svc-c-meta">
-                    <div class="svc-c-title">Latency</div>
-                    <div class="svc-c-title2">Ultra Low</div>
-                    <div class="svc-c-ref">Internal benchmark references</div>
+                    <div class="svc-c-title">Keyword</div>
+                    <div class="svc-c-title2">Solana</div>
+                    <div class="svc-c-ref">Encrypted data stays hidden</div>
                   </div>
                 </div>
               </div>
@@ -231,16 +232,18 @@
             <div class="svc-a" aria-hidden="true"></div>
             <div class="svc-right">
               <div class="svc-b">
-                <h3 class="svc-title">Another Service</h3>
-                <p class="svc-desc">Describe another capability with public docs/state.</p>
+                <h3 class="svc-title">Confidential DeFi</h3>
+                <p class="svc-desc">Beyond personal protection,
+                  we block trading bots to <strong>boost asset growth and returns.</strong>
+                </p>
               </div>
               <div class="svc-bot">
                 <div class="svc-c">
-                  <img src="./asset/slide03.png" alt="" />
+                  <img class="s-img-3" src="./asset/slide03.png" alt="" />
                   <div class="svc-c-meta">
-                    <div class="svc-c-title">Status</div>
-                    <div class="svc-c-title2">Public</div>
-                    <div class="svc-c-ref">Open documentation available</div>
+                    <div class="svc-c-title">Keyword</div>
+                    <div class="svc-c-title2">Asset growth</div>
+                    <div class="svc-c-ref">Block trading bots to protect<br>your assets and boost returns</div>
                   </div>
                 </div>
               </div>
@@ -254,16 +257,17 @@
               <div class="svc-a" aria-hidden="true"></div>
               <div class="svc-right">
                 <div class="svc-b">
-                  <h3 class="svc-title">Another Service</h3>
-                  <p class="svc-desc">Describe another capability with public docs/state.</p>
+                  <h3 class="svc-title">Confidential<br> Voting</h3>
+                  <p class="svc-desc">Demographic vote stats—<br>
+<strong>no disclosure of individual choices or identities.</strong></p>
                 </div>
                 <div class="svc-bot">
                   <div class="svc-c">
-                    <img src="./asset/slide04.png" alt="" />
+                    <img class="s-img-4" src="./asset/slide04.png" alt="" />
                     <div class="svc-c-meta">
-                      <div class="svc-c-title">Status</div>
-                      <div class="svc-c-title2">Public</div>
-                      <div class="svc-c-ref">Open documentation available</div>
+                      <div class="svc-c-title">Keyword</div>
+                      <div class="svc-c-title2">Privatally</div>
+                      <div class="svc-c-ref">Privacy protected,<br>metrics accurate</div>
                     </div>
                   </div>
                 </div>
@@ -279,25 +283,28 @@
         <button class="svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
         <button class="svc-btn is-gray" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
       </div>
-    </div>
-</section>
+      </div>
+    </section>
   
 
 
 <!-- 섹션 05: Our Goal (큰 섹션 내부 타이틀 포함) -->
 <section id="sec05" class="container dot-bg" aria-labelledby="goal-label">
     <div class="goal-wrap">
-      <h2 id="goal-label" class="section-label">03. Our Goal</h2>
-      <div class="goal-frame" aria-hidden="true">
-        <!-- 오렌지 손글씨 이미지를 실제 이미지로 교체하거나 임시로 텍스트 사용 -->
-        <span class="h3">Confidential Layer</span>
-      </div>
-      <div class="goal-caption">
-        <p class="p">
-          This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC), 
-          and Threshold Cryptography to enable the execution of verifiable computations 
-          on the blockchain while keeping sensitive data in a confidential state.
-        </p>
+      <div class="title-area">
+        <h2 id="goal-label" class="section-label">03. Our Goal</h2>
+        <div class="goal-frame" aria-hidden="true">
+          <!-- 오렌지 손글씨 이미지를 실제 이미지로 교체하거나 임시로 텍스트 사용 -->
+          <!-- <span class="h3">Confidential Layer</span> -->
+           <img src="./asset/section05-goal-title.svg" alt="">
+        </div>
+        <div class="goal-caption">
+          <p class="p">
+            This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC), 
+            and Threshold Cryptography to enable the execution of verifiable computations 
+            on the blockchain while keeping sensitive data in a confidential state.
+          </p>
+        </div>
       </div>
       
       <!-- 드롭다운 카드들 추가 -->
@@ -332,9 +339,22 @@
             </svg>
           </button>
           <div class="goal-dropdown-content">
-            <p class="goal-dropdown-text">
-              [드롭다운 내용을 여기에 추가하세요]
-            </p>
+            <div class="item-drop">
+              <p>(To be disclosed Oct. 2025)</p>
+              <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
+            </div>
+            <div class="item-drop">
+              <p>(To be disclosed Oct. 2025)</p>
+              <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
+            </div>
+            <div class="item-drop">
+              <p>(To be disclosed Oct. 2025)</p>
+              <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
+            </div>
+            <div class="item-drop">
+              <p>(To be disclosed Oct. 2025)</p>
+              <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
+            </div>
           </div>
         </div>
         
@@ -350,7 +370,13 @@
           </button>
           <div class="goal-dropdown-content">
             <p class="goal-dropdown-text">
-              [드롭다운 내용을 여기에 추가하세요]
+              Flagship Product — Deterministic Confidential Layer 🏁
+            </p>
+            <p class="goal-dropdown-text">
+              Executes blockchain state data on FHE16, enabling public verification. 🔍
+            </p>
+            <p class="goal-dropdown-text">
+              Unlike traditional ZK systems limited to fixed states,FHE16-based technology supports dynamic state verification. 🔄✅
             </p>
           </div>
         </div>
