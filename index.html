@@ -22,14 +22,17 @@
 <body>
   <!-- 고정 헤더 -->
   <header class="header" role="banner">
-    <nav class="nav" aria-label="주요 섹션">
-      <a href="#sec03">Technology</a>
-      <a href="#sec04">Service</a>
-      <a href="#sec05">Goal</a>
-      <a href="#sec06">Experience</a>
-      <a href="#sec07">Team</a>
-      <a href="#sec08">Advisors</a>
-    </nav>
+    <div class="logo-menus">
+      <img src="./asset/logo-filled-01.png" alt="">
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="#sec03">Technology</a>
+        <a href="#sec04">Service</a>
+        <a href="#sec05">Goal</a>
+        <a href="#sec06">Experience</a>
+        <a href="#sec07">Team</a>
+        <a href="#sec08">Advisors</a>
+      </nav>
+    </div>
   </header>
 
   <main id="main" tabindex="-1">
@@ -107,7 +110,7 @@
             <span class="action-icon" aria-hidden="true">
               <span class="material-icons" aria-hidden="true">insights</span>
             </span>
-            <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기">더보기</button>
+            <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기">more details</button>
           </div>
 
           <!-- 우하단 이미지 (데코레이션) -->
@@ -150,7 +153,7 @@
             <span class="action-icon" aria-hidden="true">
               <span class="material-icons" aria-hidden="true">lock</span>
             </span>
-            <button class="more-btn" type="button" aria-label="Confidential Layer 더보기">더보기</button>
+            <button class="more-btn" type="button" aria-label="Confidential Layer 더보기">more details</button>
           </div>
 
           <!-- <img class="panel-thumb" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" /> -->
@@ -160,131 +163,131 @@
 
     <!-- 섹션 04: Our Service (슬라이드) -->
     <section id="sec04" class="container" aria-labelledby="service-label">
-      <h2 id="service-label" class="section-label">02. Our Service</h2>
-  
-      <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
-        <div class="svc-track" id="svc-track">
-        <!-- Slide 1 -->
-        <article class="svc-item" aria-roledescription="slide" aria-current="true">
-          <div class="svc-top">
-            <!-- 왼쪽 고정 박스 (모든 슬라이드에 동일하게 위치) -->
-            <div class="svc-a" aria-hidden="true">
-              <!-- 내부 이미지 슬라이더 -->
-              <div class="svc-image-slider" id="svc-image-slider">
-                <div class="svc-image-item"></div>
-                <div class="svc-image-item"></div>
-                <div class="svc-image-item"></div>
-                <div class="svc-image-item"></div>
-              </div>
-            </div>
+  <h2 id="service-label" class="section-label">02. Our Service</h2>
 
-            <!-- 반드시 class="svc-right" -->
-            <div class="svc-right">
-              <div class="svc-b">
-                <h3 class="svc-title">Confidential Layer</h3>
-                <p class="svc-desc">
-                  Normal transactions stay on-chain, while sensitive data/compute run
-                  in a confidential FHE layer—keeping state public.
-                </p>
-              </div>
-    
-              <div class="svc-bot">
-                <div class="svc-c">
-                  <img class="s-img-1" src="./asset/slide01.png" alt=""/>
-                  <div class="svc-c-meta">
-                    <div class="svc-c-title">Keyword</div>
-                    <div class="svc-c-title2">Hide</div>
-                    <div class="svc-c-ref">Encrypted data stays hidden</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-  
-        <!-- Slide 2 -->
-        <article class="svc-item" aria-roledescription="slide">
-          <div class="svc-top">
-            <div class="svc-a" aria-hidden="true"></div>
-            <div class="svc-right">
-              <div class="svc-b">
-                <h3 class="svc-title">Confidential Layer <br>for Solana</h3>
-                <p class="svc-desc">On Solana, we apply <strong>FHE to sensitive state and code,</strong>
-                  enabling private execution <strong>hidden from external observers.</strong></p>
-              </div>
-              <div class="svc-bot">
-                <div class="svc-c">
-                  <img class="s-img-2" src="./asset/slide02.png" alt="" />
-                  <div class="svc-c-meta">
-                    <div class="svc-c-title">Keyword</div>
-                    <div class="svc-c-title2">Solana</div>
-                    <div class="svc-c-ref">Encrypted data stays hidden</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
-  
-        <!-- Slide 3 -->
-        <article class="svc-item" aria-roledescription="slide">
-          <div class="svc-top">
-            <div class="svc-a" aria-hidden="true"></div>
-            <div class="svc-right">
-              <div class="svc-b">
-                <h3 class="svc-title">Confidential DeFi</h3>
-                <p class="svc-desc">Beyond personal protection,
-                  we block trading bots to <strong>boost asset growth and returns.</strong>
-                </p>
-              </div>
-              <div class="svc-bot">
-                <div class="svc-c">
-                  <img class="s-img-3" src="./asset/slide03.png" alt="" />
-                  <div class="svc-c-meta">
-                    <div class="svc-c-title">Keyword</div>
-                    <div class="svc-c-title2">Asset growth</div>
-                    <div class="svc-c-ref">Block trading bots to protect<br>your assets and boost returns</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+  <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
+    <div class="svc-track" id="svc-track">
+    <!-- Slide 1 -->
+    <article class="svc-item" aria-roledescription="slide" aria-current="true">
+      <div class="svc-top">
+        <!-- 왼쪽 고정 박스 -->
+        <div class="svc-a" aria-hidden="true">
+          <img src="./asset/left-s-01.png" alt="">
+        </div>
 
-        <!-- Slide 4 -->
-        <article class="svc-item" aria-roledescription="slide">
-            <div class="svc-top">
-              <div class="svc-a" aria-hidden="true"></div>
-              <div class="svc-right">
-                <div class="svc-b">
-                  <h3 class="svc-title">Confidential<br> Voting</h3>
-                  <p class="svc-desc">Demographic vote stats—<br>
+        <!-- 반드시 class="svc-right" -->
+        <div class="svc-right">
+          <div class="svc-b">
+            <h3 class="svc-title">Confidential Layer</h3>
+            <p class="svc-desc">
+              Normal transactions stay on-chain, while sensitive data/compute run
+              in a confidential FHE layer—keeping state public.
+            </p>
+          </div>
+
+          <div class="svc-bot">
+            <div class="svc-c">
+              <img class="s-img-1" src="./asset/slide01.png" alt=""/>
+              <div class="svc-c-meta">
+                <div class="svc-c-title">Keyword</div>
+                <div class="svc-c-title2">Hide</div>
+                <div class="svc-c-ref">Encrypted data stays hidden</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 2 -->
+    <article class="svc-item" aria-roledescription="slide">
+      <div class="svc-top">
+        <div class="svc-a" aria-hidden="true">
+          <img src="./asset/left-s-02.png" alt="">
+        </div>
+        <div class="svc-right">
+          <div class="svc-b">
+            <h3 class="svc-title">Confidential Layer <br>for Solana</h3>
+            <p class="svc-desc">On Solana, we apply <strong>FHE to sensitive state and code,</strong>
+              enabling private execution <strong>hidden from external observers.</strong></p>
+          </div>
+          <div class="svc-bot">
+            <div class="svc-c">
+              <img class="s-img-2" src="./asset/slide02.png" alt="" />
+              <div class="svc-c-meta">
+                <div class="svc-c-title">Keyword</div>
+                <div class="svc-c-title2">Solana</div>
+                <div class="svc-c-ref">Encrypted data stays hidden</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 3 -->
+    <article class="svc-item" aria-roledescription="slide">
+      <div class="svc-top">
+        <div class="svc-a" aria-hidden="true">
+          <img src="./asset/left-s-03.png" alt="">
+        </div>
+        <div class="svc-right">
+          <div class="svc-b">
+            <h3 class="svc-title">Confidential DeFi</h3>
+            <p class="svc-desc">Beyond personal protection,
+              we block trading bots to <strong>boost asset growth and returns.</strong>
+            </p>
+          </div>
+          <div class="svc-bot">
+            <div class="svc-c">
+              <img class="s-img-3" src="./asset/slide03.png" alt="" />
+              <div class="svc-c-meta">
+                <div class="svc-c-title">Keyword</div>
+                <div class="svc-c-title2">Asset growth</div>
+                <div class="svc-c-ref">Block trading bots to protect<br>your assets and boost returns</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 4 -->
+    <article class="svc-item" aria-roledescription="slide">
+        <div class="svc-top">
+          <div class="svc-a" aria-hidden="true">
+            <img src="./asset/left-s-04.png" alt="">
+          </div>
+          <div class="svc-right">
+            <div class="svc-b">
+              <h3 class="svc-title">Confidential<br> Voting</h3>
+              <p class="svc-desc">Demographic vote stats—<br>
 <strong>no disclosure of individual choices or identities.</strong></p>
-                </div>
-                <div class="svc-bot">
-                  <div class="svc-c">
-                    <img class="s-img-4" src="./asset/slide04.png" alt="" />
-                    <div class="svc-c-meta">
-                      <div class="svc-c-title">Keyword</div>
-                      <div class="svc-c-title2">Privatally</div>
-                      <div class="svc-c-ref">Privacy protected,<br>metrics accurate</div>
-                    </div>
-                  </div>
+            </div>
+            <div class="svc-bot">
+              <div class="svc-c">
+                <img class="s-img-4" src="./asset/slide04.png" alt="" />
+                <div class="svc-c-meta">
+                  <div class="svc-c-title">Keyword</div>
+                  <div class="svc-c-title2">Privately</div>
+                  <div class="svc-c-ref">Privacy protected,<br>metrics accurate</div>
                 </div>
               </div>
             </div>
-        </article>            
-      </div>
-  
-      <!-- 고정 컨트롤러(트랙 밖) -->
-      <div class="svc-cont">
-        <button class="svc-btn is-gray" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
-        <button class="svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
-        <button class="svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
-        <button class="svc-btn is-gray" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
-      </div>
-      </div>
-    </section>
+          </div>
+        </div>
+    </article>            
+    </div>
+
+    <!-- 고정 컨트롤러(트랙 밖) -->
+    <div class="svc-cont">
+      <button class="svc-btn is-gray" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
+      <button class="svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
+      <button class="svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
+      <button class="svc-btn is-gray" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
+    </div>
+    </div>
+</section>
   
 
 
@@ -292,20 +295,21 @@
 <section id="sec05" class="container dot-bg" aria-labelledby="goal-label">
     <div class="goal-wrap">
       <div class="title-area">
-        <h2 id="goal-label" class="section-label">03. Our Goal</h2>
-        <div class="goal-frame" aria-hidden="true">
-          <!-- 오렌지 손글씨 이미지를 실제 이미지로 교체하거나 임시로 텍스트 사용 -->
-          <!-- <span class="h3">Confidential Layer</span> -->
-           <img src="./asset/section05-goal-title.svg" alt="">
-        </div>
-        <div class="goal-caption">
-          <p class="p">
-            This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC), 
-            and Threshold Cryptography to enable the execution of verifiable computations 
-            on the blockchain while keeping sensitive data in a confidential state.
-          </p>
-        </div>
+          <div class="frame-content">        <!-- 프레임 안쪽 안전영역 -->
+            <h2 id="goal-label" class="section-label">03. Our Goal</h2>
+            <div class="title-graphic">
+              <img src="./asset/section05-goal-title.svg" alt="">
+            </div>
+            <div class="goal-caption">
+              <p class="p">
+                This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC),
+                and Threshold Cryptography to enable the execution of verifiable computations on the blockchain
+                while keeping sensitive data in a confidential state.
+              </p>
+            </div>
+          </div>
       </div>
+
       
       <!-- 드롭다운 카드들 추가 -->
       <div class="goal-dropdown-container">
@@ -340,19 +344,19 @@
           </button>
           <div class="goal-dropdown-content">
             <div class="item-drop">
-              <p>(To be disclosed Oct. 2025)</p>
+              <p><strong>(To be disclosed Oct. 2025)</strong></p>
               <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
             </div>
             <div class="item-drop">
-              <p>(To be disclosed Oct. 2025)</p>
+              <p><strong>(To be disclosed Oct. 2025)</strong></p>
               <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
             </div>
             <div class="item-drop">
-              <p>(To be disclosed Oct. 2025)</p>
+              <p><strong>(To be disclosed Oct. 2025)</strong></p>
               <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
             </div>
             <div class="item-drop">
-              <p>(To be disclosed Oct. 2025)</p>
+              <p><strong>(To be disclosed Oct. 2025)</strong></p>
               <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
             </div>
           </div>
@@ -395,10 +399,10 @@
                 
                 <div class="images-container">
                     <div class="main-image">
-                        👥 Development Team Working
+                        <img src="./asset/section06-top-1.png" alt="">
                     </div>
                     <div class="small-image">
-                        💻 Live Demo<br>Screen
+                        <img src="./asset/section06-top-2.png" alt="">
                     </div>
                 </div>
             </div>
@@ -410,15 +414,7 @@
             </ul>
 
             <div class="architecture-diagram">
-                <div class="diagram-container">
-                    <div class="layer svm">Solana Mainchain (SVM)</div>
-                    <div class="layer accounts">Accounts</div>
-                    <div class="layer state-public">State Account (Public)</div>
-                    <div class="layer program-public">Program Account (Public)</div>
-                    <div class="layer program-conf">Program Account (Confidential)</div>
-                    <div class="layer state-conf">State Account (Confidential)</div>
-                    <div class="layer confidential">FHE CoProcessor</div>
-                </div>
+              <img src="./asset/section06-bot-1.svg" alt="">
             </div>
         </div>
 
@@ -449,7 +445,7 @@
 
         <!-- Roadmap Section -->
         <div class="roadmap-section">
-            <h2 class="roadmap-title">Roadmap</h2>
+            <img src="./asset/Roadmap-title-img.png" class="roadmap-title"></img>
             
             <div class="roadmap-timeline">
                 <div class="roadmap-item">
@@ -477,7 +473,7 @@
             <!-- CEO -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-male">👨‍💼</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Seunghwan Lee (CEO)</div>
@@ -491,7 +487,7 @@
             <!-- CTO -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-male">👨‍💻</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Dohyuk Kim (CTO)</div>
@@ -505,13 +501,13 @@
             <!-- CSO -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-male">👨‍🎓</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Dong-Joon Shin (CSO)</div>
                     <p class="member-description">
                         Professor of Electronic Engineering, Hanyang University;<br>
-                        Extensive academic-industry networking
+                        Extensive academic–industry networking
                     </p>
                 </div>
             </div>
@@ -519,7 +515,7 @@
             <!-- Yunsik Ham -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-male">👨‍⚡</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Yunsik Ham</div>
@@ -533,7 +529,7 @@
             <!-- Youngjun Kim -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-male">👨‍🔧</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Youngjun Kim</div>
@@ -547,13 +543,12 @@
             <!-- Kiin Shin -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-female">👩‍🔬</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-female.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Kiin Shin</div>
                     <p class="member-description">
-                        Ph.D. in Electronic Engineering, Hanyang University;<br>
-                        Leads FHE16 R&D
+                      Marketing and Graphic Designer
                     </p>
                 </div>
             </div>
@@ -561,13 +556,12 @@
             <!-- Jin Shin -->
             <div class="team-member">
                 <div class="member-avatar">
-                    <div class="avatar-female">👩‍⚗️</div>
+                    <div class="avatar-male"><img src="./asset/team-mem-female.svg" alt=""></div>
                 </div>
                 <div class="member-info">
                     <div class="member-name-role">Jin Shin</div>
                     <p class="member-description">
-                        Ph.D. in Electronic Engineering, Hanyang University;<br>
-                        Leads FHE16 R&D
+                      UIUX Designer
                     </p>
                 </div>
             </div>
@@ -577,7 +571,23 @@
     <!-- 섹션 08: Advisors (배경 F2F2F2) -->
     <section id="sec08" aria-labelledby="advisors-label">
       <div class="container">
-
+        <div class="s08-comt-inner">
+          <h4 class="s08-title">WaLLLnut collaborates with distinguished professors from<br>
+            leading universities in Korea for technical advisory and joint research.
+          </h4>
+          <p>
+            Prof. Jong-Seon No<br>
+            Department of Electrical and Computer Engineering, Seoul National University
+            Prof. Jooyoung Lee<br>
+            School of Computing, KAIST
+            Prof. Jon-Lark Kim<br>
+            Department of Mathematics, Sogang University
+            Prof. Young-Sik Kim<br>
+            Department of Electrical Engineering and Computer Science, DGIST
+            Asst. Prof. Yongwoo Lee<br>
+            Department of Electrical and Electronic Engineering, Inha University
+          </p>
+        </div>
       </div>
     </section>
   </main>

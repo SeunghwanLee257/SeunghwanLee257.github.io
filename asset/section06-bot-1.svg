@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1058pt" height="389pt" viewBox="0.00 0.00 1058.00 389.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 385)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-385 1054,-385 1054,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_svm</title>
+<polygon fill="lightblue" stroke="lightblue" points="8,-93 8,-373 1032.25,-373 1032.25,-93 8,-93"/>
+<text text-anchor="middle" x="520.12" y="-356.4" font-family="Helvetica,sans-Serif" font-size="14.00">Solana Mainchain (SVM)</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_accounts</title>
+<polygon fill="white" stroke="white" points="416.79,-101 416.79,-340 644.1,-340 644.1,-101 416.79,-101"/>
+<text text-anchor="middle" x="530.44" y="-323.4" font-family="Helvetica,sans-Serif" font-size="14.00">Accounts</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_confidential</title>
+<polygon fill="lightpink" stroke="lightpink" points="665.1,-8 665.1,-85 1042,-85 1042,-8 665.1,-8"/>
+<text text-anchor="middle" x="853.55" y="-68.4" font-family="Helvetica,sans-Serif" font-size="14.00">Confidential Layer (FHE16)</text>
+</g>
+<!-- User Transaction -->
+<g id="node1" class="node">
+<title>User Transaction</title>
+<polygon fill="black" stroke="black" points="138.59,-226 16,-226 16,-190 138.59,-190 138.59,-226"/>
+<text text-anchor="middle" x="77.3" y="-203.8" font-family="Helvetica,sans-Serif" font-size="14.00">User Transaction</text>
+</g>
+<!-- Instruction Parser -->
+<g id="node2" class="node">
+<title>Instruction Parser</title>
+<polygon fill="black" stroke="black" points="301.3,-226 175.59,-226 175.59,-190 301.3,-190 301.3,-226"/>
+<text text-anchor="middle" x="238.45" y="-203.8" font-family="Helvetica,sans-Serif" font-size="14.00">Instruction Parser</text>
+</g>
+<!-- User Transaction&#45;&gt;Instruction Parser -->
+<g id="edge1" class="edge">
+<title>User Transaction-&gt;Instruction Parser</title>
+<path fill="none" stroke="black" d="M138.92,-208C147.07,-208 155.51,-208 163.85,-208"/>
+<polygon fill="black" stroke="black" points="163.63,-211.5 173.63,-208 163.63,-204.5 163.63,-211.5"/>
+</g>
+<!-- Program Account (Public) -->
+<g id="node3" class="node">
+<title>Program Account (Public)</title>
+<polygon fill="lightyellow" stroke="black" points="618.2,-253 442.69,-253 442.69,-217 618.2,-217 618.2,-253"/>
+<text text-anchor="middle" x="530.44" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00">Program Account (Public)</text>
+</g>
+<!-- Instruction Parser&#45;&gt;Program Account (Public) -->
+<g id="edge2" class="edge">
+<title>Instruction Parser-&gt;Program Account (Public)</title>
+<path fill="none" stroke="black" d="M301.66,-213.79C339.32,-217.3 388.18,-221.85 430.99,-225.83"/>
+<polygon fill="black" stroke="black" points="430.52,-229.3 440.8,-226.75 431.17,-222.33 430.52,-229.3"/>
+</g>
+<!-- Program Account (Confidential) -->
+<g id="node4" class="node">
+<title>Program Account (Confidential)</title>
+<polygon fill="mistyrose" stroke="red" stroke-width="2" points="636.1,-199 424.79,-199 424.79,-163 636.1,-163 636.1,-199"/>
+<text text-anchor="middle" x="530.44" y="-176.8" font-family="Helvetica,sans-Serif" font-size="14.00">Program Account (Confidential)</text>
+</g>
+<!-- Instruction Parser&#45;&gt;Program Account (Confidential) -->
+<g id="edge3" class="edge">
+<title>Instruction Parser-&gt;Program Account (Confidential)</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M301.71,-197.46C307.65,-196.62 313.58,-195.85 319.3,-195.2 349.72,-191.74 382.72,-189.03 413.35,-186.94"/>
+<polygon fill="black" stroke="black" points="413.27,-190.45 423.01,-186.3 412.8,-183.47 413.27,-190.45"/>
+<text text-anchor="middle" x="363.05" y="-199.4" font-family="Times,serif" font-size="14.00">Sensitive Logic</text>
+</g>
+<!-- Execution Trace -->
+<g id="node7" class="node">
+<title>Execution Trace</title>
+<polygon fill="black" stroke="black" points="796.08,-253 678.92,-253 678.92,-217 796.08,-217 796.08,-253"/>
+<text text-anchor="middle" x="737.5" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00">Execution Trace</text>
+</g>
+<!-- Program Account (Public)&#45;&gt;Execution Trace -->
+<g id="edge4" class="edge">
+<title>Program Account (Public)-&gt;Execution Trace</title>
+<path fill="none" stroke="black" d="M618.41,-235C634.74,-235 651.62,-235 667.33,-235"/>
+<polygon fill="black" stroke="black" points="667.02,-238.5 677.02,-235 667.02,-231.5 667.02,-238.5"/>
+</g>
+<!-- FHE CoProcessor -->
+<g id="node9" class="node">
+<title>FHE CoProcessor</title>
+<polygon fill="lightgreen" stroke="black" stroke-width="2" points="801.91,-52 673.1,-52 673.1,-16 801.91,-16 801.91,-52"/>
+<text text-anchor="middle" x="737.5" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">FHE CoProcessor</text>
+</g>
+<!-- Program Account (Confidential)&#45;&gt;FHE CoProcessor -->
+<g id="edge5" class="edge">
+<title>Program Account (Confidential)-&gt;FHE CoProcessor</title>
+<path fill="none" stroke="black" d="M632.84,-162.59C636.85,-160.06 640.63,-157.21 644.1,-154 666.38,-133.38 647.62,-113.82 665.1,-89 673.19,-77.51 684.4,-67.3 695.54,-58.91"/>
+<polygon fill="black" stroke="black" points="697.47,-61.82 703.58,-53.16 693.4,-56.13 697.47,-61.82"/>
+</g>
+<!-- State Account (Public) -->
+<g id="node5" class="node">
+<title>State Account (Public)</title>
+<polygon fill="lightyellow" stroke="black" points="607.7,-307 453.19,-307 453.19,-271 607.7,-271 607.7,-307"/>
+<text text-anchor="middle" x="530.44" y="-284.8" font-family="Helvetica,sans-Serif" font-size="14.00">State Account (Public)</text>
+</g>
+<!-- State Account (Public)&#45;&gt;Execution Trace -->
+<g id="edge7" class="edge">
+<title>State Account (Public)-&gt;Execution Trace</title>
+<path fill="none" stroke="black" d="M607.93,-271.2C620.05,-268.23 632.44,-265.1 644.1,-262 651.67,-259.99 659.57,-257.81 667.43,-255.58"/>
+<polygon fill="black" stroke="black" points="668.35,-258.96 677,-252.85 666.43,-252.23 668.35,-258.96"/>
+</g>
+<!-- State Account (Confidential) -->
+<g id="node6" class="node">
+<title>State Account (Confidential)</title>
+<polygon fill="mistyrose" stroke="red" stroke-width="2" points="625.6,-145 435.29,-145 435.29,-109 625.6,-109 625.6,-145"/>
+<text text-anchor="middle" x="530.44" y="-122.8" font-family="Helvetica,sans-Serif" font-size="14.00">State Account (Confidential)</text>
+</g>
+<!-- State Account (Confidential)&#45;&gt;FHE CoProcessor -->
+<g id="edge6" class="edge">
+<title>State Account (Confidential)-&gt;FHE CoProcessor</title>
+<path fill="none" stroke="black" d="M571.96,-108.63C604.57,-93.84 650.59,-72.96 685.68,-57.05"/>
+<polygon fill="black" stroke="black" points="686.68,-60.44 694.34,-53.12 683.79,-54.06 686.68,-60.44"/>
+</g>
+<!-- Result Commit -->
+<g id="node8" class="node">
+<title>Result Commit</title>
+<polygon fill="black" stroke="black" points="1024.25,-253 916.46,-253 916.46,-217 1024.25,-217 1024.25,-253"/>
+<text text-anchor="middle" x="970.35" y="-230.8" font-family="Helvetica,sans-Serif" font-size="14.00">Result Commit</text>
+</g>
+<!-- Execution Trace&#45;&gt;Result Commit -->
+<g id="edge10" class="edge">
+<title>Execution Trace-&gt;Result Commit</title>
+<path fill="none" stroke="black" d="M796.46,-235C829.46,-235 870.87,-235 904.89,-235"/>
+<polygon fill="black" stroke="black" points="904.61,-238.5 914.61,-235 904.61,-231.5 904.61,-238.5"/>
+</g>
+<!-- Encrypted Handle -->
+<g id="node10" class="node">
+<title>Encrypted Handle</title>
+<polygon fill="black" stroke="black" points="1034,-52 906.71,-52 906.71,-16 1034,-16 1034,-52"/>
+<text text-anchor="middle" x="970.35" y="-29.8" font-family="Helvetica,sans-Serif" font-size="14.00">Encrypted Handle</text>
+</g>
+<!-- FHE CoProcessor&#45;&gt;Encrypted Handle -->
+<g id="edge8" class="edge">
+<title>FHE CoProcessor-&gt;Encrypted Handle</title>
+<path fill="none" stroke="black" d="M802.19,-34C830.95,-34 865.11,-34 895.03,-34"/>
+<polygon fill="black" stroke="black" points="894.76,-37.5 904.76,-34 894.76,-30.5 894.76,-37.5"/>
+</g>
+<!-- Encrypted Handle&#45;&gt;Execution Trace -->
+<g id="edge9" class="edge">
+<title>Encrypted Handle-&gt;Execution Trace</title>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M948.34,-52.3C907.06,-88.24 815.28,-168.15 767.96,-209.35"/>
+<polygon fill="black" stroke="black" points="765.78,-206.61 760.54,-215.81 770.38,-211.89 765.78,-206.61"/>
+<text text-anchor="middle" x="854.31" y="-162.61" font-family="Times,serif" font-size="14.00">Oracle Sync</text>
+</g>
+</g>
+</svg>
