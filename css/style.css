@@ -528,7 +528,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 /* ========== Footer ========== */
 footer{
   padding:20px var(--side-desktop);
-  background:#F7F7F7; color:#666; font-size:12px;
+  background:#DEDBD8; color:#666; font-size:12px;
 }
 @media (max-width:1200px){
   footer{ padding-left: var(--side-tablet); padding-right: var(--side-tablet); }
