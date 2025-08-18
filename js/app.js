@@ -92,7 +92,8 @@
     setKeyBySel('#exp-label','sec.exp');
     setKeyBySel('#team-label','sec.team');
 
-    setKeyList('#sec01 .time-label', ['label.days','label.hours','label.seconds']);
+    // countdown 라벨 (범용 선택자)
+    setKeyList('.count-wrap .time-label', ['label.days','label.hours','label.seconds']);
     setKeyBySel('#sec02 .strip p', 'slogan');
 
     // Tech A
@@ -337,18 +338,14 @@
         var isOpen = btn.getAttribute('aria-expanded') === 'true';
 
         if (!isOpen) {
-          // 열기: 상태 먼저 바꿔서 패딩/스타일 적용 → 0에서 내용 높이로
+          // 열기
           btn.setAttribute('aria-expanded', 'true');
           card.classList.add('open');
-
-          // 시작 높이를 0으로 잡고 리플로우
           content.style.maxHeight = '0px';
           void content.offsetHeight; // reflow
-
-          // 패딩 적용된 상태에서 실제 콘텐츠 높이로 애니메이션
           content.style.maxHeight = content.scrollHeight + 'px';
         } else {
-          // 닫기: 현재 자연 높이를 픽셀로 고정 → 리플로우 → 0으로
+          // 닫기
           if (content.style.maxHeight === '' || getComputedStyle(content).maxHeight === 'none') {
             content.style.maxHeight = content.scrollHeight + 'px';
             void content.offsetHeight; // reflow
@@ -361,33 +358,90 @@
     });
   }
 
-  /* -------- Countdown (optional) -------- */
+  /* -------- Countdown (deadline 또는 초기값 감소형 + 유닛별 hover-pause) -------- */
   function initCountdown() {
-    var wrap = $('#sec01 .count-wrap');
+    var wrap = $('.count-wrap');
     if (!wrap) return;
-    var deadlineStr = wrap.getAttribute('data-deadline');
-    if (!deadlineStr) return;
-    var deadline = new Date(deadlineStr).getTime();
-    var elDays = $('#days'), elHours = $('#hours'), elSecs = $('#seconds');
+
+    var elDays  = $('#days', wrap);
+    var elHours = $('#hours', wrap);
+    var elSecs  = $('#seconds', wrap);
     if (!elDays || !elHours || !elSecs) return;
+
+    // 유닛별 일시정지
     var paused = { days: false, hours: false, seconds: false };
     $$('.time-box', wrap).forEach(function (box) {
       var unit = box.getAttribute('data-unit');
       box.addEventListener('mouseenter', function () { if (unit) paused[unit] = true; });
       box.addEventListener('mouseleave', function () { if (unit) paused[unit] = false; });
     });
-    function tick() {
-      var now = Date.now();
-      var dw = Math.max(0, Math.floor((deadline - now) / 1000));
-      var d = Math.floor(dw / (3600 * 24)); dw -= d * 3600 * 24;
-      var h = Math.floor(dw / 3600);        dw -= h * 3600;
-      var s = Math.floor(dw);
+
+    var deadlineStr = wrap.getAttribute('data-deadline');
+    var mode = deadlineStr ? 'deadline' : 'manual';
+
+    // 수동 모드 시작값(HTML 숫자 사용)
+    var d = parseInt((elDays.textContent || '').replace(/\D+/g,''), 10)  || 0;
+    var h = parseInt((elHours.textContent || '').replace(/\D+/g,''), 10) || 0;
+    var s = parseInt((elSecs.textContent || '').replace(/\D+/g,''), 10)  || 0;
+
+    function render() {
       if (!paused.days)    elDays.textContent  = String(d);
-      if (!paused.hours)   elHours.textContent = String(h).padStart(2, '0');
-      if (!paused.seconds) elSecs.textContent  = String(s).padStart(2, '0');
-      if (deadline - now > 0) requestAnimationFrame(tick);
+      if (!paused.hours)   elHours.textContent = String(h).padStart(2,'0');
+      if (!paused.seconds) elSecs.textContent  = String(s).padStart(2,'0');
     }
-    tick();
+
+    // 수동 카운트다운(초 → 시 → 일)
+    function tickManual() {
+      if (d <= 0 && h <= 0 && s <= 0) {
+        clearInterval(timerId);
+        wrap.setAttribute('aria-label', 'countdown finished');
+        return;
+      }
+      if (paused.seconds) return; // 초가 정지 중이면 전체 진행 정지
+
+      s -= 1;
+      if (s < 0) {
+        if (paused.hours) { s = 0; return; } // 시가 멈춘 경우 0초에서 대기
+        s = 59;
+        h -= 1;
+
+        if (h < 0) {
+          if (paused.days) { h = 0; return; } // 일이 멈춘 경우 0시에서 대기
+          h = 23;
+          d = Math.max(0, d - 1);
+        }
+      }
+      render();
+    }
+
+    // 데드라인 기반(남은 시간 재계산)
+    function startDeadline() {
+      var deadline = new Date(deadlineStr).getTime();
+      function rafLoop() {
+        var now = Date.now();
+        var remain = Math.max(0, Math.floor((deadline - now) / 1000));
+        var nd = Math.floor(remain / (24 * 3600));
+        remain -= nd * 24 * 3600;
+        var nh = Math.floor(remain / 3600);
+        remain -= nh * 3600;
+        var ns = remain;
+
+        if (!paused.days)    d = nd;
+        if (!paused.hours)   h = nh;
+        if (!paused.seconds) s = ns;
+
+        render();
+
+        if (deadline > now) requestAnimationFrame(rafLoop);
+        else wrap.setAttribute('aria-label', 'countdown finished');
+      }
+      rafLoop();
+    }
+
+    render();
+    var timerId = null;
+    if (mode === 'deadline') startDeadline();
+    else timerId = setInterval(tickManual, 1000);
   }
 
   /* -------- Init -------- */

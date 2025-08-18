@@ -130,7 +130,7 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 
 /* ========== Section spacing ========== */
 section{ padding-top: 0; padding-bottom: 0; }
-#sec01{ height: 100%; padding: 320px 0; background-color: #FFFFFF; display: flex; justify-content: center; text-align: center; }
+#sec01{ height: 100%; padding: 320px 0; background-color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; text-align: center; }
 #sec02{ background-image: url('../asset/section02_슬로건.png'); background-size: cover; background-repeat:no-repeat; }
 #sec03, #sec04, #sec05{ padding-top: 160px; padding-bottom: 160px; }
 #sec06{ padding-top: 120px; padding-bottom: 200px; }
@@ -154,6 +154,11 @@ section{ padding-top: 0; padding-bottom: 0; }
    margin-top: 12px; 
    letter-spacing:.4px; 
   }
+
+  .banner-title{margin-top: 20px;}
+  .banner-title .sec01-title {margin: 0;}
+  .banner-title .s-t-01{color: #0F0F10; padding-bottom: 4px;}
+  .banner-title .s-t-02{color: #807F7F; filter: blur(.65px);}
 
 /* ========== Section 02: Strip Banner ========== */
 /* 부모(#sec02)가 배경 이미지를 가지므로 .strip은 텍스트만 */
@@ -416,7 +421,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .property-title{
   font-family:"Asap Condensed", sans-serif; font-size:80px; font-weight:800;
   color:#0F0F10; line-height:1; flex:1; min-width:300px; 
-  position: relative; top: -100px;
+  position: relative; top: -120px;
 }
 .images-container{ position:relative; height:300px; flex:1; min-width:400px; }
 .main-image{ width:70%; height:200px; border-radius:20px; display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; }
@@ -426,7 +431,7 @@ section{ padding-top: 0; padding-bottom: 0; }
   position:absolute; bottom:0; right:0; box-shadow:0 4px 16px rgba(0,0,0,.2); z-index:2;
 }
 .property-features{ list-style:none; padding-left: 0; margin: 0; position: relative; bottom: 80px;}
-.property-features li{ margin-bottom:12px; font-size:14px; color:#555; position:relative; padding-left:20px; }
+.property-features li{ margin-bottom:8px; font-size:14px; color:#555; position:relative; padding-left:20px; }
 .property-features li:before{ content:'•'; position:absolute; left:0; color:#667eea; font-weight:bold; }
 
 .architecture-diagram{ position:relative; width:100%; background:white; border-radius:16px; padding:30px; }
