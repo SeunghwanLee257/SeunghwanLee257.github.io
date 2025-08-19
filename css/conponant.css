@@ -40,7 +40,11 @@ ul.tech-body {
 
 ul{list-style-type: none; margin: 0; padding: 0;}
 
+.pro-name{padding-bottom: 4px; color: #403E3C;}
+
 .img-siz{width: 130%;}
 
 .list-item{font-size: 14px; padding-bottom: 12px;}
 .list-item > span{font-size: 12px;}
+
+.pro-list-link::after{content: ""; height: 8px !important; padding-left: 2px; margin-left: 4px; background-color: #DEDBD8;}
