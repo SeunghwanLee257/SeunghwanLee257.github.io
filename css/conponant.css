@@ -4,6 +4,43 @@
 .captionKey{padding-top: 8px; padding-bottom: 8px; color: #403E3C; font-size: 14px; font-weight: 500;}
 .g-item-ex{color: #807F7F;}
 
+
+ul.tech-body {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.black-f{color: #0F0F10; font-family: "Asap Condensed", sans-serif;}
+
+.g-item-ex {
+  position: relative;
+  padding-left: 2px; /* 박스와 텍스트 사이 간격 */
+  margin-bottom: 4px;
+}
+
+.fron-text{position: relative; z-index: 1 !important;}
+
+.box {
+    display:block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;  /* 시작 시 너비 0으로 설정 */
+  height: 24px;
+  background-color: #FF952D;
+  transition: width 0.5s ease-in-out; /* 가로가 늘어날 때 애니메이션 효과 */
+}
+
+.box.expand {
+  width: 172px; /* 박스가 확장될 때 가로 길이가 100%로 늘어남 */
+}
+
+
+
+
 ul{list-style-type: none; margin: 0; padding: 0;}
 
 .img-siz{width: 130%;}
+
+.list-item{font-size: 14px; padding-bottom: 12px;}
+.list-item > span{font-size: 12px;}

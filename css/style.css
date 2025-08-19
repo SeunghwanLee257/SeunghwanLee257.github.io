@@ -76,7 +76,7 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 /* ========== Fixed Header ========== */
 .header{
   display: flex; align-items: center; justify-content: space-between;
-  position: fixed; bottom: 6%; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 8%; left: 50%; transform: translateX(-50%);
   z-index: 1000;
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(6px);
@@ -104,7 +104,7 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 .lang-dd-btn .caret{ transition: transform .15s; fill:#fff; }
 .lang-dd-btn[aria-expanded="true"] .caret{ transform: rotate(180deg); }
 .lang-dd-menu{
-  position:absolute; top:calc(100% + 8px); right:0; min-width:180px;
+  position:absolute; top:calc(-360% + 8px); right:0; min-width:180px;
   background:#fff; border:1px solid var(--chip);
   border-radius:12px; box-shadow: 0 8px 24px rgba(0,0,0,.1); padding:6px;
   list-style:none; margin:0; z-index:50;
@@ -137,7 +137,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 #sec03, #sec04, #sec05{ padding-top: 160px; padding-bottom: 160px; }
 #sec06{ padding-top: 120px; padding-bottom: 200px; }
 #sec07{ padding-top: 0; padding-bottom: 120px; }
-#sec08{ background: var(--bg-gray); padding-top: 120px; padding-bottom: 120px; }
+#sec08{ background: var(--bg-gray); padding: 80px 0 120px 0; }
 
 /* ========== Section 01: Countdown ========== */
 .count-wrap{ display:flex; gap:28px; align-items:center; justify-content:flex-start; }
