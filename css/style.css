@@ -37,6 +37,7 @@
 
 html, body { height: 100%; }
 
+
 body{
   margin: 0;
   color: var(--ink);
@@ -55,6 +56,7 @@ html[lang="ko"] :where(p,div,span,li,button,a,h1,h2,h3,h4,h5,h6){
                "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
+p{margin: 0;}
 a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
 /* 공용 컨테이너 */
 .container{
@@ -175,7 +177,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 
 /* ========== Section 03: Technology Split Panels ========== */
-.tech-split{ display:flex; gap:16px; align-items:stretch; }
+.tech-split{height: 520px; display:flex; gap:16px; align-items:stretch; }
 .tech-panel{
   position:relative; background:#FFFFFF; border-radius:20px; padding:60px 40px;
   overflow:hidden; display:flex; flex-direction:column;
@@ -185,7 +187,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .tech-panel.inactive{ flex: 0 0 154px; background: var(--chip); }
 
 .tech-panel .inner{
-  display:grid; grid-template-columns: 1fr 160px;
+  display:grid; grid-template-columns: 1fr 120px;
   gap:40px; align-items:start; flex:1;
 }
 .tech-panel .content, .tech-panel .actions{ display:none; }
@@ -210,8 +212,8 @@ section{ padding-top: 0; padding-bottom: 0; }
   font-weight:700; font-size: clamp(32px, 6vw, 42px);
   line-height:.95; color:#000; margin:0 0 20px;
 }
-.tech-subtitle{ font-size:16px; font-weight:400; color:var(--title-color); margin:0 0 20px; line-height:1.5; }
-.tech-body{ font-size:16px; font-weight:400; color:var(--title-color); line-height:1.5; margin:0 0 20px; }
+.tech-subtitle{ font-size:16px; font-weight:400; color:var(--title-color); line-height:1.5; }
+.tech-body{ font-size:16px; font-weight:400; color:var(--title-color); line-height:1.5; }
 .tech-ref{ font-size:14px; font-weight:400; color:var(--muted); line-height:1.6; margin:0; }
 
 /* Actions */
@@ -236,7 +238,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .more-btn:hover, .more-btn:focus-visible{ transform: translateY(-1px); box-shadow: var(--btn-elev-hover); }
 
 .panel-thumb{ position:absolute; height:auto; pointer-events:none; }
-.panel-thumb.pt-1{ left:0; top:-85%; }
+.panel-thumb.pt-1{ left:0; top: -175%; }
 .panel-thumb.pt-2{ right:0; bottom:-60px; }
 
 /* Tech: Responsive */
@@ -245,7 +247,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 @media (max-width:1005px) and (min-width:721px){
   .inactive-head{ bottom:20px !important; }
-  .panel-thumb.pt-1{ left:0; top:-175%; }
+  .panel-thumb.pt-1{ left:0; top: 0; }
   .panel-thumb.pt-2{ right:0; bottom:-20px; }
 }
 @media (max-width:720px){

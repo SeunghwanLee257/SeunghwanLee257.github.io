@@ -7,6 +7,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/conponant.css">
 
   <!-- Icons / Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -125,30 +126,28 @@
           <!-- 활성 콘텐츠 -->
           <div class="inner">
             <div class="content">
-              <h3 class="tech-title-lg" id="tab-a">Deterministic FHE16-based
-                Ultra-Low-Latency Bootstrapping</h3>
+              <h3 class="tech-title-lg" id="tab-a">Ultra-Low-Latency</h3>
               <p class="tech-subtitle">A 16-bit integer computation–centric deterministic FHE structure
                 that eliminates floating-point operations,
                 ensuring identical results regardless of the execution environment</p>
-              <p class="tech-body">
-                Achieves 2.89 ms bootstrapping through GINX gate 
-                optimization (suitable for real-time and low-latency applications) 
-                Structurally eliminates floating-point environment-specific error issues
-              </p>
-              <p class="tech-ref">Reference: ePrint 2024/1916</p>
+              <p class="captionKey">Key Features</p>
+              <ul class="tech-body">
+                <li class="g-item-ex">Elimination of floating-point operations, ensuring identical results regardless of the execution environments</li>
+                <li class="g-item-ex">Elimination of floating-point environment-specific error issues</li>
+                <li class="g-item-ex">Ultra-fast 2.89 ms bootstrapping through GINX gate optimization (suitable for real-time and low-latency applications)</li>
+              </ul>
+              <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
             </div>
           </div>
 
           <!-- 액션 영역 -->
-          <div class="actions morebtn">
+          <!-- 영문으로 바꾸는데 시간 걸려서 추후 공개 -->
+          <!-- <div class="actions morebtn">
             <span class="action-icon" aria-hidden="true">
               <img src="./asset/sec03-1.svg" alt="">
             </span>
             <button class="more-btn" type="button" aria-label="Deterministic FHE 더보기"><a href="https://walllnut.gitbook.io/walllnut-docs/">more details</a></button>
-          </div>
-
-          <!-- 우하단 이미지 (데코레이션) -->
-          <img class="panel-thumb" src="" alt="" loading="lazy" />
+          </div> -->
         </article>
 
         <!-- 자식 b (기본: 비활성 + 배경 #DEDBD8) -->
@@ -170,28 +169,28 @@
           <div class="inner">
             <header class="content">
               <h3 class="tech-title-lg" id="tab-b">FHE16-based MPC (SSFHE)</h3>
-              <p class="tech-subtitle">Combines FHE16 with SPDZ-style LSSS-MPC to perform FHE encryption
-                and decryption within the MPC environment</p>
-              <p>Key Features</p>
-              <p class="tech-body">
-                Online phase: O(1) complexity for communication, computation, rounds, and input size
-                Offline phase: Only evaluation key (ev) generation required at O(n κ d²) complexity
-                CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)
-                Guarantees Circuit Privacy with active security in a dishonest majority setting
-              </p>
-              <p class="tech-ref">Reference: ePrint 2024/1916</p>
+              <p class="tech-subtitle">A new FHE (FHE16) is based on 16-bit integer arithmetic, 
+                  utilizing composite numbers of 16-bit
+                  primes as its modulus values.</p>
+              <p class="captionKey">Key Features</p>
+              <ul class="tech-body">
+                <li class="g-item-ex">O(1) complexity for each of communication, computation,<br> rounds and input size</li>
+                <li class="g-item-ex">O(n κ d²) complexity for generation of evaluation key (ev)</li>
+                <li class="g-item-ex">CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)</li>
+                <li class="g-item-ex">Circuit Privacy with active security in a dishonest majority setting</li>
+              </ul>
+              <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
             </header>
           </div>
 
-          <div class="actions morebtn">
+          <!-- 영문으로 바꾸는데 시간 걸려서 추후 공개 -->
+          <!-- <div class="actions morebtn">
             <span class="action-icon" aria-hidden="true">
               <img src="./asset/sec03-2.svg" alt="">
-              <!-- <span class="material-icons" aria-hidden="true">lock</span> -->
+              <span class="material-icons" aria-hidden="true">lock</span>
             </span>
             <button class="more-btn" type="button" aria-label="Confidential Layer 더보기"><a href="https://walllnut.gitbook.io/walllnut-docs/">more details</a></button>
-          </div>
-
-          <!-- <img class="panel-thumb" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" /> -->
+          </div> -->
         </article>
       </div>
     </section>
@@ -213,10 +212,10 @@
         <!-- 반드시 class="svc-right" -->
         <div class="svc-right">
           <div class="svc-b">
-            <h3 class="svc-title">Confidential Layer</h3>
+            <h3 class="svc-title">Deterministic Confidential Layer</h3>
             <p class="svc-desc">
               Normal transactions stay on-chain, while sensitive data/compute run
-              in a confidential FHE layer—keeping state public.
+              <strong>in a confidential FHE layer—keeping state public.</strong>
             </p>
           </div>
 
@@ -268,9 +267,8 @@
         </div>
         <div class="svc-right">
           <div class="svc-b">
-            <h3 class="svc-title">Confidential DeFi</h3>
-            <p class="svc-desc">Beyond personal protection,
-              we block trading bots to <strong>boost asset growth and returns.</strong>
+            <h3 class="svc-title">Fair DeFi</h3>
+            <p class="svc-desc">Block trading bots from doing <br>MEV extraction in order to <strong>boost asset growth and returns</strong>
             </p>
           </div>
           <div class="svc-bot">
@@ -278,7 +276,7 @@
               <img class="s-img-3" src="./asset/slide03.png" alt="" />
               <div class="svc-c-meta">
                 <div class="svc-c-title">Keyword</div>
-                <div class="svc-c-title2">Asset growth</div>
+                <div class="svc-c-title2">Fair asset growth</div>
                 <div class="svc-c-ref">Block trading bots to protect<br>your assets and boost returns</div>
               </div>
             </div>
@@ -306,7 +304,7 @@
                 <div class="svc-c-meta">
                   <div class="svc-c-title">Keyword</div>
                   <div class="svc-c-title2">Privately</div>
-                  <div class="svc-c-ref">Privacy protected,<br>metrics accurate</div>
+                  <div class="svc-c-ref">Safe and private voting</div>
                 </div>
               </div>
             </div>
@@ -352,7 +350,7 @@
         <div class="goal-dropdown-card">
           <button class="goal-dropdown-header" aria-expanded="false">
             <span class="goal-dropdown-question">
-              What does Walllnut actually do—and what are we confident about? 🫥💪
+              What does waLLLnut actually do—and what are we confident about? 🫥💪
             </span>
             <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
@@ -368,7 +366,7 @@
         <div class="goal-dropdown-card">
           <button class="goal-dropdown-header" aria-expanded="false">
             <span class="goal-dropdown-question">
-              Hashes for Walllnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
+              Hashes for waLLLnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
             </span>
             <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
@@ -395,7 +393,7 @@
         <div class="goal-dropdown-card">
           <button class="goal-dropdown-header" aria-expanded="false">
             <span class="goal-dropdown-question">
-              So, what's in Walllnut's product lineup? 🚀
+              So, what's in waLLLnut's product lineup? 🚀
             </span>
             <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
           </button>
@@ -599,7 +597,7 @@
     <section id="sec08" aria-labelledby="advisors-label">
       <div class="container">
         <div class="s08-comt-inner">
-          <h4 class="s08-title">WaLLLnut collaborates with distinguished professors from<br>
+          <h4 class="s08-title">waLLLnut collaborates with distinguished professors from<br>
             leading universities in Korea for technical advisory and joint research.
           </h4>
           <p>
@@ -622,7 +620,7 @@
   <!-- 푸터 -->
   <footer role="contentinfo">
     <div class="container">
-      © 2025 WaLLLnut · All rights reserved.
+      © 2025 waLLLnut · All rights reserved.
     </div>
   </footer>
 </body>
