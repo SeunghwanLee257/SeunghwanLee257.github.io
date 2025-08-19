@@ -421,16 +421,16 @@ section{ padding-top: 0; padding-bottom: 0; }
 .property-content{ display:flex; align-items:flex-start; gap:60px;}
 /* Asap 유지 */
 .property-title{
-  font-family:"Asap Condensed", sans-serif; font-size:80px; font-weight:800;
+  font-family:"Asap Condensed", sans-serif; font-size:68px; font-weight:800;
   color:#0F0F10; line-height:1; flex:1; min-width:300px; 
   position: relative; top: -120px;
 }
-.images-container{ position:relative; height:300px; flex:1; min-width:400px; }
+.images-container{ position:relative; top: -40px; height:300px; flex:1; min-width:400px; }
 .main-image{ width:70%; height:200px; border-radius:20px; display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; }
 .small-image{
   width:45%; height:120px; background:#1a1a1a; border-radius:12px; border:4px solid #333;
   display:flex; align-items:center; justify-content:center; color:#4ade80; font-size:14px; font-weight:600;
-  position:absolute; bottom:0; right:0; box-shadow:0 4px 16px rgba(0,0,0,.2); z-index:2;
+  position:absolute; bottom:20px; right:20px; box-shadow:0 4px 16px rgba(0,0,0,.2); z-index:2;
 }
 .property-features{ list-style:none; padding-left: 0; margin: 0; position: relative; bottom: 80px;}
 .property-features li{ margin-bottom:8px; font-size:14px; color:#555; position:relative; padding-left:20px; }
