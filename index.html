@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>WaLLLnut — Landing</title>
+  <title>waLLLnut</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/conponant.css">
+  <link rel="stylesheet" href="./css/verLangKor.css">
+  <link rel="stylesheet" href="./css/rwd.css">
 
   <!-- Icons / Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -17,24 +19,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css" />
 
   <!-- JS -->
+  <script src="./js/i18n.js"></script>
   <script src="js/app.js" defer></script>
   <script src="./js/conponant.js"></script>
+  <script src="./js/remove.js"></script>
 </head>
 
 <body>
   <!-- 고정 헤더 -->
   <header class="header" role="banner">
     <div class="logo-menus">
-      <img src="./asset/logo-filled-01.png" alt="">
+      <img src="./asset/head-logo.svg" alt="WaLLLnut Logo">
+      <!-- Mobile menu button will be inserted here by JavaScript -->
       <nav class="nav" aria-label="주요 섹션">
-        <a href="#sec03">Technology</a>
-        <a href="#sec04">Service</a>
-        <a href="#sec05">Goal</a>
-        <a href="#sec06">Experience</a>
-        <a href="#sec07">Team</a>
-        <a href="#sec08">Advisors</a>
+        <a href="#sec03" data-i18n="nav.tech">Technology</a>
+        <a href="#sec04" data-i18n="nav.service">Service</a>
+        <a href="#sec05" data-i18n="nav.goal">Goal</a>
+        <a href="#sec06" data-i18n="nav.exp">Experience</a>
+        <a href="#sec07" data-i18n="nav.team">Team</a>
+        <a href="#sec08" data-i18n="nav.advisors">Advisors</a>
       </nav>
     </div>
+    
     <!-- Language Dropdown -->
     <div class="lang-dd" id="langDropdown">
       <span id="langLabel" class="lang-dd-label" data-i18n="lang.label">Language</span>
@@ -117,11 +123,10 @@
           <!-- 비활성 헤더(기본 활성이라 숨김) -->
           <div class="inactive-head" aria-hidden="true">
             <img class="panel-thumb pt-1" src="./asset/tabs-inact-cha02.png" alt="" loading="lazy" />
-            <p class="inactive-title">
-              Deterministic FHE16-based
-              <br>Ultra-Low-Latency Bootstrapping
+            <div class="inactive-icon-tabs">
+              <p class="inactive-title">Ultra-Low-Latency</p>
               <p class="material-icons arrow-dwon" aria-hidden="true">arrow_right</p>
-            </p>
+            </div>
           </div>
 
           <!-- 활성 콘텐츠 -->
@@ -167,10 +172,10 @@
           >
           <div class="inactive-head">
             <img class="panel-thumb pt-2" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" />
-            <p class="inactive-title">
-              FHE16-based<br>MPC (SSFHE)
-              <p class="material-icons  arrow-up" aria-hidden="true">arrow_left</p>
-            </p>
+            <div class="inactive-icon-tabs">
+              <p class="inactive-title">FHE16-based<br>MPC (SSFHE)</p>
+              <p class="material-icons arrow-up" aria-hidden="true">arrow_left</p>
+            </div>
           </div>
 
           <div class="inner">
@@ -232,7 +237,7 @@
               <div class="svc-c-meta">
                 <div class="svc-c-title">Keyword</div>
                 <div class="svc-c-title2">Hide</div>
-                <div class="svc-c-ref">Encrypted data stays hidden</div>
+                <div class="svc-c-ref"><p>Encrypted data stays hidden</p></div>
               </div>
             </div>
           </div>
@@ -258,7 +263,7 @@
               <div class="svc-c-meta">
                 <div class="svc-c-title">Keyword</div>
                 <div class="svc-c-title2">Solana</div>
-                <div class="svc-c-ref">Encrypted data stays hidden</div>
+                <div class="svc-c-ref"><p>Encrypted data stays hidden</p></div>
               </div>
             </div>
           </div>
@@ -284,7 +289,7 @@
               <div class="svc-c-meta">
                 <div class="svc-c-title">Keyword</div>
                 <div class="svc-c-title2">Fair asset growth</div>
-                <div class="svc-c-ref">Block trading bots to protect<br>your assets and boost returns</div>
+                <div class="svc-c-ref"><p>Block trading bots to protect<br>your assets and boost returns</p></div>
               </div>
             </div>
           </div>
@@ -311,7 +316,7 @@
                 <div class="svc-c-meta">
                   <div class="svc-c-title">Keyword</div>
                   <div class="svc-c-title2">Privately</div>
-                  <div class="svc-c-ref">Safe and private voting</div>
+                  <div class="svc-c-ref"><p>Safe and private voting</p></div>
                 </div>
               </div>
             </div>
@@ -339,13 +344,14 @@
           <div class="frame-content">        <!-- 프레임 안쪽 안전영역 -->
             <h2 id="goal-label" class="section-label">03. Our Goal</h2>
             <div class="title-graphic">
-              <img src="./asset/section05-goal-title.svg" alt="">
+              <img src="./asset/goal-title02.svg" alt="">
             </div>
             <div class="goal-caption">
               <p class="p">
-                This layer combines Fully Homomorphic Encryption (FHE), Secure Multi-Party Computation (MPC), and
-                Threshold Cryptography to enable the execution of verifiable computations on the blockchain while
-                keeping sensitive data in a confidential state.
+                Walnut’s Confidential Layer brings FHE, MPC, and threshold cryptography together so you can run verifiable on-chain compute
+                while your data stays sealed. Personal data is end-to-end encrypted and opens—briefly—only when the user gives the nod.
+                In short, “disclose only what’s needed, only when needed,” which compounds security and value over time. 
+                With no sensitive signals leaking, MEV bots lose their edge, markets stay fairer, and your assets get an extra lift.
               </p>
             </div>
           </div>
@@ -599,9 +605,9 @@
     <section id="sec08" aria-labelledby="advisors-label">
       <div class="container">
         <div class="s08-comt-inner">
-          <h4 class="s08-title">waLLLnut collaborates with distinguished professors from<br>
+          <span class="s08-title"><strong>waLLLnut</strong> collaborates with distinguished professors from<br>
             leading universities in Korea for technical advisory and joint research.
-          </h4>
+          </span>
           <ul class="professor-list">
             <li class="list-item">
                 <p class="pro-name"><strong>Jon-Lark Kim:</strong></p>
@@ -647,7 +653,7 @@
   <!-- 푸터 -->
   <footer role="contentinfo">
     <div class="container">
-      © 2025 waLLLnut · All rights reserved.
+      <span>© 2025 waLLLnut · All rights reserved.</span>
     </div>
   </footer>
 </body>

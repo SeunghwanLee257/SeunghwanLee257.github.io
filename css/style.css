@@ -25,7 +25,7 @@
   --accent: #FF952D;
 
   /* Shadows */
-  --elev: 0 6px 24px rgba(0,0,0,0.25);
+  --elev: 0 6px 24px rgba(0,0,0,0.16);
   --btn-elev: 0 8px 20px rgba(255,149,45,.35);
   --btn-elev-hover: 0 12px 24px rgba(255,149,45,.45);
 }
@@ -65,9 +65,6 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
   padding-left: var(--side-desktop);
   padding-right: var(--side-desktop);
 }
-@media (max-width: 1200px){
-  .container{ padding-left: var(--side-tablet); padding-right: var(--side-tablet); }
-}
 
 /* 공용 텍스트 유틸 */
 .h3{ font-size: 28px; font-weight: 800; margin:0 0 12px; color:#111; }
@@ -86,12 +83,12 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 }
 .logo-menus{display: flex; align-items: center;}
 .logo-menus img{padding-right: 4px;}
-.nav{ display:flex; gap:14px; align-items:center; justify-content:center; font-size: 13px; }
+.nav{ display:flex; gap:4px; align-items:center; justify-content:center; font-size: 13px; }
 .nav a{ text-decoration: none; color:#222; padding:8px 12px; border-radius: 10px; }
 .nav a:hover{ background: var(--hover-bg); }
 
 /* ========== Language Dropdown (UI only) ========== */
-.lang-dd { padding-left: 60px; display:flex; align-items:center; gap:10px; margin-left:auto; }
+.lang-dd { padding-left: 80px; display:flex; align-items:center; gap:10px; margin-left:auto; }
 .lang-dd-label { color: var(--muted); font-size:14px; }
 .lang-dd-wrap { position:relative; }
 .lang-dd-btn{
@@ -116,7 +113,6 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 }
 .lang-dd-menu li:hover, .lang-dd-menu li.focused{ background: var(--hover-bg); }
 .lang-dd-menu .lang-code{ color:#8a8a8a; font-variant: all-small-caps; }
-@media (max-width: 768px){ .lang-dd-label{ display:none; } }
 
 /* ========== Section Meta Labels ========== */
 /* Asap Condensed 유지 (영/한 모두) */
@@ -179,8 +175,8 @@ section{ padding-top: 0; padding-bottom: 0; }
 /* ========== Section 03: Technology Split Panels ========== */
 .tech-split{height: 520px; display:flex; gap:16px; align-items:stretch; }
 .tech-panel{
-  position:relative; background:#FFFFFF; border-radius:20px; padding:60px 40px;
-  overflow:hidden; display:flex; flex-direction:column;
+  position:relative; background:#FFFFFF; border-radius:20px;
+  overflow:hidden; display:flex; flex-direction:column; padding: 60px 40px;
   transition: flex-basis .35s ease, max-height .35s ease, background-color .2s ease;
 }
 .tech-panel.active{ flex: 1 1 auto; }
@@ -195,10 +191,15 @@ section{ padding-top: 0; padding-bottom: 0; }
 .tech-panel.active .content{ width:100%; grid-column:1; }
 
 .tech-panel .inactive-head{
-  position:absolute; bottom:60px; right:0;
-  display:none; padding:16px 18px; text-align:right;
+  /* border: 1px solid red; */
+  width: 100%; height: 100%;
+  position:relative;
+  display:none; text-align:right;
 }
 .tech-panel.inactive .inactive-head{ display:block; }
+.inactive-icon-tabs{
+  position: absolute; bottom: 0;
+}
 
 .inactive-title{
   font-family:"Asap Condensed", sans-serif; font-weight:700; font-size:20px;
@@ -238,28 +239,9 @@ section{ padding-top: 0; padding-bottom: 0; }
 .more-btn:hover, .more-btn:focus-visible{ transform: translateY(-1px); box-shadow: var(--btn-elev-hover); }
 
 .panel-thumb{ position:absolute; height:auto; pointer-events:none; }
-.panel-thumb.pt-1{ left:0; top: -175%; }
-.panel-thumb.pt-2{ right:0; bottom:-60px; }
+.panel-thumb.pt-1{ left: -50px; top: -80px; }
+.panel-thumb.pt-2{ right: -60px; bottom: -80px; }
 
-/* Tech: Responsive */
-@media (max-width:1024px){
-  .tech-panel .inner{ grid-template-columns:1fr; gap:20px; }
-}
-@media (max-width:1005px) and (min-width:721px){
-  .inactive-head{ bottom:20px !important; }
-  .panel-thumb.pt-1{ left:0; top: 0; }
-  .panel-thumb.pt-2{ right:0; bottom:-20px; }
-}
-@media (max-width:720px){
-  .tech-split{ flex-direction:column; }
-  .tech-panel.active{ max-height:9999px; }
-  .tech-panel.inactive{ max-height:154px; flex:0 0 auto; }
-  .tech-panel .inner{ display:block; }
-  .inactive-head{ bottom:20px !important; }
-  .material-icons.arrow-dwon, .material-icons.arrow-up{ padding-left:12px; transform: rotate(90deg); }
-  .panel-thumb.pt-1{ left:-358px; top:-20px; }
-  .panel-thumb.pt-2{ right:0; bottom:-20px; }
-}
 
 /* ========== Section 04: Our Service (Slider) ========== */
 .svc-slider{ position: relative; overflow: hidden; }
@@ -319,32 +301,6 @@ section{ padding-top: 0; padding-bottom: 0; }
 .svc-btn:is(:hover,:focus-visible){ transform: translateY(-1px); background-color:#F2F2F2; }
 .svc-btn.is-gray{ color:#B6B4B1; }
 
-/* Slider responsive */
-@media (max-width:1200px){
-  .svc-item{ grid-template-columns:360px minmax(0,1fr); column-gap:140px; }
-  .svc-a{ height:360px; } .svc-right{ height:360px; }
-}
-@media (max-width:980px){
-  .svc-item{ display:flex; flex-direction:column; gap:32px; }
-  .svc-top{ width:100%; display:flex; flex-direction:column; gap:36px; }
-  .svc-a{ width:100%; height: clamp(280px, 45vw, 416px); }
-  .svc-right{ align-items:right; text-align:right; height:auto; justify-content:right; }
-  .svc-b{ align-items:right; text-align:right; }
-  .svc-c{ justify-content:space-between; height:154px; padding:32px 24px; gap:16px; }
-  .svc-c img{ position:relative; transform:none; height:fit-content; }
-  .svc-c img.s-img-1{ width:340px; left:-100px; top:55%; transform: translateY(4%); }
-  .svc-c img.s-img-2{ width:500px; left:-100px !important; top:55%; transform: translateY(-8%); }
-  .svc-c img.s-img-3{ width:260px; left:24px; top:55%; transform: translateY(-6%); }
-  .svc-c img.s-img-4{ width:260px; left:24px; top:55%; transform: translateY(-5%); }
-  .svc-c-meta{ text-align:right; padding-right:0; }
-  .svc-cont{ justify-content:center; margin-top:24px; }
-}
-@media (max-width:600px){
-  .svc-title{ font-size: clamp(26px, 7vw, 40px); }
-  .svc-btn{ width:44px; height:44px; }
-  .svc-a{ height: clamp(220px, 50vw, 300px); }
-}
-
 /* ========== Section 05: Our Goal ========== */
 /* 점 배경 */
 .dot-bg{ background-image: radial-gradient(circle, #ccc 1px, transparent 1px); background-size:20px 20px; background-position:0 0; }
@@ -374,7 +330,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .title-graphic{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; min-height:0; }
 .title-graphic img{ max-width:100%; max-height:100%; width:auto; height:auto; }
 
-.goal-caption{ width:100%; max-width:620px; padding-top: 20px; text-align:center; align-self:end; }
+.goal-caption{ width:100%; max-width:520px; padding-top: 20px; text-align:center; align-self:end; }
 .goal-caption .p{ margin:0; font-size: clamp(13px, 1.3vw, 16px); line-height:1.5; color:#333; }
 
 /* Dropdown Cards */
@@ -398,23 +354,6 @@ section{ padding-top: 0; padding-bottom: 0; }
 .goal-dropdown-card.open .goal-dropdown-content{ max-height:500px;  padding: 12px 24px 16px;  }
 .goal-dropdown-text{ font-size:15px; font-weight:400; color: var(--title-color); line-height:1.6; margin:0; }
 
-/* Goal Responsive */
-@media (max-width:1024px) and (min-width:768px){
-  .title-area{ height: clamp(450px, 65vw, 700px); background-size: clamp(550px, 85vw, 950px) auto; }
-  .frame-content{
-    top: clamp(35px, 6vw, 70px); left: clamp(35px, 6vw, 70px); right: clamp(35px, 6vw, 70px); bottom: clamp(35px, 6vw, 70px);
-    gap: clamp(18px, 2.5vw, 35px);
-  }
-}
-@media (max-width:767px){
-  .title-area{ height: clamp(400px, 60vw, 600px); background-size: clamp(450px, 80vw, 700px) auto; }
-  .frame-content{
-    top: clamp(30px, 5vw, 50px); left: clamp(30px, 5vw, 50px); right: clamp(30px, 5vw, 50px); bottom: clamp(30px, 5vw, 50px);
-    gap: clamp(15px, 2vw, 25px);
-  }
-  .goal-caption .p{ font-size: clamp(11px, 3vw, 14px); }
-}
-
 /* ========== Section 06: Our Experience ========== */
 #sec06 > h2{margin-bottom: 72px;}
 .property-container{ margin-bottom:40px; }
@@ -428,9 +367,9 @@ section{ padding-top: 0; padding-bottom: 0; }
 .images-container{ position:relative; top: -40px; height:300px; flex:1; min-width:400px; }
 .main-image{ width:70%; height:200px; border-radius:20px; display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; }
 .small-image{
-  width:45%; height:120px; background:#1a1a1a; border-radius:12px; border:4px solid #333;
-  display:flex; align-items:center; justify-content:center; color:#4ade80; font-size:14px; font-weight:600;
-  position:absolute; bottom:20px; right:20px; box-shadow:0 4px 16px rgba(0,0,0,.2); z-index:2;
+  width: 45%; height: auto; 
+  display:flex; align-items:center; justify-content:center;
+  position:absolute; bottom:-60px; right:20px; z-index:2;
 }
 .property-features{ list-style:none; padding-left: 0; margin: 0; position: relative; bottom: 80px;}
 .property-features li{ margin-bottom:8px; font-size:14px; color:#555; position:relative; padding-left:20px; }
@@ -466,19 +405,6 @@ section{ padding-top: 0; padding-bottom: 0; }
   width:2px; height:40px; background: linear-gradient(to bottom, #ddd, transparent);
 }
 
-/* Experience responsive */
-@media (max-width:1024px) and (min-width:769px){
-  .small-image{ right:50%; transform: translateX(50%); }
-}
-@media (max-width:768px){
-  .property-content{ flex-direction:column; gap:40px; }
-  .property-title{ font-size:44px; min-width:auto; }
-  .images-container{ height:250px; min-width:auto; width:100%; }
-  .main-image{ width:75%; height:160px; }
-  .small-image{ width:50%; height:100px; right:0; transform:none; }
-  .roadmap-title{ font-size:48px; }
-}
-
 /* ========== Section 07: Team ========== */
 .team-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:60px 80px; justify-items:center; }
 .team-member{ display:flex; flex-direction:column; align-items:center; text-align:center; max-width:300px; width:100%; }
@@ -497,44 +423,14 @@ section{ padding-top: 0; padding-bottom: 0; }
 .team-grid .team-member:first-child{ grid-column: 1 / -1; margin-bottom:20px; }
 .team-grid .team-member:first-child .member-avatar{ margin-bottom:24px; }
 
-/* Team responsive */
-@media (max-width:768px){
-  .team-grid{ grid-template-columns:1fr; gap:50px; max-width:300px; margin:0 auto; }
-  .team-grid .team-member:first-child{ grid-column:1; margin-bottom:0; }
-  .team-member{ max-width:280px; }
-  .avatar-male, .avatar-female{ width:100px; height:130px; }
-  .team-grid .team-member:first-child .avatar-male{ width:120px; height:150px; }
-  .member-name-role{ font-size:13px; padding:6px 16px; }
-  .member-description{ font-size:11px; }
-}
-@media (max-width:480px){
-  .team-grid{ gap:40px; }
-  .avatar-male, .avatar-female{ width:90px; height:115px; }
-  .team-grid .team-member:first-child .avatar-male{ width:110px; height:135px; }
-  .member-name-role{ font-size:12px; padding:5px 14px; }
-  .member-description{ font-size:10px; }
-}
+.s08-comt-inner, 
+.professor-list li{display: flex; flex-direction: column; align-items: center;}
+.s08-title{font-size: 14px; text-align: center; color: #807F7F;}
+.professor-list{margin-top: 20px;}
 
-/* ========== Section 08: Advisors ========== */
-.advisors{ display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:20px; }
-.ad{ background:#fff; border-radius:16px; padding:16px; box-shadow: 0 10px 26px rgba(0,0,0,0.06); }
-.ad .avatar{ width:100%; aspect-ratio:1/1; border-radius:12px; background:#EEE; margin-bottom:10px; }
-.ad .name{ font-weight:800; font-size:14px; }
-.ad .role{ font-size:12px; color:#666; }
-.s08-comt-inner{text-align:center;}
-.s08-title{padding-bottom:20px;}
-.s08-comt-inner > p{ color:#403E3C; }
-@media (max-width:900px){ .advisors{ grid-template-columns: 1fr 1fr; } }
-@media (max-width:560px){ .advisors{ grid-template-columns: 1fr; } }
-
-/* ========== Footer ========== */
-footer{
-  padding:20px var(--side-desktop);
-  background:#DEDBD8; color:#666; font-size:12px;
-}
-@media (max-width:1200px){
-  footer{ padding-left: var(--side-tablet); padding-right: var(--side-tablet); }
-}
+/* Footer */
+footer{background-color: #DEDBD8; padding: 20px;}
+footer > div {font-size: 12px; font-weight: 600; color: #403E3C;}
 
 /* ===== Tech Panel CTA 상태 분리 (override) ===== */
 /* Tech 패널 내 기본은 회색(비활성), 활성 패널에서만 오렌지 */
@@ -579,3 +475,26 @@ footer{
 .goal-dropdown-header[aria-expanded="false"] + .goal-dropdown-content{
   padding: 0 24px;
 }
+
+/* --- Material Icons 강제 적용 (글꼴 오버라이드 방지) --- */
+.material-icons,
+.material-icons-outlined,
+.material-icons-round,
+.material-icons-sharp,
+.material-icons-two-tone {
+  font-family: 'Material Icons' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 24px; /* 필요하면 조절 */
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+}
+
