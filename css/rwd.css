@@ -509,15 +509,18 @@
   }
 
   .svc-c img.s-img-2 {
-    left: -180px;
+    width: 320px;
+    left: -120px;
   }
 
   .svc-c img.s-img-3 {
-    left: -10px;
+    width: 240px;
+    left: -40px;
   }
 
   .svc-c img.s-img-4 {
-    left: 0px;
+    width: 240px;
+    left: -40px;
   }
 
   .svc-c-title2 {
