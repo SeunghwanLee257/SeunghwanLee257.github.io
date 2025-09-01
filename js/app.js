@@ -571,29 +571,113 @@
     });
   }
 
-  /* -------- Service slider -------- */
-  function initServiceSlider() {
-    var track = $('#svc-track');
-    var items = $$('#svc-track .svc-item');
-    if (!track || !items.length) return;
-    var bF = $('#svc-first'), bP = $('#svc-prev'), bN = $('#svc-next'), bL = $('#svc-last');
-    var idx = 0;
-    function update() {
-      track.style.transform = 'translateX(' + (-(idx * 100)) + '%)';
-      items.forEach(function (it, i) { it.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
-      if (bF) bF.disabled = (idx === 0);
-      if (bP) bP.disabled = (idx === 0);
-      if (bL) bL.disabled = (idx === items.length - 1);
-      if (bN) bN.disabled = (idx === items.length - 1);
-    }
-    function go(n) { idx = clamp(n, 0, items.length - 1); update(); }
-    if (bF) bF.addEventListener('click', function (e) { e.stopPropagation(); go(0); });
-    if (bP) bP.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
-    if (bN) bN.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
-    if (bL) bL.addEventListener('click', function (e) { e.stopPropagation(); go(items.length - 1); });
-    window.addEventListener('resize', update, { passive: true });
-    update();
+/* -------- Service slider (buttons + drag/swipe) -------- */
+function initServiceSlider() {
+  var track = $('#svc-track');
+  var items = $$('#svc-track .svc-item');
+  if (!track || !items.length) return;
+
+  var bF = $('#svc-first'), bP = $('#svc-prev'), bN = $('#svc-next'), bL = $('#svc-last');
+  var idx = 0;           // 현재 슬라이드
+  var dx = 0;            // 드래그 offset(px)
+  var dragging = false;
+  var startX = 0, startY = 0;
+
+  // 드래그 중 수평만 캡처하도록 힌트
+  track.style.touchAction = 'pan-y';
+
+  function applyTransform() {
+    // 기본 이동(-idx*100%)에 드래그 px 오프셋을 더해 자연스러운 추적
+    track.style.transform = 'translateX(calc(' + (-(idx * 100)) + '% + ' + dx + 'px))';
   }
+  function update() {
+    dx = 0;
+    track.style.transition = 'transform 320ms ease';
+    applyTransform();
+    items.forEach(function (it, i) { it.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+    if (bF) bF.disabled = (idx === 0);
+    if (bP) bP.disabled = (idx === 0);
+    if (bL) bL.disabled = (idx === items.length - 1);
+    if (bN) bN.disabled = (idx === items.length - 1);
+  }
+  function go(n) { idx = clamp(n, 0, items.length - 1); update(); }
+
+  // 버튼
+  if (bF) bF.addEventListener('click', function (e) { e.stopPropagation(); go(0); });
+  if (bP) bP.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
+  if (bN) bN.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
+  if (bL) bL.addEventListener('click', function (e) { e.stopPropagation(); go(items.length - 1); });
+
+  // ====== 드래그/스와이프 ======
+  function viewportWidth() {
+    var vp = track.parentElement;
+    return (vp && vp.clientWidth) || window.innerWidth || 1;
+  }
+  function dragStart(x, y) {
+    dragging = true;
+    startX = x; startY = y;
+    dx = 0;
+    track.style.transition = 'none';
+    track.style.willChange = 'transform';
+  }
+  function dragMove(x, y, e) {
+    if (!dragging) return;
+    var moveX = x - startX;
+    var moveY = Math.abs(y - startY);
+
+    // 가로 스와이프가 의도라면 스크롤 방지
+    if (Math.abs(moveX) > moveY && e && e.cancelable) e.preventDefault();
+
+    // 양끝에서 살짝 고무줄 저항
+    var atStart = (idx === 0 && moveX > 0);
+    var atEnd   = (idx === items.length - 1 && moveX < 0);
+    dx = (atStart || atEnd) ? moveX * 0.35 : moveX;
+
+    applyTransform();
+  }
+  function dragEnd() {
+    if (!dragging) return;
+    dragging = false;
+
+    var w = viewportWidth();
+    var threshold = Math.min(140, Math.max(50, w * 0.18)); // 화면 18% 또는 50~140px
+
+    track.style.transition = 'transform 320ms ease';
+    if (Math.abs(dx) > threshold) {
+      if (dx < 0) idx = clamp(idx + 1, 0, items.length - 1);
+      else        idx = clamp(idx - 1, 0, items.length - 1);
+    }
+    dx = 0;
+    applyTransform();
+    update();
+    track.style.willChange = '';
+  }
+
+  // Pointer Events 우선, 미지원 브라우저는 터치/마우스로 대체
+  if ('PointerEvent' in window) {
+    track.addEventListener('pointerdown', function (e) { dragStart(e.clientX, e.clientY); track.setPointerCapture(e.pointerId); });
+    window.addEventListener('pointermove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); }, { passive: false });
+    window.addEventListener('pointerup',   dragEnd);
+    window.addEventListener('pointercancel', dragEnd);
+  } else {
+    // 터치
+    track.addEventListener('touchstart', function (e) {
+      var t = e.touches[0]; dragStart(t.clientX, t.clientY);
+    }, { passive: true });
+    track.addEventListener('touchmove', function (e) {
+      var t = e.touches[0]; dragMove(t.clientX, t.clientY, e);
+    }, { passive: false });
+    track.addEventListener('touchend', dragEnd);
+    // 마우스(데스크톱)
+    track.addEventListener('mousedown', function (e) { dragStart(e.clientX, e.clientY); });
+    window.addEventListener('mousemove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); });
+    window.addEventListener('mouseup', dragEnd);
+  }
+
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}
+
 
   /* -------- Goal accordion -------- */
   function initGoalAccordion() {
