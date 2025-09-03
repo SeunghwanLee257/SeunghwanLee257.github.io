@@ -311,19 +311,26 @@ section{ padding-top: 0; padding-bottom: 0; }
 /* 점 배경 */
 .dot-bg{ background-image: radial-gradient(circle, #ccc 1px, transparent 1px); background-size:20px 20px; background-position:0 0; }
 
-.goal-wrap{ max-width:800px; margin:0 auto; padding:80px 20px; display:flex; flex-direction:column; align-items:center; gap:40px; }
+.goal-wrap{ max-width:800px; margin:0 auto; padding: 20px; display:flex; flex-direction:column; align-items:center;}
 
 /* 공통 섹션 라벨 기본은 위(.section-label) 사용.
    Goal 내에서만 시각 보정이 필요하면 아래처럼 범위 한정해 오버라이드 */
 .goal-wrap .section-label{
-  font-weight:500; font-size: clamp(12px, 1.4vw, 16px); color:#666; margin:0; letter-spacing:.5px; padding-bottom: 16px;
+  font-weight:500; 
+  font-size: clamp(12px, 1.4vw, 16px); 
+  color:#666; 
+  margin:0; 
+  letter-spacing:.5px;
+  position: relative;
+  top: 20px;
 }
 
 .title-area{
-  position:relative; width:150%;
-  height: clamp(500px, 70vw, 800px);
+  position:relative; width: 130%;
+  height: 100vh;
+  /* height: clamp(500px, 100vw, 1020px); */
   background: url('../asset/swection05-top-bg.svg') no-repeat center center;
-  background-size: clamp(600px, 90vw, 1100px) auto;
+  background-size:contain;
   overflow: visible; background-position:center center;
 }
 .frame-content{
@@ -336,11 +343,11 @@ section{ padding-top: 0; padding-bottom: 0; }
 .title-graphic{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; min-height:0; }
 .title-graphic img{ max-width:100%; max-height:100%; width:auto; height:auto; }
 
-.goal-caption{ width:100%; max-width:520px; padding-top: 20px; text-align:center; align-self:end; }
+.goal-caption{ width:100%; max-width:520px; padding: 20px 0; text-align:center; align-self:end; }
 .goal-caption .p{ margin:0; font-size: clamp(13px, 1.3vw, 16px); line-height:1.5; color:#333; }
 
 /* Dropdown Cards */
-.goal-dropdown-container{ width:100%; max-width:800px; display:flex; flex-direction:column; gap:16px; margin-top:40px; }
+.goal-dropdown-container{ width:100%; max-width:800px; display:flex; flex-direction:column; gap:16px;}
 .goal-dropdown-card{ background:white; border-radius:16px; border:4px solid #DEDBD8; box-shadow:0 4px 12px rgba(0,0,0,.03); overflow:hidden; transition: all .3s ease; }
 .goal-dropdown-card:hover{ box-shadow: 0 8px 24px rgba(0,0,0,.1); }
 .goal-dropdown-header{
