@@ -159,7 +159,6 @@ section{ padding-top: 0; padding-bottom: 0; }
   .banner-title .s-t-02{color: #807F7F; filter: blur(.65px);}
 
 /* ========== Section 02: Strip Banner ========== */
-/* 부모(#sec02)가 배경 이미지를 가지므로 .strip은 텍스트만 */
 .strip{
   width:100%; height:120px;
   display:flex; align-items:center; justify-content:center; text-align:center;
@@ -173,6 +172,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 
 /* ========== Section 03: Technology Split Panels ========== */
+.tech-body {position: relative; left: 12px;}
 .tech-split{height: 520px; display:flex; gap:16px; align-items:stretch; }
 .tech-panel{
   position:relative; background:#FFFFFF; border-radius:20px;
@@ -366,6 +366,11 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 .goal-dropdown-card.open .goal-dropdown-content{ max-height:500px;  padding: 12px 24px 16px;  }
 .goal-dropdown-text{ font-size:15px; font-weight:400; color: var(--title-color); line-height:1.6; margin:0; }
+.goal-dropdown-content > .item-drop > .dropItem-num02-subtotle{padding-bottom: 4px;}
+
+.card02 > .goal-dropdown-content > .item-drop{margin-bottom: 16px;}
+.card02 > .goal-dropdown-content > .item-drop p:nth-child(2){color: #807F7F; font-size: 14px;}
+
 
 /* ========== Section 06: Our Experience ========== */
 #sec06 > h2{margin-bottom: 72px;}

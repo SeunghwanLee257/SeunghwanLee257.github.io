@@ -27,7 +27,7 @@
       '.s-t-02':'Most data on the internet is effectively irreversible',
 
       // Tech A
-      'pA.title':'Ultra-Low-Latency',
+      'pA.title':'GHE16',
       'pA.subtitle':'A 16-bit integer computation–centric deterministic FHE structure that eliminates floating-point operations, ensuring identical results regardless of the execution environment',
       'common.keyFeatures':'Key Features',
 
@@ -67,7 +67,7 @@
       'goal.q1':'What does waLLLnut actually do—and what are we confident about? 🫥💪',
       'goal.a1':'We\'re a research-driven company building on quantum-resistant FHE (Fully Homomorphic Encryption) and MPC (Multi-Party Computation) to make data security and privacy sustainable. Moreover, multi-users’ data can be securely and privately processed — decrypting only when needed and extracting statistical insights if necessary.📊📈',
       'goal.q2':'Hashes for waLLLnut\'s upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️',
-      'goal.hash.disclose':'(To be disclosed in Oct. 2025)',
+      'goal.hash.disclose':'<strong>(To be disclosed in Oct. 2025)</strong>',
       'goal.q3':'So, what\'s in waLLLnut\'s product lineup? 🚀',
       'goal.a3.1':'Flagship Product — Deterministic Confidential Layer 🏁',
       'goal.a3.2':'Executes blockchain state data on FHE16, enabling public verification. 🔍',

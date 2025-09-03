@@ -1,7 +1,7 @@
 .tech-subtitle{font-weight: 700; padding-bottom: 12px;}
 .tech-ref{padding-top: 16px;}
 
-.captionKey{padding-top: 8px; padding-bottom: 8px; color: #403E3C; font-size: 14px; font-weight: 500;}
+.captionKey{padding: 12px 0; color: #403E3C; font-size: 14px; font-weight: 500;}
 .g-item-ex{color: #807F7F;}
 
 
@@ -39,7 +39,7 @@ ul.tech-body {
 .title-graphic{width: 50% !important;}
 
 
-
+.tech-body > li{list-style: disc;}
 ul{list-style-type: none; margin: 0; padding: 0;}
 
 .pro-name{padding-bottom: 4px; color: #403E3C;}
