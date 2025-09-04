@@ -286,3 +286,23 @@
     });
   });
 })();
+
+
+// scroll top
+(function () {
+  const btn = document.getElementById('scrollTopBtn');
+
+  // 스크롤 시 버튼 토글
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 300) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  });
+
+  // 클릭 시 맨 위로 부드럽게 이동
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
