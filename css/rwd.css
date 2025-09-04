@@ -322,7 +322,7 @@
 
   /* Section 03 - Technology */
   #sec03 {
-    padding: 80px 0;
+    padding: 80px 20px;
   }
 
   .tech-split {
@@ -462,7 +462,7 @@
 
   /* Section 04 - Service Slider */
   #sec04 {
-    padding: 80px 0;
+    padding: 80px 20px;
   }
 
   .svc-item {
@@ -626,7 +626,7 @@
 
   /* Section 06 - Experience - Complete restructure */
   #sec06 {
-    padding: 80px 0;
+    padding: 80px 20px;
     position: relative;
     z-index: 1;
   }
@@ -751,7 +751,7 @@
     font-family: "Asap Condensed", sans-serif;
     font-size: 18px;
     font-weight: 600;
-    /* margin-bottom: 24px; */
+    margin-bottom: 0;
     display: inline-block;
   }
 
@@ -806,7 +806,7 @@
 
   /* Section 07 - Team */
   #sec07 {
-    padding: 80px 0;
+    padding: 80px 20px;
   }
 
   .team-grid {

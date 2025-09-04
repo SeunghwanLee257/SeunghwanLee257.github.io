@@ -1,6 +1,15 @@
 /* =========================================================
    WaLLLnut Landing - App Script (UI + i18n unified, EN/KR)
+   - Anchor jump fix (iOS Safari) + single smoothScrollTo export
    ========================================================= */
+
+/* ── 0) Prevent native anchor jump at capture phase (iOS Safari) ── */
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest('.nav a[href^="#"]');
+  if (!a) return;
+  e.preventDefault(); // stop default jump early
+}, true); // capture=true
+
 (function () {
   'use strict';
 
@@ -12,7 +21,7 @@
   var norm = function (s) { return String(s).replace(/\s+/g, ' ').trim(); };
 
   /* =========================================================
-     i18n dictionary (EN + KO) — keys used by autowire
+     i18n dictionary (EN + KO)
      ========================================================= */
   var I18N = {
     en: {
@@ -30,12 +39,9 @@
       'pA.title':'GHE16',
       'pA.subtitle':'A 16-bit integer computation–centric deterministic FHE structure that eliminates floating-point operations, ensuring identical results regardless of the execution environment',
       'common.keyFeatures':'Key Features',
-
-      /* ✅ 강조+꼬리 분리 키 */
       'highlight.float':'Elimination of floating-point',
       'pA.kf1.tail':' operations, ensuring identical results regardless of the execution environments',
       'pA.kf2.tail':' environment-specific error issues',
-
       'pA.kf3':'Ultra-fast 2.89 ms bootstrapping through GINX gate optimization (suitable for real-time and low-latency applications)',
       'common.reference':'Reference: ePrint 2024/1916',
 
@@ -87,49 +93,28 @@
       'prop.f2':'Any state change can be verified by all network participants',
       'prop.f3':'State disclosure is propagated across the network via a Threshold Decryption protocol',
 
-      // Team Member
+      // Team / Advisors / footer
       'member1.role': 'Seunghwan Lee (CEO)',
       'member1.description': 'Leads FHE16 and MPC R&D <br> Hanyang University',
-
       'member2.role': 'Dohyuk Kim (CTO)',
       'member2.description': 'Leads FHE16 and MPC Implementation',
-
       'member3.role': 'Dong-Joon Shin (CSO)',
       'member3.description': 'Establishes Academic-Industry Strategies',
-
       'member4.role': 'Yunsik Ham',
       'member4.description': 'Blockchain+Cryptography Developer',
-
       'member5.role': 'Youngjun Kim',
       'member5.description': 'Cryptography & Server Developer',
-
       'member6.role': 'KiIn Shin',
       'member6.description': 'Marketing Manager and Graphic Designer',
-
       'member7.role': 'JiIn Shin',
       'member7.description': 'PR Manager and UIUX Designer',
-
-
-      'prof.1.name':  'Jon-Lark Kim:',
-      'prof.1.affil': 'Professor of Sogang University',
-
-      'prof.2.name':  'Young-Sik Kim:',
-      'prof.2.affil': 'Professor of DGIST',
-
-      'prof.3.name':  'Jooyoung Lee:',
-      'prof.3.affil': 'Professor of KAIST',
-
-      'prof.4.name':  'Yongwoo Lee:',
-      'prof.4.affil': 'Professor of Inha University',
-
-      'prof.5.name':  'Jong-Seon No:',
-      'prof.5.affil': 'Emeritus Professor of Seoul National University',
-
-
-      // Advisors / footer
+      'prof.1.name':  'Jon-Lark Kim:', 'prof.1.affil': 'Professor of Sogang University',
+      'prof.2.name':  'Young-Sik Kim:', 'prof.2.affil': 'Professor of DGIST',
+      'prof.3.name':  'Jooyoung Lee:', 'prof.3.affil': 'Professor of KAIST',
+      'prof.4.name':  'Yongwoo Lee:', 'prof.4.affil': 'Professor of Inha University',
+      'prof.5.name':  'Jong-Seon No:', 'prof.5.affil': 'Emeritus Professor of Seoul National University',
       'advisors.title':'waLLLnut collaborates with distinguished professors from<br>leading universities in Korea for technical advisory and joint research.',
-      'footer.copy':'© 2025 waLLLnut · All rights reserved.',
-
+      'footer.copy':'© 2025 waLLLnut · All rights reserved.'
     },
     ko: {
       'lang.label':'언어',
@@ -138,7 +123,7 @@
       'slogan':'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>“투명성”</strong>과 <strong>“기밀성”</strong>을 모두 보장하는 것입니다.',
       'sec.tech':'01. Our Technology','sec.service':'02. Our Service','sec.goal':'03. Our Goal','sec.exp':'04. Our Experience','sec.team':'05. Team Member',
 
-      // Section01 Top Banner
+      // Section01
       '.s-t-01':'여러분의 데이터는 인터넷에 얼마나 머무를까요?',
       '.s-t-02':'인터넷 안에 있는 대다수의 데이터는 삭제가 불가능한 데이터 입니다.',
 
@@ -146,12 +131,9 @@
       'pA.title':'Ultra-Low-Latency',
       'pA.subtitle':'16비트 정수 연산 중심의 결정론적 FHE 구조로 부동소수 연산을 제거하여, 실행 환경에 상관없이 동일한 결과를 보장합니다',
       'common.keyFeatures':'핵심 특징',
-
-      /* ✅ 강조+꼬리 분리 키 */
       'highlight.float':'부동소수점 연산 제거',
       'pA.kf1.tail':'로 실행 환경과 무관하게 동일한 결과 보장',
       'pA.kf2.tail':' 연산 환경별 오차 제거',
-
       'pA.kf3':'GINX 게이트 최적화를 통한 2.89ms 초고속 부트스트래핑 (실시간·저지연 애플리케이션 적합)',
       'common.reference':'참고: ePrint 2024/1916',
 
@@ -203,54 +185,26 @@
       'prop.f2':'모든 네트워크 참여자가 상태 변경을 검증 가능',
       'prop.f3':'임계값 복호화 프로토콜로 상태 공개가 네트워크에 전파',
 
-      // Team Member
-      'member1.role': '이승환(CEO)',
-      'member1.description': '한양대 전자공학 박사, <br>FHE16 연구·개발 총괄',
-
-      'member2.role': '김도혁(CTO)',
-      'member2.description': '한양대 전자공학 박사과정, <br>FHE 상용화·납품 개발 경험',
-
-      'member3.role': '신동준(CSO)',
-      'member3.description': '한양대 전자공학 교수, <br>학계·산업 네트워킹 보유',
-
-      'member4.role': '함윤식',
-      'member4.description': '블록체인 메인 개발자, <br>ZK + Blockchain 프로젝트 리드 경험',
-
-      'member5.role': '김영준',
-      'member5.description': '암호·서버 개발자, <br>LWE 및 네트워크 구현 경험',
-
-      'member6.role': '신기인',
-      'member6.description': '마케팅 매니저 · 그래픽 디자이너',
-
-      'member7.role': '신지인',
-      'member7.description': 'PR 매니저 · UI/UX 디자이너',
-
-      'prof.1.name':  '김종락 교수님',
-      'prof.1.affil': '서강대학교 교수',
-
-      'prof.2.name':  '김영식 교수님 ',
-      'prof.2.affil': 'DGIST 교수',
-
-      'prof.3.name':  '이주영 교수님',
-      'prof.3.affil': 'KAIST 교수',
-
-      'prof.4.name':  '이용우 교수님',
-      'prof.4.affil': '인하대학교 교수',
-
-      'prof.5.name':  '노종선 교수님',
-      'prof.5.affil': '서울대학교 명예교수',
-
-
-      // Advisors / footer
+      // Team / Advisors / footer
+      'member1.role': '이승환(CEO)', 'member1.description': '한양대 전자공학 박사, <br>FHE16 연구·개발 총괄',
+      'member2.role': '김도혁(CTO)', 'member2.description': '한양대 전자공학 박사과정, <br>FHE 상용화·납품 개발 경험',
+      'member3.role': '신동준(CSO)', 'member3.description': '한양대 전자공학 교수, <br>학계·산업 네트워킹 보유',
+      'member4.role': '함윤식', 'member4.description': '블록체인 메인 개발자, <br>ZK + Blockchain 프로젝트 리드 경험',
+      'member5.role': '김영준', 'member5.description': '암호·서버 개발자, <br>LWE 및 네트워크 구현 경험',
+      'member6.role': '신기인', 'member6.description': '마케팅 매니저 · 그래픽 디자이너',
+      'member7.role': '신지인', 'member7.description': 'PR 매니저 · UI/UX 디자이너',
+      'prof.1.name':  '김종락 교수님', 'prof.1.affil': '서강대학교 교수',
+      'prof.2.name':  '김영식 교수님 ', 'prof.2.affil': 'DGIST 교수',
+      'prof.3.name':  '이주영 교수님', 'prof.3.affil': 'KAIST 교수',
+      'prof.4.name':  '이용우 교수님', 'prof.4.affil': '인하대학교 교수',
+      'prof.5.name':  '노종선 교수님', 'prof.5.affil': '서울대학교 명예교수',
       'advisors.title':'waLLLnut는 한국 주요 대학의 저명한 교수진과 함께<br>기술 자문 및 공동 연구를 진행합니다.',
       'footer.copy':'© 2025 waLLLnut · All rights reserved.'
     }
   };
-  window.I18N = I18N; // 디버깅용 노출
+  window.I18N = I18N; // debugging
 
   var LANG_CODES = { en: 'eng', ko: 'kor' };
-
-  // 번역 제외(요청): material-icons 전체, 슬라이더 컨트롤(.svc-cont), 드롭다운 아이콘
   var I18N_EXCLUDE = [
     '.material-icons', '.material-icons *',
     '.svc-cont', '.svc-cont *',
@@ -269,7 +223,6 @@
     var fb = 'en';
     document.documentElement.setAttribute('lang', lang);
 
-    // 제외영역 내부 data-i18n 제거
     if (EXCLUDE_SELECTOR) {
       $$(EXCLUDE_SELECTOR).forEach(function (root) {
         if (root.hasAttribute('data-i18n')) root.removeAttribute('data-i18n');
@@ -288,39 +241,29 @@
   function getSavedLang() { try { return localStorage.getItem('lang'); } catch (e) { return null; } }
   function saveLang(v)     { try { localStorage.setItem('lang', v); } catch (e) {} }
 
-  /* =========================================================
-     🔒 범위 고정 바인딩: 부모 p.fron-text는 제외하고,
-        .black-f(강조)와 그 뒤 꼬리만 각각 번역
-     ========================================================= */
+  /* -------- bindStrongAndTail (protect parent p) -------- */
   function bindStrongAndTail(p, strongKey, tailKey) {
     if (!p) return;
-
-    // 부모가 통째로 덮어쓰지 않도록 보호
     if (p.hasAttribute('data-i18n')) p.removeAttribute('data-i18n');
     p.setAttribute('data-no-i18n', '');
-
-    // 강조에 고정 키 부여
     var strong = p.querySelector('.black-f');
     if (strong && !strong.hasAttribute('data-i18n')) {
       strong.setAttribute('data-i18n', strongKey);
     }
-
-    // 강조 뒤의 모든 형제 노드를 꼬리 span으로 래핑 + 키 부여
     if (strong && !p.querySelector('[data-i18n="'+ tailKey +'"]')) {
       var tail = document.createElement('span');
       tail.setAttribute('data-i18n', tailKey);
-
       var node = strong.nextSibling;
       while (node) {
         var next = node.nextSibling;
-        tail.appendChild(node); // 기존 텍스트/노드 이동
+        tail.appendChild(node);
         node = next;
       }
       p.appendChild(tail);
     }
   }
 
-  /* ------ auto wiring (selectors) ------ */
+  /* ------ auto wiring ------ */
   function setKey(el, key) { if (el && !isExcluded(el) && !el.hasAttribute('data-i18n')) el.setAttribute('data-i18n', key); }
   function setKeyBySel(sel, key) { setKey($(sel), key); }
   function setKeyList(sel, keys) {
@@ -329,17 +272,15 @@
 
   function autowireBySelectors() {
     setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.exp','nav.team','nav.advisors']);
-
     setKeyBySel('#tech-label','sec.tech');
     setKeyBySel('#service-label','sec.service');
     setKeyBySel('#goal-label','sec.goal');
     setKeyBySel('#exp-label','sec.exp');
     setKeyBySel('#team-label','sec.team');
-
     setKeyList('.count-wrap .time-label', ['label.days','label.hours','label.seconds']);
     setKeyBySel('#sec02 .strip p', 'slogan');
 
-    // Tech A (❗ pA.kf1 / pA.kf2는 bindStrongAndTail로 처리하므로 여기서 설정하지 않음)
+    // Tech A
     setKeyBySel('#panel-a .tech-title-lg#tab-a', 'pA.title');
     setKeyBySel('#panel-a .tech-subtitle', 'pA.subtitle');
     setKeyBySel('#panel-a .captionKey', 'common.keyFeatures');
@@ -356,7 +297,7 @@
     setKeyBySel('#panel-b .tech-body li:nth-child(4)', 'pB.kf4');
     setKeyBySel('#panel-b .tech-ref a', 'common.reference');
 
-    // Service slides (titles 번역 제외, desc/meta만)
+    // Service slides
     function S(n, s) { return '.svc-item:nth-of-type(' + n + ') ' + s; }
     setKeyBySel(S(1,'.svc-desc'), 'svc.1.desc');
     setKeyBySel(S(1,'.svc-c-title'), 'svc.meta.keyword');
@@ -405,10 +346,8 @@
     // Property features
     setKeyList('.property-features li', ['prop.f1','prop.f2','prop.f3']);
 
-    // Team Member
+    // Team
     setKeyBySel('.s-t-02', '.s-t-02');
-
-    // Team Member cards (순서대로 1~7)
     (function bindTeam(){
       var cards = $$('.team-grid .team-member');
       cards.forEach(function(card, i){
@@ -420,39 +359,30 @@
       });
     })();
 
-    // Professors List
+    // Advisors
     (function bindAdvisors(){
       function P(n, s){ return '.professor-list .list-item:nth-of-type(' + n + ') ' + s; }
-      // 이름(굵게)과 소속(링크 텍스트)만 번역, 이메일은 건드리지 않음
       setKeyBySel(P(1, '.pro-name strong'),  'prof.1.name');
       setKeyBySel(P(1, '.pro-list-link'),    'prof.1.affil');
-
       setKeyBySel(P(2, '.pro-name strong'),  'prof.2.name');
       setKeyBySel(P(2, '.pro-list-link'),    'prof.2.affil');
-
       setKeyBySel(P(3, '.pro-name strong'),  'prof.3.name');
       setKeyBySel(P(3, '.pro-list-link'),    'prof.3.affil');
-
       setKeyBySel(P(4, '.pro-name strong'),  'prof.4.name');
       setKeyBySel(P(4, '.pro-list-link'),    'prof.4.affil');
-
       setKeyBySel(P(5, '.pro-name strong'),  'prof.5.name');
       setKeyBySel(P(5, '.pro-list-link'),    'prof.5.affil');
     })();
 
-
-
-    // Advisors / Footer
+    // Footer / label
     setKeyBySel('#sec08 .s08-comt-inner .s08-title','advisors.title');
     var footerCopy = $('footer .container');
     if (footerCopy && !footerCopy.hasAttribute('data-i18n')) footerCopy.setAttribute('data-i18n','footer.copy');
-
-    // Dropdown label
     var label = $('#langLabel');
     if (label && !label.hasAttribute('data-i18n')) label.setAttribute('data-i18n', 'lang.label');
   }
 
-  /* ------ text-match wiring (English → key), fron-text는 제외 ------ */
+  /* ------ text-match wiring ------ */
   function autowireByTextMatch() {
     var map = new Map();
     var en = I18N.en || {};
@@ -463,7 +393,7 @@
       .reduce(function (a, b) { return a.concat(b); }, [])
       .filter(function (el) {
         return !el.hasAttribute('data-i18n') &&
-               !el.classList.contains('fron-text') &&   // 부모 p 보호
+               !el.classList.contains('fron-text') &&
                !isExcluded(el) &&
                !el.hasAttribute('data-no-i18n');
       });
@@ -474,7 +404,7 @@
     });
   }
 
-  /* -------- Language dropdown (fixed) -------- */
+  /* -------- Language dropdown -------- */
   function openLangMenu() {
     var btn = $('#langBtn'), menu = $('#langMenu');
     if (!btn || !menu) return;
@@ -523,6 +453,7 @@
     if (idx < 0) for (var j = 0; j < list.length; j++) if (list[j].getAttribute('aria-selected') === 'true') { idx = j; break; }
     var next = (idx + dir + list.length) % list.length;
     list.forEach(function (li) { li.classList.remove('focused'); });
+    list[next].addEventListener('transitionend', function(){}, {once:true});
     list[next].classList.add('focused');
     list[next].scrollIntoView({ block: 'nearest' });
   }
@@ -533,16 +464,26 @@
     var b = $('#langBtn'); if (b) b.focus();
   }
 
-  /* -------- Smooth nav scroll -------- */
-  function getHeaderOffset() { var header = $('.header'); return header ? (header.getBoundingClientRect().height || 0) : 0; }
+  /* -------- Smooth nav scroll (single source of truth) -------- */
+  function getHeaderOffset() {
+    var header = document.querySelector('.header');
+    var h = header ? (header.getBoundingClientRect().height || 0) : 0;
+    return Math.max(0, Math.min(160, h)); // clamp to avoid over/under offsets
+  }
   function smoothScrollTo(targetSelector) {
-    var el = $(targetSelector); if (!el) return;
+    var el = document.querySelector(targetSelector);
+    if (!el) return;
     var top = window.scrollY + el.getBoundingClientRect().top - getHeaderOffset() - 16;
     window.scrollTo({ top: top, behavior: 'smooth' });
   }
+  window.smoothScrollTo = smoothScrollTo; // export for other files
+
   function bindNavScroll() {
     $$('.nav a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (e) { e.preventDefault(); smoothScrollTo(a.getAttribute('href')); });
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        smoothScrollTo(a.getAttribute('href'));
+      });
     });
   }
 
@@ -571,113 +512,95 @@
     });
   }
 
-/* -------- Service slider (buttons + drag/swipe) -------- */
-function initServiceSlider() {
-  var track = $('#svc-track');
-  var items = $$('#svc-track .svc-item');
-  if (!track || !items.length) return;
+  /* -------- Service slider (buttons + drag/swipe) -------- */
+  function initServiceSlider() {
+    var track = $('#svc-track');
+    var items = $$('#svc-track .svc-item');
+    if (!track || !items.length) return;
 
-  var bF = $('#svc-first'), bP = $('#svc-prev'), bN = $('#svc-next'), bL = $('#svc-last');
-  var idx = 0;           // 현재 슬라이드
-  var dx = 0;            // 드래그 offset(px)
-  var dragging = false;
-  var startX = 0, startY = 0;
+    var bF = $('#svc-first'), bP = $('#svc-prev'), bN = $('#svc-next'), bL = $('#svc-last');
+    var idx = 0;
+    var dx = 0;
+    var dragging = false;
+    var startX = 0, startY = 0;
 
-  // 드래그 중 수평만 캡처하도록 힌트
-  track.style.touchAction = 'pan-y';
+    track.style.touchAction = 'pan-y';
 
-  function applyTransform() {
-    // 기본 이동(-idx*100%)에 드래그 px 오프셋을 더해 자연스러운 추적
-    track.style.transform = 'translateX(calc(' + (-(idx * 100)) + '% + ' + dx + 'px))';
-  }
-  function update() {
-    dx = 0;
-    track.style.transition = 'transform 320ms ease';
-    applyTransform();
-    items.forEach(function (it, i) { it.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
-    if (bF) bF.disabled = (idx === 0);
-    if (bP) bP.disabled = (idx === 0);
-    if (bL) bL.disabled = (idx === items.length - 1);
-    if (bN) bN.disabled = (idx === items.length - 1);
-  }
-  function go(n) { idx = clamp(n, 0, items.length - 1); update(); }
-
-  // 버튼
-  if (bF) bF.addEventListener('click', function (e) { e.stopPropagation(); go(0); });
-  if (bP) bP.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
-  if (bN) bN.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
-  if (bL) bL.addEventListener('click', function (e) { e.stopPropagation(); go(items.length - 1); });
-
-  // ====== 드래그/스와이프 ======
-  function viewportWidth() {
-    var vp = track.parentElement;
-    return (vp && vp.clientWidth) || window.innerWidth || 1;
-  }
-  function dragStart(x, y) {
-    dragging = true;
-    startX = x; startY = y;
-    dx = 0;
-    track.style.transition = 'none';
-    track.style.willChange = 'transform';
-  }
-  function dragMove(x, y, e) {
-    if (!dragging) return;
-    var moveX = x - startX;
-    var moveY = Math.abs(y - startY);
-
-    // 가로 스와이프가 의도라면 스크롤 방지
-    if (Math.abs(moveX) > moveY && e && e.cancelable) e.preventDefault();
-
-    // 양끝에서 살짝 고무줄 저항
-    var atStart = (idx === 0 && moveX > 0);
-    var atEnd   = (idx === items.length - 1 && moveX < 0);
-    dx = (atStart || atEnd) ? moveX * 0.35 : moveX;
-
-    applyTransform();
-  }
-  function dragEnd() {
-    if (!dragging) return;
-    dragging = false;
-
-    var w = viewportWidth();
-    var threshold = Math.min(140, Math.max(50, w * 0.18)); // 화면 18% 또는 50~140px
-
-    track.style.transition = 'transform 320ms ease';
-    if (Math.abs(dx) > threshold) {
-      if (dx < 0) idx = clamp(idx + 1, 0, items.length - 1);
-      else        idx = clamp(idx - 1, 0, items.length - 1);
+    function applyTransform() {
+      track.style.transform = 'translateX(calc(' + (-(idx * 100)) + '% + ' + dx + 'px))';
     }
-    dx = 0;
-    applyTransform();
+    function update() {
+      dx = 0;
+      track.style.transition = 'transform 320ms ease';
+      applyTransform();
+      items.forEach(function (it, i) { it.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+      if (bF) bF.disabled = (idx === 0);
+      if (bP) bP.disabled = (idx === 0);
+      if (bL) bL.disabled = (idx === items.length - 1);
+      if (bN) bN.disabled = (idx === items.length - 1);
+    }
+    function go(n) { idx = clamp(n, 0, items.length - 1); update(); }
+
+    if (bF) bF.addEventListener('click', function (e) { e.stopPropagation(); go(0); });
+    if (bP) bP.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
+    if (bN) bN.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
+    if (bL) bL.addEventListener('click', function (e) { e.stopPropagation(); go(items.length - 1); });
+
+    function viewportWidth() {
+      var vp = track.parentElement;
+      return (vp && vp.clientWidth) || window.innerWidth || 1;
+    }
+    function dragStart(x, y) {
+      dragging = true;
+      startX = x; startY = y;
+      dx = 0;
+      track.style.transition = 'none';
+      track.style.willChange = 'transform';
+    }
+    function dragMove(x, y, e) {
+      if (!dragging) return;
+      var moveX = x - startX;
+      var moveY = Math.abs(y - startY);
+      if (Math.abs(moveX) > moveY && e && e.cancelable) e.preventDefault();
+      var atStart = (idx === 0 && moveX > 0);
+      var atEnd   = (idx === items.length - 1 && moveX < 0);
+      dx = (atStart || atEnd) ? moveX * 0.35 : moveX;
+      applyTransform();
+    }
+    function dragEnd() {
+      if (!dragging) return;
+      dragging = false;
+      var w = viewportWidth();
+      var threshold = Math.min(140, Math.max(50, w * 0.18));
+      track.style.transition = 'transform 320ms ease';
+      if (Math.abs(dx) > threshold) {
+        if (dx < 0) idx = clamp(idx + 1, 0, items.length - 1);
+        else        idx = clamp(idx - 1, 0, items.length - 1);
+      }
+      dx = 0; applyTransform(); update(); track.style.willChange = '';
+    }
+
+    if ('PointerEvent' in window) {
+      track.addEventListener('pointerdown', function (e) { dragStart(e.clientX, e.clientY); track.setPointerCapture(e.pointerId); });
+      window.addEventListener('pointermove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); }, { passive: false });
+      window.addEventListener('pointerup',   dragEnd);
+      window.addEventListener('pointercancel', dragEnd);
+    } else {
+      track.addEventListener('touchstart', function (e) {
+        var t = e.touches[0]; dragStart(t.clientX, t.clientY);
+      }, { passive: true });
+      track.addEventListener('touchmove', function (e) {
+        var t = e.touches[0]; dragMove(t.clientX, t.clientY, e);
+      }, { passive: false });
+      track.addEventListener('touchend', dragEnd);
+      track.addEventListener('mousedown', function (e) { dragStart(e.clientX, e.clientY); });
+      window.addEventListener('mousemove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); });
+      window.addEventListener('mouseup', dragEnd);
+    }
+
+    window.addEventListener('resize', update, { passive: true });
     update();
-    track.style.willChange = '';
   }
-
-  // Pointer Events 우선, 미지원 브라우저는 터치/마우스로 대체
-  if ('PointerEvent' in window) {
-    track.addEventListener('pointerdown', function (e) { dragStart(e.clientX, e.clientY); track.setPointerCapture(e.pointerId); });
-    window.addEventListener('pointermove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); }, { passive: false });
-    window.addEventListener('pointerup',   dragEnd);
-    window.addEventListener('pointercancel', dragEnd);
-  } else {
-    // 터치
-    track.addEventListener('touchstart', function (e) {
-      var t = e.touches[0]; dragStart(t.clientX, t.clientY);
-    }, { passive: true });
-    track.addEventListener('touchmove', function (e) {
-      var t = e.touches[0]; dragMove(t.clientX, t.clientY, e);
-    }, { passive: false });
-    track.addEventListener('touchend', dragEnd);
-    // 마우스(데스크톱)
-    track.addEventListener('mousedown', function (e) { dragStart(e.clientX, e.clientY); });
-    window.addEventListener('mousemove', function (e) { if (dragging) dragMove(e.clientX, e.clientY, e); });
-    window.addEventListener('mouseup', dragEnd);
-  }
-
-  window.addEventListener('resize', update, { passive: true });
-  update();
-}
-
 
   /* -------- Goal accordion -------- */
   function initGoalAccordion() {
@@ -800,8 +723,6 @@ function initServiceSlider() {
   }
 
   /* -------- Init -------- */
-
-  // 아이콘/컨트롤 영역을 i18n 완전 차단
   (function protectIconsAndControls(){
     $$('.material-icons, .material-icons *, .svc-cont, .svc-cont *').forEach(function(el){
       el.setAttribute('data-no-i18n', '');
@@ -813,28 +734,23 @@ function initServiceSlider() {
     var langBtn = $('#langBtn');
     if (langBtn && !langBtn.getAttribute('aria-controls')) langBtn.setAttribute('aria-controls', 'langMenu');
 
-    /* ✅ 먼저 범위 고정 바인딩을 적용해 p.fron-text 보호 + 자식 키 주입 */
+    // protect strong/tail for panel A
     bindStrongAndTail(
       document.querySelector('#panel-a .tech-body li:nth-of-type(1) .fron-text'),
-      'highlight.float',   // black-f(강조) 공통 키
-      'pA.kf1.tail'        // 꼬리 전용 키
+      'highlight.float','pA.kf1.tail'
     );
     bindStrongAndTail(
       document.querySelector('#panel-a .tech-body li:nth-of-type(2) .fron-text'),
-      'highlight.float',
-      'pA.kf2.tail'
+      'highlight.float','pA.kf2.tail'
     );
 
-    // 그 다음 자동 바인딩
     autowireBySelectors();
     autowireByTextMatch();
 
-    // 초기 언어 결정 및 적용
     var htmlLang = (document.documentElement.getAttribute('lang') || '').slice(0,2);
     var initial = getSavedLang() || (htmlLang || 'en');
     setLanguage(initial);
 
-    // 언어 드롭다운 바인딩
     var langMenu = $('#langMenu');
     if (langBtn && langMenu) {
       langBtn.addEventListener('click', function (e) {
@@ -864,10 +780,8 @@ function initServiceSlider() {
   function setLanguage(lang) {
     saveLang(lang);
     applyI18n(lang);
-
     var btnText = $('#langBtnText');
     if (btnText) btnText.textContent = (LANG_CODES[lang] || lang);
-
     var menu = $('#langMenu');
     if (menu) {
       $$('#langMenu [role="option"]').forEach(function (li) {

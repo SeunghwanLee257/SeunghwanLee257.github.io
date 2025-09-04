@@ -50,3 +50,34 @@ ul{list-style-type: none; margin: 0; padding: 0;}
 .list-item > span{font-size: 12px;}
 
 .pro-list-link::after{content: ""; height: 8px !important; padding-left: 2px; margin-left: 4px; background-color: #DEDBD8;}
+
+
+/* moblie overlay */
+/* ===== Mobile menu overlay & panel ===== */
+.mobile-menu-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.50);   /* 뒤 컨텐츠는 그대로, 어둡게만 */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 998;                  /* 패널보다 한 단계 낮게 */
+}
+.mobile-menu-overlay.active{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+/* 메뉴 열렸을 때: 페이지는 숨기지 말고 스크롤만 잠금 */
+body.menu-open{ overflow: hidden; }
+
+/* 혹시 기존 CSS에 “menu-open 시 main/section 숨김” 규칙이 있으면 무력화 */
+body.menu-open main,
+body.menu-open header,
+body.menu-open footer,
+body.menu-open section{
+  opacity: 1 !important;
+  visibility: visible !important;
+}

@@ -9,6 +9,27 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
 
+
+  // === Scroll Lock (iOS/Safari 안전) ===
+  let __lockY = 0;
+  function lockScroll() {
+    __lockY = window.scrollY || window.pageYOffset;
+    document.documentElement.classList.add('menu-locked');
+    document.body.classList.add('menu-locked');
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${__lockY}px`;
+    document.body.style.width = '100%';
+  }
+  function unlockScroll() {
+    document.documentElement.classList.remove('menu-locked');
+    document.body.classList.remove('menu-locked');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, __lockY);
+  }
+
+
   /* =========================================================
      1) Box in-view -> .expand  (IO + scroll fallback)
      ========================================================= */
@@ -93,31 +114,48 @@
       return $$('#mobile-nav a, #mobile-nav button, #mobile-nav [tabindex]:not([tabindex="-1"])');
     }
 
-    function openMenu() {
-      isMenuOpen = true;
-      logoMenus.classList.add('menu-open');
-      menuBtn.setAttribute('aria-expanded', 'true');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      setTimeout(function(){ closeBtn.focus(); }, 50);
-    }
+  function openMenu() {
+    isMenuOpen = true;
+    logoMenus.classList.add('menu-open');
+    document.body.classList.add('menu-open'); // ← 추가: 전역 상태
+    menuBtn.setAttribute('aria-expanded', 'true');
+    overlay.classList.add('active');
+  }
 
-    function closeMenu() {
-      isMenuOpen = false;
-      logoMenus.classList.remove('menu-open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-      menuBtn.focus();
-    }
+  function closeMenu() {
+    isMenuOpen = false;
+    logoMenus.classList.remove('menu-open');
+    document.body.classList.remove('menu-open'); // ← 추가
+    menuBtn.setAttribute('aria-expanded', 'false');
+    overlay.classList.remove('active');
+  }
 
-    function toggleMenu(){ isMenuOpen ? closeMenu() : openMenu(); }
+  function toggleMenu(){ isMenuOpen ? closeMenu() : openMenu(); }
 
-    // 이벤트 바인딩
+  // 이벤트 바인딩
     menuBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); toggleMenu(); });
     closeBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); closeMenu(); });
     overlay.addEventListener('click', function(e){ e.preventDefault(); closeMenu(); });
-    $$('.nav a').forEach(function(link){ link.addEventListener('click', closeMenu); });
+
+    // 모바일 메뉴 안의 앵커 클릭 시: 기본 점프 차단 → 메뉴 닫기 → 부드럽게 이동
+  $$('.nav a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var target = link.getAttribute('href');
+
+    // 메뉴 닫으며 스크롤 락 해제
+    closeMenu();
+
+    // 레이아웃 안정화 뒤(다음 프레임) 스크롤 실행
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      smoothScrollTo(target);  // 아래 3-3 노출 함수 사용
+    });
+  });
+  }, { passive: false });
+});
+
 
     // 포커스 트랩 + ESC
     document.addEventListener('keydown', function(e){
@@ -150,7 +188,39 @@
   }
 
   /* =========================================================
-     3) Enhanced Language Dropdown for Mobile
+     3) fix bug
+    ========================================================= */ 
+
+  // === Desktop 복귀 시 모바일 흔적 제거 ===
+  function teardownMobileMenu() {
+    const logoMenus = document.querySelector('.logo-menus');
+    const nav = document.querySelector('.nav');
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const closeBtn = nav ? nav.querySelector('.nav-close-btn') : null;
+
+  // 상태/클래스/스크롤 락 해제
+    logoMenus && logoMenus.classList.remove('menu-open');
+    document.body.style.overflow = '';
+
+  // 동적 생성 요소 제거
+    if (menuBtn) menuBtn.remove();
+    if (overlay) overlay.remove();
+    if (closeBtn) closeBtn.remove();
+
+  // 모바일 전용 id/aria 원복
+    if (nav && nav.getAttribute('id') === 'mobile-nav') {
+      nav.removeAttribute('id');
+    }
+    const langBtn = document.getElementById('langBtn');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+    const langMenu = document.getElementById('langMenu');
+    if (langMenu) { langMenu.hidden = true; langMenu.style.display = 'none'; }
+}
+
+
+  /* =========================================================
+     4) Enhanced Language Dropdown for Mobile
      ========================================================= */
   function enhanceMobileLanguageDropdown() {
     var langBtn  = $('#langBtn');
@@ -192,7 +262,7 @@
   }
 
   /* =========================================================
-     Init
+     5) Init
      ========================================================= */
   document.addEventListener('DOMContentLoaded', function () {
     initBoxExpand();

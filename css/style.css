@@ -70,6 +70,25 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 .h3{ font-size: 28px; font-weight: 800; margin:0 0 12px; color:#111; }
 .p { color:#444; font-size:14px; line-height:1.7; margin:0; }
 
+/* 모바일 버튼 잔류 방지 */
+/* Desktop safeguard: 모바일 전용 UI는 데스크톱에선 강제 비표시 */
+@media (min-width: 768px) {
+  .mobile-menu-btn,
+  .mobile-menu-overlay,
+  .nav-close-btn {
+    display: none !important;
+  }
+
+  /* 혹시 .menu-open 클래스가 남아도 데스크톱 레이아웃 유지 */
+  .logo-menus.menu-open .nav {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+    position: static !important;
+  }
+}
+
+
 /* ========== Fixed Header ========== */
 .header{
   display: flex; align-items: center; justify-content: space-between;
@@ -516,3 +535,11 @@ footer > div {font-size: 12px; font-weight: 600; color: #403E3C;}
           font-feature-settings: 'liga';
 }
 
+/* JS 스크롤과 충돌 방지: 전역 스무스 비활성화 */
+html, body { scroll-behavior: auto !important; }
+
+/* 메뉴 열렸을 때 배경 스크롤 완전 고정 */
+html.menu-locked, body.menu-locked {
+  overflow: hidden !important;
+  touch-action: none;
+}
