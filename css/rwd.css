@@ -1177,9 +1177,9 @@
 /* Tech Panel Animation Box */
 @media screen and (max-width: 767px) {
   .box.expand {
-    width: 150px;
+    width: 150px !important;
   }
-  html:lang(ko) .box.expand{width: 118px;}
+  html:lang(ko) .box.expand{width: 118px !important;}
 }
 
 /* Accessibility improvements for touch devices */
