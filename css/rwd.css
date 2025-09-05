@@ -101,6 +101,7 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   }
 
+
   /* Navigation - Hidden by default */
   .nav {
     display: none;
@@ -931,11 +932,11 @@
 
   /* Section 03 - Technology */
   #sec03 {
-    padding: 120px 60px;
+    padding: 80px 20px;
   }
 
   .tech-split {
-    height: 450px;
+    height: 540px;
   }
 
   .tech-panel {
@@ -948,19 +949,19 @@
 
   /* Section 04 - Service */
   #sec04 {
-    padding: 120px 0;
+    padding: 80px 20px;
   }
 
   .svc-item {
-    column-gap: 60px;
+    column-gap: 20px;
   }
 
   .svc-a {
-    height: 350px;
+    width: 100%;
   }
 
   .svc-right {
-    height: 350px;
+    /* border: 1px solid red; */
   }
 
   .svc-title {
@@ -1000,7 +1001,7 @@
 
   /* Section 06 */
   #sec06 {
-    padding: 100px 0 150px;
+    padding: 80px;
   }
 
   .property-content {
@@ -1197,3 +1198,26 @@
     page-break-inside: avoid;
   }
 }
+
+
+/* 전역 안전망 */
+html, body { max-width:100%; overflow-x:hidden; }
+
+/* 섹션06: 배경/내부 이미지가 살짝 넘쳐도 커팅 */
+.title-area,
+.main-image,
+.architecture-diagram { overflow:hidden; }
+
+/* 슬라이더 2중 안전장치 */
+.svc-slider { overflow:hidden; }
+.svc-track  { display:flex; }
+.svc-item   { flex:0 0 100%; max-width:100%; }
+
+/* 스크롤탑 버튼이 레이아웃에 영향 주지 않게 고정 크기 */
+.scroll-top-btn { width:56px; height:56px; }
+
+
+/* 부모가 트랙 밖으로 새는 걸 항상 막기 */
+.svc-slider{ overflow: hidden; }
+.svc-track{ display: flex; will-change: transform; }
+.svc-item{ flex: 0 0 100%; max-width: 100%; }

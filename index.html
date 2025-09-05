@@ -47,14 +47,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
 
   <!-- JS: 렌더 블로킹 방지를 위해 defer 권장 -->
-  <script src="./js/i18n.js" defer></script>
-  <script src="./js/app.js" defer></script>
-  <script src="./js/conponant.js" defer></script>
-  <script src="./js/remove.js" defer></script>
+  <script src="./js/walllnut.bundle.js" defer></script>
 </head>
 
 
 <body>
+    <!-- Go to scroll top -->
+  <button id="scrollTopBtn" class="scroll-top-btn">
+    <img src="./asset/scrollTop.svg" alt="Scroll to top">
+  </button>
+
   <!-- 고정 헤더 -->
   <header class="header" role="banner">
     <div class="logo-menus">
@@ -667,10 +669,6 @@
     </div>
   </footer>
 
-  <!-- Go to scroll top -->
-  <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Go to top">
-    <img src="./asset/scrollTop.svg" alt="Scroll to top" />
-  </button>
 
 </body>
 </html>
