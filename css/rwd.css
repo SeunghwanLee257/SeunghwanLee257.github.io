@@ -505,6 +505,7 @@
 
   .svc-c-title{color: #807F7F; font-size: 14px;}
 
+
   .svc-c img.s-img-1 {
     width: 250px;
     left: -80px;
@@ -960,16 +961,33 @@
     width: 100%;
   }
 
-  .svc-right {
-    /* border: 1px solid red; */
-  }
-
   .svc-title {
     font-size: 42px;
   }
 
   .svc-c {
     height: 130px;
+  }
+
+    .svc-c img.s-img-1 {
+    width: 250px;
+    left: -100px;
+  }
+
+  .svc-c img.s-img-2 {
+    width: 320px;
+    left: -170px;
+  }
+
+  .svc-c img.s-img-3 {
+    width: 200px;
+    top: 80px;
+    left: -70px;
+  }
+
+  .svc-c img.s-img-4 {
+    width: 200px;
+    left: -70px;
   }
 
   /* Section 05 */
