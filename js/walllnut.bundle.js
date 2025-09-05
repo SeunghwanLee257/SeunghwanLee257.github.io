@@ -763,9 +763,11 @@ function initTechPanels() {
 
     // i18n 바인딩 및 적용
     autowireBySelectors(); autowireByTextMatch();
-    var htmlLang=(document.documentElement.getAttribute('lang')||'').slice(0,2);
-    var initial=getSavedLang() || (htmlLang || 'en');
+    var initial = 'en';
+    var urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang === 'ko' || urlLang === 'en') initial = urlLang;
     setLanguage(initial);
+
 
     // 메뉴/언어
     var langMenu=$('#langMenu');
