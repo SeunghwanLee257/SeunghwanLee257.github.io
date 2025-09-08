@@ -40,7 +40,7 @@ var I18N = {
       'sec.team': '05. Team Member',
       '.s-t-01': 'How much time is left on your data clock?',
       '.s-t-02': 'Most data on the internet is effectively irreversible',
-      'pA.title': 'GHE16',
+      'pA.title': 'FHE16',
       'pA.subtitle': 'A 16-bit integer computation–centric deterministic FHE structure that eliminates floating-point operations, ensuring identical results regardless of the execution environment',
       'common.keyFeatures': 'Key Features',
       'highlight.float': 'Elimination of floating-point',
