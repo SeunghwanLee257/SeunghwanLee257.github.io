@@ -927,7 +927,7 @@
   }
 
   .tech-split {
-    height: 540px;
+    height: 620px;
   }
 
   .tech-panel {
@@ -937,6 +937,10 @@
   .tech-title-lg {
     font-size: 36px;
   }
+
+  .panel-thumb.pt-1{top: -60px; left: -30px;}
+  .panel-thumb.pt-2{right: -60px; bottom: -40px;}
+
 
   /* Section 04 - Service */
   #sec04 {
@@ -1082,6 +1086,9 @@
   .time-value {
     font-size: 72px;
   }
+
+  .panel-thumb.pt-1{top: -60px; left: -40px;}
+  .panel-thumb.pt-2{right: -60px; bottom: -60px;}
 
   /* 기타 주요 섹션들도 태블릿과 대형 데스크톱 사이의 적절한 값으로 설정 */
 }
