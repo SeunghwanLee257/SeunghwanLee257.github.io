@@ -35,11 +35,9 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'sec.team': '05. Team Member',
       '.s-t-01': 'How much time is left on your data clock?',
       '.s-t-02': 'Most data on the internet is effectively irreversible',
-<<<<<<< HEAD
-=======
 
       // Tech A
->>>>>>> 58e4cfa (update sec01 ... 06)
+
       'pA.title': 'FHE16',
       'pA.subtitle': 'A 16-bit integer computation–centric deterministic FHE structure that eliminates floating-point operations, ensuring identical results regardless of the execution environment',
       'common.keyFeatures': 'Key Features',
