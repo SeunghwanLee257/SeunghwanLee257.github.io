@@ -4,19 +4,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+<<<<<<< HEAD
   <meta name="description" content="waLLLnut: For a secure and private world" />
+=======
+>>>>>>> 58e4cfa (update sec01 ... 06)
   <meta name="google" content="notranslate">
+  <meta name="description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
 
   <title>waLLLnut</title>
   <link rel="canonical" href="https://walllnut.com/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
+<<<<<<< HEAD
   <meta property="og:title" content="waLLLnut: For a secure and private world">
   <meta property="og:description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
+=======
+>>>>>>> 58e4cfa (update sec01 ... 06)
   <meta property="og:site_name" content="waLLLnut">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="waLLLnut: For a secure and private world">
+  <meta property="og:description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
   <meta property="og:url" content="https://walllnut.com/">
-  <meta property="og:image" content="https://walllnut.com/asset/OGP-1200_640.png">
+  <!-- 이미지 파일을 1200x630로 맞추는 걸 권장합니다 -->
+  <meta property="og:image" content="https://walllnut.com/asset/OGP-1200_630.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="waLLLnut: For a secure and private world">
@@ -25,11 +36,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="waLLLnut: For a secure and private world">
   <meta name="twitter:description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
-  <meta name="twitter:image" content="https://walllnut.com/asset/OGP-1200_640.png">
-
-  <!-- 일반 검색엔진 스니펫 -->
-  <meta name="description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
-
+  <meta name="twitter:image" content="https://walllnut.com/asset/OGP-1200_630.png">
+  <meta name="twitter:image:alt" content="waLLLnut: For a secure and private world">
 
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css">
@@ -38,16 +46,17 @@
   <link rel="stylesheet" href="./css/verLangKor.css">
 
   <!-- 아이콘/폰트 -->
-  <!-- 파비콘은 이미 했다고 했으니 아래는 선택 -->
   <link rel="icon" href="./asset/logo-filled-orange.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
 
-  <!-- JS: 렌더 블로킹 방지를 위해 defer 권장 -->
+  <!-- JS (defer) -->
   <script src="./js/walllnut.bundle.js" defer></script>
+  <script src="./js/bg-canvas.js" defer></script>
 </head>
 
 
@@ -106,6 +115,8 @@
   <main id="main" tabindex="-1">
     <!-- 섹션 01: 배너 / 카운트다운 -->
     <section id="sec01" aria-labelledby="countdown-heading">
+      <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
       <div class="container count-wrap" aria-label="countdown">
         <div class="time-box" data-unit="days" title="hover 시 해당 유닛만 일시정지">
           <div class="time-value" id="days">365</div>
@@ -170,14 +181,19 @@
               <p class="captionKey">Key Features</p>
               <ul class="tech-body">
                 <li class="g-item-ex">
-                  <p class="fron-text"><span class="black-f">Elimination of floating-point</span> operations, ensuring identical results regardless of the execution environments</p>
-                  <div class="box"></div>
+                  <p class="front-text"><span class="black-f">Elimination of floating-point operations,</span> ensuring identical results regardless of the execution environments</p>
+                  <div class="box oBox-01"></div>
                 </li>
                 <li class="g-item-ex">
-                  <p class="fron-text"><span class="black-f">Elimination of floating-point</span> environment-specific error issues</p>
-                  <div class="box"></div>
+                  <p class="front-text">Elimination of floating-point environment-specific error issues</p>
                 </li>
-                <li class="g-item-ex">Ultra-fast 2.89 ms bootstrapping through GINX gate optimization (suitable for real-time and low-latency applications)</li>
+                <li class="g-item-ex">
+                  <p class="front-text">
+                    <span class="black-f">Ultra-fast 2.89 ms bootstrapping</span>
+                      through GINX gate optimization (suitable for real-time and low-latency applications)
+                  </p>
+                  <div class="box oBox-02"></div>
+                </li>
               </ul>
               <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
             </div>
@@ -208,10 +224,26 @@
                   primes as its modulus values.</p>
               <p class="captionKey">Key Features</p>
               <ul class="tech-body">
-                <li class="g-item-ex">O(1) complexity for each of communication, computation,<br> rounds and input size</li>
-                <li class="g-item-ex">O(n κ d²) complexity for generation of evaluation key (ev)</li>
-                <li class="g-item-ex">CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)</li>
-                <li class="g-item-ex">Circuit Privacy with active security in a dishonest majority setting</li>
+                <li class="g-item-ex">
+                  <p class="front-text">
+                    <span class="black-f">O(1) complexity</span> for each of communication, computation,<br> rounds and input size
+                  </p>
+                </li>
+                <li class="g-item-ex">
+                  <p class="front-text">
+                    O(n κ d²) complexity for generation of <span class="black-f">evaluation key (ev)</span>
+                  </p>
+                </li>
+                <li class="g-item-ex">
+                  <p class="front-text">
+                    <span class="black-f">CRT-SPDZ–based</span> secure random number and distribution sampling (including Discrete Gaussian)
+                  </p>
+                </li>
+                <li class="g-item-ex">
+                   <p class="front-text">
+                     Circuit Privacy with <span class="black-f">active security in a dishonest majority</span> setting
+                   </p>
+                </li>
               </ul>
               <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
             </div>
@@ -668,7 +700,6 @@
       <span>© 2025 waLLLnut · All rights reserved.</span>
     </div>
   </footer>
-
 
 </body>
 </html>

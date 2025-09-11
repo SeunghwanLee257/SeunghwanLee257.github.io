@@ -150,7 +150,7 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 
 /* ========== Section spacing ========== */
 section{ padding-top: 0; padding-bottom: 0; }
-#sec01{ height: 100%; padding: 320px 0; background-color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+#sec01{ height: 100vh !important; padding: 320px 0; background-color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; text-align: center; }
 #sec02{ background-image: url('../asset/section02_슬로건.png'); background-size: cover; background-repeat:no-repeat; }
 #sec03, #sec04, #sec05{ padding-top: 160px; padding-bottom: 160px; }
 #sec06{ padding-top: 120px; padding-bottom: 200px; }
@@ -158,7 +158,17 @@ section{ padding-top: 0; padding-bottom: 0; }
 #sec08{ background: var(--bg-gray); padding: 80px 0 120px 0; }
 
 /* ========== Section 01: Countdown ========== */
-.count-wrap{ display:flex; gap:28px; align-items:center; justify-content:flex-start; }
+.sec01{position: relative;}
+#bg-canvas {
+  position: absolute; inset: 0;
+  z-index: 0; pointer-events: none;
+}
+#sec01 .count-wrap,
+#sec01 .banner-title { position: relative; z-index: 1; }
+.main-cont-topB {margin-bottom: 120px; display: flex; flex-direction: column; gap: 40px; align-items: center;}
+#heroToggleBtn{margin-top: 40px;}
+
+.count-wrap{ display:flex; gap:28px; align-items:center; justify-content:flex-start; margin-bottom: 20px;}
 .time-box{
   min-width: 260px; height: 260px; border-radius: 24px;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -175,10 +185,11 @@ section{ padding-top: 0; padding-bottom: 0; }
    letter-spacing:.4px; 
   }
 
-  .banner-title{margin-top: 20px;}
   .banner-title .sec01-title {margin: 0;}
   .banner-title .s-t-01{color: #0F0F10; padding-bottom: 4px;}
   .banner-title .s-t-02{color: #807F7F; filter: blur(.65px);}
+
+
 
 /* ========== Section 02: Strip Banner ========== */
 .strip{
@@ -238,6 +249,22 @@ section{ padding-top: 0; padding-bottom: 0; }
 .tech-subtitle{ font-size:16px; font-weight:400; color:var(--title-color); line-height:1.5; }
 .tech-body{ font-size:16px; font-weight:400; color:var(--title-color); line-height:1.5; }
 .tech-ref{ font-size:14px; font-weight:400; color:var(--muted); line-height:1.6; margin:0; }
+
+/* 1024px 이하에서는 JS 박스 끄고, 줄바꿈 단위로 배경을 칠한다 */
+@media (max-width: 1024px) {
+  /* Tech-B 항목: 굵게(강조) 텍스트에 라인단위 하이라이트 */
+  #panel-b .tech-body .black-f {
+    background: #FF952D;
+    padding: 0 .25em;                 /* 살짝 여백 */
+    border-radius: 4px;
+    -webkit-box-decoration-break: clone;
+            box-decoration-break: clone; /* 줄바꿈마다 배경/라운드 복제 */
+  }
+  /* JS가 뿌리는 주황 박스를 모바일에선 숨김 */
+  #panel-b .g-item-ex .box {
+    display: none !important;
+  }
+}
 
 /* Actions */
 .actions{grid-column:1; display:flex; text-align: right; gap:16px; margin-top:20px; }

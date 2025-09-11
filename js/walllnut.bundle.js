@@ -1,11 +1,7 @@
-/* =========================================================
-   WaLLLnut Landing - 완전 통합 번들 (i18n + 모든 인터랙션)
-   ========================================================= */
 
 // 항상 맨 위에서 시작
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-
 
 (function () {
   'use strict';
@@ -19,8 +15,7 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
   var root = document.scrollingElement || document.documentElement;
 
   /* ================= i18n dict (en/ko) ================= */
-
-var I18N = {
+  var I18N = {
     en: {
       'lang.label': 'Language',
       'nav.tech': 'Technology',
@@ -40,20 +35,53 @@ var I18N = {
       'sec.team': '05. Team Member',
       '.s-t-01': 'How much time is left on your data clock?',
       '.s-t-02': 'Most data on the internet is effectively irreversible',
+<<<<<<< HEAD
+=======
+
+      // Tech A
+>>>>>>> 58e4cfa (update sec01 ... 06)
       'pA.title': 'FHE16',
       'pA.subtitle': 'A 16-bit integer computation–centric deterministic FHE structure that eliminates floating-point operations, ensuring identical results regardless of the execution environment',
       'common.keyFeatures': 'Key Features',
-      'highlight.float': 'Elimination of floating-point',
-      'pA.kf1.tail': ' operations, ensuring identical results regardless of the execution environments',
-      'pA.kf2.tail': ' environment-specific error issues',
-      'pA.kf3': 'Ultra-fast 2.89 ms bootstrapping through GINX gate optimization (suitable for real-time and low-latency applications)',
+
+      // 강조 조각
+      'highlight.float': 'Elimination of floating-point operations,',
+      'highlight.float.short': 'Elimination of floating-point',
+      'pA.kf1.tail': ' ensuring identical results regardless of the execution environments',
+      'pA.kf2.tail': ' avoiding environment-specific error issues',
+
+      // 3번 항목
+      'highlight.boot': 'Ultra-fast 2.89 ms bootstrapping',
+      'pA.kf3.tail': ' through GINX gate optimization (suitable for real-time and low-latency applications)',
+
       'common.reference': 'Reference: ePrint 2024/1916',
+
+      // Tech B (MPC)
       'pB.title': 'FHE16-based MPC (SSFHE)',
-      'pB.subtitle': 'A new FHE (FHE16) is based on 16-bit integer arithmetic, utilizing composite numbers of 16-bit primes as its modulus values.',
+      'pB.subtitle': 'An efficient MPC that combines FHE16 and CRT-SPDZ, utilizing composite numbers of 16-bit primes as modulus values and effective sampling.',
       'pB.kf1': 'O(1) complexity for each of communication, computation,<br> rounds and input size',
       'pB.kf2': 'O(n κ d²) complexity for generation of evaluation key (ev)',
       'pB.kf3': 'CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)',
       'pB.kf4': 'Circuit Privacy with active security in a dishonest majority setting',
+
+      // Tech-B 강조(부분 바인딩)
+      'pB.hl1.pre':    '',
+      'pB.hl1.strong': 'O(1) complexity',
+      'pB.hl1.tail':   ' for each of communication, computation,<br> rounds and input size',
+
+      'pB.hl2.pre':    'O(n κ d²) complexity for generation of ',
+      'pB.hl2.strong': 'evaluation key (ev)',
+      'pB.hl2.tail':   '',
+
+      'pB.hl3.pre':    '',
+      'pB.hl3.strong': 'CRT-SPDZ–based',
+      'pB.hl3.tail':   ' secure random number and distribution sampling (including Discrete Gaussian)',
+
+      'pB.hl4.pre':    'Circuit Privacy with ',
+      'pB.hl4.strong': 'active security in a dishonest majority',
+      'pB.hl4.tail':   ' setting',
+
+      // Service / Goal / Use cases …
       'svc.meta.keyword': 'Keyword',
       'svc.1.desc': 'Normal transactions stay on-chain, while sensitive data/compute run <strong>in a confidential FHE layer—keeping state public.</strong>',
       'svc.1.meta.title2': 'Hide',
@@ -134,20 +162,50 @@ var I18N = {
       'sec.team': '05. Team Member',
       '.s-t-01': '여러분의 데이터는 인터넷에 얼마나 머무를까요?',
       '.s-t-02': '인터넷 안에 있는 대다수의 데이터는 삭제가 불가능한 데이터 입니다.',
-      'pA.title': 'Ultra-Low-Latency',
+
+      // Tech A
+      'pA.title': 'FHE16',
       'pA.subtitle': '16비트 정수 연산 중심의 결정론적 FHE 구조로 부동소수 연산을 제거하여, 실행 환경에 상관없이 동일한 결과를 보장합니다',
       'common.keyFeatures': '핵심 특징',
-      'highlight.float': '부동소수점 연산 제거',
-      'pA.kf1.tail': '로 실행 환경과 무관하게 동일한 결과 보장',
-      'pA.kf2.tail': ' 연산 환경별 오차 제거',
-      'pA.kf3': 'GINX 게이트 최적화를 통한 2.89ms 초고속 부트스트래핑 (실시간·저지연 애플리케이션 적합)',
+
+      // 강조 조각
+      'highlight.float': '부동소수점 연산 제거,',
+      'highlight.float.short': '부동소수점 제거',
+      'pA.kf1.tail': ' 실행 환경과 무관하게 동일한 결과 보장',
+      'pA.kf2.tail': ' 환경별 오차 문제를 방지',
+
+      // 3번 항목
+      'highlight.boot': '2.89ms 초고속 부트스트래핑',
+      'pA.kf3.tail': ' — GINX 게이트 최적화를 통해 (실시간·저지연 애플리케이션 적합)',
+
       'common.reference': '참고: ePrint 2024/1916',
+
+      // Tech B (MPC)
       'pB.title': 'FHE16 기반 MPC (SSFHE)',
-      'pB.subtitle': '새로운 FHE(FHE16)는 16비트 정수 산술을 기반으로 하며, 모듈러로 16비트 소수의 합성수를 활용합니다.',
+      'pB.subtitle': 'FHE16과 CRT-SPDZ를 결합한 효율적인 MPC로, 16비트 소수의 합성수를 모듈러로 활용하고 효율적인 샘플링을 지원합니다.',
       'pB.kf1': '통신·연산·라운드·입력 크기 각각에 대해 O(1) 복잡도',
       'pB.kf2': '평가 키(ev) 생성의 복잡도: O(n κ d²)',
       'pB.kf3': 'CRT-SPDZ 기반 안전한 난수·분포 샘플링(이산 가우시안 포함)',
       'pB.kf4': '불신 다수 환경에서 능동 보안의 서킷 프라이버시',
+
+      // Tech-B 강조(부분 바인딩)
+      'pB.hl1.pre':    '',
+      'pB.hl1.strong': 'O(1) 복잡도',
+      'pB.hl1.tail':   ' — 통신·연산·라운드·입력 크기 각각',
+
+      'pB.hl2.pre':    'O(n κ d²) 복잡도 — ',
+      'pB.hl2.strong': '평가 키(ev) 생성',
+      'pB.hl2.tail':   '',
+
+      'pB.hl3.pre':    '',
+      'pB.hl3.strong': 'CRT-SPDZ 기반',
+      'pB.hl3.tail':   ' 안전한 난수 및 분포 샘플링(이산 가우시안 포함)',
+
+      'pB.hl4.pre':    '서킷 프라이버시 — ',
+      'pB.hl4.strong': '불신 다수 환경의 능동 보안',
+      'pB.hl4.tail':   '',
+
+      // Service / Goal / Use cases …
       'svc.meta.keyword': '키워드',
       'svc.1.desc': '일반 트랜잭션은 온체인에 유지하고, <br>민감 데이터/연산은 <strong>기밀 FHE 레이어에서 수행—상태는 공개로 유지.</strong>',
       'svc.1.meta.title2': '숨김',
@@ -245,18 +303,144 @@ var I18N = {
   function getSavedLang(){ try{ return localStorage.getItem('lang'); }catch(e){ return null; } }
   function saveLang(v){ try{ localStorage.setItem('lang', v); }catch(e){} }
 
-  // 강조/꼬리 텍스트 key 분리 바인딩
-  function bindStrongAndTail(p, strongKey, tailKey) {
-    if (!p) return;
-    if (p.hasAttribute('data-i18n')) p.removeAttribute('data-i18n');
-    p.setAttribute('data-no-i18n', '');
-    var strong = p.querySelector('.black-f');
-    if (strong && !strong.hasAttribute('data-i18n')) strong.setAttribute('data-i18n', strongKey);
-    if (strong && !p.querySelector('[data-i18n="'+ tailKey +'"]')) {
-      var tail = document.createElement('span'); tail.setAttribute('data-i18n', tailKey);
-      var node = strong.nextSibling; while (node) { var next = node.nextSibling; tail.appendChild(node); node = next; }
-      p.appendChild(tail);
+  /* === pre/strong/tail 3분할 바인더 === */
+/* === pre/strong/tail 3분할 바인더 — 안전판 버전 === */
+function bindThreeParts(p, preKey, strongKey, tailKey){
+  if (!p) return;
+
+  // p 자체는 i18n 대상에서 제외 (자동 텍스트 치환 방지)
+  if (p.hasAttribute('data-i18n')) p.removeAttribute('data-i18n');
+  p.setAttribute('data-no-i18n','');
+
+  var strong = p.querySelector('.black-f');
+  if (!strong) return;
+
+  // 1) pre/tail 보장
+  var preSpan = p.querySelector('.hl-pre');
+  if (!preSpan){
+    preSpan = document.createElement('span');
+    preSpan.className = 'hl-pre';
+    p.insertBefore(preSpan, p.firstChild);
+  }
+
+  var tailSpan = p.querySelector('.hl-tail');
+  if (!tailSpan){
+    tailSpan = document.createElement('span');
+    tailSpan.className = 'hl-tail';
+    p.appendChild(tailSpan);
+  }
+
+  // 2) pre 정리: strong 앞에 있는 형제들을 preSpan으로 이동
+  //    (tailSpan/strong은 제외)
+  var node = preSpan.nextSibling;
+  while (node && node !== strong && node !== tailSpan){
+    var next = node.nextSibling;
+    preSpan.appendChild(node);
+    node = next;
+  }
+
+  // 3) tail 정리: strong 뒤의 형제들을 tailSpan으로 이동
+  //    ★ 핵심 수정: tailSpan 자신을 만나면 중단하여 자기-자기 append 방지
+  var node2 = strong.nextSibling;
+  while (node2 && node2 !== tailSpan){
+    var next2 = node2.nextSibling;
+    tailSpan.appendChild(node2);
+    node2 = next2;
+  }
+
+  // 4) i18n 키 바인딩
+  if (preKey)    preSpan.setAttribute('data-i18n', preKey);
+  if (strongKey) strong.setAttribute('data-i18n', strongKey);
+  if (tailKey)   tailSpan.setAttribute('data-i18n', tailKey);
+}
+
+  /* === 하이라이트 박스: 보장 + 레이아웃 + 인뷰 애니메이션 === */
+  function ensureBox(item){
+    var box = item.querySelector('.box');
+    if (!box){
+      box = document.createElement('div');
+      box.className = 'box';
+      item.appendChild(box);
     }
+    item.style.position = 'relative';
+    item.style.overflow = 'visible';
+
+    var p = item.querySelector('.front-text, .fron-text');
+    if (p){
+      p.style.position = 'relative';
+      p.style.zIndex = '1';
+      p.setAttribute('data-no-i18n',''); // 문장 보호
+    }
+
+    // CSS 없어도 동작하도록 최소 스타일 강제
+    box.style.position = 'absolute';
+    box.style.left = '0px';
+    box.style.top = '0px';
+    box.style.height = '0px';
+    box.style.width = '0px';
+    box.style.background = '#FF952D';
+    box.style.borderRadius = '4px';
+    box.style.pointerEvents = 'none';
+    box.style.zIndex = '0';
+    box.style.transformOrigin = 'left center';
+    box.style.transform = 'scaleX(0)';
+    box.style.transition = 'transform 420ms ease';
+    return box;
+  }
+function layoutHighlight(item){
+  var strong = item.querySelector('.front-text .black-f, .fron-text .black-f');
+  var box    = ensureBox(item);
+  if (!strong) { box.style.transform = 'scaleX(0)'; return; }
+
+  var rs = strong.getBoundingClientRect();
+  var ri = item.getBoundingClientRect();
+
+  // strong의 좌상단을 item 기준 좌표로 변환
+  var left = rs.left - ri.left;
+  var top  = rs.top  - ri.top;
+
+  // 컨테이너 안쪽 폭(패딩 제외) 계산 후, 오른쪽으로 넘치지 않게 클램프
+  var cs    = getComputedStyle(item);
+  var padL  = parseFloat(cs.paddingLeft)  || 0;
+  var padR  = parseFloat(cs.paddingRight) || 0;
+  var inner = item.clientWidth - padL - padR;
+
+  var maxW  = Math.max(0, inner - left);
+  var width = Math.min(rs.width, maxW);
+  var height = Math.max(0, rs.height);
+
+  // 음수/소수 방지
+  box.style.left   = Math.max(0, Math.round(left))  + 'px';
+  box.style.top    = Math.max(0, Math.round(top))   + 'px';
+  box.style.width  = Math.round(width)              + 'px';
+  box.style.height = Math.round(height)             + 'px';
+}
+
+  function initHighlightAnim(){
+    var items = Array.prototype.slice.call(document.querySelectorAll('.g-item-ex'));
+    if (!items.length) return;
+
+    function layoutAll(){ items.forEach(layoutHighlight); }
+    layoutAll();
+    window.addEventListener('resize', layoutAll, { passive:true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAll);
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var item = entry.target;
+        var box = item.querySelector('.box');
+        if (!box) return;
+
+        if (entry.isIntersecting){
+          layoutHighlight(item); // 최신 치수 반영
+          requestAnimationFrame(function(){ box.style.transform = 'scaleX(1)'; });
+        }else{
+          box.style.transform = 'scaleX(0)';
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '20% 0px -5% 0px' });
+
+    items.forEach(function(it){ ensureBox(it); io.observe(it); });
   }
 
   function setKey(el, key){ if (el && !isExcluded(el) && !el.hasAttribute('data-i18n')) el.setAttribute('data-i18n', key); }
@@ -277,17 +461,12 @@ var I18N = {
     setKeyBySel('#panel-a .tech-title-lg#tab-a', 'pA.title');
     setKeyBySel('#panel-a .tech-subtitle', 'pA.subtitle');
     setKeyBySel('#panel-a .captionKey', 'common.keyFeatures');
-    setKeyBySel('#panel-a .tech-body li:nth-child(3)', 'pA.kf3');
     setKeyBySel('#panel-a .tech-ref a', 'common.reference');
 
-    // Tech B
+    // Tech B (li 전체 바인딩 금지! 제목/부제/캡션/레퍼런스만)
     setKeyBySel('#panel-b .tech-title-lg#tab-b', 'pB.title');
     setKeyBySel('#panel-b .tech-subtitle', 'pB.subtitle');
     setKeyBySel('#panel-b .captionKey', 'common.keyFeatures');
-    setKeyBySel('#panel-b .tech-body li:nth-child(1)', 'pB.kf1');
-    setKeyBySel('#panel-b .tech-body li:nth-child(2)', 'pB.kf2');
-    setKeyBySel('#panel-b .tech-body li:nth-child(3)', 'pB.kf3');
-    setKeyBySel('#panel-b .tech-body li:nth-child(4)', 'pB.kf4');
     setKeyBySel('#panel-b .tech-ref a', 'common.reference');
 
     // Service slides
@@ -313,7 +492,7 @@ var I18N = {
     setKeyBySel(S(4,'.svc-c-ref'),'svc.4.meta.ref');
 
     // Goal
-    setKeyBySel('.goal-caption .p', 'goal.caption');
+    setKeyBySel('.goal-caption p', 'goal.caption'); // (.p → p) 수정
     setKeyBySel('.goal-dropdown-card:nth-of-type(1) .goal-dropdown-question', 'goal.q1');
     setKeyBySel('.goal-dropdown-card:nth-of-type(1) .goal-dropdown-content .goal-dropdown-text', 'goal.a1');
 
@@ -365,7 +544,7 @@ var I18N = {
     var label=$('#langLabel'); if(label && !label.hasAttribute('data-i18n')) label.setAttribute('data-i18n','lang.label');
   }
 
-  // 텍스트 매칭 자동 바인딩
+  // 텍스트 매칭 자동 바인딩 (인터랙티브 영역 보호)
   function autowireByTextMatch() {
     var map = new Map(), en = I18N.en || {};
     Object.keys(en).forEach(function(k){ map.set(norm(stripTags(en[k])), k); });
@@ -374,7 +553,12 @@ var I18N = {
     var nodes = [];
     roots.forEach(function(root){ nodes = nodes.concat($$('a,h1,h2,h3,h4,h5,h6,p,button,div,span,li', root)); });
     nodes = nodes.filter(function(el){
-      return !el.hasAttribute('data-i18n') && !el.classList.contains('fron-text') && !isExcluded(el) && !el.hasAttribute('data-no-i18n');
+      return !el.hasAttribute('data-i18n')
+             && !el.classList.contains('fron-text') // 과거 오타 호환
+             && !el.classList.contains('front-text')
+             && !el.classList.contains('g-item-ex') // 강조 아이템 보호
+             && !isExcluded(el)
+             && !el.hasAttribute('data-no-i18n');
     });
     nodes.forEach(function(el){
       var key = map.get(norm(el.innerHTML || el.textContent || '')); if (key) el.setAttribute('data-i18n', key);
@@ -418,129 +602,117 @@ var I18N = {
   }
 
   /* ================= Smooth Scroll ================= */
-function getHeaderOffset() {
-  var header = document.querySelector('.header');
-  if (!header) return 0;
-  var rect = header.getBoundingClientRect();
-  var cs = getComputedStyle(header);
-  var fixed = cs.position === 'fixed';
-  var sticky = cs.position === 'sticky' && rect.top <= 0 + 1; // top≈0
-  return (fixed || sticky) ? rect.height : 0;
-}
+  function getHeaderOffset() {
+    var header = document.querySelector('.header');
+    if (!header) return 0;
+    var rect = header.getBoundingClientRect();
+    var cs = getComputedStyle(header);
+    var fixed = cs.position === 'fixed';
+    var sticky = cs.position === 'sticky' && rect.top <= 0 + 1;
+    return (fixed || sticky) ? rect.height : 0;
+  }
 
-function smoothScrollTo(targetSelector) {
-  var el = document.querySelector(targetSelector);
-  if (!el) return;
+  function smoothScrollTo(targetSelector) {
+    var el = document.querySelector(targetSelector);
+    if (!el) return;
 
-  var offset = getHeaderOffset() + 12;
-  var top = getScrollY() + el.getBoundingClientRect().top - offset;
-  if (top < 0) top = 0;
+    var offset = getHeaderOffset() + 12;
+    var top = getScrollY() + el.getBoundingClientRect().top - offset;
+    if (top < 0) top = 0;
 
-  smoothTo(top);
+    smoothTo(top);
 
-  // 혹시 브라우저가 스무스 호출을 무시하면 해시 점프로 폴백
-  setTimeout(function(){
-    var now = getScrollY();
-    if (Math.abs(now - top) < 2) {
-      if (history && history.pushState) history.pushState(null, '', targetSelector);
-      else location.hash = targetSelector;
-    }
-  }, 80);
-}
-
-// 전역 export 유지
-window.smoothScrollTo = smoothScrollTo;
-
+    setTimeout(function(){
+      var now = getScrollY();
+      if (Math.abs(now - top) < 2) {
+        if (history && history.pushState) history.pushState(null, '', targetSelector);
+        else location.hash = targetSelector;
+      }
+    }, 80);
+  }
+  window.smoothScrollTo = smoothScrollTo;
 
   function clearLocks(){ document.documentElement.classList.remove('menu-locked'); document.body.classList.remove('menu-locked','menu-open'); var ov=$('.mobile-menu-overlay'); if(ov) ov.classList.remove('active'); }
 
-
   // === Scroll root detection ===
-function getScrollRoot() {
-  // 우선순위대로 후보 모으기
-  var cands = [
-    document.scrollingElement || null,
-    document.documentElement,
-    document.body,
-    document.querySelector('#main'),
-    document.querySelector('main')
-  ].filter(Boolean);
+  function getScrollRoot() {
+    var cands = [
+      document.scrollingElement || null,
+      document.documentElement,
+      document.body,
+      document.querySelector('#main'),
+      document.querySelector('main')
+    ].filter(Boolean);
 
-  // overflow가 auto/scroll 이거나 실제 스크롤 길이가 긴 것을 선택
-  var best = cands[0];
-  var bestScore = -1;
+    var best = cands[0];
+    var bestScore = -1;
 
-  cands.forEach(function(el){
-    var cs = getComputedStyle(el);
-    var canOverflow = /(auto|scroll)/.test(cs.overflowY) || /(auto|scroll)/.test(cs.overflow);
-    var scrollable = (el.scrollHeight - el.clientHeight) > 1;
-    var score = (canOverflow?2:0) + (scrollable?3:0) + (el === document.scrollingElement?1:0);
-    if (score > bestScore) { best = el; bestScore = score; }
-  });
-
-  return best || document.documentElement;
-}
-
-function getScrollY() {
-  var root = getScrollRoot();
-  return root === document.body || root === document.documentElement
-    ? (window.pageYOffset || window.scrollY || root.scrollTop || 0)
-    : root.scrollTop || 0;
-}
-
-function smoothTo(y) {
-  var root = getScrollRoot();
-
-  // window도 시도
-  try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch(_) { window.scrollTo(0, y); }
-
-  // 루트 요소도 시도
-  try {
-    if (root.scrollTo) root.scrollTo({ top: y, behavior: 'smooth' });
-    else root.scrollTop = y;
-  } catch(_) {
-    root.scrollTop = y;
-  }
-}
-
-
-  /* ================= ScrollTop btn ================= */
-function initScrollTopButton() {
-  var btn = document.querySelector('#scrollTopBtn');
-  if (!btn) {
-    btn = document.createElement('button');
-    btn.id = 'scrollTopBtn';
-    btn.className = 'scroll-top-btn';
-    btn.innerHTML = '<img src="./asset/scrollTop.svg" alt="Scroll to top">';
-    btn.setAttribute('hidden', '');
-    document.body.appendChild(btn);
-  }
-
-  var THRESHOLD = 240;
-  var root = getScrollRoot();
-
-  function getY(){ return getScrollY(); }
-  function visible(v){ v ? btn.removeAttribute('hidden') : btn.setAttribute('hidden',''); }
-  function update(){ visible(getY() > THRESHOLD); }
-
-  if (!btn._scrollListenerAdded) {
-    // 실제 스크롤 루트에도 리스너
-    root.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', function(){ root = getScrollRoot(); update(); }, { passive: true });
-
-    btn.addEventListener('click', function(e){
-      e.preventDefault(); e.stopImmediatePropagation();
-      smoothTo(0);
+    cands.forEach(function(el){
+      var cs = getComputedStyle(el);
+      var canOverflow = /(auto|scroll)/.test(cs.overflowY) || /(auto|scroll)/.test(cs.overflow);
+      var scrollable = (el.scrollHeight - el.clientHeight) > 1;
+      var score = (canOverflow?2:0) + (scrollable?3:0) + (el === document.scrollingElement?1:0);
+      if (score > bestScore) { best = el; bestScore = score; }
     });
 
-    btn._scrollListenerAdded = true;
+    return best || document.documentElement;
   }
 
-  setTimeout(update, 0);
-  setTimeout(update, 300);
-}
+  function getScrollY() {
+    var root = getScrollRoot();
+    return root === document.body || root === document.documentElement
+      ? (window.pageYOffset || window.scrollY || root.scrollTop || 0)
+      : root.scrollTop || 0;
+  }
 
+  function smoothTo(y) {
+    var root = getScrollRoot();
+
+    try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch(_) { window.scrollTo(0, y); }
+
+    try {
+      if (root.scrollTo) root.scrollTo({ top: y, behavior: 'smooth' });
+      else root.scrollTop = y;
+    } catch(_) {
+      root.scrollTop = y;
+    }
+  }
+
+  /* ================= ScrollTop btn ================= */
+  function initScrollTopButton() {
+    var btn = document.querySelector('#scrollTopBtn');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'scrollTopBtn';
+      btn.className = 'scroll-top-btn';
+      btn.innerHTML = '<img src="./asset/scrollTop.svg" alt="Scroll to top">';
+      btn.setAttribute('hidden', '');
+      document.body.appendChild(btn);
+    }
+
+    var THRESHOLD = 240;
+    var root = getScrollRoot();
+
+    function getY(){ return getScrollY(); }
+    function visible(v){ v ? btn.removeAttribute('hidden') : btn.setAttribute('hidden',''); }
+    function update(){ visible(getY() > THRESHOLD); }
+
+    if (!btn._scrollListenerAdded) {
+      root.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', function(){ root = getScrollRoot(); update(); }, { passive: true });
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault(); e.stopImmediatePropagation();
+        smoothTo(0);
+      });
+
+      btn._scrollListenerAdded = true;
+    }
+
+    setTimeout(update, 0);
+    setTimeout(update, 300);
+  }
 
   /* ================= Header nav anchors ================= */
   function initNavigation(){
@@ -555,7 +727,6 @@ function initScrollTopButton() {
     document.addEventListener('click',navClickHandler,true);
     document._walllnutNavHandlers.push(navClickHandler);
 
-    // window.addEventListener('load',function(){ if(location.hash && document.querySelector(location.hash)) setTimeout(function(){ smoothScrollTo(location.hash); },0); });
     window.addEventListener('hashchange',function(){ if(location.hash && document.querySelector(location.hash)) smoothScrollTo(location.hash); });
   }
 
@@ -592,52 +763,49 @@ function initScrollTopButton() {
   }
 
   /* ================= Tech panels ================= */
-function initTechPanels() {
-  var panels = $$('.tech-panel');
-  if (!panels.length) return;
+  function initTechPanels() {
+    var panels = $$('.tech-panel');
+    if (!panels.length) return;
 
-  function syncHeadA11y(panel) {
-    var head = $('.inactive-head', panel);
-    if (!head) return;
-    var inactive = panel.classList.contains('inactive'); // 비활성 패널 = 헤더 보이기
+    function syncHeadA11y(panel) {
+      var head = $('.inactive-head', panel);
+      if (!head) return;
+      var inactive = panel.classList.contains('inactive');
 
-    if (inactive) {
-      head.removeAttribute('hidden');
-      head.removeAttribute('aria-hidden');
-      head.tabIndex = 0;
-      head.setAttribute('role', 'button');
-      // head.inert = false; // 선택(지원 브라우저)
-    } else {
-      head.setAttribute('hidden', '');     // 접근성 트리에서도 제거
-      head.setAttribute('aria-hidden', 'true');
-      head.tabIndex = -1;
-      head.removeAttribute('role');
-      // head.inert = true; // 선택
+      if (inactive) {
+        head.removeAttribute('hidden');
+        head.removeAttribute('aria-hidden');
+        head.tabIndex = 0;
+        head.setAttribute('role', 'button');
+      } else {
+        head.setAttribute('hidden', '');
+        head.setAttribute('aria-hidden', 'true');
+        head.tabIndex = -1;
+        head.removeAttribute('role');
+      }
     }
-  }
 
-  function activate(panel) {
+    function activate(panel) {
+      panels.forEach(function (p) {
+        var active = p === panel;
+        p.classList.toggle('active', active);
+        p.classList.toggle('inactive', !active);
+        p.setAttribute('aria-hidden', active ? 'false' : 'true');
+        syncHeadA11y(p);
+      });
+    }
+
     panels.forEach(function (p) {
-      var active = p === panel;
-      p.classList.toggle('active', active);
-      p.classList.toggle('inactive', !active);
-      p.setAttribute('aria-hidden', active ? 'false' : 'true');
-      syncHeadA11y(p);            // ★ 상태와 접근성 속성 동기화
+      var head = $('.inactive-head', p);
+      if (!head || head._eventsBound) return;
+      head.addEventListener('click', function (ev) { ev.stopPropagation(); activate(p); });
+      head.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(p); }
+      });
+      head._eventsBound = true;
+      syncHeadA11y(p);
     });
   }
-
-  panels.forEach(function (p) {
-    var head = $('.inactive-head', p);
-    if (!head || head._eventsBound) return;
-    head.addEventListener('click', function (ev) { ev.stopPropagation(); activate(p); });
-    head.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(p); }
-    });
-    head._eventsBound = true;
-    syncHeadA11y(p);             // ★ 초기 상태 맞추기
-  });
-}
-
 
   /* ================= Service slider ================= */
   function initServiceSlider(){
@@ -736,38 +904,44 @@ function initTechPanels() {
     var timerId=null; if(mode==='deadline') startDeadline(); else timerId=setInterval(tickManual,1000);
   }
 
-  /* ================= In-view box expand ================= */
-  function initBoxExpand(){
-    var boxes=$$('.box'); if(!boxes.length) return;
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(entries){ entries.forEach(function(entry){ entry.target.classList.toggle('expand', entry.isIntersecting); }); },{threshold:0.05});
-      boxes.forEach(function(b){ io.observe(b); });
-    }else{
-      function onScroll(){ var h=window.innerHeight; boxes.forEach(function(box){ var t=box.getBoundingClientRect().top; box.classList.toggle('expand', t<=h && t>=0); }); }
-      onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
-    }
-  }
-
-  /* ================= init ================= */
+  /* ================= 초기화 ================= */
   function init(){
-    // i18n 제외 마크 (여기가 오류 원인이었음: $$ 로 수정)
+    // i18n 제외 마크
     $$('.material-icons, .material-icons *, .svc-cont, .svc-cont *').forEach(function(el){
       el.setAttribute('data-no-i18n',''); if(el.hasAttribute('data-i18n')) el.removeAttribute('data-i18n');
     });
 
-    var langBtn=$('#langBtn'); if(langBtn && !langBtn.getAttribute('aria-controls')) langBtn.setAttribute('aria-controls','langMenu');
+    var langBtn=$('#langBtn');
+    if(langBtn && !langBtn.getAttribute('aria-controls')) langBtn.setAttribute('aria-controls','langMenu');
 
-    // 패널 A 강조/꼬리 분리
-    bindStrongAndTail($('#panel-a .tech-body li:nth-of-type(1) .fron-text'),'highlight.float','pA.kf1.tail');
-    bindStrongAndTail($('#panel-a .tech-body li:nth-of-type(2) .fron-text'),'highlight.float','pA.kf2.tail');
+    // === Tech-A 강조 (strong/tail 분리) ===
+    (function bindTechA(){
+      function FT(n){
+        return $('#panel-a .tech-body li:nth-of-type('+n+') .front-text')
+            || $('#panel-a .tech-body li:nth-of-type('+n+') .fron-text');
+      }
+      bindThreeParts(FT(1), '', 'highlight.float',       'pA.kf1.tail');
+      bindThreeParts(FT(2), '', 'highlight.float.short', 'pA.kf2.tail');
+      bindThreeParts(FT(3), '', 'highlight.boot',        'pA.kf3.tail');
+    })();
 
-    // i18n 바인딩 및 적용
-    autowireBySelectors(); autowireByTextMatch();
+    // === Tech-B 강조 (pre/strong/tail 부분 번역) ===
+    (function bindTechB(){
+      function PB(n){ return '#panel-b .tech-body li:nth-of-type('+n+') .front-text'; }
+      bindThreeParts($(PB(1)), 'pB.hl1.pre', 'pB.hl1.strong', 'pB.hl1.tail');
+      bindThreeParts($(PB(2)), 'pB.hl2.pre', 'pB.hl2.strong', 'pB.hl2.tail');
+      bindThreeParts($(PB(3)), 'pB.hl3.pre', 'pB.hl3.strong', 'pB.hl3.tail');
+      bindThreeParts($(PB(4)), 'pB.hl4.pre', 'pB.hl4.strong', 'pB.hl4.tail');
+    })();
+
+    // i18n 자동 바인딩/적용
+    autowireBySelectors();
+    autowireByTextMatch();
+
     var initial = 'en';
     var urlLang = new URLSearchParams(location.search).get('lang');
     if (urlLang === 'ko' || urlLang === 'en') initial = urlLang;
     setLanguage(initial);
-
 
     // 메뉴/언어
     var langMenu=$('#langMenu');
@@ -780,13 +954,15 @@ function initTechPanels() {
     // 공통 인터랙션
     initScrollTopButton();
     initNavigation();
-    initBoxExpand();
     initGoalAccordion();
     initCountdown();
     initTechPanels();
     initServiceSlider();
 
-    if(window.innerWidth<=767) initMobileMenu();
+    // 하이라이트 애니메이션
+    initHighlightAnim();
+
+    if (window.innerWidth<=767) initMobileMenu();
 
     if(!window._walllnutResizeHandlerAdded){
       window.addEventListener('resize',function(){
@@ -800,22 +976,103 @@ function initTechPanels() {
       window._walllnutResizeHandlerAdded=true;
     }
 
-      // --- [선택] 디버그 로그: URL에 ?debug 있을 때만 찍음 ---
     if (location.search.includes('debug')) {
-      var r = getScrollRoot();
+      var r = (function(){
+        var cands=[document.scrollingElement||null,document.documentElement,document.body,document.querySelector('#main'),document.querySelector('main')].filter(Boolean);
+        return cands[0];
+      })();
       console.log('[debug:scroll-root]', {
-        root: r === document.documentElement ? 'documentElement'
-            : r === document.body ? 'body'
-            : (r.id || r.tagName || 'node'),
-        y: getScrollY(),
+        y: (window.pageYOffset || window.scrollY || r.scrollTop || 0),
         h: r.scrollHeight,
         ch: r.clientHeight,
         overflowY: getComputedStyle(r).overflowY
       });
     }
-
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
   else init();
+
+})();
+
+(function(){
+  'use strict';
+  var $ = function(s, r){ return (r||document).querySelector(s); };
+  var $$ = function(s, r){ return Array.from((r||document).querySelectorAll(s)); };
+
+  var hero   = $('#sec01-hero');
+  if (!hero) return;
+  var btn    = $('#heroToggleBtn', hero);
+  var lockEl = $('#heroLockIcon', hero);
+  var title  = $('.hero-title img', hero);
+  var chars  = $$('.hero-characters .char', hero);
+
+  /* ---- initial state ---- */
+  hero.classList.add('is-locked');   // locked → 노이즈 on
+  if (btn) btn.dataset.state = 'locked';
+
+  /* ---- lock/open toggle ---- */
+  function setLocked(v){
+    hero.classList.toggle('is-locked', v);
+    hero.classList.toggle('is-open', !v);
+    if (btn){
+      btn.dataset.state = v ? 'locked' : 'open';
+      btn.setAttribute('aria-pressed', String(!v));
+      $('.btn-text', btn).textContent = v ? 'Lock' : 'Open';
+    }
+    if (lockEl){
+      var next = v ? lockEl.getAttribute('data-src-locked') : lockEl.getAttribute('data-src-open');
+      if (next) lockEl.src = next;
+    }
+  }
+  if (btn && !btn._bound){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      setLocked(btn.dataset.state !== 'locked' ? true : false); // toggle
+    });
+    btn._bound = true;
+  }
+
+  /* ---- characters MUST touch top/bottom=0; left/right random offsets ---- */
+  function placeCornerCharacters(){
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    // 가로 여백 범위 (뷰포트 비율에 따라 가변)
+    var min = Math.round(vw * 0.04);
+    var max = Math.round(vw * 0.14);
+    function rnd(a,b){ return Math.round(a + Math.random()*(b-a)); }
+
+    // CSS 변수로 offset 주입 (요소는 top/bottom=0 보장)
+    hero.style.setProperty('--char-left-a',  rnd(min, max) + 'px');
+    hero.style.setProperty('--char-right-b', rnd(min, max) + 'px');
+    hero.style.setProperty('--char-left-c',  rnd(min, max) + 'px');
+    hero.style.setProperty('--char-right-d', rnd(min, max) + 'px');
+  }
+  placeCornerCharacters();
+  window.addEventListener('resize', throttle(placeCornerCharacters, 200), {passive:true});
+
+  /* ---- 3-프레임 스프라이트 애니메이션 (cha01/02/03) ---- */
+  function startSprite(el){
+    var frames = [el.getAttribute('data-f1'), el.getAttribute('data-f2'), el.getAttribute('data-f3')].filter(Boolean);
+    if (frames.length < 2) return;
+    var i = 0;
+    var delay = 220 + Math.round(Math.random()*120); // 약간 랜덤
+    function tick(){
+      i = (i+1) % frames.length;
+      // 이미 로딩된 동일 src면 교체 생략
+      if (el.src.indexOf(frames[i]) === -1) el.src = frames[i];
+      el._spriteTimer = setTimeout(tick, delay);
+    }
+    tick();
+  }
+  chars.forEach(startSprite);
+
+  /* ---- helpers ---- */
+  function throttle(fn, wait){
+    var t=0, lastArgs=null;
+    return function(){
+      lastArgs = arguments;
+      if (t) return;
+      t = setTimeout(function(){ t=0; fn.apply(null, lastArgs); }, wait);
+    };
+  }
 })();

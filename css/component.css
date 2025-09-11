@@ -1,43 +1,25 @@
+
+.font16{font-size: 16px;}
+
 .tech-subtitle{font-weight: 700; padding-bottom: 12px;}
 .tech-ref{padding-top: 16px;}
 
 .captionKey{padding: 12px 0; color: #403E3C; font-size: 14px; font-weight: 500;}
 .g-item-ex{color: #807F7F;}
 
+/* .hero-title > img{border: 1px solid red; width: 50%;} */
 
 ul.tech-body {
   list-style-type: none;
   padding-left: 0;
 }
 
-.black-f{color: #0F0F10; font-family: "Asap Condensed", sans-serif;}
-
-.g-item-ex {
-  position: relative;
-  padding-left: 2px; /* 박스와 텍스트 사이 간격 */
-  margin-bottom: 4px;
+.black-f{
+  font-family: "Asap Condensed", sans-serif;
+  color: #000;
 }
 
-.fron-text{position: relative; z-index: 1 !important;}
-
-.box {
-  display:block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;  /* 시작 시 너비 0으로 설정 */
-  height: 24px;
-  background-color: #FF952D;
-  transition: width 0.5s ease-in-out; /* 가로가 늘어날 때 애니메이션 효과 */
-}
-
-.box.expand {
-  width: 172px; /* 박스가 확장될 때 가로 길이가 100%로 늘어남 */
-}
-
-
-.title-graphic{width: 50% !important;}
-
+.title-graphic{width: 50%;}
 
 .tech-body > li{list-style: disc;}
 ul{list-style-type: none; margin: 0; padding: 0;}
