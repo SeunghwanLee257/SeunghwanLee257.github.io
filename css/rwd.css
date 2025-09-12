@@ -377,7 +377,7 @@
   }
 
   /* Inactive header styling */
-  .arrow-dwon{transform: rotate(90deg);}
+  .arrow-down{transform: rotate(90deg);}
   .arrow-up{transform: rotate(90deg); padding-left: 12px;}
 
   .panel-thumb.pt-1{top: -20px; left: -22px;}
@@ -400,7 +400,7 @@
     margin: 0;
   }
 
-  .arrow-dwon {
+  .arrow-down {
     color: #666;
     font-size: 24px;
   }
