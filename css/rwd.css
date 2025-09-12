@@ -852,7 +852,14 @@
   footer .container {
     text-align: center;
     font-size: 12px;
+    padding-top: 24px;
   }
+
+  .f-inner{flex-direction: column; align-items: first baseline; gap: 12px;}
+
+  .f-social-list{gap: 4px;}
+  
+  .social-link {width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;}
 }
 
 /* Accessibility improvements for touch devices */

@@ -494,10 +494,6 @@ section{ padding-top: 0; padding-bottom: 0; }
 .s08-title{font-size: 14px; text-align: center; color: #807F7F;}
 .professor-list{margin-top: 20px;}
 
-/* Footer */
-footer{background-color: #DEDBD8; padding: 20px;}
-footer > div {font-size: 12px; font-weight: 600; color: #403E3C;}
-
 /* ===== Tech Panel CTA 상태 분리 (override) ===== */
 /* Tech 패널 내 기본은 회색(비활성), 활성 패널에서만 오렌지 */
 .tech-panel .more-btn{
@@ -561,7 +557,7 @@ footer > div {font-size: 12px; font-weight: 600; color: #403E3C;}
   direction: ltr;
   -webkit-font-smoothing: antialiased;
   -webkit-font-feature-settings: 'liga';
-          font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
 }
 
 /* JS 스크롤과 충돌 방지: 전역 스무스 비활성화 */
@@ -572,3 +568,27 @@ html.menu-locked, body.menu-locked {
   overflow: hidden !important;
   touch-action: none;
 }
+
+
+
+/* Footer */
+footer{background-color: #DEDBD8; padding: 20px;}
+footer > div {font-size: 12px; font-weight: 600; color: #807F7F;}
+
+.f-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.f-social-list{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.social-link{text-align: center;}
+.social-link a,
+.social-link a svg{width: 24px; height: 24px;}
+.social-link:nth-child(1) a {display: flex; align-items: center; justify-content: center;}
+.social-link:nth-child(1) a svg {width: 20px; height: 20px;}
