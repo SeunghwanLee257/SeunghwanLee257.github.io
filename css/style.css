@@ -321,7 +321,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .svc-b{ display:flex; flex-direction:column; gap:16px; align-items:flex-end; text-align:right; }
 /* Asap 유지 */
 .svc-title{ font-family:"Asap Condensed", sans-serif; font-weight:700; font-size: clamp(28px, 5vw, 56px); color:#000; margin:0; line-height:1.1; }
-.svc-desc{ font-size:16px; font-weight:500; color:#20201F; line-height:1.6; margin:0; max-width:600px; }
+.svc-desc{ font-size:16px; font-weight:500; color:#20201F; line-height:1.6; margin:0; max-width: 580px; }
 
 .svc-bot{ width:100%; }
 .svc-c{
@@ -448,7 +448,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .use-cases-section{ border-radius:24px; margin-bottom:200px; }
 .use-cases-title{
   background:#DEDBD8; color:#403E3C; padding:12px 24px; border-radius:40px;
-  font-family:"Asap Condensed", sans-serif; font-size:24px; font-weight:600; margin-bottom: 24px; display:inline-block;
+  font-family:"Asap Condensed", sans-serif; font-size:18px; font-weight:600; display:inline-block;
 }
 .use-case{ margin-bottom:32px; margin-left:4px; }
 .use-case-title{ font-size:16px; font-weight:700; color:#2c3e50; margin-bottom:8px; }

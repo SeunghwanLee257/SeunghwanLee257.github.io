@@ -17,7 +17,6 @@
   <meta property="og:site_name" content="waLLLnut">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://walllnut.com/">
-  <!-- 이미지 파일을 1200x630로 맞추는 걸 권장합니다 -->
   <meta property="og:image" content="https://walllnut.com/asset/OGP-1200_630.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -45,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
 
-  <!-- JS (defer) -->
+  <!-- JS -->
   <script src="./js/walllnut.bundle.js" defer></script>
   <script src="./js/bg-canvas.js" defer></script>
 </head>
@@ -153,7 +152,7 @@
           aria-labelledby="tab-a"
           aria-hidden="false"
         >
-          <!-- 비활성 헤더(기본 활성이라 숨김) -->
+          <!-- 비활성 헤더 -->
           <div class="inactive-head" aria-hidden="true">
             <img class="panel-thumb pt-1" src="./asset/tabs-inact-cha02.png" alt="" loading="lazy" />
             <div class="inactive-icon-tabs">
@@ -191,7 +190,7 @@
           </div>
         </article>
 
-        <!-- 자식 b (기본: 비활성 + 배경 #DEDBD8) -->
+        <!-- 자식 b -->
         <article
           class="tech-panel inactive"
           id="panel-b"
@@ -257,10 +256,10 @@
           <!-- 반드시 class="svc-right" -->
           <div class="svc-right">
             <div class="svc-b">
-            <h3 class="svc-title">Deterministic Confidential Layer</h3>
+            <h3 class="svc-title">Deterministic Confidential Coprocessor</h3>
             <p class="svc-desc">
               Normal transactions stay on-chain, while sensitive data/compute run
-              <strong>in a confidential FHE layer—keeping state public.</strong>
+              <strong>in a confidential FHE coprocessor—keeping state public.</strong>
             </p>
             </div>
             <div class="svc-bot">
@@ -281,11 +280,10 @@
       <article class="svc-item" aria-roledescription="slide">
         <div class="svc-top">
           <div class="svc-a sa02" aria-hidden="true">
-          <!-- <img src="./asset/left-s-02.png" alt=""> -->
           </div>
           <div class="svc-right">
             <div class="svc-b">
-            <h3 class="svc-title">Confidential Layer <br>for Solana</h3>
+            <h3 class="svc-title">Confidential Coprocessor <br>for Solana</h3>
             <p class="svc-desc">On Solana, we apply <strong>FHE to sensitive state and code,</strong>
               enabling private execution <strong>hidden from external observers.</strong></p>
             </div>
@@ -307,7 +305,6 @@
       <article class="svc-item" aria-roledescription="slide">
         <div class="svc-top">
           <div class="svc-a sa03" aria-hidden="true">
-          <!-- <img src="./asset/left-s-03.png" alt=""> -->
           </div>
           <div class="svc-right">
             <div class="svc-b">
@@ -333,7 +330,6 @@
       <article class="svc-item" aria-roledescription="slide">
         <div class="svc-top">
           <div class="svc-a sa04" aria-hidden="true">
-            <!-- <img src="./asset/left-s-04.png" alt=""> -->
           </div>
           <div class="svc-right">
             <div class="svc-b">
@@ -369,28 +365,28 @@
     </div>
     </section>
   
-    <!-- 섹션 05: Our Goal (큰 섹션 내부 타이틀 포함) -->
+    <!-- 섹션 05: Our Goal -->
     <section id="sec05" class="dot-bg" aria-labelledby="goal-label">
     <div class="goal-wrap">
       <div class="title-area">
-          <div class="frame-content">        <!-- 프레임 안쪽 안전영역 -->
+          <div class="frame-content">
             <h2 id="goal-label" class="section-label">03. Our Goal</h2>
             <div class="title-graphic">
               <img src="./asset/sec05-title.svg" alt="">
             </div>
             <div class="goal-caption">
               <p class="p">
-                Walnut’s Confidential Layer brings FHE, MPC, and threshold cryptography together so you can run verifiable on-chain compute
-                while your data stays sealed. Personal data is end-to-end encrypted and opens—briefly—only when the user gives the nod.
-                In short, “disclose only what’s needed, only when needed,” which compounds security and value over time. 
-                With no sensitive signals leaking, MEV bots lose their edge, markets stay fairer, and your assets get an extra lift.
-              </p>
+                waLLLnut's Confidential Coprocessor locks data with FHE, MPC, and
+                threshold cryptography while running verifiable on-chain compute.
+                It opens only what's needed, 
+                ith user consent—reducing MEV bots' edge and keeping 
+                markets fair.
             </div>
           </div>
       </div>
 
       
-      <!-- 드롭다운 카드들 추가 -->
+      <!-- 드롭다운 -->
       <div class="goal-dropdown-container">
         <div class="goal-dropdown-card">
           <button class="goal-dropdown-header" aria-expanded="false">
@@ -445,7 +441,7 @@
           </button>
           <div class="goal-dropdown-content">
             <p class="goal-dropdown-text">
-              Flagship Product — Deterministic Confidential Layer 🏁
+              Flagship Product — Deterministic Confidential Coprocessor 🏁
             </p>
             <p class="goal-dropdown-text">
               Executes blockchain state data on FHE16, enabling public verification. 🔍
@@ -482,7 +478,7 @@
           <li>State disclosure is propagated across the network via a Threshold Decryption protocol</li>
         </ul>
 
-        <div class="architecture-diagram"><img src="./asset/section06-bot-1.svg" alt=""></div>
+        <div class="architecture-diagram"><img src="./asset/sec06-img-user.svg" alt=""></div>
       </div>
 
       <!-- Use Cases Section -->

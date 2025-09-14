@@ -479,7 +479,7 @@
   }
 
   .svc-title {
-    font-size: 32px;
+    font-size: 32px !important;
     line-height: 1.2;
   }
 
@@ -521,9 +521,12 @@
     padding-top: 8px;
   }
 
+  .svc-bot{margin-top: 12px;}
+
   .svc-cont {
     justify-content: center;
-    margin-top: 24px;
+    position: relative;
+    top: -20px;
   }
 
   /* Section 05 - Goal */
@@ -642,12 +645,12 @@
     font-weight: 800;
     line-height: 1.1;
     color: #0F0F10;
-    margin-bottom: 30px;
     text-align: left;
     position: static;
     top: auto;
     min-width: auto;
     flex: none;
+    margin: 16px 0 32px 0;
   }
 
   .images-container {
@@ -1030,7 +1033,7 @@
   .property-title {
     font-size: 54px;
     position: relative;
-    top: -80px;
+    top: -110px;
   }
 
   .images-container {
