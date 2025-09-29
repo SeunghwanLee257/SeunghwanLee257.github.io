@@ -374,9 +374,9 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 
 .title-area{
-  position:relative; width: 130%;
-  height: 100vh;
-  /* height: clamp(500px, 100vw, 1020px); */
+  position:relative; 
+  width: 100%;
+  height: 694px;
   background: url('../asset/swection05-top-bg.svg') no-repeat center center;
   background-size:contain;
   overflow: visible; background-position:center center;
