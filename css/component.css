@@ -67,7 +67,9 @@ body.menu-open{ overflow: hidden; }
 .scroll-top-btn{
   position: fixed;
   right: 16px;
+  right: calc(16px + env(safe-area-inset-right, 0px));
   bottom: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   width: 56px;
   height: 56px;
   border: none;

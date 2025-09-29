@@ -829,7 +829,11 @@ function layoutHighlight(item){
     function dragEnd(){ if(!dragging) return; dragging=false; var w=viewportWidth(); var threshold=Math.min(140, Math.max(50, w*0.18)); track.style.transition='transform 320ms ease'; if(Math.abs(dx)>threshold){ if(dx<0) idx=clamp(idx+1,0,items.length-1); else idx=clamp(idx-1,0,items.length-1); } dx=0; applyTransform(); update(); track.style.willChange=''; }
 
     if('PointerEvent' in window){
-      track.addEventListener('pointerdown',function(e){ dragStart(e.clientX,e.clientY); track.setPointerCapture(e.pointerId); });
+      track.addEventListener('pointerdown',function(e){
+        if(typeof e.button==='number' && e.button!==0) return;
+        dragStart(e.clientX,e.clientY);
+        if(track.setPointerCapture) track.setPointerCapture(e.pointerId);
+      });
       window.addEventListener('pointermove',function(e){ if(dragging) dragMove(e.clientX,e.clientY,e); },{passive:false});
       window.addEventListener('pointerup',dragEnd);
       window.addEventListener('pointercancel',dragEnd);
@@ -837,7 +841,7 @@ function layoutHighlight(item){
       track.addEventListener('touchstart',function(e){ var t=e.touches[0]; dragStart(t.clientX,t.clientY); },{passive:true});
       track.addEventListener('touchmove',function(e){ var t=e.touches[0]; dragMove(t.clientX,t.clientY,e); },{passive:false});
       track.addEventListener('touchend',dragEnd);
-      track.addEventListener('mousedown',function(e){ dragStart(e.clientX,e.clientY); });
+      track.addEventListener('mousedown',function(e){ if(e.button && e.button!==0) return; dragStart(e.clientX,e.clientY); });
       window.addEventListener('mousemove',function(e){ if(dragging) dragMove(e.clientX,e.clientY,e); });
       window.addEventListener('mouseup',dragEnd);
     }
@@ -846,6 +850,178 @@ function layoutHighlight(item){
     update(); track._sliderInitialized=true;
   }
 
+
+/* ================= Use case slider ================= */
+function initUseCaseSlider(){
+  var section=$('.use-cases-section');
+  if(!section) return;
+
+  var slider=$('.use-case-slider',section);
+  var viewport=$('.use-case-window',slider);
+  var track=$('.use-case-track',slider);
+  var items=$$('.use-case-item',track);
+  if(!slider || !viewport || !track || !items.length || track._sliderInitialized) return;
+  if(items.length<=1){ track.style.transform='translateX(0px)'; return; }
+
+    var prevBtn=$('#usecase-prev',section);
+    var nextBtn=$('#usecase-next',section);
+
+  var page=0, dx=0, dragging=false, startX=0, startY=0;
+  var step=0, perView=1, pageCount=Math.max(1, items.length);
+  var maxOffset=0;
+
+  items.forEach(function(item,i){
+    item.setAttribute('role','group');
+    item.setAttribute('aria-roledescription','slide');
+    item.setAttribute('aria-label',(i+1)+' / '+items.length);
+  });
+
+  function viewportWidth(){
+    return (viewport && viewport.clientWidth) || window.innerWidth || 1;
+  }
+
+  function parseGap(style){
+    if(!style) return 0;
+    var g=style.columnGap || style.gap || style.rowGap || '0';
+    var n=parseFloat(g);
+    return Number.isFinite(n)? n : 0;
+  }
+
+  function computeMetrics(){
+    var first=items[0];
+    var style=track? window.getComputedStyle(track):null;
+    var gap=parseGap(style);
+    var width=first? first.getBoundingClientRect().width:0;
+    var newStep=width>0? width+gap : 0;
+    var vw=viewportWidth();
+    var newPerView=newStep>0? Math.max(1, Math.floor((vw+gap)/newStep)) : 1;
+    var newPageCount=Math.max(1, Math.ceil(items.length / newPerView));
+    var newMaxOffset=Math.max(0, (track.scrollWidth||0) - vw);
+    var layoutChanged=(newPerView!==perView) || (Math.abs(newStep-step)>0.5) || (newPageCount!==pageCount) || (Math.abs(newMaxOffset-maxOffset)>0.5);
+    perView=newPerView;
+    step=newStep>0? newStep : width || vw;
+    pageCount=newPageCount;
+    maxOffset=newMaxOffset;
+    if(page>pageCount-1) page=pageCount-1;
+    return layoutChanged;
+  }
+
+  function firstVisibleIndex(){
+    var theoretical=page*perView;
+    var maxFirst=Math.max(0, items.length-perView);
+    return Math.min(theoretical, maxFirst);
+  }
+
+  function baseOffset(){
+    var offset=firstVisibleIndex()*step;
+    return Math.min(offset, maxOffset);
+  }
+
+  function applyTransform(){
+    var offset=-baseOffset() + dx;
+    track.style.transform='translateX('+ offset +'px)';
+  }
+
+  function setActiveStates(){
+    var start=firstVisibleIndex();
+    var end=Math.min(items.length-1, start+perView-1);
+    items.forEach(function(item,i){
+      var active=i>=start && i<=end;
+      item.setAttribute('aria-hidden',active?'false':'true');
+      var card=$('.use-case',item);
+      if(card) card.classList.toggle('is-active',active);
+    });
+      if(prevBtn) prevBtn.disabled=(page===0);
+      if(nextBtn) nextBtn.disabled=(page>=pageCount-1);
+  }
+
+  function update(){
+    computeMetrics();
+    track.style.transition='transform 320ms ease';
+    dx=0;
+    applyTransform();
+    setActiveStates();
+  }
+
+  function go(n){
+    var target=clamp(n,0,pageCount-1);
+    if(target===page){ update(); return; }
+    page=target;
+    update();
+  }
+
+  function dragStart(x,y){
+    dragging=true; startX=x; startY=y; dx=0;
+    track.style.transition='none';
+    track.style.willChange='transform';
+  }
+
+  function dragMove(x,y,e){
+    if(!dragging) return;
+    var moveX=x-startX;
+    var moveY=Math.abs(y-startY);
+    if(Math.abs(moveX)>moveY && e && e.cancelable) e.preventDefault();
+    var atStart=(page===0 && moveX>0);
+    var atEnd=(page===pageCount-1 && moveX<0);
+    dx=(atStart||atEnd)? moveX*0.35 : moveX;
+    applyTransform();
+  }
+
+  function dragEnd(){
+    if(!dragging) return;
+    dragging=false;
+    var stepForPage=step*Math.max(1,perView);
+    var threshold=Math.min(Math.max(80, stepForPage*0.25), 320);
+    if(Math.abs(dx)>threshold){
+      page=clamp(page+(dx<0?1:-1),0,pageCount-1);
+    }
+    dx=0;
+    track.style.willChange='';
+    update();
+  }
+
+    if(prevBtn && !prevBtn._eventsBound){
+      prevBtn.addEventListener('click',function(e){ e.preventDefault(); go(page-1); });
+      prevBtn._eventsBound=true;
+    }
+    if(nextBtn && !nextBtn._eventsBound){
+      nextBtn.addEventListener('click',function(e){ e.preventDefault(); go(page+1); });
+      nextBtn._eventsBound=true;
+    }
+
+  track.style.touchAction='pan-y';
+
+  if('PointerEvent' in window){
+    track.addEventListener('pointerdown',function(e){
+      if(typeof e.button==='number' && e.button!==0) return;
+      dragStart(e.clientX,e.clientY);
+      if(track.setPointerCapture) track.setPointerCapture(e.pointerId);
+    });
+    window.addEventListener('pointermove',function(e){ if(dragging) dragMove(e.clientX,e.clientY,e); },{passive:false});
+    window.addEventListener('pointerup',dragEnd);
+    window.addEventListener('pointercancel',dragEnd);
+  }else{
+    track.addEventListener('touchstart',function(e){ var t=e.touches[0]; dragStart(t.clientX,t.clientY); },{passive:true});
+    track.addEventListener('touchmove',function(e){ var t=e.touches[0]; dragMove(t.clientX,t.clientY,e); },{passive:false});
+    track.addEventListener('touchend',dragEnd);
+    track.addEventListener('mousedown',function(e){ if(e.button && e.button!==0) return; dragStart(e.clientX,e.clientY); });
+    window.addEventListener('mousemove',function(e){ if(dragging) dragMove(e.clientX,e.clientY,e); });
+    window.addEventListener('mouseup',dragEnd);
+  }
+
+  window.addEventListener('resize',function(){
+    var prevTransition=track.style.transition;
+    track.style.transition='none';
+    dx=0;
+    computeMetrics();
+    applyTransform();
+    setActiveStates();
+    requestAnimationFrame(function(){ track.style.transition=prevTransition||'transform 320ms ease'; });
+  },{passive:true});
+
+  track._sliderInitialized=true;
+  update();
+}
   /* ================= Goal accordion ================= */
   function initGoalAccordion(){
     $$('.goal-dropdown-card').forEach(function(card){
@@ -955,6 +1131,7 @@ function layoutHighlight(item){
     initCountdown();
     initTechPanels();
     initServiceSlider();
+    initUseCaseSlider();
 
     // 하이라이트 애니메이션
     initHighlightAnim();

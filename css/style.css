@@ -346,14 +346,20 @@ section{ padding-top: 0; padding-bottom: 0; }
 .svc-c-ref{ font-size:14px; font-weight:500; color:#807F7F; margin:0; }
 
 /* Controls */
-.svc-cont{ margin-top:32px; display:flex; justify-content:flex-end; gap:8px; }
-.svc-btn{
+.slider-controls{ display:flex; align-items:center; gap:8px; }
+.slider-btn{
   width:42px; height:42px; display:inline-flex; align-items:center; justify-content:center;
-  background-color:#FAFAF9; border-radius:50%; border:none; color:#807F7F;
-  cursor:pointer; transition: transform .12s ease, box-shadow .12s ease;
+  background-color:#FAFAF9; border-radius:50%; border:none;
+  color:#807F7F; cursor:pointer;
+  transition: transform .12s ease, background-color .12s ease, color .12s ease, border-color .12s ease;
 }
-.svc-btn:is(:hover,:focus-visible){ transform: translateY(-1px); background-color:#F2F2F2; }
-.svc-btn.is-gray{ color:#B6B4B1; }
+.slider-btn .material-icons{ font-size:22px; }
+.slider-btn:is(:hover,:focus-visible){ transform: translateY(-1px); background-color:#F2F2F2; color:#403E3C; border-color:rgba(64,62,60,0.28); }
+.slider-btn:disabled{ opacity:.45; cursor:default; transform:none; background-color:#F5F4F3; border-color:rgba(64,62,60,0.12); color:#B6B4B1; }
+.slider-btn.is-gray{ color:#B6B4B1; }
+.svc-cont{ margin-top:32px; justify-content:flex-end; }
+.svc-cont, .use-case-controls{ display:flex; }
+.svc-btn{}
 
 /* ========== Section 05: Our Goal ========== */
 /* 점 배경 */
@@ -444,31 +450,68 @@ section{ padding-top: 0; padding-bottom: 0; }
 .architecture-diagram{ position:relative; width:100%; background:white; border-radius:16px; padding:30px; }
 .architecture-diagram > img{ width:100%; }
 
-• Use Cases */
+/* Use Cases */
 .use-cases-section{ border-radius:24px; margin-bottom:200px; }
+.use-cases-header{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .use-cases-title{
   background:#DEDBD8; color:#403E3C; padding:12px 24px; border-radius:40px;
   font-family:"Asap Condensed", sans-serif; font-size:18px; font-weight:600; display:inline-block;
 }
-.use-case{ margin-bottom:32px; margin-left:4px; }
-.use-case-title{ font-size:16px; font-weight:700; color:#2c3e50; margin-bottom:8px; }
-.use-case-desc{ font-size:14px; color:#666; line-height:1.5; }
+.use-case-controls{ justify-content:flex-end; }
+.use-case-slider{ margin-top:20px; }
+.use-case-window{ overflow:hidden; width:100%; }
+.use-case-track{ list-style:none; padding:0; margin:0; display:flex; gap:12px; align-items:stretch; transition:transform 320ms ease; }
+.use-case-item{ flex:0 0 calc(50% - 6px); min-width:calc(50% - 6px); display:flex; }
+.use-case{ flex:1; display:flex; flex-direction:column; gap:24px; background:#F2F2F2; border-radius:32px;
+  padding:36px 30px; box-sizing:border-box; transition:transform 200ms ease, box-shadow 200ms ease; box-shadow:none;
+  min-height:500px;
+}
+.use-case.is-active{ outline:none; }
+.use-case:focus-within{ box-shadow:0 0 0 3px rgba(255,152,0,0.35); }
+.use-case-image{ width:100%; height:240px; border-radius:28px; object-fit:cover; background:#e6e6e6; }
+.use-case-titleAndDesc{ display:flex; flex-direction:column; gap:12px; flex:1; }
+.use-case-title{ font-size:22px; font-weight:700; color:#2c3e50; line-height:1.3; }
+.use-case-desc{ font-size:16px; color:#555; line-height:1.6; overflow-wrap:anywhere; }
 
 /* Roadmap */
 .roadmap-section{ text-align:center; }
 .roadmap-title{ margin-top: 200px; margin-bottom:60px; }
 .roadmap-timeline{ display:flex; flex-direction:column; gap:40px; align-items:center; }
-.roadmap-item{ padding:30px 40px; max-width:500px; position:relative; }
+.roadmap-item{ padding:36px 48px; max-width:540px; position:relative; }
 /* Asap 유지 */
 .roadmap-date{
-  background:#ff9800; color:#0F0F10; padding:12px 20px; border-radius:50px;
-  font-family:"Asap Condensed", sans-serif; font-size:24px; font-weight:600; margin-bottom:16px; display:inline-block;
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:4px; color:#0F0F10; font-family:"Asap Condensed", sans-serif; font-size:28px; font-weight:600;
+  margin-bottom:20px; letter-spacing:0.4px;
 }
-.roadmap-date.ongoing:after{ content:'• Ongoing'; margin-left:8px; opacity:.8; }
-.roadmap-content{ font-size:16px; font-weight:600; color:#2c3e50; }
+.roadmap-date .date,
+.roadmap-date .onDec{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:14px 28px; border-radius:999px; background:#DEDBD8; color:#0F0F10;
+}
+.roadmap-date .onDec{ background:#ff9800; }
+.roadmap-date .status{
+  position:absolute; top:50%; left:100%; margin-left:8px;
+  font-size:14px; font-weight:600; color:#807F7F;
+  padding-left:14px;
+  transform: translateY(-50%);
+  animation: roadmapStatusFloat 2.4s ease-in-out infinite;
+}
+.roadmap-date .status::before{
+  content:''; position:absolute; left:0; top:50%; transform:translateY(-50%) rotate(-180deg);
+  border-top:4px solid transparent; border-bottom:4px solid transparent;
+  border-left:6px solid currentColor;
+}
+.roadmap-content{ font-size:18px; font-weight:600; color:#2c3e50; line-height:1.4; }
+.roadmap-item:nth-of-type(2) .roadmap-content{ color:#918f8d; }
 .roadmap-item:not(:last-child):after{
   content:''; position:absolute; bottom:-40px; left:50%; transform: translateX(-50%);
   width:2px; height:40px; background: linear-gradient(to bottom, #ddd, transparent);
+}
+@keyframes roadmapStatusFloat{
+  0%,100%{ transform:translateY(-50%); }
+  50%{ transform:translateY(calc(-50% - 4px)); }
 }
 
 /* ========== Section 07: Team ========== */

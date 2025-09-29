@@ -380,7 +380,7 @@
   .arrow-down{transform: rotate(90deg);}
   .arrow-up{transform: rotate(90deg); padding-left: 12px;}
 
-  .panel-thumb.pt-1{top: -20px; left: -22px;}
+  .panel-thumb.pt-1{top: -20px; left: -20px;}
   .panel-thumb.pt-2{bottom: -20px; right: -20px;}
   .inactive-head .panel-thumb {
     object-fit: cover;
@@ -738,60 +738,76 @@
     margin-bottom: 80px;
   }
 
-  .use-cases-title {
-    background: #DEDBD8;
-    color: #403E3C;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-family: "Asap Condensed", sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 0;
-    display: inline-block;
+  .use-cases-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .use-case-controls {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .use-case-controls .slider-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .use-case-controls .slider-btn .material-icons {
+    font-size: 22px;
+  }
+
+  .use-case-slider {
+    margin-top: 16px;
+  }
+
+  .use-case-window {
+    overflow: visible;
+  }
+
+  .use-case-track {
+    height: auto;
+  }
+
+  .use-case-item {
+    min-width: 100%;
+    flex: 0 0 100%;
   }
 
   .use-case {
-    margin-bottom: 24px;
+    padding: 28px 24px;
+    border-radius: 28px;
+    min-height: auto;
+  }
+
+  .use-case-image {
+    height: 260px;
+    border-radius: 20px;
   }
 
   .use-case-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 8px;
-    line-height: 1.3;
+    font-size: 20px;
   }
 
   .use-case-desc {
     font-size: 14px;
-    color: #666;
-    line-height: 1.5;
-    margin: 0;
+    line-height: 1.6;
   }
+
+  
 
   .roadmap-title {
     margin-top: 80px;
     margin-bottom: 40px;
-    width: 100%;
+    width: 70%;
   }
 
   .roadmap-item {
     padding: 20px;
     max-width: 100%;
   }
-
-  .roadmap-date {
-    font-size: 16px;
-    padding: 8px 16px;
-    border-radius: 20px;
-    background: #ff9800;
-    color: #0F0F10;
-    font-family: "Asap Condensed", sans-serif;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 12px;
-  }
-
   .roadmap-content {
     font-size: 14px;
     font-weight: 600;
@@ -999,27 +1015,28 @@
     padding: 120px 0;
   }
 
-  .title-area {
-    width: 80%;
-    height: 720px;
-  }
-
   .goal-wrap {
     padding: 60px 24px;
   }
 
   .title-area {
-    width: 120%;
-    height: 600px;
-    background-size: 800px auto;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    min-height: 640px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 
   .frame-content {
     top: 40px;
-    right: 40px;
+    right: clamp(32px, 6vw, 56px);
     bottom: 40px;
-    left: 40px;
+    left: clamp(32px, 6vw, 56px);
   }
+
+  .goal-dropdown-container{position: relative; top: -60px;}
 
   /* Section 06 */
   #sec06 {
@@ -1028,6 +1045,31 @@
 
   .property-content {
     gap: 40px;
+  }
+
+  /* Use Cases slider */
+  .use-case-track {
+    height: auto;
+    align-items: stretch;
+  }
+
+  .use-case {
+    padding: 32px 26px;
+    min-height: 480px;
+    height: auto;
+  }
+
+  .use-case-image {
+    height: 210px;
+  }
+
+  .use-case-title {
+    font-size: 20px;
+  }
+
+  .use-case-desc {
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .property-title {
@@ -1167,12 +1209,12 @@
 
 /* Service Slider Navigation */
 @media screen and (max-width: 767px) {
-  .svc-btn {
+  .slider-controls .slider-btn {
     width: 36px;
     height: 36px;
   }
-  
-  .svc-btn .material-icons {
+
+  .slider-controls .slider-btn .material-icons {
     font-size: 20px;
   }
 }
@@ -1204,7 +1246,7 @@
 
 /* Accessibility improvements for touch devices */
 @media (hover: none) and (pointer: coarse) {
-  .svc-btn,
+  .slider-btn,
   .more-btn,
   .goal-dropdown-header {
     min-height: 44px;

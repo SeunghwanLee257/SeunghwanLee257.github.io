@@ -357,11 +357,11 @@
 
 
     <!-- 고정 컨트롤러(트랙 밖) -->
-    <div class="svc-cont">
-      <button class="svc-btn is-gray" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
-      <button class="svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
-      <button class="svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
-      <button class="svc-btn is-gray" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
+    <div class="slider-controls svc-cont" role="group" aria-label="Service slider controls">
+      <button class="slider-btn is-gray svc-btn" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
+      <button class="slider-btn svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
+      <button class="slider-btn svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
+      <button class="slider-btn is-gray svc-btn" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
     </div>
     </section>
   
@@ -477,32 +477,63 @@
           <li>Any state change can be verified by all network participants</li>
           <li>State disclosure is propagated across the network via a Threshold Decryption protocol</li>
         </ul>
-
-        <div class="architecture-diagram"><img src="./asset/sec06-img-user.svg" alt=""></div>
       </div>
 
       <!-- Use Cases Section -->
-      <div class="use-cases-section">
-          <div class="use-cases-title">Use Cases</div>
-            
-          <div class="use-case">
-            <h4 class="use-case-title">Protecting DeFi transaction data and preventing MEV</h4>
-            <p class="use-case-desc">Keep your crypto trades private so others can't peek at your orders.<br>Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</p>
+      <div class="use-cases-section" aria-labelledby="use-cases-label">
+          <div class="use-cases-header">
+            <div id="use-cases-label" class="use-cases-title">Use Cases</div>
+            <div class="slider-controls use-case-controls" role="group" aria-label="Use case slider controls">
+              <button class="slider-btn" id="usecase-prev" type="button" aria-label="Previous use case">
+                <span class="material-icons" aria-hidden="true">chevron_left</span>
+              </button>
+              <button class="slider-btn" id="usecase-next" type="button" aria-label="Next use case">
+                <span class="material-icons" aria-hidden="true">chevron_right</span>
+              </button>
+            </div>
           </div>
 
-          <div class="use-case">
-            <h4 class="use-case-title">On-chain voting (selective anonymity + public verifiability)</h4>
-            <p class="use-case-desc">Vote on the blockchain while your identity and choice stay private.<br>Anyone can still verify the overall results are real.</p>
-          </div>
-
-          <div class="use-case">
-            <h4 class="use-case-title">Data marketplaces (perform computations without revealing raw data)</h4>
-            <p class="use-case-desc">Buy and sell insights without handing over your raw data.<br>The marketplace runs computations on protected data, so the originals stay private.</p>
-          </div>
-
-          <div class="use-case">
-            <h4 class="use-case-title">Privacy-preserving messaging/SNS</h4>
-            <p class="use-case-desc">Chat and share on social without giving up your privacy.<br>Your content stays encrypted, and you decide who sees what.</p>
+          <div class="use-case-slider" role="region" aria-labelledby="use-cases-label" aria-roledescription="carousel">
+            <div class="use-case-window">
+              <ul class="use-case-track" aria-live="polite">
+                <li class="use-case-item">
+                  <div class="use-case">
+                    <img src="./asset/usecase-messaging.png" alt="" class="use-case-image">
+                    <div class="use-case-titleAndDesc">
+                      <div class="use-case-title">Privacy-preserving messaging/SNS</div>
+                      <div class="use-case-desc">Chat and share on social without giving up your privacy.<br>Your content stays encrypted, and you decide who sees what.</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="use-case-item">
+                  <div class="use-case">
+                    <img src="./asset/usecase-voting.png" alt="" class="use-case-image">
+                    <div class="use-case-titleAndDesc">
+                      <div class="use-case-title">On-chain voting (selective anonymity + public verifiability)</div>
+                      <div class="use-case-desc">Vote on the blockchain while your identity and choice stay private.<br>Anyone can still verify the overall results are real.</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="use-case-item">
+                  <div class="use-case">
+                    <img src="./asset/usecase-defi.png" alt="" class="use-case-image">
+                    <div class="use-case-titleAndDesc">
+                      <div class="use-case-title">Protecting DeFi transaction data and preventing MEV</div>
+                      <div class="use-case-desc">Keep your crypto trades private so others can't peek at your orders.<br>Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="use-case-item">
+                  <div class="use-case">
+                    <img src="./asset/usecase-market.png" alt="" class="use-case-image">
+                    <div class="use-case-titleAndDesc">
+                      <div class="use-case-title">Data marketplaces (perform computations without revealing raw data)</div>
+                      <div class="use-case-desc">Buy and sell insights without handing over your raw data.<br>The marketplace runs computations on protected data, so the originals stay private.</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
       </div>
 
@@ -512,13 +543,16 @@
             
         <div class="roadmap-timeline">
           <div class="roadmap-item">
-            <div class="roadmap-date ongoing">Dec 2026</div>
-            <div class="roadmap-content">Launch of SVM-based Confidential<br>Coprocessor module</div>
+            <div class="roadmap-date ongoing">
+              <span class="onDec">(~Dec. 2026)</span>
+              <span class="status">Ongoing</span>
+            </div>
+            <div class="roadmap-content">Launch of SVM-based Confidential Layer module</div>
           </div>
                 
           <div class="roadmap-item">
-            <div class="roadmap-date">Dec 2027</div>
-            <div class="roadmap-content">Launch of EVM-based Confidential<br>Coprocessor module</div>
+            <div class="roadmap-date"><span class="date">(~Dec. 2027)</span></div>
+            <div class="roadmap-content">Launch of EVM-based Confidential Layer module</div>
           </div>
         </div>
       </div>
