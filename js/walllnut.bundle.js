@@ -3,6 +3,7 @@
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
 
+ 
 (function () {
   'use strict';
 
@@ -24,6 +25,8 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.exp': 'Experience',
       'nav.team': 'Team',
       'nav.advisors': 'Advisors',
+      'hero.headline': 'Confidential Coprocessor for Fair, Verifiable Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
+      'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what’s needed is revealed —<br> privacy preserved, fairness ensured.',
       'label.days': 'Days',
       'label.hours': 'Hours',
       'label.seconds': 'Seconds',
@@ -148,6 +151,8 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.exp': '경험',
       'nav.team': '팀',
       'nav.advisors': '자문',
+      'hero.headline': '공정하고 검증 가능한 시장을 위한 보안 코프로세서<br>FHE16 + MPC + 분산 복호화 기술 — 성능과 함께 확장되는 프라이버시.',
+      'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
       'label.days': '일',
       'label.hours': '시간',
       'label.seconds': '초',
@@ -413,11 +418,21 @@ function layoutHighlight(item){
   box.style.height = Math.round(height)             + 'px';
 }
 
+  function requestHighlightRelayout(){
+    var fn=document._walllnutLayoutHighlight;
+    if(typeof fn==='function'){
+      requestAnimationFrame(fn);
+    }
+  }
+
   function initHighlightAnim(){
     var items = Array.prototype.slice.call(document.querySelectorAll('.g-item-ex'));
     if (!items.length) return;
 
     function layoutAll(){ items.forEach(layoutHighlight); }
+    document._walllnutLayoutHighlight = function(){
+      layoutAll();
+    };
     layoutAll();
     window.addEventListener('resize', layoutAll, { passive:true });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutAll);
@@ -596,6 +611,16 @@ function layoutHighlight(item){
     saveLang(lang); applyI18n(lang);
     var btnText=$('#langBtnText'); if(btnText) btnText.textContent=(LANG_CODES[lang]||lang);
     var menu=$('#langMenu'); if(menu){ $$('#langMenu [role="option"]').forEach(function(li){ li.setAttribute('aria-selected', li.getAttribute('data-lang')===lang?'true':'false'); }); }
+    syncLangToggleUI(lang);
+    requestHighlightRelayout();
+  }
+  function syncLangToggleUI(lang){
+    $$('.lang-toggle-btn').forEach(function(btn){
+      var targetLang=btn.getAttribute('data-lang');
+      var isActive=targetLang===lang;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', isActive?'true':'false');
+    });
   }
 
   /* ================= Smooth Scroll ================= */
@@ -726,6 +751,199 @@ function layoutHighlight(item){
 
     window.addEventListener('hashchange',function(){ if(location.hash && document.querySelector(location.hash)) smoothScrollTo(location.hash); });
   }
+
+  /* ================= Header nav highlight only ================= */
+function initNavHighlightOnly() {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'))
+    .map(a => ({
+      link: a,
+      target: document.querySelector(a.getAttribute('href'))
+    }))
+    .filter(e => e.target);
+
+  if (!links.length) return;
+
+  function setActive(link) {
+    links.forEach(e => {
+      const isActive = e.link === link;
+      e.link.classList.toggle('is-active', isActive);
+    });
+  }
+
+  function onScroll() {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const offset = (document.querySelector('.header')?.offsetHeight || 0) + 60;
+    let current = null;
+
+    for (const { link, target } of links) {
+      const top = target.offsetTop - offset;
+      if (scrollY >= top) current = link;
+      else break;
+    }
+
+    setActive(current);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+}
+
+
+  function initNavActiveLinks(){
+    var nav=document.querySelector('.nav'); if(!nav) return;
+    var links=Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+    var pairs=links.map(function(link){
+      var id=link.getAttribute('href');
+      if(!id || id==='#') return null;
+      var section=document.querySelector(id);
+      return section? {link:link, section:section}:null;
+    }).filter(Boolean);
+    if(!pairs.length) return;
+
+    function setActive(link){
+      links.forEach(function(a){ var isActive=a===link; a.classList.toggle('is-active',isActive); a.classList.toggle('active',isActive); if(isActive) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+    }
+
+    function resolve(){
+      var scrollPos=window.scrollY||document.documentElement.scrollTop||0;
+      var header=document.querySelector('.header');
+      var offset=(header? header.offsetHeight:0)+16;
+      var current=null;
+      pairs.forEach(function(pair){
+        var top=pair.section.getBoundingClientRect().top + scrollPos;
+        if(scrollPos + offset >= top) current=pair.link;
+      });
+      if(current) setActive(current);
+      else setActive(null);
+    }
+
+    var ticking=false;
+    function onScroll(){
+      if(ticking) return;
+      ticking=true;
+      requestAnimationFrame(function(){ resolve(); ticking=false; });
+    }
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', function(){ resolve(); }, {passive:true});
+    resolve();
+  }
+
+  function initHeaderScrollState(){
+    var header=document.querySelector('.header');
+    if(!header) return;
+    function update(){
+      if(window.scrollY>2) header.classList.add('header--scrolled');
+      else header.classList.remove('header--scrolled');
+    }
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize', update, {passive:true});
+    update();
+  }
+
+  function initHeaderAutoHide() {
+  const MOBILE_MAX = 768;
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (!isMobile) {
+    console.log('💻 Desktop mode — auto-hide disabled');
+    return;
+  }
+
+  const header = document.querySelector('.header');
+  const langBox = document.querySelector('#langDropdown');
+  const scrollRoot = getScrollRoot();
+  if (!header || !langBox || !scrollRoot) return;
+
+  console.log('📱 Mobile scroll detection active on:', scrollRoot === window ? 'window' : scrollRoot.tagName);
+
+  let lastY = getScrollY();
+  let lastChangeY = lastY;
+  let lastDirection = null; // 👈 위/아래 스크롤 방향 저장
+  let isCompact = false;
+  let ticking = false;
+  let lastActionTime = 0; // 👈 너무 자주 토글 방지용 timestamp
+
+  const DEAD_ZONE = 100;       // 상단에서는 항상 보이게
+  const SHOW_THRESHOLD = 100;   // 위로 40px 이상 → 보이기
+  const HIDE_THRESHOLD = 100;  // 아래로 120px 이상 → 숨기기
+  const MIN_DELAY = 200;       // 👈 최소 250ms 간격 두기 (번쩍 방지)
+
+  function setCompact(compact) {
+    if (isCompact === compact) return; // 👈 같은 상태면 무시
+    const now = performance.now();
+    if (now - lastActionTime < MIN_DELAY) return; // 👈 너무 자주 변경 방지
+
+    isCompact = compact;
+    lastActionTime = now;
+    header.classList.toggle('is-compact', compact);
+    langBox.classList.toggle('is-hidden', compact);
+    langBox.classList.toggle('is-visible', !compact);
+    console.log('📍 header 상태:', compact ? '숨김' : '보임');
+  }
+
+  function evaluate() {
+    const y = getScrollY();
+    const dy = y - lastY;
+    const dist = Math.abs(y - lastChangeY);
+    const direction = dy > 0 ? 'down' : dy < 0 ? 'up' : null;
+
+    // DEAD_ZONE → 항상 보이기
+    if (y < DEAD_ZONE) {
+      setCompact(false);
+      lastDirection = null;
+      lastChangeY = y;
+      lastY = y;
+      ticking = false;
+      return;
+    }
+
+    // 👇 스크롤 방향이 바뀌었을 때만 동작
+    if (direction && direction !== lastDirection) {
+      lastDirection = direction;
+      lastChangeY = y;
+    }
+
+    // 아래로 충분히 스크롤 → 숨기기
+    if (direction === 'down' && dist > HIDE_THRESHOLD && !isCompact) {
+      setCompact(true);
+      lastChangeY = y;
+    }
+
+    // 위로 충분히 스크롤 → 보이기
+    if (direction === 'up' && dist > SHOW_THRESHOLD && isCompact) {
+      setCompact(false);
+      lastChangeY = y;
+    }
+
+    lastY = y;
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(evaluate);
+    }
+  }
+
+  scrollRoot.addEventListener('scroll', onScroll, { passive: true });
+
+  window.addEventListener('resize', () => {
+    if (!window.matchMedia('(max-width: 768px)').matches) {
+      scrollRoot.removeEventListener('scroll', onScroll);
+      header.classList.remove('is-compact');
+      langBox.classList.remove('is-hidden');
+      langBox.classList.add('is-visible');
+      console.log('💻 Switched to desktop — scroll detection off');
+    }
+  });
+}
+
+
 
   /* ================= Mobile menu ================= */
   function initMobileMenu(){
@@ -1042,41 +1260,6 @@ function initUseCaseSlider(){
     });
   }
 
-  /* ================= Countdown ================= */
-  function initCountdown(){
-    var wrap=$('.count-wrap'); if(!wrap) return;
-    var elDays=$('#days',wrap), elHours=$('#hours',wrap), elSecs=$('#seconds',wrap); if(!elDays||!elHours||!elSecs) return;
-
-    var paused={days:false,hours:false,seconds:false};
-    $$('.time-box',wrap).forEach(function(box){ var unit=box.getAttribute('data-unit'); box.addEventListener('mouseenter',function(){ if(unit) paused[unit]=true; }); box.addEventListener('mouseleave',function(){ if(unit) paused[unit]=false; }); });
-
-    var deadlineStr=wrap.getAttribute('data-deadline'); var mode=deadlineStr?'deadline':'manual';
-    var d=parseInt((elDays.textContent||'').replace(/\D+/g,''),10)||0;
-    var h=parseInt((elHours.textContent||'').replace(/\D+/g,''),10)||0;
-    var s=parseInt((elSecs.textContent||'').replace(/\D+/g,''),10)||0;
-
-    function render(){ if(!paused.days) elDays.textContent=String(d); if(!paused.hours) elHours.textContent=String(h).padStart(2,'0'); if(!paused.seconds) elSecs.textContent=String(s).padStart(2,'0'); }
-    function tickManual(){
-      if(d<=0 && h<=0 && s<=0){ clearInterval(timerId); wrap.setAttribute('aria-label','countdown finished'); return; }
-      if(paused.seconds) return;
-      s-=1;
-      if(s<0){ if(paused.hours){ s=0; return; } s=59; h-=1; if(h<0){ if(paused.days){ h=0; return; } h=23; d=Math.max(0,d-1); } }
-      render();
-    }
-    function startDeadline(){
-      var deadline=new Date(deadlineStr).getTime();
-      function rafLoop(){
-        var now=Date.now(); var remain=Math.max(0,Math.floor((deadline-now)/1000));
-        var nd=Math.floor(remain/(24*3600)); remain-=nd*24*3600; var nh=Math.floor(remain/3600); remain-=nh*3600; var ns=remain;
-        if(!paused.days) d=nd; if(!paused.hours) h=nh; if(!paused.seconds) s=ns; render();
-        if(deadline>now) requestAnimationFrame(rafLoop); else wrap.setAttribute('aria-label','countdown finished');
-      }
-      rafLoop();
-    }
-    render();
-    var timerId=null; if(mode==='deadline') startDeadline(); else timerId=setInterval(tickManual,1000);
-  }
-
   /* ================= 초기화 ================= */
   function init(){
     // i18n 제외 마크
@@ -1124,28 +1307,88 @@ function initUseCaseSlider(){
       langMenu.addEventListener('click',function(e){ e.stopPropagation(); var li=e.target.closest('[role="option"]'); if(li) chooseLang(li); });
     }
 
-    // 공통 인터랙션
-    initScrollTopButton();
-    initNavigation();
-    initGoalAccordion();
-    initCountdown();
-    initTechPanels();
-    initServiceSlider();
-    initUseCaseSlider();
+    $$('.lang-toggle-btn').forEach(function(btn){
+      if(btn._langBound) return;
+      btn.addEventListener('click',function(e){
+        e.preventDefault();
+        var lang=btn.getAttribute('data-lang');
+        if(lang) setLanguage(lang);
+      });
+      btn.addEventListener('keydown',function(e){
+        if(e.key==='Enter' || e.key===' '){
+          e.preventDefault();
+          var lang=btn.getAttribute('data-lang');
+          if(lang) setLanguage(lang);
+        }
+      });
+      btn._langBound=true;
+    });
 
-    // 하이라이트 애니메이션
-    initHighlightAnim();
+    var ecosystemBtn=$('.ecosystem-btn');
+    if(ecosystemBtn && !ecosystemBtn._comingSoonBound){
+      var showSoon=function(e){
+        e.preventDefault();
+        if(typeof window.alert==='function') window.alert('Coming soon!');
+        else console.log('Coming soon!');
+      };
+      ecosystemBtn.addEventListener('click',showSoon);
+      ecosystemBtn.addEventListener('keydown',function(e){
+        if(e.key==='Enter' || e.key===' '){
+          showSoon(e);
+        }
+      });
+      ecosystemBtn._comingSoonBound=true;
+    }
 
-    if (window.innerWidth<=767) initMobileMenu();
+    var versionBtn=$('#versionBtn');
+    var versionMenu=$('#versionMenu');
+    if(versionMenu){
+      versionMenu.hidden=true;
+      versionMenu.style.display='none';
+    }
+    if(versionBtn && !versionBtn._comingSoonBound){
+      var showVersionSoon=function(e){
+        e.preventDefault();
+        if(versionMenu){
+          versionMenu.hidden=true;
+          versionMenu.style.display='none';
+          versionBtn.setAttribute('aria-expanded','false');
+        }
+        if(typeof window.alert==='function') window.alert('Coming soon!');
+        else console.log('Coming soon!');
+      };
+      versionBtn.addEventListener('click',showVersionSoon);
+      versionBtn.addEventListener('keydown',function(e){
+        if(e.key==='Enter' || e.key===' '){
+          showVersionSoon(e);
+        }
+      });
+      versionBtn._comingSoonBound=true;
+    }
+
+// 공통 인터랙션
+initScrollTopButton();
+initHeaderScrollState();
+initNavigation();
+initNavHighlightOnly();   // 👈 여기에 정확히 위치
+initGoalAccordion();
+initTechPanels();
+initServiceSlider();
+initUseCaseSlider();
+
+
+// 이 아래에 두기 👇
+initHeaderAutoHide();
+
+// 애니메이션
+initHighlightAnim();
+
 
     if(!window._walllnutResizeHandlerAdded){
       window.addEventListener('resize',function(){
-        if(window.innerWidth<=767){ if(!$('.mobile-menu-btn')) initMobileMenu(); }
-        else{
-          var overlay=$('.mobile-menu-overlay'); if(overlay) overlay.classList.remove('active');
-          var logoMenus=$('.logo-menus'); if(logoMenus) logoMenus.classList.remove('menu-open');
-          document.body.classList.remove('menu-open');
-        }
+        var overlay=$('.mobile-menu-overlay'); if(overlay) overlay.classList.remove('active');
+        var logoMenus=$('.logo-menus'); if(logoMenus) logoMenus.classList.remove('menu-open');
+        document.body.classList.remove('menu-open');
       },{passive:true});
       window._walllnutResizeHandlerAdded=true;
     }
@@ -1249,4 +1492,5 @@ function initUseCaseSlider(){
       t = setTimeout(function(){ t=0; fn.apply(null, lastArgs); }, wait);
     };
   }
+
 })();

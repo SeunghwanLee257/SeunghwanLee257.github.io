@@ -44,9 +44,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
 
-  <!-- JS -->
-  <script src="./js/walllnut.bundle.js" defer></script>
-  <script src="./js/bg-canvas.js" defer></script>
 </head>
 
 
@@ -57,90 +54,83 @@
   </button>
 
   <!-- 고정 헤더 -->
-  <header class="header" role="banner">
+  <header class="header header-font" role="banner">
     <div class="logo-menus">
       <img src="./asset/head-logo.svg" alt="WaLLLnut Logo">
-      <!-- Mobile menu button will be inserted here by JavaScript -->
-      <nav class="nav" aria-label="주요 섹션">
-        <a href="#sec03" data-i18n="nav.tech">Technology</a>
-        <a href="#sec04" data-i18n="nav.service">Service</a>
-        <a href="#sec05" data-i18n="nav.goal">Goal</a>
-        <a href="#sec06" data-i18n="nav.exp">Experience</a>
-        <a href="#sec07" data-i18n="nav.team">Team</a>
-        <a href="#sec08" data-i18n="nav.advisors">Advisors</a>
-      </nav>
     </div>
-    
-    <!-- Language Dropdown -->
-    <div class="lang-dd" id="langDropdown">
-      <span id="langLabel" class="lang-dd-label" data-i18n="lang.label">Language</span>
 
-      <div class="lang-dd-wrap">
-        <button
-          type="button"
-          class="lang-dd-btn"
-          id="langBtn"
-          aria-haspopup="listbox"
-          aria-expanded="false"
-          aria-labelledby="langLabel langBtn"
+    <!-- Language & Utility Controls -->
+    <div class="lang-dd header-floating" id="langDropdown">
+      <button type="button" class="ecosystem-btn"><span class="ecosystem-label">Ecosystem</span></button>
+
+      <div class="lang-controls">
+        <div class="lang-toggle" role="group" aria-labelledby="langLabel">
+          <button type="button" class="lang-toggle-btn is-active" data-lang="en" aria-pressed="true">Eng</button>
+          <button type="button" class="lang-toggle-btn" data-lang="ko" aria-pressed="false">Ko</button>
+        </div>
+
+        <div class="version-dd">
+          <button
+            type="button"
+            class="version-dd-btn"
+            id="versionBtn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="versionBtn"
           >
-          <span id="langBtnText">eng</span>
-          <svg class="caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M7 10l5 5 5-5z"></path>
-          </svg>
-        </button>
+            <span class="version-label">ver_121025</span>
+            <svg class="caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 10l5 5 5-5z"></path>
+            </svg>
+          </button>
 
-        <ul class="lang-dd-menu" id="langMenu" role="listbox" aria-labelledby="langLabel" hidden>
-          <li role="option" data-lang="en" aria-selected="true">
-            <span class="lang-name">English</span><span class="lang-code">eng</span>
-          </li>
-          <li role="option" data-lang="ko" aria-selected="false">
-            <span class="lang-name">한국어</span><span class="lang-code">kor</span>
-          </li>
-        </ul>
+          <ul class="version-dd-menu" id="versionMenu" role="listbox" aria-labelledby="versionBtn" hidden>
+            <li role="option" data-version="ver_121025" aria-selected="true">
+              <span class="version-name">ver_100825</span>
+            </li>
+            <li role="option" data-version="ver_121024">
+              <span class="version-name">ver_260925</span>
+            </li>
+            <li role="option" data-version="ver_121023">
+              <span class="version-name">ver_101025</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
+    <nav class="nav" aria-label="주요 섹션">
+      <a href="#sec03" data-i18n="nav.tech">Technology</a>
+      <a href="#sec04" data-i18n="nav.solutions">Solutions</a>
+      <a href="#sec05" data-i18n="nav.vision">Vision</a>
+      <a href="#sec07" data-i18n="nav.team">Team</a>
+    </nav>
   </header>
 
   <main id="main" tabindex="-1">
-    <!-- 섹션 01: 배너 / 카운트다운 -->
-    <section id="sec01" aria-labelledby="countdown-heading">
-      <canvas id="bg-canvas" aria-hidden="true"></canvas>
-
-      <div class="container count-wrap" aria-label="countdown">
-        <div class="time-box" data-unit="days" title="hover 시 해당 유닛만 일시정지">
-          <div class="time-value" id="days">365</div>
-          <div class="time-label">Days</div>
-        </div>
-        <div class="time-box" data-unit="hours">
-          <div class="time-value" id="hours">24</div>
-          <div class="time-label">Hours</div>
-        </div>
-        <div class="time-box" data-unit="seconds">
-          <div class="time-value" id="seconds">59</div>
-          <div class="time-label">Seconds</div>
-        </div>
-      </div>
-
-      <div class="banner-title">
-        <p class="sec01-title s-t-01">How much time is left on your data clock?</p>
-        <p class="sec01-title s-t-02">Most data on the internet is effectively irreversible</p>
+    <!-- 섹션 01: Hero Scroll -->
+    <section id="sec01" class="hero" aria-labelledby="hero-heading" data-stage="0">
+      <div class="title-sec01">
+        <h3 data-i18n="hero.headline">Confidential Coprocessor for Fair, Verifiable Markets<br>
+          FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.
+        </h3>
       </div>
     </section>
 
     <!-- 섹션 02: 띠지 -->
     <section id="sec02" aria-label="Slogan">
-      <div class="strip" role="img" aria-label="Green nature banner">
-        <p>
-          waLLLnut’s vision is to ensure both <strong>“transparency”</strong> and <strong>“confidentiality”</strong> of data in the
-          next-generation internet infrastructure.
-        </p>
+      <div class="titleSec02">
+        <img src="./asset/sec02-txtBg.svg" alt="">
+        <h2 data-i18n="sec02.slogan">
+          Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>
+          Only what’s needed is revealed —<br> privacy preserved, fairness ensured.
+        </h2>
       </div>
     </section>
 
     <!-- 섹션 03: Our Technology -->
     <section id="sec03" class="container" aria-labelledby="tech-label">
-      <h2 id="tech-label" class="section-label">01. Our Technology</h2>
+      <h2 id="tech-label" class="section-label">01. Technology</h2>
 
       <!-- 부모 A -->
       <div class="tech-split" role="tablist" aria-label="Technology Panels">
@@ -244,7 +234,7 @@
 
     <!-- 섹션 04: Our Service (슬라이드) -->
     <section id="sec04" class="container" aria-labelledby="service-label">
-    <h2 id="service-label" class="section-label">02. Our Service</h2>
+    <h2 id="service-label" class="section-label">02. Solutions</h2>
 
     <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
       <div class="svc-track" id="svc-track">
@@ -370,7 +360,7 @@
     <div class="goal-wrap">
       <div class="title-area">
           <div class="frame-content">
-            <h2 id="goal-label" class="section-label">03. Our Goal</h2>
+            <h2 id="goal-label" class="section-label">03. Vision</h2>
             <div class="title-graphic">
               <img src="./asset/sec05-title.svg" alt="">
             </div>
@@ -457,7 +447,7 @@
 
     <!-- 섹션 06: Our Experience -->
     <section id="sec06" class="container" aria-labelledby="exp-label">
-      <h2 id="exp-label" class="section-label">04. Our Experience</h2>
+      <!-- <h2 id="exp-label" class="section-label">Use Cases</h2> -->
         
       <!-- Property Section -->
       <div class="property-container">
@@ -560,13 +550,13 @@
 
     <!-- 섹션 07: Team Member (섹션 여백 없음) -->
     <section id="sec07" class="container" aria-labelledby="team-label">
-      <h2 id="team-label" class="section-label">05. Team Member</h2>
+      <h2 id="team-label" class="section-label">04. Team</h2>
         
       <div class="team-grid">
         <!-- CEO -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-male.svg" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Seunghwan Lee(CEO).png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">Seunghwan Lee (CEO)</div>
@@ -577,7 +567,7 @@
         <!-- CTO -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-CTO.png" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Dohyuk Kim(CTO).png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">Dohyuk Kim (CTO)</div>
@@ -588,7 +578,7 @@
         <!-- CSO -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-CSO.png" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Dong-Joon Shin(CSO).png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">Dong-Joon Shin (CSO)</div>
@@ -599,7 +589,7 @@
         <!-- Yunsik Ham -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-yunsik.png" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Yunsik_Ham.png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">Yunsik Ham</div>
@@ -610,7 +600,7 @@
         <!-- Youngjun Kim -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-youngjun.png" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Youngjun_Kim.png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">Youngjun Kim</div>
@@ -621,7 +611,7 @@
         <!-- Kiin Shin -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-female.svg" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Kiin_Shin.png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">KiIn Shin</div>
@@ -632,7 +622,7 @@
         <!-- Jin Shin -->
         <div class="team-member">
           <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/team-mem-jiin.png" alt=""></div>
+            <div class="avatar-male"><img src="./asset/sec07-Jiin_Shin.png" alt=""></div>
           </div>
           <div class="member-info">
             <div class="member-name-role">JiIn Shin</div>
@@ -731,6 +721,7 @@
       <span>© 2025 waLLLnut · All rights reserved.</span>
     </div>
   </footer>
-
+  
+  <script src="./js/walllnut.bundle.js"></script>
 </body>
 </html>

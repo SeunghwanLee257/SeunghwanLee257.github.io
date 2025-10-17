@@ -57,7 +57,7 @@ html[lang="ko"] :where(p,div,span,li,button,a,h1,h2,h3,h4,h5,h6){
 }
 
 p{margin: 0;}
-a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;}
+a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;}
 /* 공용 컨테이너 */
 .container{
   max-width: 1028px;
@@ -94,47 +94,352 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 
 /* ========== Fixed Header ========== */
 .header{
-  display: flex; align-items: center; justify-content: space-between;
-  position: fixed; bottom: 8%; left: 50%; transform: translateX(-50%);
-  z-index: 1000;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(6px);
-  border-radius: 999px;
-  box-shadow: var(--elev);
-  padding: 10px 14px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  z-index:200;
+  background-color:rgba(255,255,255,0.96);
+  backdrop-filter:blur(6px);
+  box-shadow:none;
+  border-radius:0;
+  padding:24px 6% 0 6%;
+  transition:all 0.3s ease;
+  background-image:none;
+  height:96px;
 }
-.logo-menus{display: flex; align-items: center;}
-.logo-menus img{padding-right: 4px;}
-.nav{ display:flex; gap:4px; align-items:center; justify-content:center; font-size: 13px; }
-.nav a{ text-decoration: none; color:#222; padding:8px 12px; border-radius: 10px; }
-.nav a:hover{ background: var(--hover-bg); }
+.header.header--lang-hidden,
+.header.is-compact{
+  padding:16px 6% 8px 6%;
+  gap:12px;
+}
+.header.is-compact{
+  height: auto;
+}
+.header::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:#E4E2DF;
+  pointer-events:none;
+}
+.header-font{
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+.header--scrolled{
+  box-shadow:0 10px 24px rgba(0,0,0,0.08);
+  background-image:none;
+}
+.header--scrolled::after{
+  background:#c4bfb8;
+}
+.header-font button,
+.header-font a,
+.header-font span,
+.header-font .version-name,
+.header-font .version-label{
+  font-family: inherit;
+}
+.header-spacer{
+  height:90px;
+  transition:height .35s ease;
+}
+.logo-menus{
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  order:0;
+  padding-bottom:14px;
+}
+.header.header--lang-hidden .logo-menus,
+.header.is-compact .logo-menus{
+  padding-bottom: 0;
+}
+.logo-menus img{
+  padding-right:0;
+}
+.nav{
+  position:relative;
+  order:1;
+  display:flex;
+  gap:20px;
+  align-items:flex-end;
+  justify-content:flex-start;
+  font-size:14px;
+  flex:0 1 auto;
+  margin-left:16px;
+  margin-right:auto;
+  padding:0 0 28px;
+  transition:padding .35s ease;
+}
+.lang-dd{
+  order:2;
+  margin-left:16px;
+}
+.nav a{
+  position:relative;
+  text-decoration:none;
+  color:#807F7F;
+  border-bottom:0;
+  transition:color .2s ease;
+  margin-bottom:0;
+  display:inline-flex;
+  align-items:center;
+  padding:0;
+}
+.nav a.is-active,
+.nav a.active{
+  color:#FF952D;
+}
+.nav a:hover{
+  color:#FF952D;
+}
+
+.header-floating,
+#langDropdown{
+  transition:transform 220ms ease, opacity 180ms ease;
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+.lang-dd.header-floating.hide{
+  opacity:0;
+  transform:translateY(-20px);
+  pointer-events:none;
+  transition:all 0.3s ease;
+}
+.header.is-compact .header-floating{
+  transform:translateY(-100%);
+  opacity:0;
+  pointer-events:none;
+}
+.header.header--lang-hidden .header-floating{
+  transform:translateY(-100%);
+  opacity:0;
+  pointer-events:none;
+}
+.header.header--lang-hidden #langDropdown{
+  opacity:0;
+  transform:translateY(-16px);
+  pointer-events:none;
+  transition:opacity 0.25s ease, transform 0.25s ease;
+}
 
 /* ========== Language Dropdown (UI only) ========== */
-.lang-dd { padding-left: 80px; display:flex; align-items:center; gap:10px; margin-left:auto; }
-.lang-dd-label { color: var(--muted); font-size:14px; }
-.lang-dd-wrap { position:relative; }
-.lang-dd-btn{
-  display:inline-flex; align-items:center; gap:8px;
-  padding:8px 14px; border-radius:9999px; border:0;
-  background:#2b2b2b; color:#fff; cursor:pointer;
-  font: inherit; line-height:1; transition: opacity .15s;
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
 }
-.lang-dd-btn:hover{ opacity:.9; }
-.lang-dd-btn .caret{ transition: transform .15s; fill:#fff; }
-.lang-dd-btn[aria-expanded="true"] .caret{ transform: rotate(180deg); }
-.lang-dd-menu{
-  position:absolute; top:calc(-360% + 8px); right:0; min-width:180px;
-  background:#fff; border:1px solid var(--chip);
-  border-radius:12px; box-shadow: 0 8px 24px rgba(0,0,0,.1); padding:6px;
-  list-style:none; margin:0; z-index:50;
+.lang-dd{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-left:auto;
+  flex:0 0 auto;
+  align-self:flex-end;
+  padding-bottom: 12px;
+  max-height:160px;
+  overflow:hidden;
+  transition:opacity .3s ease, transform .35s ease, max-height .35s ease, padding .35s ease;
 }
-.lang-dd-menu li{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 12px; border-radius:8px; cursor:pointer; user-select:none;
-  font-size:14px; color: var(--ink);
+.header.header--lang-hidden .lang-dd,
+.header.is-compact #langDropdown,
+.header.is-compact .header-floating{
+  max-height:0;
+  padding-bottom:0;
+  pointer-events:none;
 }
-.lang-dd-menu li:hover, .lang-dd-menu li.focused{ background: var(--hover-bg); }
-.lang-dd-menu .lang-code{ color:#8a8a8a; font-variant: all-small-caps; }
+.header.header--lang-hidden .nav,
+.header.is-compact .nav{
+  padding-bottom:16px;
+}
+.header.header--lang-hidden + main .header-spacer,
+.header.is-compact + main .header-spacer,
+.header.header--lang-hidden ~ main .header-spacer,
+.header.is-compact ~ main .header-spacer{
+  height:72px;
+}
+
+@media (max-width: 1023px){
+  .header.header--compact{
+    transform:translateY(-40px);
+    opacity:0.95;
+    transition:transform 0.35s ease, opacity 0.35s ease;
+  }
+}
+.lang-dd-label{ color: var(--muted); font-size:14px; }
+.lang-controls{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.lang-toggle{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  background:#fff;
+  border:1px solid #E4E2DF;
+  border-radius:999px;
+  padding:5px 6px;
+  height:52px;
+}
+.lang-toggle-btn{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:0;
+  background:none;
+  color:#807F7F;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.08em;
+  cursor:pointer;
+  transition:background .3s ease, color .3s ease, transform .3s ease;
+  position:relative;
+  z-index:1;
+}
+.lang-toggle-btn.is-active{
+  background:#FF952D;
+  color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(255,149,45,0.25);
+}
+.lang-toggle-btn:focus-visible{
+  outline:2px solid rgba(255,149,45,0.5);
+  outline-offset:2px;
+}
+.ecosystem-btn{
+  height:42px;
+  padding:0 4px;
+  border:none;
+  background:transparent;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+  position:relative;
+  transition:color .2s ease;
+  border-radius:12px;
+  overflow:hidden;
+}
+.header-arrow{
+  display:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid transparent;
+  background:none;
+  color:#807F7F;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.header-arrow .material-icons{ font-size:20px; }
+.ecosystem-label{
+  display:inline-block;
+  color:#FF952D;
+  transition:color .2s ease, background-position .2s ease;
+}
+.ecosystem-btn:hover .ecosystem-label,
+.ecosystem-btn:focus-visible .ecosystem-label{
+  color:transparent;
+  background-image:linear-gradient(110deg, #FFE3C2 0%, #FFFFFF 8%, #FFB870 18%, #FF952D 38%, #FFB870 58%, #FFE3C2 72%, #FF952D 100%);
+  background-size:180% 100%;
+  background-position:-120% 0;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:ecosystem-shimmer 2.6s cubic-bezier(.45,.05,.45,.95) infinite;
+}
+@keyframes ecosystem-shimmer{
+  0%{ background-position:-160% 0; }
+  50%{ background-position:45% 0; }
+  100%{ background-position:160% 0; }
+}
+.version-dd{
+  position:relative;
+  height:52px;
+}
+.version-dd-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  height:52px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid #E4E2DF;
+  background:#fff;
+  color:#807F7F;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .15s ease, border-color .15s ease;
+}
+.version-dd-btn:focus-visible{
+  outline:2px solid rgba(255,149,45,0.35);
+  outline-offset:3px;
+}
+.version-dd-btn .caret{
+  fill:#807F7F;
+  transition:transform .15s ease;
+}
+.version-dd-btn[aria-expanded="true"] .caret{
+  transform:rotate(180deg);
+}
+.version-label{
+  font-size:14px;
+  font-weight:600;
+  color:#807F7F;
+}
+.version-dd-menu{
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  min-width:220px;
+  background:#fff;
+  border:1px solid #E4E2DF;
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.12);
+  padding:6px;
+  list-style:none;
+  margin:0;
+  z-index:50;
+}
+.version-dd-menu[hidden]{ display:none; }
+.version-dd-menu li{
+  padding:10px 12px;
+  border-radius:8px;
+  font-size:14px;
+  color:#191919;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.version-dd-menu li[aria-selected="true"]{
+  background:rgba(255,149,45,0.1);
+  color:#FF952D;
+}
+.version-dd-menu li.focused:not([aria-selected="true"]){
+  background:var(--hover-bg);
+}
+.version-dd-menu li:hover{
+  background:var(--hover-bg);
+}
 
 /* ========== Section Meta Labels ========== */
 /* Asap Condensed 유지 (영/한 모두) */
@@ -150,59 +455,55 @@ a{text-decoration: none; color: #807F7F; font-family: -apple-system, BlinkMacSys
 
 /* ========== Section spacing ========== */
 section{ padding-top: 0; padding-bottom: 0; }
-#sec01{ height: 100vh !important; padding: 320px 0; background-color: #FFFFFF; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-#sec02{ background-image: url('../asset/section02_슬로건.png'); background-size: cover; background-repeat:no-repeat; }
 #sec03, #sec04, #sec05{ padding-top: 160px; padding-bottom: 160px; }
 #sec06{ padding-top: 120px; padding-bottom: 200px; }
 #sec07{ padding-top: 0; padding-bottom: 120px; }
 #sec08{ background: var(--bg-gray); padding: 80px 0 120px 0; }
 
-/* ========== Section 01: Countdown ========== */
-.sec01{position: relative;}
-#bg-canvas {
-  position: absolute; inset: 0;
-  z-index: 0; pointer-events: none;
+/* ========== Section 01: Banner ========== */
+.hero{
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  border: none;
+  background: url('../asset/sec01-bg.png') no-repeat;
+  background-size: cover;
+  background-position: 50% 35%;
+  border-radius: 0 0 36px 36px;
+  overflow: hidden;
 }
-#sec01 .count-wrap,
-#sec01 .banner-title { position: relative; z-index: 1; }
-.main-cont-topB {margin-bottom: 120px; display: flex; flex-direction: column; gap: 40px; align-items: center;}
-#heroToggleBtn{margin-top: 40px;}
-
-.count-wrap{ display:flex; gap:28px; align-items:center; justify-content:flex-start; margin-bottom: 20px;}
-.time-box{
-  min-width: 260px; height: 260px; border-radius: 24px;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  user-select: none; transition: background .2s ease; background:#fff;
+.title-sec01{
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.543); 
+  color: #FFFFFF;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
-.time-box:hover{ background: var(--hover-bg); }
-.time-value{ font-size: 80px; font-weight: 800; line-height: 1; }
-.time-label{
-   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-   font-size: 16px; 
-   font-weight: 500;
-   color:#403E3C; 
-   margin-top: 12px; 
-   letter-spacing:.4px; 
-  }
-
-  .banner-title .sec01-title {margin: 0;}
-  .banner-title .s-t-01{color: #0F0F10; padding-bottom: 4px;}
-  .banner-title .s-t-02{color: #807F7F; filter: blur(.65px);}
-
-
-
+.title-sec01 h3{
+  padding-bottom: 8px; 
+  font-weight: 500; 
+  font-size: 28px;
+  margin: 0;
+}
 /* ========== Section 02: Strip Banner ========== */
-.strip{
-  width:100%; height:120px;
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  color:#fff !important;
-  text-shadow: 0 0 16px rgba(0,0,0,.9) !important;
+#sec02{
+  position: relative;
+  width: 100%; 
+  height: 400px; 
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
-.strip p{
-  margin:0; padding: 0 20px; font-size: 14px; font-weight: 400;
-  color:#fff !important;
-  text-shadow: 0 0 16px rgba(0,0,0,.9) !important;
-}
+
+#sec02 img{position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 0%);}
+#sec02 h2{font-size: 32px; font-weight: 500;}
 
 /* ========== Section 03: Technology Split Panels ========== */
 .tech-body {position: relative; left: 12px;}
@@ -362,8 +663,13 @@ section{ padding-top: 0; padding-bottom: 0; }
 .svc-btn{}
 
 /* ========== Section 05: Our Goal ========== */
-/* 점 배경 */
-.dot-bg{ background-image: radial-gradient(circle, #ccc 1px, transparent 1px); background-size:20px 20px; background-position:0 0; }
+/* 점 배경 – small tiled SVG keeps painting cost low */
+.dot-bg{
+  position:relative;
+  background-color:#FAFAF9;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%23FAFAF9'/%3E%3Ccircle cx='4' cy='4' r='1.5' fill='%23e1ddd7'/%3E%3C/svg%3E");
+  background-size:24px 24px;
+}
 
 .goal-wrap{ max-width:800px; margin:0 auto; padding: 20px; display:flex; flex-direction:column; align-items:center;}
 
@@ -454,8 +760,18 @@ section{ padding-top: 0; padding-bottom: 0; }
 .use-cases-section{ border-radius:24px; margin-bottom:200px; }
 .use-cases-header{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .use-cases-title{
-  background:#DEDBD8; color:#403E3C; padding:12px 24px; border-radius:40px;
-  font-family:"Asap Condensed", sans-serif; font-size:18px; font-weight:600; display:inline-block;
+  width: 146px;
+  height: 52px; 
+  background:#DEDBD8; 
+  color:#403E3C; 
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Asap Condensed", sans-serif; 
+  font-size:18px; 
+  font-weight:600; 
 }
 .use-case-controls{ justify-content:flex-end; }
 .use-case-slider{ margin-top:20px; }
@@ -635,3 +951,63 @@ footer > div {font-size: 12px; font-weight: 600; color: #807F7F;}
 .social-link a svg{width: 24px; height: 24px;}
 .social-link:nth-child(1) a {display: flex; align-items: center; justify-content: center;}
 .social-link:nth-child(1) a svg {width: 20px; height: 20px;}
+
+.lang-toggle-btn.is-active{transform:translateX(0); box-shadow:0 8px 18px rgba(255,149,45,0.35);}
+
+
+/* ==========================
+   Smart Lang Dropdown Animation
+   ========================== */
+
+/* 헤더는 숨기지 않음 */
+.header {
+  overflow: visible; /* 기존 overflow:hidden 제거 */
+}
+
+/* lang-dropdown은 기본 상태에서 표시 */
+.lang-dd.header-floating {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1),
+              opacity 0.3s ease;
+}
+
+/* compact 상태 (스크롤 내릴 때): 위로 부드럽게 사라짐 */
+.header.is-compact .lang-dd.header-floating {
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+}
+
+/* 다시 스크롤 올릴 때: 부드럽게 복귀 */
+.header:not(.is-compact) .lang-dd.header-floating {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.header.is-compact {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+
+#langDropdown {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#langDropdown.is-hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#langDropdown.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
