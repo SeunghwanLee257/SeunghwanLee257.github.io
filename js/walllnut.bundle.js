@@ -27,16 +27,11 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.advisors': 'Advisors',
       'hero.headline': 'Confidential Coprocessor for Fair, Verifiable Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
       'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what’s needed is revealed —<br> privacy preserved, fairness ensured.',
-      'label.days': 'Days',
-      'label.hours': 'Hours',
-      'label.seconds': 'Seconds',
       'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
-      'sec.tech': '01. Technology',
-      'sec.service': '02. Solutions',
-      'sec.goal': '03. Vision',
+      'sec.tech': '02. Technology',
+      'sec.service': '03. Solutions',
+      'sec.goal': '01. Vision',
       'sec.team': '04. Team',
-      '.s-t-01': 'How much time is left on your data clock?',
-      '.s-t-02': 'Most data on the internet is effectively irreversible',
       
       // Tech A
       'pA.title': 'FHE16',
@@ -151,16 +146,11 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.advisors': '자문',
       'hero.headline': '공정하고 검증 가능한 시장을 위한 보안 코프로세서<br>FHE16 + MPC + 분산 복호화 기술 — 성능과 함께 확장되는 프라이버시.',
       'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
-      'label.days': '일',
-      'label.hours': '시간',
-      'label.seconds': '초',
       'slogan': 'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>"투명성"</strong>과 <strong>"기밀성"</strong>을 모두 보장하는 것입니다.',
-      'sec.tech': '01. Technology',
-      'sec.service': '02. Solutions',
-      'sec.goal': '03. Vision',
-      'sec.team': '05. Team',
-      '.s-t-01': '여러분의 데이터는 인터넷에 얼마나 머무를까요?',
-      '.s-t-02': '인터넷 안에 있는 대다수의 데이터는 삭제가 불가능한 데이터 입니다.',
+      'sec.tech': '02. Technology',
+      'sec.service': '03. Solutions',
+      'sec.goal': '01. Vision',
+      'sec.team': '04. Team',
 
       // Tech A
       'pA.title': 'FHE16',
@@ -463,7 +453,6 @@ function layoutHighlight(item){
     setKeyBySel('#goal-label','sec.goal');
     setKeyBySel('#exp-label','sec.exp');
     setKeyBySel('#team-label','sec.team');
-    setKeyList('.count-wrap .time-label', ['label.days','label.hours','label.seconds']);
     setKeyBySel('#sec02 .strip p', 'slogan');
 
     // Tech A
@@ -526,8 +515,6 @@ function layoutHighlight(item){
     setKeyList('.property-features li',['prop.f1','prop.f2','prop.f3']);
 
     // Team
-    setKeyBySel('.s-t-01','.s-t-01');
-    setKeyBySel('.s-t-02','.s-t-02');
     (function bindTeam(){
       var cards=$$('.team-grid .team-member');
       cards.forEach(function(card,i){
