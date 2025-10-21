@@ -1,27 +1,21 @@
-/* ===========================
-   Korean-only layout tweaks
-   HTML lang을 기준으로 적용됨
-   =========================== */
 
-/* 0) 아이콘 폰트는 그대로 (혹시 전역 폰트가 덮는 경우 방지) */
+
 .material-icons,
 .material-icons * {
   font-family: 'Material Icons' !important;
 }
 
-/* 1) 큰 타이틀/헤드라인: 한국어는 자간·행간·폰트 크기 살짝 조정 */
 html:lang(ko) .tech-title-lg,
 html:lang(ko) .section-label {
-  /* 한국어는 Condensed 계열보다 산세리프가 가독성 좋음 */
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, sans-serif;
-  /* 화면 크기에 따라 유연하게 줄이기 */
-  font-size: 14px;
-  letter-spacing: .2px; /* 너무 벌어지지 않게 */
-  text-wrap: balance;       /* 여러 줄 균형(크롬/사파리/엣지 지원) */
-  word-break: keep-all;     /* 한글 단어 중간 단절 방지 */
+  letter-spacing: .2px;
+  text-wrap: balance;   
+  word-break: keep-all;    
 }
 
-/* 2) 본문형 텍스트: 줄바꿈/넘침 제어 */
+html:lang(ko) .tech-title-lg{font-size: 42px;}
+html:lang(ko) .section-label{font-size: 14px;}
+
 html:lang(ko) .tech-subtitle,
 html:lang(ko) .svc-desc,
 html:lang(ko) .goal-dropdown-text,
@@ -30,14 +24,13 @@ html:lang(ko) .use-case-title,
 html:lang(ko) .goal-dropdown-question,
 html:lang(ko) .property-features li {
   line-height: 1.55;
-  word-break: keep-all;     /* 한글 단어 중간 끊김 방지 */
-  overflow-wrap: anywhere;  /* 긴 영어/URL이 섞일 때는 강제 줄바꿈 허용 */
-  hyphens: auto;            /* 영어 단어 하이픈 분리 허용 */
-  text-wrap: pretty;        /* 문장부호 앞뒤 보기 좋게(지원 브라우저에서) */
+  word-break: keep-all;     
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: pretty;
   white-space: normal;
 }
 
-/* 3) 강조 스팬이 길어질 때 줄 높이 무너지는 것 보정 */
 html:lang(ko) .black-f {
   letter-spacing: -0.01em;
   line-height: 1.1;
@@ -57,7 +50,6 @@ html:lang(ko) .svc-title{
   font-size: 42px;
 }
 
-/* 4) 서비스 슬라이드 설명은 모바일에서 더 타이트 조정 */
 @media (max-width: 768px) {
   html:lang(ko) .svc-desc {
     font-size: 0.95rem;
@@ -65,28 +57,25 @@ html:lang(ko) .svc-title{
   }
 }
 
-/* 5) 드롭다운 질문이 한 줄을 넘을 때 아이콘과 겹치지 않도록 여백 확보 */
 html:lang(ko) .goal-dropdown-header {
   align-items: flex-start;
 }
 html:lang(ko) .goal-dropdown-question {
-  margin-right: 0.75rem; /* 아이콘과 간격 */
+  margin-right: 0.75rem;
 }
 
-/* 6) 타이틀이 정말 긴 경우(특정 섹션) 한 단계 더 줄이기 */
 @media (max-width: 480px) {
   html:lang(ko) .tech-title-lg {
     font-size: clamp(1rem, 6vw, 1.75rem);
   }
 }
 
-/* 7) 숫자/라벨 영역은 고정폭으로 줄넘김 방지 */
 html:lang(ko) .count-wrap .time-label {
   white-space: nowrap;
 }
 
 html:lang(ko) .box.expand {
-  width: 134px; /* 박스가 확장될 때 가로 길이가 100%로 늘어남 */
+  width: 134px;
 }
 
 
@@ -95,9 +84,6 @@ html:lang(ko) .fron-text .black-f {
   overflow-wrap: anywhere;
 }
 
-
-/* section04 slide */
 .svc-c-ref{max-width: 200px; line-height: 1.4;}
 
-/* Section 05 Our Goal */
 html:lang(ko) .goal-caption{max-width: 500px;}

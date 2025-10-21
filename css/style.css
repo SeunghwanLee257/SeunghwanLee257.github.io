@@ -494,8 +494,9 @@ section{ padding-top: 0; padding-bottom: 0; }
 #sec02{
   position: relative;
   width: 100%; 
-  height: 400px; 
+  height: auto; 
   text-align: center;
+  padding: 12% 6%;
 
   display: flex;
   align-items: center;
@@ -504,7 +505,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 
 #sec02 img{position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 0%);}
-#sec02 h2{font-size: 32px; font-weight: 500;}
+#sec02 h2{font-size: 28px; font-weight: 500;}
 
 /* ========== Section 03: Technology Split Panels ========== */
 .tech-body {position: relative; left: 12px;}
@@ -622,7 +623,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 .svc-b{ display:flex; flex-direction:column; gap:16px; align-items:flex-end; text-align:right; }
 /* Asap 유지 */
-.svc-title{ font-family:"Asap Condensed", sans-serif !important; font-weight:700; font-size: clamp(28px, 5vw, 56px); color:#000; margin:0; line-height:1.1; }
+.svc-title{ font-family:"Asap Condensed", sans-serif !important; font-weight:700; font-size: 42px; color:#000; margin:0; line-height:1.1; }
 .svc-desc{ font-size:16px; font-weight:500; color:#20201F; line-height:1.6; margin:0; max-width: 580px; }
 
 .svc-bot{ width:100%; }
