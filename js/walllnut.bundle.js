@@ -33,7 +33,7 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
       'sec.tech': '01. Technology',
       'sec.service': '02. Solutions',
-      'sec.goal': '03. Vision,
+      'sec.goal': '03. Vision',
       'sec.team': '04. Team',
       '.s-t-01': 'How much time is left on your data clock?',
       '.s-t-02': 'Most data on the internet is effectively irreversible',
