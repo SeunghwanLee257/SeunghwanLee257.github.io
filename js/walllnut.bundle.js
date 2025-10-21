@@ -457,7 +457,7 @@ function layoutHighlight(item){
   function setKeyList(sel, keys){ var list=$$(sel); keys.forEach(function(k,i){ if(list[i]) setKey(list[i],k); }); }
 
   function autowireBySelectors() {
-    setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.exp','nav.team','nav.advisors']);
+    setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.team','nav.advisors']);
     setKeyBySel('#tech-label','sec.tech');
     setKeyBySel('#service-label','sec.service');
     setKeyBySel('#goal-label','sec.goal');
