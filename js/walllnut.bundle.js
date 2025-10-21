@@ -19,12 +19,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
   var I18N = {
     en: {
       'lang.label': 'Language',
-      'nav.tech': 'Technology',
-      'nav.service': 'Service',
-      'nav.goal': 'Goal',
-      'nav.exp': 'Experience',
-      'nav.team': 'Team',
-      'nav.advisors': 'Advisors',
       'hero.headline': 'Confidential Coprocessor for Fair, Verifiable Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
       'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what’s needed is revealed —<br> privacy preserved, fairness ensured.',
       'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
@@ -139,11 +133,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     },
     ko: {
       'lang.label': '언어',
-      'nav.tech': '기술',
-      'nav.service': '서비스',
-      'nav.goal': '목표',
-      'nav.team': '팀',
-      'nav.advisors': '자문',
       'hero.headline': '공정하고 검증 가능한 시장을 위한 보안 코프로세서<br>FHE16 + MPC + 분산 복호화 기술 — 성능과 함께 확장되는 프라이버시.',
       'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
       'slogan': 'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>"투명성"</strong>과 <strong>"기밀성"</strong>을 모두 보장하는 것입니다.',
@@ -447,7 +436,6 @@ function layoutHighlight(item){
   function setKeyList(sel, keys){ var list=$$(sel); keys.forEach(function(k,i){ if(list[i]) setKey(list[i],k); }); }
 
   function autowireBySelectors() {
-    setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.team','nav.advisors']);
     setKeyBySel('#tech-label','sec.tech');
     setKeyBySel('#service-label','sec.service');
     setKeyBySel('#goal-label','sec.goal');
