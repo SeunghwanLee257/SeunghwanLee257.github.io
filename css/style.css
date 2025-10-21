@@ -445,7 +445,7 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
 /* Asap Condensed 유지 (영/한 모두) */
 .section-label,
 .section-title{
-  font-family: "Asap Condensed", sans-serif;
+  font-family: "Asap Condensed", sans-serif !important;
   font-weight: 800;
   font-size: 14px;
   letter-spacing: .2px;
@@ -455,7 +455,8 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
 
 /* ========== Section spacing ========== */
 section{ padding-top: 0; padding-bottom: 0; }
-#sec03, #sec04, #sec05{ padding-top: 160px; padding-bottom: 160px; }
+#sec05{margin-top: 0 !important;}
+#sec03, #sec04, #sec05{ margin-top: 160px; margin-bottom: 160px; }
 #sec06{ padding-top: 120px; padding-bottom: 200px; }
 #sec07{ padding-top: 0; padding-bottom: 120px; }
 #sec08{ background: var(--bg-gray); padding: 80px 0 120px 0; }
@@ -484,7 +485,7 @@ section{ padding-top: 0; padding-bottom: 0; }
   flex-direction: column;
 }
 .title-sec01 h3{
-  padding-bottom: 8px; 
+  padding: 0px 20px 8px; 
   font-weight: 500; 
   font-size: 28px;
   margin: 0;
@@ -535,14 +536,14 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 
 .inactive-title{
-  font-family:"Asap Condensed", sans-serif; font-weight:700; font-size:20px;
+  font-family:"Asap Condensed", sans-serif !important; font-weight:700; font-size:20px;
   color: var(--muted); display:inline-flex; align-items:center; gap:8px;
 }
 .inactive-title .material-icons{ font-size:20px; color: var(--muted); }
 
 /* Asap 유지 */
 .tech-title-lg{
-  font-family:"Asap Condensed", sans-serif;
+  font-family:"Asap Condensed", sans-serif !important;
   font-weight:700; font-size: clamp(32px, 6vw, 42px);
   line-height:.95; color:#000; margin:0 0 20px;
 }
@@ -621,7 +622,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 .svc-b{ display:flex; flex-direction:column; gap:16px; align-items:flex-end; text-align:right; }
 /* Asap 유지 */
-.svc-title{ font-family:"Asap Condensed", sans-serif; font-weight:700; font-size: clamp(28px, 5vw, 56px); color:#000; margin:0; line-height:1.1; }
+.svc-title{ font-family:"Asap Condensed", sans-serif !important; font-weight:700; font-size: clamp(28px, 5vw, 56px); color:#000; margin:0; line-height:1.1; }
 .svc-desc{ font-size:16px; font-weight:500; color:#20201F; line-height:1.6; margin:0; max-width: 580px; }
 
 .svc-bot{ width:100%; }
@@ -643,7 +644,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .svc-c-meta{ display:flex; align-items:flex-end; text-align:right; flex-direction:column; gap:4px; z-index:1; padding-right:16px; }
 .svc-c-title{ font-size:16px; font-weight:500; color:#20201F; margin:0; }
 /* Asap 유지 */
-.svc-c-title2{ font-family:"Asap Condensed", sans-serif; font-weight:700; font-size: clamp(22px, 4vw, 36px); color:#000; margin:0; line-height:1; padding:12px 0 2px 0; }
+.svc-c-title2{ font-family:"Asap Condensed", sans-serif !important; font-weight:700; font-size: clamp(22px, 4vw, 36px); color:#000; margin:0; line-height:1; padding:12px 0 2px 0; }
 .svc-c-ref{ font-size:14px; font-weight:500; color:#807F7F; margin:0; }
 
 /* Controls */
@@ -671,7 +672,7 @@ section{ padding-top: 0; padding-bottom: 0; }
   background-size:24px 24px;
 }
 
-.goal-wrap{ max-width:800px; margin:0 auto; padding: 20px; display:flex; flex-direction:column; align-items:center;}
+.goal-wrap{ max-width:800px; margin:0 auto; padding: 20px 20px 80px; display:flex; flex-direction:column; align-items:center;}
 
 /* 공통 섹션 라벨 기본은 위(.section-label) 사용.
    Goal 내에서만 시각 보정이 필요하면 아래처럼 범위 한정해 오버라이드 */
@@ -697,7 +698,7 @@ section{ padding-top: 0; padding-bottom: 0; }
   position:absolute;
   top: clamp(24px, 6vw, 72px); right: clamp(24px, 6vw, 72px);
   bottom: clamp(24px, 6vw, 72px); left: clamp(24px, 6vw, 72px);
-  display:grid; grid-template-rows: min-content min-content min-content; row-gap: clamp(6px, 1.2vw, 14px);
+  display:grid; grid-template-rows: min-content min-content min-content; row-gap: clamp(12px, 1.5vw, 20px);
   justify-items:center; align-content:center;
 }
 .title-graphic{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; min-height:0; }
@@ -738,7 +739,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 .property-content{ display:flex; align-items:flex-start; gap:60px;}
 /* Asap 유지 */
 .property-title{
-  font-family:"Asap Condensed", sans-serif; font-size:68px; font-weight:800;
+  font-family:"Asap Condensed", sans-serif !important; font-size:68px; font-weight:800;
   color:#0F0F10; line-height:1; flex:1; min-width:300px; 
   position: relative; top: -120px;
 }
@@ -751,7 +752,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 }
 .property-features{ list-style:none; padding-left: 0; margin: 0; position: relative; bottom: 80px;}
 .property-features li{ margin-bottom:8px; font-size:14px; color:#555; position:relative; padding-left:20px; }
-.property-features li:before{ content:'•'; position:absolute; left:0; color:#667eea; font-weight:bold; }
+.property-features li:before{ content:'•'; position:absolute; left:0; color:#807F7F; font-weight:bold; }
 
 .architecture-diagram{ position:relative; width:100%; background:white; border-radius:16px; padding:30px; }
 .architecture-diagram > img{ width:100%; }
@@ -798,13 +799,18 @@ section{ padding-top: 0; padding-bottom: 0; }
 .roadmap-date{
   position:relative;
   display:inline-flex; align-items:center; justify-content:center;
-  gap:4px; color:#0F0F10; font-family:"Asap Condensed", sans-serif; font-size:28px; font-weight:600;
+  gap:4px; color:#0F0F10; font-family:"Asap Condensed", sans-serif !important; font-size:28px; font-weight:600;
   margin-bottom:20px; letter-spacing:0.4px;
 }
 .roadmap-date .date,
 .roadmap-date .onDec{
   display:inline-flex; align-items:center; justify-content:center;
   padding:14px 28px; border-radius:999px; background:#DEDBD8; color:#0F0F10;
+}
+.roadmap-date .date,
+.roadmap-date .onDec,
+.roadmap-date .status{
+  font-family:"Asap Condensed", sans-serif !important;
 }
 .roadmap-date .onDec{ background:#ff9800; }
 .roadmap-date .status{
@@ -839,7 +845,7 @@ section{ padding-top: 0; padding-bottom: 0; }
 /* Asap 유지 */
 .member-name-role{
   background:#ff9800; color:#0F0F10; padding:12px 26px; border-radius:32px;
-  font-family:"Asap Condensed", sans-serif; font-size:24px; font-weight:900;
+  font-family:"Asap Condensed", sans-serif !important; font-size:24px; font-weight:900;
   margin-bottom:12px; display:inline-block; white-space:nowrap;
 }
 .member-description{ font-size:14px; color:#807F7F; line-height:1.4; font-weight:400; }
