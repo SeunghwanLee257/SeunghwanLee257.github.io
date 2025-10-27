@@ -49,11 +49,24 @@ html:lang(ko) article .svc-b::after{
 html:lang(ko) .svc-title{
   font-size: 42px;
 }
-
+@media screen and (min-width: 402px) and (max-width: 701px) {
+      html:lang(ko)  #sec01 .title-sec01 h3 {
+      /* border: 1px solid black !important; */
+      width: 400px !important;
+      padding: 0;
+      line-height: 2.5rem;
+  }
+}
 @media (max-width: 768px) {
   html:lang(ko) .svc-desc {
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+    html:lang(ko)  #sec01 .title-sec01 h3 {
+      /* border: 1px solid red; */
+      width: 92%;
+      padding: 0;
+      line-height: 2.5rem;
   }
 }
 
