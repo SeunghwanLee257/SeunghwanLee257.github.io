@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="./css/component.css">
   <link rel="stylesheet" href="./css/verLangKor.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="icon" href="./asset/logo-filled-orange.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,7 +119,9 @@
     <!-- 섹션 01: Hero Scroll -->
     <section id="sec01" class="hero" aria-labelledby="hero-heading" data-stage="0">
       <div class="title-sec01">
-        <h3 data-i18n="hero.headline">Confidential Coprocessor for Fair and Verifiable RWA Markets<br>
+        <h3 class="animate__animated animate__fadeInUp" 
+        data-i18n="hero.headline"
+        >Confidential Coprocessor for Fair and Verifiable RWA Markets<br>
           FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.
         </h3>
       </div>
@@ -127,7 +130,10 @@
     <!-- 섹션 02: 띠지 -->
     <section id="sec02" aria-label="Slogan">
       <div class="titleSec02">
-        <h2 data-i18n="sec02.slogan">
+        <h2 
+        data-fade-up data-fade-duration="900"
+        data-i18n="sec02.slogan"
+        >
           Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>
           Only what’s needed is revealed —<br> privacy preserved, fairness ensured.
         </h2>
@@ -135,7 +141,9 @@
     </section>
     <!-- 섹션 05: Our Goal (Vision) -->
     <section id="sec05" class="dot-bg" aria-labelledby="goal-label">
-      <div class="goal-wrap">
+      <div        
+        data-fade-up data-fade-duration="900"
+        class="goal-wrap">
         <div class="title-area">
           <div class="frame-content">
             <h2 id="goal-label" class="section-label">01. Vision</h2>
@@ -223,7 +231,7 @@
     </section>
 
     <!-- 섹션 03: Our Technology -->
-    <section id="sec03" class="container" aria-labelledby="tech-label">
+    <section data-fade-up data-fade-duration="900" id="sec03" class="container" aria-labelledby="tech-label">
       <h2 id="tech-label" class="section-label">02. Technology</h2>
 
       <div class="tech-split" role="tablist" aria-label="Technology Panels">
@@ -324,7 +332,7 @@
     </section>
 
     <!-- 섹션 04: Our Service (슬라이드) -->
-    <section id="sec04" class="container" aria-labelledby="service-label">
+    <section data-fade-up data-fade-duration="900" id="sec04" class="container" aria-labelledby="service-label">
     <h2 id="service-label" class="section-label">03. Solutions</h2>
 
     <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
@@ -441,7 +449,7 @@
     </section>
 
     <!-- 섹션 06: Our Experience -->
-    <section id="sec06" class="container" aria-labelledby="exp-label">
+    <section data-fade-up data-fade-duration="900" id="sec06" class="container" aria-labelledby="exp-label">
 
       <div class="property-container">
         <div class="property-content">
@@ -519,7 +527,7 @@
           </div>
       </div>
 
-      <div class="roadmap-section">
+      <div data-fade-up data-fade-duration="900" class="roadmap-section">
         <img src="./asset/Roadmap-title-img.png" class="roadmap-title" />
 
         <div class="roadmap-timeline">
@@ -540,7 +548,7 @@
     </section>
 
     <!-- 섹션 07: Team Member (섹션 여백 없음) -->
-    <section id="sec07" class="container" aria-labelledby="team-label">
+    <section data-fade-up data-fade-duration="900" id="sec07" class="container" aria-labelledby="team-label">
       <h2 id="team-label" class="section-label">04. Team</h2>
 
       <div class="team-grid">
@@ -707,5 +715,24 @@
   </footer>
 
   <script src="./js/walllnut.bundle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const fadeElements = document.querySelectorAll('[data-fade-up]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const duration = entry.target.dataset.fadeDuration || 500;
+        entry.target.style.transitionDuration = `${duration}ms`;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeElements.forEach(el => observer.observe(el));
+});
+
+  </script>
+
 </body>
 </html>
