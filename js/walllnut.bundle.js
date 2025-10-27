@@ -150,7 +150,7 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     },
     ko: {
       'lang.label': '언어',
-      'hero.headline': '공정하고 검증 가능한 시장을 위한 보안 코프로세서<br>FHE16 + MPC + 분산 복호화 기술 — 성능과 함께 확장되는 프라이버시.',
+      'hero.headline': '공정하고 신뢰할 수 있는 실물자산(RWA) 시장을 위한<br>비공개 연산 플랫폼 FHE16, MPC, 임계값 암호화를 결합해<br>성능 저하 없이 확장 가능한 프라이버시를 제공합니다.',
       'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
       'slogan': 'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>"투명성"</strong>과 <strong>"기밀성"</strong>을 모두 보장하는 것입니다.',
       'sec.tech': '02. Technology',
