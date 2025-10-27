@@ -1474,20 +1474,19 @@ function initUseCaseSlider(){
         }
       };
       ensureVersionLabel();
+      var showVersionComingSoon=function(){
+        if(typeof window.alert==='function') window.alert('Coming soon!');
+        else console.log('Coming soon!');
+      };
       versionBtn.addEventListener('click',function(e){
         e.preventDefault();
         e.stopPropagation();
-        if(versionMenu.hidden) openVersionMenu();
-        else closeVersionMenu();
+        showVersionComingSoon();
       });
       versionBtn.addEventListener('keydown',function(e){
-        if(e.key==='Enter' || e.key===' ' || e.key==='ArrowDown'){
+        if(e.key==='Enter' || e.key===' ' || e.key==='ArrowDown' || e.key==='ArrowUp'){
           e.preventDefault();
-          openVersionMenu();
-        }else if(e.key==='ArrowUp'){
-          e.preventDefault();
-          openVersionMenu();
-          moveVersionFocus(-1);
+          showVersionComingSoon();
         }else if(e.key==='Escape' && !versionMenu.hidden){
           e.preventDefault();
           closeVersionMenu();
