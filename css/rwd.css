@@ -91,12 +91,16 @@
     align-items: flex-start;
     gap: 16px;
     max-height: 240px;
-    overflow: hidden;
+    overflow: visible;
     transition: opacity .35s ease, transform .35s ease, max-height .4s ease, padding .35s ease;
   }
   .header .lang-dd {
     order: 1;
     padding: 0 20px 24px;
+  }
+  .header.is-compact .lang-dd,
+  .header.header--lang-hidden .lang-dd{
+    overflow: hidden;
   }
 
   /* Header: nav */
@@ -193,6 +197,17 @@
     background: none;
     color: #FF952D;
   }
+
+  /*
+  .result-image-area {
+    margin: 96px 16px 48px;
+    padding: 24px 16px;
+  }
+  .result-placeholder{
+    font-size:clamp(24px, 8vw, 48px);
+    gap:8px;
+  }
+  */
 
   .nav-active-bar {
     position: absolute;

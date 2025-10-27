@@ -102,7 +102,7 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
   left:0;
   right:0;
   width:100%;
-  z-index:200;
+  z-index:1000;
   background-color:rgba(255,255,255,0.96);
   backdrop-filter:blur(6px);
   box-shadow:none;
@@ -182,6 +182,8 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
 .lang-dd{
   order:2;
   margin-left:16px;
+  position:relative;
+  z-index:250;
 }
 .nav a{
   position:relative;
@@ -406,8 +408,8 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
 }
 .version-dd-menu{
   position:absolute;
-  top:calc(100% + 8px);
-  right:0;
+  top:100%;
+  left:0;
   min-width:220px;
   background:#fff;
   border:1px solid #E4E2DF;
@@ -416,7 +418,7 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
   padding:6px;
   list-style:none;
   margin:0;
-  z-index:50;
+  z-index:9999;
 }
 .version-dd-menu[hidden]{ display:none; }
 .version-dd-menu li{
@@ -440,6 +442,63 @@ a{text-decoration: none; color: #807F7F; font-family: Pretendard, -apple-system,
 .version-dd-menu li:hover{
   background:var(--hover-bg);
 }
+
+/*
+.result-image-area{
+  max-width:1080px;
+  margin:120px auto 80px;
+  padding:32px 24px;
+  border:1px solid #E4E2DF;
+  border-radius:16px;
+  background:#F7F5F2;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+}
+.result-image-area .loading-text{
+  font-size:14px;
+  color:inherit;
+  text-align:center;
+}
+.result-placeholder{
+  position:relative;
+  display:grid;
+  gap:12px;
+  text-transform:uppercase;
+  font-weight:700;
+  font-size:clamp(32px,4vw,56px);
+  letter-spacing:0.08em;
+  color:inherit;
+  text-align:center;
+  margin:32px 0;
+}
+.result-placeholder .result-device{
+  display:block;
+}
+.result-placeholder .result-device::after{
+  content:"WEB";
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .result-placeholder .result-device::after{
+    content:"TABLET";
+  }
+}
+@media screen and (max-width: 767px){
+  .result-placeholder .result-device::after{
+    content:"MOBILE";
+  }
+}
+#versionImage{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  border-radius:8px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.06);
+}
+*/
 
 /* ========== Section Meta Labels ========== */
 /* Asap Condensed 유지 (영/한 모두) */

@@ -14,18 +14,35 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
   var stripTags = function (h) { return String(h).replace(/<[^>]*>/g, ''); };
   var norm = function (s) { return String(s).replace(/\s+/g, ' ').trim(); };
   var root = document.scrollingElement || document.documentElement;
+  var galleryConfig = {
+    basePath:'./images/',
+    device:'web',
+    container:null,
+    image:null,
+    placeholder:null,
+    loading:null,
+    ready:false
+  };
+  var currentGalleryVersion='ver_121025';
+  var currentGalleryLanguage='en';
 
   /* ================= i18n dict (en/ko) ================= */
   var I18N = {
     en: {
       'lang.label': 'Language',
-      'hero.headline': 'Confidential Coprocessor for Fair, Verifiable Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
+      'nav.tech': 'Technology',
+      'nav.service': 'Service',
+      'nav.goal': 'Goal',
+      'nav.team': 'Team',
+      'nav.advisors': 'Advisors',
+      'hero.headline': 'Confidential Coprocessor for Fair and Verifiable RWA Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
       'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what’s needed is revealed —<br> privacy preserved, fairness ensured.',
       'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
       'sec.tech': '02. Technology',
       'sec.service': '03. Solutions',
       'sec.goal': '01. Vision',
       'sec.team': '04. Team',
+      
       
       // Tech A
       'pA.title': 'FHE16',
@@ -139,7 +156,9 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'sec.tech': '02. Technology',
       'sec.service': '03. Solutions',
       'sec.goal': '01. Vision',
+      'sec.exp': '04. Our Experience',
       'sec.team': '04. Team',
+      
 
       // Tech A
       'pA.title': 'FHE16',
@@ -436,6 +455,7 @@ function layoutHighlight(item){
   function setKeyList(sel, keys){ var list=$$(sel); keys.forEach(function(k,i){ if(list[i]) setKey(list[i],k); }); }
 
   function autowireBySelectors() {
+    setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.team','nav.advisors']);
     setKeyBySel('#tech-label','sec.tech');
     setKeyBySel('#service-label','sec.service');
     setKeyBySel('#goal-label','sec.goal');
@@ -549,6 +569,39 @@ function layoutHighlight(item){
     });
   }
 
+  /*function updateGalleryImage(){
+    if(!galleryConfig.ready || !galleryConfig.container) return;
+    var container=galleryConfig.container;
+    var placeholder=galleryConfig.placeholder;
+    var loading=galleryConfig.loading;
+    var imageEl=galleryConfig.image;
+
+    if(loading){
+      loading.textContent='';
+      loading.style.display='none';
+    }
+
+    if(imageEl){
+      imageEl.hidden=true;
+      imageEl.style.display='none';
+      imageEl.removeAttribute('src');
+    }
+
+    if(placeholder){
+      placeholder.style.display='grid';
+    }
+
+    var THEMES={
+      en:{ bg:'#B91C1C', border:'#9A1919', text:'#FFFFFF' },
+      ko:{ bg:'#1E3A8A', border:'#1A2D66', text:'#FFFFFF' }
+    };
+    var theme=THEMES[currentGalleryLanguage] || { bg:'#4B5563', border:'#374151', text:'#FFFFFF' };
+    container.style.background=theme.bg;
+    container.style.borderColor=theme.border;
+    container.style.color=theme.text;
+    if(placeholder) placeholder.style.color=theme.text;
+  }*/
+
   /* ---------------- Language dropdown ---------------- */
   function openLangMenu() {
     var btn=$('#langBtn'), menu=$('#langMenu'); if(!btn||!menu) return;
@@ -584,6 +637,8 @@ function layoutHighlight(item){
     var btnText=$('#langBtnText'); if(btnText) btnText.textContent=(LANG_CODES[lang]||lang);
     var menu=$('#langMenu'); if(menu){ $$('#langMenu [role="option"]').forEach(function(li){ li.setAttribute('aria-selected', li.getAttribute('data-lang')===lang?'true':'false'); }); }
     syncLangToggleUI(lang);
+    currentGalleryLanguage=lang;
+    // if(galleryConfig.ready) updateGalleryImage();
     requestHighlightRelayout();
   }
   function syncLangToggleUI(lang){
@@ -1314,29 +1369,158 @@ function initUseCaseSlider(){
 
     var versionBtn=$('#versionBtn');
     var versionMenu=$('#versionMenu');
+    if(versionBtn && !versionBtn.getAttribute('aria-controls')) versionBtn.setAttribute('aria-controls','versionMenu');
     if(versionMenu){
       versionMenu.hidden=true;
       versionMenu.style.display='none';
     }
-    if(versionBtn && !versionBtn._comingSoonBound){
-      var showVersionSoon=function(e){
-        e.preventDefault();
-        if(versionMenu){
-          versionMenu.hidden=true;
-          versionMenu.style.display='none';
-          versionBtn.setAttribute('aria-expanded','false');
+    if(versionBtn && versionMenu && !versionBtn._versionBound){
+      var versionLabel=versionBtn.querySelector('.version-label');
+      var ensureVersionLabel=function(){
+        var selected=versionMenu.querySelector('[aria-selected="true"]');
+        if(!selected){
+          var options=$$('#versionMenu [role="option"]');
+          selected=options[0];
         }
-        if(typeof window.alert==='function') window.alert('Coming soon!');
-        else console.log('Coming soon!');
+        if(selected && versionLabel){
+          var nameEl=selected.querySelector('.version-name');
+          var text=nameEl ? nameEl.textContent.trim() : (selected.getAttribute('data-version')||'');
+          if(text) versionLabel.textContent=text;
+        }
+        if(selected){
+          var selectedVersionAttr=selected.getAttribute('data-version');
+          if(selectedVersionAttr) currentGalleryVersion=selectedVersionAttr;
+        }
       };
-      versionBtn.addEventListener('click',showVersionSoon);
+      var closeVersionMenu=function(){
+        versionBtn.setAttribute('aria-expanded','false');
+        versionMenu.hidden=true;
+        versionMenu.style.display='none';
+        versionMenu.style.left='';
+        versionMenu.style.top='';
+        versionMenu.style.maxHeight='';
+        $$('#versionMenu .focused').forEach(function(li){ li.classList.remove('focused'); });
+      };
+      var moveVersionFocus=function(dir){
+        if(versionMenu.hidden) return;
+        var list=$$('#versionMenu [role="option"]');
+        if(!list.length) return;
+        var idx=list.findIndex(function(li){ return li.classList.contains('focused'); });
+        if(idx<0) idx=list.findIndex(function(li){ return li.getAttribute('aria-selected')==='true'; });
+        var next=(idx<0?0:(idx+dir+list.length)%list.length);
+        list.forEach(function(li){ li.classList.remove('focused'); });
+        list[next].classList.add('focused');
+        list[next].scrollIntoView({block:'nearest'});
+      };
+      var chooseVersion=function(option){
+        if(!option) return;
+        $$('#versionMenu [role="option"]').forEach(function(li){
+          li.setAttribute('aria-selected', li===option ? 'true' : 'false');
+          li.classList.remove('focused');
+        });
+        var selectedValue=option.getAttribute('data-version');
+        if(versionLabel){
+          var name=option.querySelector('.version-name');
+          var labelText=name ? name.textContent.trim() : (option.getAttribute('data-version')||'');
+          if(labelText) versionLabel.textContent=labelText;
+        }
+        if(selectedValue) currentGalleryVersion=selectedValue;
+        closeVersionMenu();
+        versionBtn.focus();
+        // if(galleryConfig.ready) updateGalleryImage();
+      };
+      var openVersionMenu=function(){
+        versionBtn.setAttribute('aria-expanded','true');
+        versionMenu.hidden=false;
+        versionMenu.style.display='block';
+        versionMenu.style.right='auto';
+        var rect=versionBtn.getBoundingClientRect();
+        var gap=8;
+        var width=Math.max(rect.width,220);
+        var left=rect.left;
+        if(left+width>window.innerWidth-16){
+          left=Math.max(16,window.innerWidth-width-16);
+        }
+        if(left<16) left=16;
+        var top=rect.bottom+gap;
+        versionMenu.style.minWidth=width+'px';
+        versionMenu.style.left=Math.round(left)+'px';
+        versionMenu.style.top=Math.round(top)+'px';
+        versionMenu.style.maxHeight=Math.max(120,window.innerHeight-top-16)+'px';
+        var menuRect=versionMenu.getBoundingClientRect();
+        if(menuRect.bottom>window.innerHeight-8){
+          var adjustedTop=Math.max(16,rect.top-menuRect.height-gap);
+          versionMenu.style.top=Math.round(adjustedTop)+'px';
+        }
+        var items=$$('#versionMenu [role="option"]');
+        items.forEach(function(li){ li.classList.remove('focused'); });
+        var current=versionMenu.querySelector('[aria-selected="true"]')||items[0];
+        if(current) current.classList.add('focused');
+        if(!document._versionDocClick){
+          document._versionDocClick=function(e){
+            if(versionMenu.hidden) return;
+            if(!versionMenu.contains(e.target) && !versionBtn.contains(e.target)){
+              closeVersionMenu();
+            }
+          };
+          document.addEventListener('click',document._versionDocClick,true);
+        }
+        if(!document._versionKeydown){
+          document._versionKeydown=function(e){
+            if(versionMenu.hidden) return;
+            if(e.key==='ArrowDown'){ e.preventDefault(); moveVersionFocus(1); }
+            else if(e.key==='ArrowUp'){ e.preventDefault(); moveVersionFocus(-1); }
+            else if(e.key==='Enter' || e.key===' '){ e.preventDefault(); var focused=versionMenu.querySelector('.focused'); chooseVersion(focused||versionMenu.querySelector('[aria-selected="true"]')); }
+            else if(e.key==='Escape'){ e.preventDefault(); closeVersionMenu(); versionBtn.focus(); }
+          };
+          document.addEventListener('keydown',document._versionKeydown);
+        }
+      };
+      ensureVersionLabel();
+      versionBtn.addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        if(versionMenu.hidden) openVersionMenu();
+        else closeVersionMenu();
+      });
       versionBtn.addEventListener('keydown',function(e){
-        if(e.key==='Enter' || e.key===' '){
-          showVersionSoon(e);
+        if(e.key==='Enter' || e.key===' ' || e.key==='ArrowDown'){
+          e.preventDefault();
+          openVersionMenu();
+        }else if(e.key==='ArrowUp'){
+          e.preventDefault();
+          openVersionMenu();
+          moveVersionFocus(-1);
+        }else if(e.key==='Escape' && !versionMenu.hidden){
+          e.preventDefault();
+          closeVersionMenu();
         }
       });
-      versionBtn._comingSoonBound=true;
+      versionMenu.addEventListener('click',function(e){
+        e.stopPropagation();
+        var option=e.target.closest('[role="option"]');
+        if(option) chooseVersion(option);
+      });
+      versionBtn._versionBound=true;
     }
+
+    /*
+    if(!galleryConfig.ready){
+      galleryConfig.container=document.querySelector('.result-image-area');
+      galleryConfig.image=document.getElementById('versionImage');
+      galleryConfig.loading=document.querySelector('.result-image-area .loading-text');
+      galleryConfig.placeholder=document.querySelector('.result-image-area .result-placeholder');
+      if(versionMenu){
+        var defaultOption=versionMenu.querySelector('[aria-selected="true"]')||versionMenu.querySelector('[role="option"]');
+        if(defaultOption){
+          var defaultVersionAttr=defaultOption.getAttribute('data-version');
+          if(defaultVersionAttr) currentGalleryVersion=defaultVersionAttr;
+        }
+      }
+      galleryConfig.ready=!!galleryConfig.container;
+    }
+    // if(galleryConfig.ready) updateGalleryImage();
+    */
 
 // 공통 인터랙션
 initScrollTopButton();
