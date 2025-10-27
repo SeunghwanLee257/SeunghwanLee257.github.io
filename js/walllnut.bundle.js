@@ -885,8 +885,6 @@ function initNavHighlightOnly() {
   const scrollRoot = getScrollRoot();
   if (!header || !langBox || !scrollRoot) return;
 
-  console.log('📱 Mobile scroll detection active on:', scrollRoot === window ? 'window' : scrollRoot.tagName);
-
   let lastY = getScrollY();
   let lastChangeY = lastY;
   let lastDirection = null; // 👈 위/아래 스크롤 방향 저장
@@ -909,7 +907,6 @@ function initNavHighlightOnly() {
     header.classList.toggle('is-compact', compact);
     langBox.classList.toggle('is-hidden', compact);
     langBox.classList.toggle('is-visible', !compact);
-    console.log('📍 header 상태:', compact ? '숨김' : '보임');
   }
 
   function evaluate() {
