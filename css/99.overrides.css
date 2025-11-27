@@ -1,0 +1,77 @@
+/* =========================================================
+   99. Overrides
+   - Temporary or defensive hides / feature toggles
+   ========================================================= */
+
+/* Legacy state aliases (removed after state refactor)
+   - .goal-dropdown-card.open → .goal-dropdown-card.is-open
+   - .mobile-menu-overlay.active → .mobile-menu-overlay.is-active
+   - .nav a.active → .nav a.is-active
+   - .tech-panel.active / .tech-panel.inactive → .tech-panel.is-active / .tech-panel:not(.is-active)
+   - #langDropdown.is-hidden & #langDropdown.is-visible → #langDropdown.is-open
+   - body.menu-open → html/body.menu-locked
+*/
+
+.result-image-area,
+.result-placeholder,
+#versionImage{
+  display: none !important; /* quarantine: legacy gallery placeholder */
+}
+
+.nav-active-bar{
+  display: none !important; /* quarantine: unused nav indicator */
+}
+
+.actions .action-icon{
+  display: none !important; /* quarantine: unused CTA icon wrapper */
+}
+
+body.menu-open{
+  display: none !important; /* quarantine: replaced by menu-locked state */
+}
+
+@media (min-width: 768px){
+  /* Desktop safeguard: hide mobile-only controls */
+  .mobile-menu-btn,
+  .mobile-menu-overlay,
+  .nav-close-btn{
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px){
+  /* Disable JS-injected highlight boxes on smaller viewports */
+  #panel-b .g-item-ex .box{
+    display: none !important;
+  }
+}
+
+@media print{
+  .header,
+  .svc-cont,
+  .goal-dropdown-icon{
+    display: none;
+  }
+
+  body{
+    font-size: 12pt;
+  }
+}
+
+/* =========================================================
+   Desktop-first baseline (requested): min viewport 1024px
+   - Prevent unintended mobile shrink until dedicated specs arrive
+   ========================================================= */
+/* 반응형을 위해 min-width 제거 */
+/* html, body{
+  min-width: 1024px;
+} */
+
+/* Recommended breakpoint scaffold (to be refined with your directives)
+   Use these blocks for subsequent fine-tuning; currently no-op. */
+@media (min-width: 1024px){
+  /* desktop baseline tweaks go here */
+}
+@media (min-width: 1440px){
+  /* large desktop tweaks go here */
+}

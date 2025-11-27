@@ -1,0 +1,55 @@
+/* =========================================================
+   00. Design Tokens & Z-Layers
+   - CSS custom properties shared across the system
+   - Shadow presets and documented z-index stack
+   ========================================================= */
+
+:root{
+  /* Layout */
+  --side-desktop: 20px;
+  --side-tablet: 20px;
+  --gap-title-content: 16px;
+
+  /* Spacing (8pt scale) */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Colors */
+  --title-color: #403E3C;
+  --muted: #807F7F;
+  --paper: #FFFFFF;
+  --ink: #191919;
+  --bg-gray: #F2F2F2;
+  --hover-bg: #FAFAF9;
+  --chip: #DEDBD8;
+  --accent: #FF952D;
+  --accent-dark: #D86B00; /* Improved contrast for text on light backgrounds */
+
+  /* Z-Index */
+  --z-base: 1;
+  --z-header: 100;
+  --z-dropdown: 400;
+  --z-modal: 1000;
+  --z-toast: 1100;
+
+  /* Shadows */
+  --elev: 0 6px 24px rgba(0,0,0,0.16);
+  --btn-elev: 0 8px 20px rgba(216,107,0,.4);
+  --btn-elev-hover: 0 12px 24px rgba(216,107,0,.5);
+}
+
+/* Z-Index Stack Reference
+   2147483647  scroll-top button
+   var(--z-toast)    toast / highest notices
+   var(--z-modal)    modals & overlays
+   var(--z-dropdown) dropdown sheets
+   var(--z-header)   header & sticky nav
+   var(--z-base)     default positioned elements
+*/

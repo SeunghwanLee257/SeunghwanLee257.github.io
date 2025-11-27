@@ -1,0 +1,1465 @@
+/* =========================================================
+   02. Layout
+   - Global containers, header/nav, footer
+   - Shared spacing for page sections
+   - Responsive layout adjustments
+   ========================================================= */
+
+/* Global containers - 최소한만 */
+.container{
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 1023px 이하에서 container 강제 반응형 */
+@media screen and (max-width: 1023px){
+  .container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 섹션에 container 클래스가 있어도 섹션 width는 섹션 스타일 우선 */
+section.container{
+  width: 100%;
+}
+
+main{
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden !important;
+}
+
+/* Section rhythm - 최소한의 기본 스타일만 */
+section{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+#sec01{
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* AOS가 작동하지 않아도 섹션들이 보이도록 */
+[data-aos]{
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* ========== Section Width - 반응형 ========== */
+
+/* 기본: 모든 섹션은 100% width (모든 화면 크기) */
+#sec02,
+#sec03,
+#sec04,
+#sec05,
+#sec06{
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box;
+}
+
+/* 섹션에 container 클래스가 있어도 반응형 유지 */
+section.container{
+  width: 100%;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+/* 섹션 내부 모든 요소도 반응형 */
+#sec02 > *,
+#sec03 > *,
+#sec04 > *,
+#sec05 > *,
+#sec06 > *{
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 섹션 내부 모든 요소의 width 강제 제한 (1023px 이하) */
+@media screen and (max-width: 1023px){
+  #sec02,
+  #sec03,
+  #sec04,
+  #sec05,
+  #sec06{
+    overflow-x: hidden !important;
+  }
+  
+  #sec02 *,
+  #sec03 *,
+  #sec04 *,
+  #sec05 *,
+  #sec06 *{
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 고정 width를 가진 요소들도 반응형으로 */
+  #sec02 img,
+  #sec03 img,
+  /* #sec04 img, */
+  #sec05 img{
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* #sec06 img는 팀 슬라이드에서 별도 관리 */
+  
+  /* .tech-panel-media img는 부모 높이만큼 100% 차지 */
+  .tech-panel-media img{
+    height: 100% !important;
+  }
+  
+  /* 텍스트 요소들도 줄바꿈 허용 */
+  #sec02 p,
+  #sec03 p,
+  #sec04 p,
+  #sec05 p,
+  #sec06 p,
+  #sec02 h1,
+  #sec02 h2,
+  #sec02 h3,
+  #sec03 h1,
+  #sec03 h2,
+  #sec03 h3,
+  #sec04 h1,
+  #sec04 h2,
+  #sec04 h3,
+  #sec05 h1,
+  #sec05 h2,
+  #sec05 h3,
+  #sec06 h1,
+  #sec06 h2,
+  #sec06 h3{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+}
+
+/* 데스크톱 (1024px 이상) - 여기서만 max-width 제한 */
+@media screen and (min-width: 1024px){
+  #sec02,
+  #sec03,
+  #sec04,
+  #sec05,
+  #sec06{
+    width: 100% !important;
+    max-width: 1240px !important;
+    margin: 260px auto;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  section.container{
+    width: 100% !important;
+    max-width: 1240px !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+  
+  /* 데스크톱에서는 모바일 스타일 완전히 제거하고 원래대로 복원 */
+  .header-left{
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: var(--space-16) !important;
+    order: 0 !important;
+    /* 모바일의 display: contents 제거 */
+  }
+  
+  .header-center{
+    flex: 0 1 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    order: 0 !important;
+    padding-right: 0 !important;
+    gap: var(--space-16) !important;
+    flex-direction: row !important;
+    /* 모바일 스타일 제거 */
+    flex-grow: 0 !important;
+    flex-shrink: 1 !important;
+    flex-basis: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  
+  .logo-menus{
+    order: 0 !important;
+    padding-left: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 1 !important;
+  }
+  
+  /* .header-left에 있는 .ecosystem-btn은 표시 */
+  .header-left .ecosystem-btn{
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* .header-center 안에 .ecosystem-btn이 있으면 숨김 (모바일에서 이동된 경우) */
+  .header-center .ecosystem-btn{
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  .nav{
+    display: flex !important;
+    pointer-events: auto !important;
+  }
+  
+  .nav a{
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+  
+  .header-left{
+    pointer-events: auto !important;
+  }
+  
+  .header-right{
+    order: 0 !important;
+    /* 모바일의 order: 1 제거 */
+  }
+}
+
+/* 태블릿 (768px ~ 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  #sec02,
+  #sec03,
+  #sec04,
+  #sec05,
+  #sec06{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 160px auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  section.container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* 모바일 큰 (481px ~ 767px) */
+@media screen and (min-width: 481px) and (max-width: 767px){
+  #sec02,
+  #sec03,
+  #sec04,
+  #sec05,
+  #sec06{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding-top: 120px !important;
+    padding-bottom: 120px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  section.container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* 모바일 작은 (max-width: 480px) */
+@media screen and (max-width: 480px){
+  #sec02,
+  #sec03,
+  #sec04,
+  #sec05,
+  #sec06{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  section.container{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+
+
+/* Header */
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: var(--z-header);
+  background-color: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 32px 30px 12px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  color: white;
+  transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity .4s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s ease,
+              backdrop-filter 0.3s ease,
+              color 0.3s ease,
+              visibility 0s;
+  background-image: none;
+  /* 기본적으로 표시 (스크롤 전에도 보임) */
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  /* 뷰포트를 벗어나지 않도록 보장 */
+  min-width: 0;
+}
+
+/* 스크롤 시에만 배경 적용 */
+.header.has-scrolled{
+  background-color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+  color: inherit;
+}
+
+/* 스크롤 전에는 배경 없음 */
+.header:not(.has-scrolled){
+  background-color: transparent;
+  backdrop-filter: none;
+  color: white;
+}
+
+/* 스크롤 전 header 내부 요소 색상 */
+.header:not(.has-scrolled) a,
+.header:not(.has-scrolled) button,
+.header:not(.has-scrolled) span,
+.header:not(.has-scrolled) .nav a{
+  color: white;
+}
+
+/* scrollY:0일 때 header 버튼 배경색 alpha 0.6 (lang-toggle-btn 제외) */
+.header:not(.has-scrolled) .ecosystem-btn{
+  background: rgba(242, 242, 242, 0.6);
+}
+
+.header:not(.has-scrolled) .header-menu-btn{
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* .lang-toggle-btn은 제외 - 투명도 적용 안 함 */
+
+/* scrollY:0일 때 lang-toggle-btn 색상 (비활성 상태일 때만) */
+.header:not(.has-scrolled) .lang-toggle-btn[data-lang="ko"]:not(.is-active),
+.header:not(.has-scrolled) .lang-toggle-btn[data-lang="en"]:not(.is-active) {
+  color: #8F8F8F;
+}
+
+.header.is-visible.header--animating{
+  animation: headerSlideDown .4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes headerSlideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header-left,
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  flex: 1 1 0;
+  min-width: 0; /* flex 아이템이 축소될 수 있도록 */
+}
+
+/* 모바일에서는 기본 flex 값 무시 */
+@media screen and (max-width: 767px){
+  .header-left,
+  .header-right{
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+  }
+}
+
+.header-left{
+  justify-content: flex-start;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.header.sns-active .header-left{
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.header-center{
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header-right{
+  justify-content: flex-end;
+}
+
+.header-right-group{
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+/* 모바일 작은 (max-width: 480px) - Header */
+@media screen and (max-width: 480px){
+  .header{
+    position: fixed !important;
+    top: 0;
+    z-index: var(--z-header);
+    width: 100% !important;
+    height: auto;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    backdrop-filter: none;
+    padding: 20px 6px 8px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      backdrop-filter 0.4s ease,
+      background 0.4s ease,
+      box-shadow 0.4s ease,
+      opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 웹처럼 처음에는 숨김 */
+  }
+  
+  /* 웹처럼 처음에는 헤더 숨김 */
+  .header:not(.is-visible){
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .header.is-visible{
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .header-left{
+    display: contents !important; /* 자식 요소를 부모의 직접 자식처럼 만듦 */
+  }
+  
+  /* .header-left 안에 있는 .ecosystem-btn을 먼저 배치 */
+  .header-left .ecosystem-btn{
+    order: -1 !important; /* 벤치마킹 버튼을 가장 앞으로 */
+    margin-right: 12px !important; /* 로고와의 간격 */
+  }
+  
+  .header-center{
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    position: static !important;
+    transform: none !important;
+    order: 0 !important; /* 로고는 벤치마킹 버튼 다음 */
+  }
+  
+  .logo-menus{
+    width: auto !important;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+    padding-left: 0 !important;
+  }
+  
+  /* .header-center 안에 있는 .ecosystem-btn 스타일 */
+  .header-center .ecosystem-btn{
+    flex-shrink: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .nav{
+    display: none !important; /* 모바일에서는 nav 숨김 (사이드바로 이동) */
+  }
+
+  .header-right{
+    order: 1 !important; /* 제일 오른쪽 */
+  }
+  
+  .logo-menus img{
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
+
+  .header-right{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+  
+  .header-right-group{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  
+  .sns-toggle{
+    width: 52px !important;
+    height: 32px !important;
+    padding: 2px !important;
+    flex-shrink: 0 !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .sns-toggle-track{
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .header-right .lang-dd{
+    display: flex !important;
+    flex: 0 0 auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 2px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  
+  .lang-toggle{
+    height: 32px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .lang-toggle-btn{
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 10px !important;
+    flex-shrink: 0 !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    transform: none !important;
+  }
+  
+  .header-right .header-menu-btn{
+    width: 32px !important;
+    height: 32px !important;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .header-menu-btn .material-icons{
+    font-size: 20px;
+  }
+}
+
+/* 모바일 큰 (481px ~ 767px) - Header */
+@media screen and (min-width: 481px) and (max-width: 767px){
+  .header{
+    position: fixed !important;
+    top: 0;
+    z-index: var(--z-header);
+    width: 100% !important;
+    height: auto;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    backdrop-filter: none;
+    padding: 20px 6px 8px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      backdrop-filter 0.4s ease,
+      background 0.4s ease,
+      box-shadow 0.4s ease,
+      opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 웹처럼 처음에는 숨김 */
+  }
+  
+  /* 웹처럼 처음에는 헤더 숨김 */
+  .header:not(.is-visible){
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .header.is-visible{
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .header-left{
+    display: contents !important; /* 자식 요소를 부모의 직접 자식처럼 만듦 */
+  }
+  
+  /* .header-left 안에 있는 .ecosystem-btn을 먼저 배치 */
+  .header-left .ecosystem-btn{
+    order: -1 !important; /* 벤치마킹 버튼을 가장 앞으로 */
+    margin-right: 12px !important; /* 로고와의 간격 */
+  }
+  
+  .header-center{
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    position: static !important;
+    transform: none !important;
+    order: 0 !important; /* 로고는 벤치마킹 버튼 다음 */
+  }
+  
+  .logo-menus{
+    width: auto !important;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+    padding-left: 0 !important;
+  }
+  
+  /* .header-center 안에 있는 .ecosystem-btn 스타일 */
+  .header-center .ecosystem-btn{
+    flex-shrink: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .nav{
+    display: none !important; /* 모바일에서는 nav 숨김 (사이드바로 이동) */
+  }
+
+  .header-right{
+    order: 1 !important; /* 제일 오른쪽 */
+  }
+  
+  .logo-menus img{
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
+
+  .header-right{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+  
+  .header-right-group{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  
+  .sns-toggle{
+    width: 60px !important;
+    height: 38px !important;
+    padding: 3px !important;
+    flex-shrink: 0 !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .sns-toggle-track{
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .header-right .lang-dd{
+    display: flex !important;
+    flex: 0 0 auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 2px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  
+  .lang-toggle{
+    height: 36px !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .lang-toggle-btn{
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 11px !important;
+    flex-shrink: 0 !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    transform: none !important;
+  }
+  
+  .header-right .header-menu-btn{
+    width: 38px !important;
+    height: 38px !important;
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .header-menu-btn .material-icons{
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1023px){
+  .header.header--compact{
+    transform: translateY(-40px);
+    opacity: 0.95;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  /* 768px 이상 1023px 이하에서만 적용 */
+  @media screen and (min-width: 768px) {
+    /* 1023px 이하에서 header-center를 왼쪽에 배치 */
+    .header-center{
+      order: 0;
+      padding-right: 12px;
+    }
+
+    .header-left{
+      order: 1;
+    }
+
+    .header-right{
+      order: 2;
+    }
+  }
+}
+
+.header.header--lang-hidden,
+.header.is-compact{
+  padding: var(--space-16) 6% var(--space-8) 6%;
+  gap: var(--space-12);
+}
+
+.header.is-compact{
+  height: auto;
+}
+
+.header::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.header-font{
+  font-family: Pretendard;
+}
+
+.header--scrolled{
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  background-image: none;
+}
+
+.header--scrolled::after{
+  background: transparent;
+}
+
+.header-font button,
+.header-font a,
+.header-font span,
+.header-font .version-name,
+.header-font .version-label{
+  font-family: inherit;
+}
+
+.header-spacer{
+  height: 90px;
+  transition: height .35s ease;
+}
+
+main + .header-spacer{
+  height: 90px;
+}
+
+@media screen and (max-width: 767px){
+  .header-spacer{
+    height: 170px;
+  }
+
+  .header.header--compact + main .header-spacer,
+  .header.header--lang-hidden + main .header-spacer,
+  .header.is-compact + main .header-spacer,
+  .header.header--compact ~ main .header-spacer,
+  .header.header--lang-hidden ~ main .header-spacer,
+  .header.is-compact ~ main .header-spacer{
+    height: 120px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .header-spacer{
+    height: 170px;
+  }
+
+  .header.header--lang-hidden + main .header-spacer,
+  .header.is-compact + main .header-spacer,
+  .header.header--lang-hidden ~ main .header-spacer,
+  .header.is-compact ~ main .header-spacer{
+    height: 120px;
+  }
+}
+
+.logo-menus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  position: relative;
+}
+
+@media screen and (max-width: 767px){
+  .logo-menus{
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 12px;
+  }
+
+  .logo-menus img{
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
+    padding-right: 0;
+    box-shadow: none;
+  }
+
+  .header.header--lang-hidden .logo-menus,
+  .header.is-compact .logo-menus{
+    position: static;
+    top: auto;
+    padding-bottom: 0;
+  }
+}
+
+.header.header--lang-hidden .logo-menus,
+.header.is-compact .logo-menus{
+  padding-bottom: 0;
+}
+
+.logo-menus img{
+  padding-right: 0;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.header.sns-active .logo-menus img{
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.nav{
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0;
+  transition: padding .35s ease;
+}
+
+@media screen and (max-width: 767px){
+  .nav{
+    order: 2;
+    padding: var(--space-12) 20px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #E4E2DF;
+    margin-left: 0;
+  }
+
+  .header .nav{
+    order: 2;
+    padding: var(--space-12) 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .nav{
+    gap: var(--space-12);
+    font-size: 12px;
+  }
+}
+
+.nav a{
+  position: relative;
+  text-decoration: none;
+  color: #807F7F;
+  border-bottom: 0;
+  transition: color .2s ease;
+  margin-bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  font-weight: 500;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+@media screen and (max-width: 767px){
+  .nav a{
+    padding: 0;
+    border-radius: 0;
+    min-height: auto;
+    color: #807F7F;
+    font-weight: 500;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .nav a{
+    padding: 6px 10px;
+  }
+}
+
+.nav a.is-active{
+  color: var(--accent-dark);
+  text-shadow: 0 0 1px rgba(216, 107, 0, 0.3);
+}
+
+.nav a:hover{
+  color: var(--accent-dark);
+  text-shadow: 0 0 1px rgba(216, 107, 0, 0.3);
+}
+
+.lang-dd{
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin-left: 0;
+  flex: 0 0 auto;
+  align-self: center;
+  padding-bottom: 0;
+  max-height: 160px;
+  overflow: hidden;
+  transition: opacity .3s ease, transform .35s ease, max-height .35s ease, padding .35s ease;
+}
+
+@media screen and (max-width: 767px){
+  .lang-dd{
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-16);
+    padding: 0;
+    max-height: 240px;
+    overflow: visible;
+    transition: opacity .35s ease, transform .35s ease, max-height .4s ease, padding .35s ease;
+  }
+
+  .header .lang-dd{
+    padding: 0;
+  }
+
+  .header.is-compact .lang-dd,
+  .header.header--lang-hidden .lang-dd{
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .lang-dd{
+    padding-left: 0;
+  }
+}
+
+.header.header--lang-hidden .lang-dd,
+.header.is-compact #langDropdown,
+.header.is-compact .header-floating{
+  max-height: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.header.header--lang-hidden .nav,
+.header.is-compact .nav{
+  padding-bottom: 16px;
+}
+
+.header.header--lang-hidden + main .header-spacer,
+.header.is-compact + main .header-spacer,
+.header.header--lang-hidden ~ main .header-spacer,
+.header.is-compact ~ main .header-spacer{
+  height: 72px;
+}
+
+/* Lang dropdown animation states */
+.header{
+  overflow: visible;
+}
+
+.header-floating{
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lang-dd.header-floating{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.header.is-compact .header-floating,
+.header.header--lang-hidden .header-floating{
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header.is-compact .lang-dd.header-floating{
+  transform: translateY(-40px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header:not(.is-compact) .lang-dd.header-floating{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.header.header--lang-hidden #langDropdown{
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
+}
+
+#langDropdown{
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  /* 항상 보이게 */
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  max-height: none;
+}
+
+#langDropdown.is-open{
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* is-open이 없어도 보이게 */
+#langDropdown:not(.is-open){
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  max-height: none;
+}
+
+.header.is-compact{
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+
+.lang-dd-label{
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Footer */
+footer{
+  background-color: #DEDBD8;
+  padding: 80px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1023px){
+  footer{
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 60px 20px;
+    box-sizing: border-box;
+  }
+  
+  footer > div{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  footer *{
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+footer > div{
+  font-size: 12px;
+  font-weight: 600;
+  color: #807F7F;
+}
+
+.f-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.f-social-list{
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.social-link{
+  text-align: center;
+}
+
+.social-link a,
+.social-link a svg{
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-link a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.social-link a:hover,
+.social-link a:focus-visible{
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.social-link a:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.social-link:nth-child(1) a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link:nth-child(1) a svg{
+  width: 20px;
+  height: 20px;
+}
+
+@media (hover: none) and (pointer: coarse){
+  .nav a{
+    min-height: 48px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .header{
+    position: fixed !important;
+    top: 0;
+    z-index: var(--z-header);
+    width: 100% !important;
+    height: auto;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    backdrop-filter: none;
+    padding: 10px 10px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    box-sizing: border-box !important;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      backdrop-filter 0.4s ease,
+      background 0.4s ease,
+      box-shadow 0.4s ease,
+      opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 웹처럼 처음에는 숨김 */
+  }
+  
+  /* 웹처럼 처음에는 헤더 숨김 */
+  .header:not(.is-visible){
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  .header.is-visible{
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* 모바일과 동일한 레이아웃 */
+  .header-left{
+    display: contents !important; /* 자식 요소를 부모의 직접 자식처럼 만듦 */
+  }
+  
+  /* .header-left 안에 있는 .ecosystem-btn을 먼저 배치 */
+  .header-left .ecosystem-btn{
+    order: -1 !important; /* 벤치마킹 버튼을 가장 앞으로 */
+    margin-right: 12px !important; /* 로고와의 간격 */
+  }
+  
+  .header-center{
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 4px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    position: static !important;
+    transform: none !important;
+    order: 0 !important; /* 로고는 벤치마킹 버튼 다음 */
+  }
+  
+  .logo-menus{
+    width: auto !important;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+    padding-left: 0 !important;
+  }
+  
+  /* .header-center 안에 있는 .ecosystem-btn 스타일 */
+  .header-center .ecosystem-btn{
+    flex-shrink: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .nav{
+    display: none !important; /* 모바일에서는 nav 숨김 (사이드바로 이동) */
+  }
+
+  .header-right{
+    order: 1 !important; /* 제일 오른쪽 */
+  }
+  
+  .nav a{
+    padding: 6px 10px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px){
+  .header{
+    /* padding: 10px 16px; */
+  }
+  
+  /* 데스크톱에서는 모바일 스타일 완전히 제거하고 원래대로 복원 */
+  .header-left{
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: var(--space-16) !important;
+    order: 0 !important;
+    /* 모바일의 display: contents 제거 */
+  }
+  
+  .header-center{
+    flex: 0 1 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    order: 0 !important;
+    padding-right: 0 !important;
+    gap: var(--space-16) !important;
+    flex-direction: row !important;
+    /* 모바일 스타일 제거 */
+    flex-grow: 0 !important;
+    flex-shrink: 1 !important;
+    flex-basis: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
+    width: auto !important;
+    transform: none !important;
+  }
+  
+  .logo-menus{
+    order: 0 !important;
+    padding-left: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 1 !important;
+  }
+  
+  /* .header-left에 있는 .ecosystem-btn은 표시 */
+  .header-left .ecosystem-btn{
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* .header-center 안에 .ecosystem-btn이 있으면 숨김 (모바일에서 이동된 경우) */
+  .header-center .ecosystem-btn{
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  .nav{
+    display: flex !important;
+    pointer-events: auto !important;
+  }
+  
+  .nav a{
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+  
+  .header-left{
+    pointer-events: auto !important;
+  }
+  
+  .header-right{
+    order: 0 !important;
+    /* 모바일의 order: 1 제거 */
+  }
+}

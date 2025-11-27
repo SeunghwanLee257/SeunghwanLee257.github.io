@@ -1,4 +1,3 @@
-
 // 항상 맨 위에서 시작
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
@@ -30,16 +29,18 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
   var I18N = {
     en: {
       'lang.label': 'Language',
+      'nav.vision': 'Vision',
+      'nav.solutions': 'Solutions',
       'nav.tech': 'Technology',
       'nav.service': 'Service',
       'nav.goal': 'Goal',
       'nav.team': 'Team',
       'nav.advisors': 'Advisors',
       'hero.headline': 'Confidential Coprocessor for Fair and Verifiable RWA Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
-      'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what’s needed is revealed —<br> privacy preserved, fairness ensured.',
+      'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what\'s needed is revealed —<br> privacy preserved, fairness ensured.',
       'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
-      'sec.tech': '02. Technology',
-      'sec.service': '03. Solutions',
+      'sec.tech': '03. Technology',
+      'sec.service': '02. Solutions',
       'sec.goal': '01. Vision',
       'sec.team': '04. Team',
       
@@ -150,11 +151,15 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     },
     ko: {
       'lang.label': '언어',
+      'nav.vision': '비전',
+      'nav.solutions': '솔루션',
+      'nav.tech': '기술',
+      'nav.team': '팀',
       'hero.headline': '공정하고 신뢰할 수 있는 실물자산(RWA) 시장을 위한<br>비공개 연산 플랫폼 FHE16, MPC, 임계값 암호화를 결합해<br>성능 저하 없이 확장 가능한 프라이버시를 제공합니다.',
       'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
       'slogan': 'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>"투명성"</strong>과 <strong>"기밀성"</strong>을 모두 보장하는 것입니다.',
-      'sec.tech': '02. Technology',
-      'sec.service': '03. Solutions',
+      'sec.tech': '03. Technology',
+      'sec.service': '02. Solutions',
       'sec.goal': '01. Vision',
       'sec.exp': '04. Our Experience',
       'sec.team': '04. Team',
@@ -681,7 +686,21 @@ function layoutHighlight(item){
   }
   window.smoothScrollTo = smoothScrollTo;
 
-  function clearLocks(){ document.documentElement.classList.remove('menu-locked'); document.body.classList.remove('menu-locked','menu-open'); var ov=$('.mobile-menu-overlay'); if(ov) ov.classList.remove('active'); }
+  function clearLocks(){
+    document.documentElement.classList.remove('menu-locked');
+    document.body.classList.remove('menu-locked');
+    var overlay = $('.mobile-menu-overlay');
+    if (overlay) overlay.classList.remove('is-active');
+    var logoMenus = $('.logo-menus');
+    if (logoMenus) logoMenus.classList.remove('is-open');
+    var nav = $('.nav');
+    if (nav) nav.classList.remove('is-open');
+    var menuBtn = $('.mobile-menu-btn');
+    if (menuBtn) {
+      menuBtn.classList.remove('is-active');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  }
 
   // === Scroll root detection ===
   function getScrollRoot() {
@@ -725,42 +744,6 @@ function layoutHighlight(item){
     } catch(_) {
       root.scrollTop = y;
     }
-  }
-
-  /* ================= ScrollTop btn ================= */
-  function initScrollTopButton() {
-    var btn = document.querySelector('#scrollTopBtn');
-    if (!btn) {
-      btn = document.createElement('button');
-      btn.id = 'scrollTopBtn';
-      btn.className = 'scroll-top-btn';
-      btn.innerHTML = '<img src="./asset/scrollTop.svg" alt="Scroll to top">';
-      btn.setAttribute('hidden', '');
-      document.body.appendChild(btn);
-    }
-
-    var THRESHOLD = 240;
-    var root = getScrollRoot();
-
-    function getY(){ return getScrollY(); }
-    function visible(v){ v ? btn.removeAttribute('hidden') : btn.setAttribute('hidden',''); }
-    function update(){ visible(getY() > THRESHOLD); }
-
-    if (!btn._scrollListenerAdded) {
-      root.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', function(){ root = getScrollRoot(); update(); }, { passive: true });
-
-      btn.addEventListener('click', function(e){
-        e.preventDefault(); e.stopImmediatePropagation();
-        smoothTo(0);
-      });
-
-      btn._scrollListenerAdded = true;
-    }
-
-    setTimeout(update, 0);
-    setTimeout(update, 300);
   }
 
   /* ================= Header nav anchors ================= */
@@ -832,7 +815,11 @@ function initNavHighlightOnly() {
     if(!pairs.length) return;
 
     function setActive(link){
-      links.forEach(function(a){ var isActive=a===link; a.classList.toggle('is-active',isActive); a.classList.toggle('active',isActive); if(isActive) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+      links.forEach(function(a){
+        var isActive=a===link;
+        a.classList.toggle('is-active',isActive);
+        if(isActive) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current');
+      });
     }
 
     function resolve(){
@@ -873,40 +860,50 @@ function initNavHighlightOnly() {
   }
 
   function initHeaderAutoHide() {
-  const MOBILE_MAX = 768;
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  if (!isMobile) {
-    console.log('💻 Desktop mode — auto-hide disabled');
-    return;
-  }
-
+  // 모든 디바이스에서 적용 (모바일, 태블릿, 웹)
   const header = document.querySelector('.header');
   const langBox = document.querySelector('#langDropdown');
+  const hero = document.querySelector('#sec01-hero, .hero');
   const scrollRoot = getScrollRoot();
   if (!header || !langBox || !scrollRoot) return;
 
   let lastY = getScrollY();
   let lastChangeY = lastY;
-  let lastDirection = null; // 👈 위/아래 스크롤 방향 저장
-  let isCompact = false;
+  let lastDirection = null;
+  let isVisible = false; // 웹처럼 is-visible 클래스로 제어
   let ticking = false;
-  let lastActionTime = 0; // 👈 너무 자주 토글 방지용 timestamp
+  let lastActionTime = 0;
 
-  const DEAD_ZONE = 100;       // 상단에서는 항상 보이게
-  const SHOW_THRESHOLD = 100;   // 위로 40px 이상 → 보이기
-  const HIDE_THRESHOLD = 100;  // 아래로 120px 이상 → 숨기기
-  const MIN_DELAY = 200;       // 👈 최소 250ms 간격 두기 (번쩍 방지)
+  const DEAD_ZONE = 100;       // 상단에서는 헤더 숨김
+  const SHOW_THRESHOLD = 50;   // 위로 50px 이상 스크롤 → 헤더 보이기
+  const HIDE_THRESHOLD = 50;   // 아래로 50px 이상 스크롤 → 헤더 숨기기
+  const MIN_DELAY = 200;
 
-  function setCompact(compact) {
-    if (isCompact === compact) return; // 👈 같은 상태면 무시
+  function setVisible(visible) {
+    if (isVisible === visible) return;
     const now = performance.now();
-    if (now - lastActionTime < MIN_DELAY) return; // 👈 너무 자주 변경 방지
+    if (now - lastActionTime < MIN_DELAY) return;
 
-    isCompact = compact;
+    isVisible = visible;
     lastActionTime = now;
-    header.classList.toggle('is-compact', compact);
-    langBox.classList.toggle('is-hidden', compact);
-    langBox.classList.toggle('is-visible', !compact);
+    header.classList.toggle('is-visible', visible);
+    
+    if (visible) {
+      header.style.removeProperty('transform');
+      header.style.removeProperty('opacity');
+      header.style.removeProperty('pointer-events');
+      header.style.removeProperty('visibility');
+      header.classList.add('header--animating');
+      setTimeout(() => {
+        header.classList.remove('header--animating');
+      }, 400);
+    } else {
+      header.style.setProperty('transform', 'translateY(-100%)', 'important');
+      header.style.setProperty('opacity', '0', 'important');
+      header.style.setProperty('pointer-events', 'none', 'important');
+      header.style.setProperty('visibility', 'hidden', 'important');
+    }
+    langBox.classList.toggle('is-open', visible);
   }
 
   function evaluate() {
@@ -915,9 +912,9 @@ function initNavHighlightOnly() {
     const dist = Math.abs(y - lastChangeY);
     const direction = dy > 0 ? 'down' : dy < 0 ? 'up' : null;
 
-    // DEAD_ZONE → 항상 보이기
+    // DEAD_ZONE 이하 → 헤더 숨김 (웹처럼)
     if (y < DEAD_ZONE) {
-      setCompact(false);
+      setVisible(false);
       lastDirection = null;
       lastChangeY = y;
       lastY = y;
@@ -925,21 +922,21 @@ function initNavHighlightOnly() {
       return;
     }
 
-    // 👇 스크롤 방향이 바뀌었을 때만 동작
+    // 스크롤 방향이 바뀌었을 때만 동작
     if (direction && direction !== lastDirection) {
       lastDirection = direction;
       lastChangeY = y;
     }
 
-    // 아래로 충분히 스크롤 → 숨기기
-    if (direction === 'down' && dist > HIDE_THRESHOLD && !isCompact) {
-      setCompact(true);
+    // 아래로 충분히 스크롤 → 헤더 숨기기
+    if (direction === 'down' && dist > HIDE_THRESHOLD && isVisible) {
+      setVisible(false);
       lastChangeY = y;
     }
 
-    // 위로 충분히 스크롤 → 보이기
-    if (direction === 'up' && dist > SHOW_THRESHOLD && isCompact) {
-      setCompact(false);
+    // 위로 충분히 스크롤 → 헤더 보이기
+    if (direction === 'up' && dist > SHOW_THRESHOLD && !isVisible) {
+      setVisible(true);
       lastChangeY = y;
     }
 
@@ -954,17 +951,38 @@ function initNavHighlightOnly() {
     }
   }
 
+  // 초기 상태: 헤더 즉시 숨김
+  header.classList.remove('is-visible');
+  header.style.setProperty('transform', 'translateY(-100%)', 'important');
+  header.style.setProperty('opacity', '0', 'important');
+  header.style.setProperty('pointer-events', 'none', 'important');
+  header.style.setProperty('visibility', 'hidden', 'important');
+  isVisible = false;
+  
+  // DOMContentLoaded 후에도 확인
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      header.classList.remove('is-visible');
+      header.style.setProperty('transform', 'translateY(-100%)', 'important');
+      header.style.setProperty('opacity', '0', 'important');
+      header.style.setProperty('pointer-events', 'none', 'important');
+      header.style.setProperty('visibility', 'hidden', 'important');
+    });
+  }
+  
   scrollRoot.addEventListener('scroll', onScroll, { passive: true });
+  
+  // 초기 스크롤 위치 확인
+  const initialY = getScrollY();
+  if (initialY < DEAD_ZONE) {
+    setVisible(false);
+    header.classList.remove('is-visible');
+    header.style.setProperty('transform', 'translateY(-100%)', 'important');
+    header.style.setProperty('opacity', '0', 'important');
+    header.style.setProperty('pointer-events', 'none', 'important');
+  }
 
-  window.addEventListener('resize', () => {
-    if (!window.matchMedia('(max-width: 768px)').matches) {
-      scrollRoot.removeEventListener('scroll', onScroll);
-      header.classList.remove('is-compact');
-      langBox.classList.remove('is-hidden');
-      langBox.classList.add('is-visible');
-      console.log('💻 Switched to desktop — scroll detection off');
-    }
-  });
+  // 모든 디바이스에서 동일하게 작동하므로 resize 이벤트 제거
 }
 
 
@@ -985,8 +1003,26 @@ function initNavHighlightOnly() {
     var logo=$('img',logoMenus); if(logo) logo.parentNode.insertBefore(menuBtn,logo.nextSibling); else logoMenus.appendChild(menuBtn);
 
     var isMenuOpen=false;
-    function openMenu(){ isMenuOpen=true; logoMenus.classList.add('menu-open'); document.body.classList.add('menu-open'); menuBtn.setAttribute('aria-expanded','true'); overlay.classList.add('active'); }
-    function closeMenu(){ isMenuOpen=false; logoMenus.classList.remove('menu-open'); document.body.classList.remove('menu-open'); menuBtn.setAttribute('aria-expanded','false'); overlay.classList.remove('active'); }
+    function openMenu(){
+      isMenuOpen=true;
+      logoMenus.classList.add('is-open');
+      nav.classList.add('is-open');
+      menuBtn.classList.add('is-active');
+      menuBtn.setAttribute('aria-expanded','true');
+      document.documentElement.classList.add('menu-locked');
+      document.body.classList.add('menu-locked');
+      overlay.classList.add('is-active');
+    }
+    function closeMenu(){
+      isMenuOpen=false;
+      logoMenus.classList.remove('is-open');
+      nav.classList.remove('is-open');
+      menuBtn.classList.remove('is-active');
+      menuBtn.setAttribute('aria-expanded','false');
+      document.documentElement.classList.remove('menu-locked');
+      document.body.classList.remove('menu-locked');
+      overlay.classList.remove('is-active');
+    }
     function toggleMenu(){ isMenuOpen ? closeMenu() : openMenu(); }
 
     if(!menuBtn._eventsBound){ menuBtn.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); toggleMenu(); }); menuBtn._eventsBound=true; }
@@ -1002,6 +1038,9 @@ function initNavHighlightOnly() {
   }
 
   /* ================= Tech panels ================= */
+  // Moved to js/modules/tech-panels.js to avoid duplication
+  // This function is now handled by the modular tech-panels.js implementation
+  /*
   function initTechPanels() {
     var panels = $$('.tech-panel');
     if (!panels.length) return;
@@ -1009,7 +1048,8 @@ function initNavHighlightOnly() {
     function syncHeadA11y(panel) {
       var head = $('.inactive-head', panel);
       if (!head) return;
-      var inactive = panel.classList.contains('inactive');
+      var isActive = panel.classList.contains('is-active');
+      var inactive = !isActive;
 
       if (inactive) {
         head.removeAttribute('hidden');
@@ -1027,8 +1067,7 @@ function initNavHighlightOnly() {
     function activate(panel) {
       panels.forEach(function (p) {
         var active = p === panel;
-        p.classList.toggle('active', active);
-        p.classList.toggle('inactive', !active);
+        p.classList.toggle('is-active', active);
         p.setAttribute('aria-hidden', active ? 'false' : 'true');
         syncHeadA11y(p);
       });
@@ -1045,6 +1084,7 @@ function initNavHighlightOnly() {
       syncHeadA11y(p);
     });
   }
+  */
 
   /* ================= Service slider ================= */
   function initServiceSlider(){
@@ -1270,18 +1310,228 @@ function initUseCaseSlider(){
       var btn=$('.goal-dropdown-header',card), content=$('.goal-dropdown-content',card);
       if(!btn||!content) return;
 
-      function setInitial(){ var isOpen=btn.getAttribute('aria-expanded')==='true'; card.classList.toggle('open',isOpen); content.style.overflow='hidden'; content.style.maxHeight=isOpen?'none':'0px'; }
+      function setInitial(){ var isOpen=btn.getAttribute('aria-expanded')==='true'; card.classList.toggle('is-open',isOpen); content.style.overflow='hidden'; content.style.maxHeight=isOpen?'none':'0px'; }
       setInitial();
 
       content.addEventListener('transitionend',function(e){ if(e.propertyName!=='max-height') return; if(btn.getAttribute('aria-expanded')==='true') content.style.maxHeight='none'; });
 
       btn.addEventListener('click',function(e){
         e.stopPropagation(); var isOpen=btn.getAttribute('aria-expanded')==='true';
-        if(!isOpen){ btn.setAttribute('aria-expanded','true'); card.classList.add('open'); content.style.maxHeight='0px'; void content.offsetHeight; content.style.maxHeight=content.scrollHeight+'px'; }
+        if(!isOpen){ btn.setAttribute('aria-expanded','true'); card.classList.add('is-open'); content.style.maxHeight='0px'; void content.offsetHeight; content.style.maxHeight=content.scrollHeight+'px'; }
         else{ if(content.style.maxHeight==='' || getComputedStyle(content).maxHeight==='none'){ content.style.maxHeight=content.scrollHeight+'px'; void content.offsetHeight; }
-          btn.setAttribute('aria-expanded','false'); card.classList.remove('open'); content.style.maxHeight='0px'; }
+          btn.setAttribute('aria-expanded','false'); card.classList.remove('is-open'); content.style.maxHeight='0px'; }
       });
     });
+  }
+
+  /* ================= Benchmark Chart ================= */
+  function initBenchmarkChart(){
+    var chartContainer = $('#benchmarkChart');
+    if(!chartContainer) return;
+
+    var canvas = document.getElementById('benchmarkChartCanvas');
+    if(!canvas) return;
+
+    var versionSelect = document.getElementById('benchmarkVersion');
+    if(!versionSelect) return;
+
+    // 벤치마크 데이터
+    var benchmarkData = {
+      version1: {
+        zama_NEG: [52.764, 103.81, 100.54, 100.90, 134.93, 148.57, 196.76, 367.60],
+        zama_ABS: [124.49, 165.94, 165.18, 200.11, 202.82, 246.05, 373.27, 554.53],
+        zama_ADD: [52.651, 94.521, 100.28, 137.05, 135.25, 182.48, 290.50, 440.10],
+        zama_bitand: [21.655, 33.267, 32.150, 33.925, 34.869, 40.903, 45.741, 82.166],
+        zama_leftshift: [65.208, 99.053, 136.62, 181.17, 222.14, 253.79, 366.94, 770.05],
+        ZAMA_min: [150.58, 156.78, 165.98, 206.75, 211.67, 256.00, 370.91, 565.41],
+        ZAMA_eq: [67.682, 62.825, 95.948, 97.595, 94.552, 139.56, 138.66, 219.75],
+        ZAMA_lt: [94.528, 102.30, 99.334, 127.08, 144.97, 180.29, 248.17, 336.67],
+        ZAMA_select: [43.845, 47.727, 49.015, 54.798, 58.187, 64.410, 87.991, 144.89]
+      },
+      version2: {
+        // 버전 2 데이터는 추후 추가
+        zama_NEG: [52.764, 103.81, 100.54, 100.90, 134.93, 148.57, 196.76, 367.60],
+        zama_ABS: [124.49, 165.94, 165.18, 200.11, 202.82, 246.05, 373.27, 554.53],
+        zama_ADD: [52.651, 94.521, 100.28, 137.05, 135.25, 182.48, 290.50, 440.10],
+        zama_bitand: [21.655, 33.267, 32.150, 33.925, 34.869, 40.903, 45.741, 82.166],
+        zama_leftshift: [65.208, 99.053, 136.62, 181.17, 222.14, 253.79, 366.94, 770.05],
+        ZAMA_min: [150.58, 156.78, 165.98, 206.75, 211.67, 256.00, 370.91, 565.41],
+        ZAMA_eq: [67.682, 62.825, 95.948, 97.595, 94.552, 139.56, 138.66, 219.75],
+        ZAMA_lt: [94.528, 102.30, 99.334, 127.08, 144.97, 180.29, 248.17, 336.67],
+        ZAMA_select: [43.845, 47.727, 49.015, 54.798, 58.187, 64.410, 87.991, 144.89]
+      }
+    };
+
+    // 연산별 색상 (사이트 디자인에 맞게 커스터마이징)
+    var operationColors = {
+      zama_NEG: '#FF00FF',      // 마젠타
+      zama_ABS: '#FFFF00',      // 노랑
+      zama_ADD: '#00FFFF',      // 시안
+      zama_bitand: '#FF952D',   // 오렌지 (사이트 액센트)
+      zama_leftshift: '#12C2A5', // 청록
+      ZAMA_min: '#94E044',      // 라임
+      ZAMA_eq: '#FF7300',       // 오렌지 (다크)
+      ZAMA_lt: '#8F8F8F',       // 회색
+      ZAMA_select: '#807F7F'    // 뮤트
+    };
+
+    // 연산별 표시 이름
+    var operationLabels = {
+      zama_NEG: 'NEG',
+      zama_ABS: 'ABS',
+      zama_ADD: 'ADD',
+      zama_bitand: 'BitAND',
+      zama_leftshift: 'Left Shift',
+      ZAMA_min: 'MIN',
+      ZAMA_eq: 'EQ',
+      ZAMA_lt: 'LT',
+      ZAMA_select: 'SELECT'
+    };
+
+    var chartInstance = null;
+
+    function createChart(version){
+      var data = benchmarkData[version] || benchmarkData.version1;
+      var labels = Array.from({length: 8}, (_, i) => i + 1); // 1-8 또는 비트 깊이 값
+
+      var datasets = [];
+      var operationKeys = Object.keys(data);
+      
+      operationKeys.forEach(function(key){
+        datasets.push({
+          label: operationLabels[key] || key,
+          data: data[key],
+          borderColor: operationColors[key] || '#403E3C',
+          backgroundColor: operationColors[key] ? operationColors[key] + '20' : '#403E3C20',
+          pointBackgroundColor: operationColors[key] || '#403E3C',
+          pointBorderColor: '#FFFFFF',
+          pointBorderWidth: 2,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          pointStyle: 'rect',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.1
+        });
+      });
+
+      var config = {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                padding: 15,
+                font: {
+                  family: 'Pretendard',
+                  size: 12,
+                  weight: 'normal'
+                },
+                color: '#FFFFFF'
+              }
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              titleColor: '#FFFFFF',
+              bodyColor: '#FFFFFF',
+              borderColor: 'rgba(255, 255, 255, 0.2)',
+              borderWidth: 1,
+              padding: 12,
+              displayColors: true,
+              callbacks: {
+                label: function(context) {
+                  return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' ms';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: 'Bit Depth / Parameter',
+                color: '#FFFFFF',
+                font: {
+                  family: 'Pretendard',
+                  size: 14,
+                  weight: 'normal'
+                }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                lineWidth: 1
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: {
+                  family: 'Pretendard',
+                  size: 12
+                }
+              }
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: 'Performance (ms)',
+                color: '#FFFFFF',
+                font: {
+                  family: 'Pretendard',
+                  size: 14,
+                  weight: 'normal'
+                }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                lineWidth: 1
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: {
+                  family: 'Pretendard',
+                  size: 12
+                },
+                callback: function(value) {
+                  return value + ' ms';
+                }
+              }
+            }
+          }
+        }
+      };
+
+      if(chartInstance){
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(canvas, config);
+    }
+
+    // 버전 변경 이벤트
+    if(!versionSelect._chartBound){
+      versionSelect.addEventListener('change', function(e){
+        createChart(e.target.value);
+      });
+      versionSelect._chartBound = true;
+    }
+
+    // 초기 차트 생성
+    createChart('version1');
   }
 
   /* ================= 초기화 ================= */
@@ -1348,21 +1598,24 @@ function initUseCaseSlider(){
       btn._langBound=true;
     });
 
-    var ecosystemBtn=$('.ecosystem-btn');
-    if(ecosystemBtn && !ecosystemBtn._comingSoonBound){
-      var showSoon=function(e){
-        e.preventDefault();
-        if(typeof window.alert==='function') window.alert('Coming soon!');
-        else console.log('Coming soon!');
-      };
-      ecosystemBtn.addEventListener('click',showSoon);
-      ecosystemBtn.addEventListener('keydown',function(e){
-        if(e.key==='Enter' || e.key===' '){
-          showSoon(e);
-        }
-      });
-      ecosystemBtn._comingSoonBound=true;
-    }
+    // 벤치마킹 버튼 이벤트는 index.html에서 직접 처리하므로 여기서는 제거
+    // var ecosystemBtn=$('.ecosystem-btn');
+    // if(ecosystemBtn && !ecosystemBtn._heroTriggerBound){
+    //   var triggerSlide=function(e){
+    //     if(e) e.preventDefault();
+    //     document.dispatchEvent(new CustomEvent('hero:request-slide',{detail:{index:1}}));
+    //   };
+    //   ecosystemBtn.addEventListener('click',triggerSlide);
+    //   ecosystemBtn.addEventListener('keydown',function(e){
+    //     if(e.key==='Enter' || e.key===' '){
+    //       triggerSlide(e);
+    //     }
+    //   });
+    //   ecosystemBtn._heroTriggerBound=true;
+    // }
+
+    // Benchmark Chart 초기화
+    initBenchmarkChart();
 
     var versionBtn=$('#versionBtn');
     var versionMenu=$('#versionMenu');
@@ -1519,12 +1772,12 @@ function initUseCaseSlider(){
     */
 
 // 공통 인터랙션
-initScrollTopButton();
+// initScrollTopButton(); // Scroll to top button not implemented
 initHeaderScrollState();
 initNavigation();
 initNavHighlightOnly();   // 👈 여기에 정확히 위치
-initGoalAccordion();
-initTechPanels();
+// initGoalAccordion(); // Using js/modules/goal-dropdowns.js instead
+// initTechPanels(); // Using js/modules/tech-panels.js instead
 initServiceSlider();
 initUseCaseSlider();
 
@@ -1538,9 +1791,12 @@ initHighlightAnim();
 
     if(!window._walllnutResizeHandlerAdded){
       window.addEventListener('resize',function(){
-        var overlay=$('.mobile-menu-overlay'); if(overlay) overlay.classList.remove('active');
-        var logoMenus=$('.logo-menus'); if(logoMenus) logoMenus.classList.remove('menu-open');
-        document.body.classList.remove('menu-open');
+        var overlay=$('.mobile-menu-overlay'); if(overlay) overlay.classList.remove('is-active');
+        var logoMenus=$('.logo-menus'); if(logoMenus) logoMenus.classList.remove('is-open');
+        var nav=$('.nav'); if(nav) nav.classList.remove('is-open');
+        var menuBtn=$('.mobile-menu-btn'); if(menuBtn){ menuBtn.classList.remove('is-active'); menuBtn.setAttribute('aria-expanded','false'); }
+        document.documentElement.classList.remove('menu-locked');
+        document.body.classList.remove('menu-locked');
       },{passive:true});
       window._walllnutResizeHandlerAdded=true;
     }

@@ -2,5 +2,19 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "aos": "^2.3.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "stylelint": "^16.8.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-order": "^6.0.4"
+  },
+  "scripts": {
+    "lint:css": "stylelint \"css/**/*.css\"",
+    "lint:css:fix": "stylelint \"css/**/*.css\" --fix",
+    "format:css": "prettier --check \"css/**/*.css\"",
+    "format:css:fix": "prettier --write \"css/**/*.css\"",
+    "report:coverage": "node tools/generate-css-coverage.js"
   }
 }

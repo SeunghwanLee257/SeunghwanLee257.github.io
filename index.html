@@ -27,12 +27,18 @@
   <meta name="twitter:image" content="https://walllnut.com/asset/OGP-1200_630.png">
   <meta name="twitter:image:alt" content="waLLLnut: For a secure and private world">
 
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/rwd.css">
-  <link rel="stylesheet" href="./css/component.css">
-  <link rel="stylesheet" href="./css/verLangKor.css">
+  <link rel="stylesheet" href="./css/00.tokens.css">
+  <link rel="stylesheet" href="./css/01.base.css">
+  <link rel="stylesheet" href="./css/02.layout.css">
+  <link rel="stylesheet" href="./css/03.components.css">
+  <link rel="stylesheet" href="./css/04.sections.css">
+  <link rel="stylesheet" href="./css/05.i18n.css">
+  <link rel="stylesheet" href="./css/06.utilities.css">
+  <link rel="stylesheet" href="./css/99.overrides.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <link rel="icon" href="./asset/logo-filled-orange.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,133 +50,143 @@
 </head>
 
 <body>
-  <button id="scrollTopBtn" class="scroll-top-btn">
-    <img src="./asset/scrollTop.svg" alt="Scroll to top">
-  </button>
-
   <header class="header header-font" role="banner">
+    <div class="header-left">
+      <button type="button" class="ecosystem-btn" aria-label="View benchmarks"><span class="ecosystem-label">Benchmarks</span></button>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="#sec02" data-i18n="nav.vision">Vision</a>
+        <a href="#sec03" data-i18n="nav.solutions">Solutions</a>
+        <a href="#sec04" data-i18n="nav.tech">Technology</a>
+        <a href="#sec06" data-i18n="nav.team">Team</a>
+      </nav>
+    </div>
+
+    <div class="header-center">
     <div class="logo-menus">
       <img src="./asset/head-logo.svg" alt="WaLLLnut Logo">
     </div>
+    </div>
 
-    <div class="lang-dd header-floating" id="langDropdown">
-      <button type="button" class="ecosystem-btn"><span class="ecosystem-label">Benchmarks</span></button>
+    <div class="header-right">
 
+      <div class="lang-dd header-floating" id="langDropdown">
       <div class="lang-controls">
         <div class="lang-toggle" role="group" aria-labelledby="langLabel">
-          <button type="button" class="lang-toggle-btn is-active" data-lang="en" aria-pressed="true">Eng</button>
-          <button type="button" class="lang-toggle-btn" data-lang="ko" aria-pressed="false">Ko</button>
-        </div>
-
-        <div class="version-dd">
-          <button
-            type="button"
-            class="version-dd-btn"
-            id="versionBtn"
-            aria-haspopup="listbox"
-            aria-expanded="false"
-            aria-labelledby="versionBtn"
-          >
-            <span class="version-label">ver_121025</span>
-            <svg class="caret" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 10l5 5 5-5z"></path>
-            </svg>
-          </button>
-
-          <ul class="version-dd-menu" id="versionMenu" role="listbox" aria-labelledby="versionBtn" hidden>
-            <li role="option" data-version="ver_121025" aria-selected="true">
-              <span class="version-name">ver_100825</span>
-            </li>
-            <li role="option" data-version="ver_121024">
-              <span class="version-name">ver_260925</span>
-            </li>
-            <li role="option" data-version="ver_121023">
-              <span class="version-name">ver_101025</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <nav class="nav" aria-label="주요 섹션">
-      <a href="#sec05" data-i18n="nav.vision">Vision</a>
-      <a href="#sec03" data-i18n="nav.tech">Technology</a>
-      <a href="#sec04" data-i18n="nav.solutions">Solutions</a>
-      <a href="#sec07" data-i18n="nav.team">Team</a>
-    </nav>
-  </header>
-
-  <main id="main" tabindex="-1">
-    <!--
-    <div class="result-image-area" aria-live="polite">
-      <p class="loading-text" role="status">이미지를 불러오는 중...</p>
-      <div class="result-placeholder" aria-hidden="true">
-        <span class="result-device"></span>
-      </div>
-      <img
-        id="versionImage"
-        src=""
-        alt="선택된 버전과 언어에 해당하는 웹페이지 결과물"
-        hidden
-      />
-    </div>
-    -->
-
-    <!-- 섹션 01: Hero Scroll -->
-    <section id="sec01" class="hero" aria-labelledby="hero-heading" data-stage="0">
-      <div class="title-sec01">
-        <h3 class="animate__animated animate__fadeInUp" 
-        data-i18n="hero.headline"
-        >Confidential Coprocessor for Fair and Verifiable RWA Markets<br>
-          FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.
-        </h3>
-      </div>
-    </section>
-
-    <!-- 섹션 02: 띠지 -->
-    <section id="sec02" aria-label="Slogan">
-      <div class="titleSec02">
-        <h2 
-        data-fade-up data-fade-duration="900"
-        data-i18n="sec02.slogan"
-        >
-          Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>
-          Only what’s needed is revealed —<br> privacy preserved, fairness ensured.
-        </h2>
-      </div>
-    </section>
-    <!-- 섹션 05: Our Goal (Vision) -->
-    <section id="sec05" class="dot-bg" aria-labelledby="goal-label">
-      <div        
-        data-fade-up data-fade-duration="900"
-        class="goal-wrap">
-        <div class="title-area">
-          <div class="frame-content">
-            <h2 id="goal-label" class="section-label">01. Vision</h2>
-            <div class="title-graphic">
-              <img src="./asset/sec05-title.svg" alt="">
-            </div>
-            <div class="goal-caption">
-              <p class="p">
-                waLLLnut's Confidential Coprocessor locks data with FHE, MPC, and
-                threshold cryptography while running verifiable on-chain compute.
-                It opens only what's needed,
-                ith user consent—reducing MEV bots' edge and keeping
-                markets fair.
-              </p>
+              <button type="button" class="lang-toggle-btn is-active" data-lang="en" aria-pressed="true">eng</button>
+              <button type="button" class="lang-toggle-btn" data-lang="ko" aria-pressed="false">ko</button>
             </div>
           </div>
         </div>
 
+        <button type="button" class="header-menu-btn" aria-label="Open sidebar navigation" aria-expanded="false">
+          <span class="material-icons" aria-hidden="true">menu</span>
+          </button>
+    </div>
+  </header>
+
+  <!-- Sidebar Menu -->
+  <aside class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
+    <div class="sidebar-menu-content">
+      <nav class="sidebar-menu-nav sidebar-menu-nav--main" aria-label="주요 섹션">
+        <a href="#sec02" data-i18n="nav.vision" class="sidebar-menu-link">Vision</a>
+        <a href="#sec03" data-i18n="nav.solutions" class="sidebar-menu-link">Solutions</a>
+        <a href="#sec04" data-i18n="nav.tech" class="sidebar-menu-link">Technology</a>
+        <a href="#sec06" data-i18n="nav.team" class="sidebar-menu-link">Team</a>
+      </nav>
+      <div class="sidebar-menu-gap"></div>
+      <h2 class="sidebar-menu-title">Our Archive</h2>
+      <div class="sidebar-menu-gap"></div>
+      <h2 class="sidebar-menu-title">Our SNS</h2>
+      <nav class="sidebar-menu-nav" aria-label="Social media links">
+        <a href="https://x.com/waLLLnut_co_Inc" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">x</a>
+        <a href="https://www.linkedin.com/company/108117808/admin/dashboard/" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">LinkedIn</a>
+        <a href="https://www.youtube.com/channel/UC-0wXSMaQti8Wp71CUlHsQw" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">YouTube</a>
+        <a href="https://www.instagram.com/walllnut.co.inc/?igsh=MXA5cW9nam1hbnp5OA%3D%3D#" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">Instargram</a>
+      </nav>
+      <div class="sidebar-menu-gap"></div>
+      <p class="sidebar-menu-copyright">© 2025 waLLLnut · All rights reserved.</p>
+    </div>
+  </aside>
+
+  <main id="main" tabindex="-1">
+
+    <!-- 01. Hero -->
+    <section id="sec01" aria-labelledby="hero-heading">
+      <div class="hero vision-hero" data-stage="0">
+      <div class="hero-inner container">
+          <div class="hero-slider" data-hero-slider>
+            <div class="hero-slides">
+              <article class="hero-slide is-active" id="hero-slide-0" data-slide-index="0" aria-hidden="false">
+                <img class="hero-slide-media" src="./asset/sec01-bg.jpeg" alt="Confidential coprocessor overview">
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content hero-slide-content--split">
+                  <div class="hero-heading-stack">
+                    <div id="hero-heading" class="hero-heading-row" data-i18n="hero.headline" role="heading" aria-level="3">
+                      <span class="hero-heading-text hero-heading-text--left"><strong>Confidential Coprocessor</strong></span>
+                      <div class="hero-slide-visual hero-slide-visual--inline">
+                        <img src="./asset/graphic/sec01-bnner.png" alt="Coprocessor lettering">
+      </div>
+                      <span class="hero-heading-text hero-heading-text--right">for <strong>Fair</strong> and Verifiable RWA Markets <strong>FHE16</strong><br>+ MPC + Threshold Cryptography — <strong>Privacy</strong> that <strong>scales with performance.</strong></span>
+      </div>
+            </div>
+                </div>
+              </article>
+              <article class="hero-slide" id="hero-slide-1" data-slide-index="1" aria-hidden="true">
+                <div class="hero-slide-media hero-slide-media--chart"></div>
+                <div class="hero-slide-overlay hero-slide-overlay--graph"></div>
+                <div class="hero-slide-content hero-slide-content--graph">
+                  <div class="hero-slide-visual hero-slide-visual--graph">
+                    <div class="benchmark-chart" id="benchmarkChart">
+                      <div class="chart-header">
+                        <select id="benchmarkVersion" class="chart-version-select" aria-label="Select benchmark version" style="display: none;">
+                          <option value="version1" selected>Version 1</option>
+                        </select>
+                      </div>
+                      <div class="chart-wrapper">
+                        <canvas id="benchmarkChartCanvas"></canvas>
+                      </div>
+                    </div>
+          </div>
+        </div>
+              </article>
+            </div>
+                <div class="hero-slider-controls">
+                  <button class="hero-nav hero-nav-prev" type="button" aria-label="Previous slide">
+                    <span class="material-icons" aria-hidden="true">chevron_left</span>
+                  </button>
+                  <button class="hero-nav hero-nav-next" type="button" aria-label="Next slide">
+                    <span class="material-icons" aria-hidden="true">chevron_right</span>
+                  </button>
+                </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. Vision Narrative -->
+    <section id="sec02" class="dot-bg" aria-labelledby="goal-label">
+      <h2 id="goal-label" class="section-label">01. Vision</h2>
+      <div class="vision-heading">
+        <p class="vision-title" data-i18n="vision.title">
+          Confidential and Verifiable Computation
+        </p>
+        <p class="vision-subtitle" data-i18n="vision.subtitle">
+          This layer uses FHE, MPC, and Threshold Cryptography to perform verifiable<br>
+          computations on the blockchain while keeping sensitive data confidential.
+        </p>
+      </div>
+      <div data-aos="fade-up" data-aos-duration="900" class="goal-wrap">
+        <div class="goal-inner">
+          <div class="title-area"></div>
         <div class="goal-dropdown-container">
           <div class="goal-dropdown-card">
-            <button class="goal-dropdown-header" aria-expanded="false">
+            <button class="goal-dropdown-header" id="goal-header-1" aria-expanded="false" aria-controls="goal-content-1">
               <span class="goal-dropdown-question">
                 What does waLLLnut actually do—and what are we confident about? 🫥💪
               </span>
-              <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
+                <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
-            <div class="goal-dropdown-content">
+            <div class="goal-dropdown-content" id="goal-content-1" aria-labelledby="goal-header-1">
               <p class="goal-dropdown-text"> We're a research-driven company building on quantum-resistant FHE (Fully Homomorphic Encryption)
                 and MPC (Multi-Party Computation) to make data security and privacy sustainable. Moreover, multi-
                 users’ data can be securely and privately processed — decrypting only when needed and extracting
@@ -180,13 +196,13 @@
           </div>
 
           <div class="goal-dropdown-card card02">
-            <button class="goal-dropdown-header" aria-expanded="false">
+            <button class="goal-dropdown-header" id="goal-header-2" aria-expanded="false" aria-controls="goal-content-2">
               <span class="goal-dropdown-question">
                 Hashes for waLLLnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
               </span>
-              <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
+                <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
-            <div class="goal-dropdown-content">
+            <div class="goal-dropdown-content" id="goal-content-2" aria-labelledby="goal-header-2">
               <div class="item-drop">
                 <p class="dropItem-num02-subtitle" data-no-i18n><strong>(To be disclosed in Oct. 2025)</strong></p>
                 <p>f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
@@ -208,13 +224,13 @@
           </div>
 
           <div class="goal-dropdown-card">
-            <button class="goal-dropdown-header" aria-expanded="false">
+            <button class="goal-dropdown-header" id="goal-header-3" aria-expanded="false" aria-controls="goal-content-3">
               <span class="goal-dropdown-question">
                 So, what's in waLLLnut's product lineup? 🚀
               </span>
-              <img src="./asset/close-icon.svg" class="goal-dropdown-icon" alt="">
+                <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
-            <div class="goal-dropdown-content">
+            <div class="goal-dropdown-content" id="goal-content-3" aria-labelledby="goal-header-3">
               <p class="goal-dropdown-text">
                 Flagship Product — Deterministic Confidential Coprocessor 🏁
               </p>
@@ -224,515 +240,431 @@
               <p class="goal-dropdown-text">
                 Unlike traditional ZK systems limited to fixed states,FHE16-based technology supports dynamic state verification. 🔄✅
               </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 섹션 03: Our Technology -->
-    <section data-fade-up data-fade-duration="900" id="sec03" class="container" aria-labelledby="tech-label">
-      <h2 id="tech-label" class="section-label">02. Technology</h2>
-
-      <div class="tech-split" role="tablist" aria-label="Technology Panels">
-
-        <article
-          class="tech-panel active"
-          id="panel-a"
-          role="tabpanel"
-          aria-labelledby="tab-a"
-          aria-hidden="false"
-        >
-
-          <div class="inactive-head" aria-hidden="true">
-            <img class="panel-thumb pt-1" src="./asset/tabs-inact-cha02.png" alt="" loading="lazy" />
-            <div class="inactive-icon-tabs">
-              <p class="inactive-title">FHE16</p>
-              <p class="material-icons arrow-down" aria-hidden="true">arrow_right</p>
-            </div>
-          </div>
-
-          <div class="inner">
-            <div class="content">
-              <h3 class="tech-title-lg" id="tab-a">FHE16</h3>
-              <p class="tech-subtitle">A 16-bit integer computation–centric deterministic FHE structure
-                that eliminates floating-point operations,
-                ensuring identical results regardless of the execution environment</p>
-              <p class="captionKey">Key Features</p>
-              <ul class="tech-body">
-                <li class="g-item-ex">
-                  <p class="front-text"><span class="black-f">Elimination of floating-point operations,</span> ensuring identical results regardless of the execution environments</p>
-                  <div class="box oBox-01"></div>
-                </li>
-                <li class="g-item-ex">
-                  <p class="front-text">Elimination of floating-point environment-specific error issues</p>
-                </li>
-                <li class="g-item-ex">
-                  <p class="front-text">
-                    <span class="black-f">Ultra-fast 2.89 ms bootstrapping</span>
-                      through GINX gate optimization (suitable for real-time and low-latency applications)
-                  </p>
-                  <div class="box oBox-02"></div>
-                </li>
-              </ul>
-              <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
-            </div>
-          </div>
-        </article>
-
-        <article
-          class="tech-panel inactive"
-          id="panel-b"
-          role="tabpanel"
-          aria-labelledby="tab-b"
-          aria-hidden="true"
-          >
-          <div class="inactive-head">
-            <img class="panel-thumb pt-2" src="./asset/tabs-inact-cha.png" alt="" loading="lazy" />
-            <div class="inactive-icon-tabs">
-              <p class="inactive-title">FHE16-based<br>MPC (SSFHE)</p>
-              <p class="material-icons arrow-up" aria-hidden="true">arrow_left</p>
-            </div>
-          </div>
-
-          <div class="inner">
-            <div class="content">
-              <h3 class="tech-title-lg" id="tab-b">FHE16-based MPC (SSFHE)</h3>
-              <p class="tech-subtitle">A new FHE (FHE16) is based on 16-bit integer arithmetic,
-                  utilizing composite numbers of 16-bit
-                  primes as its modulus values.</p>
-              <p class="captionKey">Key Features</p>
-              <ul class="tech-body">
-                <li class="g-item-ex">
-                  <p class="front-text">
-                    <span class="black-f">O(1) complexity</span> for each of communication, computation,<br> rounds and input size
-                  </p>
-                </li>
-                <li class="g-item-ex">
-                  <p class="front-text">
-                    O(n κ d²) complexity for generation of <span class="black-f">evaluation key (ev)</span>
-                  </p>
-                </li>
-                <li class="g-item-ex">
-                  <p class="front-text">
-                    <span class="black-f">CRT-SPDZ–based</span> secure random number and distribution sampling (including Discrete Gaussian)
-                  </p>
-                </li>
-                <li class="g-item-ex">
-                   <p class="front-text">
-                     Circuit Privacy with <span class="black-f">active security in a dishonest majority</span> setting
-                   </p>
-                </li>
-              </ul>
-              <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- 섹션 04: Our Service (슬라이드) -->
-    <section data-fade-up data-fade-duration="900" id="sec04" class="container" aria-labelledby="service-label">
-    <h2 id="service-label" class="section-label">03. Solutions</h2>
-
-    <div class="svc-slider" id="svc-slider" role="region" aria-labelledby="service-label">
-      <div class="svc-track" id="svc-track">
-
-      <article class="svc-item" aria-roledescription="slide" aria-current="true">
-        <div class="svc-top">
-          <div class="svc-a sa01" aria-hidden="true"></div>
-
-          <div class="svc-right">
-            <div class="svc-b">
-            <h3 class="svc-title">Deterministic Confidential Coprocessor</h3>
-            <p class="svc-desc">
-              Normal transactions stay on-chain, while sensitive data/compute run
-              <strong>in a confidential FHE coprocessor—keeping state public.</strong>
+    <!-- 02. Solutions -->
+    <section data-aos="fade-up" data-aos-duration="900" id="sec03" class="container" aria-labelledby="service-label">
+      <h2 id="service-label" class="section-label">02. Solutions</h2>
+      <div class="solutions-layout">
+        <div class="solutions-card" data-solution-card>
+          <div class="solutions-visual" data-solution-visual></div>
+          <div class="solutions-content">
+            <p class="solutions-title" data-solution-title>Deterministic Confidential Coprocessor</p>
+            <p class="solutions-body" data-solution-body>
+              Normal transactions <strong>stay on-chain,</strong> while sensitive data/compute run in a <strong>confidential FHE coprocessor</strong>—keeping state public.
             </p>
-            </div>
-            <div class="svc-bot">
-              <div class="svc-c">
-                <img class="s-img-1" src="./asset/slide01.png" alt="">
-                <div class="svc-c-meta">
-                  <div class="svc-c-title">Keyword</div>
-                  <div class="svc-c-title2">Hide</div>
-                  <div class="svc-c-ref"><p>Encrypted data stays hidden</p></div>
-                </div>
-              </div>
-            </div>
+            <p class="solutions-sub" data-solution-sub>Encrypted data stays hidden</p>
           </div>
         </div>
-      </article>
-
-      <article class="svc-item" aria-roledescription="slide">
-        <div class="svc-top">
-          <div class="svc-a sa02" aria-hidden="true">
-          </div>
-          <div class="svc-right">
-            <div class="svc-b">
-            <h3 class="svc-title">Confidential Coprocessor <br>for Solana</h3>
-            <p class="svc-desc">On Solana, we apply <strong>FHE to sensitive state and code,</strong>
-              enabling private execution <strong>hidden from external observers.</strong></p>
-            </div>
-            <div class="svc-bot">
-              <div class="svc-c">
-                <img class="s-img-2" src="./asset/slide02.png" alt="" />
-                <div class="svc-c-meta">
-                  <div class="svc-c-title">Keyword</div>
-                  <div class="svc-c-title2">Solana</div>
-                  <div class="svc-c-ref"><p>Encrypted data stays hidden</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="svc-item" aria-roledescription="slide">
-        <div class="svc-top">
-          <div class="svc-a sa03" aria-hidden="true">
-          </div>
-          <div class="svc-right">
-            <div class="svc-b">
-              <h3 class="svc-title">Fair DeFi</h3>
-              <p class="svc-desc">Block trading bots from doing <br>MEV extraction in order to <strong>boost asset growth and returns</strong>
-              </p>
-            </div>
-            <div class="svc-bot">
-              <div class="svc-c">
-                <img class="s-img-3" src="./asset/slide03.png" alt="" />
-                <div class="svc-c-meta">
-                  <div class="svc-c-title">Keyword</div>
-                  <div class="svc-c-title2">Fair asset growth</div>
-                  <div class="svc-c-ref"><p>Block trading bots to protect<br>your assets and boost returns</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="svc-item" aria-roledescription="slide">
-        <div class="svc-top">
-          <div class="svc-a sa04" aria-hidden="true">
-          </div>
-          <div class="svc-right">
-            <div class="svc-b">
-              <h3 class="svc-title">Confidential<br> Voting</h3>
-              <p class="svc-desc">Demographic vote stats—<br>
-                <strong>no disclosure of individual choices or identities.</strong>
-              </p>
-            </div>
-            <div class="svc-bot">
-              <div class="svc-c">
-                <img class="s-img-4" src="./asset/slide04.png" alt="" />
-                <div class="svc-c-meta">
-                  <div class="svc-c-title">Keyword</div>
-                  <div class="svc-c-title2">Privately</div>
-                  <div class="svc-c-ref"><p>Safe and private voting</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
+        <nav class="solutions-tab-nav" aria-label="Solution categories">
+          <ul>
+            <li><button type="button" class="solutions-tab is-active" data-solution="coprocessor" aria-selected="true">Coprocessor</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="solana" aria-selected="false">Solana</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="defi" aria-selected="false">DeFi</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="voting" aria-selected="false">Voting</button></li>
+          </ul>
+        </nav>
       </div>
-    </div>
-
-    <div class="slider-controls svc-cont" role="group" aria-label="Service slider controls">
-      <button class="slider-btn is-gray svc-btn" id="svc-first" aria-label="맨 처음으로"><span class="material-icons">first_page</span></button>
-      <button class="slider-btn svc-btn" id="svc-prev" aria-label="이전으로"><span class="material-icons">chevron_left</span></button>
-      <button class="slider-btn svc-btn" id="svc-next" aria-label="다음으로"><span class="material-icons">chevron_right</span></button>
-      <button class="slider-btn is-gray svc-btn" id="svc-last" aria-label="맨 뒤로"><span class="material-icons">last_page</span></button>
-    </div>
     </section>
 
-    <!-- 섹션 06: Our Experience -->
-    <section data-fade-up data-fade-duration="900" id="sec06" class="container" aria-labelledby="exp-label">
+    <!-- 03. Technology -->
+    <section data-aos="fade-up" data-aos-duration="900" id="sec04" class="container" aria-labelledby="tech-label">
+      <h2 id="tech-label" class="section-label">03. Technology</h2>
+
+      <div class="tech-split" role="group" aria-label="Technology Panels">
+
+        <article class="tech-panel tech-panel--active" id="panel-a" aria-hidden="false">
+          <button type="button" class="tech-panel-trigger" data-tech-target="panel-a" aria-label="View FHE16"></button>
+          <div class="tech-panel-media">
+            <img src="./asset/bg/sec04-FHE16-bg.png" alt="Illustration of FHE16 chip architecture" loading="lazy">
+            </div>
+          <div class="tech-panel-content">
+            <header class="tech-panel-header">
+                <h3 class="tech-title-lg" data-i18n="tech.fhe16.title">FHE16</h3>
+                <p class="tech-subtitle" data-i18n="tech.fhe16.subtitle">A 16-bit integer computation–centric deterministic FHE structure eliminating floating-point operations and ensuring identical results regardless of the execution environment</p>
+            </header>
+            <div class="tech-features-wrap">
+              <span class="tech-chip" data-i18n="tech.keyFeatures">Key Features</span>
+                <ul class="tech-body">
+                <li data-i18n="tech.fhe16.feature1">Elimination of floating-point operations, ensuring identical results regardless of execution environments</li>
+                <li data-i18n="tech.fhe16.feature2">Elimination of floating-point environment-specific error issues</li>
+                <li data-i18n="tech.fhe16.feature3">Ultra-fast 2.89 ms bootstrapping through GINX gate optimization (suitable for real-time and low-latency applications)</li>
+                </ul>
+                </div>
+                <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
+          </div>
+        </article>
+
+        <article class="tech-panel tech-panel--inactive" id="panel-b" aria-hidden="true">
+          <button type="button" class="tech-panel-trigger" data-tech-target="panel-b" aria-label="View FHE16-based MPC"></button>
+          <div class="tech-panel-media">
+            <img src="./asset/bg/sec04-SSFHE-bg.png" alt="Visual abstract of SSFHE secure circuit" loading="lazy">
+          </div>
+          <div class="tech-panel-content">
+            <header class="tech-panel-header">
+                <h3 class="tech-title-lg" data-i18n="tech.mpc.title">FHE16-based MPC (SSFHE)</h3>
+                <p class="tech-subtitle" data-i18n="tech.mpc.subtitle">An efficient MPC that combines FHE16 and CRT-SPDZ, utilizing composite numbers of 16-bit primes as modulus values and effective sampling.</p>
+            </header>
+            <div class="tech-features-wrap">
+              <span class="tech-chip" data-i18n="tech.keyFeatures">Key Features</span>
+                <ul class="tech-body">
+                <li data-i18n="tech.mpc.feature1">O(1) complexity for each of communication, computation, rounds and input size</li>
+                <li data-i18n="tech.mpc.feature2">O(n κ d²) complexity for generation of evaluation key (ev)</li>
+                <li data-i18n="tech.mpc.feature3">CRT-SPDZ–based secure random number and distribution sampling (including Discrete Gaussian)</li>
+                <li data-i18n="tech.mpc.feature4">Circuit Privacy with active security in a dishonest majority setting</li>
+                </ul>
+            </div>
+                <p class="tech-ref"><a href="https://eprint.iacr.org/2024/1916">Reference: ePrint 2024/1916</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 05. Property & Use Cases -->
+    <section data-aos="fade-up" data-aos-duration="900" id="sec05" class="container">
 
       <div class="property-container">
         <div class="property-content">
-          <h3 class="property-title">waLLLnut<br> makes it <br>possible that,</h3>
-
-          <div class="images-container">
-            <div class="main-image">
-              <img class="img-siz" src="./asset/section06-top-1.png" alt="">
-            </div>
-            <div class="small-image"><img src="./asset/section06-top-2.png" alt=""></div>
-          </div>
-        </div>
-
+          <p class="property-title">waLLLnut's Property is,</p>
         <ul class="property-features">
-          <li>Each private state is deterministically encrypted under FHE16 and recorded on-chain</li>
-          <li>Any state change can be verified by all network participants</li>
-          <li>State disclosure is propagated across the network via a Threshold Decryption protocol</li>
+            <li data-i18n="property.feature1">Each private state is deterministically encrypted under FHE16 and recorded on-chain.</li>
+            <li data-i18n="property.feature2">Any state change can be verified by all network participants.</li>
+            <li data-i18n="property.feature3">State disclosure is propagated via a Threshold Decryption protocol.</li>
         </ul>
+        </div>
       </div>
 
-      <div class="use-cases-section" aria-labelledby="use-cases-label">
+      <div class="use-cases-section">
           <div class="use-cases-header">
-            <div id="use-cases-label" class="use-cases-title">Use Cases</div>
-            <div class="slider-controls use-case-controls" role="group" aria-label="Use case slider controls">
-              <button class="slider-btn" id="usecase-prev" type="button" aria-label="Previous use case">
+          <span class="use-cases-title" data-i18n="usecases.title">Use case</span>
+          <div class="use-case-controls">
+            <button id="usecase-prev" class="slider-btn" type="button" aria-label="Previous use case">
                 <span class="material-icons" aria-hidden="true">chevron_left</span>
               </button>
-              <button class="slider-btn" id="usecase-next" type="button" aria-label="Next use case">
+            <button id="usecase-next" class="slider-btn" type="button" aria-label="Next use case">
                 <span class="material-icons" aria-hidden="true">chevron_right</span>
               </button>
             </div>
           </div>
-
-          <div class="use-case-slider" role="region" aria-labelledby="use-cases-label" aria-roledescription="carousel">
+        <div class="use-case-slider">
             <div class="use-case-window">
-              <ul class="use-case-track" aria-live="polite">
+            <ul class="use-case-track">
                 <li class="use-case-item">
-                  <div class="use-case">
-                    <img src="./asset/usecase-messaging.png" alt="" class="use-case-image">
+                <article class="use-case">
+                  <div class="use-case-image" role="img" aria-label="Privacy preserving messaging illustration" style="background-image: url('./asset/graphic/sec06-usecase-01.png'); background-position:center; background-size:cover;"></div>
                     <div class="use-case-titleAndDesc">
-                      <div class="use-case-title">Privacy-preserving messaging/SNS</div>
-                      <div class="use-case-desc">Chat and share on social without giving up your privacy.<br>Your content stays encrypted, and you decide who sees what.</div>
+                    <h3 class="use-case-title" data-i18n="usecase.1.title">Protecting DeFi transaction data &amp; preventing MEV</h3>
+                    <p class="use-case-desc" data-i18n="usecase.1.desc">Keep your crypto trades private so others can't peek at your orders. Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</p>
                     </div>
-                  </div>
+                </article>
                 </li>
                 <li class="use-case-item">
-                  <div class="use-case">
-                    <img src="./asset/usecase-voting.png" alt="" class="use-case-image">
+                <article class="use-case">
+                  <div class="use-case-image" role="img" aria-label="Protecting DeFi transaction illustration" style="background-image: url('./asset/graphic/sec06-usecase-02.png'); background-position:center; background-size:cover;"></div>
                     <div class="use-case-titleAndDesc">
-                      <div class="use-case-title">On-chain voting (selective anonymity + public verifiability)</div>
-                      <div class="use-case-desc">Vote on the blockchain while your identity and choice stay private.<br>Anyone can still verify the overall results are real.</div>
+                    <h3 class="use-case-title" data-i18n="usecase.2.title">On-chain voting (selective anonymity + public verifiability)</h3>
+                    <p class="use-case-desc" data-i18n="usecase.2.desc">Vote on the blockchain while your identity and choice stay private. Anyone can still verify the overall results are real.</p>
                     </div>
-                  </div>
+                </article>
                 </li>
                 <li class="use-case-item">
-                  <div class="use-case">
-                    <img src="./asset/usecase-defi.png" alt="" class="use-case-image">
+                <article class="use-case">
+                  <div class="use-case-image" role="img" aria-label="On-chain voting illustration" style="background-image: url('./asset/graphic/sec06-usecase-03.png'); background-position:center; background-size:cover;"></div>
                     <div class="use-case-titleAndDesc">
-                      <div class="use-case-title">Protecting DeFi transaction data and preventing MEV</div>
-                      <div class="use-case-desc">Keep your crypto trades private so others can't peek at your orders.<br>Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</div>
+                    <h3 class="use-case-title" data-i18n="usecase.3.title">Data marketplaces (perform computations without revealing raw data)</h3>
+                    <p class="use-case-desc" data-i18n="usecase.3.desc">Buy and sell insights without handing over your raw data. The marketplace runs computations on protected data, so the originals stay private.</p>
                     </div>
-                  </div>
+                </article>
                 </li>
                 <li class="use-case-item">
-                  <div class="use-case">
-                    <img src="./asset/usecase-market.png" alt="" class="use-case-image">
+                <article class="use-case">
+                  <div class="use-case-image" role="img" aria-label="Compliance analytics illustration" style="background-image: url('./asset/graphic/sec06-usecase-04.png'); background-position:center; background-size:cover;"></div>
                     <div class="use-case-titleAndDesc">
-                      <div class="use-case-title">Data marketplaces (perform computations without revealing raw data)</div>
-                      <div class="use-case-desc">Buy and sell insights without handing over your raw data.<br>The marketplace runs computations on protected data, so the originals stay private.</div>
+                    <h3 class="use-case-title" data-i18n="usecase.4.title">Privacy-preserving messaging/SNS</h3>
+                    <p class="use-case-desc" data-i18n="usecase.4.desc">Chat and share on social without giving up your privacy. Your content stays encrypted, and you decide who sees what.</p>
                     </div>
-                  </div>
+                </article>
                 </li>
               </ul>
             </div>
           </div>
       </div>
 
-      <div data-fade-up data-fade-duration="900" class="roadmap-section">
-        <img src="./asset/Roadmap-title-img.png" class="roadmap-title" />
-
+      <div class="roadmap-section">
+        <img class="roadmap-title-img" src="./asset/graphic/sec06-Roadmap-title-img.png" alt="Roadmap title graphic" loading="lazy">
         <div class="roadmap-timeline">
-          <div class="roadmap-item">
-            <div class="roadmap-date ongoing">
-              <span class="onDec">(~Dec. 2026)</span>
+          <article class="roadmap-item">
+            <div class="roadmap-date">
+              <span class="onDec">~Dec.2026</span>
               <span class="status">Ongoing</span>
             </div>
-            <div class="roadmap-content">Launch of SVM-based Confidential Layer module</div>
+            <p class="roadmap-content">Launch of SVM-based Confidential Layer module</p>
+          </article>
+          <article class="roadmap-item">
+            <div class="roadmap-date">
+              <span class="date">~Nov.2026</span>
           </div>
-
-          <div class="roadmap-item">
-            <div class="roadmap-date"><span class="date">(~Dec. 2027)</span></div>
-            <div class="roadmap-content">Launch of EVM-based Confidential Layer module</div>
+            <p class="roadmap-content">LatticA<br><span>The Solana-native confidential computing that makes encrypted data computable and verifiable anywhere.</span></p>
+          </article>
+          <article class="roadmap-item">
+            <div class="roadmap-date">
+              <span class="date">~Dec.2027</span>
           </div>
+            <p class="roadmap-content"><span>Launch of EVM-based Confidential Layer module</span></p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 섹션 07: Team Member (섹션 여백 없음) -->
-    <section data-fade-up data-fade-duration="900" id="sec07" class="container" aria-labelledby="team-label">
+    <!-- 06. Team -->
+    <section data-aos="fade-up" data-aos-duration="900" id="sec06" class="container" aria-labelledby="team-label">
       <h2 id="team-label" class="section-label">04. Team</h2>
-
-      <div class="team-grid">
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Seunghwan Lee(CEO).png" alt=""></div>
-          </div>
-          <div class="member-info">
-            <div class="member-name-role">Seunghwan Lee (CEO)</div>
-            <p class="member-description">Leads FHE16 and MPC R&D <br> Hanyang University</p>
-          </div>
+      <div class="team-intro">
+        <p class="team-intro-title">
+          We are pioneering<br>
+          Fully Homomorphic Encryption(FHE)<br>
+          for decentralized, secure, and verifiable computation.
+        </p>
         </div>
 
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Dohyuk Kim(CTO).png" alt=""></div>
+      <div class="team-gallery">
+        <div class="team-slider">
+          <div class="team-window">
+            <ul class="team-track">
+              <li class="team-item">
+        <article class="team-card">
+          <img src="./asset/team/team-CEO.jpg" alt="Seunghwan Lee" class="team-card-photo" loading="lazy">
+          <div class="detail">
+            <div class="detail-text">
+              <h3 class="team-card-name">Seunghwan Lee (CEO)</h3>
+              <span class="team-card-name-kr">이승환</span>
+              <p class="team-card-desc">
+                Ph.D. in Electronic Engineering, Hanyang University; Leads FHE16 R&D<br>
+                한양대 전자공학 박사, FHE16 연구·개발 총괄
+              </p>
           </div>
-          <div class="member-info">
-            <div class="member-name-role">Dohyuk Kim (CTO)</div>
-            <p class="member-description">Leads FHE16 and MPC Implementation</p>
-          </div>
-        </div>
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Dong-Joon Shin(CSO).png" alt=""></div>
-          </div>
-          <div class="member-info">
-            <div class="member-name-role">Dong-Joon Shin (CSO)</div>
-            <p class="member-description">Establishes Academic-Industry Strategies</p>
-          </div>
-        </div>
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Yunsik_Ham.png" alt=""></div>
-          </div>
-          <div class="member-info">
-            <div class="member-name-role">Yunsik Ham</div>
-            <p class="member-description">Blockchain+Cryptography Developer</p>
-          </div>
-        </div>
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Youngjun_Kim.png" alt=""></div>
-          </div>
-          <div class="member-info">
-            <div class="member-name-role">Youngjun Kim</div>
-            <p class="member-description">Cryptography & Server Developer</p>
+            <div class="sns-link">
+              <a href="https://www.instagram.com/seunghwan832?igsh=MXM3YTBoa2E3NmExcQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+              </a>
+              <a href="https://www.linkedin.com/in/scarrots/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+              </a>
+              <a href="https://x.com/Scarrots93" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+                <img src="./asset/icon/sns-x.svg" alt="X icon">
+              </a>
           </div>
         </div>
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Kiin_Shin.png" alt=""></div>
+        </article>
+              </li>
+              <li class="team-item">
+        <article class="team-card">
+          <div class="team-card-photo-wrapper" style="background-image: url('./asset/team/team-CTO.jpg');">
+            <img src="./asset/team/team-CTO.jpg" alt="Dohyuk Kim" class="team-card-photo" loading="lazy">
           </div>
-          <div class="member-info">
-            <div class="member-name-role">KiIn Shin</div>
-            <p class="member-description">Marketing Manager and Graphic Designer</p>
+          <div class="detail">
+            <div class="detail-text">
+              <h3 class="team-card-name">Dohyuk Kim (CTO)</h3>
+              <span class="team-card-name-kr">김도혁</span>
+              <p class="team-card-desc">
+                Leads FHE16 and MPC Implementation<br>
+                한양대 전자공학 박사과정, FHE 상용화·납품 개발 경험
+              </p>
+          </div>
+            <div class="sns-link">
+              <a href="https://www.instagram.com/dohyuk1000?igsh=djBuYjNjaGNvYmIw" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+              </a>
+              <a href="#" aria-label="LinkedIn profile" style="display: none;">
+                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+              </a>
+              <a href="https://x.com/Isley1249" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+                <img src="./asset/icon/sns-x.svg" alt="X icon">
+              </a>
           </div>
         </div>
-
-        <div class="team-member">
-          <div class="member-avatar">
-            <div class="avatar-male"><img src="./asset/sec07-Jiin_Shin.png" alt=""></div>
+        </article>
+              </li>
+              <li class="team-item">
+        <article class="team-card">
+          <div class="team-card-photo-wrapper" style="background-image: url('./asset/team/team-CSO.jpg');">
+            <img src="./asset/team/team-CSO.jpg" alt="Dong-Joon Shin" class="team-card-photo" loading="lazy">
           </div>
-          <div class="member-info">
-            <div class="member-name-role">JiIn Shin</div>
-            <p class="member-description">PR Manager and UIUX Designer</p>
+          <div class="detail">
+            <div class="detail-text">
+              <h3 class="team-card-name">Dong-Joon Shin (CSO)</h3>
+              <span class="team-card-name-kr">신동준</span>
+              <p class="team-card-desc">
+                Establishes Academic-Industry Strategies<br>
+                한양대 전자공학 교수, 학계·산업 네트워킹 보유
+              </p>
+          </div>
+            <div class="sns-link">
+              <a href="https://www.instagram.com/dlstka04?igsh=eWJ4MXZlbDRxNzVi" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+              </a>
+              <a href="https://www.linkedin.com/in/djshin73/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+              </a>
+              <a href="#" aria-label="X profile" style="display: none;">
+                <img src="./asset/icon/sns-x.svg" alt="X icon">
+              </a>
+          </div>
+        </div>
+        </article>
+              </li>
+              <li class="team-item">
+        <article class="team-card">
+          <img src="./asset/team/team-graphic-designer.jpeg" alt="KiIn Shin" class="team-card-photo" loading="lazy">
+          <div class="detail">
+            <div class="detail-text">
+              <h3 class="team-card-name">KiIn Shin</h3>
+              <span class="team-card-name-kr">신기인</span>
+              <p class="team-card-desc">
+                Marketing Manager and Graphic Designer<br>
+                마케팅 매니저 · 그래픽 디자이너
+              </p>
+          </div>
+            <div class="sns-link">
+              <a href="#" aria-label="Instagram profile" style="display: none;">
+                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+              </a>
+              <a href="https://www.linkedin.com/in/kiin-shin-67096a378/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+              </a>
+              <a href="https://x.com/Shinin60" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+                <img src="./asset/icon/sns-x.svg" alt="X icon">
+              </a>
+          </div>
+        </div>
+        </article>
+              </li>
+              <li class="team-item">
+        <article class="team-card">
+          <img src="./asset/team/team-UIUX-designer.jpg" alt="JiIn Shin" class="team-card-photo" loading="lazy">
+          <div class="detail">
+            <div class="detail-text">
+              <h3 class="team-card-name">JiIn Shin</h3>
+              <span class="team-card-name-kr">신지인</span>
+              <p class="team-card-desc">
+                PR Manager and UIUX Designer<br>
+                PR 매니저 · UI/UX 디자이너
+              </p>
+          </div>
+            <div class="sns-link">
+              <a href="https://www.instagram.com/_jiin880?igsh=MWE1cGcxdW52Ync3ag%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+              </a>
+              <a href="https://www.linkedin.com/in/ji-in-shin-6a896028b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+              </a>
+              <a href="https://www.behance.net/sjji86192137" target="_blank" rel="noopener noreferrer" aria-label="Behance profile">
+                <img src="./asset/icon/sns-behance.svg" alt="Behance icon">
+              </a>
+          </div>
+        </div>
+        </article>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 섹션 08: Advisors (배경 F2F2F2) -->
-    <section id="sec08" aria-labelledby="advisors-label">
+  </main>
+
+  <nav class="side-link-stack" aria-label="Quick navigation">
+    <a class="side-link-btn" href="https://x.com/latticawalllnut?s=11" target="_blank" rel="noopener noreferrer" aria-label="Follow LatticA on X">
+      <img src="./asset/icon/lattica.svg" alt="" aria-hidden="true">
+    </a>
+    <a class="side-link-btn" href="#sec04" aria-label="Jump to Technology section">
+      <img src="./asset/icon/github.svg" alt="" aria-hidden="true">
+    </a>
+    <a class="side-link-btn side-link-btn--image" href="https://walllnut.gitbook.io/walllnut-docs/deterministic-fhe16" target="_blank" rel="noopener noreferrer" aria-label="View Deterministic FHE16 Documentation"></a>
+  </nav>
+
+  <!-- Footer -->
+  <footer id="sec08" aria-labelledby="advisors-label" role="contentinfo">
       <div class="container">
         <div class="s08-comt-inner">
-          <span class="s08-title"><strong>waLLLnut</strong> collaborates with distinguished professors from<br>
+          <span class="s08-title" data-i18n="advisors.title"><strong>waLLLnut</strong> collaborates with distinguished professors from<br>
             leading universities in Korea for technical advisory and joint research.
           </span>
           <ul class="professor-list">
             <li class="list-item">
               <p class="pro-name"><strong>Jon-Lark Kim:</strong></p>
               <span>
-                <a class="pro-list-link" href="https://cicagolab.sogang.ac.kr/">Professor of Sogang University</a>
+                <a class="pro-list-link" href="https://cicagolab.sogang.ac.kr/" data-i18n="advisor.kimjl.title">Professor of Sogang University</a>
                 jlkim@sogang.ac.kr<br>
               </span>
             </li>
             <li class="list-item">
               <p class="pro-name"><strong>Young-Sik Kim:</strong></p>
               <span>
-                <a class="pro-list-link" href="https://sites.google.com/view/pacl">Professor of DGIST</a>
+                <a class="pro-list-link" href="https://sites.google.com/view/pacl" data-i18n="advisor.kimys.title">Professor of DGIST</a>
                 ysk@dgist.ac.kr<br>
               </span>
             </li>
             <li class="list-item">
               <p class="pro-name"><strong>Jooyoung Lee:</strong></p>
               <span>
-                <a class="pro-list-link" href="https://sites.google.com/view/cryptlab/home">Professor of KAIST</a>
+                <a class="pro-list-link" href="https://sites.google.com/view/cryptlab/home" data-i18n="advisor.leejy.title">Professor of KAIST</a>
                 hicalf@kaist.ac.kr<br>
               </span>
             </li>
             <li class="list-item">
               <p class="pro-name"><strong>Yongwoo Lee:</strong></p>
               <span>
-                <a class="pro-list-link" href="https://crypto.inha.ac.kr/">Professor of Inha University</a>
+                <a class="pro-list-link" href="https://crypto.inha.ac.kr/" data-i18n="advisor.leeyw.title">Professor of Inha University</a>
                 yongwoo@inha.ac.kr<br>
               </span>
             </li>
             <li class="list-item">
               <p class="pro-name"><strong>Jong-Seon No:</strong></p>
               <span>
-                <a class="pro-list-link" href="https://ccl.snu.ac.kr/">Emeritus Professor of Seoul National University</a>
+                <a class="pro-list-link" href="https://ccl.snu.ac.kr/" data-i18n="advisor.nojs.title">Emeritus Professor of Seoul National University</a>
                 jsno@snu.ac.kr<br>
               </span>
             </li>
           </ul>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container f-inner">
-      <ul class="f-social-list">
-        <li class="social-link x">
-          <a href="https://x.com/waLLLnut_co_Inc"
-            target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 462"
-              width="20" height="20"
-              fill="#807F7F">
-              <path d="M389.2 0h76.5l-167 191.2L512 462.3H353.3L229.7
-                298.1 87.9 462.3H11.3L188.2 256.1 0 0h162.7l108.9
-                144.5L389.2 0zM361.7 414.3h42.4L153.1 48.1H108.2l253.5
-                366.2z"/>
-            </svg>
-          </a>
-        </li>
-        <li class="social-link instar">
-          <a href="https://www.instagram.com/walllnut.co.inc?igsh=MXA5cW9nam1hbnp5OA=="
-            target="_blank" rel="noopener noreferrer">
-            <svg fill="#807F7F" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>instagram</title> <path d="M25.805 7.996c0 0 0 0.001 0 0.001 0 0.994-0.806 1.799-1.799 1.799s-1.799-0.806-1.799-1.799c0-0.994 0.806-1.799 1.799-1.799v0c0.993 0.001 1.798 0.805 1.799 1.798v0zM16 20.999c-2.761 0-4.999-2.238-4.999-4.999s2.238-4.999 4.999-4.999c2.761 0 4.999 2.238 4.999 4.999v0c0 0 0 0.001 0 0.001 0 2.76-2.237 4.997-4.997 4.997-0 0-0.001 0-0.001 0h0zM16 8.3c0 0 0 0-0 0-4.253 0-7.7 3.448-7.7 7.7s3.448 7.7 7.7 7.7c4.253 0 7.7-3.448 7.7-7.7v0c0-0 0-0 0-0.001 0-4.252-3.447-7.7-7.7-7.7-0 0-0 0-0.001 0h0zM16 3.704c4.003 0 4.48 0.020 6.061 0.089 1.003 0.012 1.957 0.202 2.84 0.538l-0.057-0.019c1.314 0.512 2.334 1.532 2.835 2.812l0.012 0.034c0.316 0.826 0.504 1.781 0.516 2.778l0 0.005c0.071 1.582 0.087 2.057 0.087 6.061s-0.019 4.48-0.092 6.061c-0.019 1.004-0.21 1.958-0.545 2.841l0.019-0.058c-0.258 0.676-0.64 1.252-1.123 1.726l-0.001 0.001c-0.473 0.484-1.049 0.866-1.692 1.109l-0.032 0.011c-0.829 0.316-1.787 0.504-2.788 0.516l-0.005 0c-1.592 0.071-2.061 0.087-6.072 0.087-4.013 0-4.481-0.019-6.072-0.092-1.008-0.019-1.966-0.21-2.853-0.545l0.059 0.019c-0.676-0.254-1.252-0.637-1.722-1.122l-0.001-0.001c-0.489-0.47-0.873-1.047-1.114-1.693l-0.010-0.031c-0.315-0.828-0.506-1.785-0.525-2.785l-0-0.008c-0.056-1.575-0.076-2.061-0.076-6.053 0-3.994 0.020-4.481 0.076-6.075 0.019-1.007 0.209-1.964 0.544-2.85l-0.019 0.059c0.247-0.679 0.632-1.257 1.123-1.724l0.002-0.002c0.468-0.492 1.045-0.875 1.692-1.112l0.031-0.010c0.823-0.318 1.774-0.509 2.768-0.526l0.007-0c1.593-0.056 2.062-0.075 6.072-0.075zM16 1.004c-4.074 0-4.582 0.019-6.182 0.090-1.315 0.028-2.562 0.282-3.716 0.723l0.076-0.025c-1.040 0.397-1.926 0.986-2.656 1.728l-0.001 0.001c-0.745 0.73-1.333 1.617-1.713 2.607l-0.017 0.050c-0.416 1.078-0.67 2.326-0.697 3.628l-0 0.012c-0.075 1.6-0.090 2.108-0.090 6.182s0.019 4.582 0.090 6.182c0.028 1.315 0.282 2.562 0.723 3.716l-0.025-0.076c0.796 2.021 2.365 3.59 4.334 4.368l0.052 0.018c1.078 0.415 2.326 0.669 3.628 0.697l0.012 0c1.6 0.075 2.108 0.090 6.182 0.090s4.582-0.019 6.182-0.090c1.315-0.029 2.562-0.282 3.716-0.723l-0.076 0.026c2.021-0.796 3.59-2.365 4.368-4.334l0.018-0.052c0.416-1.078 0.669-2.326 0.697-3.628l0-0.012c0.075-1.6 0.090-2.108 0.090-6.182s-0.019-4.582-0.090-6.182c-0.029-1.315-0.282-2.562-0.723-3.716l0.026 0.076c-0.398-1.040-0.986-1.926-1.729-2.656l-0.001-0.001c-0.73-0.745-1.617-1.333-2.607-1.713l-0.050-0.017c-1.078-0.416-2.326-0.67-3.628-0.697l-0.012-0c-1.6-0.075-2.108-0.090-6.182-0.090z"></path> </g></svg>
-          </a>
-        </li>
-        <li class="social-link youtube">
-          <a href="https://www.youtube.com/channel/UC-0wXSMaQti8Wp71CUlHsQw"
-            target="_blank" rel="noopener noreferrer">
-            <svg fill="#807F7F" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#807F7F"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>youtube</title> <path d="M12.932 20.459v-8.917l7.839 4.459zM30.368 8.735c-0.354-1.301-1.354-2.307-2.625-2.663l-0.027-0.006c-3.193-0.406-6.886-0.638-10.634-0.638-0.381 0-0.761 0.002-1.14 0.007l0.058-0.001c-0.322-0.004-0.701-0.007-1.082-0.007-3.748 0-7.443 0.232-11.070 0.681l0.434-0.044c-1.297 0.363-2.297 1.368-2.644 2.643l-0.006 0.026c-0.4 2.109-0.628 4.536-0.628 7.016 0 0.088 0 0.176 0.001 0.263l-0-0.014c-0 0.074-0.001 0.162-0.001 0.25 0 2.48 0.229 4.906 0.666 7.259l-0.038-0.244c0.354 1.301 1.354 2.307 2.625 2.663l0.027 0.006c3.193 0.406 6.886 0.638 10.634 0.638 0.38 0 0.76-0.002 1.14-0.007l-0.058 0.001c0.322 0.004 0.702 0.007 1.082 0.007 3.749 0 7.443-0.232 11.070-0.681l-0.434 0.044c1.298-0.362 2.298-1.368 2.646-2.643l0.006-0.026c0.399-2.109 0.627-4.536 0.627-7.015 0-0.088-0-0.176-0.001-0.263l0 0.013c0-0.074 0.001-0.162 0.001-0.25 0-2.48-0.229-4.906-0.666-7.259l0.038 0.244z"></path> </g></svg>
-          </a>
-        </li>
-        <li class="social-link linkedIn">
-          <a href="https://www.linkedin.com/company/108117808/admin/dashboard/"
-            target="_blank" rel="noopener noreferrer">
-            <svg fill="#807F7F" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>linkedin</title> <path d="M28.778 1.004h-25.56c-0.008-0-0.017-0-0.027-0-1.199 0-2.172 0.964-2.186 2.159v25.672c0.014 1.196 0.987 2.161 2.186 2.161 0.010 0 0.019-0 0.029-0h25.555c0.008 0 0.018 0 0.028 0 1.2 0 2.175-0.963 2.194-2.159l0-0.002v-25.67c-0.019-1.197-0.994-2.161-2.195-2.161-0.010 0-0.019 0-0.029 0h0.001zM9.9 26.562h-4.454v-14.311h4.454zM7.674 10.293c-1.425 0-2.579-1.155-2.579-2.579s1.155-2.579 2.579-2.579c1.424 0 2.579 1.154 2.579 2.578v0c0 0.001 0 0.002 0 0.004 0 1.423-1.154 2.577-2.577 2.577-0.001 0-0.002 0-0.003 0h0zM26.556 26.562h-4.441v-6.959c0-1.66-0.034-3.795-2.314-3.795-2.316 0-2.669 1.806-2.669 3.673v7.082h-4.441v-14.311h4.266v1.951h0.058c0.828-1.395 2.326-2.315 4.039-2.315 0.061 0 0.121 0.001 0.181 0.003l-0.009-0c4.5 0 5.332 2.962 5.332 6.817v7.855z"></path> </g></svg>
-          </a>
-        </li>
-      </ul>
-      <span>© 2025 waLLLnut · All rights reserved.</span>
     </div>
   </footer>
 
+  <!-- SNS Menu (하단 고정) -->
+  <nav class="sns-menu-bottom" id="snsMenu" aria-label="Social media links">
+    <ul class="sns-menu-list">
+      <li>
+        <a href="https://x.com/waLLLnut_co_Inc" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on X">
+          <img src="./asset/icon/head-X.svg" alt="X icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/company/108117808/admin/dashboard/" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on LinkedIn">
+          <img src="./asset/icon/head-linkedIn.svg" alt="LinkedIn icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/walllnut.co.inc/?igsh=MXA5cW9nam1hbnp5OA%3D%3D#" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on Instagram">
+          <img src="./asset/icon/head-instargram.svg" alt="Instagram icon">
+        </a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/channel/UC-0wXSMaQti8Wp71CUlHsQw" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on YouTube">
+          <img src="./asset/icon/head-youtube.svg" alt="YouTube icon">
+        </a>
+      </li>
+    </ul>
+  </nav>
+
   <script src="./js/walllnut.bundle.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  const fadeElements = document.querySelectorAll('[data-fade-up]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const duration = entry.target.dataset.fadeDuration || 500;
-        entry.target.style.transitionDuration = `${duration}ms`;
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  fadeElements.forEach(el => observer.observe(el));
-});
-
-  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="module" src="./js/main.js"></script>
 
 </body>
 </html>

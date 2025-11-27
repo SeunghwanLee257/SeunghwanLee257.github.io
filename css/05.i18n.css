@@ -1,0 +1,118 @@
+/* =========================================================
+   05. i18n (Korean Overrides)
+   - Typography & layout adjustments when lang="ko"
+   - Media-specific tuning for Korean copy
+   ========================================================= */
+
+/* --- Site-wide Base (All Sections) --- */
+html[lang="ko"] :where(p, div, span, li, button, a, h1, h2, h3, h4, h5, h6){
+  font-family: Pretendard;
+}
+
+/* --- Section 03: Technology Panels --- */
+html:lang(ko) .section-label{
+  font-family: Pretendard;
+  letter-spacing: .2px;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+/* .tech-title-lg는 eng 버전과 동일하게 유지 */
+
+html:lang(ko) .tech-subtitle{
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: pretty;
+  white-space: normal;
+}
+
+html:lang(ko) .black-f{
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+html:lang(ko) .box.expand{
+  width: 134px;
+}
+
+html:lang(ko) .fron-text .black-f{
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* .tech-title-lg는 eng 버전과 동일하게 유지 */
+
+@media screen and (max-width: 767px){
+  /* Mobile-specific highlight width */
+  html:lang(ko) .box.expand{
+    width: 118px !important;
+  }
+}
+
+/* --- Section 04: Service Slider & Copy --- */
+html:lang(ko) .svc-title{
+  font-size: 42px;
+}
+
+html:lang(ko) .svc-desc{
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+html:lang(ko) article .svc-b::after{
+  color: #c0ad9b;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  position: relative;
+  top: 20px;
+}
+
+html:lang(ko) .svc-c-ref{
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+/* --- Section 05: Vision Accordion --- */
+html:lang(ko) .goal-dropdown-header{
+  align-items: flex-start;
+}
+
+html:lang(ko) .goal-dropdown-question{
+  margin-right: 0.75rem;
+}
+
+html:lang(ko) .goal-dropdown-text{
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: pretty;
+  white-space: normal;
+}
+
+html:lang(ko) .goal-caption{
+  max-width: 500px;
+}
+
+/* --- Section 06: Experience & Use Cases --- */
+html:lang(ko) .use-case-title,
+html:lang(ko) .use-case-desc,
+html:lang(ko) .property-features li{
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: pretty;
+  white-space: normal;
+}
+
+/* --- Header: Language Dropdown (Tablet) --- */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  html:lang(ko) .header{
+    width: 80%;
+  }
+}

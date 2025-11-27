@@ -1,0 +1,62 @@
+/* =========================================================
+   06. Utilities
+   - Toast notifications
+   ========================================================= */
+
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  min-width: 280px;
+  max-width: 400px;
+  padding: 16px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  box-shadow: var(--elev);
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+}
+
+.toast--show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast--error {
+  background: #d32f2f;
+}
+
+.toast--success {
+  background: #2e7d32;
+}
+
+.toast--info {
+  background: var(--ink);
+}
+
+@media screen and (max-width: 767px) {
+  #toast-container {
+    top: 80px;
+    right: 16px;
+    left: 16px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+}

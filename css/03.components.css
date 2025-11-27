@@ -1,0 +1,689 @@
+/* =========================================================
+   03. Components
+   - Interactive widgets, dropdowns, toggles, overlays
+   - Micro-interactions & utility components
+   ========================================================= */
+
+/* Language toggle & ecosystem chip */
+.lang-controls{
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.header-settings-btn{
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: #FFEAD6;
+  color: #403E3C;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .3s ease, box-shadow .3s ease, transform .25s ease;
+}
+
+.header-settings-btn:hover,
+.header-settings-btn:focus-visible{
+  background: #FF952D;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(216,107,0,0.3);
+}
+
+.header-settings-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.5);
+  outline-offset: 2px;
+}
+
+.header-settings-btn .material-icons{
+  font-size: 22px;
+  line-height: 1;
+}
+
+.lang-toggle{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 999px;
+  height: 42px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.lang-toggle-btn{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 0;
+  background: none;
+  color: #807F7F;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, transform .3s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  -webkit-user-select: none;
+  user-select: none;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.lang-toggle-btn.is-active{
+  background: #FF952D;
+  color: #fff;
+  transform: none;
+}
+
+.lang-toggle-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.6);
+  outline-offset: 2px;
+}
+
+.header-right{
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.sns-toggle{
+  border: none;
+  background: rgba(240,240,240,0.95);
+  border-radius: 999px;
+  padding: 4px;
+  width: 74px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.sns-toggle:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.6);
+  outline-offset: 2px;
+}
+.sns-toggle-track{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #9B9B9B;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .3s ease, transform .3s ease;
+  transform: translateX(0);
+}
+.sns-toggle.is-active .sns-toggle-track{
+  background: #0F0F10;
+  transform: translateX(28px);
+}
+.sns-toggle-track img{
+  width: 20px;
+  height: 20px;
+}
+
+/* SNS Menu */
+/* SNS Menu 하단 고정 */
+.sns-menu-bottom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 42px;
+  background-color: white;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.3s ease;
+}
+
+.sns-menu-bottom.is-active{
+  height: auto;
+  min-height: 42px;
+  padding: 12px 0;
+}
+
+.sns-menu-list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sns-menu-list li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sns-menu-link{
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  color: #807F7F;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: width 0.3s ease, height 0.3s ease, transform 0.2s ease;
+  position: relative;
+  overflow: visible;
+}
+
+/* inactive 상태: 이미지만 투명도 40% */
+.sns-menu-bottom .sns-menu-link{
+  overflow: visible;
+}
+
+.sns-menu-bottom .sns-menu-link img{
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  display: block !important;
+  visibility: visible !important;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+  position: relative;
+  z-index: 10;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: auto;
+  background: none !important;
+  border: none !important;
+}
+
+/* inactive 상태: SVG를 회색으로 변환하고 투명도 40% */
+.sns-menu-bottom .sns-menu-link img{
+  filter: brightness(0) saturate(100%) invert(51%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  opacity: 0.4 !important;
+}
+
+/* active 상태: SVG를 검은색으로 변환하고 투명도 100% */
+.sns-menu-bottom.is-active .sns-menu-link img,
+.sns-menu-link:hover img,
+.sns-menu-link:focus-visible img,
+.sns-menu-link:active img{
+  filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+  opacity: 1 !important;
+}
+
+/* active 상태 (hover, click, 터치) */
+.sns-menu-bottom.is-active .sns-menu-link,
+.sns-menu-link:hover,
+.sns-menu-link:focus-visible,
+.sns-menu-link:active{
+  width: 46px;
+  height: 46px;
+}
+
+.sns-menu-bottom.is-active .sns-menu-link img,
+.sns-menu-link:hover img,
+.sns-menu-link:focus-visible img,
+.sns-menu-link:active img{
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+}
+
+.sns-menu-link:hover,
+.sns-menu-link:focus-visible{
+  transform: translateY(-2px);
+}
+
+.sns-menu-link:focus-visible{
+  outline: 2px solid rgba(255,115,0,0.4);
+  outline-offset: 2px;
+}
+
+.lang-dd{
+  background: #F5F5F5;
+  border-radius: 999px;
+  padding: 4px;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ecosystem-btn{
+  border: none;
+  border-radius: 8px;
+  padding: 12px 8px;
+  min-height: 42px;
+  background: #F2F2F2;
+  color: #8F8F8F;
+  font-weight: 700;
+  font-family: "Asap Condensed", Pretendard;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, color .2s ease;
+}
+
+.ecosystem-label{
+  display: inline-block;
+  color: inherit;
+}
+
+.ecosystem-btn:hover,
+.ecosystem-btn:focus-visible,
+.ecosystem-btn.is-active{
+  background: #0F0F10;
+  color: #FF7300;
+}
+
+.ecosystem-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.5);
+  outline-offset: 2px;
+}
+
+.header-menu-btn{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.header-menu-btn .material-icons{
+  color: #9A9A9A;
+}
+.header-menu-btn:hover,
+.header-menu-btn:focus-visible{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+.header-menu-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.6);
+  outline-offset: 2px;
+}
+
+.header-menu-btn.is-active{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* Sidebar Menu */
+.sidebar-menu{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 85vw);
+  z-index: var(--z-modal);
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.sidebar-menu.is-open{
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.sidebar-menu-content{
+  height: 100%;
+  padding: 120px 40px 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid #FFFFFF;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.sidebar-menu-title{
+  font-family: "Asap Condensed", Pretendard;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0F0F10;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sidebar-menu-gap{
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.sidebar-menu-nav{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar-menu-nav--main{
+  margin-bottom: 0;
+}
+
+.sidebar-menu-link{
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0F0F10;
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color .2s ease, transform .2s ease;
+  display: inline-block;
+}
+
+.sidebar-menu-link:hover,
+.sidebar-menu-link:focus-visible{
+  color: #FF7300;
+  transform: translateX(4px);
+}
+
+.sidebar-menu-link:focus-visible{
+  outline: 2px solid rgba(255,115,0,0.4);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.sidebar-menu-copyright{
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8F8F8F;
+  margin: 0;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+@media screen and (max-width: 767px){
+  .sidebar-menu{
+    right: 0;
+    width: min(320px, 90vw);
+  }
+  .sidebar-menu-content{
+    padding: 100px 28px 32px;
+  }
+  .sidebar-menu-title{
+    font-size: 28px;
+  }
+}
+
+.header-arrow{
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  color: #807F7F;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header-arrow .material-icons{
+  font-size: 20px;
+}
+
+.side-link-stack{
+  position: fixed;
+  right: 30px;
+  bottom: 6%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  z-index: calc(var(--z-modal) - 10);
+  box-sizing: border-box;
+}
+
+/* 두 번째 자식 요소 숨김 (코드는 유지) */
+.side-link-stack > :nth-child(2){
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 모바일에서 SNS 링크와 겹치지 않도록 right 위치 조정 */
+@media screen and (max-width: 767px){
+  .side-link-stack{
+    right: 10px;
+  }
+}
+
+.side-link-btn{
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid #FFFFFF;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .25s ease, box-shadow .25s ease, background .3s ease;
+}
+
+.side-link-btn:hover,
+.side-link-btn:focus-visible{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.side-link-btn--image:hover,
+.side-link-btn--image:focus-visible{
+  background: url('../asset/icon/gitbook.png') center/cover no-repeat;
+}
+
+.side-link-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.5);
+  outline-offset: 2px;
+}
+
+.side-link-btn .material-icons{
+  font-size: 24px;
+  color: #403E3C;
+}
+
+.side-link-btn img{
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.side-link-btn--image{
+  background: url('../asset/icon/gitbook.png') center/cover no-repeat;
+}
+
+
+/* Version dropdown */
+.version-dd{
+  position: relative;
+  height: 52px;
+}
+
+.version-dd-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  height: 52px;
+  padding: 0 var(--space-16);
+  border-radius: 999px;
+  border: 1px solid #E4E2DF;
+  background: #fff;
+  color: #807F7F;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.version-dd-btn:focus-visible{
+  outline: 2px solid rgba(216,107,0,0.5);
+  outline-offset: 3px;
+}
+
+.version-dd-btn .caret{
+  fill: #807F7F;
+  transition: transform .15s ease;
+}
+
+.version-dd-btn[aria-expanded="true"] .caret{
+  transform: rotate(180deg);
+}
+
+.version-label{
+  font-size: 14px;
+  font-weight: 600;
+  color: #807F7F;
+}
+
+.version-dd-menu{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #E4E2DF;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  padding: 6px;
+  list-style: none;
+  margin: 0;
+  z-index: var(--z-dropdown);
+}
+
+.version-dd-menu[hidden]{
+  display: none;
+}
+
+.version-dd-menu li{
+  padding: 10px var(--space-12);
+  border-radius: 8px;
+  font-size: 14px;
+  color: #191919;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.version-dd-menu li[aria-selected="true"]{
+  background: rgba(255,149,45,0.1);
+  color: var(--accent-dark);
+  text-shadow: 0 0 1px rgba(216, 107, 0, 0.3);
+}
+
+.version-dd-menu li.focused:not([aria-selected="true"]),
+.version-dd-menu li:hover{
+  background: var(--hover-bg);
+}
+
+/* Mobile nav active bar */
+.nav-active-bar{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  border-radius: 2px;
+  background: #20201F;
+  opacity: 1;
+  transition: left .25s ease, width .25s ease, opacity .2s ease;
+}
+
+/* Mobile menu overlay */
+.mobile-menu-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.50);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: var(--z-modal);
+}
+
+.mobile-menu-overlay.is-active{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html.menu-locked,
+body.menu-locked{
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+/* Service slider core layout */
+.svc-slider{
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-track{
+  display: flex;
+  transition: transform .45s ease;
+  will-change: transform;
+}
+
+.svc-item{
+  box-sizing: border-box;
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: 416px minmax(0, 1fr);
+  column-gap: 112px; /* align with desktop mock spacing */
+  align-items: start;
+}
+
+/* Scroll to top button */
+/* Reveal animation helper */
+[data-fade-up]{
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+[data-fade-up].visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Touch targets */
+@media (hover: none) and (pointer: coarse){
+  .mobile-menu-btn,
+  .nav-close-btn{
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
