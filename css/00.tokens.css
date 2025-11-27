@@ -46,7 +46,6 @@
 }
 
 /* Z-Index Stack Reference
-   2147483647  scroll-top button
    var(--z-toast)    toast / highest notices
    var(--z-modal)    modals & overlays
    var(--z-dropdown) dropdown sheets

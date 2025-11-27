@@ -1772,7 +1772,6 @@ function initUseCaseSlider(){
     */
 
 // 공통 인터랙션
-// initScrollTopButton(); // Scroll to top button not implemented
 initHeaderScrollState();
 initNavigation();
 initNavHighlightOnly();   // 👈 여기에 정확히 위치
