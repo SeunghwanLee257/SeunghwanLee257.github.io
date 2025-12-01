@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="waLLLnut: For a secure and private world" />
   <meta name="google" content="notranslate">
+  <!-- 캐시 방지 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
 
   <title>waLLLnut</title>
   <link rel="canonical" href="https://walllnut.com/">
@@ -27,14 +31,14 @@
   <meta name="twitter:image" content="https://walllnut.com/asset/OGP-1200_630.png">
   <meta name="twitter:image:alt" content="waLLLnut: For a secure and private world">
 
-  <link rel="stylesheet" href="./css/00.tokens.css">
-  <link rel="stylesheet" href="./css/01.base.css">
-  <link rel="stylesheet" href="./css/02.layout.css">
-  <link rel="stylesheet" href="./css/03.components.css">
-  <link rel="stylesheet" href="./css/04.sections.css">
-  <link rel="stylesheet" href="./css/05.i18n.css">
-  <link rel="stylesheet" href="./css/06.utilities.css">
-  <link rel="stylesheet" href="./css/99.overrides.css">
+  <link rel="stylesheet" href="./css/00.tokens.css?v=20241220">
+  <link rel="stylesheet" href="./css/01.base.css?v=20241220">
+  <link rel="stylesheet" href="./css/02.layout.css?v=20241220">
+  <link rel="stylesheet" href="./css/03.components.css?v=20241220">
+  <link rel="stylesheet" href="./css/04.sections.css?v=20241220">
+  <link rel="stylesheet" href="./css/05.i18n.css?v=20241220">
+  <link rel="stylesheet" href="./css/06.utilities.css?v=20241220">
+  <link rel="stylesheet" href="./css/99.overrides.css?v=20241220">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -47,12 +51,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
 
+  <!-- 벤치마킹 버튼 CSS (기본적으로 숨김) -->
+  <style>
+    .ecosystem-btn {
+      display: none !important;
+    }
+    .ecosystem-btn.is-ready {
+      display: inline-flex !important;
+    }
+  </style>
+
 </head>
 
 <body>
   <header class="header header-font" role="banner">
     <div class="header-left">
-      <button type="button" class="ecosystem-btn" aria-label="View benchmarks"><span class="ecosystem-label">Benchmarks</span></button>
       <nav class="nav" aria-label="주요 섹션">
         <a href="#sec02" data-i18n="nav.vision">Vision</a>
         <a href="#sec03" data-i18n="nav.solutions">Solutions</a>
@@ -123,16 +136,14 @@
                   <div class="hero-heading-stack">
                     <div id="hero-heading" class="hero-heading-row" data-i18n="hero.headline" role="heading" aria-level="3">
                       <span class="hero-heading-text hero-heading-text--left"><strong>Confidential Coprocessor</strong></span>
-                      <div class="hero-slide-visual hero-slide-visual--inline">
-                        <img src="./asset/graphic/sec01-bnner.png" alt="Coprocessor lettering">
-      </div>
                       <span class="hero-heading-text hero-heading-text--right">for <strong>Fair</strong> and Verifiable RWA Markets <strong>FHE16</strong><br>+ MPC + Threshold Cryptography — <strong>Privacy</strong> that <strong>scales with performance.</strong></span>
       </div>
             </div>
                 </div>
               </article>
               <article class="hero-slide" id="hero-slide-1" data-slide-index="1" aria-hidden="true">
-                <div class="hero-slide-media hero-slide-media--chart"></div>
+                <img class="hero-slide-media" src="./asset/sec01-bg.jpeg" alt="Benchmark chart background" style="z-index: 0;">
+                <div class="hero-slide-media hero-slide-media--chart" style="z-index: 1;"></div>
                 <div class="hero-slide-overlay hero-slide-overlay--graph"></div>
                 <div class="hero-slide-content hero-slide-content--graph">
                   <div class="hero-slide-visual hero-slide-visual--graph">
@@ -659,9 +670,10 @@
     </ul>
   </nav>
 
-  <script src="./js/walllnut.bundle.js"></script>
+  <script src="./js/walllnut.bundle.js?v=20241220"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/main.js?v=20241220"></script>
+
 
 </body>
 </html>
