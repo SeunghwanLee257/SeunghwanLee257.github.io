@@ -55,9 +55,21 @@
   <style>
     .ecosystem-btn {
       display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      left: -9999px !important;
+      top: -9999px !important;
     }
     .ecosystem-btn.is-ready {
       display: inline-flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
     }
   </style>
 
