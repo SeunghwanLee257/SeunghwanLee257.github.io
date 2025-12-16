@@ -728,7 +728,53 @@
   <script src="./js/walllnut.bundle.js?v=20241220"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script type="module" src="./js/main.js?v=20241220"></script>
-
+  
+  <!-- Archive Modal -->
+  <div class="archive-modal" id="archiveModal" role="dialog" aria-labelledby="archiveModalTitle" aria-hidden="true">
+    <div class="archive-modal-overlay"></div>
+    <div class="archive-modal-content">
+      <div class="archive-modal-header">
+        <div class="archive-modal-tabs" role="tablist">
+          <button class="archive-modal-tab is-active" data-tab="alumni" role="tab" aria-selected="true" aria-controls="alumni-panel">Alumni Community</button>
+          <button class="archive-modal-tab" data-tab="ir" role="tab" aria-selected="false" aria-controls="ir-panel">IR</button>
+        </div>
+        <button class="archive-modal-close" aria-label="Close modal">
+          <span class="material-icons" aria-hidden="true">close</span>
+        </button>
+      </div>
+      <div class="archive-modal-body">
+        <div class="archive-modal-panel is-active" id="alumni-panel" role="tabpanel" aria-labelledby="alumni-tab">
+          <ul class="alumni-list">
+            <li class="alumni-item">
+              <img src="./asset/team/Alumni_Community01.JPG" alt="Yunsik Ham" class="alumni-photo" loading="lazy">
+              <div class="txt-detail">
+                <h3 class="alumni-name">Yunsik Ham</h3>
+                <span class="alumni-name-kr">함윤식</span>
+                <p class="alumni-desc">
+                  Lead Blockchain Developer;<br>
+                  Experience leading multiple ZK + blockchain projects
+                </p>
+              </div>
+            </li>
+            <li class="alumni-item">
+              <img src="./asset/team/Alumni_Community02.JPG" alt="Youngjun Kim" class="alumni-photo" loading="lazy">
+              <div class="txt-detail">
+                <h3 class="alumni-name">Youngjun Kim</h3>
+                <span class="alumni-name-kr">김영준</span>
+                <p class="alumni-desc">
+                  Cryptography & Server Developer;<br>
+                  Experience in LWE coding and network implementation
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="archive-modal-panel" id="ir-panel" role="tabpanel" aria-labelledby="ir-tab">
+          <!-- IR content will be added here -->
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
