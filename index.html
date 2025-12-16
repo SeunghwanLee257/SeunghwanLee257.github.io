@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
   <link rel="icon" href="./asset/logo-filled-orange.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -164,9 +164,44 @@
                         <select id="benchmarkVersion" class="chart-version-select" aria-label="Select benchmark version" style="display: none;">
                           <option value="version1" selected>Version 1</option>
                         </select>
+                        <button class="chart-detail-btn" id="chartDetailBtn" aria-label="View detailed chart" style="display: none;">
+                          <span class="detail-btn-text" id="detailBtnText">View Details</span>
+                          <span class="material-icons" aria-hidden="true">open_in_new</span>
+                        </button>
                       </div>
                       <div class="chart-wrapper">
-                        <canvas id="benchmarkChartCanvas"></canvas>
+                        <div id="benchmarkChartCanvas"></div>
+                      </div>
+                      <div class="chart-categories" id="chartCategories" role="tablist" aria-label="Benchmark categories">
+                        <button class="category-tab" data-category="ABS" role="tab" aria-selected="true" aria-controls="benchmarkChartCanvas">ABS</button>
+                        <button class="category-tab" data-category="ADD_TH" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD_TH</button>
+                        <button class="category-tab" data-category="ADD_VER2" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD_VER2</button>
+                        <button class="category-tab" data-category="ADD" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD</button>
+                        <button class="category-tab" data-category="ADD3" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD3</button>
+                        <button class="category-tab" data-category="EQ" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">EQ</button>
+                        <button class="category-tab" data-category="GATE_VEC" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">GATE_VEC</button>
+                        <button class="category-tab" data-category="LT" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">LT</button>
+                        <button class="category-tab" data-category="MAX" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">MAX</button>
+                        <button class="category-tab" data-category="NEG" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">NEG</button>
+                        <button class="category-tab" data-category="SELECT" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">SELECT</button>
+                      </div>
+                    </div>
+                    
+                    <!-- Chart Detail Modal -->
+                    <div class="chart-detail-modal" id="chartDetailModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                      <div class="modal-overlay" id="modalOverlay"></div>
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="modalTitle">Benchmark Details</h3>
+                          <button class="modal-close" id="modalClose" aria-label="Close modal">
+                            <span class="material-icons" aria-hidden="true">close</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="modal-chart-wrapper">
+                            <div id="modalChartCanvas"></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
           </div>
