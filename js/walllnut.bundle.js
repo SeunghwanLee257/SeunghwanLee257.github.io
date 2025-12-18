@@ -863,41 +863,49 @@ function initNavHighlightOnly() {
   // 모든 디바이스에서 적용 (모바일, 태블릿, 웹)
   const header = document.querySelector('.header');
   const langBox = document.querySelector('#langDropdown');
-  const hero = document.querySelector('#sec01-hero, .hero');
+  const heroSection = document.querySelector('#sec01, .hero');
   const scrollRoot = getScrollRoot();
-  if (!header || !langBox || !scrollRoot) return;
+  if (!header || !langBox || !scrollRoot || !heroSection) return;
 
-  let lastY = getScrollY();
-  let lastChangeY = lastY;
-  let lastDirection = null;
-  let isVisible = false; // 웹처럼 is-visible 클래스로 제어
+  let isVisible = false;
   let ticking = false;
-  let lastActionTime = 0;
-
-  const DEAD_ZONE = 100;       // 상단에서는 헤더 숨김
-  const SHOW_THRESHOLD = 50;   // 위로 50px 이상 스크롤 → 헤더 보이기
-  const HIDE_THRESHOLD = 50;   // 아래로 50px 이상 스크롤 → 헤더 숨기기
-  const MIN_DELAY = 200;
 
   function setVisible(visible) {
     if (isVisible === visible) return;
-    const now = performance.now();
-    if (now - lastActionTime < MIN_DELAY) return;
 
     isVisible = visible;
-    lastActionTime = now;
     header.classList.toggle('is-visible', visible);
     
+    // 뷰포트 크기에 따라 다르게 처리
+    const viewportWidth = window.innerWidth;
+    const isMobile = viewportWidth <= 767;
+    
     if (visible) {
+      // visibility 관련 스타일만 제거 (CSS가 제어하도록)
       header.style.removeProperty('transform');
       header.style.removeProperty('opacity');
       header.style.removeProperty('pointer-events');
       header.style.removeProperty('visibility');
+      
+      // 모바일이 아닐 때는 다른 인라인 스타일도 제거
+      if (!isMobile) {
+        header.style.removeProperty('background');
+        header.style.removeProperty('box-shadow');
+        header.style.removeProperty('backdrop-filter');
+        header.style.removeProperty('padding');
+        header.style.removeProperty('display');
+        header.style.removeProperty('flex-direction');
+        header.style.removeProperty('justify-content');
+        header.style.removeProperty('align-items');
+        header.style.removeProperty('gap');
+      }
+      
       header.classList.add('header--animating');
       setTimeout(() => {
         header.classList.remove('header--animating');
       }, 400);
     } else {
+      // 숨김 상태: visibility 관련 스타일만 설정
       header.style.setProperty('transform', 'translateY(-100%)', 'important');
       header.style.setProperty('opacity', '0', 'important');
       header.style.setProperty('pointer-events', 'none', 'important');
@@ -907,44 +915,107 @@ function initNavHighlightOnly() {
   }
 
   function evaluate() {
-    const y = getScrollY();
-    const dy = y - lastY;
-    const dist = Math.abs(y - lastChangeY);
-    const direction = dy > 0 ? 'down' : dy < 0 ? 'up' : null;
-
-    // DEAD_ZONE 이하 → 헤더 숨김 (웹처럼)
-    if (y < DEAD_ZONE) {
+    // Hero 섹션의 위치 확인
+    const heroRect = heroSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const scrollY = scrollRoot === document.documentElement 
+      ? window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0
+      : scrollRoot.scrollTop || 0;
+    
+    // Hero가 전체 뷰포트를 차지하는지 확인
+    // 페이지 최상단에서 Hero가 뷰포트의 대부분을 차지하고 있는지 확인
+    const heroTop = heroRect.top;
+    const heroHeight = heroRect.height;
+    
+    // 페이지 최상단에서 Hero가 뷰포트를 완전히 덮고 있는지 확인
+    // 1. 스크롤이 최상단에 있거나 거의 최상단에 있을 때
+    // 2. Hero의 top이 0에 가깝고 (페이지 최상단에 위치)
+    // 3. Hero의 높이가 viewportHeight의 90% 이상일 때 (100vw를 차지하는 경우)
+    const isAtTop = scrollY <= 10; // 스크롤이 최상단에 있을 때
+    const isHeroTopNearZero = heroTop >= -10 && heroTop <= 10; // Hero가 최상단에 있는지 (더 엄격)
+    const isHeroFullHeight = heroHeight >= viewportHeight * 0.9; // Hero 높이가 뷰포트의 90% 이상 (100vw를 차지)
+    
+    // 모든 조건을 만족하면 Hero가 전체 뷰포트를 차지하는 것으로 간주
+    const isHeroFullViewport = isAtTop && isHeroTopNearZero && isHeroFullHeight;
+    
+    // Hero가 전체 뷰포트를 차지할 때만 헤더 전체(배경 포함) 숨김
+    // 그 외에는 헤더 전체(배경 포함) 표시
+    if (isHeroFullViewport) {
       setVisible(false);
-      lastDirection = null;
-      lastChangeY = y;
-      lastY = y;
-      ticking = false;
-      return;
-    }
-
-    // 스크롤 방향이 바뀌었을 때만 동작
-    if (direction && direction !== lastDirection) {
-      lastDirection = direction;
-      lastChangeY = y;
-    }
-
-    // 아래로 충분히 스크롤 → 헤더 숨기기
-    if (direction === 'down' && dist > HIDE_THRESHOLD && isVisible) {
-      setVisible(false);
-      lastChangeY = y;
-    }
-
-    // 위로 충분히 스크롤 → 헤더 보이기
-    if (direction === 'up' && dist > SHOW_THRESHOLD && !isVisible) {
+    } else {
+      // Hero가 전체 뷰포트를 차지하지 않으면 헤더 전체 표시
       setVisible(true);
-      lastChangeY = y;
+      // 스크롤 위치에 따라 배경 스타일 제어
+      const isAtTopForBg = scrollY <= 5;
+      header.classList.toggle('has-scrolled', !isAtTopForBg);
     }
-
-    lastY = y;
+    
     ticking = false;
   }
 
   function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(evaluate);
+    }
+  }
+
+  function onResize() {
+    // 뷰포트 크기 변경 시 헤더의 모든 인라인 스타일 제거 (CSS 미디어 쿼리가 다시 적용되도록)
+    const viewportWidth = window.innerWidth;
+    const isMobile = viewportWidth <= 767;
+    
+    // 데스크톱으로 변경될 때만 모바일 전용 인라인 스타일 제거
+    if (!isMobile) {
+      // 헤더의 모든 인라인 스타일 제거 (visibility 관련 제외)
+      const stylePropsToRemove = [
+        'background',
+        'box-shadow',
+        'backdrop-filter',
+        'padding',
+        'display',
+        'flex-direction',
+        'justify-content',
+        'align-items',
+        'gap',
+        'overflow-x',
+        'overflow-y',
+        'box-sizing',
+        'width',
+        'height',
+        'position',
+        'top',
+        'z-index'
+      ];
+      
+      stylePropsToRemove.forEach(prop => {
+        header.style.removeProperty(prop);
+      });
+      
+      // 헤더 자식 요소들의 모든 인라인 스타일 제거
+      const headerLeft = header.querySelector('.header-left');
+      const headerCenter = header.querySelector('.header-center');
+      const headerRight = header.querySelector('.header-right');
+      const headerRightGroup = header.querySelector('.header-right-group');
+      
+      [headerLeft, headerCenter, headerRight, headerRightGroup].forEach(el => {
+        if (el) {
+          el.style.cssText = '';
+        }
+      });
+      
+      // CSS 클래스를 제거했다가 다시 추가하여 스타일 강제 재적용
+      const headerClasses = Array.from(header.classList);
+      header.className = '';
+      requestAnimationFrame(() => {
+        headerClasses.forEach(cls => {
+          header.classList.add(cls);
+        });
+        // 강제 리플로우 트리거
+        void header.offsetHeight;
+      });
+    }
+    
     if (!ticking) {
       ticking = true;
       requestAnimationFrame(evaluate);
@@ -959,30 +1030,11 @@ function initNavHighlightOnly() {
   header.style.setProperty('visibility', 'hidden', 'important');
   isVisible = false;
   
-  // DOMContentLoaded 후에도 확인
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      header.classList.remove('is-visible');
-      header.style.setProperty('transform', 'translateY(-100%)', 'important');
-      header.style.setProperty('opacity', '0', 'important');
-      header.style.setProperty('pointer-events', 'none', 'important');
-      header.style.setProperty('visibility', 'hidden', 'important');
-    });
-  }
+  // 초기 상태 확인 (Hero 섹션 위치 기반)
+  evaluate();
   
   scrollRoot.addEventListener('scroll', onScroll, { passive: true });
-  
-  // 초기 스크롤 위치 확인
-  const initialY = getScrollY();
-  if (initialY < DEAD_ZONE) {
-    setVisible(false);
-    header.classList.remove('is-visible');
-    header.style.setProperty('transform', 'translateY(-100%)', 'important');
-    header.style.setProperty('opacity', '0', 'important');
-    header.style.setProperty('pointer-events', 'none', 'important');
-  }
-
-  // 모든 디바이스에서 동일하게 작동하므로 resize 이벤트 제거
+  window.addEventListener('resize', onResize, { passive: true });
 }
 
 
@@ -1329,209 +1381,452 @@ function initUseCaseSlider(){
     var chartContainer = $('#benchmarkChart');
     if(!chartContainer) return;
 
-    var canvas = document.getElementById('benchmarkChartCanvas');
-    if(!canvas) return;
+    var chartDiv = document.getElementById('benchmarkChartCanvas');
+    if(!chartDiv) return;
 
-    var versionSelect = document.getElementById('benchmarkVersion');
-    if(!versionSelect) return;
+    var categoryTabs = document.querySelectorAll('.category-tab');
+    if(!categoryTabs || categoryTabs.length === 0) return;
 
-    // 벤치마크 데이터
-    var benchmarkData = {
-      version1: {
-        zama_NEG: [52.764, 103.81, 100.54, 100.90, 134.93, 148.57, 196.76, 367.60],
-        zama_ABS: [124.49, 165.94, 165.18, 200.11, 202.82, 246.05, 373.27, 554.53],
-        zama_ADD: [52.651, 94.521, 100.28, 137.05, 135.25, 182.48, 290.50, 440.10],
-        zama_bitand: [21.655, 33.267, 32.150, 33.925, 34.869, 40.903, 45.741, 82.166],
-        zama_leftshift: [65.208, 99.053, 136.62, 181.17, 222.14, 253.79, 366.94, 770.05],
-        ZAMA_min: [150.58, 156.78, 165.98, 206.75, 211.67, 256.00, 370.91, 565.41],
-        ZAMA_eq: [67.682, 62.825, 95.948, 97.595, 94.552, 139.56, 138.66, 219.75],
-        ZAMA_lt: [94.528, 102.30, 99.334, 127.08, 144.97, 180.29, 248.17, 336.67],
-        ZAMA_select: [43.845, 47.727, 49.015, 54.798, 58.187, 64.410, 87.991, 144.89]
-      },
-      version2: {
-        // 버전 2 데이터는 추후 추가
-        zama_NEG: [52.764, 103.81, 100.54, 100.90, 134.93, 148.57, 196.76, 367.60],
-        zama_ABS: [124.49, 165.94, 165.18, 200.11, 202.82, 246.05, 373.27, 554.53],
-        zama_ADD: [52.651, 94.521, 100.28, 137.05, 135.25, 182.48, 290.50, 440.10],
-        zama_bitand: [21.655, 33.267, 32.150, 33.925, 34.869, 40.903, 45.741, 82.166],
-        zama_leftshift: [65.208, 99.053, 136.62, 181.17, 222.14, 253.79, 366.94, 770.05],
-        ZAMA_min: [150.58, 156.78, 165.98, 206.75, 211.67, 256.00, 370.91, 565.41],
-        ZAMA_eq: [67.682, 62.825, 95.948, 97.595, 94.552, 139.56, 138.66, 219.75],
-        ZAMA_lt: [94.528, 102.30, 99.334, 127.08, 144.97, 180.29, 248.17, 336.67],
-        ZAMA_select: [43.845, 47.727, 49.015, 54.798, 58.187, 64.410, 87.991, 144.89]
-      }
+    // 카테고리별 색상 (사이트 디자인에 맞게)
+    var categoryColors = {
+      'ABS': '#FFFF00',        // 노랑
+      'ADD_TH': '#00FFFF',     // 시안
+      'ADD_VER2': '#FF00FF',   // 마젠타
+      'ADD': '#12C2A5',        // 청록
+      'ADD3': '#94E044',       // 라임
+      'EQ': '#FF7300',         // 오렌지 (다크)
+      'GATE_VEC': '#FF952D',   // 오렌지 (사이트 액센트)
+      'LT': '#8F8F8F',         // 회색
+      'MAX': '#94E044',        // 라임
+      'NEG': '#FF00FF',        // 마젠타
+      'SELECT': '#807F7F'      // 뮤트
     };
 
-    // 연산별 색상 (사이트 디자인에 맞게 커스터마이징)
-    var operationColors = {
-      zama_NEG: '#FF00FF',      // 마젠타
-      zama_ABS: '#FFFF00',      // 노랑
-      zama_ADD: '#00FFFF',      // 시안
-      zama_bitand: '#FF952D',   // 오렌지 (사이트 액센트)
-      zama_leftshift: '#12C2A5', // 청록
-      ZAMA_min: '#94E044',      // 라임
-      ZAMA_eq: '#FF7300',       // 오렌지 (다크)
-      ZAMA_lt: '#8F8F8F',       // 회색
-      ZAMA_select: '#807F7F'    // 뮤트
-    };
+    var currentCategory = 'ABS';
+    var chartData = null;
+    var modalChartInstance = null;
+    var clickedPoint = null; // 클릭한 포인트 정보 저장
+    
+    var detailBtn = document.getElementById('chartDetailBtn');
+    var detailBtnText = document.getElementById('detailBtnText');
+    var modal = document.getElementById('chartDetailModal');
+    var modalOverlay = document.getElementById('modalOverlay');
+    var modalClose = document.getElementById('modalClose');
+    var modalChartDiv = document.getElementById('modalChartCanvas');
 
-    // 연산별 표시 이름
-    var operationLabels = {
-      zama_NEG: 'NEG',
-      zama_ABS: 'ABS',
-      zama_ADD: 'ADD',
-      zama_bitand: 'BitAND',
-      zama_leftshift: 'Left Shift',
-      ZAMA_min: 'MIN',
-      ZAMA_eq: 'EQ',
-      ZAMA_lt: 'LT',
-      ZAMA_select: 'SELECT'
-    };
-
-    var chartInstance = null;
-
-    function createChart(version){
-      var data = benchmarkData[version] || benchmarkData.version1;
-      var labels = Array.from({length: 8}, (_, i) => i + 1); // 1-8 또는 비트 깊이 값
-
-      var datasets = [];
-      var operationKeys = Object.keys(data);
-      
-      operationKeys.forEach(function(key){
-        datasets.push({
-          label: operationLabels[key] || key,
-          data: data[key],
-          borderColor: operationColors[key] || '#403E3C',
-          backgroundColor: operationColors[key] ? operationColors[key] + '20' : '#403E3C20',
-          pointBackgroundColor: operationColors[key] || '#403E3C',
-          pointBorderColor: '#FFFFFF',
-          pointBorderWidth: 2,
-          pointRadius: 5,
-          pointHoverRadius: 7,
-          pointStyle: 'rect',
-          borderWidth: 2,
-          fill: false,
-          tension: 0.1
+    // 데이터 로드 함수
+    function loadCategoryData(category, callback){
+      fetch('./data/' + category + '.json')
+        .then(function(response){
+          if(!response.ok) throw new Error('Failed to load data');
+          return response.json();
+        })
+        .then(function(data){
+          chartData = data;
+          if(callback) callback(data);
+        })
+        .catch(function(error){
+          console.error('Error loading category data:', error);
         });
-      });
+    }
 
-      var config = {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: datasets
+    // Plotly 차트 생성 함수
+    function createChart(data){
+      if(!data) return;
+
+      // 데이터를 배열로 변환 (키 순서대로)
+      var keys = Object.keys(data).map(function(k){ return parseInt(k); }).sort(function(a, b){ return a - b; });
+      var xValues = keys;
+      var yValues = keys.map(function(k){ return data[String(k)]; });
+
+      var trace = {
+        x: xValues,
+        y: yValues,
+        type: 'scatter',
+        mode: 'lines+markers',  // 마커 추가하여 클릭 가능하게
+        name: currentCategory,
+        line: {
+          color: categoryColors[currentCategory] || '#FFFFFF',
+          width: 2
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: {
-            mode: 'index',
-            intersect: false
-          },
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-              labels: {
-                usePointStyle: true,
-                padding: 15,
-                font: {
-                  family: 'Pretendard',
-                  size: 12,
-                  weight: 'normal'
-                },
-                color: '#FFFFFF'
-              }
-            },
-            tooltip: {
-              enabled: true,
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              titleColor: '#FFFFFF',
-              bodyColor: '#FFFFFF',
-              borderColor: 'rgba(255, 255, 255, 0.2)',
-              borderWidth: 1,
-              padding: 12,
-              displayColors: true,
-              callbacks: {
-                label: function(context) {
-                  return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' ms';
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              display: true,
-              title: {
-                display: true,
-                text: 'Bit Depth / Parameter',
-                color: '#FFFFFF',
-                font: {
-                  family: 'Pretendard',
-                  size: 14,
-                  weight: 'normal'
-                }
-              },
-              grid: {
-                color: 'rgba(255, 255, 255, 0.1)',
-                lineWidth: 1
-              },
-              ticks: {
-                color: '#FFFFFF',
-                font: {
-                  family: 'Pretendard',
-                  size: 12
-                }
-              }
-            },
-            y: {
-              display: true,
-              title: {
-                display: true,
-                text: 'Performance (ms)',
-                color: '#FFFFFF',
-                font: {
-                  family: 'Pretendard',
-                  size: 14,
-                  weight: 'normal'
-                }
-              },
-              grid: {
-                color: 'rgba(255, 255, 255, 0.1)',
-                lineWidth: 1
-              },
-              ticks: {
-                color: '#FFFFFF',
-                font: {
-                  family: 'Pretendard',
-                  size: 12
-                },
-                callback: function(value) {
-                  return value + ' ms';
-                }
-              }
-            }
+        marker: {
+          size: 8,  // 클릭 가능하도록 마커 크기 설정
+          color: categoryColors[currentCategory] || '#FFFFFF',
+          opacity: 0,  // 투명하게 하여 보이지 않게
+          line: {
+            width: 0
           }
-        }
+        },
+        hovertemplate: '<b>%{fullData.name}</b><br>X: %{x}<br>Y: %{y:.2f} ms<extra></extra>'
       };
 
-      if(chartInstance){
-        chartInstance.destroy();
+      var layout = {
+        autosize: true,
+        margin: {
+          l: 60,
+          r: 20,
+          t: 20,
+          b: 60,
+          pad: 4
+        },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: {
+          family: 'Pretendard, sans-serif',
+          size: 12,
+          color: '#FFFFFF'
+        },
+        xaxis: {
+          title: {
+            text: 'Bit Depth / Parameter',
+            font: {
+              size: 14,
+              color: '#FFFFFF'
+            }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.1)',
+          gridwidth: 1,
+          tickfont: {
+            color: '#FFFFFF',
+            size: 12
+          },
+          showline: false
+        },
+        yaxis: {
+          title: {
+            text: 'Performance (ms)',
+            font: {
+              size: 14,
+              color: '#FFFFFF'
+            }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.1)',
+          gridwidth: 1,
+          tickfont: {
+            color: '#FFFFFF',
+            size: 12
+          },
+          showline: false
+        },
+        showlegend: false,
+        hovermode: 'x unified'
+      };
+
+      var config = {
+        displayModeBar: false,
+        responsive: true
+      };
+
+      Plotly.newPlot(chartDiv, [trace], layout, config);
+      
+      // 차트 클릭 이벤트 추가
+      chartDiv.on('plotly_click', function(data){
+        if(data && data.points && data.points.length > 0){
+          var point = data.points[0];
+          clickedPoint = {
+            x: point.x,
+            y: point.y,
+            pointNumber: point.pointNumber
+          };
+          // 모달 열기
+          openModal();
+        }
+      });
+      
+      // 디테일 버튼 표시 및 텍스트 업데이트
+      if(detailBtn){
+        detailBtn.style.display = 'inline-flex';
+        if(detailBtnText){
+          detailBtnText.textContent = currentCategory + ' Details';
+        }
+      }
+    }
+    
+    // 뷰포트 리사이즈 시 차트 크기 재조정
+    var resizeTimeout;
+    function handleResize(){
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function(){
+        if(chartDiv && chartData){
+          try{
+            Plotly.Plots.resize(chartDiv);
+          } catch(e){
+            console.warn('Chart resize error:', e);
+          }
+        }
+        if(modalChartDiv && modal && modal.classList.contains('is-open')){
+          try{
+            Plotly.Plots.resize(modalChartDiv);
+          } catch(e){
+            console.warn('Modal chart resize error:', e);
+          }
+        }
+      }, 150);
+    }
+    
+    window.addEventListener('resize', handleResize);
+    
+    // 모달 내부 상세 차트 생성 함수
+    function createModalChart(data){
+      if(!data || !modalChartDiv) return;
+
+      // 데이터를 배열로 변환 (키 순서대로)
+      var keys = Object.keys(data).map(function(k){ return parseInt(k); }).sort(function(a, b){ return a - b; });
+      var xValues = keys;
+      var yValues = keys.map(function(k){ return data[String(k)]; });
+
+      var trace = {
+        x: xValues,
+        y: yValues,
+        type: 'scatter',
+        mode: 'lines+markers',
+        name: currentCategory,
+        line: {
+          color: categoryColors[currentCategory] || '#FFFFFF',
+          width: 3
+        },
+        marker: {
+          size: 6,
+          color: categoryColors[currentCategory] || '#FFFFFF',
+          line: {
+            color: '#FFFFFF',
+            width: 1
+          }
+        },
+        hovertemplate: '<b>%{fullData.name}</b><br>X: %{x}<br>Y: %{y:.2f} ms<extra></extra>'
+      };
+      
+      // 클릭한 포인트 강조 표시를 위한 annotation
+      var annotations = [];
+      if(clickedPoint){
+        annotations.push({
+          x: clickedPoint.x,
+          y: clickedPoint.y,
+          text: '<b>Selected Point</b><br>X: ' + clickedPoint.x + '<br>Y: ' + clickedPoint.y.toFixed(2) + ' ms',
+          showarrow: true,
+          arrowhead: 2,
+          arrowsize: 1.5,
+          arrowwidth: 2,
+          arrowcolor: '#FF7300',
+          ax: 0,
+          ay: -40,
+          bgcolor: 'rgba(255, 115, 0, 0.8)',
+          bordercolor: '#FFFFFF',
+          borderwidth: 1,
+          font: {
+            color: '#FFFFFF',
+            size: 12,
+            family: 'Pretendard, sans-serif'
+          }
+        });
       }
 
-      chartInstance = new Chart(canvas, config);
+      var layout = {
+        autosize: true,
+        margin: {
+          l: 80,
+          r: 40,
+          t: 40,
+          b: 80,
+          pad: 4
+        },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent',
+        font: {
+          family: 'Pretendard, sans-serif',
+          size: 14,
+          color: '#FFFFFF'
+        },
+        xaxis: {
+          title: {
+            text: 'Bit Depth / Parameter',
+            font: {
+              size: 16,
+              color: '#FFFFFF'
+            }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.15)',
+          gridwidth: 1,
+          tickfont: {
+            color: '#FFFFFF',
+            size: 13
+          },
+          showline: true,
+          linecolor: 'rgba(255, 255, 255, 0.3)'
+        },
+        yaxis: {
+          title: {
+            text: 'Performance (ms)',
+            font: {
+              size: 16,
+              color: '#FFFFFF'
+            }
+          },
+          gridcolor: 'rgba(255, 255, 255, 0.15)',
+          gridwidth: 1,
+          tickfont: {
+            color: '#FFFFFF',
+            size: 13
+          },
+          showline: true,
+          linecolor: 'rgba(255, 255, 255, 0.3)'
+        },
+        showlegend: false,
+        hovermode: 'x unified',
+        annotations: annotations
+      };
+      
+      // 클릭한 포인트로 줌 (선택적)
+      if(clickedPoint){
+        layout.xaxis.range = [Math.max(0, clickedPoint.x - 10), clickedPoint.x + 10];
+        layout.yaxis.range = [Math.max(0, clickedPoint.y - 20), clickedPoint.y + 20];
+      }
+
+      var config = {
+        displayModeBar: true,
+        responsive: true,
+        modeBarButtonsToRemove: ['pan2d', 'lasso2d']
+      };
+
+      if(modalChartInstance){
+        Plotly.purge(modalChartDiv);
+      }
+      
+      Plotly.newPlot(modalChartDiv, [trace], layout, config);
+      modalChartInstance = modalChartDiv;
+      
+      // 클릭한 포인트로 스크롤 (선택적)
+      if(clickedPoint){
+        setTimeout(function(){
+          try{
+            Plotly.relayout(modalChartDiv, {
+              'xaxis.range': [Math.max(0, clickedPoint.x - 10), clickedPoint.x + 10],
+              'yaxis.range': [Math.max(0, clickedPoint.y - 20), clickedPoint.y + 20]
+            });
+          } catch(e){
+            console.warn('Modal chart zoom error:', e);
+          }
+        }, 100);
+      }
+      
+      // 모달이 열린 후 차트 크기 재조정
+      setTimeout(function(){
+        try{
+          Plotly.Plots.resize(modalChartDiv);
+        } catch(e){
+          console.warn('Modal chart resize error:', e);
+        }
+      }, 100);
+    }
+    
+    // 모달 열기 함수
+    function openModal(){
+      if(!modal || !chartData) return;
+      
+      // 모달 제목 업데이트
+      var modalTitle = document.getElementById('modalTitle');
+      if(modalTitle){
+        modalTitle.textContent = currentCategory + ' - Detailed Benchmark';
+      }
+      
+      // 모달 내부 차트 생성
+      createModalChart(chartData);
+      
+      // hero 컨트롤 숨기기
+      var heroControls = document.querySelector('.hero-slider-controls');
+      if(heroControls){
+        heroControls.style.display = 'none';
+      }
+      
+      // 모달 표시
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // 모달 닫기 함수
+    function closeModal(){
+      if(!modal) return;
+      
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      
+      // hero 컨트롤 다시 보이기
+      var heroControls = document.querySelector('.hero-slider-controls');
+      if(heroControls){
+        heroControls.style.display = '';
+      }
+      
+      // 모달 차트 정리
+      if(modalChartDiv){
+        Plotly.purge(modalChartDiv);
+        modalChartInstance = null;
+      }
+      
+      // 클릭한 포인트 정보 초기화
+      clickedPoint = null;
     }
 
-    // 버전 변경 이벤트
-    if(!versionSelect._chartBound){
-      versionSelect.addEventListener('change', function(e){
-        createChart(e.target.value);
+    // 카테고리 탭 클릭 이벤트
+    categoryTabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var category = this.getAttribute('data-category');
+        if(category === currentCategory) return;
+
+        // 탭 상태 업데이트
+        categoryTabs.forEach(function(t){
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('is-active');
+        this.setAttribute('aria-selected', 'true');
+
+        currentCategory = category;
+
+        // 데이터 로드 및 차트 업데이트
+        loadCategoryData(category, function(data){
+          createChart(data);
+        });
       });
-      versionSelect._chartBound = true;
-    }
+    });
 
-    // 초기 차트 생성
-    createChart('version1');
+    // 디테일 버튼 클릭 이벤트
+    if(detailBtn){
+      detailBtn.addEventListener('click', function(){
+        openModal();
+      });
+    }
+    
+    // 모달 닫기 이벤트
+    if(modalClose){
+      modalClose.addEventListener('click', function(){
+        closeModal();
+      });
+    }
+    
+    if(modalOverlay){
+      modalOverlay.addEventListener('click', function(){
+        closeModal();
+      });
+    }
+    
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal && modal.classList.contains('is-open')){
+        closeModal();
+      }
+    });
+    
+    // 초기 차트 생성 (ABS)
+    loadCategoryData('ABS', function(data){
+      createChart(data);
+      // 첫 번째 탭 활성화
+      if(categoryTabs[0]){
+        categoryTabs[0].classList.add('is-active');
+        categoryTabs[0].setAttribute('aria-selected', 'true');
+      }
+    });
   }
 
   /* ================= 초기화 ================= */
