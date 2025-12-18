@@ -928,12 +928,14 @@ function initNavHighlightOnly() {
     const heroHeight = heroRect.height;
     
     // 페이지 최상단에서 Hero가 뷰포트를 완전히 덮고 있는지 확인
-    // 1. 스크롤이 최상단에 있거나 거의 최상단에 있을 때
+    // Hero 섹션이 뷰포트를 거의 완전히 차지하는 경우 헤더 숨김
+    // Hero 섹션은 86vh로 설정되어 있으므로, 뷰포트의 대부분을 차지함
+    // 1. 스크롤이 최상단에 있을 때
     // 2. Hero의 top이 0에 가깝고 (페이지 최상단에 위치)
-    // 3. Hero의 높이가 viewportHeight의 90% 이상일 때 (100vw를 차지하는 경우)
-    const isAtTop = scrollY <= 10; // 스크롤이 최상단에 있을 때
-    const isHeroTopNearZero = heroTop >= -10 && heroTop <= 10; // Hero가 최상단에 있는지 (더 엄격)
-    const isHeroFullHeight = heroHeight >= viewportHeight * 0.9; // Hero 높이가 뷰포트의 90% 이상 (100vw를 차지)
+    // 3. Hero의 높이가 viewportHeight의 75% 이상일 때 (86vh이므로 충분)
+    const isAtTop = scrollY <= 30; // 스크롤이 최상단에 있을 때
+    const isHeroTopNearZero = heroTop >= -30 && heroTop <= 30; // Hero가 최상단에 있는지
+    const isHeroFullHeight = heroHeight >= viewportHeight * 0.75; // Hero 높이가 뷰포트의 75% 이상 (86vh이므로 충분)
     
     // 모든 조건을 만족하면 Hero가 전체 뷰포트를 차지하는 것으로 간주
     const isHeroFullViewport = isAtTop && isHeroTopNearZero && isHeroFullHeight;
@@ -1565,6 +1567,62 @@ function initUseCaseSlider(){
     }
     
     window.addEventListener('resize', handleResize);
+    
+    // 슬라이드 활성화 시 차트 리사이즈 (Plotly는 숨겨진 요소에서 제대로 렌더링되지 않음)
+    function handleSlideActivation(){
+      // 그래프 슬라이드가 활성화되었는지 확인
+      var graphSlide = chartContainer.closest('.hero-slide');
+      if(graphSlide && graphSlide.classList.contains('is-active')){
+        // 슬라이드가 활성화된 후 차트 리사이즈
+        setTimeout(function(){
+          if(chartDiv && chartData){
+            try{
+              Plotly.Plots.resize(chartDiv);
+            } catch(e){
+              console.warn('Chart resize on slide activation error:', e);
+            }
+          }
+        }, 100);
+      }
+    }
+    
+    // 슬라이드 전환 감지를 위한 MutationObserver
+    var slideObserver = new MutationObserver(function(mutations){
+      mutations.forEach(function(mutation){
+        if(mutation.type === 'attributes' && mutation.attributeName === 'class'){
+          var target = mutation.target;
+          if(target.classList.contains('hero-slide')){
+            handleSlideActivation();
+          }
+        }
+      });
+    });
+    
+    // 그래프 슬라이드 관찰 시작
+    var graphSlide = chartContainer.closest('.hero-slide');
+    if(graphSlide){
+      slideObserver.observe(graphSlide, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+    
+    // hero:request-slide 및 hero:slide-changed 이벤트 리스너 추가
+    document.addEventListener('hero:request-slide', function(event){
+      var requestedIndex = event.detail ? event.detail.index : 1;
+      if(requestedIndex === 1){
+        // 그래프 슬라이드로 이동할 때
+        setTimeout(handleSlideActivation, 200);
+      }
+    });
+    
+    document.addEventListener('hero:slide-changed', function(event){
+      var slideIndex = event.detail ? event.detail.index : 0;
+      if(slideIndex === 1){
+        // 그래프 슬라이드가 활성화되었을 때
+        setTimeout(handleSlideActivation, 200);
+      }
+    });
     
     // 모달 내부 상세 차트 생성 함수
     function createModalChart(data){
