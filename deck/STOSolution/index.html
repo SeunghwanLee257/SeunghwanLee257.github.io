@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy-preserving Execution Layer for STO | IR Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 14</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="deco-top"></div>
+                    <div class="deco-bottom"></div>
+                    <div class="version-tag">2025.ver</div>
+                    <p class="pre-headline">STO 사업자(플랫폼/중개/발행)가 규정준수·감사·공정거래를 "운영 가능"하게 만드는</p>
+                    <h1 class="main-headline">
+                        <span class="orange">Privacy-preserving</span><br>
+                        <span class="orange">Execution Layer</span> for STO
+                    </h1>
+                    <p class="sub-headline">Decision + Evidence 인프라</p>
+                    <div class="tagline-bar">
+                        민감정보를 공개하지 않고 정책을 실행하고, 결과를 재현 가능한 증빙으로 남긴다.
+                    </div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <span>Decision</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9,12 11,14 15,10"></polyline>
+                                </svg>
+                            </div>
+                            <span>Signed Result</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <span>Evidence Trail</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Problem -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title orange">Problem</span>
+                    </div>
+                    <h2 class="slide-headline">STO는 체결이 아니라 <span class="orange">규정준수/감사/감시</span> 운영에서 멈춘다</h2>
+
+                    <div class="card-row-3">
+                        <div class="card">
+                            <div class="card-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <h4>거래 전</h4>
+                            <p>투자자 한도/적격성/내부정책 판정이 필수</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                </svg>
+                            </div>
+                            <h4>거래 후</h4>
+                            <p>"왜 합법인가"를 감사/분쟁에서 재현 가능한 방식으로 입증</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h4>참여자 증가</h4>
+                            <p>증권사/플랫폼/발행/수탁/감사 → 데이터 공유 비용/누설 리스크 폭증</p>
+                        </div>
+                    </div>
+
+                    <div class="result-banner">
+                        <span class="result-icon">!</span>
+                        <span><strong>결과:</strong> 문서·대사·승인에 사람이 붙음 → <span class="orange">느림/비쌈/사고</span></span>
+                    </div>
+
+                    <div class="faq-box">
+                        <h4>Q. FHE 없이도 하는 데가 있는데, 꼭 우리여야 하나?</h4>
+                        <p class="faq-highlight">"불가능"이 아니라 <strong>'운영 표준이 없으면 확장 불가능'</strong>이 핵심</p>
+                        <ul>
+                            <li>대안(레거시/TEE/ZK)은 각각 가능하지만, 공통 병목은 동일</li>
+                            <li>우리는 <strong>Decision+Evidence를 표준 API로 제공</strong></li>
+                            <li>보안 수준은 고객 요구에 맞춰 단계적으로(TEE → ZK/FHE) 강화 가능</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Why Now -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title orange">Why Now</span>
+                    </div>
+                    <h2 class="slide-headline">지금은 "앱"보다 <span class="orange">운영 표준 인프라</span>가 먼저 깔리는 타이밍</h2>
+
+                    <div class="timeline-row">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-item" style="left: 100px;">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">
+                                <span class="year">2023</span>
+                                <span class="desc">가이드라인 정비</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item" style="left: 450px;">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-label">
+                                <span class="year">2024</span>
+                                <span class="desc">샌드박스 테스트</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item active" style="left: 800px;">
+                            <div class="timeline-dot pulse"></div>
+                            <div class="timeline-label">
+                                <span class="year orange">2025</span>
+                                <span class="desc"><strong>제도화 · 표준 레이어 선점</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-row-3 mt-40">
+                        <div class="info-card">
+                            <div class="info-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                    <path d="M2 17l10 5 10-5"></path>
+                                    <path d="M2 12l10 5 10-5"></path>
+                                </svg>
+                            </div>
+                            <p>금융당국 로드맵은 <strong>"가이드라인 → 샌드박스 → 제도화"</strong>로 단계 추진</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <p>초기 채택된 운영 레이어는 감사/리스크 모델과 얽혀 <strong>교체가 매우 어렵다(락인)</strong></p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon orange-bg">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <p>2025년 조각투자 장외 유통 인가 추진 → <strong>"인가/운영요건 설계"</strong> 단계</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Insight -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title orange">Insight</span>
+                    </div>
+                    <h2 class="slide-headline">STO의 핵심은 블록체인이 아니라 <span class="orange">판정(Decision)</span> + <span class="orange">입증(Evidence)</span></h2>
+
+                    <div class="insight-grid">
+                        <div class="insight-item">
+                            <span class="insight-num">01</span>
+                            <p>규정준수는 단순 기록이 아니라 거래 전 <strong>"허용/차단" 판정</strong>이 핵심</p>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-num">02</span>
+                            <p>판정 입력은 <strong>개인정보·신용정보·전략정보</strong>라 공개 불가</p>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-num">03</span>
+                            <p>감독/감사는 결과가 아니라 <strong>"왜 허용했나"</strong>를 요구</p>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-num">04</span>
+                            <p>STO는 "원장 시스템"이 아니라 <strong>정책 실행 + 증빙 재현 엔진</strong>이 필요</p>
+                        </div>
+                    </div>
+
+                    <div class="arch-row">
+                        <div class="arch-box orange-border">
+                            <div class="arch-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                </svg>
+                            </div>
+                            <h4>Decision Engine</h4>
+                            <p>정책 실행</p>
+                        </div>
+                        <div class="arch-plus">+</div>
+                        <div class="arch-box green-border">
+                            <div class="arch-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h4>Evidence Trail</h4>
+                            <div class="evidence-tags">
+                                <span>정책버전</span>
+                                <span>근거해시</span>
+                                <span>서명</span>
+                                <span>타임스탬프</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Solution + Positioning -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title orange">Solution + Positioning</span>
+                    </div>
+                    <h2 class="slide-headline">비공개 실행 레이어 = <span class="orange">정책 실행(Decision)</span> + <span class="orange">증빙(Evidence)</span> 자동화</h2>
+                    <p class="slide-subline">STO 사업자는 거래를 만들고, 우리는 규정준수/감사/감시를 '시스템으로' 실행하게 만든다.</p>
+
+                    <div class="two-col">
+                        <div class="col-left">
+                            <h4 class="col-title">Solution (정의)</h4>
+                            <div class="solution-steps">
+                                <div class="sol-step">
+                                    <span class="sol-badge">입력</span>
+                                    <span class="sol-text">비공개 데이터 (암호화/격리/권한통제)</span>
+                                </div>
+                                <div class="sol-arrow">↓</div>
+                                <div class="sol-step">
+                                    <span class="sol-badge">처리</span>
+                                    <span class="sol-text">정책/룰/메커니즘 실행</span>
+                                </div>
+                                <div class="sol-arrow">↓</div>
+                                <div class="sol-step">
+                                    <span class="sol-badge">출력</span>
+                                    <span class="sol-text">서명된 판정 (Allow/Deny/Valid) + 증빙 메타데이터</span>
+                                </div>
+                                <div class="sol-arrow">↓</div>
+                                <div class="sol-step highlight">
+                                    <span class="sol-badge">감사/분쟁</span>
+                                    <span class="sol-text">"그 시점의 정책/근거/결과" 자동 재현</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-right">
+                            <h4 class="col-title">Positioning (인프라 벤더)</h4>
+                            <div class="position-items">
+                                <div class="pos-item">
+                                    <div class="pos-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                                        </svg>
+                                    </div>
+                                    <p>우리는 STO 플랫폼/거래소가 <strong>아니다</strong> (중립/이해상충 최소화)</p>
+                                </div>
+                                <div class="pos-item">
+                                    <div class="pos-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <p>여러 플랫폼/중개사/발행사에 <strong>동시 공급 가능</strong>한 운영 인프라</p>
+                                </div>
+                                <div class="pos-item highlight">
+                                    <div class="pos-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <line x1="12" y1="20" x2="12" y2="10"></line>
+                                            <line x1="18" y1="20" x2="18" y2="4"></line>
+                                            <line x1="6" y1="20" x2="6" y2="16"></line>
+                                        </svg>
+                                    </div>
+                                    <p>시장이 커질수록 판정 호출/증빙 생성 사용량이 증가하는 <strong>레버리지 구조</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: How it works -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title orange">How it works</span>
+                    </div>
+                    <h2 class="slide-headline">기존 시스템은 그대로, <span class="orange">판정 단계만 분리</span>해 붙인다</h2>
+
+                    <div class="how-steps">
+                        <div class="how-step">
+                            <div class="step-circle">1</div>
+                            <h4>이벤트 생성</h4>
+                            <p>플랫폼/증권사가 거래 이벤트 생성</p>
+                            <small>(주문/배정/명의변경 요청)</small>
+                        </div>
+                        <div class="how-arrow">→</div>
+                        <div class="how-step">
+                            <div class="step-circle">2</div>
+                            <h4>룰 실행</h4>
+                            <p>비공개 실행 레이어가 룰 실행</p>
+                            <small>(한도/적격/락업/내부정책)</small>
+                        </div>
+                        <div class="how-arrow">→</div>
+                        <div class="how-step">
+                            <div class="step-circle">3</div>
+                            <h4>서명 반환</h4>
+                            <p>결과를 서명으로 반환</p>
+                            <small>(허용/차단/유효)</small>
+                        </div>
+                        <div class="how-arrow">→</div>
+                        <div class="how-step">
+                            <div class="step-circle">4</div>
+                            <h4>증빙 축적</h4>
+                            <p>증빙 자동 축적</p>
+                            <small>(정책버전·근거해시·결과서명)</small>
+                        </div>
+                    </div>
+
+                    <div class="sys-diagram">
+                        <div class="sys-box">KIS 내부<br><small>회원/KYC/리스크/OMS</small></div>
+                        <div class="sys-arrow">↔</div>
+                        <div class="sys-box highlight">판정+증빙</div>
+                        <div class="sys-arrow">↔</div>
+                        <div class="sys-box">원장/리포팅</div>
+                        <div class="sys-arrow">↔</div>
+                        <div class="sys-box">전자등록/시장 연계</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Use Case 1 -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title orange">Use Case 1</span>
+                    </div>
+                    <h2 class="slide-headline">투자한도/적격성/내부정책을 <span class="orange">"비공개로" 자동 집행</span></h2>
+                    <p class="slide-subline">거래 전 규정준수 자동집행</p>
+
+                    <div class="io-flow">
+                        <div class="io-box input">
+                            <div class="io-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17,8 12,3 7,8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                            </div>
+                            <h4>입력</h4>
+                            <p>투자자 상태/한도/규칙<br><small>(민감)</small></p>
+                        </div>
+                        <div class="io-arrow-box">→</div>
+                        <div class="io-box process">
+                            <div class="io-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                </svg>
+                            </div>
+                            <h4>Pre-trade Check</h4>
+                        </div>
+                        <div class="io-arrow-box">→</div>
+                        <div class="io-box output">
+                            <div class="io-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h4>출력</h4>
+                            <p>허용/차단 서명</p>
+                        </div>
+                    </div>
+
+                    <div class="effect-row">
+                        <div class="effect-item up">
+                            <span class="effect-icon">↑</span>
+                            <span>체결 속도</span>
+                        </div>
+                        <div class="effect-item down">
+                            <span class="effect-icon">↓</span>
+                            <span>운영 인력</span>
+                        </div>
+                        <div class="effect-item block">
+                            <span class="effect-icon">🛡</span>
+                            <span>위반 거래 사전 차단</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-row">
+                        <div class="kpi-box">
+                            <span class="kpi-value">&lt;100<small>ms</small></span>
+                            <span class="kpi-label">p95 지연시간</span>
+                        </div>
+                        <div class="kpi-box">
+                            <span class="kpi-value">99.9<small>%</small></span>
+                            <span class="kpi-label">위반차단율</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Use Case 2 -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title orange">Use Case 2</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="orange">"왜 허용했는지"</span>를 자동으로 남기는 증빙 + 리포팅</h2>
+                    <p class="slide-subline">Evidence(감사/입증) 자동화 + 리포팅</p>
+
+                    <div class="feature-row">
+                        <div class="feature-card">
+                            <div class="feature-icon orange-bg">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                </svg>
+                            </div>
+                            <p>매 거래마다 <strong>자동 생성</strong>: 정책버전, 근거해시(원문 비공개), 결과서명, 타임스탬프</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon orange-bg">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </div>
+                            <p>감사/분쟁 시 <strong>자동 재현</strong> (문서 찾기/대사 인력 감소)</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon orange-bg">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                            </div>
+                            <p>운영기관/전자등록 연계에 필요한 <strong>리포팅 자동화</strong> (총량/변동/이력)</p>
+                        </div>
+                    </div>
+
+                    <div class="evidence-table">
+                        <h4>Evidence 레코드 예시</h4>
+                        <table>
+                            <tr class="header">
+                                <td>필드</td>
+                                <td>값</td>
+                            </tr>
+                            <tr>
+                                <td>정책버전</td>
+                                <td class="code">v2.3.1-2025-01-15</td>
+                            </tr>
+                            <tr>
+                                <td>근거해시</td>
+                                <td class="code">0x7f3a...8b2c</td>
+                            </tr>
+                            <tr>
+                                <td>결과서명</td>
+                                <td class="code"><span class="status-allow">ALLOW</span> | sig:0xab12...ef34</td>
+                            </tr>
+                            <tr>
+                                <td>타임스탬프</td>
+                                <td class="code">2025-01-15T09:32:17.234Z</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Use Case 3 -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title orange">Use Case 3 — Overseas</span>
+                    </div>
+                    <h2 class="slide-headline">해외 확장: Ethereum에서 <span class="orange">"컨트랙트가 증권+대금을 동시에 결제"</span></h2>
+                    <p class="slide-subline">Ethereum 컨트랙트 레벨 DvP(대금결제 포함)</p>
+
+                    <div class="goal-banner">
+                        <div class="goal-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                            </svg>
+                        </div>
+                        <div class="goal-text">
+                            <strong>목표:</strong> 증권 토큰 Transfer + 대금(스테이블코인) Transfer를 <strong>원자적(Atomic)</strong>으로 결합
+                        </div>
+                    </div>
+
+                    <div class="dvp-features">
+                        <div class="dvp-feature">
+                            <span class="dvp-badge">DvP</span>
+                            <p>동일 트랜잭션에서 교환 → 실패 시 둘 다 롤백</p>
+                        </div>
+                        <div class="dvp-feature">
+                            <span class="dvp-badge">Privacy</span>
+                            <p>온체인에는 PII를 올리지 않고, "허용 서명/증빙 해시"로 검증</p>
+                        </div>
+                        <div class="dvp-feature">
+                            <span class="dvp-badge">효과</span>
+                            <p>결제 리스크/대사 비용↓, 24/7 글로벌 유통 기반</p>
+                        </div>
+                    </div>
+
+                    <div class="dvp-diagram">
+                        <div class="dvp-party">
+                            <div class="party-circle">Buyer</div>
+                        </div>
+                        <div class="dvp-step-box">Approve</div>
+                        <div class="dvp-arrow">→</div>
+                        <div class="dvp-contract">
+                            <div class="contract-inner">DvP Contract</div>
+                        </div>
+                        <div class="dvp-arrow">→</div>
+                        <div class="dvp-result">
+                            <div class="result-circle">Atomic<br>Settlement</div>
+                        </div>
+                        <div class="dvp-arrow">←</div>
+                        <div class="dvp-step-box">Approve</div>
+                        <div class="dvp-party">
+                            <div class="party-circle">Seller</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Market -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title orange">Market</span>
+                    </div>
+                    <h2 class="slide-headline">시장은 "STO"만이 아니라 <span class="orange">증권 운영 소프트웨어</span> 전체로 열린다</h2>
+
+                    <div class="market-layout">
+                        <div class="market-left">
+                            <div class="market-item">
+                                <span class="market-label">글로벌</span>
+                                <p>Equity Management Software / Transfer Agent Service 등 인접 시장이 존재(확장 가능)</p>
+                            </div>
+                            <div class="market-item">
+                                <span class="market-label">한국</span>
+                                <p>유통플랫폼·발행·운영기관은 인가/감사/감시 요구로 <strong>"운영 시스템 예산"</strong>이 필연적으로 발생</p>
+                            </div>
+                            <div class="market-item highlight">
+                                <span class="market-label">SAM</span>
+                                <p>거래 전 판정 + 감사 증빙 + 리포팅(총량/이력)</p>
+                            </div>
+                            <div class="market-item">
+                                <span class="market-label">3년 SOM</span>
+                                <p>유통플랫폼/증권사 2~4곳(고단가) + 발행/운영기관 10~20곳(중단가)</p>
+                            </div>
+                        </div>
+                        <div class="market-right">
+                            <div class="pyramid">
+                                <div class="pyramid-level tam">TAM<br><small>글로벌 증권 운영 SW</small></div>
+                                <div class="pyramid-level sam">SAM<br><small>STO 규정준수/감사 인프라</small></div>
+                                <div class="pyramid-level som">SOM<br><small>한국 초기 고객</small></div>
+                            </div>
+                            <div class="track-badges">
+                                <span class="track korea">한국 트랙</span>
+                                <span class="track global">해외 트랙</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Competition -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title orange">Competition</span>
+                    </div>
+                    <h2 class="slide-headline">경쟁은 토큰 발행이 아니라 <span class="orange">운영/명부/준법/감사 인프라</span>에서 난다</h2>
+
+                    <div class="comp-grid">
+                        <div class="comp-card">
+                            <h4>전통 TA/주주서비스</h4>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>신뢰/운영</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>비공개 실행·자동 증빙 표준 부족</span>
+                            </div>
+                        </div>
+                        <div class="comp-card">
+                            <h4>캡테이블 SaaS</h4>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>내부 관리</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>거래/감사/규정준수 자동집행 깊이 부족</span>
+                            </div>
+                        </div>
+                        <div class="comp-card">
+                            <h4>토큰증권 인프라(해외)</h4>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>토큰화/이전대행</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>한국 제도 연계/운영요건 현지화</span>
+                            </div>
+                        </div>
+                        <div class="comp-card">
+                            <h4>내부개발</h4>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>단기 가능</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>규정 변화 대응/유지보수 비용 폭증</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="our-diff">
+                        <h4>우리 차별점</h4>
+                        <div class="diff-items">
+                            <div class="diff-item">✓ <strong>"거래 전 판정" + "감사 증빙"</strong>을 제품 코어로 제공</div>
+                            <div class="diff-item">✓ 한국 규제/운영요건 중심의 패키지(리포팅/감시/내부통제 연계)</div>
+                            <div class="diff-item">✓ 중립 인프라 벤더(데이터·유동성 이해상충 최소화)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Go-to-Market -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title orange">Go-to-Market</span>
+                    </div>
+                    <h2 class="slide-headline">1) <span class="orange">유통플랫폼/증권사(고단가)</span> 2) 발행/운영기관(확장) 순서로 진입</h2>
+
+                    <div class="gtm-layout">
+                        <div class="gtm-left">
+                            <div class="icp-card priority">
+                                <span class="icp-badge">ICP 1순위</span>
+                                <h4>증권사 STO TF / 유통플랫폼</h4>
+                                <p>(준법·리스크·IT가 동시에 구매)</p>
+                            </div>
+                            <div class="icp-card">
+                                <span class="icp-badge secondary">ICP 2순위</span>
+                                <h4>발행인/운영기관</h4>
+                                <p>(총량·이력·리포팅 필수)</p>
+                            </div>
+                        </div>
+                        <div class="gtm-right">
+                            <div class="poc-box">
+                                <h4>PoC (8주)</h4>
+                                <p>더미 KYC/한도/주문 이벤트 + 감사 시나리오 3개</p>
+                                <div class="poc-kpis">
+                                    <span>판정 p95 지연시간</span>
+                                    <span>감사 재현 시간</span>
+                                    <span>운영자 원문 접근 최소화</span>
+                                </div>
+                                <div class="poc-weeks">
+                                    <div class="week">W1-2<br><small>환경 구축</small></div>
+                                    <div class="week">W3-4<br><small>더미 연동</small></div>
+                                    <div class="week">W5-6<br><small>시나리오 테스트</small></div>
+                                    <div class="week">W7-8<br><small>결과 리포트</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Team -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title orange">Our Team</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="orange">암호/시스템/사업화</span> 실행 역량을 동시에 보유</h2>
+
+                    <div class="team-origin">한양대 신동준 교수 연구실 실험실 창업</div>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="role-badge ceo">CEO</div>
+                            <h4>이승환</h4>
+                            <p class="eng">Seunghwan Lee</p>
+                            <p class="role">암호·블록체인 박사</p>
+                            <ul>
+                                <li>한양대 전자공학부 학/석/박사</li>
+                                <li>세계 최고 수준 FHE, MPC 기술 개발</li>
+                                <li>㈜Supergate FHE 상용화/납품</li>
+                                <li>2025 Solana Superteam 수상</li>
+                            </ul>
+                        </div>
+                        <div class="team-card">
+                            <div class="role-badge cto">CTO</div>
+                            <h4>김도혁</h4>
+                            <p class="eng">Dohyuk Kim</p>
+                            <p class="role">FHE 박사과정 · FHE16 설계·가속 리드</p>
+                            <ul>
+                                <li>한양대 전기공학과 학사, 석박사 과정</li>
+                                <li>FHE 상품 개발/납품 경험</li>
+                                <li>세계 최고 수준 FHE/MPC 역량</li>
+                                <li>동형암호 기반 DB 검색 연구/개발</li>
+                            </ul>
+                        </div>
+                        <div class="team-card">
+                            <div class="role-badge cso">CSO</div>
+                            <h4>신동준</h4>
+                            <p class="eng">Dong-joon Shin</p>
+                            <p class="role">동형암호·정보보호 권위자 · 한양대 교수</p>
+                            <ul>
+                                <li>서울대 학사, Northwestern 석사, USC 박사</li>
+                                <li>한양대 전자공학과 교수 25년 재직</li>
+                                <li>KpqC 연구단 기술자문 위원</li>
+                                <li>양자내성암호 공동연구 경험</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="track-record">
+                        <div class="record-item">01.2025 한양대 기술사업화 협약</div>
+                        <div class="record-item">04.2025 Korea Science & Technology Expo</div>
+                        <div class="record-item">06.2025 대학주도 창업 프로그램 선정</div>
+                        <div class="record-item highlight">08.2025 CRYPTO 2025 논문 채택</div>
+                        <div class="record-item">11.2025 Solana Superteam Korea 3등</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Business Model + Financials + Ask -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title orange">Business Model + Financials + Ask</span>
+                    </div>
+                    <h2 class="slide-headline">단가/비용 구조와 <span class="orange">18개월 실행 계획</span></h2>
+
+                    <div class="fin-grid">
+                        <div class="fin-card">
+                            <h4>가격 (예시)</h4>
+                            <div class="price-row">
+                                <span class="price-label">Platform 패키지</span>
+                                <span class="price-value">연 6억원 + 사용량</span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price-label">Issuer/Operator</span>
+                                <span class="price-value">연 1.2억원 + 사용량</span>
+                            </div>
+                            <p class="price-note">모듈: 감사 리포트, 정책 템플릿, 이상거래 탐지, 해외 DvP</p>
+                        </div>
+                        <div class="fin-card">
+                            <h4>연간 고정비</h4>
+                            <div class="cost-value">20~26억원</div>
+                            <p class="cost-note">(인건비/보안/법무/세일즈 포함)</p>
+                        </div>
+                        <div class="fin-card">
+                            <h4>손익분기 예시</h4>
+                            <div class="bep-row">Platform 2 + Issuer 8 = <strong>24.4억</strong> → BEP 근접</div>
+                            <div class="bep-row success">Platform 4 + Issuer 15 = <strong>47.5억</strong> → 흑자/확장</div>
+                        </div>
+                        <div class="fin-card">
+                            <h4>18개월 런웨이</h4>
+                            <p>월 고정비 1.6억 × 18 = 28.8억</p>
+                            <p>버퍼 20% 포함: <strong>34.6억</strong></p>
+                            <div class="runway-ask">조달 권장: <strong>35~45억</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="ask-box">
+                        <h4>Ask (한국투자증권)</h4>
+                        <div class="ask-items">
+                            <span>✓ 8주 PoC 디자인 파트너 (준법/리스크/IT 워킹그룹)</span>
+                            <span>✓ 더미 데이터/시나리오 3개 제공</span>
+                            <span>✓ PoC 종료 시 상용 범위/가격 협의</span>
+                        </div>
+                    </div>
+
+                    <div class="ref-links">
+                        참고: <a href="https://www.fsc.go.kr/no010101/79386">금융위 가이드라인</a> | <a href="https://www.fsc.go.kr/no010101/85593">금융위 추진현황</a> | <a href="https://www.nars.go.kr/report/view.do?brdSeq=48361&cmsCode=CM0018">국회입법조사처</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
