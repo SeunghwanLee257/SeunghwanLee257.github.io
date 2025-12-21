@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딸깍배당 | IR Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 14</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="deco-top"></div>
+                    <div class="deco-bottom"></div>
+                    <div class="version-tag">2025.ver</div>
+                    <h1 class="main-headline">
+                        <span class="highlight">딸깍배당</span>
+                    </h1>
+                    <p class="tagline">"KCD를 분산화한다: 데이터가 쓰일 때마다, 동네와 사장님에게 돈이 돌아간다."</p>
+                    <div class="value-props">
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <span><strong>웹 경영관리 OS</strong><br><small>(캐시노트 이상)</small></span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <span><strong>FHE16 비열람 통계</strong><br><small>(질의당 과금·배당)</small></span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                </svg>
+                            </div>
+                            <span><strong>딸깍 리포트 스토어</strong><br><small>(즉시결제형 공개링크)</small></span>
+                        </div>
+                    </div>
+                    <div class="bottom-note">
+                        예비창업자/개선수요에게 <strong>'즉시 결제형 리포트'</strong>로 빠른 매출 발생
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Problem -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title highlight">Problem</span>
+                    </div>
+                    <h2 class="slide-headline">운영 의사결정 + <span class="highlight">"배당 0원"</span> 구조</h2>
+
+                    <div class="problem-grid">
+                        <div class="problem-box">
+                            <div class="problem-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h4>사장님의 매일 질문</h4>
+                            <p class="quote">"이 동네에서 내가 평균 이하라면, 지금 접어야 하나?"</p>
+                            <p class="desc">동네 전체 침체 vs 내 가게 문제를 구분할 데이터가 없어서<br><strong>감(感)과 불안</strong>으로 결정</p>
+                        </div>
+                        <div class="problem-box">
+                            <div class="problem-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <line x1="19" y1="8" x2="19" y2="14"></line>
+                                    <line x1="22" y1="11" x2="16" y2="11"></line>
+                                </svg>
+                            </div>
+                            <h4>예비창업자/개선 수요</h4>
+                            <p class="quote">"여기서 시작해도 되나?" "리모델링이 효과 있나?"</p>
+                            <p class="desc"><strong>'동네 평균과 분포'</strong>가 없으면 뇌피셜<br>정부도 '소상공인365'로 수요 인정</p>
+                        </div>
+                    </div>
+
+                    <div class="killer-stat">
+                        <div class="stat-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            <span>핵심 문제: 지금은 데이터가 쓰여도 <strong>'질의당 배당'이 0원</strong></span>
+                        </div>
+                        <div class="stat-body">
+                            <div class="stat-item">
+                                <span class="stat-label">KCD 2024 매출</span>
+                                <span class="stat-value">1,428억원</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">캐시노트 도입</span>
+                                <span class="stat-value">160만 사업장</span>
+                            </div>
+                            <div class="stat-item highlight-stat">
+                                <span class="stat-label">35% 환원 시 연간</span>
+                                <span class="stat-value">499.8억원</span>
+                                <span class="stat-sub">→ 가게당 31,237원/년</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Market & Competition -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title highlight">Market & Competition</span>
+                    </div>
+                    <h2 class="slide-headline">캐시노트·KCD를 <span class="highlight">"쫓아가되, 룰을 바꿈"</span></h2>
+
+                    <div class="comp-section">
+                        <div class="comp-card strong">
+                            <h4>캐시노트/KCD가 강한 이유</h4>
+                            <ul>
+                                <li>2024년 연결 매출 <strong>1,428억원</strong></li>
+                                <li>캐시노트 도입 <strong>160만 사업장</strong></li>
+                                <li>매출 입금 확인, 일/주/월 리포트 제공</li>
+                                <li>멤버십 기반 유료 분석 서비스</li>
+                            </ul>
+                        </div>
+                        <div class="comp-card gap">
+                            <h4>우리가 들어갈 "틈"</h4>
+                            <ul>
+                                <li>원가/비용/재고/발주 같은 <strong>깊은 운영 데이터</strong></li>
+                                <li>"플랫폼이 본다"는 느낌만으로도 <strong>공유 저항</strong></li>
+                                <li>동네 단위 초정밀 데이터풀은 <strong>"신뢰 구조"</strong> 없이 안 모임</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="diff-banner">
+                        <div class="diff-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="diff-text">
+                            <p class="diff-compare">캐시노트/KCD = "데이터를 모아 분석"</p>
+                            <p class="diff-ours"><strong>딸깍배당 = "데이터를 잠근 채(FHE16) 통계만 꺼내 팔고, 쓰일 때마다 자동 배당"</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="market-pyramid">
+                        <div class="pyramid-level tam">
+                            <span class="level-label">TAM</span>
+                            <span class="level-value">3.2조원</span>
+                            <span class="level-desc">소상공인 데이터·경영관리 전체 시장</span>
+                        </div>
+                        <div class="pyramid-level sam">
+                            <span class="level-label">SAM</span>
+                            <span class="level-value">5,000억원</span>
+                            <span class="level-desc">데이터 기반 상권분석·경영지원 시장</span>
+                        </div>
+                        <div class="pyramid-level som">
+                            <span class="level-label">SOM</span>
+                            <span class="level-value">200억원</span>
+                            <span class="level-desc">3년내 목표: 5만 사업장 × 40만원 ARPU</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: One Page Summary -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title highlight">One Page Summary</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">3개의 수익 엔진</span></h2>
+
+                    <div class="engine-grid">
+                        <div class="engine-card">
+                            <div class="engine-badge">A</div>
+                            <h4>웹 경영관리 OS</h4>
+                            <p class="engine-sub">(캐시노트 이상)</p>
+                            <div class="engine-features">
+                                <span>매출/정산/입금예정</span>
+                                <span>비용·원가</span>
+                                <span>재고·발주</span>
+                                <span>인건비·근무표</span>
+                                <span>손익(P&L)</span>
+                                <span>다점포 권한</span>
+                            </div>
+                        </div>
+                        <div class="engine-card primary">
+                            <div class="engine-badge">B</div>
+                            <h4>FHE16 비열람 통계 마켓</h4>
+                            <p class="engine-sub">(질의 판매 + 배당)</p>
+                            <div class="engine-flow">
+                                <div class="flow-step">기업/지자체/연구기관이 통계 질의(Query) 구매</div>
+                                <div class="flow-arrow-down">↓</div>
+                                <div class="flow-step">질의 1건마다: 산출 → 로그 → 과금 → 배당</div>
+                            </div>
+                        </div>
+                        <div class="engine-card">
+                            <div class="engine-badge">C</div>
+                            <h4>딸깍 리포트 스토어</h4>
+                            <p class="engine-sub">(즉시 결제 + 공개 링크)</p>
+                            <div class="engine-features">
+                                <span>상권진단서</span>
+                                <span>개선진단서</span>
+                                <span>PDF 자동 생성</span>
+                                <span>공유 링크</span>
+                            </div>
+                            <p class="engine-note">공동창업자/투자자/가맹본부/임대인/은행에 바로 공유</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Product 1 - Web OS -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title highlight">Product 1: 웹 경영관리 OS</span>
+                    </div>
+                    <h2 class="slide-headline">캐시노트 이상의 <span class="highlight">웹 경영관리 시스템</span></h2>
+                    <p class="slide-subline">"앱 중심 경영관리"를 넘어, 웹에서 더 깊게</p>
+
+                    <div class="product-compare">
+                        <div class="compare-col base">
+                            <h4>캐시노트급 (기본 탑재)</h4>
+                            <ul>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    들어올 돈, 입금 예정/완료 확인
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    일/주/월 리포트 (매출, 객단가, 비용 분석)
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="compare-col plus">
+                            <h4>캐시노트 "이상" (웹 OS 차별)</h4>
+                            <ul>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>원가/매입</strong>: 매입단가·원가율, 거래처별 변화
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>재고/폐기/발주</strong>: 재고회전, 폐기율, 발주 추천
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>인건비/근무표</strong>: 시간대 매출 대비 인력 최적화
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>손익(P&L)</strong>: 고정비 포함 실질 이익 추정
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>다점포/세무사/가맹본부 권한</strong>
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <strong>내보내기</strong>: 회계/급여/BI 연동
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hook-box">
+                        <div class="hook-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <div class="hook-content">
+                            <span class="hook-label">[딸깍 건강검진]</span>
+                            <span class="hook-desc">"동네 평균 대비 내 위치 + 이번주 액션 3개" 즉시 생성</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Product 2 - Feed & Market -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title highlight">Product 2: 피드 + 마켓</span>
+                    </div>
+                    <h2 class="slide-headline">데이터 판매가 <span class="highlight">"SNS처럼 보이는"</span> 구조</h2>
+
+                    <div class="feed-market-grid">
+                        <div class="feed-section">
+                            <h4>동네 KPI 피드 (회사 SNS 느낌)</h4>
+                            <div class="feed-demo">
+                                <div class="feed-item">
+                                    <span class="feed-tag">#흑석동카페</span>
+                                    <p>동네 중앙값 매출지수 <strong class="up">+5.2%</strong></p>
+                                </div>
+                                <div class="feed-item">
+                                    <span class="feed-tag">#흑석동편의점</span>
+                                    <p>원가율 구간 경고 <strong class="warn">상위 20%</strong></p>
+                                </div>
+                                <div class="feed-item">
+                                    <span class="feed-tag">#신림동치킨</span>
+                                    <p>피크타임 이동 <strong>18시→19시</strong></p>
+                                </div>
+                            </div>
+                            <p class="feed-note">피드가 커질수록 "동네"가 데이터 커뮤니티가 됨</p>
+                        </div>
+                        <div class="store-section">
+                            <h4>리포트 스토어 (예비창업/개선)</h4>
+                            <div class="store-flow">
+                                <div class="store-step">
+                                    <span class="step-num">1</span>
+                                    <span>구매자 결제</span>
+                                </div>
+                                <div class="store-arrow">→</div>
+                                <div class="store-step">
+                                    <span class="step-num">2</span>
+                                    <span>상권/개선 진단서 자동 생성</span>
+                                </div>
+                                <div class="store-arrow">→</div>
+                                <div class="store-step">
+                                    <span class="step-num">3</span>
+                                    <span>공유 링크 (공개/비공개)</span>
+                                </div>
+                            </div>
+                            <p class="store-note"><strong>공개 링크</strong>가 바이럴/리퍼럴 역할</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Cashnote Integration -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title highlight">캐시노트 연동</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">공존/제휴</span> — 캐시노트 쓰는 가게도 바로 온보딩</h2>
+
+                    <div class="integration-strategy">
+                        <div class="strategy-box">
+                            <h4>전략: 대체가 아니라 "공존 + 확장"</h4>
+                            <div class="strategy-content">
+                                <div class="strategy-item">
+                                    <span class="keep">유지</span>
+                                    <p>가게는 캐시노트를 계속 사용</p>
+                                </div>
+                                <div class="strategy-plus">+</div>
+                                <div class="strategy-item">
+                                    <span class="add">추가</span>
+                                    <p>웹 OS(원가·재고·발주·권한)<br>+ 배당 지갑 + 로컬 피드</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="integration-flow">
+                        <h4>연동 방향</h4>
+                        <div class="flow-items">
+                            <div class="flow-item">
+                                <div class="flow-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                </div>
+                                <span>동일 데이터 소스<br>(POS/PG/계좌/정산)</span>
+                            </div>
+                            <div class="flow-connector">→</div>
+                            <div class="flow-item">
+                                <div class="flow-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <polyline points="16 11 18 13 22 9"></polyline>
+                                    </svg>
+                                </div>
+                                <span>가게 동의 하에 연결</span>
+                            </div>
+                            <div class="flow-connector">→</div>
+                            <div class="flow-item highlight-item">
+                                <div class="flow-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="12" cy="8" r="7"></circle>
+                                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                                    </svg>
+                                </div>
+                                <span>캐시노트 경험 유지<br>+ 깊은 관리 + 배당</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: FHE16 Core -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title highlight">핵심 기술: FHE16</span>
+                    </div>
+                    <h2 class="slide-headline">완전 동형암호 <span class="highlight">FHE16</span></h2>
+
+                    <div class="fhe-hero">
+                        <div class="hero-quote">
+                            "내 사업장 정보는 <strong>암호화</strong> 되어있고,<br>
+                            모두가 동의하에 필요한 정보만,<br>
+                            필요할 때 <strong>통계자료만 꺼내서 돈을 번다.</strong>"
+                        </div>
+                    </div>
+
+                    <div class="fhe-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h4>원본 비열람</h4>
+                            <p>원본 장부/원가/비용을<br>운영자도 비열람 상태 유지</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                            </div>
+                            <h4>통계만 제공</h4>
+                            <p>구매자는 통계만 얻음<br>개별 데이터 노출 없음</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h4>자동 배당</h4>
+                            <p>질의(조회)될 때마다<br>과금/로그/배당 투명 처리</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Data Governance -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title highlight">Data Governance</span>
+                    </div>
+                    <h2 class="slide-headline">로컬 데이터에서 <span class="highlight">필수인 거버넌스</span></h2>
+
+                    <div class="governance-grid">
+                        <div class="gov-item">
+                            <div class="gov-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>k-임계치 미달 차단</h4>
+                            <p>표본 부족 구간은 통계 공개 금지<br>(자동 차단)</p>
+                        </div>
+                        <div class="gov-item">
+                            <div class="gov-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <h4>기간/반경 자동 확장</h4>
+                            <p>재식별 방지를 위한<br>자동 범위 조정</p>
+                        </div>
+                        <div class="gov-item">
+                            <div class="gov-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                            </div>
+                            <h4>질의 남발 방지</h4>
+                            <p>쿼리 예산/정책으로<br>무분별 조회 차단</p>
+                        </div>
+                        <div class="gov-item">
+                            <div class="gov-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h4>점포 자율권</h4>
+                            <p>언제든 공유 범위(등급)<br>하향/철회 가능</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Customer Segments -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title highlight">Customer Segments</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">"빠르게 돈 받는"</span> 고객군</h2>
+
+                    <div class="customer-grid">
+                        <div class="customer-card">
+                            <div class="customer-badge">Group 1</div>
+                            <h4>기존 점포 (운영자)</h4>
+                            <p>웹 OS 구독 + 배당 참여</p>
+                        </div>
+                        <div class="customer-card">
+                            <div class="customer-badge">Group 2</div>
+                            <h4>기업/지자체/연구기관</h4>
+                            <p>통계 질의 구매 (데이터 판매)</p>
+                        </div>
+                        <div class="customer-card primary">
+                            <div class="customer-badge">Group 3</div>
+                            <h4>예비창업자/개선 수요</h4>
+                            <p><strong>즉시 결제형 캐시카우</strong></p>
+                            <ul>
+                                <li>창업 후보지 비교 리포트</li>
+                                <li>리모델링/메뉴/운영시간 시뮬레이션</li>
+                                <li>공유 링크로 의사결정자 설득</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="validation-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span>중기부 '소상공인365'에서 예비창업자·소상공인 대상 "빅데이터 상권분석/경영진단" 정식 서비스 → <strong>수요 검증 완료</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: GTM Strategy -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title highlight">Go-to-Market</span>
+                    </div>
+                    <h2 class="slide-headline">가게를 모으는 전략: <span class="highlight">"운영 OS → 피드 → 배당"</span></h2>
+
+                    <div class="gtm-funnel">
+                        <div class="funnel-step">
+                            <div class="step-badge">1차 훅</div>
+                            <h4>캐시노트 이상의 웹 OS</h4>
+                            <p>(무료 시작)</p>
+                        </div>
+                        <div class="funnel-arrow">→</div>
+                        <div class="funnel-step">
+                            <div class="step-badge">2차 훅</div>
+                            <h4>동네 KPI 피드</h4>
+                            <p>(표본이 늘수록 지표 해금)</p>
+                        </div>
+                        <div class="funnel-arrow">→</div>
+                        <div class="funnel-step primary">
+                            <div class="step-badge">3차 훅</div>
+                            <h4>배당 지갑</h4>
+                            <p>(데이터가 쓰일 때마다 돈이 찍힘)</p>
+                        </div>
+                    </div>
+
+                    <div class="data-sources">
+                        <h4>데이터 입력/자동화 (현실 커넥터 중심)</h4>
+                        <div class="source-grid">
+                            <div class="source-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                                <span>POS 매출</span>
+                            </div>
+                            <div class="source-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <span>PG/카드 정산</span>
+                            </div>
+                            <div class="source-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <span>계좌 입출금</span>
+                            </div>
+                            <div class="source-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                </svg>
+                                <span>매입/식자재</span>
+                            </div>
+                            <div class="source-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                                <span>최소 수기 입력</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Business Model -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title highlight">Business Model</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">구독 + 질의 과금 + 리포트 스토어</span></h2>
+
+                    <div class="biz-grid">
+                        <div class="biz-card">
+                            <h4>운영 OS 구독 (웹 SaaS)</h4>
+                            <div class="tier-list">
+                                <div class="tier free">
+                                    <span class="tier-name">Free</span>
+                                    <span class="tier-desc">기본 대시보드</span>
+                                </div>
+                                <div class="tier pro">
+                                    <span class="tier-name">Pro</span>
+                                    <span class="tier-desc">원가·재고·발주·다점포·권한·내보내기</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="biz-card primary">
+                            <h4>데이터 질의 과금 (배당 마켓)</h4>
+                            <div class="query-tiers">
+                                <div class="query-tier">
+                                    <span class="tier-badge bronze">Bronze</span>
+                                    <span class="tier-price">10원/질의</span>
+                                </div>
+                                <div class="query-tier">
+                                    <span class="tier-badge silver">Silver</span>
+                                    <span class="tier-price">100원/질의</span>
+                                </div>
+                                <div class="query-tier">
+                                    <span class="tier-badge gold">Gold</span>
+                                    <span class="tier-price">1,000원/질의</span>
+                                </div>
+                            </div>
+                            <div class="split-ratio">
+                                <span>소상공인 <strong>35%</strong></span>
+                                <span>지역풀 <strong>15%</strong></span>
+                                <span>플랫폼 <strong>50%</strong></span>
+                            </div>
+                        </div>
+                        <div class="biz-card">
+                            <h4>리포트 스토어 (즉시결제형)</h4>
+                            <p>결제 즉시 PDF + 공유 링크 발급<br>(공개/비공개 선택)</p>
+                        </div>
+                    </div>
+
+                    <div class="revenue-calc">
+                        <h4>KCD급 매출 달성 시 (연간)</h4>
+                        <div class="calc-items">
+                            <div class="calc-item">
+                                <span class="calc-label">소상공인 배당</span>
+                                <span class="calc-value">499.8억원</span>
+                                <span class="calc-sub">(1,428억 × 35%)</span>
+                            </div>
+                            <div class="calc-item">
+                                <span class="calc-label">지역풀</span>
+                                <span class="calc-value">214.2억원</span>
+                            </div>
+                            <div class="calc-item">
+                                <span class="calc-label">플랫폼</span>
+                                <span class="calc-value">714.0억원</span>
+                            </div>
+                            <div class="calc-item highlight">
+                                <span class="calc-label">가게당 평균 배당</span>
+                                <span class="calc-value">31,237원/년</span>
+                                <span class="calc-sub">(160만 기준)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Team -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title highlight">Our Team</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">암호/시스템/사업화</span> 실행 역량</h2>
+
+                    <div class="team-origin">한양대 신동준 교수 연구실 실험실 창업</div>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="role-badge ceo">CEO</div>
+                            <h4>이승환</h4>
+                            <p class="eng">Seunghwan Lee</p>
+                            <p class="role">암호·블록체인 박사</p>
+                            <ul>
+                                <li>한양대 전자공학부 학/석/박사</li>
+                                <li>세계 최고 수준 FHE, MPC 기술 개발</li>
+                                <li>㈜Supergate FHE 상용화/납품</li>
+                                <li>2025 Solana Superteam 수상</li>
+                            </ul>
+                        </div>
+                        <div class="team-card">
+                            <div class="role-badge cto">CTO</div>
+                            <h4>김도혁</h4>
+                            <p class="eng">Dohyuk Kim</p>
+                            <p class="role">FHE 박사과정 · FHE16 설계 리드</p>
+                            <ul>
+                                <li>한양대 전기공학과 학사, 석박사 과정</li>
+                                <li>FHE 상품 개발/납품 경험</li>
+                                <li>세계 최고 수준 FHE/MPC 역량</li>
+                                <li>동형암호 기반 DB 검색 연구/개발</li>
+                            </ul>
+                        </div>
+                        <div class="team-card">
+                            <div class="role-badge cso">CSO</div>
+                            <h4>신동준</h4>
+                            <p class="eng">Dong-joon Shin</p>
+                            <p class="role">동형암호·정보보호 권위자 · 한양대 교수</p>
+                            <ul>
+                                <li>서울대 학사, Northwestern 석사, USC 박사</li>
+                                <li>한양대 전자공학과 교수 25년 재직</li>
+                                <li>KpqC 연구단 기술자문 위원</li>
+                                <li>양자내성암호 공동연구 경험</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Track Record & Ask -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title highlight">Track Record & Ask</span>
+                    </div>
+                    <h2 class="slide-headline">waLLLnut <span class="highlight">Track Record</span></h2>
+
+                    <div class="track-timeline">
+                        <div class="track-item">
+                            <span class="track-date">01.2025</span>
+                            <span class="track-event">한양대 기술사업화 협약</span>
+                        </div>
+                        <div class="track-item">
+                            <span class="track-date">04.2025</span>
+                            <span class="track-event">Korea Science & Technology Expo</span>
+                        </div>
+                        <div class="track-item">
+                            <span class="track-date">06.2025</span>
+                            <span class="track-event">대학주도 창업 프로그램 선정</span>
+                        </div>
+                        <div class="track-item highlight">
+                            <span class="track-date">08.2025</span>
+                            <span class="track-event">CRYPTO 2025 논문 채택</span>
+                        </div>
+                        <div class="track-item">
+                            <span class="track-date">11.2025</span>
+                            <span class="track-event">Solana Superteam Korea 3등</span>
+                        </div>
+                    </div>
+
+                    <div class="ask-section">
+                        <h4>Funding Ask</h4>
+                        <div class="ask-grid">
+                            <div class="ask-item">
+                                <span class="ask-amount">5억원</span>
+                                <span class="ask-label">Pre-Seed</span>
+                            </div>
+                            <div class="ask-usage">
+                                <div class="usage-item">
+                                    <span class="usage-label">제품 개발</span>
+                                    <span class="usage-pct">50%</span>
+                                </div>
+                                <div class="usage-item">
+                                    <span class="usage-label">GTM / 초기 온보딩</span>
+                                    <span class="usage-pct">30%</span>
+                                </div>
+                                <div class="usage-item">
+                                    <span class="usage-label">운영 / 인건비</span>
+                                    <span class="usage-pct">20%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="company-info">
+                            <div class="company-logo">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                    <path d="M2 17l10 5 10-5"></path>
+                                    <path d="M2 12l10 5 10-5"></path>
+                                </svg>
+                            </div>
+                            <div class="company-text">
+                                <span class="company-name">waLLLnut</span>
+                                <span class="company-desc">Privacy-preserving Technology</span>
+                            </div>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <span>shlee@walllnut.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>한양대학교 ERICA 캠퍼스</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

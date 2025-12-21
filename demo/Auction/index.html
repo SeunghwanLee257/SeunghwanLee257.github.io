@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidential Auction Network | FHE16 Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>DEMO - Frontend only. 실제 FHE16 연산은 서버에서 수행됩니다. (AES로 시뮬레이션)</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <span class="logo-text">Confidential Auction</span>
+            <span class="logo-badge">FHE16</span>
+        </div>
+        <div class="header-actions">
+            <div class="key-status">
+                <span class="status-dot"></span>
+                <span>Secret Key Loaded</span>
+            </div>
+            <div class="kyc-box" id="kycBox">
+                <span class="kyc-label">KYC 상태</span>
+                <span class="kyc-status" id="kycStatus">미인증</span>
+                <button class="btn btn-small" id="verifyKycBtn" onclick="app.verifyKYC()">인증하기</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Panel: Lot List -->
+        <section class="panel lot-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    경매 작품 목록
+                </h2>
+            </div>
+            <div class="lot-list" id="lotList">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="lot-legend">
+                <div class="legend-item"><span class="legend-dot hot"></span><span>인기</span></div>
+                <div class="legend-item"><span class="legend-dot warm"></span><span>관심</span></div>
+                <div class="legend-item"><span class="legend-dot cool"></span><span>기회</span></div>
+            </div>
+        </section>
+
+        <!-- Center Panel: Bid Interface -->
+        <section class="panel bid-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Sealed Bid 입찰
+                </h2>
+                <div class="timer-box">
+                    <span class="timer-label">남은시간</span>
+                    <span class="timer-value" id="auctionTimer">--:--:--</span>
+                </div>
+            </div>
+
+            <!-- No Selection State -->
+            <div class="bid-content" id="bidContent">
+                <div class="no-selection" id="noSelection">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    </svg>
+                    <p>왼쪽에서 작품을 선택하세요</p>
+                </div>
+
+                <!-- Selected Lot Info -->
+                <div class="selected-lot-section" id="selectedLotSection" style="display:none;">
+                    <div class="lot-detail-card">
+                        <div class="lot-detail-header">
+                            <span class="lot-number" id="lotNumber">LOT 001</span>
+                            <span class="lot-status-badge" id="lotStatusBadge">진행중</span>
+                        </div>
+                        <h3 class="lot-detail-title" id="lotTitle">-</h3>
+                        <p class="lot-detail-artist" id="lotArtist">-</p>
+                        <div class="lot-detail-meta">
+                            <span id="lotYear">-</span> | <span id="lotMedium">-</span> | <span id="lotSize">-</span>
+                        </div>
+                        <div class="lot-estimate-box">
+                            <div class="estimate-item">
+                                <span class="label">추정가</span>
+                                <span class="value" id="lotEstimate">-</span>
+                            </div>
+                            <div class="estimate-item">
+                                <span class="label">시작가</span>
+                                <span class="value" id="lotStarting">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bid Form -->
+                    <div class="bid-form-section">
+                        <label class="bid-label">입찰 금액 (KRW)</label>
+                        <div class="bid-input-wrapper">
+                            <span class="currency-symbol">₩</span>
+                            <input type="number" id="bidAmount" placeholder="금액 입력" min="0" step="1000000">
+                        </div>
+                        <div class="bid-presets">
+                            <button type="button" onclick="app.addBidAmount(10000000)">+1천만</button>
+                            <button type="button" onclick="app.addBidAmount(50000000)">+5천만</button>
+                            <button type="button" onclick="app.addBidAmount(100000000)">+1억</button>
+                            <button type="button" onclick="app.addBidAmount(500000000)">+5억</button>
+                        </div>
+
+                        <!-- Encryption Preview -->
+                        <div class="encryption-preview" id="encryptionPreview">
+                            <div class="preview-header">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                암호화 미리보기
+                            </div>
+                            <code id="previewCode">금액을 입력하면 암호화된 값이 표시됩니다</code>
+                        </div>
+
+                        <button class="btn btn-primary btn-large" id="submitBidBtn" onclick="app.submitBid()" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13"></path>
+                                <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                            </svg>
+                            Sealed Bid 제출
+                        </button>
+                        <p class="bid-notice" id="bidNotice">KYC 인증 후 입찰할 수 있습니다</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FHE Flow Visualization -->
+            <div class="fhe-flow" id="fheFlow">
+                <h4>FHE16 처리 플로우</h4>
+                <div class="flow-steps">
+                    <div class="flow-step" data-step="1">
+                        <div class="step-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <span>암호화</span>
+                    </div>
+                    <div class="flow-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="flow-step" data-step="2">
+                        <div class="step-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>Sealed</span>
+                    </div>
+                    <div class="flow-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <div class="flow-step" data-step="3">
+                        <div class="step-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <span>완료</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel: Stats -->
+        <section class="panel stats-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10"></path>
+                        <path d="M12 20V4"></path>
+                        <path d="M6 20v-6"></path>
+                    </svg>
+                    Public Stats
+                </h2>
+                <span class="public-tag">PUBLIC</span>
+            </div>
+
+            <div class="stats-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalLots">0</span>
+                        <span class="stat-label">총 작품</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="activeAuctions">0</span>
+                        <span class="stat-label">진행중</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalBids">0</span>
+                        <span class="stat-label">총 입찰</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="yourBids">0</span>
+                        <span class="stat-label">내 입찰</span>
+                    </div>
+                </div>
+
+                <div class="selected-lot-stats" id="selectedLotStats" style="display:none;">
+                    <h4 id="selectedLotTitle">선택된 작품</h4>
+                    <div class="lot-stats-detail">
+                        <div class="stat-row">
+                            <span class="label">입찰 수</span>
+                            <span class="value" id="lotBidCount">-</span>
+                            <span class="visibility">PUBLIC</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label">입찰 금액</span>
+                            <span class="value encrypted">암호화됨</span>
+                            <span class="visibility private">PRIVATE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-bids-section">
+                    <h4>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        최근 입찰
+                    </h4>
+                    <div class="recent-bids-list" id="recentBidsList">
+                        <div class="empty-message">아직 입찰이 없습니다</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary btn-full" id="viewEncryptedBtn" onclick="app.showEncryptedData()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    암호화 데이터 보기
+                </button>
+
+                <button class="btn btn-accent btn-full" onclick="app.determineWinner()" style="margin-top:8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    낙찰자 결정 (Demo)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Encrypted Data Modal -->
+    <div class="modal" id="encryptedDataModal">
+        <div class="modal-overlay" onclick="app.closeModal('encryptedDataModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>암호화된 입찰 데이터</h3>
+                <button class="close-modal" onclick="app.closeModal('encryptedDataModal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="encryptedDataContent">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Winner Modal -->
+    <div class="modal" id="winnerModal">
+        <div class="modal-overlay" onclick="app.closeModal('winnerModal')"></div>
+        <div class="modal-content modal-winner">
+            <div class="modal-header">
+                <h3 id="winnerTitle">낙찰 결과</h3>
+                <button class="close-modal" onclick="app.closeModal('winnerModal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="winnerDetails">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="crypto.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidential Auction Network | IR Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 18</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="confidential-badge">CONFIDENTIAL</div>
+                    <div class="deco-line"></div>
+                    <h1 class="main-headline">
+                        Confidential<br>Auction Network
+                    </h1>
+                    <p class="tagline">"공개 신뢰 + 비공개 가격"</p>
+                    <p class="sub-tagline">블록체인 + FHE16로 입찰 '신뢰'는 공개, 금액·개인은 보호</p>
+
+                    <div class="lot-card-demo">
+                        <div class="lot-header">Lot #2024-A7</div>
+                        <div class="lot-body">
+                            <div class="lot-stat public">
+                                <span class="label">Bid Count</span>
+                                <span class="value">127</span>
+                                <span class="tag">PUBLIC</span>
+                            </div>
+                            <div class="lot-stat private">
+                                <span class="label">Bid Amount</span>
+                                <span class="value">🔒 Encrypted</span>
+                                <span class="tag">PRIVATE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="brand-tagline">
+                        <span class="highlight">Public Trust</span>, <span>Private Value</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: One Line Summary -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title highlight">Executive Summary</span>
+                    </div>
+                    <h2 class="slide-headline">한 줄 요약</h2>
+
+                    <div class="summary-quote">
+                        "경매의 핵심 데이터를 <span class="highlight">'보여줄 건 보여주고'</span>(입찰 수/관심 지표), <span class="highlight">'숨길 건 끝까지 숨긴다'</span>(금액/개인)—이 둘을 FHE16로 동시에 달성하는 경매 인프라"
+                    </div>
+
+                    <div class="summary-grid">
+                        <div class="summary-card public-card">
+                            <div class="card-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M2 12h20"></path>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </div>
+                            <h4>공개 (Public)</h4>
+                            <ul>
+                                <li>Lot별 실시간 입찰 수</li>
+                                <li>경쟁 강도 / 추세</li>
+                                <li>감사 가능한 이벤트 로그</li>
+                            </ul>
+                        </div>
+                        <div class="summary-card private-card">
+                            <div class="card-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h4>비공개 (Private)</h4>
+                            <ul>
+                                <li>입찰 금액 (암호화)</li>
+                                <li>입찰자 신원</li>
+                                <li>패자 입찰 내역</li>
+                            </ul>
+                        </div>
+                        <div class="summary-card compliance-card">
+                            <div class="card-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>보장 (Compliance)</h4>
+                            <ul>
+                                <li>거래 단위 KYC</li>
+                                <li>자산/자금 검증</li>
+                                <li>위변조 불가 감사로그</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Problem Definition -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title highlight">Problem</span>
+                    </div>
+                    <h2 class="slide-headline">"신뢰 vs 프라이버시"의 <span class="highlight">트레이드오프</span></h2>
+
+                    <div class="problem-list">
+                        <div class="problem-item">
+                            <div class="problem-num">1</div>
+                            <div class="problem-content">
+                                <h4>진행 데이터 제한</h4>
+                                <p>관람자/잠재참여자 유입이 약함 → 시장 활성화 저해</p>
+                            </div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-num">2</div>
+                            <div class="problem-content">
+                                <h4>"사이트를 믿어야 하는" 구조</h4>
+                                <p>조작/분쟁 의심 비용 발생 → 신뢰 형성에 한계</p>
+                            </div>
+                        </div>
+                        <div class="problem-item">
+                            <div class="problem-num">3</div>
+                            <div class="problem-content">
+                                <h4>글로벌 확장 시 검증 비용</h4>
+                                <p>신원/자금/자산 검증 비용이 급격히 증가</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="matrix-section">
+                        <h4>현재 경매 시장의 딜레마</h4>
+                        <div class="matrix">
+                            <div class="matrix-label y-label">프라이버시/컴플라이언스</div>
+                            <div class="matrix-label x-label">투명성</div>
+                            <div class="matrix-quadrant q1">
+                                <span>전통 경매</span>
+                                <small>투명↓ 프라이버시↑</small>
+                            </div>
+                            <div class="matrix-quadrant q2 highlight-quadrant">
+                                <span>우리 솔루션</span>
+                                <small>투명↑ 프라이버시↑</small>
+                            </div>
+                            <div class="matrix-quadrant q3">
+                                <span>폐쇄형</span>
+                                <small>투명↓ 프라이버시↓</small>
+                            </div>
+                            <div class="matrix-quadrant q4">
+                                <span>NFT 마켓</span>
+                                <small>투명↑ 프라이버시↓</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Insight -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title highlight">Insight</span>
+                    </div>
+                    <h2 class="slide-headline">Prediction Market처럼 <span class="highlight">"관람/참여"</span>를 키우는 엔진</h2>
+
+                    <div class="insight-principles">
+                        <div class="principle">
+                            <div class="principle-num">원리 1</div>
+                            <div class="principle-content">
+                                <h4>블록체인 검증 가능성</h4>
+                                <p>Lot별 입찰 수는 실시간 검증 가능 → <strong>조작 불가</strong></p>
+                            </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-num">원리 2</div>
+                            <div class="principle-content">
+                                <h4>전략적 참여 유도</h4>
+                                <p>유저가 "경쟁 낮은 Lot", "인기 Lot" 등 <strong>전략적으로 참여</strong></p>
+                            </div>
+                        </div>
+                        <div class="principle">
+                            <div class="principle-num">원리 3</div>
+                            <div class="principle-content">
+                                <h4>트래픽 → 유동성</h4>
+                                <p>관람자 트래픽 자체가 <strong>시장 유동성을 키움</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heatmap-mockup">
+                        <h4>Lot별 관심지수 랭킹 (목업)</h4>
+                        <div class="heatmap-grid">
+                            <div class="heatmap-item hot"><span>Lot #12</span><span class="bids">89 bids</span></div>
+                            <div class="heatmap-item warm"><span>Lot #7</span><span class="bids">54 bids</span></div>
+                            <div class="heatmap-item warm"><span>Lot #23</span><span class="bids">47 bids</span></div>
+                            <div class="heatmap-item cool"><span>Lot #5</span><span class="bids">31 bids</span></div>
+                            <div class="heatmap-item cool"><span>Lot #19</span><span class="bids">28 bids</span></div>
+                            <div class="heatmap-item cold"><span>Lot #3</span><span class="bids">12 bids</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Solution Overview -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title highlight">Solution</span>
+                    </div>
+                    <h2 class="slide-headline">"공개 신뢰 레이어 + 비공개 가격 레이어"</h2>
+
+                    <div class="layer-architecture">
+                        <div class="layer public-layer">
+                            <div class="layer-badge">A</div>
+                            <h4>Onchain Public Trust Layer</h4>
+                            <p class="layer-sub">(공개)</p>
+                            <ul>
+                                <li>Lot 등록/검증 이벤트</li>
+                                <li>입찰 이벤트 (카운트)</li>
+                                <li>마감 이벤트</li>
+                                <li>누구나 검증 가능한 "감사로그"</li>
+                            </ul>
+                        </div>
+                        <div class="layer-connector">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                            <span>결합</span>
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="19" x2="12" y2="5"></line>
+                                <polyline points="5 12 12 5 19 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="layer private-layer">
+                            <div class="layer-badge">B</div>
+                            <h4>FHE16 Confidential Value Layer</h4>
+                            <p class="layer-sub">(비공개)</p>
+                            <ul>
+                                <li>입찰 금액 암호화 저장/연산</li>
+                                <li>낙찰자/정산에 필요한 결과만</li>
+                                <li>권한 기반 공개</li>
+                                <li>패자 입찰가 영구 비공개 가능</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Product -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title highlight">Product</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">AuctionOS</span> 모듈 구성</h2>
+
+                    <div class="module-grid">
+                        <div class="module-card">
+                            <div class="module-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="8.5" cy="7" r="4"></circle>
+                                    <polyline points="17 11 19 13 23 9"></polyline>
+                                </svg>
+                            </div>
+                            <h4>KYC/자산검증 모듈</h4>
+                            <p>거래(입찰) 단위로 자격 확인</p>
+                        </div>
+                        <div class="module-card primary">
+                            <div class="module-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h4>FHE16 비공개 입찰 엔진</h4>
+                            <p>암호문 상태에서 낙찰 계산</p>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                            </div>
+                            <h4>Onchain 이벤트/통계</h4>
+                            <p>입찰 수/추세 공개 + 대시보드</p>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                            </div>
+                            <h4>정산/계약 모듈</h4>
+                            <p>수수료/로열티/세금계산서 연동</p>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <h4>API/화이트라벨 UI</h4>
+                            <p>기존 사업자에 빠르게 탑재</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Seoul Auction Integration -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title highlight">Integration</span>
+                    </div>
+                    <h2 class="slide-headline">서울옥션 <span class="highlight">"현행 프로세스"</span>에 어떻게 붙나</h2>
+
+                    <div class="existing-features">
+                        <h4>서울옥션이 이미 갖춘 것</h4>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>온라인 경매 (자동연장/자동응찰) 운영</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>프라이빗 세일 (경매 외 거래) 운영</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>회원가입 단계에 본인인증 플로우 존재</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="integration-flow">
+                        <h4>우리 모듈 삽입 지점</h4>
+                        <div class="flow-diagram">
+                            <div class="flow-step">
+                                <span class="step-label">회원가입</span>
+                                <div class="step-add">+ KYC-VC 연결</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <span class="step-label">입찰 제출</span>
+                                <div class="step-add">+ FHE16 암호화</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <span class="step-label">마감/낙찰</span>
+                                <div class="step-add">+ 온체인 검증</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="integration-note">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        <span>"완전한 신규 모델"이 아니라, <strong>기존 모델 위에 '신뢰/프라이버시 레이어'만 추가</strong>하는 제안</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Core Feature 1 -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title highlight">Core Feature 1</span>
+                    </div>
+                    <h2 class="slide-headline">"입찰 수는 공개, 금액은 <span class="highlight">끝까지 비공개</span>"</h2>
+
+                    <div class="feature-demo">
+                        <div class="demo-lot">
+                            <div class="lot-title">Lot #2024-A7 "Blue Composition"</div>
+                            <div class="demo-split">
+                                <div class="demo-public">
+                                    <h4>실시간 공개</h4>
+                                    <div class="stat-row">
+                                        <span class="stat-label">총 입찰 수</span>
+                                        <span class="stat-value">127</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">참여자 수</span>
+                                        <span class="stat-value">43</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">시간대별 증가</span>
+                                        <span class="stat-value">+23/hr</span>
+                                    </div>
+                                    <span class="badge public-badge">PUBLIC</span>
+                                </div>
+                                <div class="demo-private">
+                                    <h4>암호화 상태</h4>
+                                    <div class="encrypted-display">
+                                        <code>0x7f3a9c...</code>
+                                        <code>0x8b2e1d...</code>
+                                        <code>0x4c9f7a...</code>
+                                    </div>
+                                    <span class="badge private-badge">🔒 ENCRYPTED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="after-close">
+                        <h4>마감 시</h4>
+                        <div class="close-items">
+                            <div class="close-item reveal">
+                                <span>낙찰자/낙찰가</span>
+                                <span class="status">공개</span>
+                            </div>
+                            <div class="close-item hidden">
+                                <span>패자 입찰가</span>
+                                <span class="status">영구 비공개 유지</span>
+                            </div>
+                        </div>
+                        <p class="close-benefit">→ 담합/보복/정보노출 리스크 감소</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Core Feature 2 -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title highlight">Core Feature 2</span>
+                    </div>
+                    <h2 class="slide-headline">"거래 단위 KYC + 자산검증"<br><span class="highlight">Compliance-first Web3</span></h2>
+
+                    <div class="kyc-flow">
+                        <div class="kyc-step">
+                            <div class="kyc-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <h4>지갑/계정 연결</h4>
+                            <p>KYC 자격 증명<br>(VC/DID)</p>
+                        </div>
+                        <div class="kyc-arrow">→</div>
+                        <div class="kyc-step">
+                            <div class="kyc-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h4>입찰 제출 시</h4>
+                            <p>신원/자금출처/<br>제재리스트 체크</p>
+                        </div>
+                        <div class="kyc-arrow">→</div>
+                        <div class="kyc-step">
+                            <div class="kyc-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h4>검증 완료</h4>
+                            <p>위탁/자산 증빙<br>워크플로우화</p>
+                        </div>
+                    </div>
+
+                    <div class="compliance-message">
+                        <div class="message-icon">💡</div>
+                        <div class="message-content">
+                            <p>"온체인 투명성은 <span class="highlight">'불법자금' 우려</span>로 막히고,</p>
+                            <p>프라이버시는 <span class="highlight">'신뢰' 우려</span>로 막힌다</p>
+                            <p class="solution">→ <strong>둘을 동시에 푸는 구조</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: FHE16 Technology -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title highlight">Technology</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">FHE16</span> — Why Us</h2>
+
+                    <div class="tech-comparison">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>방식</th>
+                                    <th>장점</th>
+                                    <th>한계</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Commit-Reveal</td>
+                                    <td>단순 구현</td>
+                                    <td class="negative">마감 후 전체 공개 위험</td>
+                                </tr>
+                                <tr>
+                                    <td>TEE</td>
+                                    <td>빠른 연산</td>
+                                    <td class="negative">하드웨어 신뢰/운영 리스크</td>
+                                </tr>
+                                <tr>
+                                    <td>ZK</td>
+                                    <td>강력한 검증</td>
+                                    <td class="negative">복잡한 상태 유지 어려움</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>FHE16</strong></td>
+                                    <td><strong>암호문 연산 + 영구 비공개</strong></td>
+                                    <td class="positive">연산 비용 (최적화 중)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="market-validation">
+                        <h4>FHE On-chain 트렌드</h4>
+                        <div class="validation-items">
+                            <div class="validation-item">
+                                <span class="company">Zama</span>
+                                <span class="desc">FHEVM 개념 — 스마트컨트랙트 내 암호화 데이터 연산</span>
+                            </div>
+                            <div class="validation-item">
+                                <span class="company">Fhenix</span>
+                                <span class="desc">EVM 호환 "Confidential Smart Contract" 인프라</span>
+                            </div>
+                            <div class="validation-item highlight-validation">
+                                <span class="company">우리</span>
+                                <span class="desc"><strong>경매 특화 Vertical</strong>로 차별화</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Market -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title highlight">Market</span>
+                    </div>
+                    <h2 class="slide-headline">Why Now: 가격 침체 속 <span class="highlight">"거래량/참여"</span>가 승부처</h2>
+
+                    <div class="market-stats">
+                        <div class="market-stat">
+                            <span class="stat-value">$57.5B</span>
+                            <span class="stat-label">글로벌 미술 시장 (2024)</span>
+                            <span class="stat-change negative">-12% YoY</span>
+                        </div>
+                        <div class="market-stat">
+                            <span class="stat-value">917억원</span>
+                            <span class="stat-label">국내 경매 거래금액<br>(2024 상반기, 8개사)</span>
+                        </div>
+                        <div class="market-stat warning">
+                            <span class="stat-value">49.8%</span>
+                            <span class="stat-label">국내 낙찰률</span>
+                            <span class="stat-change negative">↓ 하락 추세</span>
+                        </div>
+                    </div>
+
+                    <div class="market-insight">
+                        <div class="insight-point">
+                            <span class="point-icon">📈</span>
+                            <span>거래건수는 증가 (중저가/참여자 확산)</span>
+                        </div>
+                        <div class="insight-point">
+                            <span class="point-icon">👥</span>
+                            <span>대형 경매사 → 젊은 고객/럭셔리 확장 중</span>
+                        </div>
+                        <div class="insight-point">
+                            <span class="point-icon">💻</span>
+                            <span>온라인/데이터 기반 참여 촉진이 핵심 전략</span>
+                        </div>
+                    </div>
+
+                    <div class="market-conclusion">
+                        <p>"<span class="highlight">가격은 흔들려도, 참여/관심지수는 올릴 수 있다</span>"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Business Model -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title highlight">Business Model</span>
+                    </div>
+                    <h2 class="slide-headline">B2B 우선 <span class="highlight">수익 모델</span></h2>
+
+                    <div class="biz-model-grid">
+                        <div class="biz-model-card">
+                            <div class="model-badge">1</div>
+                            <h4>엔터프라이즈 (서울옥션급)</h4>
+                            <ul>
+                                <li>초기 구축비 + 연간 라이선스 (SaaS)</li>
+                                <li>Lot당 / 낙찰당 / 입찰당 사용료</li>
+                                <li>볼륨 기반 과금</li>
+                            </ul>
+                        </div>
+                        <div class="biz-model-card">
+                            <div class="model-badge">2</div>
+                            <h4>트랜잭션 수익</h4>
+                            <ul>
+                                <li>"프라이버시 프리미엄" 옵션</li>
+                                <li>패자 입찰가 영구 비공개</li>
+                                <li>고급 감사 리포트</li>
+                            </ul>
+                        </div>
+                        <div class="biz-model-card">
+                            <div class="model-badge">3</div>
+                            <h4>데이터/마케팅</h4>
+                            <ul>
+                                <li>익명화된 관심지수 기반</li>
+                                <li>추천/큐레이션 고도화</li>
+                                <li>전환 퍼널 개선</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Unit Economics -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title highlight">Unit Economics</span>
+                    </div>
+                    <h2 class="slide-headline">서울옥션 수수료 구조 & <span class="highlight">우리 제안</span></h2>
+
+                    <div class="fee-structure">
+                        <h4>서울옥션 약관 기준</h4>
+                        <div class="fee-cards">
+                            <div class="fee-card buyer">
+                                <span class="fee-label">구매자 수수료</span>
+                                <span class="fee-value">18%</span>
+                                <span class="fee-note">VAT 별도 (체감 19.8%)</span>
+                            </div>
+                            <div class="fee-card seller">
+                                <span class="fee-label">위탁(판매자) 수수료</span>
+                                <span class="fee-value">10%</span>
+                                <span class="fee-note">VAT 별도, 별도계약 시 변동</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="our-value">
+                        <h4>우리 제안의 논리</h4>
+                        <div class="value-flow">
+                            <div class="value-step">
+                                <span class="step-effect">분쟁/신뢰비용 ↓</span>
+                            </div>
+                            <div class="value-arrow">+</div>
+                            <div class="value-step">
+                                <span class="step-effect">관람 트래픽 ↑</span>
+                            </div>
+                            <div class="value-arrow">→</div>
+                            <div class="value-step">
+                                <span class="step-effect">입찰자 ↑</span>
+                            </div>
+                            <div class="value-arrow">→</div>
+                            <div class="value-step highlight-step">
+                                <span class="step-effect">낙찰률/낙찰가 ↑</span>
+                            </div>
+                        </div>
+                        <p class="value-conclusion">
+                            <strong>"수수료율 경쟁"이 아니라 "시장 파이(참여) 확장" 프레임</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Competition Map -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title highlight">Competition</span>
+                    </div>
+                    <h2 class="slide-headline">경쟁사 / 협력사 맵</h2>
+
+                    <div class="comp-sections">
+                        <div class="comp-section">
+                            <h4>A) 국내 경매 (직접 비교)</h4>
+                            <div class="comp-list">
+                                <div class="comp-item target">
+                                    <span class="comp-name">서울옥션</span>
+                                    <span class="comp-role">1번 타깃 파트너</span>
+                                </div>
+                                <div class="comp-item">
+                                    <span class="comp-name">케이옥션</span>
+                                    <span class="comp-role">국내 2강</span>
+                                </div>
+                                <div class="comp-item">
+                                    <span class="comp-name">중소 경매사</span>
+                                    <span class="comp-role">꼬모, 라이즈, 마이아트 등</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comp-section">
+                            <h4>B) 글로벌 벤치마크</h4>
+                            <div class="comp-list">
+                                <div class="comp-item">
+                                    <span class="comp-name">Christie's / Sotheby's / Phillips</span>
+                                    <span class="comp-role">"참여자 확대" 전략 명확</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comp-section">
+                            <h4>C) Web3 Confidential Stack</h4>
+                            <div class="comp-list">
+                                <div class="comp-item">
+                                    <span class="comp-name">Zama / Fhenix</span>
+                                    <span class="comp-role">인프라 파트너십 가능</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="positioning-matrix">
+                        <div class="pos-item traditional">전통 경매<br><small>컴플↑ 투명↓</small></div>
+                        <div class="pos-item nft">NFT 마켓<br><small>투명↑ 컴플↓</small></div>
+                        <div class="pos-item ours">우리<br><small>둘 다↑</small></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: GTM -->
+            <div class="slide" data-slide="15">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">14</span>
+                        <span class="slide-title highlight">Go-To-Market</span>
+                    </div>
+                    <h2 class="slide-headline">"서울옥션 파일럿 → 국내 표준 → 해외"</h2>
+
+                    <div class="gtm-phases">
+                        <div class="gtm-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 1</span>
+                                <span class="phase-period">0~3개월</span>
+                            </div>
+                            <h4>서울옥션 A/B 테스트</h4>
+                            <ul>
+                                <li>온라인 경매 특정 카테고리</li>
+                                <li>'입찰 수 공개 + 금액 FHE16 비공개'</li>
+                            </ul>
+                            <div class="phase-kpi">
+                                <span>KPI:</span> 관람수, 회원가입, 입찰자수, 낙찰률
+                            </div>
+                        </div>
+                        <div class="gtm-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 2</span>
+                                <span class="phase-period">3~9개월</span>
+                            </div>
+                            <h4>프라이빗 세일 확장</h4>
+                            <ul>
+                                <li>고가 거래의 "완전 비공개" 수요</li>
+                                <li>워치/핸드백/주얼리 카테고리</li>
+                            </ul>
+                        </div>
+                        <div class="gtm-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 3</span>
+                                <span class="phase-period">9~18개월</span>
+                            </div>
+                            <h4>타 경매사 + 해외</h4>
+                            <ul>
+                                <li>케이옥션 및 중형사 화이트라벨</li>
+                                <li>크로스보더 거래 연동</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: Roadmap -->
+            <div class="slide" data-slide="16">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">15</span>
+                        <span class="slide-title highlight">Roadmap</span>
+                    </div>
+                    <h2 class="slide-headline">기술/제품 <span class="highlight">마일스톤</span></h2>
+
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-item">
+                            <div class="version-badge">v1</div>
+                            <h4>Core MVP</h4>
+                            <ul>
+                                <li>Bid Count Onchain</li>
+                                <li>KYC-VC 연동</li>
+                                <li>FHE16 sealed bid (single format)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="version-badge">v1.5</div>
+                            <h4>Multi-Format</h4>
+                            <ul>
+                                <li>프라이빗 세일</li>
+                                <li>제한 공개 경매</li>
+                                <li>다중 포맷 지원</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="version-badge">v2</div>
+                            <h4>Full Automation</h4>
+                            <ul>
+                                <li>온체인 정산 자동화</li>
+                                <li>수수료/세금 문서</li>
+                                <li>감사리포트 자동 생성</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-item">
+                            <div class="version-badge">v3</div>
+                            <h4>Network Effect</h4>
+                            <ul>
+                                <li>멀티 경매사 네트워크</li>
+                                <li>컨소시엄 체인/표준</li>
+                                <li>글로벌 확장</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 17: Risks -->
+            <div class="slide" data-slide="17">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">16</span>
+                        <span class="slide-title highlight">Risk & Mitigation</span>
+                    </div>
+                    <h2 class="slide-headline">리스크 & 대응</h2>
+
+                    <div class="risk-grid">
+                        <div class="risk-card">
+                            <div class="risk-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>규제/컴플라이언스</h4>
+                            <p class="risk-desc">KYC/AML, 개인정보 규제</p>
+                            <div class="risk-mitigation">
+                                <span class="mitigation-label">대응</span>
+                                <span>개인정보 최소 공개, 권한 기반 열람</span>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <h4>성능</h4>
+                            <p class="risk-desc">FHE 연산 비용/속도</p>
+                            <div class="risk-mitigation">
+                                <span class="mitigation-label">대응</span>
+                                <span>온체인/오프체인 분리 + 검증가능 결과</span>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h4>시장 채택</h4>
+                            <p class="risk-desc">기존 운영 변경 저항</p>
+                            <div class="risk-mitigation">
+                                <span class="mitigation-label">대응</span>
+                                <span>"기존 운영 유지" 모듈 추가/화이트라벨</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 18: Ask -->
+            <div class="slide" data-slide="18">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">17</span>
+                        <span class="slide-title highlight">Ask</span>
+                    </div>
+                    <h2 class="slide-headline">투자 / 제휴 요청</h2>
+
+                    <div class="ask-sections">
+                        <div class="ask-card investor">
+                            <h4>투자자용</h4>
+                            <div class="ask-amount">
+                                <span class="amount">5억원</span>
+                                <span class="round">Pre-Seed</span>
+                            </div>
+                            <div class="ask-usage">
+                                <div class="usage-row">
+                                    <span class="usage-label">제품화 / 개발</span>
+                                    <span class="usage-pct">50%</span>
+                                </div>
+                                <div class="usage-row">
+                                    <span class="usage-label">보안 감사</span>
+                                    <span class="usage-pct">20%</span>
+                                </div>
+                                <div class="usage-row">
+                                    <span class="usage-label">BD / 파일럿 운영</span>
+                                    <span class="usage-pct">30%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ask-card partner">
+                            <h4>서울옥션용</h4>
+                            <div class="partner-proposal">
+                                <h5>파일럿 제안</h5>
+                                <ul>
+                                    <li><strong>기간:</strong> 3개월</li>
+                                    <li><strong>범위:</strong> 온라인 경매 1개 카테고리</li>
+                                    <li><strong>KPI:</strong> 관람수, 입찰자, 낙찰률</li>
+                                    <li><strong>수익쉐어:</strong> 협의 가능</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-section">
+                        <div class="company-brand">
+                            <div class="brand-logo">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                    <path d="M2 17l10 5 10-5"></path>
+                                    <path d="M2 12l10 5 10-5"></path>
+                                </svg>
+                            </div>
+                            <div class="brand-text">
+                                <span class="brand-name">waLLLnut</span>
+                                <span class="brand-desc">Confidential Auction Infrastructure</span>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <span>shlee@walllnut.com</span>
+                            <span>한양대학교 ERICA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

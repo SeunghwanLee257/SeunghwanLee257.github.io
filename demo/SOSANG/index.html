@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딸깍배당 | FHE16 Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>DEMO용으로 Frontend만 다루고 있습니다. 실제 FHE16 연산은 서버에서 수행됩니다.</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <span class="logo-text">딸깍배당</span>
+            <span class="logo-badge">FHE16 Demo</span>
+        </div>
+        <div class="header-info">
+            <div class="key-status">
+                <span class="status-dot"></span>
+                <span>Global Key: <code id="globalKeyDisplay">초기화 중...</code></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Panel: Store Management -->
+        <section class="panel store-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    내 가게 정보
+                </h2>
+                <button class="btn-icon" onclick="app.addNewStore()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="store-list" id="storeList">
+                <!-- Store cards will be rendered here -->
+            </div>
+
+            <div class="add-store-form" id="addStoreForm" style="display: none;">
+                <h4>새 가게 등록</h4>
+                <div class="form-group">
+                    <label>가게명</label>
+                    <input type="text" id="newStoreName" placeholder="예: 흑석동 카페">
+                </div>
+                <div class="form-group">
+                    <label>업종</label>
+                    <select id="newStoreCategory">
+                        <option value="cafe">카페</option>
+                        <option value="restaurant">음식점</option>
+                        <option value="convenience">편의점</option>
+                        <option value="chicken">치킨</option>
+                        <option value="bakery">베이커리</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>동네</label>
+                    <input type="text" id="newStoreLocation" placeholder="예: 흑석동">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>월매출 (만원)</label>
+                        <input type="number" id="newStoreSales" placeholder="3000">
+                    </div>
+                    <div class="form-group">
+                        <label>원가율 (%)</label>
+                        <input type="number" id="newStoreCostRate" placeholder="35">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>인건비 (만원)</label>
+                        <input type="number" id="newStoreLaborCost" placeholder="500">
+                    </div>
+                    <div class="form-group">
+                        <label>임대료 (만원)</label>
+                        <input type="number" id="newStoreRent" placeholder="200">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" onclick="app.cancelAddStore()">취소</button>
+                    <button class="btn btn-primary" onclick="app.saveNewStore()">등록 (암호화)</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Center Panel: Query & Results -->
+        <section class="panel query-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    통계 질의 (Query)
+                </h2>
+            </div>
+
+            <div class="query-builder">
+                <div class="query-type-select">
+                    <button class="query-type active" data-type="neighborhood" onclick="app.selectQueryType('neighborhood')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        동네 평균
+                    </button>
+                    <button class="query-type" data-type="category" onclick="app.selectQueryType('category')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                        업종 평균
+                    </button>
+                    <button class="query-type" data-type="ranking" onclick="app.selectQueryType('ranking')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        내 순위
+                    </button>
+                </div>
+
+                <div class="query-params" id="queryParams">
+                    <!-- Dynamic query parameters -->
+                    <div class="form-group">
+                        <label>조회 동네</label>
+                        <select id="queryLocation">
+                            <option value="all">전체</option>
+                            <option value="흑석동">흑석동</option>
+                            <option value="신림동">신림동</option>
+                            <option value="강남역">강남역</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>조회 업종</label>
+                        <select id="queryCategory">
+                            <option value="all">전체</option>
+                            <option value="cafe">카페</option>
+                            <option value="restaurant">음식점</option>
+                            <option value="convenience">편의점</option>
+                            <option value="chicken">치킨</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>조회 항목</label>
+                        <select id="queryMetric">
+                            <option value="sales">월매출</option>
+                            <option value="costRate">원가율</option>
+                            <option value="laborCost">인건비</option>
+                            <option value="profit">순이익</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="query-cost">
+                    <span class="cost-label">질의 비용</span>
+                    <span class="cost-value" id="queryCost">100원</span>
+                    <span class="cost-tier" id="queryTier">Silver</span>
+                </div>
+
+                <button class="btn btn-primary btn-large" onclick="app.executeQuery()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    FHE16 통계 질의 실행
+                </button>
+            </div>
+
+            <!-- Execution Flow -->
+            <div class="execution-flow" id="executionFlow" style="display: none;">
+                <h4>FHE16 연산 플로우</h4>
+                <div class="flow-steps">
+                    <div class="flow-step" id="step1">
+                        <div class="step-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <span>암호화된 데이터 로드</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" id="step2">
+                        <div class="step-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                <rect x="9" y="9" width="6" height="6"></rect>
+                                <line x1="9" y1="1" x2="9" y2="4"></line>
+                                <line x1="15" y1="1" x2="15" y2="4"></line>
+                                <line x1="9" y1="20" x2="9" y2="23"></line>
+                                <line x1="15" y1="20" x2="15" y2="23"></line>
+                            </svg>
+                        </div>
+                        <span>FHE16 통계 연산</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" id="step3">
+                        <div class="step-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <span>결과 암호화</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" id="step4">
+                        <div class="step-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 6v6l4 2"></path>
+                            </svg>
+                        </div>
+                        <span>배당 기록</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Query Result -->
+            <div class="query-result" id="queryResult" style="display: none;">
+                <h4>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    조회 결과
+                </h4>
+                <div class="result-content" id="resultContent">
+                    <!-- Result will be displayed here -->
+                </div>
+                <div class="result-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">질의 ID</span>
+                        <code id="queryId">-</code>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">참여 점포 수</span>
+                        <span id="participantCount">-</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">배당 총액</span>
+                        <span id="totalDividend">-</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Panel: Dividend & Feed -->
+        <section class="panel dividend-panel">
+            <div class="panel-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    배당 지갑
+                </h2>
+            </div>
+
+            <div class="wallet-card">
+                <div class="wallet-balance">
+                    <span class="balance-label">누적 배당금</span>
+                    <span class="balance-value" id="totalBalance">0</span>
+                    <span class="balance-unit">원</span>
+                </div>
+                <div class="wallet-stats">
+                    <div class="wallet-stat">
+                        <span class="stat-value" id="queryCount">0</span>
+                        <span class="stat-label">참여 질의</span>
+                    </div>
+                    <div class="wallet-stat">
+                        <span class="stat-value" id="storeCount">0</span>
+                        <span class="stat-label">등록 가게</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dividend-history">
+                <h4>배당 내역</h4>
+                <div class="history-list" id="dividendHistory">
+                    <!-- Dividend history will be rendered here -->
+                </div>
+            </div>
+
+            <div class="local-feed">
+                <h4>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 11a9 9 0 0 1 9 9"></path>
+                        <path d="M4 4a16 16 0 0 1 16 16"></path>
+                        <circle cx="5" cy="19" r="1"></circle>
+                    </svg>
+                    동네 KPI 피드
+                </h4>
+                <div class="feed-list" id="localFeed">
+                    <!-- Feed items will be rendered here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Encrypted Data Viewer Modal -->
+    <div class="modal" id="encryptedModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>암호화된 데이터 확인</h3>
+                <button class="btn-icon" onclick="app.closeModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="encrypted-data">
+                    <label>암호문 (AES-256-GCM)</label>
+                    <code id="encryptedDataView"></code>
+                </div>
+                <div class="encrypted-note">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>이 데이터는 Global Key로만 복호화 가능합니다. 서버는 통계 연산만 수행하고 원본 데이터를 열람하지 않습니다.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="crypto.js"></script>
+    <script src="database.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
