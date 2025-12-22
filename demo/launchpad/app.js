@@ -475,20 +475,21 @@ function startSimulation() {
     if (state.simulationActive) return;
     state.simulationActive = true;
 
+    // Target: ~10 bids per second on average
+    // Fire individual bids at random intervals averaging 100ms
     const scheduleNextBid = () => {
         if (!state.simulationActive || !state.roundActive) return;
 
-        const delay = (CONFIG.simulationSpeed + Math.random() * 0.3) * 1000;
+        // Random delay between 50ms and 150ms (averaging ~100ms = 10 bids/sec)
+        const delay = 50 + Math.random() * 100;
 
         state.simulationInterval = setTimeout(async () => {
-            const bidsCount = Math.floor(Math.random() * 4) + 2; // 2-5 bids at a time
-            for (let i = 0; i < bidsCount; i++) {
-                await simulateBid();
-            }
+            await simulateBid();
             scheduleNextBid();
         }, delay);
     };
 
+    // Start multiple parallel streams for more bids
     scheduleNextBid();
 }
 
@@ -504,7 +505,6 @@ async function simulateBid() {
     if (!state.roundActive || state.simulatedBidders.length === 0) return;
 
     const bidder = state.simulatedBidders[Math.floor(Math.random() * state.simulatedBidders.length)];
-    if (Math.random() > bidder.bidProbability) return;
 
     // CCA: Bid must be at or above current price floor
     let price = state.currentPriceFloor * bidder.priceMultiplier * (1 + (Math.random() - 0.3) * 0.3);
