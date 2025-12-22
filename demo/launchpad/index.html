@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalLLLnut 런치패드 - 블라인드 옥션 데모</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
+                    <path d="M8 16L12 12L16 16L20 12L24 16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 20L12 16L16 20L20 16L24 20" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                    <defs>
+                        <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32">
+                            <stop stop-color="#6366F1"/>
+                            <stop offset="1" stop-color="#8B5CF6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">WalLLLnut 런치패드</span>
+            </div>
+            <div class="network-badge">
+                <span class="network-dot"></span>
+                Solana Devnet
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="dashboard-tabs">
+                <button class="tab-btn active" data-tab="investor" onclick="switchDashboard('investor')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    투자자 대시보드
+                </button>
+                <button class="tab-btn" data-tab="founder" onclick="switchDashboard('founder')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    창업자 대시보드
+                </button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="fhe-status" id="fheStatus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <span>FHE16 초기화 중...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Token Info Banner -->
+        <section class="token-banner">
+            <div class="token-info">
+                <div class="token-logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236366F1'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='32' font-weight='bold'%3EWNT%3C/text%3E%3C/svg%3E" alt="WNT Token">
+                </div>
+                <div class="token-details">
+                    <h1>WalLLLnut 토큰 (WNT)</h1>
+                    <p class="token-description">FHE16 프라이버시 인프라 토큰 - 블록체인 기반 기밀 연산 지원</p>
+                </div>
+            </div>
+            <div class="sale-status">
+                <div class="status-item">
+                    <span class="label">판매 방식</span>
+                    <span class="value highlight">블라인드 옥션 + CCA</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">현재 라운드</span>
+                    <span class="value" id="currentRoundDisplay">라운드 1 / 3</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">라운드 타이머</span>
+                    <span class="value timer" id="roundTimer">00:45</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investor Dashboard -->
+        <div class="dashboard investor-dashboard active" id="investorDashboard">
+            <div class="dashboard-grid">
+                <!-- Left Panel: My Bid Status -->
+                <div class="panel bid-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            입찰하기
+                        </h2>
+                        <span class="panel-badge">암호화됨</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="my-wallet-info">
+                            <div class="wallet-address">
+                                <span class="label">내 지갑</span>
+                                <span class="address" id="myWalletAddress">연결 중...</span>
+                            </div>
+                            <div class="wallet-balance">
+                                <span class="label">USDT 잔액</span>
+                                <span class="balance" id="myBalance">--</span>
+                            </div>
+                        </div>
+
+                        <form class="bid-form" id="bidForm">
+                            <div class="form-group">
+                                <label>토큰당 가격 (USDT)</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="bidPrice" placeholder="0.00" step="0.01" min="0.01">
+                                    <span class="input-suffix">USDT</span>
+                                </div>
+                                <div class="price-suggestions">
+                                    <button type="button" onclick="setSuggestedPrice(0.15)">$0.15</button>
+                                    <button type="button" onclick="setSuggestedPrice(0.20)">$0.20</button>
+                                    <button type="button" onclick="setSuggestedPrice(0.25)">$0.25</button>
+                                    <button type="button" onclick="setSuggestedPrice(0.30)">$0.30</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>수량 (토큰)</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="bidQuantity" placeholder="0" step="1000" min="1000">
+                                    <span class="input-suffix">WNT</span>
+                                </div>
+                                <div class="quantity-suggestions">
+                                    <button type="button" onclick="setSuggestedQuantity(10000)">1만</button>
+                                    <button type="button" onclick="setSuggestedQuantity(50000)">5만</button>
+                                    <button type="button" onclick="setSuggestedQuantity(100000)">10만</button>
+                                    <button type="button" onclick="setSuggestedQuantity(500000)">50만</button>
+                                </div>
+                            </div>
+
+                            <div class="bid-summary">
+                                <div class="summary-row">
+                                    <span>총 비용</span>
+                                    <span id="totalCost">$0.00</span>
+                                </div>
+                                <div class="summary-row highlight">
+                                    <span>청산가 기준 최대 토큰</span>
+                                    <span id="maxTokensAtClearing">--</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-bid-btn" id="submitBidBtn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                암호화 & 입찰
+                            </button>
+                        </form>
+
+                        <div class="my-bids-section" id="myBidsSection" style="display: none;">
+                            <h3>내 제출 입찰</h3>
+                            <div class="my-bids-list" id="myBidsList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Panel: Live Activity -->
+                <div class="panel activity-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                            실시간 옥션 활동
+                        </h2>
+                        <div class="live-indicator">
+                            <span class="live-dot"></span>
+                            LIVE
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="round-progress">
+                            <div class="round-steps">
+                                <div class="round-step active" data-round="1">
+                                    <div class="step-circle">1</div>
+                                    <span>가격 탐색</span>
+                                </div>
+                                <div class="step-line"></div>
+                                <div class="round-step" data-round="2">
+                                    <div class="step-circle">2</div>
+                                    <span>가격 조정</span>
+                                </div>
+                                <div class="step-line"></div>
+                                <div class="round-step" data-round="3">
+                                    <div class="step-circle">3</div>
+                                    <span>최종 배분</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="activity-feed" id="activityFeed">
+                            <div class="activity-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                <p>옥션 시작을 기다리는 중...</p>
+                            </div>
+                        </div>
+
+                        <div class="encrypted-data-preview">
+                            <h4>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                최신 암호화 입찰
+                            </h4>
+                            <div class="encrypted-hex" id="latestEncryptedBid">
+                                아직 입찰 없음
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Market Stats -->
+                <div class="panel stats-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                            라운드 통계
+                        </h2>
+                        <span class="panel-badge encrypted">FHE16 연산</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-label">총 참여자</span>
+                                <span class="stat-value" id="totalParticipants">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">총 입찰</span>
+                                <span class="stat-value" id="totalBids">0</span>
+                            </div>
+                            <div class="stat-card highlight">
+                                <span class="stat-label">예상 가격</span>
+                                <span class="stat-value" id="indicativePrice">$--</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">총 수요</span>
+                                <span class="stat-value" id="totalDemand">0 WNT</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">공급량</span>
+                                <span class="stat-value" id="totalSupply">3,333,333 WNT</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-label">초과 청약</span>
+                                <span class="stat-value" id="oversubscription">0x</span>
+                            </div>
+                        </div>
+
+                        <div class="price-chart-section">
+                            <h4>가격 발견 차트</h4>
+                            <div class="chart-container" id="priceChart">
+                                <canvas id="priceChartCanvas"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="my-position">
+                            <h4>내 포지션 (예상)</h4>
+                            <div class="position-info" id="myPositionInfo">
+                                <p class="no-bid">입찰하면 예상 포지션을 확인할 수 있습니다</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Founder Dashboard -->
+        <div class="dashboard founder-dashboard" id="founderDashboard">
+            <div class="dashboard-grid founder-grid">
+                <!-- Left Panel: Token Sale Overview -->
+                <div class="panel sale-overview-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            토큰 세일 현황
+                        </h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="sale-progress-visual">
+                            <div class="progress-ring">
+                                <svg viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="#1E293B" stroke-width="12"/>
+                                    <circle cx="60" cy="60" r="54" fill="none" stroke="url(#progress-gradient)" stroke-width="12"
+                                            stroke-dasharray="339.29" stroke-dashoffset="339.29" id="progressCircle"
+                                            transform="rotate(-90 60 60)"/>
+                                    <defs>
+                                        <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#6366F1"/>
+                                            <stop offset="100%" stop-color="#8B5CF6"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="progress-center">
+                                    <span class="progress-percent" id="saleProgressPercent">0%</span>
+                                    <span class="progress-label">모금 완료</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sale-metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">목표 모금액</span>
+                                <span class="metric-value">$1,000,000</span>
+                            </div>
+                            <div class="metric-row highlight">
+                                <span class="metric-label">현재 모금액</span>
+                                <span class="metric-value" id="currentRaised">$0</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">판매 토큰</span>
+                                <span class="metric-value">10,000,000 WNT (10%)</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">총 수요</span>
+                                <span class="metric-value" id="founderTotalDemand">0 WNT</span>
+                            </div>
+                        </div>
+
+                        <div class="round-controls">
+                            <h4>라운드 제어</h4>
+                            <div class="control-buttons">
+                                <button class="control-btn" id="startRoundBtn" onclick="startRound()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"/>
+                                    </svg>
+                                    라운드 시작
+                                </button>
+                                <button class="control-btn secondary" id="endRoundBtn" onclick="endRound()" disabled>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="6" y="4" width="4" height="16"/>
+                                        <rect x="14" y="4" width="4" height="16"/>
+                                    </svg>
+                                    라운드 종료
+                                </button>
+                            </div>
+                            <button class="control-btn final" id="finalizeBtn" onclick="finalizeSale()" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                세일 종료 & 낙찰자 결정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Panel: Real-time Price & Valuation -->
+                <div class="panel pricing-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                <polyline points="17 6 23 6 23 12"/>
+                            </svg>
+                            실시간 가격
+                        </h2>
+                        <div class="price-update-indicator" id="priceUpdateIndicator">
+                            <span class="update-dot"></span>
+                            0초 전 업데이트
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="current-price-display">
+                            <div class="price-label">현재 청산 가격</div>
+                            <div class="price-value" id="currentClearingPrice">
+                                <span class="currency">$</span>
+                                <span class="amount">0.00</span>
+                            </div>
+                            <div class="price-change" id="priceChange">
+                                <span class="change-icon up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                </span>
+                                <span class="change-value">+0.00%</span>
+                                <span class="change-label">이전 라운드 대비</span>
+                            </div>
+                        </div>
+
+                        <div class="valuation-metrics">
+                            <div class="valuation-card">
+                                <span class="val-label">예상 FDV</span>
+                                <span class="val-value" id="impliedFDV">$0</span>
+                                <span class="val-sub">현재 가격 기준</span>
+                            </div>
+                            <div class="valuation-card highlight">
+                                <span class="val-label">SAFE 밸류에이션</span>
+                                <span class="val-value">$10,000,000</span>
+                                <span class="val-sub">프리머니 캡</span>
+                            </div>
+                        </div>
+
+                        <div class="roi-display">
+                            <h4>창업자 ROI 분석</h4>
+                            <div class="roi-comparison">
+                                <div class="roi-item safe">
+                                    <span class="roi-label">SAFE 가격</span>
+                                    <span class="roi-price">$0.10</span>
+                                    <span class="roi-basis">1억 개 총 공급량 기준</span>
+                                </div>
+                                <div class="roi-arrow">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"/>
+                                        <polyline points="12 5 19 12 12 19"/>
+                                    </svg>
+                                </div>
+                                <div class="roi-item current">
+                                    <span class="roi-label">현재 가격</span>
+                                    <span class="roi-price" id="currentTokenPrice">$0.00</span>
+                                    <span class="roi-gain" id="roiGain">+0%</span>
+                                </div>
+                            </div>
+                            <div class="roi-highlight" id="roiHighlight">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                                <span>가격 탐색 대기 중...</span>
+                            </div>
+                        </div>
+
+                        <div class="price-history-chart">
+                            <h4>라운드별 가격 기록</h4>
+                            <div class="chart-container">
+                                <canvas id="priceHistoryCanvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Participant Activity -->
+                <div class="panel participants-panel">
+                    <div class="panel-header">
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            참여자 활동
+                        </h2>
+                        <span class="participant-count" id="participantCount">0 참여자</span>
+                    </div>
+                    <div class="panel-content">
+                        <div class="participant-stats">
+                            <div class="p-stat">
+                                <span class="p-stat-value" id="uniqueBidders">0</span>
+                                <span class="p-stat-label">고유 입찰자</span>
+                            </div>
+                            <div class="p-stat">
+                                <span class="p-stat-value" id="avgBidSize">$0</span>
+                                <span class="p-stat-label">평균 입찰액</span>
+                            </div>
+                            <div class="p-stat">
+                                <span class="p-stat-value" id="bidFrequency">0/분</span>
+                                <span class="p-stat-label">입찰 빈도</span>
+                            </div>
+                        </div>
+
+                        <div class="participant-feed">
+                            <h4>최근 활동 (암호화됨)</h4>
+                            <div class="activity-list" id="participantActivityList">
+                                <div class="activity-empty">
+                                    <p>아직 활동 없음</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="fhe-operations">
+                            <h4>FHE16 연산 로그</h4>
+                            <div class="operation-log" id="fheOperationLog">
+                                <div class="log-entry">
+                                    <span class="log-time">--:--:--</span>
+                                    <span class="log-msg">연산 대기 중...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FHE Processing Modal -->
+    <div class="modal" id="fheModal">
+        <div class="modal-content fhe-modal">
+            <div class="modal-header">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    FHE16 연산 진행 중
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div class="fhe-flow-steps">
+                    <div class="fhe-step" id="fheStep1">
+                        <div class="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-title">1단계: 복호화</span>
+                            <span class="step-desc">비밀키로 모든 입찰 복호화 중...</span>
+                        </div>
+                        <div class="step-status">
+                            <div class="spinner"></div>
+                        </div>
+                    </div>
+                    <div class="fhe-step" id="fheStep2">
+                        <div class="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                                <line x1="9" y1="1" x2="9" y2="4"/>
+                                <line x1="15" y1="1" x2="15" y2="4"/>
+                                <line x1="9" y1="20" x2="9" y2="23"/>
+                                <line x1="15" y1="20" x2="15" y2="23"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-title">2단계: 연산</span>
+                            <span class="step-desc">청산가 및 배분 계산 중...</span>
+                        </div>
+                        <div class="step-status">
+                            <div class="pending-dot"></div>
+                        </div>
+                    </div>
+                    <div class="fhe-step" id="fheStep3">
+                        <div class="step-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                <circle cx="12" cy="16" r="1"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-title">3단계: 재암호화</span>
+                            <span class="step-desc">온체인 검증을 위해 결과 재암호화 중...</span>
+                        </div>
+                        <div class="step-status">
+                            <div class="pending-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="encrypted-output" id="fheEncryptedOutput">
+                    <span class="output-label">암호화된 결과:</span>
+                    <code class="output-hex">대기 중...</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Winner Announcement Modal -->
+    <div class="modal" id="winnerModal">
+        <div class="modal-content winner-modal">
+            <div class="modal-header">
+                <h3>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="7"/>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                    </svg>
+                    옥션 결과
+                </h3>
+                <button class="modal-close" onclick="closeWinnerModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="result-summary">
+                    <div class="result-item">
+                        <span class="result-label">최종 청산 가격</span>
+                        <span class="result-value" id="finalClearingPrice">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">총 모금액</span>
+                        <span class="result-value" id="finalTotalRaised">$0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">배분된 토큰</span>
+                        <span class="result-value" id="finalTokensAllocated">0 WNT</span>
+                    </div>
+                </div>
+                <div class="winner-list" id="winnerList">
+                    <!-- Winners will be inserted here -->
+                </div>
+                <div class="my-result" id="myResult">
+                    <!-- User's result will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="crypto.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
