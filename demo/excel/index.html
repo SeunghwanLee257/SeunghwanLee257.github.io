@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RebateProof Demo | 원장 비공개 리베이트 정산 검증</title>
+    <title>SettleProof Demo | 원장 비공개 거래조건 정산</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,11 +15,11 @@
         <header class="header">
             <div class="logo">
                 <span class="logo-icon">🔐</span>
-                <span class="logo-text">RebateProof</span>
+                <span class="logo-text">SettleProof</span>
                 <span class="logo-badge">DEMO</span>
             </div>
             <div class="header-info">
-                <span class="crypto-badge">AES-256-GCM 암호화</span>
+                <span class="crypto-badge">AES-256-GCM (FHE 시뮬레이션)</span>
                 <span class="status-indicator">
                     <span class="status-dot"></span>
                     시스템 정상
@@ -32,7 +32,7 @@
             <!-- Left Panel: Participants -->
             <div class="panel participants-panel">
                 <div class="panel-header">
-                    <h2>참여자 (Participants)</h2>
+                    <h2>참여자</h2>
                     <button class="btn btn-sm" onclick="resetDemo()">초기화</button>
                 </div>
 
@@ -59,7 +59,7 @@
                             </button>
                             <button class="btn btn-secondary" onclick="viewEncryptedA()">
                                 <span class="btn-icon">🔒</span>
-                                암호문 보기
+                                암호문
                             </button>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                             </button>
                             <button class="btn btn-secondary" onclick="viewEncryptedB()">
                                 <span class="btn-icon">🔒</span>
-                                암호문 보기
+                                암호문
                             </button>
                         </div>
                     </div>
@@ -100,65 +100,52 @@
                         <div class="participant-info">
                             <span class="participant-badge">V</span>
                             <div>
-                                <h3>RebateProof Engine</h3>
-                                <p class="participant-role">운영 벤더 (정산대행)</p>
+                                <h3>SettleProof Engine</h3>
+                                <p class="participant-role">운영 벤더</p>
                             </div>
                         </div>
                         <span class="data-status ready" id="statusV">대기 중</span>
                     </div>
                     <div class="participant-body">
                         <p class="vendor-note">
-                            ⚠️ 원문 데이터를 <strong>절대</strong> 볼 수 없음<br>
-                            암호화된 상태에서 정산 연산 수행
+                            ⚠️ 원문 데이터 <strong>비가시</strong><br>
+                            암호화 상태에서 정산 연산
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Center Panel: Process -->
-            <div class="panel process-panel">
-                <div class="panel-header">
-                    <h2>정산 프로세스</h2>
-                </div>
-
-                <!-- Rule Pack -->
-                <div class="process-section">
-                    <div class="section-header">
-                        <span class="section-num">1</span>
-                        <h3>Rule Pack (정산 규칙)</h3>
-                    </div>
-                    <div class="rule-pack" id="rulePack">
-                        <div class="rule-item">
+                <!-- Rule Pack (moved here) -->
+                <div class="rule-section">
+                    <h3>📋 Rule Pack (정산 규칙)</h3>
+                    <div class="rule-pack-compact" id="rulePack">
+                        <div class="rule-row">
                             <span class="rule-label">프로그램</span>
-                            <span class="rule-value">2025년 1분기 판촉 리베이트</span>
+                            <span class="rule-value">2025 Q1 판촉정산</span>
                         </div>
-                        <div class="rule-item">
+                        <div class="rule-row">
                             <span class="rule-label">기간</span>
-                            <span class="rule-value">2025.01.01 ~ 2025.03.31</span>
+                            <span class="rule-value">2025.01~03</span>
                         </div>
-                        <div class="rule-item">
-                            <span class="rule-label">조건</span>
-                            <span class="rule-value">월 매출 1억 이상 시 3% 리베이트</span>
-                        </div>
-                        <div class="rule-item">
+                        <div class="rule-row">
                             <span class="rule-label">티어</span>
-                            <span class="rule-value">
-                                1억~2억: 3% | 2억~5억: 4% | 5억+: 5%
-                            </span>
+                            <span class="rule-value">1~2억:3% | 2~5억:4% | 5억+:5%</span>
                         </div>
-                        <div class="rule-item">
+                        <div class="rule-row">
                             <span class="rule-label">룰 해시</span>
                             <span class="rule-value mono" id="ruleHash">-</span>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Center Panel: Process & Statement -->
+            <div class="panel process-panel">
+                <div class="panel-header">
+                    <h2>정산 실행</h2>
+                </div>
 
                 <!-- Execution -->
-                <div class="process-section">
-                    <div class="section-header">
-                        <span class="section-num">2</span>
-                        <h3>Confidential Compute</h3>
-                    </div>
+                <div class="process-section compact">
                     <div class="execution-box">
                         <button class="btn btn-execute" id="executeBtn" onclick="executeSettlement()" disabled>
                             <span class="btn-icon">⚡</span>
@@ -170,94 +157,99 @@
                     </div>
                 </div>
 
-                <!-- Proof Pack -->
+                <!-- Settlement Statement (NEW - Critical for approval) -->
                 <div class="process-section">
                     <div class="section-header">
-                        <span class="section-num">3</span>
-                        <h3>Proof Pack (증빙)</h3>
+                        <h3>📄 정산 명세서 (Settlement Statement)</h3>
+                        <span class="section-badge">지급 승인용</span>
+                    </div>
+                    <div class="statement-box" id="statementBox">
+                        <p class="statement-placeholder">정산 실행 후 버킷별 명세서가 생성됩니다</p>
+                    </div>
+                </div>
+
+                <!-- Proof Pack (Enhanced) -->
+                <div class="process-section">
+                    <div class="section-header">
+                        <h3>🔏 Proof Pack (증빙 패킷)</h3>
+                        <span class="section-badge">감사/분쟁 대응</span>
                     </div>
                     <div class="proof-pack" id="proofPack">
                         <p class="proof-placeholder">정산 실행 후 증빙이 생성됩니다</p>
                     </div>
                 </div>
+
+                <!-- Challenge Protocol (NEW) -->
+                <div class="process-section">
+                    <div class="section-header">
+                        <h3>⚖️ Challenge (이의제기)</h3>
+                        <span class="section-badge">7일 이내</span>
+                    </div>
+                    <div class="challenge-box" id="challengeBox">
+                        <p class="challenge-placeholder">정산 확정 후 이의제기 가능</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Right Panel: Results & ROI -->
+            <!-- Right Panel: ERP Output & Approval -->
             <div class="panel results-panel">
                 <div class="panel-header">
-                    <h2>정산 결과 & ROI 분석</h2>
+                    <h2>지급 승인 & ERP 연동</h2>
                 </div>
 
-                <!-- Settlement Result -->
+                <!-- Approval Status -->
                 <div class="result-section">
-                    <h3>정산 결과</h3>
-                    <div class="result-box" id="resultBox">
-                        <p class="result-placeholder">정산 실행을 기다리는 중...</p>
+                    <h3>✅ 결재 상태</h3>
+                    <div class="approval-box" id="approvalBox">
+                        <p class="approval-placeholder">정산 실행을 기다리는 중...</p>
                     </div>
                 </div>
 
-                <!-- ROI Analysis -->
+                <!-- ERP Posting Output (NEW - Critical) -->
                 <div class="result-section">
-                    <h3>ROI 분석 (기존 대비)</h3>
-                    <div class="roi-grid" id="roiGrid">
-                        <div class="roi-item">
-                            <span class="roi-label">정산 리드타임</span>
-                            <div class="roi-compare">
-                                <span class="roi-before">기존: 14일</span>
-                                <span class="roi-arrow">→</span>
-                                <span class="roi-after" id="roiLeadtime">-</span>
-                            </div>
-                        </div>
-                        <div class="roi-item">
-                            <span class="roi-label">분쟁 발생률</span>
-                            <div class="roi-compare">
-                                <span class="roi-before">기존: 23%</span>
-                                <span class="roi-arrow">→</span>
-                                <span class="roi-after" id="roiDispute">-</span>
-                            </div>
-                        </div>
-                        <div class="roi-item">
-                            <span class="roi-label">인력 투입</span>
-                            <div class="roi-compare">
-                                <span class="roi-before">기존: 3명/월말</span>
-                                <span class="roi-arrow">→</span>
-                                <span class="roi-after" id="roiManpower">-</span>
-                            </div>
-                        </div>
-                        <div class="roi-item">
-                            <span class="roi-label">과지급/누락</span>
-                            <div class="roi-compare">
-                                <span class="roi-before">기존: ~2.1%</span>
-                                <span class="roi-arrow">→</span>
-                                <span class="roi-after" id="roiError">-</span>
-                            </div>
-                        </div>
+                    <h3>📊 ERP 전표 출력</h3>
+                    <div class="erp-tabs">
+                        <button class="erp-tab active" onclick="showERPTab('A')">지급자 (A)</button>
+                        <button class="erp-tab" onclick="showERPTab('B')">수령자 (B)</button>
                     </div>
-                </div>
-
-                <!-- Revenue Feasibility -->
-                <div class="result-section">
-                    <h3>수익 타당성 검증</h3>
-                    <div class="feasibility-box" id="feasibilityBox">
-                        <div class="feasibility-header">
-                            <span class="feasibility-title">고객사 연간 절감 효과 추정</span>
-                        </div>
-                        <div class="feasibility-content" id="feasibilityContent">
-                            <p class="feasibility-placeholder">정산 실행 후 분석됩니다</p>
-                        </div>
+                    <div class="erp-output" id="erpOutput">
+                        <p class="erp-placeholder">정산 실행 후 전표가 생성됩니다</p>
                     </div>
                 </div>
 
                 <!-- Verification -->
                 <div class="result-section">
-                    <h3>검증 (Verification)</h3>
+                    <h3>🔍 검증</h3>
                     <div class="verification-box">
                         <button class="btn btn-verify" id="verifyBtn" onclick="verifyResult()" disabled>
                             <span class="btn-icon">✓</span>
-                            결과 검증
+                            Proof 검증
                         </button>
                         <div class="verification-result" id="verificationResult">
                             <p class="verify-placeholder">정산 후 검증 가능</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="result-section">
+                    <h3>📈 효과 요약</h3>
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-item">
+                            <span class="stat-label">리드타임</span>
+                            <span class="stat-value" id="statLeadtime">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">분쟁률</span>
+                            <span class="stat-value" id="statDispute">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">인력</span>
+                            <span class="stat-value" id="statManpower">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">오차율</span>
+                            <span class="stat-value" id="statError">-</span>
                         </div>
                     </div>
                 </div>
@@ -266,8 +258,8 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>RebateProof Demo v1.0 | 원장 비공개 리베이트 정산 검증 레이어</p>
-            <p class="footer-note">※ 데모용: 실제 FHE16 대신 AES-256-GCM 시뮬레이션</p>
+            <p>SettleProof Demo v2.0 | 원장 비공개 거래조건 정산 검증 레이어</p>
+            <p class="footer-note">※ "거래조건정산" = 판촉비/장려금/인센티브 정산 (리베이트 용어 대체)</p>
         </footer>
     </div>
 
@@ -293,6 +285,32 @@
             </div>
             <div class="modal-body" id="encryptedBody">
                 <!-- Encrypted data view -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Challenge -->
+    <div class="modal" id="challengeModal">
+        <div class="modal-content modal-wide">
+            <div class="modal-header">
+                <h3>⚖️ 이의제기 (Challenge)</h3>
+                <button class="modal-close" onclick="closeChallengeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="challengeModalBody">
+                <!-- Challenge content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Statement Detail -->
+    <div class="modal" id="statementModal">
+        <div class="modal-content modal-full">
+            <div class="modal-header">
+                <h3>📄 정산 명세서 상세</h3>
+                <button class="modal-close" onclick="closeStatementModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="statementModalBody">
+                <!-- Statement detail -->
             </div>
         </div>
     </div>

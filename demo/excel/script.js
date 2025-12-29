@@ -1,14 +1,14 @@
 /**
- * RebateProof Demo
- * 원장 비공개 리베이트 정산 검증 시뮬레이션
+ * SettleProof Demo v2.0
+ * 원장 비공개 거래조건 정산 검증 시뮬레이션
  *
  * 실제 FHE16 대신 AES-256-GCM으로 시뮬레이션
  * Global Secret Key는 WebDB(IndexedDB)에 저장
  */
 
 // ============== Global State ==============
-const DB_NAME = 'RebateProofDB';
-const DB_VERSION = 1;
+const DB_NAME = 'SettleProofDB';
+const DB_VERSION = 2;
 
 let db = null;
 let globalSecretKey = null;
@@ -17,6 +17,7 @@ let dataB = null; // 총판 원장
 let encryptedDataA = null;
 let encryptedDataB = null;
 let settlementResult = null;
+let currentERPTab = 'A';
 
 // ============== IndexedDB Setup ==============
 async function initDB() {
@@ -66,6 +67,11 @@ async function initDB() {
             // Proof Pack Store
             if (!database.objectStoreNames.contains('proofs')) {
                 database.createObjectStore('proofs', { keyPath: 'id', autoIncrement: true });
+            }
+
+            // Challenges Store
+            if (!database.objectStoreNames.contains('challenges')) {
+                database.createObjectStore('challenges', { keyPath: 'id', autoIncrement: true });
             }
         };
     });
@@ -134,6 +140,35 @@ async function hashData(data) {
     const dataBuffer = encoder.encode(JSON.stringify(data));
     const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
     return btoa(String.fromCharCode(...new Uint8Array(hashBuffer))).slice(0, 16);
+}
+
+// Full SHA-256 hash
+async function sha256(data) {
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(JSON.stringify(data));
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+    return Array.from(new Uint8Array(hashBuffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+}
+
+// Merkle Root calculation
+async function calculateMerkleRoot(items) {
+    if (items.length === 0) return 'empty';
+
+    let hashes = await Promise.all(items.map(item => sha256(item)));
+
+    while (hashes.length > 1) {
+        const newHashes = [];
+        for (let i = 0; i < hashes.length; i += 2) {
+            const left = hashes[i];
+            const right = hashes[i + 1] || left;
+            newHashes.push(await sha256(left + right));
+        }
+        hashes = newHashes;
+    }
+
+    return hashes[0];
 }
 
 // ============== DB Operations ==============
@@ -209,7 +244,7 @@ function generateSampleDataA() {
             { month: '2025-03', sku: 'MED-002', productName: '오메가3 프리미엄', qty: 11000, unitPrice: 15000, shipmentValue: 165000000 },
             { month: '2025-03', sku: 'MED-003', productName: '프로바이오틱스', qty: 16000, unitPrice: 12000, shipmentValue: 192000000 },
         ],
-        rebatePolicy: {
+        incentivePolicy: {
             tier1: { min: 100000000, max: 200000000, rate: 0.03 },
             tier2: { min: 200000000, max: 500000000, rate: 0.04 },
             tier3: { min: 500000000, max: Infinity, rate: 0.05 }
@@ -243,19 +278,19 @@ function generateSampleDataB() {
             { sku: 'MED-002', beginningStock: 3000, endingStock: 3500 },
             { sku: 'MED-003', beginningStock: 4000, endingStock: 4200 },
         ],
-        claimedRebate: 58500000 // 총판이 주장하는 리베이트
+        claimedIncentive: 58500000 // 총판이 주장하는 장려금
     };
 }
 
 // ============== Rule Pack ==============
 const RULE_PACK = {
-    programName: '2025년 1분기 판촉 리베이트',
+    programName: '2025년 1분기 판촉정산',
     period: { start: '2025-01-01', end: '2025-03-31' },
-    baseCondition: '월 매출 1억 이상 시 리베이트 지급',
+    baseCondition: '월 매출 1억 이상 시 장려금 지급',
     tiers: [
-        { minSales: 100000000, maxSales: 200000000, rebateRate: 0.03, description: '1억~2억: 3%' },
-        { minSales: 200000000, maxSales: 500000000, rebateRate: 0.04, description: '2억~5억: 4%' },
-        { minSales: 500000000, maxSales: Infinity, rebateRate: 0.05, description: '5억+: 5%' }
+        { minSales: 100000000, maxSales: 200000000, incentiveRate: 0.03, description: '1억~2억: 3%' },
+        { minSales: 200000000, maxSales: 500000000, incentiveRate: 0.04, description: '2억~5억: 4%' },
+        { minSales: 500000000, maxSales: Infinity, incentiveRate: 0.05, description: '5억+: 5%' }
     ],
     exclusions: ['반품 제외', '프로모션 물량 별도 정산'],
     version: '1.0.0'
@@ -322,7 +357,7 @@ function updateSummaryB() {
 
     const totalSellOut = dataB.sales.reduce((sum, s) => sum + s.sellOutValue, 0);
     const totalPromo = dataB.sales.reduce((sum, s) => sum + s.promoQty, 0);
-    const claimed = dataB.claimedRebate;
+    const claimed = dataB.claimedIncentive;
 
     el.innerHTML = `
         <div class="summary-grid">
@@ -335,7 +370,7 @@ function updateSummaryB() {
                 <span class="value">${totalPromo.toLocaleString()}개</span>
             </div>
             <div class="summary-item">
-                <span class="label">주장 리베이트</span>
+                <span class="label">주장 장려금</span>
                 <span class="value">${formatKRW(claimed)}</span>
             </div>
             <div class="summary-item">
@@ -355,6 +390,10 @@ function formatKRW(num) {
         return (num / 10000).toFixed(0) + '만';
     }
     return num.toLocaleString() + '원';
+}
+
+function formatNumber(num) {
+    return num.toLocaleString('ko-KR');
 }
 
 function checkExecuteButton() {
@@ -424,7 +463,7 @@ async function confirmUploadA() {
         company: dataA.company,
         period: dataA.period,
         transactions: await encryptData(dataA.transactions, globalSecretKey),
-        rebatePolicy: await encryptData(dataA.rebatePolicy, globalSecretKey),
+        incentivePolicy: await encryptData(dataA.incentivePolicy, globalSecretKey),
         returns: await encryptData(dataA.returns, globalSecretKey),
         commitment: await hashData(dataA)
     };
@@ -502,7 +541,7 @@ async function confirmUploadB() {
         period: dataB.period,
         sales: await encryptData(dataB.sales, globalSecretKey),
         inventory: await encryptData(dataB.inventory, globalSecretKey),
-        claimedRebate: await encryptData({ value: dataB.claimedRebate }, globalSecretKey),
+        claimedIncentive: await encryptData({ value: dataB.claimedIncentive }, globalSecretKey),
         commitment: await hashData(dataB)
     };
 
@@ -543,8 +582,8 @@ function viewEncryptedA() {
             </div>
 
             <div class="encrypted-field">
-                <div class="field-label"><span class="lock-icon">🔒</span> 리베이트 정책 (rebatePolicy)</div>
-                <div class="field-value">${encryptedDataA.rebatePolicy.data.slice(0, 200)}...</div>
+                <div class="field-label"><span class="lock-icon">🔒</span> 장려금 정책 (incentivePolicy)</div>
+                <div class="field-value">${encryptedDataA.incentivePolicy.data.slice(0, 200)}...</div>
             </div>
 
             <div class="encrypted-field">
@@ -588,8 +627,8 @@ function viewEncryptedB() {
             </div>
 
             <div class="encrypted-field">
-                <div class="field-label"><span class="lock-icon">🔒</span> 주장 리베이트 (claimedRebate)</div>
-                <div class="field-value">${encryptedDataB.claimedRebate.data.slice(0, 200)}...</div>
+                <div class="field-label"><span class="lock-icon">🔒</span> 주장 장려금 (claimedIncentive)</div>
+                <div class="field-value">${encryptedDataB.claimedIncentive.data.slice(0, 200)}...</div>
             </div>
 
             <div class="encrypted-field">
@@ -636,7 +675,7 @@ async function executeSettlement() {
     btn.innerHTML = '<span class="btn-icon">⏳</span> 정산 실행 중...';
 
     clearLog();
-    addLog('info', '=== RebateProof 정산 프로세스 시작 ===');
+    addLog('info', '=== SettleProof 정산 프로세스 시작 ===');
 
     await sleep(300);
     addLog('info', '[Step 1] Rule Pack 검증 중...');
@@ -658,12 +697,12 @@ async function executeSettlement() {
     addLog('crypto', '[Decrypt] Company A 거래 데이터 복호화...');
     const decryptedTransactions = await decryptData(encryptedDataA.transactions, globalSecretKey);
     const decryptedReturns = await decryptData(encryptedDataA.returns, globalSecretKey);
-    const decryptedPolicy = await decryptData(encryptedDataA.rebatePolicy, globalSecretKey);
+    const decryptedPolicy = await decryptData(encryptedDataA.incentivePolicy, globalSecretKey);
 
     await sleep(300);
     addLog('crypto', '[Decrypt] Company B 판매 데이터 복호화...');
     const decryptedSales = await decryptData(encryptedDataB.sales, globalSecretKey);
-    const decryptedClaimed = await decryptData(encryptedDataB.claimedRebate, globalSecretKey);
+    const decryptedClaimed = await decryptData(encryptedDataB.claimedIncentive, globalSecretKey);
 
     // Calculate settlement
     await sleep(400);
@@ -680,46 +719,72 @@ async function executeSettlement() {
     addLog('info', `[계산] 2월 매출: ${formatKRW(monthlySales['2025-02'])}`);
     addLog('info', `[계산] 3월 매출: ${formatKRW(monthlySales['2025-03'])}`);
 
-    // 리베이트 계산
+    // 장려금 계산 (버킷별)
     await sleep(300);
-    let totalRebate = 0;
-    const rebateDetails = [];
+    let totalIncentive = 0;
+    const incentiveDetails = [];
+    const bucketBreakdown = [];
 
     Object.entries(monthlySales).forEach(([month, sales]) => {
         let rate = 0;
         let tier = '';
+        let tierNum = 0;
 
         if (sales >= 500000000) {
             rate = 0.05;
             tier = 'Tier 3 (5%)';
+            tierNum = 3;
         } else if (sales >= 200000000) {
             rate = 0.04;
             tier = 'Tier 2 (4%)';
+            tierNum = 2;
         } else if (sales >= 100000000) {
             rate = 0.03;
             tier = 'Tier 1 (3%)';
+            tierNum = 1;
         }
 
-        const rebate = Math.floor(sales * rate);
-        totalRebate += rebate;
-        rebateDetails.push({ month, sales, tier, rate, rebate });
+        const incentive = Math.floor(sales * rate);
+        totalIncentive += incentive;
+        incentiveDetails.push({ month, sales, tier, tierNum, rate, incentive });
 
-        addLog('success', `[${month}] ${tier} → 리베이트: ${formatKRW(rebate)}`);
+        // Bucket breakdown
+        bucketBreakdown.push({
+            bucketId: `${month}-T${tierNum}`,
+            month,
+            tier,
+            tierNum,
+            baseSales: sales,
+            rate,
+            grossIncentive: incentive,
+            deductions: 0,
+            netIncentive: incentive
+        });
+
+        addLog('success', `[${month}] ${tier} → 장려금: ${formatKRW(incentive)}`);
     });
 
-    // 반품 차감
+    // 반품 차감 (월별 배분)
     await sleep(200);
     const totalReturns = decryptedReturns.reduce((sum, r) => sum + r.value, 0);
-    const returnDeduction = Math.floor(totalReturns * 0.03); // 반품에 대한 리베이트 차감
-    addLog('warning', `[차감] 반품분 리베이트 차감: -${formatKRW(returnDeduction)}`);
+    const returnDeduction = Math.floor(totalReturns * 0.03);
 
-    const finalRebate = totalRebate - returnDeduction;
-    const claimedRebate = decryptedClaimed.value;
-    const difference = finalRebate - claimedRebate;
+    // 반품 차감을 월별로 배분
+    const deductionPerMonth = Math.floor(returnDeduction / 3);
+    bucketBreakdown.forEach(bucket => {
+        bucket.deductions = deductionPerMonth;
+        bucket.netIncentive = bucket.grossIncentive - deductionPerMonth;
+    });
+
+    addLog('warning', `[차감] 반품분 장려금 차감: -${formatKRW(returnDeduction)}`);
+
+    const finalIncentive = totalIncentive - returnDeduction;
+    const claimedIncentive = decryptedClaimed.value;
+    const difference = finalIncentive - claimedIncentive;
 
     await sleep(300);
-    addLog('success', `[결과] 계산된 리베이트: ${formatKRW(finalRebate)}`);
-    addLog('info', `[비교] B사 주장 리베이트: ${formatKRW(claimedRebate)}`);
+    addLog('success', `[결과] 계산된 장려금: ${formatKRW(finalIncentive)}`);
+    addLog('info', `[비교] B사 주장 장려금: ${formatKRW(claimedIncentive)}`);
     addLog(difference >= 0 ? 'success' : 'warning',
            `[차이] ${difference >= 0 ? '+' : ''}${formatKRW(difference)}`);
 
@@ -727,38 +792,58 @@ async function executeSettlement() {
     await sleep(300);
     addLog('crypto', '[Step 5] 결과 재암호화...');
 
+    const executionId = crypto.randomUUID();
+    const settlementId = `SP-${Date.now().toString(36).toUpperCase()}`;
+
     settlementResult = {
+        settlementId,
         ruleHash,
         period: '2025-Q1',
         monthlySales,
-        rebateDetails,
-        totalRebate,
+        incentiveDetails,
+        bucketBreakdown,
+        totalIncentive,
         returnDeduction,
-        finalRebate,
-        claimedRebate,
+        finalIncentive,
+        claimedIncentive,
         difference,
         status: Math.abs(difference) < 1000000 ? 'MATCHED' : (difference > 0 ? 'UNDERCLAIMED' : 'OVERCLAIMED'),
         timestamp: Date.now(),
-        executionId: crypto.randomUUID()
+        executionId,
+        challengeDeadline: Date.now() + (7 * 24 * 60 * 60 * 1000) // 7 days
     };
+
+    // Calculate Merkle Root for all transactions
+    const allItems = [
+        ...decryptedTransactions,
+        ...decryptedSales,
+        ...decryptedReturns
+    ];
+    const merkleRoot = await calculateMerkleRoot(allItems);
+
+    // Generate enhanced Proof Pack
+    const proofPack = await generateProofPack(settlementResult, ruleHash, merkleRoot);
 
     // Encrypt and save result
     const encryptedResult = await encryptData(settlementResult, globalSecretKey);
     await saveToStore('settlements', {
         id: settlementResult.executionId,
+        settlementId,
         result: encryptedResult,
-        proofPack: await generateProofPack(settlementResult, ruleHash)
+        proofPack
     });
 
     await sleep(200);
     addLog('success', `[Step 6] Proof Pack 생성 완료`);
-    addLog('success', `=== 정산 완료 (실행 ID: ${settlementResult.executionId.slice(0, 8)}...) ===`);
+    addLog('success', `=== 정산 완료 (정산 ID: ${settlementId}) ===`);
 
     // Update UI
-    updateResultBox();
+    updateStatementBox();
     updateProofPack();
-    updateROI();
-    updateFeasibility();
+    updateChallengeBox();
+    updateApprovalBox();
+    updateERPOutput();
+    updateStats();
 
     btn.disabled = false;
     btn.innerHTML = '<span class="btn-icon">⚡</span> 암호화 정산 실행';
@@ -766,70 +851,238 @@ async function executeSettlement() {
     document.getElementById('verifyBtn').disabled = false;
 }
 
-async function generateProofPack(result, ruleHash) {
+async function generateProofPack(result, ruleHash, merkleRoot) {
+    const environmentDigest = await sha256({
+        browser: navigator.userAgent,
+        timestamp: result.timestamp,
+        ruleVersion: RULE_PACK.version,
+        screenRes: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    });
+
     return {
         ruleHash,
+        merkleRoot: merkleRoot.slice(0, 32) + '...',
         inputCommitmentA: encryptedDataA.commitment,
         inputCommitmentB: encryptedDataB.commitment,
         executionId: result.executionId,
+        settlementId: result.settlementId,
         timestamp: result.timestamp,
         resultHash: await hashData(result),
-        environmentDigest: await hashData({
-            browser: navigator.userAgent,
-            timestamp: result.timestamp,
-            ruleVersion: RULE_PACK.version
-        })
+        environmentDigest: environmentDigest.slice(0, 32) + '...',
+        bucketCount: result.bucketBreakdown.length,
+        totalTransactions: dataA.transactions.length + dataB.sales.length
     };
 }
 
-function updateResultBox() {
-    const el = document.getElementById('resultBox');
+// ============== Settlement Statement ==============
+function updateStatementBox() {
+    const el = document.getElementById('statementBox');
 
-    const statusLabel = {
-        'MATCHED': '✅ 일치',
-        'UNDERCLAIMED': '📊 과소청구',
-        'OVERCLAIMED': '⚠️ 과대청구'
-    };
+    if (!settlementResult) {
+        el.innerHTML = '<p class="statement-placeholder">정산 실행 후 버킷별 명세서가 생성됩니다</p>';
+        return;
+    }
 
-    const statusColor = {
-        'MATCHED': 'var(--success)',
-        'UNDERCLAIMED': 'var(--info)',
-        'OVERCLAIMED': 'var(--danger)'
-    };
+    const buckets = settlementResult.bucketBreakdown;
+    const totalGross = buckets.reduce((sum, b) => sum + b.grossIncentive, 0);
+    const totalDeductions = buckets.reduce((sum, b) => sum + b.deductions, 0);
+    const totalNet = buckets.reduce((sum, b) => sum + b.netIncentive, 0);
 
     el.innerHTML = `
-        <div class="result-content animate-in">
-            <div class="result-row">
-                <span class="label">총 매출 (3개월)</span>
-                <span class="value">${formatKRW(Object.values(settlementResult.monthlySales).reduce((a,b) => a+b, 0))}</span>
+        <div class="statement-content animate-in">
+            <div class="statement-header-row">
+                <span class="statement-id">정산번호: ${settlementResult.settlementId}</span>
+                <span class="statement-period">정산기간: ${settlementResult.period}</span>
             </div>
-            <div class="result-row">
-                <span class="label">계산된 리베이트</span>
-                <span class="value">${formatKRW(settlementResult.totalRebate)}</span>
-            </div>
-            <div class="result-row">
-                <span class="label">반품 차감</span>
-                <span class="value">-${formatKRW(settlementResult.returnDeduction)}</span>
-            </div>
-            <div class="result-row">
-                <span class="label">B사 주장</span>
-                <span class="value">${formatKRW(settlementResult.claimedRebate)}</span>
-            </div>
-            <div class="result-row">
-                <span class="label">차이</span>
-                <span class="value" style="color: ${statusColor[settlementResult.status]}">${settlementResult.difference >= 0 ? '+' : ''}${formatKRW(settlementResult.difference)}</span>
-            </div>
-            <div class="result-row total">
-                <span class="label">정산 상태</span>
-                <span class="value" style="color: ${statusColor[settlementResult.status]}">${statusLabel[settlementResult.status]}</span>
+
+            <table class="statement-table">
+                <thead>
+                    <tr>
+                        <th>버킷 ID</th>
+                        <th>월</th>
+                        <th>티어</th>
+                        <th>기준매출</th>
+                        <th>요율</th>
+                        <th>장려금(총)</th>
+                        <th>차감</th>
+                        <th>장려금(순)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${buckets.map(b => `
+                        <tr>
+                            <td class="mono">${b.bucketId}</td>
+                            <td>${b.month}</td>
+                            <td><span class="tier-badge tier-${b.tierNum}">${b.tier}</span></td>
+                            <td class="number">${formatKRW(b.baseSales)}</td>
+                            <td>${(b.rate * 100).toFixed(0)}%</td>
+                            <td class="number">${formatKRW(b.grossIncentive)}</td>
+                            <td class="number deduction">-${formatKRW(b.deductions)}</td>
+                            <td class="number highlight">${formatKRW(b.netIncentive)}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td colspan="5"><strong>합계</strong></td>
+                        <td class="number">${formatKRW(totalGross)}</td>
+                        <td class="number deduction">-${formatKRW(totalDeductions)}</td>
+                        <td class="number highlight"><strong>${formatKRW(totalNet)}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="statement-footer">
+                <button class="btn btn-sm btn-outline" onclick="openStatementDetail()">
+                    <span class="btn-icon">📋</span>
+                    상세보기
+                </button>
+                <span class="claim-comparison">
+                    B사 주장: ${formatKRW(settlementResult.claimedIncentive)} |
+                    차이: <span class="${settlementResult.difference >= 0 ? 'positive' : 'negative'}">
+                        ${settlementResult.difference >= 0 ? '+' : ''}${formatKRW(settlementResult.difference)}
+                    </span>
+                </span>
             </div>
         </div>
     `;
 }
 
+function openStatementDetail() {
+    const modal = document.getElementById('statementModal');
+    const body = document.getElementById('statementModalBody');
+
+    const buckets = settlementResult.bucketBreakdown;
+
+    body.innerHTML = `
+        <div class="statement-detail">
+            <div class="detail-header">
+                <h4>정산 명세서 상세</h4>
+                <div class="detail-meta">
+                    <span>정산번호: ${settlementResult.settlementId}</span>
+                    <span>발행일시: ${new Date(settlementResult.timestamp).toLocaleString('ko-KR')}</span>
+                </div>
+            </div>
+
+            <div class="detail-parties">
+                <div class="party">
+                    <h5>지급자 (A)</h5>
+                    <p>${dataA.company}</p>
+                </div>
+                <div class="party-arrow">→</div>
+                <div class="party">
+                    <h5>수령자 (B)</h5>
+                    <p>${dataB.company}</p>
+                </div>
+            </div>
+
+            <div class="detail-program">
+                <h5>프로그램 정보</h5>
+                <table class="info-table">
+                    <tr><td>프로그램명</td><td>${RULE_PACK.programName}</td></tr>
+                    <tr><td>정산기간</td><td>${RULE_PACK.period.start} ~ ${RULE_PACK.period.end}</td></tr>
+                    <tr><td>기본조건</td><td>${RULE_PACK.baseCondition}</td></tr>
+                    <tr><td>룰 버전</td><td>${RULE_PACK.version}</td></tr>
+                    <tr><td>룰 해시</td><td class="mono">${settlementResult.ruleHash}</td></tr>
+                </table>
+            </div>
+
+            <div class="detail-breakdown">
+                <h5>버킷별 상세</h5>
+                ${buckets.map(b => `
+                    <div class="bucket-detail">
+                        <div class="bucket-header">
+                            <span class="bucket-id">${b.bucketId}</span>
+                            <span class="tier-badge tier-${b.tierNum}">${b.tier}</span>
+                        </div>
+                        <div class="bucket-body">
+                            <div class="bucket-row">
+                                <span>기준 매출</span>
+                                <span>${formatNumber(b.baseSales)}원</span>
+                            </div>
+                            <div class="bucket-row">
+                                <span>적용 요율</span>
+                                <span>${(b.rate * 100).toFixed(1)}%</span>
+                            </div>
+                            <div class="bucket-row">
+                                <span>총 장려금</span>
+                                <span>${formatNumber(b.grossIncentive)}원</span>
+                            </div>
+                            <div class="bucket-row deduction">
+                                <span>차감 (반품분)</span>
+                                <span>-${formatNumber(b.deductions)}원</span>
+                            </div>
+                            <div class="bucket-row total">
+                                <span>순 장려금</span>
+                                <span>${formatNumber(b.netIncentive)}원</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+
+            <div class="detail-summary">
+                <h5>최종 정산 요약</h5>
+                <table class="summary-table">
+                    <tr>
+                        <td>총 장려금 (Gross)</td>
+                        <td class="number">${formatNumber(settlementResult.totalIncentive)}원</td>
+                    </tr>
+                    <tr class="deduction">
+                        <td>총 차감액</td>
+                        <td class="number">-${formatNumber(settlementResult.returnDeduction)}원</td>
+                    </tr>
+                    <tr class="total">
+                        <td><strong>최종 지급액</strong></td>
+                        <td class="number"><strong>${formatNumber(settlementResult.finalIncentive)}원</strong></td>
+                    </tr>
+                    <tr>
+                        <td>B사 주장액</td>
+                        <td class="number">${formatNumber(settlementResult.claimedIncentive)}원</td>
+                    </tr>
+                    <tr>
+                        <td>차이</td>
+                        <td class="number ${settlementResult.difference >= 0 ? 'positive' : 'negative'}">
+                            ${settlementResult.difference >= 0 ? '+' : ''}${formatNumber(settlementResult.difference)}원
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="detail-footer">
+                <p class="disclaimer">
+                    본 명세서는 SettleProof 시스템에 의해 자동 생성되었으며,
+                    양사의 암호화된 원장 데이터를 기반으로 산출되었습니다.
+                    이의가 있는 경우 7일 이내 Challenge 프로토콜을 통해 이의제기 가능합니다.
+                </p>
+                <div class="detail-actions">
+                    <button class="btn btn-secondary" onclick="closeStatementModal()">닫기</button>
+                    <button class="btn btn-primary" onclick="downloadStatement()">
+                        <span class="btn-icon">📥</span>
+                        PDF 다운로드
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+}
+
+function closeStatementModal() {
+    document.getElementById('statementModal').classList.remove('active');
+}
+
+function downloadStatement() {
+    alert('PDF 다운로드 기능은 실제 운영 환경에서 제공됩니다.');
+}
+
+// ============== Proof Pack ==============
 async function updateProofPack() {
     const el = document.getElementById('proofPack');
-    const proof = (await getAllFromStore('settlements')).pop()?.proofPack;
+    const stored = (await getAllFromStore('settlements')).pop();
+    const proof = stored?.proofPack;
 
     if (!proof) {
         el.innerHTML = '<p class="proof-placeholder">정산 실행 후 증빙이 생성됩니다</p>';
@@ -838,113 +1091,435 @@ async function updateProofPack() {
 
     el.innerHTML = `
         <div class="proof-content animate-in">
-            <div class="proof-item">
-                <span class="label">룰 해시</span>
-                <span class="value">${proof.ruleHash}</span>
+            <div class="proof-grid">
+                <div class="proof-item">
+                    <span class="proof-label">룰 해시</span>
+                    <span class="proof-value mono">${proof.ruleHash}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">Merkle Root</span>
+                    <span class="proof-value mono">${proof.merkleRoot}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">입력 커밋 (A)</span>
+                    <span class="proof-value mono">${proof.inputCommitmentA}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">입력 커밋 (B)</span>
+                    <span class="proof-value mono">${proof.inputCommitmentB}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">실행 ID</span>
+                    <span class="proof-value mono">${proof.executionId.slice(0, 16)}...</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">환경 다이제스트</span>
+                    <span class="proof-value mono">${proof.environmentDigest}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">결과 해시</span>
+                    <span class="proof-value mono">${proof.resultHash}</span>
+                </div>
+                <div class="proof-item">
+                    <span class="proof-label">타임스탬프</span>
+                    <span class="proof-value">${new Date(proof.timestamp).toLocaleString('ko-KR')}</span>
+                </div>
             </div>
-            <div class="proof-item">
-                <span class="label">입력 커밋 (A)</span>
-                <span class="value">${proof.inputCommitmentA}</span>
-            </div>
-            <div class="proof-item">
-                <span class="label">입력 커밋 (B)</span>
-                <span class="value">${proof.inputCommitmentB}</span>
-            </div>
-            <div class="proof-item">
-                <span class="label">실행 ID</span>
-                <span class="value">${proof.executionId}</span>
-            </div>
-            <div class="proof-item">
-                <span class="label">결과 해시</span>
-                <span class="value">${proof.resultHash}</span>
-            </div>
-            <div class="proof-item">
-                <span class="label">타임스탬프</span>
-                <span class="value">${new Date(proof.timestamp).toLocaleString('ko-KR')}</span>
+            <div class="proof-meta">
+                <span>버킷 수: ${proof.bucketCount}</span>
+                <span>총 거래건수: ${proof.totalTransactions}</span>
             </div>
         </div>
     `;
 }
 
-function updateROI() {
-    // 리드타임: 기존 14일 → 1일 (실시간)
-    document.getElementById('roiLeadtime').textContent = '1일 (93% ↓)';
-    document.getElementById('roiLeadtime').style.color = 'var(--success)';
+// ============== Challenge Protocol ==============
+function updateChallengeBox() {
+    const el = document.getElementById('challengeBox');
 
-    // 분쟁율: 23% → 3% (Proof Pack 기반 자동 합의)
-    document.getElementById('roiDispute').textContent = '3% (87% ↓)';
-    document.getElementById('roiDispute').style.color = 'var(--success)';
+    if (!settlementResult) {
+        el.innerHTML = '<p class="challenge-placeholder">정산 확정 후 이의제기 가능</p>';
+        return;
+    }
 
-    // 인력: 3명 → 0.5명
-    document.getElementById('roiManpower').textContent = '0.5명 (83% ↓)';
-    document.getElementById('roiManpower').style.color = 'var(--success)';
-
-    // 과지급: 2.1% → 0.1%
-    document.getElementById('roiError').textContent = '~0.1% (95% ↓)';
-    document.getElementById('roiError').style.color = 'var(--success)';
-}
-
-function updateFeasibility() {
-    const el = document.getElementById('feasibilityContent');
-
-    // 연간 절감 효과 계산 (중견 제약사 기준)
-    const annualRebateVolume = 2400000000; // 연 24억 리베이트 정산 규모
-    const currentDisputeRate = 0.23;
-    const currentOverpayRate = 0.021;
-    const currentLeadtimeCost = 50000000; // 연 5천만원 (자금 기회비용)
-    const currentManpowerCost = 120000000; // 연 1.2억 (3명 × 4천만원)
-
-    // RebateProof 적용 후
-    const newDisputeRate = 0.03;
-    const newOverpayRate = 0.001;
-    const newLeadtimeCost = 5000000; // 연 500만원
-    const newManpowerCost = 20000000; // 연 2천만원 (0.5명)
-
-    // 절감액
-    const disputeSaving = annualRebateVolume * (currentDisputeRate - newDisputeRate) * 0.05; // 분쟁 처리비용 5%
-    const overpaymentSaving = annualRebateVolume * (currentOverpayRate - newOverpayRate);
-    const leadtimeSaving = currentLeadtimeCost - newLeadtimeCost;
-    const manpowerSaving = currentManpowerCost - newManpowerCost;
-
-    const totalSaving = disputeSaving + overpaymentSaving + leadtimeSaving + manpowerSaving;
-
-    // 우리 가격 vs 절감액
-    const ourAnnualPrice = 96000000; // 연 9,600만원 (800만/월)
-    const roi = ((totalSaving - ourAnnualPrice) / ourAnnualPrice * 100).toFixed(0);
-    const paybackMonths = Math.ceil(ourAnnualPrice / (totalSaving / 12));
+    const deadline = new Date(settlementResult.challengeDeadline);
+    const daysLeft = Math.ceil((deadline - Date.now()) / (24 * 60 * 60 * 1000));
 
     el.innerHTML = `
-        <div class="feasibility-grid animate-in">
-            <div class="feasibility-item">
-                <span class="label">분쟁 비용 절감</span>
-                <span class="value">${formatKRW(disputeSaving)}/년</span>
+        <div class="challenge-content animate-in">
+            <div class="challenge-status">
+                <span class="challenge-icon">⏱️</span>
+                <div class="challenge-info">
+                    <span class="challenge-label">이의제기 마감</span>
+                    <span class="challenge-deadline">${deadline.toLocaleDateString('ko-KR')} (${daysLeft}일 남음)</span>
+                </div>
             </div>
-            <div class="feasibility-item">
-                <span class="label">과지급 방지</span>
-                <span class="value">${formatKRW(overpaymentSaving)}/년</span>
-            </div>
-            <div class="feasibility-item">
-                <span class="label">자금 비용 절감</span>
-                <span class="value">${formatKRW(leadtimeSaving)}/년</span>
-            </div>
-            <div class="feasibility-item">
-                <span class="label">인력 비용 절감</span>
-                <span class="value">${formatKRW(manpowerSaving)}/년</span>
-            </div>
-        </div>
-
-        <div class="feasibility-conclusion">
-            <p>
-                <strong>연간 총 절감액: ${formatKRW(totalSaving)}</strong><br>
-                RebateProof 연간 비용: ${formatKRW(ourAnnualPrice)}<br>
-                <strong style="color: var(--success);">ROI: ${roi}% | 손익분기: ${paybackMonths}개월</strong>
+            <p class="challenge-desc">
+                정산 결과에 이의가 있는 경우, 랜덤 샘플링을 통한 검증을 요청할 수 있습니다.
+                10건의 거래가 무작위로 추출되어 원본 대조됩니다.
             </p>
-            <p style="margin-top: 12px; font-size: 12px; color: var(--medium);">
-                ※ 중견 제약사(연 리베이트 24억 규모) 기준 추정치<br>
-                ※ 실제 효과는 업종/규모/기존 프로세스에 따라 상이
-            </p>
+            <button class="btn btn-outline btn-challenge" onclick="openChallenge()">
+                <span class="btn-icon">⚖️</span>
+                이의제기 (Challenge)
+            </button>
         </div>
     `;
+}
+
+function openChallenge() {
+    const modal = document.getElementById('challengeModal');
+    const body = document.getElementById('challengeModalBody');
+
+    // Random sampling - select 10 items
+    const allTransactions = [...dataA.transactions, ...dataB.sales];
+    const sampleSize = Math.min(10, allTransactions.length);
+    const samples = [];
+    const usedIndices = new Set();
+
+    while (samples.length < sampleSize) {
+        const idx = Math.floor(Math.random() * allTransactions.length);
+        if (!usedIndices.has(idx)) {
+            usedIndices.add(idx);
+            samples.push({
+                index: idx,
+                data: allTransactions[idx],
+                source: idx < dataA.transactions.length ? 'A' : 'B'
+            });
+        }
+    }
+
+    body.innerHTML = `
+        <div class="challenge-detail">
+            <div class="challenge-header">
+                <h4>🎲 랜덤 샘플링 검증</h4>
+                <p>아래 ${sampleSize}건의 거래가 무작위로 추출되었습니다. 원본 데이터와 대조하세요.</p>
+            </div>
+
+            <div class="sample-list">
+                <table class="sample-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>출처</th>
+                            <th>월</th>
+                            <th>SKU</th>
+                            <th>품목</th>
+                            <th>수량</th>
+                            <th>금액</th>
+                            <th>검증</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${samples.map((s, i) => `
+                            <tr>
+                                <td>${i + 1}</td>
+                                <td><span class="source-badge source-${s.source}">${s.source === 'A' ? '제조사' : '총판'}</span></td>
+                                <td>${s.data.month}</td>
+                                <td class="mono">${s.data.sku}</td>
+                                <td>${s.data.productName}</td>
+                                <td class="number">${(s.data.qty || s.data.sellOutQty || 0).toLocaleString()}</td>
+                                <td class="number">${formatKRW(s.data.shipmentValue || s.data.sellOutValue || 0)}</td>
+                                <td>
+                                    <select class="verify-select" id="verify-${i}">
+                                        <option value="">선택</option>
+                                        <option value="match">일치</option>
+                                        <option value="mismatch">불일치</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="challenge-input">
+                <label>이의 사유 (선택사항)</label>
+                <textarea id="challengeReason" rows="3" placeholder="불일치 항목에 대한 상세 사유를 입력하세요..."></textarea>
+            </div>
+
+            <div class="challenge-actions">
+                <button class="btn btn-secondary" onclick="closeChallengeModal()">취소</button>
+                <button class="btn btn-warning" onclick="submitChallenge(${sampleSize})">
+                    <span class="btn-icon">📤</span>
+                    이의제기 제출
+                </button>
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+}
+
+async function submitChallenge(sampleSize) {
+    const verifications = [];
+    let mismatchCount = 0;
+
+    for (let i = 0; i < sampleSize; i++) {
+        const select = document.getElementById(`verify-${i}`);
+        const value = select.value;
+        verifications.push(value);
+        if (value === 'mismatch') mismatchCount++;
+    }
+
+    const reason = document.getElementById('challengeReason').value;
+
+    if (verifications.some(v => v === '')) {
+        alert('모든 항목의 검증 결과를 선택해주세요.');
+        return;
+    }
+
+    // Save challenge
+    const challenge = {
+        settlementId: settlementResult.settlementId,
+        timestamp: Date.now(),
+        sampleSize,
+        verifications,
+        mismatchCount,
+        reason,
+        status: mismatchCount > 0 ? 'DISPUTE' : 'CONFIRMED'
+    };
+
+    await saveToStore('challenges', challenge);
+
+    closeChallengeModal();
+
+    if (mismatchCount > 0) {
+        alert(`이의제기가 접수되었습니다.\n불일치 항목: ${mismatchCount}건\n\n분쟁 조정 프로세스가 시작됩니다.`);
+        updateChallengeBox();
+    } else {
+        alert('모든 항목이 일치합니다. 정산이 최종 확정되었습니다.');
+    }
+}
+
+function closeChallengeModal() {
+    document.getElementById('challengeModal').classList.remove('active');
+}
+
+// ============== Approval Box ==============
+function updateApprovalBox() {
+    const el = document.getElementById('approvalBox');
+
+    if (!settlementResult) {
+        el.innerHTML = '<p class="approval-placeholder">정산 실행을 기다리는 중...</p>';
+        return;
+    }
+
+    const statusLabel = {
+        'MATCHED': '✅ 정산 일치',
+        'UNDERCLAIMED': '📊 과소청구 (추가지급 권고)',
+        'OVERCLAIMED': '⚠️ 과대청구 (조정 필요)'
+    };
+
+    const statusClass = {
+        'MATCHED': 'success',
+        'UNDERCLAIMED': 'info',
+        'OVERCLAIMED': 'warning'
+    };
+
+    el.innerHTML = `
+        <div class="approval-content animate-in">
+            <div class="approval-status ${statusClass[settlementResult.status]}">
+                <span class="approval-icon">${statusLabel[settlementResult.status].split(' ')[0]}</span>
+                <span class="approval-text">${statusLabel[settlementResult.status].split(' ').slice(1).join(' ')}</span>
+            </div>
+
+            <div class="approval-details">
+                <div class="approval-row">
+                    <span>정산번호</span>
+                    <span class="mono">${settlementResult.settlementId}</span>
+                </div>
+                <div class="approval-row">
+                    <span>최종 지급액</span>
+                    <span class="amount">${formatNumber(settlementResult.finalIncentive)}원</span>
+                </div>
+                <div class="approval-row">
+                    <span>수령자</span>
+                    <span>${dataB.company}</span>
+                </div>
+            </div>
+
+            <div class="approval-actions">
+                <button class="btn btn-success btn-approve" onclick="approvePayment()">
+                    <span class="btn-icon">✓</span>
+                    지급 승인
+                </button>
+                <button class="btn btn-outline btn-reject" onclick="rejectPayment()">
+                    반려
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function approvePayment() {
+    if (confirm(`${dataB.company}에 ${formatNumber(settlementResult.finalIncentive)}원 지급을 승인하시겠습니까?`)) {
+        alert('지급이 승인되었습니다. ERP 전표가 생성됩니다.');
+        updateApprovalBox();
+    }
+}
+
+function rejectPayment() {
+    const reason = prompt('반려 사유를 입력하세요:');
+    if (reason) {
+        alert(`지급이 반려되었습니다.\n사유: ${reason}`);
+    }
+}
+
+// ============== ERP Output ==============
+function showERPTab(tab) {
+    currentERPTab = tab;
+    document.querySelectorAll('.erp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.erp-tab:${tab === 'A' ? 'first' : 'last'}-child`).classList.add('active');
+    updateERPOutput();
+}
+
+function updateERPOutput() {
+    const el = document.getElementById('erpOutput');
+
+    if (!settlementResult) {
+        el.innerHTML = '<p class="erp-placeholder">정산 실행 후 전표가 생성됩니다</p>';
+        return;
+    }
+
+    const amount = settlementResult.finalIncentive;
+    const date = new Date(settlementResult.timestamp).toLocaleDateString('ko-KR');
+
+    if (currentERPTab === 'A') {
+        // 지급자 (제조사) 회계 처리
+        el.innerHTML = `
+            <div class="erp-content animate-in">
+                <div class="erp-header">
+                    <span class="erp-company">${dataA.company}</span>
+                    <span class="erp-type">판매장려금 지급</span>
+                </div>
+
+                <table class="erp-table">
+                    <thead>
+                        <tr>
+                            <th>계정과목</th>
+                            <th>차변 (Dr)</th>
+                            <th>대변 (Cr)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>판매장려금 (판관비)</td>
+                            <td class="debit">${formatNumber(amount)}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>미지급금</td>
+                            <td></td>
+                            <td class="credit">${formatNumber(amount)}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>합계</strong></td>
+                            <td class="debit"><strong>${formatNumber(amount)}</strong></td>
+                            <td class="credit"><strong>${formatNumber(amount)}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="erp-memo">
+                    <div class="memo-row">
+                        <span>적요</span>
+                        <span>${RULE_PACK.programName} - ${dataB.company}</span>
+                    </div>
+                    <div class="memo-row">
+                        <span>전표일자</span>
+                        <span>${date}</span>
+                    </div>
+                    <div class="memo-row">
+                        <span>정산번호</span>
+                        <span class="mono">${settlementResult.settlementId}</span>
+                    </div>
+                </div>
+
+                <div class="erp-note">
+                    <p>* 지급 완료 시 미지급금 → 보통예금 대체</p>
+                </div>
+            </div>
+        `;
+    } else {
+        // 수령자 (총판) 회계 처리
+        el.innerHTML = `
+            <div class="erp-content animate-in">
+                <div class="erp-header">
+                    <span class="erp-company">${dataB.company}</span>
+                    <span class="erp-type">판매장려금 수령</span>
+                </div>
+
+                <table class="erp-table">
+                    <thead>
+                        <tr>
+                            <th>계정과목</th>
+                            <th>차변 (Dr)</th>
+                            <th>대변 (Cr)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>미수금</td>
+                            <td class="debit">${formatNumber(amount)}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>매입할인 (매입에누리)</td>
+                            <td></td>
+                            <td class="credit">${formatNumber(amount)}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>합계</strong></td>
+                            <td class="debit"><strong>${formatNumber(amount)}</strong></td>
+                            <td class="credit"><strong>${formatNumber(amount)}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="erp-memo">
+                    <div class="memo-row">
+                        <span>적요</span>
+                        <span>${RULE_PACK.programName} - ${dataA.company}</span>
+                    </div>
+                    <div class="memo-row">
+                        <span>전표일자</span>
+                        <span>${date}</span>
+                    </div>
+                    <div class="memo-row">
+                        <span>정산번호</span>
+                        <span class="mono">${settlementResult.settlementId}</span>
+                    </div>
+                </div>
+
+                <div class="erp-note">
+                    <p>* 입금 완료 시 보통예금 ← 미수금 대체</p>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// ============== Stats ==============
+function updateStats() {
+    // 리드타임: 기존 14일 → 1일 (실시간)
+    document.getElementById('statLeadtime').textContent = '1일 (93%↓)';
+    document.getElementById('statLeadtime').style.color = 'var(--success)';
+
+    // 분쟁율: 23% → 3%
+    document.getElementById('statDispute').textContent = '3% (87%↓)';
+    document.getElementById('statDispute').style.color = 'var(--success)';
+
+    // 인력: 3명 → 0.5명
+    document.getElementById('statManpower').textContent = '0.5명 (83%↓)';
+    document.getElementById('statManpower').style.color = 'var(--success)';
+
+    // 오차율: 2.1% → 0.1%
+    document.getElementById('statError').textContent = '~0.1% (95%↓)';
+    document.getElementById('statError').style.color = 'var(--success)';
 }
 
 // ============== Verification ==============
@@ -1005,6 +1580,7 @@ async function resetDemo() {
     await clearStore('encrypted');
     await clearStore('settlements');
     await clearStore('proofs');
+    await clearStore('challenges');
 
     // Reset state
     dataA = null;
@@ -1021,11 +1597,13 @@ async function resetDemo() {
 
     document.getElementById('executionLog').innerHTML = '<p class="log-placeholder">정산 실행 대기 중...</p>';
     document.getElementById('proofPack').innerHTML = '<p class="proof-placeholder">정산 실행 후 증빙이 생성됩니다</p>';
-    document.getElementById('resultBox').innerHTML = '<p class="result-placeholder">정산 실행을 기다리는 중...</p>';
-    document.getElementById('feasibilityContent').innerHTML = '<p class="feasibility-placeholder">정산 실행 후 분석됩니다</p>';
+    document.getElementById('statementBox').innerHTML = '<p class="statement-placeholder">정산 실행 후 버킷별 명세서가 생성됩니다</p>';
+    document.getElementById('challengeBox').innerHTML = '<p class="challenge-placeholder">정산 확정 후 이의제기 가능</p>';
+    document.getElementById('approvalBox').innerHTML = '<p class="approval-placeholder">정산 실행을 기다리는 중...</p>';
+    document.getElementById('erpOutput').innerHTML = '<p class="erp-placeholder">정산 실행 후 전표가 생성됩니다</p>';
     document.getElementById('verificationResult').innerHTML = '<p class="verify-placeholder">정산 후 검증 가능</p>';
 
-    ['roiLeadtime', 'roiDispute', 'roiManpower', 'roiError'].forEach(id => {
+    ['statLeadtime', 'statDispute', 'statManpower', 'statError'].forEach(id => {
         document.getElementById(id).textContent = '-';
         document.getElementById(id).style.color = '';
     });
@@ -1066,7 +1644,7 @@ async function init() {
 
         checkExecuteButton();
 
-        console.log('RebateProof Demo initialized');
+        console.log('SettleProof Demo v2.0 initialized');
     } catch (error) {
         console.error('Initialization error:', error);
     }
