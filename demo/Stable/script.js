@@ -1,5 +1,5 @@
 // ========================================
-// IRONVEIL Vault Demo - Stablecoin Privacy Infrastructure
+// IRONVEIL Vault Demo v2.0 - User Wallets & Transactions
 // ========================================
 
 // Crypto utilities (AES-256-GCM simulation)
@@ -26,31 +26,33 @@ const crypto = {
         };
     },
 
-    async decrypt(key, encrypted) {
-        const iv = new Uint8Array(encrypted.iv.match(/.{2}/g).map(byte => parseInt(byte, 16)));
-        const ciphertext = new Uint8Array(encrypted.ciphertext.match(/.{2}/g).map(byte => parseInt(byte, 16)));
-        const decrypted = await window.crypto.subtle.decrypt(
-            { name: 'AES-GCM', iv },
-            key,
-            ciphertext
-        );
-        return JSON.parse(new TextDecoder().decode(decrypted));
-    },
-
     async sha256(str) {
         const encoder = new TextEncoder();
         const hash = await window.crypto.subtle.digest('SHA-256', encoder.encode(str));
         return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    },
+
+    generateAddress() {
+        const chars = '0123456789abcdef';
+        let addr = '0x';
+        for (let i = 0; i < 40; i++) {
+            addr += chars[Math.floor(Math.random() * 16)];
+        }
+        return addr;
+    },
+
+    shortenAddress(addr) {
+        return addr.slice(0, 6) + '...' + addr.slice(-4);
     }
 };
 
-// Institution data
-const institutions = [
-    { id: 'SEC_A', name: '한국증권', type: '증권사', icon: '📈', balance: 5000000000 },
-    { id: 'SEC_B', name: '미래투자', type: '증권사', icon: '📊', balance: 3500000000 },
-    { id: 'BANK_A', name: '국민은행', type: '은행', icon: '🏦', balance: 10000000000 },
-    { id: 'GOV_A', name: '서울시', type: '지자체', icon: '🏛️', balance: 2000000000 },
-    { id: 'CORP_A', name: '삼성전자', type: '기업', icon: '🏢', balance: 8000000000 }
+// Users/Institutions data
+const users = [
+    { id: 'user_1', name: '한국증권', type: '증권사', icon: '📈', balance: 5000000000 },
+    { id: 'user_2', name: '미래투자', type: '증권사', icon: '📊', balance: 3500000000 },
+    { id: 'user_3', name: '국민은행', type: '은행', icon: '🏦', balance: 10000000000 },
+    { id: 'user_4', name: '서울시', type: '지자체', icon: '🏛️', balance: 2000000000 },
+    { id: 'user_5', name: '삼성전자', type: '기업', icon: '🏢', balance: 8000000000 }
 ];
 
 // GovSplit KMS nodes
@@ -66,10 +68,10 @@ const kmsNodes = [
 // Application state
 let state = {
     encryptionKey: null,
+    currentUserId: 'user_1',
     accounts: [],
-    transactions: [],
+    allTransactions: [], // All transactions in the network
     hashChain: [],
-    settlements: [],
     approvalState: {
         active: false,
         targetAccount: null,
@@ -102,17 +104,28 @@ function formatTime(date) {
     return date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
 }
 
+function formatDateTime(date) {
+    return date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' }) + ' ' + formatTime(date);
+}
+
+// Get current user
+function getCurrentUser() {
+    return state.accounts.find(a => a.id === state.currentUserId);
+}
+
 // Initialize demo
 async function initDemo() {
     state.encryptionKey = await crypto.generateKey();
 
-    // Initialize accounts with encrypted balances
-    for (const inst of institutions) {
-        const encryptedBalance = await crypto.encrypt(state.encryptionKey, { balance: inst.balance });
+    // Initialize accounts with addresses and encrypted balances
+    for (const user of users) {
+        const address = crypto.generateAddress();
+        const encryptedBalance = await crypto.encrypt(state.encryptionKey, { balance: user.balance });
         state.accounts.push({
-            ...inst,
+            ...user,
+            address,
             encryptedBalance,
-            plainBalance: inst.balance // For demo purposes, we keep track
+            plainBalance: user.balance
         });
     }
 
@@ -120,7 +133,7 @@ async function initDemo() {
     const genesisData = {
         type: 'GENESIS',
         timestamp: new Date().toISOString(),
-        accounts: state.accounts.map(a => a.id)
+        accounts: state.accounts.map(a => ({ id: a.id, address: a.address }))
     };
     const genesisHash = await crypto.sha256(JSON.stringify(genesisData));
     state.hashChain.push({
@@ -131,82 +144,181 @@ async function initDemo() {
         prevHash: '0'.repeat(64)
     });
 
-    renderAccounts();
+    // Setup UI
+    populateUserSwitcher();
+    updateMyWallet();
+    renderParticipants();
     renderNodes();
-    populateSelects();
+    populateDisclosureSelect();
     updateStats();
 
-    console.log('IRONVEIL Vault Demo initialized');
+    // Setup address input listener
+    document.getElementById('toAddress').addEventListener('input', handleAddressInput);
+
+    console.log('IRONVEIL Vault Demo v2.0 initialized');
 }
 
-// Reset demo
-async function resetDemo() {
-    state = {
-        encryptionKey: await crypto.generateKey(),
-        accounts: [],
-        transactions: [],
-        hashChain: [],
-        settlements: [],
-        approvalState: {
-            active: false,
-            targetAccount: null,
-            reason: null,
-            approvedNodes: []
-        }
-    };
-
-    await initDemo();
-
-    // Reset UI
-    document.getElementById('transactionLog').innerHTML = '<div class="log-empty">거래를 실행하면 암호화된 로그가 기록됩니다</div>';
-    document.getElementById('logCount').textContent = '0건';
-    document.getElementById('disclosureResult').style.display = 'none';
-    document.getElementById('settlementPreview').innerHTML = '<div class="preview-placeholder">거래 내역이 쌓이면 정산 미리보기가 표시됩니다</div>';
-    document.getElementById('settlementBtn').disabled = true;
-    document.getElementById('verifyBtn').disabled = true;
-
-    // Reset nodes
-    document.querySelectorAll('.node-card').forEach(node => {
-        node.classList.remove('approving', 'approved');
-        node.querySelector('.node-status').textContent = '대기';
-        node.querySelector('.node-status').classList.remove('approved');
+// Populate user switcher
+function populateUserSwitcher() {
+    const switcher = document.getElementById('currentUser');
+    switcher.innerHTML = '';
+    state.accounts.forEach(account => {
+        const option = document.createElement('option');
+        option.value = account.id;
+        option.textContent = `${account.icon} ${account.name}`;
+        if (account.id === state.currentUserId) option.selected = true;
+        switcher.appendChild(option);
     });
-    document.getElementById('nodesStatus').textContent = '대기 중';
-    document.getElementById('nodesStatus').className = 'nodes-status';
 }
 
-// Render accounts
-function renderAccounts() {
-    const container = document.getElementById('accountsList');
+// Switch user
+function switchUser(userId) {
+    state.currentUserId = userId;
+    updateMyWallet();
+    renderMyTransactions();
+    renderParticipants();
+}
+
+// Update my wallet display
+function updateMyWallet() {
+    const user = getCurrentUser();
+    if (!user) return;
+
+    document.getElementById('myAvatar').textContent = user.icon;
+    document.getElementById('myName').textContent = user.name;
+    document.getElementById('myType').textContent = user.type;
+    document.getElementById('myAddress').textContent = crypto.shortenAddress(user.address);
+    document.getElementById('myBalance').textContent = formatKRW(user.plainBalance);
+    document.getElementById('myEncrypted').textContent = user.encryptedBalance.ciphertext.substring(0, 16) + '...';
+}
+
+// Copy address
+function copyAddress() {
+    const user = getCurrentUser();
+    navigator.clipboard.writeText(user.address);
+
+    const btn = document.querySelector('.copy-btn');
+    btn.innerHTML = '✓';
+    setTimeout(() => {
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>`;
+    }, 1500);
+}
+
+// Render participants (excluding current user)
+function renderParticipants() {
+    const container = document.getElementById('participantList');
+    const currentUser = getCurrentUser();
+
+    container.innerHTML = '';
+    state.accounts
+        .filter(a => a.id !== state.currentUserId)
+        .forEach(account => {
+            const item = document.createElement('div');
+            item.className = 'participant-item';
+            item.onclick = () => selectParticipant(account);
+            item.innerHTML = `
+                <div class="participant-avatar">${account.icon}</div>
+                <div class="participant-info">
+                    <div class="participant-name">${account.name}</div>
+                    <div class="participant-address">${crypto.shortenAddress(account.address)}</div>
+                </div>
+                <span class="participant-type">${account.type}</span>
+            `;
+            container.appendChild(item);
+        });
+
+    document.getElementById('participantCount').textContent = `${state.accounts.length - 1}명`;
+}
+
+// Select participant
+function selectParticipant(account) {
+    document.getElementById('toAddress').value = account.address;
+    showAddressPreview(account);
+}
+
+// Handle address input
+function handleAddressInput(e) {
+    const value = e.target.value.trim();
+    const preview = document.getElementById('addressPreview');
+
+    if (!value) {
+        preview.style.display = 'none';
+        return;
+    }
+
+    // Find matching account
+    const account = state.accounts.find(a =>
+        a.address.toLowerCase() === value.toLowerCase() ||
+        a.name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    if (account && account.id !== state.currentUserId) {
+        showAddressPreview(account);
+        if (account.address.toLowerCase() !== value.toLowerCase()) {
+            document.getElementById('toAddress').value = account.address;
+        }
+    } else {
+        preview.style.display = 'none';
+    }
+}
+
+// Show address preview
+function showAddressPreview(account) {
+    const preview = document.getElementById('addressPreview');
+    document.getElementById('previewIcon').textContent = account.icon;
+    document.getElementById('previewName').textContent = account.name;
+    document.getElementById('previewType').textContent = account.type;
+    preview.style.display = 'flex';
+}
+
+// Open address book modal
+function openAddressBook() {
+    const modal = document.getElementById('addressBookModal');
+    renderAddressBookList();
+    modal.classList.add('active');
+}
+
+// Close address book
+function closeAddressBook() {
+    document.getElementById('addressBookModal').classList.remove('active');
+}
+
+// Render address book list
+function renderAddressBookList(filter = '') {
+    const container = document.getElementById('addressBookList');
     container.innerHTML = '';
 
-    state.accounts.forEach(account => {
-        const card = document.createElement('div');
-        card.className = 'account-card';
-        card.dataset.id = account.id;
-        card.innerHTML = `
-            <div class="account-header">
-                <div class="account-avatar">${account.icon}</div>
-                <div class="account-info">
-                    <div class="account-name">${account.name}</div>
-                    <div class="account-type">${account.type}</div>
+    state.accounts
+        .filter(a => a.id !== state.currentUserId)
+        .filter(a => !filter ||
+            a.name.toLowerCase().includes(filter.toLowerCase()) ||
+            a.address.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(account => {
+            const item = document.createElement('div');
+            item.className = 'address-book-item';
+            item.onclick = () => {
+                document.getElementById('toAddress').value = account.address;
+                showAddressPreview(account);
+                closeAddressBook();
+            };
+            item.innerHTML = `
+                <div class="item-avatar">${account.icon}</div>
+                <div class="item-info">
+                    <div class="item-name">${account.name}</div>
+                    <div class="item-address">${account.address}</div>
                 </div>
-                <div class="account-badge">${account.id}</div>
-            </div>
-            <div class="account-balance">
-                <div class="balance-label">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    FHE16 암호화 잔고
-                </div>
-                <div class="balance-value">${formatKRW(account.plainBalance)}</div>
-                <div class="balance-encrypted">${account.encryptedBalance.ciphertext.substring(0, 40)}...</div>
-            </div>
-        `;
-        container.appendChild(card);
-    });
+                <span class="item-type">${account.type}</span>
+            `;
+            container.appendChild(item);
+        });
+}
+
+// Filter addresses
+function filterAddresses(query) {
+    renderAddressBookList(query);
 }
 
 // Render KMS nodes
@@ -227,20 +339,15 @@ function renderNodes() {
     });
 }
 
-// Populate select dropdowns
-function populateSelects() {
-    const fromSelect = document.getElementById('fromAccount');
-    const toSelect = document.getElementById('toAccount');
-    const disclosureSelect = document.getElementById('disclosureTarget');
-
-    [fromSelect, toSelect, disclosureSelect].forEach(select => {
-        select.innerHTML = '<option value="">선택하세요</option>';
-        state.accounts.forEach(account => {
-            const option = document.createElement('option');
-            option.value = account.id;
-            option.textContent = `${account.icon} ${account.name} (${account.type})`;
-            select.appendChild(option);
-        });
+// Populate disclosure select
+function populateDisclosureSelect() {
+    const select = document.getElementById('disclosureTarget');
+    select.innerHTML = '<option value="">주소 선택</option>';
+    state.accounts.forEach(account => {
+        const option = document.createElement('option');
+        option.value = account.id;
+        option.textContent = `${account.icon} ${account.name} (${crypto.shortenAddress(account.address)})`;
+        select.appendChild(option);
     });
 }
 
@@ -253,45 +360,40 @@ function updateStats() {
         document.getElementById('merkleRoot').textContent = lastHash.substring(0, 24) + '...';
     }
 
-    if (state.transactions.length > 0) {
+    if (state.allTransactions.length > 0) {
         document.getElementById('verifyBtn').disabled = false;
     }
 }
 
-// Switch tabs
-function switchTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tab === tabName);
-    });
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.toggle('active', content.id === tabName + 'Tab');
-    });
-}
-
 // Set quick amount
 function setAmount(amount) {
-    document.getElementById('transferAmount').value = amount.toLocaleString();
+    document.getElementById('sendAmount').value = amount.toLocaleString();
 }
 
-// Execute transfer
-async function executeTransfer() {
-    const fromId = document.getElementById('fromAccount').value;
-    const toId = document.getElementById('toAccount').value;
-    const amountStr = document.getElementById('transferAmount').value.replace(/,/g, '');
+// Execute send
+async function executeSend() {
+    const toAddress = document.getElementById('toAddress').value.trim();
+    const amountStr = document.getElementById('sendAmount').value.replace(/,/g, '');
+    const memo = document.getElementById('sendMemo').value.trim();
     const amount = parseInt(amountStr);
 
-    if (!fromId || !toId || !amount) {
-        alert('모든 필드를 입력해주세요.');
+    const fromAccount = getCurrentUser();
+    const toAccount = state.accounts.find(a => a.address.toLowerCase() === toAddress.toLowerCase());
+
+    if (!toAccount) {
+        alert('유효한 수신 주소를 입력해주세요.');
         return;
     }
 
-    if (fromId === toId) {
-        alert('출금 계정과 입금 계정이 같습니다.');
+    if (toAccount.id === state.currentUserId) {
+        alert('자기 자신에게 송금할 수 없습니다.');
         return;
     }
 
-    const fromAccount = state.accounts.find(a => a.id === fromId);
-    const toAccount = state.accounts.find(a => a.id === toId);
+    if (!amount || amount <= 0) {
+        alert('유효한 금액을 입력해주세요.');
+        return;
+    }
 
     if (fromAccount.plainBalance < amount) {
         alert('잔고가 부족합니다.');
@@ -303,7 +405,7 @@ async function executeTransfer() {
         { text: '거래 데이터 암호화', status: 'active' },
         { text: '잔고 업데이트 (암호문 연산)', status: 'pending' },
         { text: '해시 체인 기록', status: 'pending' },
-        { text: '트랜잭션 완료', status: 'pending' }
+        { text: '트랜잭션 브로드캐스트', status: 'pending' }
     ]);
 
     // Step 1: Encrypt transaction
@@ -311,7 +413,7 @@ async function executeTransfer() {
     updateProcessingStep(0, 'done');
     updateProcessingStep(1, 'active');
 
-    // Step 2: Update balances (encrypted)
+    // Step 2: Update balances
     fromAccount.plainBalance -= amount;
     toAccount.plainBalance += amount;
     fromAccount.encryptedBalance = await crypto.encrypt(state.encryptionKey, { balance: fromAccount.plainBalance });
@@ -325,9 +427,12 @@ async function executeTransfer() {
     const txData = {
         txId: 'TX-' + generateId().toUpperCase(),
         type: 'TRANSFER',
-        from: fromId,
-        to: toId,
+        from: fromAccount.id,
+        fromAddress: fromAccount.address,
+        to: toAccount.id,
+        toAddress: toAccount.address,
         amount: amount,
+        memo: memo || null,
         timestamp: new Date().toISOString()
     };
 
@@ -344,7 +449,7 @@ async function executeTransfer() {
         prevHash: prevHash
     });
 
-    state.transactions.push({
+    state.allTransactions.push({
         ...txData,
         encrypted: encryptedTx,
         chainHash: txHash
@@ -361,206 +466,97 @@ async function executeTransfer() {
     await sleep(500);
     hideProcessingModal();
 
-    renderAccounts();
-    addTransactionLog(txData, txHash);
+    updateMyWallet();
+    renderMyTransactions();
+    addNetworkLog(txData);
     updateStats();
-    updateSettlementPreview();
 
     // Clear form
-    document.getElementById('transferAmount').value = '';
+    document.getElementById('sendAmount').value = '';
+    document.getElementById('sendMemo').value = '';
+    document.getElementById('toAddress').value = '';
+    document.getElementById('addressPreview').style.display = 'none';
 }
 
-// Execute settlement
-async function executeSettlement() {
-    showProcessingModal('암호화 일괄 정산 (Netting) 처리 중', [
-        { text: '채권/채무 집계 (암호문)', status: 'active' },
-        { text: '순 정산액 계산', status: 'pending' },
-        { text: '정산 실행', status: 'pending' },
-        { text: '정산 완료', status: 'pending' }
-    ]);
+// Render my transactions
+function renderMyTransactions() {
+    const container = document.getElementById('myTransactions');
+    const currentUser = getCurrentUser();
 
-    await sleep(1000);
-    updateProcessingStep(0, 'done');
-    updateProcessingStep(1, 'active');
+    // Filter transactions involving current user
+    const myTxs = state.allTransactions.filter(tx =>
+        tx.from === currentUser.id || tx.to === currentUser.id
+    ).reverse();
 
-    // Calculate net settlements
-    const netAmounts = {};
-    state.accounts.forEach(a => netAmounts[a.id] = 0);
+    if (myTxs.length === 0) {
+        container.innerHTML = '<div class="tx-empty">아직 거래 내역이 없습니다</div>';
+        document.getElementById('myTxCount').textContent = '0건';
+        return;
+    }
 
-    state.transactions.filter(t => t.type === 'TRANSFER').forEach(tx => {
-        netAmounts[tx.from] -= tx.amount;
-        netAmounts[tx.to] += tx.amount;
+    container.innerHTML = '';
+    myTxs.forEach(tx => {
+        const isSent = tx.from === currentUser.id;
+        const counterparty = state.accounts.find(a => a.id === (isSent ? tx.to : tx.from));
+
+        const item = document.createElement('div');
+        item.className = 'my-tx-item';
+        item.innerHTML = `
+            <div class="tx-direction ${isSent ? 'sent' : 'received'}">
+                ${isSent ? '↑' : '↓'}
+            </div>
+            <div class="tx-info">
+                <div class="tx-counterparty">
+                    ${isSent ? '→' : '←'} ${counterparty.icon} ${counterparty.name}
+                </div>
+                <div class="tx-time">${formatDateTime(new Date(tx.timestamp))}</div>
+            </div>
+            <div class="tx-amount ${isSent ? 'sent' : 'received'}">
+                ${isSent ? '-' : '+'}${formatKRW(tx.amount)}
+            </div>
+        `;
+        container.appendChild(item);
     });
 
-    await sleep(800);
-    updateProcessingStep(1, 'done');
-    updateProcessingStep(2, 'active');
-
-    // Record settlement
-    const settlementData = {
-        settlementId: 'SET-' + generateId().toUpperCase(),
-        type: 'SETTLEMENT',
-        netAmounts: netAmounts,
-        txCount: state.transactions.length,
-        timestamp: new Date().toISOString()
-    };
-
-    const encryptedSettlement = await crypto.encrypt(state.encryptionKey, settlementData);
-    const prevHash = state.hashChain[state.hashChain.length - 1].hash;
-    const settlementHash = await crypto.sha256(JSON.stringify(settlementData) + prevHash);
-
-    state.hashChain.push({
-        index: state.hashChain.length,
-        type: 'SETTLEMENT',
-        data: settlementData,
-        encryptedData: encryptedSettlement,
-        hash: settlementHash,
-        prevHash: prevHash
-    });
-
-    state.settlements.push(settlementData);
-
-    await sleep(800);
-    updateProcessingStep(2, 'done');
-    updateProcessingStep(3, 'active');
-
-    await sleep(400);
-    updateProcessingStep(3, 'done');
-
-    await sleep(500);
-    hideProcessingModal();
-
-    // Update UI
-    addSettlementLog(settlementData, settlementHash);
-    updateStats();
-
-    // Clear transactions for next batch
-    state.transactions = [];
-    updateSettlementPreview();
+    document.getElementById('myTxCount').textContent = `${myTxs.length}건`;
 }
 
-// Add transaction log
-function addTransactionLog(tx, hash) {
-    const container = document.getElementById('transactionLog');
+// Add network log (anonymized view)
+function addNetworkLog(tx) {
+    const container = document.getElementById('networkLog');
     const empty = container.querySelector('.log-empty');
     if (empty) empty.remove();
 
     const fromAccount = state.accounts.find(a => a.id === tx.from);
     const toAccount = state.accounts.find(a => a.id === tx.to);
+    const currentUser = getCurrentUser();
 
-    const entry = document.createElement('div');
-    entry.className = 'log-entry';
-    entry.innerHTML = `
-        <div class="log-entry-header">
-            <div class="log-type">
-                <span class="log-type-icon transfer">💸</span>
-                <span>암호화 송금</span>
+    // Check if current user is involved
+    const isInvolved = tx.from === currentUser.id || tx.to === currentUser.id;
+
+    const item = document.createElement('div');
+    item.className = 'network-tx-item';
+    item.innerHTML = `
+        <div class="network-tx-header">
+            <div class="network-tx-type">
+                <span class="icon">💸</span>
+                <span>Transfer</span>
             </div>
-            <span class="log-time">${formatTime(new Date(tx.timestamp))}</span>
+            <span class="network-tx-time">${formatTime(new Date(tx.timestamp))}</span>
         </div>
-        <div class="log-details">
-            <div class="log-detail">
-                <span class="log-detail-label">출금</span>
-                <span class="log-detail-value">${fromAccount.icon} ${fromAccount.name}</span>
-            </div>
-            <div class="log-detail">
-                <span class="log-detail-label">입금</span>
-                <span class="log-detail-value">${toAccount.icon} ${toAccount.name}</span>
-            </div>
-            <div class="log-detail">
-                <span class="log-detail-label">금액</span>
-                <span class="log-detail-value">${formatKRWFull(tx.amount)}</span>
-            </div>
+        <div class="network-tx-flow">
+            <span>${crypto.shortenAddress(tx.fromAddress)}</span>
+            <span class="arrow">→</span>
+            <span>${crypto.shortenAddress(tx.toAddress)}</span>
         </div>
-        <div class="log-hash">🔗 ${hash.substring(0, 48)}...</div>
+        <div class="network-tx-amount">
+            ${isInvolved ? formatKRWFull(tx.amount) : '🔒 [암호화됨]'}
+        </div>
     `;
-    container.insertBefore(entry, container.firstChild);
+    container.insertBefore(item, container.firstChild);
 
-    document.getElementById('logCount').textContent = `${state.transactions.length}건`;
-}
-
-// Add settlement log
-function addSettlementLog(settlement, hash) {
-    const container = document.getElementById('transactionLog');
-
-    const entry = document.createElement('div');
-    entry.className = 'log-entry';
-    entry.innerHTML = `
-        <div class="log-entry-header">
-            <div class="log-type">
-                <span class="log-type-icon settlement">🔄</span>
-                <span>일괄 정산 완료</span>
-            </div>
-            <span class="log-time">${formatTime(new Date(settlement.timestamp))}</span>
-        </div>
-        <div class="log-details">
-            <div class="log-detail">
-                <span class="log-detail-label">정산 ID</span>
-                <span class="log-detail-value">${settlement.settlementId}</span>
-            </div>
-            <div class="log-detail">
-                <span class="log-detail-label">처리 건수</span>
-                <span class="log-detail-value">${settlement.txCount}건</span>
-            </div>
-        </div>
-        <div class="log-hash">🔗 ${hash.substring(0, 48)}...</div>
-    `;
-    container.insertBefore(entry, container.firstChild);
-}
-
-// Update settlement preview
-function updateSettlementPreview() {
-    const container = document.getElementById('settlementPreview');
-    const btn = document.getElementById('settlementBtn');
-
-    if (state.transactions.length === 0) {
-        container.innerHTML = '<div class="preview-placeholder">거래 내역이 쌓이면 정산 미리보기가 표시됩니다</div>';
-        btn.disabled = true;
-        return;
-    }
-
-    // Calculate net positions
-    const netAmounts = {};
-    state.accounts.forEach(a => netAmounts[a.id] = 0);
-
-    state.transactions.filter(t => t.type === 'TRANSFER').forEach(tx => {
-        netAmounts[tx.from] -= tx.amount;
-        netAmounts[tx.to] += tx.amount;
-    });
-
-    let html = '<div class="settlement-items">';
-    state.accounts.forEach(account => {
-        const net = netAmounts[account.id];
-        if (net !== 0) {
-            const cls = net > 0 ? 'positive' : 'negative';
-            html += `
-                <div class="settlement-item ${cls}">
-                    <span class="item-name">${account.icon} ${account.name}</span>
-                    <span class="item-amount">${net > 0 ? '+' : ''}${formatKRWFull(net)}</span>
-                </div>
-            `;
-        }
-    });
-    html += `<div class="settlement-summary">총 ${state.transactions.length}건 거래 → 정산 대기</div>`;
-    html += '</div>';
-
-    container.innerHTML = html;
-    btn.disabled = false;
-
-    // Add styles if not exist
-    if (!document.getElementById('settlementStyles')) {
-        const style = document.createElement('style');
-        style.id = 'settlementStyles';
-        style.textContent = `
-            .settlement-items { display: flex; flex-direction: column; gap: 8px; }
-            .settlement-item { display: flex; justify-content: space-between; padding: 10px 14px; background: var(--bg-elevated); border-radius: 8px; font-size: 13px; }
-            .settlement-item.positive .item-amount { color: var(--success-light); }
-            .settlement-item.negative .item-amount { color: var(--danger-light); }
-            .item-amount { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
-            .settlement-summary { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
-        `;
-        document.head.appendChild(style);
-    }
+    const count = container.querySelectorAll('.network-tx-item').length;
+    document.getElementById('networkLogCount').textContent = `${count}건`;
 }
 
 // Request disclosure
@@ -569,7 +565,7 @@ async function requestDisclosure() {
     const reason = document.getElementById('disclosureReason').value;
 
     if (!targetId) {
-        alert('열람 대상 계정을 선택해주세요.');
+        alert('열람 대상 주소를 선택해주세요.');
         return;
     }
 
@@ -582,7 +578,6 @@ async function requestDisclosure() {
         approvedNodes: []
     };
 
-    // Show approval modal
     openApprovalModal(targetAccount, reason);
 }
 
@@ -602,7 +597,8 @@ function openApprovalModal(account, reason) {
         <div class="approval-info">
             <div class="approval-target">
                 <span class="target-label">열람 대상</span>
-                <span class="target-value">${account.icon} ${account.name} (${account.type})</span>
+                <span class="target-value">${account.icon} ${account.name}</span>
+                <div style="font-size: 11px; color: var(--primary-light); margin-top: 4px; font-family: monospace;">${account.address}</div>
             </div>
             <div class="approval-reason">
                 <span class="reason-label">요청 사유</span>
@@ -632,7 +628,7 @@ function openApprovalModal(account, reason) {
         </div>
     `;
 
-    // Add styles
+    // Add styles if not exist
     if (!document.getElementById('approvalStyles')) {
         const style = document.createElement('style');
         style.id = 'approvalStyles';
@@ -711,6 +707,7 @@ async function completeDisclosure() {
     const disclosureData = {
         type: 'DISCLOSURE',
         targetAccount: state.approvalState.targetAccount.id,
+        targetAddress: state.approvalState.targetAccount.address,
         reason: state.approvalState.reason,
         approvedBy: state.approvalState.approvedNodes,
         timestamp: new Date().toISOString()
@@ -755,6 +752,11 @@ function showDisclosureResult(account, hash) {
     const container = document.getElementById('disclosureResult');
     const content = document.getElementById('disclosureContent');
 
+    // Get transactions for this account
+    const accountTxs = state.allTransactions.filter(tx =>
+        tx.from === account.id || tx.to === account.id
+    );
+
     content.innerHTML = `
         <div class="disclosed-info">
             <div class="disclosed-item">
@@ -762,16 +764,20 @@ function showDisclosureResult(account, hash) {
                 <span class="disclosed-value">${account.icon} ${account.name}</span>
             </div>
             <div class="disclosed-item">
+                <span class="disclosed-label">지갑 주소</span>
+                <span class="disclosed-value" style="font-size: 11px; font-family: monospace;">${account.address}</span>
+            </div>
+            <div class="disclosed-item">
                 <span class="disclosed-label">계정 유형</span>
                 <span class="disclosed-value">${account.type}</span>
             </div>
             <div class="disclosed-item">
-                <span class="disclosed-label">계정 ID</span>
-                <span class="disclosed-value">${account.id}</span>
-            </div>
-            <div class="disclosed-item">
                 <span class="disclosed-label">현재 잔고</span>
                 <span class="disclosed-value highlight">${formatKRWFull(account.plainBalance)}</span>
+            </div>
+            <div class="disclosed-item">
+                <span class="disclosed-label">거래 건수</span>
+                <span class="disclosed-value">${accountTxs.length}건</span>
             </div>
             <div class="disclosed-item">
                 <span class="disclosed-label">열람 승인 해시</span>
@@ -826,12 +832,89 @@ async function verifyIntegrity() {
     await sleep(500);
     hideProcessingModal();
 
-    // Show result
     if (valid) {
         alert(`✅ 검증 성공!\n\n모든 ${state.hashChain.length}개 블록의 무결성이 확인되었습니다.`);
     } else {
         alert('⚠️ 검증 실패!\n\n데이터 변조가 감지되었습니다.');
     }
+}
+
+// Reset demo
+async function resetDemo() {
+    state = {
+        encryptionKey: await crypto.generateKey(),
+        currentUserId: 'user_1',
+        accounts: [],
+        allTransactions: [],
+        hashChain: [],
+        approvalState: {
+            active: false,
+            targetAccount: null,
+            reason: null,
+            approvedNodes: []
+        }
+    };
+
+    // Reinitialize
+    for (const user of users) {
+        const address = crypto.generateAddress();
+        const encryptedBalance = await crypto.encrypt(state.encryptionKey, { balance: user.balance });
+        state.accounts.push({
+            ...user,
+            address,
+            encryptedBalance,
+            plainBalance: user.balance
+        });
+    }
+
+    // Create genesis block
+    const genesisData = {
+        type: 'GENESIS',
+        timestamp: new Date().toISOString(),
+        accounts: state.accounts.map(a => ({ id: a.id, address: a.address }))
+    };
+    const genesisHash = await crypto.sha256(JSON.stringify(genesisData));
+    state.hashChain.push({
+        index: 0,
+        type: 'GENESIS',
+        data: genesisData,
+        hash: genesisHash,
+        prevHash: '0'.repeat(64)
+    });
+
+    // Reset UI
+    populateUserSwitcher();
+    updateMyWallet();
+    renderMyTransactions();
+    renderParticipants();
+    renderNodes();
+    populateDisclosureSelect();
+    updateStats();
+
+    document.getElementById('networkLog').innerHTML = `
+        <div class="log-empty">
+            네트워크 거래가 발생하면 표시됩니다<br/>
+            <small>※ 금액과 상세 정보는 암호화되어 표시</small>
+        </div>
+    `;
+    document.getElementById('networkLogCount').textContent = '0건';
+    document.getElementById('disclosureResult').style.display = 'none';
+    document.getElementById('verifyBtn').disabled = true;
+    document.getElementById('sendAmount').value = '';
+    document.getElementById('sendMemo').value = '';
+    document.getElementById('toAddress').value = '';
+    document.getElementById('addressPreview').style.display = 'none';
+
+    // Reset nodes
+    document.querySelectorAll('.node-card').forEach(node => {
+        node.classList.remove('approving', 'approved');
+        node.querySelector('.node-status').textContent = '대기';
+        node.querySelector('.node-status').classList.remove('approved');
+    });
+    document.getElementById('nodesStatus').textContent = '대기 중';
+    document.getElementById('nodesStatus').className = 'nodes-status';
+
+    console.log('Demo reset complete');
 }
 
 // Processing modal helpers

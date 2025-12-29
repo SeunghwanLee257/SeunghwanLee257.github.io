@@ -76,124 +76,157 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Left Panel: Accounts -->
-            <section class="panel accounts-panel">
+            <!-- Left Panel: My Wallet -->
+            <section class="panel wallet-panel">
                 <div class="panel-header">
                     <h2>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
-                        기관 계정
+                        내 지갑
                     </h2>
+                    <select id="currentUser" class="user-switcher" onchange="switchUser(this.value)">
+                    </select>
                 </div>
 
-                <div class="accounts-list" id="accountsList">
-                    <!-- Account cards will be generated -->
+                <!-- My Wallet Card -->
+                <div class="my-wallet-card" id="myWalletCard">
+                    <div class="wallet-header">
+                        <div class="wallet-avatar" id="myAvatar">📈</div>
+                        <div class="wallet-info">
+                            <div class="wallet-name" id="myName">한국증권</div>
+                            <div class="wallet-type" id="myType">증권사</div>
+                        </div>
+                    </div>
+                    <div class="wallet-address">
+                        <span class="address-label">지갑 주소</span>
+                        <div class="address-value">
+                            <code id="myAddress">0x7F3a...9E2b</code>
+                            <button class="copy-btn" onclick="copyAddress()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="wallet-balance">
+                        <span class="balance-label">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            FHE16 암호화 잔고
+                        </span>
+                        <div class="balance-amount" id="myBalance">50억원</div>
+                        <div class="balance-encrypted" id="myEncrypted">0x8f4e2a...</div>
+                    </div>
                 </div>
 
-                <div class="account-info-box">
-                    <div class="info-icon">💡</div>
+                <!-- My Transactions -->
+                <div class="my-transactions">
+                    <div class="section-header">
+                        <h3>📜 내 거래 내역</h3>
+                        <span class="tx-count" id="myTxCount">0건</span>
+                    </div>
+                    <div class="my-tx-list" id="myTransactions">
+                        <div class="tx-empty">아직 거래 내역이 없습니다</div>
+                    </div>
+                </div>
+
+                <div class="wallet-info-box">
+                    <div class="info-icon">🔒</div>
                     <div class="info-text">
-                        <strong>모든 잔고는 FHE16 암호문</strong><br/>
-                        본인만 조회 가능, 운영자도 볼 수 없음
+                        <strong>프라이버시 보장</strong><br/>
+                        본인 거래만 열람 가능, 타인의 잔고/거래는 볼 수 없음
                     </div>
                 </div>
             </section>
 
-            <!-- Center Panel: Operations -->
+            <!-- Center Panel: Send & Network -->
             <section class="panel operations-panel">
                 <div class="panel-header">
                     <h2>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
-                        거래 실행
+                        송금하기
                     </h2>
-                    <div class="tab-switcher">
-                        <button class="tab-btn active" data-tab="transfer" onclick="switchTab('transfer')">송금</button>
-                        <button class="tab-btn" data-tab="settlement" onclick="switchTab('settlement')">정산</button>
-                    </div>
                 </div>
 
-                <!-- Transfer Tab -->
-                <div class="tab-content active" id="transferTab">
-                    <div class="transfer-form">
-                        <div class="form-group">
-                            <label>출금 계정</label>
-                            <select id="fromAccount" class="form-select">
-                                <option value="">선택하세요</option>
-                            </select>
+                <!-- Send Form -->
+                <div class="send-form">
+                    <div class="form-group">
+                        <label>받는 주소</label>
+                        <div class="address-input-group">
+                            <input type="text" id="toAddress" class="form-input address-input" placeholder="0x... 또는 이름으로 검색" />
+                            <button class="address-book-btn" onclick="openAddressBook()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                </svg>
+                            </button>
                         </div>
-                        <div class="transfer-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 5v14M5 12l7 7 7-7"/>
-                            </svg>
-                        </div>
-                        <div class="form-group">
-                            <label>입금 계정</label>
-                            <select id="toAccount" class="form-select">
-                                <option value="">선택하세요</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>금액 (KRW)</label>
-                            <div class="amount-input-group">
-                                <input type="text" id="transferAmount" class="form-input" placeholder="0" />
-                                <span class="amount-suffix">원</span>
-                            </div>
-                            <div class="quick-amounts">
-                                <button class="quick-btn" onclick="setAmount(1000000)">100만</button>
-                                <button class="quick-btn" onclick="setAmount(5000000)">500만</button>
-                                <button class="quick-btn" onclick="setAmount(10000000)">1,000만</button>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary btn-large" onclick="executeTransfer()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                            </svg>
-                            암호화 송금 실행
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Settlement Tab -->
-                <div class="tab-content" id="settlementTab">
-                    <div class="settlement-info">
-                        <div class="settlement-header">
-                            <span class="settlement-icon">🔄</span>
-                            <h3>일괄 정산 (Netting)</h3>
-                        </div>
-                        <p class="settlement-desc">모든 기관 간 채권/채무를 암호문 상태로 계산하여 순 정산액만 이체합니다.</p>
-                    </div>
-                    <div class="settlement-preview" id="settlementPreview">
-                        <div class="preview-placeholder">
-                            거래 내역이 쌓이면 정산 미리보기가 표시됩니다
+                        <div class="address-preview" id="addressPreview" style="display: none;">
+                            <span class="preview-icon" id="previewIcon">🏦</span>
+                            <span class="preview-name" id="previewName">국민은행</span>
+                            <span class="preview-type" id="previewType">은행</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-large" onclick="executeSettlement()" id="settlementBtn" disabled>
+                    <div class="form-group">
+                        <label>금액 (KRW)</label>
+                        <div class="amount-input-group">
+                            <input type="text" id="sendAmount" class="form-input" placeholder="0" />
+                            <span class="amount-suffix">원</span>
+                        </div>
+                        <div class="quick-amounts">
+                            <button class="quick-btn" onclick="setAmount(1000000)">100만</button>
+                            <button class="quick-btn" onclick="setAmount(5000000)">500만</button>
+                            <button class="quick-btn" onclick="setAmount(10000000)">1,000만</button>
+                            <button class="quick-btn" onclick="setAmount(100000000)">1억</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>메모 (선택)</label>
+                        <input type="text" id="sendMemo" class="form-input" placeholder="거래 메모 입력" />
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="executeSend()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/>
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
-                        암호화 정산 실행
+                        암호화 송금 실행
                     </button>
                 </div>
 
-                <!-- Transaction Log -->
-                <div class="transaction-log">
+                <!-- Address Book Section -->
+                <div class="address-book-section">
+                    <div class="section-header">
+                        <h3>📒 네트워크 참여자</h3>
+                        <span class="participant-count" id="participantCount">5명</span>
+                    </div>
+                    <div class="participant-list" id="participantList">
+                        <!-- Participants will be generated -->
+                    </div>
+                </div>
+
+                <!-- Network Transaction Log -->
+                <div class="network-log">
                     <div class="log-header">
                         <h3>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14,2 14,8 20,8"/>
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                             </svg>
-                            거래 로그 (암호화)
+                            네트워크 활동
                         </h3>
-                        <span class="log-count" id="logCount">0건</span>
+                        <span class="log-count" id="networkLogCount">0건</span>
                     </div>
-                    <div class="log-list" id="transactionLog">
+                    <div class="log-list" id="networkLog">
                         <div class="log-empty">
-                            거래를 실행하면 암호화된 로그가 기록됩니다
+                            네트워크 거래가 발생하면 표시됩니다<br/>
+                            <small>※ 금액과 상세 정보는 암호화되어 표시</small>
                         </div>
                     </div>
                 </div>
@@ -228,14 +261,14 @@
                 <!-- Disclosure Request -->
                 <div class="disclosure-section">
                     <div class="section-header">
-                        <h3>🔓 열람 요청</h3>
+                        <h3>🔓 감사/열람 요청</h3>
                         <span class="section-badge">Selective Disclosure</span>
                     </div>
                     <div class="disclosure-form">
                         <div class="form-group">
-                            <label>열람 대상</label>
+                            <label>열람 대상 주소</label>
                             <select id="disclosureTarget" class="form-select">
-                                <option value="">계정 선택</option>
+                                <option value="">주소 선택</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -294,6 +327,24 @@
             </section>
         </main>
 
+        <!-- Address Book Modal -->
+        <div class="modal" id="addressBookModal">
+            <div class="modal-content modal-addressbook">
+                <div class="modal-header">
+                    <h3>📒 주소록</h3>
+                    <button class="modal-close" onclick="closeAddressBook()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="address-search">
+                        <input type="text" id="addressSearch" class="form-input" placeholder="이름 또는 주소로 검색..." oninput="filterAddresses(this.value)" />
+                    </div>
+                    <div class="address-list" id="addressBookList">
+                        <!-- Address book entries -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Processing Modal -->
         <div class="modal" id="processingModal">
             <div class="modal-content modal-processing">
@@ -325,7 +376,7 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-left">
-                <span class="footer-brand">IRONVEIL Vault™ Demo v1.0</span>
+                <span class="footer-brand">IRONVEIL Vault™ Demo v2.0</span>
                 <span class="footer-divider">|</span>
                 <span class="footer-tagline">"No One Sees. Only Due Process."</span>
             </div>
