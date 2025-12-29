@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriBlind | 도매시장 블라인드 경매 + 분쟁증빙 자동화</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 15</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="deco-top"></div>
+                    <div class="deco-bottom"></div>
+                    <div class="version-tag">2025.ver</div>
+                    <p class="pre-headline">도매시장 경매에서 "응찰자 비공개"를 시스템으로 강제하고</p>
+                    <h1 class="main-headline">
+                        <span class="green">블라인드 경매</span> +<br>
+                        <span class="green">분쟁증빙 자동화</span>
+                    </h1>
+                    <p class="sub-headline">AgriBlind</p>
+                    <div class="tagline-bar">
+                        공정성 검증 레이어 (Web2 사이드카 + FHE16 옵션)
+                    </div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                            </div>
+                            <span>Blind-ID</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9,12 11,14 15,10"></polyline>
+                                </svg>
+                            </div>
+                            <span>ProofPack</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <span>ClearNet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Executive Summary -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title green">Executive Summary</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="green">한 줄 요약:</span> 블라인드 경매 + 분쟁 없는 증빙 시스템</h2>
+
+                    <div class="summary-box">
+                        <p class="summary-text">
+                            AgriBlind는 도매시장 경매에서<br>
+                            <strong>"응찰자 비공개(블라인드)"</strong>를 시스템으로 강제하고,<br>
+                            결과의 정당성을 <span class="green">'검증 가능한 증빙 패키지'</span>로<br>
+                            자동 생성해 <strong>분쟁·정정·민원</strong>을 줄이는<br>
+                            Web2 솔루션
+                        </p>
+                    </div>
+
+                    <div class="why-now-banner">
+                        <span class="banner-icon">!</span>
+                        <span><strong class="green">2026년 즉시 매출 가능:</strong> 정부가 옴부즈만·블라인드 경매 확대/의무화·대금정산조직 도입을 추진 중</span>
+                    </div>
+
+                    <div class="benefit-row">
+                        <div class="benefit-card">
+                            <div class="benefit-icon green-bg">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>고객 가치</h4>
+                            <p>경매 조작 시비 원천 차단<br>분쟁 처리 시간 90% 단축</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon green-bg">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                            </div>
+                            <h4>진입 전략</h4>
+                            <p>레거시 교체 X, 사이드카 부착<br>정책 타임라인에 맞춘 파일럿</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Market Size -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title green">Market Size</span>
+                    </div>
+                    <h2 class="slide-headline">마켓 사이즈: <span class="green">이미 돌아가는 수조원 인프라</span></h2>
+
+                    <div class="market-grid">
+                        <div class="market-card offline">
+                            <h4>오프라인 도매시장 (기존)</h4>
+                            <div class="market-stats">
+                                <div class="stat">
+                                    <span class="stat-value green">32개</span>
+                                    <span class="stat-label">전국 공영도매시장</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value green">~15조원</span>
+                                    <span class="stat-label">청과·채소 거래 규모</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value green">~5조원</span>
+                                    <span class="stat-label">가락시장 단독</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="market-card online">
+                            <h4>온라인 도매시장 (정부 성장 레일)</h4>
+                            <div class="market-stats">
+                                <div class="stat">
+                                    <span class="stat-value green">6,737억</span>
+                                    <span class="stat-label">2024년 거래금액</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value green">1조원</span>
+                                    <span class="stat-label">2025년 목표</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value green">7.4%p↓</span>
+                                    <span class="stat-label">유통비용률 감소</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-banner">
+                        <strong>우리 전략: 플랫폼과 경쟁 X → 정책이 요구하는 '공정성/분쟁 최소화/정산 신뢰' 기능을 빠르게 공급하는 엔진</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Problem Evidence -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title green">Problem Evidence</span>
+                    </div>
+                    <h2 class="slide-headline">문제가 <span class="green">실존</span>하는가? — 이미 제도/시스템 개편 진행 중</h2>
+
+                    <div class="evidence-main">
+                        <div class="evidence-card highlight">
+                            <div class="evidence-header">
+                                <span class="evidence-badge">실사례</span>
+                                <h4>대전 노은도매시장 블라인드 경매 도입 (2024)</h4>
+                            </div>
+                            <div class="evidence-body">
+                                <div class="evidence-item">
+                                    <span class="item-label">정의</span>
+                                    <p>경매사가 응찰자(중도매인 고유번호)를 <strong>볼 수 없게</strong> 비공개하고,<br>최고가격으로 낙찰 후 낙찰자/낙찰가격 공개</p>
+                                </div>
+                                <div class="evidence-item">
+                                    <span class="item-label">기대효과</span>
+                                    <p>경매사가 낙찰가격을 <strong class="green">임의 조정</strong>하거나 특정 응찰자에게 낙찰시키는<br><strong class="green">부정거래를 사전 방지</strong></p>
+                                </div>
+                                <div class="evidence-item">
+                                    <span class="item-label">타임라인</span>
+                                    <p>시스템 개편/교육 10월 → 시범 11월 → 본격 시행 연내</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="policy-row">
+                        <div class="policy-card">
+                            <h4>농식품부 추진</h4>
+                            <ul>
+                                <li>도매시장 분쟁조정(옴부즈만)</li>
+                                <li>분쟁조정위원회 의무화</li>
+                                <li>블라인드 경매 확대/의무화</li>
+                            </ul>
+                        </div>
+                        <div class="policy-card">
+                            <h4>반복 이슈</h4>
+                            <ul>
+                                <li>전자경매 투명성 강화 과제</li>
+                                <li>담합/불공정 기사·제재 사례</li>
+                                <li>정책이 괜히 나온 게 아님</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Solution -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title green">Solution</span>
+                    </div>
+                    <h2 class="slide-headline">솔루션: <span class="green">블라인드 경매 + 분쟁증빙 자동화</span></h2>
+
+                    <div class="module-row">
+                        <div class="module-card">
+                            <div class="module-num">1</div>
+                            <h4>AgriBlind™</h4>
+                            <p class="module-subtitle">블라인드 경매 엔진</p>
+                            <ul>
+                                <li>응찰자 ID → 익명 토큰화</li>
+                                <li>경매사 응찰자 정보 비가시</li>
+                                <li>낙찰 확정 후에만 매핑 가능</li>
+                            </ul>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-num">2</div>
+                            <h4>ProofPack™</h4>
+                            <p class="module-subtitle">분쟁 증빙 자동 생성</p>
+                            <ul>
+                                <li>변조 방지 로그(서명/해시 체인)</li>
+                                <li>이벤트 타임라인 자동 기록</li>
+                                <li>버튼 한 번으로 증빙 패키지</li>
+                            </ul>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-num">3</div>
+                            <h4>ClearNet™</h4>
+                            <p class="module-subtitle">대금정산/네팅 확장</p>
+                            <ul>
+                                <li>시장 간 정산 프라이버시</li>
+                                <li>FHE16로 민감 계산 보호</li>
+                                <li>스테이블코인 레일 확장성</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="message-box">
+                        <h4>고객이 바로 이해하는 메시지</h4>
+                        <div class="message-items">
+                            <p>"경매사가 응찰자 정보를 <strong>못 보게</strong> 시스템이 강제합니다."</p>
+                            <p>"낙찰 결과가 조작/시비 걸려도, 시스템이 <strong class="green">'증빙 패키지'</strong>를 자동으로 만들어 분쟁조정이 빨라집니다."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Architecture -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title green">Architecture</span>
+                    </div>
+                    <h2 class="slide-headline">아키텍처: <span class="green">"레거시를 갈아엎지 않는" Web2 방식</span></h2>
+
+                    <div class="core-principle">
+                        <span class="principle-icon">!</span>
+                        <strong>핵심: '교체'가 아니라 '사이드카(Plug-in)'로 진입</strong>
+                    </div>
+
+                    <p class="principle-desc">도매시장은 보수적이고, 이미 각 시장/법인마다 전자경매/정산 시스템이 돌아가고 있다.<br>따라서 <strong>"기존 경매시스템을 유지한 채"</strong> 필수 기능만 붙이는 방식</p>
+
+                    <div class="arch-flow">
+                        <div class="arch-step">
+                            <span class="step-num">1</span>
+                            <h4>Blind-ID Gateway</h4>
+                            <p>응찰자 ID를 익명 토큰화<br>경매사 ID 비가시</p>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-step">
+                            <span class="step-num">2</span>
+                            <h4>기존 경매 서버</h4>
+                            <p>익명 토큰으로 경매 진행<br>레거시 로직 그대로</p>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-step">
+                            <span class="step-num">3</span>
+                            <h4>ProofPack 엔진</h4>
+                            <p>이벤트 로그 서명/해시<br>증빙 자동 생성</p>
+                        </div>
+                        <div class="arch-arrow">→</div>
+                        <div class="arch-step">
+                            <span class="step-num">4</span>
+                            <h4>Ombudsman Console</h4>
+                            <p>분쟁 접수/처리 워크플로우<br>감사/평가 연동</p>
+                        </div>
+                    </div>
+
+                    <div class="risk-mitigation">
+                        <h4>고객이 느끼는 리스크 해소</h4>
+                        <div class="risk-items">
+                            <span>"운영이 멈추나?" → 아니오 (사이드카)</span>
+                            <span>"데이터 외부 반출?" → 온프렘/폐쇄망 설치 가능</span>
+                            <span>"분쟁 책임?" → 증빙 패키지로 명확화</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: FHE16 Application -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title green">FHE16 Application</span>
+                    </div>
+                    <h2 class="slide-headline">FHE16은 <span class="green">"여기서"</span> 필요하다 — latency 허용 구간에만</h2>
+
+                    <div class="fhe-principle">
+                        <span class="fhe-icon">!</span>
+                        <strong>"무조건 FHE"가 아니라, 'FHE가 필요한 지점'에만 적용해야 사업성</strong>
+                    </div>
+
+                    <div class="fhe-grid">
+                        <div class="fhe-card">
+                            <div class="fhe-num">1</div>
+                            <h4>블라인드 "최고가 결정" 증명</h4>
+                            <p class="fhe-diff">단순 "ID 숨김"만이면 차별화 약함</p>
+                            <ul>
+                                <li>응찰값을 암호화해 제출</li>
+                                <li>서버는 <strong>암호문 상태</strong>로 비교/최대값 계산</li>
+                                <li>optimistic proof로 이의제기 시 검증 강화</li>
+                            </ul>
+                            <p class="fhe-note">경매는 로트 단위라 수백ms~수초 허용 가능</p>
+                        </div>
+                        <div class="fhe-card">
+                            <div class="fhe-num">2</div>
+                            <h4>대금정산조직 네팅/한도 계산</h4>
+                            <p class="fhe-diff">참여자 거래·포지션 노출 시 참여 꺼림</p>
+                            <ul>
+                                <li>순정산액/한도 초과/담보요구만 공개</li>
+                                <li>원본 거래 데이터는 비가시</li>
+                                <li>온라인 확대 정책 목표와 정합</li>
+                            </ul>
+                            <p class="fhe-note">스테이블코인 정산 레일까지 연결 가능</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Value Proposition -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title green">Value Proposition</span>
+                    </div>
+                    <h2 class="slide-headline">고객 가치: <span class="green">B(시간) + A(비용)</span>으로 먼저 증명 → C(수익)로 확장</h2>
+
+                    <div class="value-grid">
+                        <div class="value-card">
+                            <div class="value-icon time">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h4>B. 시간 단축</h4>
+                            <p class="value-primary">가장 설득 쉬움</p>
+                            <ul>
+                                <li>분쟁 발생 시 "자료 수집" → 자동 증빙</li>
+                                <li>처리 리드타임: 일/주 → <strong class="green">시간 단위</strong></li>
+                                <li>옴부즈만/위원회 도입 시 즉시 필요</li>
+                            </ul>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon down">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <polyline points="19,12 12,19 5,12"></polyline>
+                                </svg>
+                            </div>
+                            <h4>A. 비용 절감</h4>
+                            <p class="value-primary">정산/분쟁/정정 비용</p>
+                            <ul>
+                                <li>운영 인력 투입 감소</li>
+                                <li>판매원표 정정 처리 비용↓</li>
+                                <li>법적 분쟁/민원 대응 비용↓</li>
+                            </ul>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon up">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                                    <polyline points="5,12 12,5 19,12"></polyline>
+                                </svg>
+                            </div>
+                            <h4>C. 거래량 증가</h4>
+                            <p class="value-primary">신뢰 → 참여 확대</p>
+                            <ul>
+                                <li>온라인 판매자 149→1,136 급증</li>
+                                <li>신뢰가 참여 장벽 낮춤</li>
+                                <li>거래액 성장 레버리지</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="kpi-reference">
+                        <p>온라인도매시장 실적: <strong class="green">유통비용률 7.4%p 감소</strong> — 정부가 '비용 절감'에 돈 쓰는 명분이 이미 존재</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Competition -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title green">Competition</span>
+                    </div>
+                    <h2 class="slide-headline">경쟁: <span class="green">존재한다</span> — 그래서 포지셔닝이 핵심</h2>
+
+                    <div class="comp-grid">
+                        <div class="comp-card">
+                            <h4>경쟁군: SaaS 경매 플랫폼</h4>
+                            <p class="comp-players">에이콘컴퍼니(우림인포텍), 온라인도매시장(KAFB2B) 등</p>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>편의성/비대면/영상/AI 가격예측</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>블라인드/분쟁조정은 "운영 정책/권한 통제" 수준<br>조작 시비를 완전히 잠재우기 어려움</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="our-diff">
+                        <h4>우리 차별점 (Wedge)</h4>
+                        <div class="diff-comparison">
+                            <div class="diff-them">
+                                <span class="diff-label">경쟁사</span>
+                                <p>"경매를 온라인으로 한다"</p>
+                            </div>
+                            <div class="diff-vs">VS</div>
+                            <div class="diff-us">
+                                <span class="diff-label green">우리</span>
+                                <p>"경매가 <strong>공정했음을 증명</strong>하고,<br>분쟁을 없애는 <strong>운영체계</strong>"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="diff-items-row">
+                        <span class="diff-tag">"응찰자 비공개" 시스템 강제</span>
+                        <span class="diff-plus">+</span>
+                        <span class="diff-tag">"증빙 자동 생성" (cryptographic)</span>
+                        <span class="diff-plus">+</span>
+                        <span class="diff-tag">"분쟁조정 워크플로우" 포함</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: GTM Strategy -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title green">GTM Strategy</span>
+                    </div>
+                    <h2 class="slide-headline">GTM: <span class="green">"블라인드 경매 시스템 개편"</span>이 진행되는 시장부터</h2>
+
+                    <div class="gtm-main">
+                        <div class="gtm-target">
+                            <h4>첫 타깃: 대전 노은도매시장</h4>
+                            <ul>
+                                <li>"왜 해야 하는지" 이미 결정됨</li>
+                                <li>"언제까지" 타임라인 존재</li>
+                                <li>"시스템 개편"이 예산/발주로 이어질 확률 높음</li>
+                            </ul>
+                            <div class="gtm-message">
+                                <strong>핵심 메시지:</strong> "지금 하는 개편을 <strong class="green">분쟁 없이, 감사 가능한 형태</strong>로 끝내게 해준다"
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="section-title">판매 방식: '교체'가 아니라 '부착'</h4>
+                    <div class="sales-flow">
+                        <div class="sales-step">
+                            <span class="step-label">기존 유지</span>
+                            <p>경매/정산 시스템</p>
+                        </div>
+                        <div class="sales-plus">+</div>
+                        <div class="sales-step highlight">
+                            <span class="step-label green">우리 제공</span>
+                            <p>Blind-ID Gateway<br>ProofPack<br>Ombudsman Console</p>
+                        </div>
+                        <div class="sales-arrow">→</div>
+                        <div class="sales-step">
+                            <span class="step-label">연동 방식</span>
+                            <p>API/프록시<br>온프렘/폐쇄망</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Revenue Model -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title green">Revenue Model</span>
+                    </div>
+                    <h2 class="slide-headline">수익 모델: <span class="green">1년 내 매출</span>을 위한 현실적 구조</h2>
+
+                    <div class="revenue-flow">
+                        <div class="revenue-step">
+                            <div class="revenue-num">1</div>
+                            <h4>유상 파일럿</h4>
+                            <p>3~4개월, 최소 기능</p>
+                            <span class="revenue-value">2,000~5,000만원</span>
+                        </div>
+                        <div class="revenue-arrow">→</div>
+                        <div class="revenue-step">
+                            <div class="revenue-num">2</div>
+                            <h4>연간 사용료</h4>
+                            <p>+ 유지보수</p>
+                            <span class="revenue-value">월 800만원~</span>
+                        </div>
+                        <div class="revenue-arrow">→</div>
+                        <div class="revenue-step">
+                            <div class="revenue-num">3</div>
+                            <h4>정책사업 연계</h4>
+                            <p>유통구조 개선/시설현대화</p>
+                            <span class="revenue-value">지자체/농식품부</span>
+                        </div>
+                    </div>
+
+                    <div class="contract-structure">
+                        <h4>계약 구조 (1년 내 매출)</h4>
+                        <div class="contract-grid">
+                            <div class="contract-item">
+                                <span class="contract-label">파일럿</span>
+                                <p>유상 3~4개월<br>블라인드 + 증빙 자동</p>
+                            </div>
+                            <div class="contract-item">
+                                <span class="contract-label">전환</span>
+                                <p>연간 사용료 + 유지보수</p>
+                            </div>
+                            <div class="contract-item">
+                                <span class="contract-label">확장</span>
+                                <p>정책사업 제안<br>블라인드/분쟁조정/정산 모듈</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Roadmap -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title green">12-Month Roadmap</span>
+                    </div>
+                    <h2 class="slide-headline">12개월 로드맵: <span class="green">1년 내 매출 목표</span></h2>
+
+                    <div class="roadmap-grid">
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 1</span>
+                                <span class="phase-period">0~3개월</span>
+                            </div>
+                            <h4>MVP</h4>
+                            <ul>
+                                <li>Blind-ID Gateway (응찰자 비공개)</li>
+                                <li>ProofPack (변조 방지 로그 + 증빙)</li>
+                                <li>관리자 UI (간단)</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 2</span>
+                                <span class="phase-period">3~6개월</span>
+                            </div>
+                            <h4>유상 파일럿</h4>
+                            <ul>
+                                <li>1개 시장/법인에서 병행 운영</li>
+                                <li>로트 1~2개 라인 Shadow → Cutover</li>
+                                <li>처리 리드타임 단축 데이터 확보</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 3</span>
+                                <span class="phase-period">6~12개월</span>
+                            </div>
+                            <h4>확장</h4>
+                            <ul>
+                                <li>Ombudsman Console 고도화</li>
+                                <li>대금정산조직 모듈 설계</li>
+                                <li>2~3개 시장으로 확대</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-kpis">
+                        <h4>목표 KPI</h4>
+                        <div class="kpi-items">
+                            <span>분쟁 처리 시간 90%↓</span>
+                            <span>정정 건수 50%↓</span>
+                            <span>민원 대응 비용↓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Risk & Mitigation -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title green">Risks & Mitigation</span>
+                    </div>
+                    <h2 class="slide-headline">리스크 & 대응 <span class="green">(솔직하게)</span></h2>
+
+                    <div class="risk-grid">
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">1</span>
+                                <h4>기존 SaaS 경매업체가 다 먹는 거 아냐?</h4>
+                            </div>
+                            <div class="risk-content">
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>플랫폼이 아니라 <strong class="green">정책 필수 기능의 '엔진/모듈'</strong>로 포지셔닝</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">2</span>
+                                <h4>FHE가 느려서 현장 경매에 안 맞으면?</h4>
+                            </div>
+                            <div class="risk-content">
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>'핵심 검증/정산/민감 계산'에만 제한적 사용,<br>실시간 호가 UI는 기존 방식 유지</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">3</span>
+                                <h4>공공시장 도입까지 절차가 길다</h4>
+                            </div>
+                            <div class="risk-content">
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>① 유상 파일럿 (작게)<br>② 온프렘/사이드카 (리스크 최소)<br>③ 정책 타임라인이 잡힌 시장 (예: 노은)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Why Now -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title green">Why Now</span>
+                    </div>
+                    <h2 class="slide-headline">왜 <span class="green">지금 당장</span> 돈이 되나?</h2>
+
+                    <div class="why-now-main">
+                        <div class="why-now-box">
+                            <h4>정책이 '해야 한다'를 만들어주는 시장</h4>
+                            <div class="why-now-facts">
+                                <div class="fact-item">
+                                    <span class="fact-icon green">✓</span>
+                                    <p>온라인도매시장 2024년 <strong>6,737억원</strong> 거래, 2025년 <strong>1조 목표</strong></p>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon green">✓</span>
+                                    <p>유통비용률 <strong>7.4%p 감소</strong> 성과 — 정부 KPI로 제시</p>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon green">✓</span>
+                                    <p><strong>블라인드 경매 확대/의무화, 분쟁조정 체계</strong> 추진</p>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon green">✓</span>
+                                    <p>노은도매시장처럼 <strong>실제 시스템 개편 진행</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="conclusion-box">
+                        <p class="conclusion-text">
+                            <strong>고객이 "원해서"</strong> + <strong>정부가 "시키는"</strong> 지점이 생겼다.<br>
+                            이때 <span class="green">"증빙 자동화 + 검증 가능 블라인드"</span>는 <strong>필수 도구</strong>가 된다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Summary + Ask -->
+            <div class="slide" data-slide="15">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">14</span>
+                        <span class="slide-title green">Summary + Ask</span>
+                    </div>
+                    <h2 class="slide-headline">핵심 질문 4개에 대한 <span class="green">"한방 답"</span></h2>
+
+                    <div class="qa-grid">
+                        <div class="qa-card">
+                            <span class="qa-num">Q1</span>
+                            <h4>마켓 사이즈 큰가?</h4>
+                            <p>공영도매시장 32개, 청과 ~15조원<br>온라인도매시장 6,737억('24) → 1조('25)</p>
+                        </div>
+                        <div class="qa-card">
+                            <span class="qa-num">Q2</span>
+                            <h4>문제가 실존하나?</h4>
+                            <p>옴부즈만/블라인드 경매 확대 추진<br>노은도매시장 시스템 개편 진행 중</p>
+                        </div>
+                        <div class="qa-card">
+                            <span class="qa-num">Q3</span>
+                            <h4>코스트/시간/이익?</h4>
+                            <p>1차: 시간↓ + 비용↓<br>2차: 신뢰 → 거래량↑</p>
+                        </div>
+                        <div class="qa-card">
+                            <span class="qa-num">Q4</span>
+                            <h4>경쟁 대비?</h4>
+                            <p>플랫폼 X, 공정성 증명 엔진 O<br>분쟁조정 증빙 자동화로 차별화</p>
+                        </div>
+                    </div>
+
+                    <div class="final-tagline">
+                        <p>"경매를 온라인으로 하는 게 아니라,<br><strong class="green">경매가 공정했음을 증명하고 분쟁을 없애는 운영체계</strong>를 제공합니다."</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <p>Contact: <strong>AgriBlind Team</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

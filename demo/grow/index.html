@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriBlind Demo | 도매시장 블라인드 경매 시뮬레이션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🌾</span>
+                <span class="logo-text">AgriBlind</span>
+                <span class="logo-badge">DEMO</span>
+            </div>
+            <div class="header-info">
+                <span class="crypto-badge">Blind-ID + ProofPack (FHE 시뮬레이션)</span>
+                <span class="status-indicator">
+                    <span class="status-dot"></span>
+                    시스템 정상
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel: Auction Setup -->
+            <div class="panel auction-panel">
+                <div class="panel-header">
+                    <h2>경매 정보</h2>
+                    <button class="btn btn-sm" onclick="resetDemo()">초기화</button>
+                </div>
+
+                <!-- Lot Info -->
+                <div class="lot-card">
+                    <div class="lot-header">
+                        <div class="lot-info">
+                            <span class="lot-badge">LOT</span>
+                            <div>
+                                <h3 id="lotName">사과 (부사) 10kg</h3>
+                                <p class="lot-details">산지: 경북 영주 | 등급: 특</p>
+                            </div>
+                        </div>
+                        <span class="lot-status" id="lotStatus">경매 대기</span>
+                    </div>
+                    <div class="lot-body">
+                        <div class="lot-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">시작가</span>
+                                <span class="stat-value" id="startPrice">50,000원</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">수량</span>
+                                <span class="stat-value" id="lotQuantity">100상자</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">예상가</span>
+                                <span class="stat-value" id="expectedPrice">55,000원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bidders (Blind) -->
+                <div class="bidders-section">
+                    <h3>응찰자 (중도매인)</h3>
+                    <p class="blind-notice">⚠️ 경매사에게 <strong>ID 비공개</strong> — 익명 토큰만 표시</p>
+
+                    <div class="bidder-list" id="bidderList">
+                        <div class="bidder-card" data-bidder="1">
+                            <span class="bidder-token">🔒 ANON-7X9K</span>
+                            <span class="bidder-status pending">대기</span>
+                        </div>
+                        <div class="bidder-card" data-bidder="2">
+                            <span class="bidder-token">🔒 ANON-3M2P</span>
+                            <span class="bidder-status pending">대기</span>
+                        </div>
+                        <div class="bidder-card" data-bidder="3">
+                            <span class="bidder-token">🔒 ANON-8Q5R</span>
+                            <span class="bidder-status pending">대기</span>
+                        </div>
+                        <div class="bidder-card" data-bidder="4">
+                            <span class="bidder-token">🔒 ANON-1Y6T</span>
+                            <span class="bidder-status pending">대기</span>
+                        </div>
+                        <div class="bidder-card" data-bidder="5">
+                            <span class="bidder-token">🔒 ANON-4W8N</span>
+                            <span class="bidder-status pending">대기</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Auction Controls -->
+                <div class="auction-controls">
+                    <button class="btn btn-primary btn-large" id="startAuctionBtn" onclick="startAuction()">
+                        <span class="btn-icon">🔔</span>
+                        경매 시작
+                    </button>
+                </div>
+            </div>
+
+            <!-- Center Panel: Auction Progress -->
+            <div class="panel progress-panel">
+                <div class="panel-header">
+                    <h2>경매 진행</h2>
+                </div>
+
+                <!-- Current Bid Display -->
+                <div class="bid-display">
+                    <div class="current-bid-box" id="currentBidBox">
+                        <span class="bid-label">현재 최고가</span>
+                        <span class="bid-value" id="currentBid">-</span>
+                        <span class="bid-bidder" id="currentBidder">응찰 대기 중</span>
+                    </div>
+                </div>
+
+                <!-- Bid Log (Encrypted) -->
+                <div class="bid-log-section">
+                    <div class="section-header">
+                        <h3>🔐 응찰 로그 (암호화)</h3>
+                        <span class="section-badge">변조 방지</span>
+                    </div>
+                    <div class="bid-log" id="bidLog">
+                        <p class="log-placeholder">경매 시작 후 응찰 내역이 기록됩니다</p>
+                    </div>
+                </div>
+
+                <!-- Winner Reveal -->
+                <div class="winner-section" id="winnerSection" style="display: none;">
+                    <div class="section-header">
+                        <h3>🏆 낙찰 결과</h3>
+                        <span class="section-badge">ID 공개</span>
+                    </div>
+                    <div class="winner-box" id="winnerBox">
+                        <!-- Winner info will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- ProofPack -->
+                <div class="proof-section">
+                    <div class="section-header">
+                        <h3>🔏 ProofPack (증빙 패킷)</h3>
+                        <span class="section-badge">감사/분쟁 대응</span>
+                    </div>
+                    <div class="proof-pack" id="proofPack">
+                        <p class="proof-placeholder">경매 완료 후 증빙이 생성됩니다</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Ombudsman & Verification -->
+            <div class="panel results-panel">
+                <div class="panel-header">
+                    <h2>분쟁조정 & 검증</h2>
+                </div>
+
+                <!-- Challenge Protocol -->
+                <div class="result-section">
+                    <h3>⚖️ 이의제기 (Challenge)</h3>
+                    <div class="challenge-box" id="challengeBox">
+                        <p class="challenge-placeholder">낙찰 확정 후 이의제기 가능</p>
+                    </div>
+                </div>
+
+                <!-- Verification -->
+                <div class="result-section">
+                    <h3>🔍 결과 검증</h3>
+                    <div class="verification-box">
+                        <button class="btn btn-verify" id="verifyBtn" onclick="verifyResult()" disabled>
+                            <span class="btn-icon">✓</span>
+                            ProofPack 검증
+                        </button>
+                        <div class="verification-result" id="verificationResult">
+                            <p class="verify-placeholder">경매 후 검증 가능</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Bidder Info (Admin View) -->
+                <div class="result-section">
+                    <h3>🔓 실제 응찰자 정보</h3>
+                    <p class="admin-notice">※ 관리자/감사위원 전용 — 낙찰 확정 후 공개</p>
+                    <div class="real-bidder-box" id="realBidderBox">
+                        <p class="bidder-placeholder">경매 완료 후 매핑 가능</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="result-section">
+                    <h3>📈 효과 요약</h3>
+                    <div class="stats-grid" id="statsGrid">
+                        <div class="stat-item">
+                            <span class="stat-label">조작 가능성</span>
+                            <span class="stat-value" id="statManipulation">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">분쟁 처리</span>
+                            <span class="stat-value" id="statDispute">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">증빙 생성</span>
+                            <span class="stat-value" id="statProof">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">투명성</span>
+                            <span class="stat-value" id="statTransparency">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AgriBlind Demo v1.0 | 도매시장 블라인드 경매 + 분쟁증빙 자동화</p>
+            <p class="footer-note">※ 경매사가 응찰자 정보를 볼 수 없게 시스템이 강제합니다</p>
+        </footer>
+    </div>
+
+    <!-- Modal: Challenge -->
+    <div class="modal" id="challengeModal">
+        <div class="modal-content modal-wide">
+            <div class="modal-header">
+                <h3>⚖️ 이의제기 (Challenge)</h3>
+                <button class="modal-close" onclick="closeChallengeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="challengeModalBody">
+                <!-- Challenge content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Admin Reveal -->
+    <div class="modal" id="revealModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔓 응찰자 ID 매핑</h3>
+                <button class="modal-close" onclick="closeRevealModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="revealModalBody">
+                <!-- Reveal content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
