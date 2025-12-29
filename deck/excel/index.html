@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RebateProof | ERP/리베이트/TPM 사이드카 검증 레이어</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 15</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="deco-top"></div>
+                    <div class="deco-bottom"></div>
+                    <div class="version-tag">2025.ver</div>
+                    <p class="pre-headline">ERP/TPM을 "교체"하지 않고, 제조사-총판-리테일 간 리베이트/판촉비 정산을</p>
+                    <h1 class="main-headline">
+                        <span class="orange">원장 공개 없이</span><br>
+                        <span class="orange">합의 가능</span>하게 만드는
+                    </h1>
+                    <p class="sub-headline">RebateProof</p>
+                    <div class="tagline-bar">
+                        검증·증빙 레이어 (SaaS + 온프렘/벤더 실행 모드)
+                    </div>
+                    <div class="flow-row">
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <span>Rule Pack</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <span>FHE Compute</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-box">
+                            <div class="flow-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9,12 11,14 15,10"></polyline>
+                                </svg>
+                            </div>
+                            <span>Proof Pack</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Executive Summary -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title orange">Executive Summary</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="orange">한 줄 요약:</span> 정산 자동화가 아니라 <span class="orange">"합의 자동화"</span></h2>
+
+                    <div class="summary-box">
+                        <p class="summary-text">
+                            RebateProof는 ERP/TPM을 <strong>"교체"하지 않고</strong>,<br>
+                            제조사-총판-리테일(또는 본사-대리점) 간<br>
+                            <span class="orange">리베이트/판매장려금/판촉비 정산</span>을<br>
+                            <strong>"원장 공개 없이도" 합의 가능</strong>하게 만드는<br>
+                            검증·증빙 레이어(SaaS+온프렘/벤더 실행 모드)
+                        </p>
+                    </div>
+
+                    <div class="benefit-row">
+                        <div class="benefit-card">
+                            <div class="benefit-icon orange-bg">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h4>고객 가치</h4>
+                            <p>정산 리드타임 단축<br>분쟁/과지급 비용 절감</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon orange-bg">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                            </div>
+                            <h4>채널 전략</h4>
+                            <p>기존 SI/BPO/ERP 파트너 채널로<br>1년 내 유료 PoC→구독 매출</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Problem -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title orange">Problem</span>
+                    </div>
+                    <h2 class="slide-headline">왜 이게 <span class="orange">"엑셀 검수"</span>랑 다르냐</h2>
+
+                    <div class="problem-banner">
+                        <span class="problem-icon">!</span>
+                        <span>고객이 자동화 못 하는 이유는 <strong>"수식"</strong>이 아니라 <strong class="orange">신뢰 경계(Trust Boundary)</strong></span>
+                    </div>
+
+                    <div class="card-row-2">
+                        <div class="card large">
+                            <h4>리베이트/판촉비 정산은 계산 자체는 엑셀로도 가능</h4>
+                            <p class="muted">하지만 실제 병목은...</p>
+                        </div>
+                    </div>
+
+                    <div class="card-row-3">
+                        <div class="card">
+                            <div class="card-num">1</div>
+                            <h4>A(지급자) 문제</h4>
+                            <p>B(수령자)의 sell-out/반품/할인 원장을<br><strong class="orange">못 받거나 못 믿음</strong> (영업기밀)</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-num">2</div>
+                            <h4>B(수령자) 문제</h4>
+                            <p>A의 조건/예외/단가 정책을<br><strong class="orange">납득하기 어려움</strong></p>
+                        </div>
+                        <div class="card">
+                            <div class="card-num">3</div>
+                            <h4>결과</h4>
+                            <p>"메일+엑셀+표본감사+재계산" 반복<br>→ <strong class="orange">정산 지연/분쟁/과지급</strong> 구조적</p>
+                        </div>
+                    </div>
+
+                    <div class="insight-banner">
+                        <strong>즉, "엑셀로 계산"이 아니라 "회사 vs 회사 사이에서 원장 공개 없이 합의/검증 가능한 정산"이 제품이 될 수 있는 지점</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: ICP & Pain -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title orange">Target Customer</span>
+                    </div>
+                    <h2 class="slide-headline">타깃 고객 <span class="orange">(ICP)</span> & 당장 존재하는 <span class="orange">Pain</span></h2>
+
+                    <div class="two-col">
+                        <div class="col-left">
+                            <h4 class="col-title">ICP (1년 내 유료 PoC 가능)</h4>
+                            <div class="icp-list">
+                                <div class="icp-item">
+                                    <span class="icp-num">1</span>
+                                    <p>거래처(대리점/총판/리테일) 수가 <strong>많고</strong></p>
+                                </div>
+                                <div class="icp-item">
+                                    <span class="icp-num">2</span>
+                                    <p>리베이트/판촉비 조건이 <strong>복잡</strong><br>(티어/기간/SKU/예외)</p>
+                                </div>
+                                <div class="icp-item">
+                                    <span class="icp-num">3</span>
+                                    <p>정산 분쟁/차감(Deduction)/클레임이<br><strong>반복</strong>되는 중견 제조·유통사</p>
+                                </div>
+                            </div>
+
+                            <h4 class="col-title mt-20">구매 주체 (Buying Center)</h4>
+                            <div class="buyer-tags">
+                                <span>재무/회계 (정산·채권·마감)</span>
+                                <span>영업기획/Trade Marketing</span>
+                                <span>내부감사 (감사 대응)</span>
+                            </div>
+                        </div>
+                        <div class="col-right">
+                            <h4 class="col-title">고객이 "뼈저리게" 느끼는 KPI</h4>
+                            <div class="kpi-grid">
+                                <div class="kpi-item">
+                                    <div class="kpi-icon">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="M12 6v6l4 2"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-text">
+                                        <strong>정산 리드타임</strong>
+                                        <p>월/분기 마감까지 며칠/몇 주</p>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-icon">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-text">
+                                        <strong>분쟁/재계산 건수</strong>
+                                        <p>이메일 왕복/표본 검증/재계산</p>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-icon">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-text">
+                                        <strong>과지급/누락</strong>
+                                        <p>"알 수 없는 차감/클레임" 규모</p>
+                                    </div>
+                                </div>
+                                <div class="kpi-item">
+                                    <div class="kpi-icon">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-text">
+                                        <strong>인력 투입 시간</strong>
+                                        <p>월말/분기말 집중</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Product Definition -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title orange">Product</span>
+                    </div>
+                    <h2 class="slide-headline">제품 정의: <span class="orange">교체형 X</span> / <span class="orange">부착형 O</span></h2>
+
+                    <div class="position-row">
+                        <div class="position-box">
+                            <h4>ERP/TPM (기존)</h4>
+                            <p class="position-label">SoR</p>
+                            <p class="position-desc">System of Record</p>
+                        </div>
+                        <div class="position-vs">VS</div>
+                        <div class="position-box highlight">
+                            <h4>RebateProof (우리)</h4>
+                            <p class="position-label orange">SoT</p>
+                            <p class="position-desc">System of Truth / Proof</p>
+                        </div>
+                    </div>
+
+                    <p class="position-summary">기존 시스템은 그대로 두고, <strong>"정산 결과가 맞는지"</strong>를 원장 공개 없이도 검증/증빙하는 레이어</p>
+
+                    <h4 class="section-title">코어 모듈 (최소 3개)</h4>
+                    <div class="module-row">
+                        <div class="module-card">
+                            <div class="module-num">1</div>
+                            <h4>Rule Pack</h4>
+                            <p class="module-subtitle">정산 룰의 "고정"</p>
+                            <ul>
+                                <li>계약/프로모션 조건을 룰(JSON/DSL)로 표준화</li>
+                                <li>룰 해시(버전)로 "이번 정산은 이 룰로 계산"을 고정</li>
+                            </ul>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-num">2</div>
+                            <h4>Confidential Compute</h4>
+                            <p class="module-subtitle">FHE16 적용 구간</p>
+                            <ul>
+                                <li>민감 필드(단가/수량/마진/특약)만 암호문 상태로 계산</li>
+                                <li>나머지 키는 해시/토큰화로 최소 노출</li>
+                            </ul>
+                        </div>
+                        <div class="module-card">
+                            <div class="module-num">3</div>
+                            <h4>Proof Pack</h4>
+                            <p class="module-subtitle">분쟁/감사 대응 증빙</p>
+                            <ul>
+                                <li>룰 해시, 입력 커밋(해시), 실행 ID, 환경 다이제스트</li>
+                                <li>(선택) 이의제기 시 최소 공개로 검증 가능</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: How it Works -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title orange">How it Works</span>
+                    </div>
+                    <h2 class="slide-headline">"벤더가 연산"하는 현실 시나리오 <span class="orange">(GTM 쉬운 구조)</span></h2>
+
+                    <div class="core-principle">
+                        <span class="principle-icon">!</span>
+                        <strong>핵심: 원문 데이터는 절대 우리에게 오지 않음</strong>
+                    </div>
+
+                    <p class="principle-desc">연산은 고객이 이미 신뢰하는 운영 벤더(SI/BPO/정산대행)가 수행하고,<br>우리는 <strong>"엔진/컨테이너/에이전트"</strong>만 공급</p>
+
+                    <h4 class="section-title">참여자</h4>
+                    <div class="participant-row">
+                        <div class="participant">
+                            <span class="participant-label">A</span>
+                            <p>지급자<br><small>제조사/브랜드사</small></p>
+                        </div>
+                        <div class="participant">
+                            <span class="participant-label">B</span>
+                            <p>수령자<br><small>총판/대리점/리테일</small></p>
+                        </div>
+                        <div class="participant">
+                            <span class="participant-label">V</span>
+                            <p>운영 벤더<br><small>ERP/SI/BPO/정산대행</small></p>
+                        </div>
+                        <div class="participant highlight">
+                            <span class="participant-label orange-bg">Us</span>
+                            <p>FHE16 엔진<br><small>+ 로컬 암호화 에이전트</small></p>
+                        </div>
+                    </div>
+
+                    <h4 class="section-title">데이터 흐름</h4>
+                    <div class="flow-steps">
+                        <div class="flow-step">
+                            <span class="step-num">1</span>
+                            <p>A/B 각 사에서 ERP/정산시스템에서 데이터 추출</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">2</span>
+                            <p>로컬 에이전트가: 표준 스키마 변환 → 민감 필드 암호화(FHE) → 서명/커밋 생성</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">3</span>
+                            <p>A/B는 <strong>암호화 패키지만</strong> V에게 전달 (원문은 밖으로 안 나감)</p>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-num">4</span>
+                            <p>V는 자신의 인프라에서 우리 컨테이너를 실행</p>
+                        </div>
+                        <div class="flow-step highlight">
+                            <span class="step-num">5</span>
+                            <p><strong>출력:</strong> 정산 결과 + Proof Pack (감사/분쟁 대응)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Value Proposition -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title orange">Value Proposition</span>
+                    </div>
+                    <h2 class="slide-headline">고객 가치 제안 <span class="orange">(ROI 스토리)</span> — "암호학"이 아니라 <span class="orange">"돈/시간"</span></h2>
+
+                    <div class="value-grid">
+                        <div class="value-card">
+                            <div class="value-icon down">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <polyline points="19,12 12,19 5,12"></polyline>
+                                </svg>
+                            </div>
+                            <h4>비용 절감</h4>
+                            <ul>
+                                <li>과지급/누락 감소 (합의 빠름, 오류 줄어듦)</li>
+                                <li>분쟁 처리 비용 감소 (메일 왕복/재계산/표본감사)</li>
+                                <li>정산 인력 투입 시간 감소</li>
+                            </ul>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon time">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h4>시간 단축</h4>
+                            <ul>
+                                <li>월/분기 정산 마감 리드타임 단축</li>
+                                <li>"상대 원장 요구 → 거부 → 표본검증 → 재계산" 루프 감소</li>
+                            </ul>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon up">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                                    <polyline points="5,12 12,5 19,12"></polyline>
+                                </svg>
+                            </div>
+                            <h4>수익/현금흐름</h4>
+                            <ul>
+                                <li>정산 지연 해소로 미지급/미수금 꼬임 완화</li>
+                                <li>채널 인센티브 집행 빨라져 채널 성과 관리 용이</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tagline-bottom">
+                        <p>"엑셀 계산을 자동화하는 게 아니라, <strong>'원장을 공유할 수 없어서 자동화가 안 되던 회사-회사 간 정산 합의'</strong>를<br>FHE16으로 가능하게 만들어 분쟁과 마감 시간을 줄입니다."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Competition -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title orange">Competition</span>
+                    </div>
+                    <h2 class="slide-headline">경쟁 환경: <span class="orange">정면승부 피하고, 빈틈을 찌르는 포지션</span></h2>
+
+                    <div class="comp-grid">
+                        <div class="comp-card">
+                            <h4>경쟁군 A: 전체 TPM/RGM/리베이트 스위트</h4>
+                            <p class="comp-players">SAP / Salesforce / Vistex / Model N / Enable</p>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>운영 워크플로우/통합/대기업 레퍼런스</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>도입 무겁고 느림 (교체 프로젝트)<br>데이터가 벤더/플랫폼에 들어가야 함<br>"원장 비공개 정산 검증"은 핵심 USP 아님</span>
+                            </div>
+                        </div>
+                        <div class="comp-card">
+                            <h4>경쟁군 B: 엑셀 + 내부 자동화 + SI 커스터마이징</h4>
+                            <p class="comp-players">현실의 대부분</p>
+                            <div class="comp-row">
+                                <span class="label green">강점</span>
+                                <span>기존 프로세스 유지 가능</span>
+                            </div>
+                            <div class="comp-row">
+                                <span class="label red">약점</span>
+                                <span>신뢰 경계 때문에 "합의/검증" 자동화 안 됨<br>사람/메일/표본검증이 끝까지 남음</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="our-diff">
+                        <h4>우리 차별점 (한 줄)</h4>
+                        <div class="diff-items">
+                            <span class="diff-tag">"교체가 아니라 부착"</span>
+                            <span class="diff-plus">+</span>
+                            <span class="diff-tag">"원문 비가시 계산 (FHE16)"</span>
+                            <span class="diff-plus">+</span>
+                            <span class="diff-tag">"분쟁/감사용 Proof Pack 표준화"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: GTM Strategy -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title orange">GTM Strategy</span>
+                    </div>
+                    <h2 class="slide-headline">GTM 전략: <span class="orange">"파트너 채널 + 유료 파일럿"</span>으로 1년 매출</h2>
+
+                    <div class="two-col">
+                        <div class="col-left">
+                            <h4 class="col-title">1차 채널 (가장 현실적)</h4>
+                            <div class="channel-list">
+                                <div class="channel-item">
+                                    <span class="channel-icon">1</span>
+                                    <p>ERP/SAP B1 파트너·SI</p>
+                                </div>
+                                <div class="channel-item">
+                                    <span class="channel-icon">2</span>
+                                    <p>Salesforce/CRM SI</p>
+                                </div>
+                                <div class="channel-item">
+                                    <span class="channel-icon">3</span>
+                                    <p>재무 BPO/정산대행</p>
+                                </div>
+                                <div class="channel-item">
+                                    <span class="channel-icon">4</span>
+                                    <p>TPM/리베이트 구축 컨설팅/운영 조직</p>
+                                </div>
+                            </div>
+                            <div class="channel-reason">
+                                <p><strong>이유:</strong> 고객사 레거시를 바꾸기 싫어하니,<br>"이미 고객 운영을 맡는 벤더"가 도입 주체가 되면 훨씬 빠름</p>
+                            </div>
+                        </div>
+                        <div class="col-right">
+                            <h4 class="col-title">판매 패키지</h4>
+                            <div class="package-card">
+                                <div class="package-badge">1</div>
+                                <h4>유료 "Proof Pilot" (4~6주)</h4>
+                                <ul>
+                                    <li><strong>범위:</strong> 특정 1개 리베이트 프로그램/채널/기간</li>
+                                    <li><strong>산출물:</strong> 정산 결과 + Proof Pack + 분쟁 대응 시나리오</li>
+                                    <li><strong>가격:</strong> 2,000만~5,000만원</li>
+                                </ul>
+                            </div>
+                            <div class="package-card">
+                                <div class="package-badge">2</div>
+                                <h4>구독 전환 (월/연간)</h4>
+                                <ul>
+                                    <li><strong>월 과금:</strong> 프로그램 수/거래처 수/정산 건수 기준</li>
+                                    <li><strong>엔터프라이즈:</strong> V(벤더) 통해 OEM/리셀(수익쉐어)</li>
+                                </ul>
+                            </div>
+                            <div class="startup-solution">
+                                <p><strong>"스타트업인데 어떻게 뚫냐" 해결책:</strong><br>우리는 <strong class="orange">벤더의 부품(OEM 모듈)</strong>로 들어감</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Revenue Model -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title orange">Revenue Model</span>
+                    </div>
+                    <h2 class="slide-headline">수익 모델: <span class="orange">현실적으로 굴러가는 3단 구조</span></h2>
+
+                    <div class="revenue-flow">
+                        <div class="revenue-step">
+                            <div class="revenue-num">1</div>
+                            <h4>Proof Pilot (고정비)</h4>
+                            <p>초기 현금흐름/레퍼런스 확보</p>
+                            <span class="revenue-value">3,000만원/건</span>
+                        </div>
+                        <div class="revenue-arrow">→</div>
+                        <div class="revenue-step">
+                            <div class="revenue-num">2</div>
+                            <h4>SaaS 구독</h4>
+                            <p>월/연간 반복 매출 (ARR)</p>
+                            <span class="revenue-value">800만원/월</span>
+                        </div>
+                        <div class="revenue-arrow">→</div>
+                        <div class="revenue-step">
+                            <div class="revenue-num">3</div>
+                            <h4>벤더 채널 수익</h4>
+                            <p>리셀 마진 + 운영/구축 수수료</p>
+                            <span class="revenue-value">수익쉐어</span>
+                        </div>
+                    </div>
+
+                    <div class="target-section">
+                        <h4 class="section-title">권장 타깃 업종 (금융 아니어도 됨, Web2에서 바로 돈 나오는 쪽)</h4>
+                        <div class="target-grid">
+                            <div class="target-card">
+                                <h4>제약</h4>
+                                <p>도매상/병원/약국<br>인센티브·공제·리베이트</p>
+                            </div>
+                            <div class="target-card">
+                                <h4>건기식</h4>
+                                <p>대리점/리셀러 인센티브<br>채널 다층</p>
+                            </div>
+                            <div class="target-card">
+                                <h4>화장품/뷰티</h4>
+                                <p>대리점/면세/수출 채널<br>인센티브</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Financial Plan -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title orange">Financial Plan</span>
+                    </div>
+                    <h2 class="slide-headline">2년 목표: <span class="orange">자사주 매입 재원 3억원</span> 현금 확보</h2>
+
+                    <div class="fin-summary">
+                        <div class="fin-box">
+                            <span class="fin-label">목표</span>
+                            <span class="fin-value">₩300,000,000</span>
+                            <span class="fin-desc">24개월 내 현금 확보</span>
+                        </div>
+                        <div class="fin-box">
+                            <span class="fin-label">월 평균</span>
+                            <span class="fin-value">₩12,500,000</span>
+                            <span class="fin-desc">남는 돈/월</span>
+                        </div>
+                        <div class="fin-box">
+                            <span class="fin-label">현금전환율</span>
+                            <span class="fin-value">65~70%</span>
+                            <span class="fin-desc">지원금/투자금으로 인건비 커버 시</span>
+                        </div>
+                    </div>
+
+                    <h4 class="section-title">플랜 A: 최소 플랜 (r=65~70%면 3억 가능)</h4>
+                    <div class="plan-table">
+                        <div class="plan-row header">
+                            <span>항목</span>
+                            <span>수량</span>
+                            <span>단가</span>
+                            <span>매출</span>
+                        </div>
+                        <div class="plan-row">
+                            <span>Proof Pilot</span>
+                            <span>5건</span>
+                            <span>3,000만원</span>
+                            <span>1.5억</span>
+                        </div>
+                        <div class="plan-row">
+                            <span>구독 (총 39개월)</span>
+                            <span>3개사</span>
+                            <span>800만원/월</span>
+                            <span>3.12억</span>
+                        </div>
+                        <div class="plan-row total">
+                            <span>2년 총매출</span>
+                            <span></span>
+                            <span></span>
+                            <span class="orange">4.62억</span>
+                        </div>
+                        <div class="plan-row result">
+                            <span>확보 현금 (r=65%)</span>
+                            <span></span>
+                            <span></span>
+                            <span class="orange">3.0억 ✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Roadmap -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title orange">12-Month Roadmap</span>
+                    </div>
+                    <h2 class="slide-headline">12개월 실행 로드맵: <span class="orange">"1년 내 매출"</span>을 위한 최소 경로</h2>
+
+                    <div class="roadmap-grid">
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 1</span>
+                                <span class="phase-period">0~2개월</span>
+                            </div>
+                            <h4>MVP 완성</h4>
+                            <ul>
+                                <li>로컬 에이전트 (암호화/커밋/서명)</li>
+                                <li>벤더 실행 컨테이너 (FHE16 compute runtime)</li>
+                                <li>Proof Pack 포맷 + 리포트 템플릿</li>
+                            </ul>
+                            <div class="kill-criteria">
+                                <strong>킬 기준:</strong> 8주 내 "데모 1회 정산" 안 돌면 피벗
+                            </div>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 2</span>
+                                <span class="phase-period">2~4개월</span>
+                            </div>
+                            <h4>채널 확보 + 인터뷰</h4>
+                            <ul>
+                                <li>ERP/SI 1곳 + BPO/정산대행 1곳 (최소 2채널)</li>
+                                <li>각 채널의 기존 고객 중 PoC 가능 후보 3곳 발굴</li>
+                                <li>인터뷰 20건 진행</li>
+                            </ul>
+                            <div class="kill-criteria">
+                                <strong>킬 기준:</strong> 4개월 내 유료 PoC 1건도 못 따면 타깃 수정
+                            </div>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 3</span>
+                                <span class="phase-period">4~8개월</span>
+                            </div>
+                            <h4>유료 Pilot → 구독 전환</h4>
+                            <ul>
+                                <li>유료 Proof Pilot 3건 수주</li>
+                                <li>구독 1~2건 전환</li>
+                            </ul>
+                            <div class="pilot-kpis">
+                                <span>정산 리드타임 30~50%↓</span>
+                                <span>분쟁 건수 50%↓</span>
+                                <span>과지급 검출 1건+</span>
+                            </div>
+                        </div>
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-label">Phase 4</span>
+                                <span class="phase-period">8~12개월</span>
+                            </div>
+                            <h4>OEM/리셀 상품화 + 확장</h4>
+                            <ul>
+                                <li>같은 구조로 업종 확장</li>
+                                <li>제조/유통 → 통신 대리점/보험 GA 등</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Risk & Mitigation -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title orange">Risks & Mitigation</span>
+                    </div>
+                    <h2 class="slide-headline">리스크 & 대응 <span class="orange">(진짜로 써야 하는 항목)</span></h2>
+
+                    <div class="risk-grid">
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">1</span>
+                                <h4>도입 저항 (레거시)</h4>
+                            </div>
+                            <div class="risk-content">
+                                <p class="risk-desc">기존 ERP/TPM 교체에 대한 저항</p>
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>교체형 금지, <strong>"벤더 실행 + 사이드카"</strong>만</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">2</span>
+                                <h4>성능 (FHE16 latency)</h4>
+                            </div>
+                            <div class="risk-content">
+                                <p class="risk-desc">암호화 연산 지연 (수백 ms)</p>
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>배치 정산에 한정 + 민감 필드만 FHE 적용 + 배치 연산/캐싱</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">3</span>
+                                <h4>데이터/보안 심사</h4>
+                            </div>
+                            <div class="risk-content">
+                                <p class="risk-desc">기업 데이터 외부 반출 우려</p>
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>BYOK(키는 고객 보유), 원문 비가시, 고객 VPC/온프렘 옵션</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-num">4</span>
+                                <h4>제품-시장 적합성 (PMF)</h4>
+                            </div>
+                            <div class="risk-content">
+                                <p class="risk-desc">시장 수요 검증 필요</p>
+                                <div class="risk-solution">
+                                    <span class="solution-label">대응</span>
+                                    <p>60~120일 내 유료 PoC 1~3건 확보 못 하면 타깃 업종/패키징 수정</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: TIPS Story -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title orange">Investment Story</span>
+                    </div>
+                    <h2 class="slide-headline">정부/투자 설득 포인트 <span class="orange">(TIPS + VC/AC)</span></h2>
+
+                    <div class="story-main">
+                        <h4>"매출 먼저"가 가능한 딥테크 스토리</h4>
+                        <div class="story-points">
+                            <div class="story-point">
+                                <span class="point-check">✓</span>
+                                <p>일반 딥테크는 R&D 후 매출이 늦는데, 우리는:</p>
+                            </div>
+                            <div class="story-sub">
+                                <span>유료 Proof Pilot로 즉시 현금흐름</span>
+                                <span>채널(OEM)로 확장</span>
+                                <span>FHE16은 "보안심사/데이터 공유 불가" 구간을 뚫는 차별화로 작동</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="section-title">TIPS 스토리 (VC가 좋아하는 구조)</h4>
+                    <div class="timeline-horizontal">
+                        <div class="timeline-item-h">
+                            <span class="timeline-label-h">단기 (12개월)</span>
+                            <p>Web2 매출<br>(정산/리베이트 운영비 절감)</p>
+                        </div>
+                        <div class="timeline-arrow-h">→</div>
+                        <div class="timeline-item-h">
+                            <span class="timeline-label-h">중기</span>
+                            <p>Proof Pack 표준<br>(거래처/감사 대응)</p>
+                        </div>
+                        <div class="timeline-arrow-h">→</div>
+                        <div class="timeline-item-h">
+                            <span class="timeline-label-h">장기</span>
+                            <p>토큰화/스테이블코인 결제 레일<br>(정산→지급 자동화)</p>
+                        </div>
+                    </div>
+
+                    <div class="buyback-note">
+                        <h4>자사주 매입/전환(바이백) 방향</h4>
+                        <ul>
+                            <li>반복매출(ARR) 기반으로 현금흐름 안정화</li>
+                            <li>특정 KPI 달성 시 투자자와 "콜옵션/상환/전환 조건" 사전 합의</li>
+                            <li>(법무/회계 자문 전제 — 사업계획서에는 '가능한 방향'으로만 기술)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Next 30 Days + Ask -->
+            <div class="slide" data-slide="15">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">14</span>
+                        <span class="slide-title orange">Next 30 Days + Ask</span>
+                    </div>
+                    <h2 class="slide-headline">다음 30일 실행 체크리스트 <span class="orange">(진짜 행동)</span></h2>
+
+                    <div class="checklist">
+                        <div class="check-item">
+                            <span class="check-box">☐</span>
+                            <p>"벤더 실행" 데모 1개 완성<br><small>(양사 데이터 → 컨테이너 실행 → Proof Pack 출력)</small></p>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-box">☐</span>
+                            <p>채널 파트너용 1페이지 제안서 작성<br><small>(OEM 수익 구조 포함)</small></p>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-box">☐</span>
+                            <p>인터뷰 15건 진행<br><small>(재무/영업기획/정산), KPI 4개 숫자 수집</small></p>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-box">☐</span>
+                            <p>Proof Pilot 견적/계약서 템플릿 준비<br><small>(범위/성과지표/보안조항)</small></p>
+                        </div>
+                        <div class="check-item">
+                            <span class="check-box">☐</span>
+                            <p>유료 Proof Pilot 1건 목표<br><small>파이프라인 5개 생성</small></p>
+                        </div>
+                    </div>
+
+                    <div class="final-tagline">
+                        <p>"고객은 레거시를 안 바꾸고, 기존 벤더가 우리 엔진을 실행하는 방식으로 바로 시작합니다."</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <p>Contact: <strong>RebateProof Team</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
