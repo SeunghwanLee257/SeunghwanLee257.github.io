@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRONVEIL Vault | 스테이블코인 프라이버시 인프라 데모</title>
+    <title>IRONVEIL Vault | Enterprise Privacy Infrastructure Demo v3.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,33 +37,49 @@
                     </div>
                     <div class="logo-text">
                         <span class="logo-name">IRONVEIL</span>
-                        <span class="logo-sub">Vault™</span>
+                        <span class="logo-sub">Vault™ Enterprise</span>
                     </div>
                 </div>
                 <div class="header-badge">
                     <span class="badge-dot"></span>
-                    LIVE DEMO
+                    PoC DEMO v3.0
                 </div>
             </div>
+
+            <!-- ROLE SWITCHER - P0-1 핵심 기능 -->
             <div class="header-center">
-                <div class="network-status">
-                    <div class="status-item">
-                        <span class="status-label">Network</span>
-                        <span class="status-value active">Testnet Active</span>
-                    </div>
-                    <div class="status-divider"></div>
-                    <div class="status-item">
-                        <span class="status-label">FHE16</span>
-                        <span class="status-value">Enabled</span>
-                    </div>
-                    <div class="status-divider"></div>
-                    <div class="status-item">
-                        <span class="status-label">GovSplit</span>
-                        <span class="status-value">6/6 Nodes</span>
+                <div class="role-switcher">
+                    <span class="role-label">현재 관점:</span>
+                    <div class="role-tabs" id="roleTabs">
+                        <button class="role-tab active" data-role="user" onclick="switchRole('user')">
+                            <span class="role-icon">👤</span>
+                            <span>사용자</span>
+                        </button>
+                        <button class="role-tab" data-role="counterparty" onclick="switchRole('counterparty')">
+                            <span class="role-icon">🤝</span>
+                            <span>상대방</span>
+                        </button>
+                        <button class="role-tab" data-role="issuer" onclick="switchRole('issuer')">
+                            <span class="role-icon">🏦</span>
+                            <span>발행기관</span>
+                        </button>
+                        <button class="role-tab" data-role="govsplit" onclick="switchRole('govsplit')">
+                            <span class="role-icon">🔐</span>
+                            <span>GovSplit</span>
+                        </button>
+                        <button class="role-tab" data-role="auditor" onclick="switchRole('auditor')">
+                            <span class="role-icon">⚖️</span>
+                            <span>감사자</span>
+                        </button>
                     </div>
                 </div>
             </div>
+
             <div class="header-right">
+                <div class="crypto-indicator">
+                    <span class="indicator-dot"></span>
+                    <span class="indicator-label">FHE16 시뮬레이션</span>
+                </div>
                 <button class="btn btn-outline" onclick="resetDemo()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
@@ -74,29 +90,44 @@
             </div>
         </header>
 
+        <!-- Role Description Banner -->
+        <div class="role-banner" id="roleBanner">
+            <div class="role-banner-content">
+                <span class="role-banner-icon">👤</span>
+                <div class="role-banner-text">
+                    <strong>사용자 A (한국증권)</strong> 관점으로 보고 있습니다
+                </div>
+                <div class="role-banner-desc">본인 잔고와 거래 내역을 볼 수 있으며, 타인 정보는 암호화되어 표시됩니다.</div>
+            </div>
+        </div>
+
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Left Panel: My Wallet -->
-            <section class="panel wallet-panel">
+            <!-- Left Panel: My View / Role View -->
+            <section class="panel view-panel">
                 <div class="panel-header">
                     <h2>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
                         </svg>
-                        내 지갑
+                        <span id="viewPanelTitle">내 지갑</span>
                     </h2>
                     <select id="currentUser" class="user-switcher" onchange="switchUser(this.value)">
                     </select>
                 </div>
 
-                <!-- My Wallet Card -->
+                <!-- Wallet Card (visible to self) -->
                 <div class="my-wallet-card" id="myWalletCard">
                     <div class="wallet-header">
                         <div class="wallet-avatar" id="myAvatar">📈</div>
                         <div class="wallet-info">
                             <div class="wallet-name" id="myName">한국증권</div>
                             <div class="wallet-type" id="myType">증권사</div>
+                        </div>
+                        <div class="kyc-badge" id="kycBadge">
+                            <span class="kyc-icon">✓</span>
+                            <span>KYC 인증</span>
                         </div>
                     </div>
                     <div class="wallet-address">
@@ -117,17 +148,39 @@
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
-                            FHE16 암호화 잔고
+                            <span id="balanceLabel">FHE16 암호화 잔고</span>
                         </span>
-                        <div class="balance-amount" id="myBalance">50억원</div>
-                        <div class="balance-encrypted" id="myEncrypted">0x8f4e2a...</div>
+                        <div class="balance-display">
+                            <div class="balance-amount" id="myBalance">50억원</div>
+                            <div class="balance-change" id="balanceChange"></div>
+                        </div>
+                        <div class="balance-encrypted" id="myEncrypted">
+                            <span class="encrypted-label">Ciphertext:</span>
+                            <code id="ciphertextValue">0x8f4e2a...</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ciphertext Change Display (P0-2) -->
+                <div class="ciphertext-change" id="ciphertextChange" style="display: none;">
+                    <div class="change-header">
+                        <span class="change-icon">🔄</span>
+                        <span>암호문 상태 변화</span>
+                    </div>
+                    <div class="change-row">
+                        <span class="change-label">이전:</span>
+                        <code class="change-value before" id="ciphertextBefore">-</code>
+                    </div>
+                    <div class="change-row">
+                        <span class="change-label">이후:</span>
+                        <code class="change-value after" id="ciphertextAfter">-</code>
                     </div>
                 </div>
 
                 <!-- My Transactions -->
                 <div class="my-transactions">
                     <div class="section-header">
-                        <h3>📜 내 거래 내역</h3>
+                        <h3>📜 <span id="txSectionTitle">내 거래 내역</span></h3>
                         <span class="tx-count" id="myTxCount">0건</span>
                     </div>
                     <div class="my-tx-list" id="myTransactions">
@@ -135,16 +188,17 @@
                     </div>
                 </div>
 
-                <div class="wallet-info-box">
+                <!-- Privacy Info -->
+                <div class="wallet-info-box" id="privacyInfoBox">
                     <div class="info-icon">🔒</div>
                     <div class="info-text">
                         <strong>프라이버시 보장</strong><br/>
-                        본인 거래만 열람 가능, 타인의 잔고/거래는 볼 수 없음
+                        <span id="privacyDesc">본인 거래만 열람 가능, 타인의 잔고/거래는 볼 수 없음</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Center Panel: Send & Network -->
+            <!-- Center Panel: Operations -->
             <section class="panel operations-panel">
                 <div class="panel-header">
                     <h2>
@@ -156,7 +210,7 @@
                 </div>
 
                 <!-- Send Form -->
-                <div class="send-form">
+                <div class="send-form" id="sendForm">
                     <div class="form-group">
                         <label>받는 주소</label>
                         <div class="address-input-group">
@@ -191,7 +245,7 @@
                         <label>메모 (선택)</label>
                         <input type="text" id="sendMemo" class="form-input" placeholder="거래 메모 입력" />
                     </div>
-                    <button class="btn btn-primary btn-large" onclick="executeSend()">
+                    <button class="btn btn-primary btn-large" onclick="executeSend()" id="sendBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
@@ -199,18 +253,17 @@
                     </button>
                 </div>
 
-                <!-- Address Book Section -->
+                <!-- Participant List -->
                 <div class="address-book-section">
                     <div class="section-header">
                         <h3>📒 네트워크 참여자</h3>
                         <span class="participant-count" id="participantCount">5명</span>
                     </div>
                     <div class="participant-list" id="participantList">
-                        <!-- Participants will be generated -->
                     </div>
                 </div>
 
-                <!-- Network Transaction Log -->
+                <!-- Network Activity Log -->
                 <div class="network-log">
                     <div class="log-header">
                         <h3>
@@ -226,7 +279,7 @@
                     <div class="log-list" id="networkLog">
                         <div class="log-empty">
                             네트워크 거래가 발생하면 표시됩니다<br/>
-                            <small>※ 금액과 상세 정보는 암호화되어 표시</small>
+                            <small>※ 역할에 따라 표시 정보가 달라집니다</small>
                         </div>
                     </div>
                 </div>
@@ -243,22 +296,27 @@
                     </h2>
                 </div>
 
-                <!-- KMS Nodes -->
+                <!-- KMS Nodes with Role-based Policy (P1-8) -->
                 <div class="kms-nodes">
                     <div class="nodes-header">
-                        <span class="nodes-title">분산 승인 노드 (n=6)</span>
+                        <span class="nodes-title">역할 기반 승인 노드 (n=6)</span>
                         <span class="nodes-status" id="nodesStatus">대기 중</span>
                     </div>
                     <div class="nodes-grid" id="nodesGrid">
-                        <!-- Nodes will be generated -->
                     </div>
                     <div class="threshold-info">
-                        <span class="threshold-label">열람 임계값</span>
-                        <span class="threshold-value">⌈n/3⌉ = <strong>2</strong>개 노드 승인 필요</span>
+                        <div class="threshold-row">
+                            <span class="threshold-label">기본 임계값</span>
+                            <span class="threshold-value">⌈n/3⌉ = <strong>2</strong>개 노드</span>
+                        </div>
+                        <div class="threshold-policy" id="thresholdPolicy">
+                            <span class="policy-label">승인 정책:</span>
+                            <span class="policy-desc">감독기관 + 다른 1개 노드</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Disclosure Request -->
+                <!-- Disclosure Request (P0-3, P0-4) -->
                 <div class="disclosure-section">
                     <div class="section-header">
                         <h3>🔓 감사/열람 요청</h3>
@@ -280,6 +338,34 @@
                                 <option value="recovery">키 분실 복구</option>
                             </select>
                         </div>
+                        <!-- P0-4: 열람 범위 선택 -->
+                        <div class="form-group">
+                            <label>열람 범위</label>
+                            <select id="disclosureScope" class="form-select">
+                                <option value="balance_only">현재 잔고만</option>
+                                <option value="specific_tx">특정 거래만</option>
+                                <option value="period">특정 기간</option>
+                                <option value="all">전체 내역</option>
+                            </select>
+                        </div>
+                        <!-- P0-4: 공개 수준 선택 -->
+                        <div class="form-group">
+                            <label>공개 수준</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="disclose_amount" checked>
+                                    <span>금액 공개</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="disclose_counterparty">
+                                    <span>상대방 공개</span>
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="disclose_memo">
+                                    <span>메모 공개</span>
+                                </label>
+                            </div>
+                        </div>
                         <button class="btn btn-warning btn-large" onclick="requestDisclosure()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
@@ -290,6 +376,15 @@
                     </div>
                 </div>
 
+                <!-- Active Disclosure Cases (P0-3) -->
+                <div class="disclosure-cases" id="disclosureCases" style="display: none;">
+                    <div class="section-header">
+                        <h3>📋 열람 요청 현황</h3>
+                    </div>
+                    <div class="cases-list" id="casesList">
+                    </div>
+                </div>
+
                 <!-- Disclosure Result -->
                 <div class="disclosure-result" id="disclosureResult" style="display: none;">
                     <div class="result-header">
@@ -297,11 +392,13 @@
                         <span class="result-title">열람 승인 완료</span>
                     </div>
                     <div class="result-content" id="disclosureContent">
-                        <!-- Disclosed info will appear here -->
+                    </div>
+                    <!-- Disclosure Receipt (P0 체크리스트) -->
+                    <div class="disclosure-receipt" id="disclosureReceipt">
                     </div>
                 </div>
 
-                <!-- Verification -->
+                <!-- Verification (P0-5) -->
                 <div class="verification-section">
                     <div class="section-header">
                         <h3>🔍 무결성 검증</h3>
@@ -309,19 +406,35 @@
                     <div class="verify-stats" id="verifyStats">
                         <div class="verify-item">
                             <span class="verify-label">해시 체인</span>
-                            <span class="verify-value" id="chainLength">0 블록</span>
+                            <span class="verify-value" id="chainLength">1 블록</span>
                         </div>
                         <div class="verify-item">
                             <span class="verify-label">Merkle Root</span>
                             <code class="verify-hash" id="merkleRoot">-</code>
                         </div>
+                        <div class="verify-item">
+                            <span class="verify-label">최종 검증</span>
+                            <span class="verify-value" id="lastVerified">-</span>
+                        </div>
                     </div>
-                    <button class="btn btn-outline" onclick="verifyIntegrity()" id="verifyBtn" disabled>
+                    <button class="btn btn-outline" onclick="verifyIntegrity()" id="verifyBtn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                             <polyline points="22,4 12,14.01 9,11.01"/>
                         </svg>
                         전체 검증 실행
+                    </button>
+                    <div class="verify-result" id="verifyResult" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Key Recovery (P1-7) -->
+                <div class="key-recovery-section">
+                    <div class="section-header">
+                        <h3>🔑 키 분실 복구</h3>
+                    </div>
+                    <button class="btn btn-outline btn-small" onclick="openKeyRecoveryModal()">
+                        복구 절차 시작
                     </button>
                 </div>
             </section>
@@ -339,7 +452,6 @@
                         <input type="text" id="addressSearch" class="form-input" placeholder="이름 또는 주소로 검색..." oninput="filterAddresses(this.value)" />
                     </div>
                     <div class="address-list" id="addressBookList">
-                        <!-- Address book entries -->
                     </div>
                 </div>
             </div>
@@ -355,12 +467,11 @@
                 <h3 id="processingTitle">FHE16 암호화 처리 중</h3>
                 <p id="processingDesc">암호문 상태로 연산을 수행합니다...</p>
                 <div class="processing-steps" id="processingSteps">
-                    <!-- Steps will be shown here -->
                 </div>
             </div>
         </div>
 
-        <!-- Approval Modal -->
+        <!-- Approval Modal (P0-3 절차화) -->
         <div class="modal" id="approvalModal">
             <div class="modal-content modal-approval">
                 <div class="modal-header">
@@ -368,7 +479,77 @@
                     <button class="modal-close" onclick="closeApprovalModal()">&times;</button>
                 </div>
                 <div class="modal-body" id="approvalBody">
-                    <!-- Approval content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Recovery Modal (P1-7) -->
+        <div class="modal" id="keyRecoveryModal">
+            <div class="modal-content modal-recovery">
+                <div class="modal-header">
+                    <h3>🔑 키 분실 복구 절차</h3>
+                    <button class="modal-close" onclick="closeKeyRecoveryModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="keyRecoveryBody">
+                    <div class="recovery-info">
+                        <div class="recovery-warning">
+                            <span class="warning-icon">⚠️</span>
+                            <div class="warning-text">
+                                <strong>중요 안내</strong><br/>
+                                키 복구는 잔고 열람이 아닌 <strong>소유권/지출권 재설정</strong>입니다.
+                            </div>
+                        </div>
+                        <div class="recovery-steps">
+                            <div class="recovery-step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <strong>신원 확인</strong>
+                                    <p>발행기관에서 KYC 정보로 본인 확인</p>
+                                </div>
+                            </div>
+                            <div class="recovery-step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <strong>GovSplit 승인</strong>
+                                    <p>2/6 노드 승인 (감독기관 포함 필수)</p>
+                                </div>
+                            </div>
+                            <div class="recovery-step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <strong>새 키 발급</strong>
+                                    <p>기존 키 무효화 + 새 지갑 주소 발급</p>
+                                </div>
+                            </div>
+                            <div class="recovery-step">
+                                <span class="step-num">4</span>
+                                <div class="step-content">
+                                    <strong>잔고 이전</strong>
+                                    <p>암호화 상태 유지하며 새 주소로 이전</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recovery-docs">
+                            <strong>필요 서류:</strong>
+                            <ul>
+                                <li>신분증 사본</li>
+                                <li>분실 경위서</li>
+                                <li>발행기관 확인서</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Detail Modal (P0-2) -->
+        <div class="modal" id="txDetailModal">
+            <div class="modal-content modal-txdetail">
+                <div class="modal-header">
+                    <h3>📋 거래 상세</h3>
+                    <button class="modal-close" onclick="closeTxDetailModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="txDetailBody">
                 </div>
             </div>
         </div>
@@ -376,14 +557,20 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-left">
-                <span class="footer-brand">IRONVEIL Vault™ Demo v2.0</span>
+                <span class="footer-brand">IRONVEIL Vault™ PoC Demo v3.0</span>
                 <span class="footer-divider">|</span>
                 <span class="footer-tagline">"No One Sees. Only Due Process."</span>
+            </div>
+            <div class="footer-center">
+                <div class="demo-disclaimer">
+                    <span class="disclaimer-icon">ℹ️</span>
+                    <span>이 데모는 <strong>AES-256-GCM 시뮬레이션</strong>입니다. 실제 FHE16 구현은 별도 라이브러리 필요.</span>
+                </div>
             </div>
             <div class="footer-right">
                 <span class="crypto-badge">
                     <span class="badge-icon">🔐</span>
-                    FHE16 + AES-256-GCM
+                    FHE16 + AES-256-GCM (시뮬레이션)
                 </span>
             </div>
         </footer>
