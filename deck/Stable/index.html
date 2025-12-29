@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRONVEIL Vault | 스테이블코인 프라이버시 인프라</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <span class="slide-counter" id="slideCounter">1 / 15</span>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+        <button class="nav-btn download-btn" id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7,10 12,15 17,10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            PDF
+        </button>
+    </nav>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+        <!-- Slide 1: Title -->
+        <div class="slide" data-slide="1">
+            <div class="slide-content title-slide">
+                <div class="title-badge">B2B INFRASTRUCTURE</div>
+                <h1 class="main-title">
+                    <span class="title-icon">🔐</span>
+                    IRONVEIL Vault™
+                </h1>
+                <p class="subtitle">스테이블코인 프라이버시 컴플라이언스 인프라</p>
+                <div class="tagline-box">
+                    <span class="tagline">"No One Sees. Only Due Process."</span>
+                    <span class="tagline-sub">아무도 못 보고, 절차가 있을 때만 열린다</span>
+                </div>
+                <div class="title-features">
+                    <div class="feature-tag"><span class="icon">🔒</span> FHE16 암호문 잔고</div>
+                    <div class="feature-tag"><span class="icon">🔑</span> GovSplit 분산 KMS</div>
+                    <div class="feature-tag"><span class="icon">⚡</span> Optimistic Proof</div>
+                </div>
+                <div class="partner-line">
+                    <span>코스콤 결제 인프라 연계</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2 class="slide-title">Executive Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-card problem">
+                        <div class="card-icon">⚠️</div>
+                        <h3>문제</h3>
+                        <p>기관이 결제형 스테이블코인을 도입하려다<br/><strong>"프라이버시 vs 규제(감사/수사/AML)"</strong>에서 막힘</p>
+                    </div>
+                    <div class="summary-card solution">
+                        <div class="card-icon">💡</div>
+                        <h3>해법</h3>
+                        <p><strong>FHE16 암호문 연산</strong> +<br/><strong>분산 KMS(⌈n/3⌉ 승인 열람)</strong>로<br/>프라이버시와 컴플라이언스 동시 해결</p>
+                    </div>
+                    <div class="summary-card market">
+                        <div class="card-icon">🎯</div>
+                        <h3>타겟</h3>
+                        <p>코스콤 STO 결제 인프라<br/>증권사/기관간 정산<br/>지자체 디지털 바우처</p>
+                    </div>
+                    <div class="summary-card model">
+                        <div class="card-icon">💰</div>
+                        <h3>비즈니스</h3>
+                        <p>PoC 납품 → 연간 라이선스<br/>노드/기관 단위 과금<br/><strong>B2B 인프라 모듈</strong></p>
+                    </div>
+                </div>
+                <div class="summary-bottom">
+                    <div class="core-message">
+                        핵심: "투명한 블록체인"의 치명적 단점(잔고/거래금액 노출)을 없애되,<br/>
+                        <strong>합법적 절차로만 열람 가능하게 만드는 게 핵심</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Now - Timing -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2 class="slide-title">Why Now? 타이밍의 완벽한 교차점</h2>
+                <div class="timing-grid">
+                    <div class="timing-card">
+                        <div class="timing-source">금융위원회</div>
+                        <div class="timing-quote">"스테이블코인/디지털자산 2단계 입법은<br/><strong>내용이 정해진 바 없다</strong>"</div>
+                        <div class="timing-implication">
+                            <span class="arrow">→</span>
+                            <span>제도 확정 전, <strong>기술 PoC → 제도 설계 반영</strong> 가능</span>
+                        </div>
+                    </div>
+                    <div class="timing-card">
+                        <div class="timing-source">코스콤</div>
+                        <div class="timing-quote">"스테이블코인 활용 토큰증권 결제 시스템<br/><strong>PoC 추진/공개</strong>"</div>
+                        <div class="timing-implication">
+                            <span class="arrow">→</span>
+                            <span><strong>원자적 결제</strong> 인프라 선제 준비 중</span>
+                        </div>
+                    </div>
+                    <div class="timing-card">
+                        <div class="timing-source">한국은행</div>
+                        <div class="timing-quote">"원화 스테이블코인<br/><strong>7가지 리스크</strong> 명시적 언급"</div>
+                        <div class="timing-implication">
+                            <span class="arrow">→</span>
+                            <span><strong>신뢰/거버넌스/통제장치</strong> 설계 필수</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timing-conclusion">
+                    <div class="conclusion-box">
+                        <span class="conclusion-icon">🎯</span>
+                        <div class="conclusion-text">
+                            <strong>결론:</strong> 스테이블코인 결제 인프라는 이미 논의/PoC 진행 중<br/>
+                            기관이 진짜로 쓰려면 <strong>프라이버시-컴플라이언스를 동시에 만족하는 보안 레이어</strong>가 필요<br/>
+                            <span class="highlight">이게 우리가 파고들 자리</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Problem Definition -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2 class="slide-title">고객이 '뼈저리게' 느끼는 문제</h2>
+                <div class="problem-section">
+                    <h3 class="section-subtitle">결제형 스테이블코인이 막히는 현실적 이유</h3>
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <div class="problem-header">
+                                <span class="problem-icon">🌐</span>
+                                <span class="problem-type">퍼블릭/준퍼블릭</span>
+                            </div>
+                            <div class="problem-body">
+                                <p class="problem-issue">거래금액/잔고/흐름이 <strong>노출</strong></p>
+                                <p class="problem-result">기관은 "영업비밀/재정정보" 공개 구조를 <span class="red">못 씀</span></p>
+                            </div>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-header">
+                                <span class="problem-icon">🏢</span>
+                                <span class="problem-type">프라이빗 체인</span>
+                            </div>
+                            <div class="problem-body">
+                                <p class="problem-issue">운영자/참여기관이 <strong>다 볼 수 있음</strong></p>
+                                <p class="problem-result">"인사이더 리스크" + "감사/분쟁 책임소재" <span class="red">해결 안됨</span></p>
+                            </div>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-header">
+                                <span class="problem-icon">⚖️</span>
+                                <span class="problem-type">규제기관 관점</span>
+                            </div>
+                            <div class="problem-body">
+                                <p class="problem-issue">"프라이버시 강화 = <strong>AML/KYC 무력화?</strong>"</p>
+                                <p class="problem-result">설계가 <span class="red">매우 민감</span>한 영역</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="customer-requirement">
+                    <div class="requirement-box">
+                        <span class="requirement-icon">💬</span>
+                        <div class="requirement-text">
+                            <strong>고객 요구조건을 한 문장으로:</strong><br/>
+                            "평소엔 누구도 잔고/금액을 못 보게 하고,<br/>
+                            <span class="highlight">정말 필요할 때만(법·규정·절차 기반) 최소한으로 열어볼 수 있어야</span>"<br/>
+                            결제형 스테이블코인이 기관/공공에 채택된다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Solution Overview -->
+        <div class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2 class="slide-title">솔루션: IRONVEIL Vault™</h2>
+                <div class="solution-hero">
+                    <div class="hero-concept">
+                        <div class="concept-badge">제품 컨셉</div>
+                        <h3>"잔고/금액은 <span class="gradient-text">암호문으로만 존재</span>"하고,<br/>
+                        해독(열람/복구/감사)은 '<span class="gradient-text">분산된 승인(⌈n/3⌉)</span>'이 모여야만 가능한<br/>
+                        <strong>지갑/계정 인프라</strong></h3>
+                    </div>
+                </div>
+                <div class="solution-tagline">
+                    <div class="tagline-main">"No One Sees. Only Due Process."</div>
+                    <div class="tagline-korean">아무도 못 보고, 절차가 있을 때만 열린다</div>
+                </div>
+                <div class="solution-modules">
+                    <div class="module-card">
+                        <div class="module-icon">🔐</div>
+                        <h4>FHE16 Balance Engine</h4>
+                        <p>잔고/금액을 암호문으로 저장<br/>덧셈/뺄셈 연산 가능</p>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon">⚡</div>
+                        <h4>Optimistic Cipher Proof</h4>
+                        <p>평소엔 빠르게 처리<br/>분쟁 시에만 검증 강제</p>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-icon">🔑</div>
+                        <h4>GovSplit KMS</h4>
+                        <p>⌈n/3⌉ 다자 승인으로만<br/>열람/복구/제출 가능</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Technical Architecture -->
+        <div class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2 class="slide-title">기술 아키텍처</h2>
+                <div class="arch-diagram">
+                    <div class="arch-layer layer-top">
+                        <div class="layer-label">사용자/기관</div>
+                        <div class="layer-items">
+                            <div class="arch-item">증권사 A</div>
+                            <div class="arch-item">증권사 B</div>
+                            <div class="arch-item">기관 C</div>
+                            <div class="arch-item">지자체 D</div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">▼ 암호화된 요청</div>
+                    <div class="arch-layer layer-middle">
+                        <div class="layer-label">IRONVEIL Vault 레이어</div>
+                        <div class="layer-content">
+                            <div class="core-module">
+                                <div class="module-name">FHE16 Balance Engine</div>
+                                <div class="module-desc">암호문 상태로 잔고 연산</div>
+                            </div>
+                            <div class="core-module">
+                                <div class="module-name">Optimistic Cipher Proof</div>
+                                <div class="module-desc">분쟁 시에만 검증 강제</div>
+                            </div>
+                            <div class="core-module">
+                                <div class="module-name">GovSplit KMS</div>
+                                <div class="module-desc">⌈n/3⌉ 분산 승인</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">▼ 프라이버시 보존</div>
+                    <div class="arch-layer layer-bottom">
+                        <div class="layer-label">코스콤 결제 인프라</div>
+                        <div class="layer-items">
+                            <div class="arch-item highlight">STO 결제 PoC</div>
+                            <div class="arch-item highlight">원자적 결제</div>
+                            <div class="arch-item highlight">정산 네트워크</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch-note">
+                    <span class="note-icon">💡</span>
+                    <span>우리는 코스콤의 경쟁자가 아니라 <strong>'보안 모듈 공급사(OEM)'</strong> 포지션</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: GovSplit KMS Detail -->
+        <div class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2 class="slide-title">GovSplit KMS: 분산 열람 권한</h2>
+                <div class="kms-overview">
+                    <div class="kms-principle">
+                        <div class="principle-icon">🔑</div>
+                        <div class="principle-text">
+                            마스터 열람키는 <strong>단일 운영자가 보유하지 않음</strong><br/>
+                            n개 기관이 분산 보관 → <strong>⌈n/3⌉ 이상 승인 시에만</strong> 열람/복구/제출
+                        </div>
+                    </div>
+                </div>
+                <div class="kms-parties">
+                    <h3>승인 주체 구성 예시 (n=6)</h3>
+                    <div class="party-grid">
+                        <div class="party-card">
+                            <div class="party-icon">🏛️</div>
+                            <div class="party-name">감독기관</div>
+                            <div class="party-count">1~2</div>
+                        </div>
+                        <div class="party-card">
+                            <div class="party-icon">⚖️</div>
+                            <div class="party-name">지자체/옴부즈만</div>
+                            <div class="party-count">1~2</div>
+                        </div>
+                        <div class="party-card">
+                            <div class="party-icon">🏢</div>
+                            <div class="party-name">코스콤</div>
+                            <div class="party-count">1</div>
+                        </div>
+                        <div class="party-card">
+                            <div class="party-icon">🏦</div>
+                            <div class="party-name">발행기관(은행)</div>
+                            <div class="party-count">1</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kms-scenarios">
+                    <h3>열람이 필요한 시나리오</h3>
+                    <div class="scenario-list">
+                        <div class="scenario-item">
+                            <span class="scenario-icon">🔍</span>
+                            <span>감사/수사 요청</span>
+                        </div>
+                        <div class="scenario-item">
+                            <span class="scenario-icon">⚠️</span>
+                            <span>키 분실/복구</span>
+                        </div>
+                        <div class="scenario-item">
+                            <span class="scenario-icon">📋</span>
+                            <span>법적 제출 요구</span>
+                        </div>
+                        <div class="scenario-item">
+                            <span class="scenario-icon">⚖️</span>
+                            <span>분쟁 조정</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="kms-guarantee">
+                    <span class="guarantee-icon">✓</span>
+                    <span><strong>단일 주체 독주 불가</strong> — 반드시 합의 기반으로만 열람</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: User Self-View -->
+        <div class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2 class="slide-title">FAQ: 사용자는 자기 잔고를 볼 수 있나?</h2>
+                <div class="faq-answer">
+                    <div class="answer-box yes">
+                        <span class="answer-icon">✅</span>
+                        <div class="answer-content">
+                            <h3>네, 본인은 볼 수 있습니다</h3>
+                            <p>사용자 본인은 <strong>자기 잔고 열람 가능</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-detail">
+                    <div class="detail-card">
+                        <h4>GovSplit이 필요한 경우</h4>
+                        <ul>
+                            <li><strong>제3자 열람</strong> (감사/수사/분쟁)</li>
+                            <li><strong>키 분실/사망</strong> 시 복구</li>
+                            <li><strong>법적 압류/제출</strong> 요청</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h4>GovSplit이 필요 없는 경우</h4>
+                        <ul>
+                            <li><strong>본인 잔고 조회</strong></li>
+                            <li><strong>본인 거래내역</strong> 확인</li>
+                            <li><strong>일반 송금/결제</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-value">
+                    <div class="value-box">
+                        <span class="value-icon">💡</span>
+                        <div class="value-text">
+                            <strong>이게 왜 중요한가?</strong><br/>
+                            "프라이버시"와 "제도권 운영" <strong>둘 다 잡는 포인트</strong><br/>
+                            평소엔 개인정보 보호, 필요 시엔 합법적 절차로 열람
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Use Cases -->
+        <div class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">1년 내 매출 가능한 유스케이스</h2>
+                <div class="usecase-hero">
+                    <div class="hero-note">
+                        <span class="note-icon">⚠️</span>
+                        <span>핵심: <strong>"우리가 스테이블코인을 발행하지 않는다"</strong><br/>
+                        인프라 모듈로 들어가서 규제/라이선스 리스크 ↓, B2B로 매출</span>
+                    </div>
+                </div>
+                <div class="usecase-main">
+                    <div class="usecase-card primary">
+                        <div class="usecase-badge">Primary Use Case</div>
+                        <h3>코스콤 스테이블코인 결제 PoC</h3>
+                        <div class="usecase-detail">
+                            <div class="detail-item">
+                                <span class="detail-label">배경</span>
+                                <span class="detail-value">토큰증권 청약·유통에서 스테이블코인 결제수단 PoC 진행 중</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">우리가 제공</span>
+                                <span class="detail-value">기관별 결제 잔고/정산금액 비공개 처리</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">기관 베네핏</span>
+                                <span class="detail-value">전략·유동성·포지션 노출 없이 참여 가능</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="revenue-model">
+                    <h3>매출 포인트</h3>
+                    <div class="revenue-grid">
+                        <div class="revenue-item">
+                            <span class="revenue-icon">📋</span>
+                            <span class="revenue-label">PoC 확장 계약</span>
+                            <span class="revenue-type">납품형/프로젝트형</span>
+                        </div>
+                        <div class="revenue-item">
+                            <span class="revenue-icon">📦</span>
+                            <span class="revenue-label">상용 모듈 라이선스</span>
+                            <span class="revenue-type">연단위 사용료</span>
+                        </div>
+                        <div class="revenue-item">
+                            <span class="revenue-icon">🔢</span>
+                            <span class="revenue-label">정산 노드 과금</span>
+                            <span class="revenue-type">참여기관 수 비례</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Customer Value -->
+        <div class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2 class="slide-title">고객 가치: 비용 · 시간 · 수익</h2>
+                <div class="value-grid">
+                    <div class="value-card cost">
+                        <div class="value-header">
+                            <span class="value-icon">💰</span>
+                            <h3>비용 절감</h3>
+                            <span class="value-strength">가장 강함</span>
+                        </div>
+                        <ul>
+                            <li>민감정보 유출 리스크 비용 <strong>구조적 감소</strong></li>
+                            <li>"누가 보유했는지" 자체를 줄여 <strong>공격면 축소</strong></li>
+                            <li>감사/분쟁 대응: 권한 남발 → <strong>승인 기반</strong></li>
+                            <li>수작업 로그/증적 → <strong>자동 생성</strong></li>
+                        </ul>
+                    </div>
+                    <div class="value-card time">
+                        <div class="value-header">
+                            <span class="value-icon">⏱️</span>
+                            <h3>시간 단축</h3>
+                            <span class="value-strength">코스콤 연계 시</span>
+                        </div>
+                        <ul>
+                            <li>원자적 결제/실시간성 방향에서<br/><strong>"프라이버시 때문에 못 간다"</strong> 해소</li>
+                            <li>기관의 <strong>도입 결정까지 시간 단축</strong></li>
+                            <li>세일즈 사이클 감소</li>
+                        </ul>
+                    </div>
+                    <div class="value-card revenue">
+                        <div class="value-header">
+                            <span class="value-icon">📈</span>
+                            <h3>수익 극대화</h3>
+                            <span class="value-strength">플랫폼 측</span>
+                        </div>
+                        <ul>
+                            <li>결제 인프라 거래량 = <strong>참여기관 × 결제빈도</strong></li>
+                            <li>프라이버시 레이어가 <strong>참여기관 확장</strong> 촉진</li>
+                            <li>네트워크 효과 → <strong>결제 트래픽 증가</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Competition -->
+        <div class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2 class="slide-title">경쟁 분석: 우리가 이기는 지점</h2>
+                <div class="competition-table">
+                    <div class="comp-row header">
+                        <div class="comp-cell">경쟁 대안</div>
+                        <div class="comp-cell">장점</div>
+                        <div class="comp-cell">단점</div>
+                        <div class="comp-cell">우리의 차별점</div>
+                    </div>
+                    <div class="comp-row">
+                        <div class="comp-cell competitor">
+                            <span class="comp-icon">🔒</span>
+                            프라이빗 체인 + 접근통제
+                        </div>
+                        <div class="comp-cell">빠르고 구현 쉬움</div>
+                        <div class="comp-cell weakness">운영자/내부자가 결국<br/><strong>"볼 수 있음"</strong></div>
+                        <div class="comp-cell strength">"운영자도 못 본다"<br/>(암호문만 존재)</div>
+                    </div>
+                    <div class="comp-row">
+                        <div class="comp-cell competitor">
+                            <span class="comp-icon">🔐</span>
+                            ZK만으로 프라이버시
+                        </div>
+                        <div class="comp-cell">프라이버시 강함</div>
+                        <div class="comp-cell weakness">매 트랜잭션 증명 비용↑<br/>열람/분쟁/복구 모델 어려움</div>
+                        <div class="comp-cell strength">Optimistic + 분산KMS<br/>"운영 가능한 제도권 설계"</div>
+                    </div>
+                    <div class="comp-row">
+                        <div class="comp-cell competitor">
+                            <span class="comp-icon">🖥️</span>
+                            TEE (보안칩/엔클레이브)
+                        </div>
+                        <div class="comp-cell">성능 좋음</div>
+                        <div class="comp-cell weakness">특정 HW 신뢰/취약점<br/>규제기관 설득 어려움</div>
+                        <div class="comp-cell strength">"암호학 기반 + 다자 승인"<br/>신뢰모델 명확</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Koscom Partnership -->
+        <div class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2 class="slide-title">코스콤 협업 전략</h2>
+                <div class="partnership-model">
+                    <div class="model-header">
+                        <span class="model-icon">🤝</span>
+                        <h3>협업 모델</h3>
+                    </div>
+                    <div class="model-content">
+                        <div class="model-position">
+                            우리는 코스콤의 <span class="red">경쟁자</span>가 아니라<br/>
+                            <strong class="highlight">'보안 모듈 공급사(OEM)'</strong> 포지션
+                        </div>
+                        <div class="model-approach">
+                            코스콤 스테이블코인 결제 PoC/TF 흐름에<br/>
+                            <strong>"프라이버시 컴플라이언스 레이어"</strong>로 참여 제안
+                        </div>
+                    </div>
+                </div>
+                <div class="persuasion-points">
+                    <h3>코스콤 설득 메시지</h3>
+                    <div class="point-grid">
+                        <div class="point-card">
+                            <span class="point-icon">🚀</span>
+                            <h4>기관 확장</h4>
+                            <p>"잔고/정산금액 노출 때문에<br/>참여 못 하는 증권사/기관"을 열어준다</p>
+                        </div>
+                        <div class="point-card">
+                            <span class="point-icon">🏛️</span>
+                            <h4>정책 친화</h4>
+                            <p>한국은행 우려 리스크 환경에서<br/>"기술+절차"로 해법 제시</p>
+                        </div>
+                        <div class="point-card">
+                            <span class="point-icon">🎯</span>
+                            <h4>역할 강화</h4>
+                            <p>코스콤이 "표준 인프라 허브" 목표 시<br/>프라이버시 거버넌스는 필수 구성요소</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Regulatory Strategy -->
+        <div class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2 class="slide-title">규제/리스크 대응 원칙</h2>
+                <div class="reg-principles">
+                    <div class="principle-card">
+                        <div class="principle-header">
+                            <span class="principle-num">1</span>
+                            <h3>결제전용(무이자) 포지션 고수</h3>
+                        </div>
+                        <div class="principle-body">
+                            <p>투자성/수익성 붙이지 않고 <strong>지급결제 수단으로 한정</strong></p>
+                            <p>이용자 보호/준비자산/상환절차/외부감사 프레임 전제</p>
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-header">
+                            <span class="principle-num">2</span>
+                            <h3>프라이버시 ≠ 익명</h3>
+                        </div>
+                        <div class="principle-body">
+                            <p><strong>"선(先)비공개, 후(後)절차열람"</strong> = Selective Disclosure</p>
+                            <p>한국은행 우려(소비자보호/규제우회)를 줄이는 방향</p>
+                        </div>
+                    </div>
+                    <div class="principle-card">
+                        <div class="principle-header">
+                            <span class="principle-num">3</span>
+                            <h3>'규제가 정해져도 살아남는' 모듈</h3>
+                        </div>
+                        <div class="principle-body">
+                            <p>스테이블코인 / 예금토큰 / 허가형 결제토큰 → 뭐든</p>
+                            <p><strong>'비공개 잔고 + 절차열람' 니즈는 남는다</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Roadmap -->
+        <div class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2 class="slide-title">12개월 로드맵</h2>
+                <div class="roadmap-timeline">
+                    <div class="roadmap-phase phase-1">
+                        <div class="phase-header">
+                            <span class="phase-period">0~3개월</span>
+                            <span class="phase-title">"보여줄 수 있는 것" 만들기</span>
+                        </div>
+                        <div class="phase-items">
+                            <div class="phase-item">FHE16 잔고 업데이트 데모 (덧셈/뺄셈)</div>
+                            <div class="phase-item">GovSplit KMS 승인 워크플로우 (⌈n/3⌉)</div>
+                            <div class="phase-item">분쟁 시나리오 2개 시연 (키 분실, 감사 열람)</div>
+                        </div>
+                    </div>
+                    <div class="roadmap-phase phase-2">
+                        <div class="phase-header">
+                            <span class="phase-period">3~6개월</span>
+                            <span class="phase-title">코스콤 PoC 확장 제안</span>
+                        </div>
+                        <div class="phase-items">
+                            <div class="phase-item">"프라이버시 레이어 PoC"로 편입 제안</div>
+                            <div class="phase-item success">성공 기준: 정산 배치 SLA (1~5분)</div>
+                            <div class="phase-item success">승인 열람 처리시간 (30분 내)</div>
+                            <div class="phase-item success">운영 로그/증적 자동 생성</div>
+                        </div>
+                    </div>
+                    <div class="roadmap-phase phase-3">
+                        <div class="phase-header">
+                            <span class="phase-period">6~12개월</span>
+                            <span class="phase-title">상용 파일럿</span>
+                        </div>
+                        <div class="phase-items">
+                            <div class="phase-item">참여기관 1~2곳 상용 파일럿</div>
+                            <div class="phase-item revenue">과금: 연 라이선스 + 운영지원</div>
+                            <div class="phase-item revenue">노드/기관 단위 확장 과금</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Summary -->
+        <div class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2 class="slide-title">요약 & Next Steps</h2>
+                <div class="summary-final">
+                    <div class="final-message">
+                        <div class="message-icon">🔐</div>
+                        <h3>IRONVEIL Vault™</h3>
+                        <p class="message-main">
+                            기관/지자체가 결제형 스테이블코인을 도입할 때<br/>
+                            <strong>"프라이버시 vs 규제"</strong> 딜레마를<br/>
+                            <span class="highlight">FHE16 + 분산 KMS</span>로 해결하는 B2B 인프라
+                        </p>
+                    </div>
+                </div>
+                <div class="next-steps">
+                    <h3>다음 미팅에서 반드시 가져갈 3가지</h3>
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <span class="step-num">1</span>
+                            <div class="step-content">
+                                <strong>숨겨야 할 항목 정의</strong>
+                                <p>잔고? 정산금액? 상대방? 한도? → 구체적 항목 리스트</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-num">2</span>
+                            <div class="step-content">
+                                <strong>FHE16으로 숨겨도 운영 가능</strong>
+                                <p>실제 흐름으로 시연</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-num">3</span>
+                            <div class="step-content">
+                                <strong>열람 시나리오 (법/규정/위원회)</strong>
+                                <p>⌈n/3⌉ 승인으로 어떻게 열리고, 어떤 로그가 남는지</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <span class="contact-label">Contact:</span>
+                    <span class="contact-value">IRONVEIL | B2B Privacy Infrastructure</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

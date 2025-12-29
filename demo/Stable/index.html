@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRONVEIL Vault | 스테이블코인 프라이버시 인프라 데모</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Ambient Background -->
+        <div class="ambient-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none">
+                            <rect x="4" y="8" width="32" height="24" rx="4" stroke="url(#grad1)" stroke-width="2"/>
+                            <path d="M20 14v12M14 20h12" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="20" cy="20" r="6" stroke="url(#grad1)" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6366F1"/>
+                                    <stop offset="100%" style="stop-color:#A78BFA"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-name">IRONVEIL</span>
+                        <span class="logo-sub">Vault™</span>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <span class="badge-dot"></span>
+                    LIVE DEMO
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="network-status">
+                    <div class="status-item">
+                        <span class="status-label">Network</span>
+                        <span class="status-value active">Testnet Active</span>
+                    </div>
+                    <div class="status-divider"></div>
+                    <div class="status-item">
+                        <span class="status-label">FHE16</span>
+                        <span class="status-value">Enabled</span>
+                    </div>
+                    <div class="status-divider"></div>
+                    <div class="status-item">
+                        <span class="status-label">GovSplit</span>
+                        <span class="status-value">6/6 Nodes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-outline" onclick="resetDemo()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
+                    초기화
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel: Accounts -->
+            <section class="panel accounts-panel">
+                <div class="panel-header">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        기관 계정
+                    </h2>
+                </div>
+
+                <div class="accounts-list" id="accountsList">
+                    <!-- Account cards will be generated -->
+                </div>
+
+                <div class="account-info-box">
+                    <div class="info-icon">💡</div>
+                    <div class="info-text">
+                        <strong>모든 잔고는 FHE16 암호문</strong><br/>
+                        본인만 조회 가능, 운영자도 볼 수 없음
+                    </div>
+                </div>
+            </section>
+
+            <!-- Center Panel: Operations -->
+            <section class="panel operations-panel">
+                <div class="panel-header">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        </svg>
+                        거래 실행
+                    </h2>
+                    <div class="tab-switcher">
+                        <button class="tab-btn active" data-tab="transfer" onclick="switchTab('transfer')">송금</button>
+                        <button class="tab-btn" data-tab="settlement" onclick="switchTab('settlement')">정산</button>
+                    </div>
+                </div>
+
+                <!-- Transfer Tab -->
+                <div class="tab-content active" id="transferTab">
+                    <div class="transfer-form">
+                        <div class="form-group">
+                            <label>출금 계정</label>
+                            <select id="fromAccount" class="form-select">
+                                <option value="">선택하세요</option>
+                            </select>
+                        </div>
+                        <div class="transfer-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12l7 7 7-7"/>
+                            </svg>
+                        </div>
+                        <div class="form-group">
+                            <label>입금 계정</label>
+                            <select id="toAccount" class="form-select">
+                                <option value="">선택하세요</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>금액 (KRW)</label>
+                            <div class="amount-input-group">
+                                <input type="text" id="transferAmount" class="form-input" placeholder="0" />
+                                <span class="amount-suffix">원</span>
+                            </div>
+                            <div class="quick-amounts">
+                                <button class="quick-btn" onclick="setAmount(1000000)">100만</button>
+                                <button class="quick-btn" onclick="setAmount(5000000)">500만</button>
+                                <button class="quick-btn" onclick="setAmount(10000000)">1,000만</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-large" onclick="executeTransfer()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                            암호화 송금 실행
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settlement Tab -->
+                <div class="tab-content" id="settlementTab">
+                    <div class="settlement-info">
+                        <div class="settlement-header">
+                            <span class="settlement-icon">🔄</span>
+                            <h3>일괄 정산 (Netting)</h3>
+                        </div>
+                        <p class="settlement-desc">모든 기관 간 채권/채무를 암호문 상태로 계산하여 순 정산액만 이체합니다.</p>
+                    </div>
+                    <div class="settlement-preview" id="settlementPreview">
+                        <div class="preview-placeholder">
+                            거래 내역이 쌓이면 정산 미리보기가 표시됩니다
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="executeSettlement()" id="settlementBtn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/>
+                        </svg>
+                        암호화 정산 실행
+                    </button>
+                </div>
+
+                <!-- Transaction Log -->
+                <div class="transaction-log">
+                    <div class="log-header">
+                        <h3>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                            </svg>
+                            거래 로그 (암호화)
+                        </h3>
+                        <span class="log-count" id="logCount">0건</span>
+                    </div>
+                    <div class="log-list" id="transactionLog">
+                        <div class="log-empty">
+                            거래를 실행하면 암호화된 로그가 기록됩니다
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: GovSplit & Verification -->
+            <section class="panel govsplit-panel">
+                <div class="panel-header">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        GovSplit KMS
+                    </h2>
+                </div>
+
+                <!-- KMS Nodes -->
+                <div class="kms-nodes">
+                    <div class="nodes-header">
+                        <span class="nodes-title">분산 승인 노드 (n=6)</span>
+                        <span class="nodes-status" id="nodesStatus">대기 중</span>
+                    </div>
+                    <div class="nodes-grid" id="nodesGrid">
+                        <!-- Nodes will be generated -->
+                    </div>
+                    <div class="threshold-info">
+                        <span class="threshold-label">열람 임계값</span>
+                        <span class="threshold-value">⌈n/3⌉ = <strong>2</strong>개 노드 승인 필요</span>
+                    </div>
+                </div>
+
+                <!-- Disclosure Request -->
+                <div class="disclosure-section">
+                    <div class="section-header">
+                        <h3>🔓 열람 요청</h3>
+                        <span class="section-badge">Selective Disclosure</span>
+                    </div>
+                    <div class="disclosure-form">
+                        <div class="form-group">
+                            <label>열람 대상</label>
+                            <select id="disclosureTarget" class="form-select">
+                                <option value="">계정 선택</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>열람 사유</label>
+                            <select id="disclosureReason" class="form-select">
+                                <option value="audit">감사 요청</option>
+                                <option value="investigation">수사 협조</option>
+                                <option value="dispute">분쟁 조정</option>
+                                <option value="recovery">키 분실 복구</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-warning btn-large" onclick="requestDisclosure()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            열람 승인 요청
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Disclosure Result -->
+                <div class="disclosure-result" id="disclosureResult" style="display: none;">
+                    <div class="result-header">
+                        <span class="result-icon">✅</span>
+                        <span class="result-title">열람 승인 완료</span>
+                    </div>
+                    <div class="result-content" id="disclosureContent">
+                        <!-- Disclosed info will appear here -->
+                    </div>
+                </div>
+
+                <!-- Verification -->
+                <div class="verification-section">
+                    <div class="section-header">
+                        <h3>🔍 무결성 검증</h3>
+                    </div>
+                    <div class="verify-stats" id="verifyStats">
+                        <div class="verify-item">
+                            <span class="verify-label">해시 체인</span>
+                            <span class="verify-value" id="chainLength">0 블록</span>
+                        </div>
+                        <div class="verify-item">
+                            <span class="verify-label">Merkle Root</span>
+                            <code class="verify-hash" id="merkleRoot">-</code>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" onclick="verifyIntegrity()" id="verifyBtn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22,4 12,14.01 9,11.01"/>
+                        </svg>
+                        전체 검증 실행
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Processing Modal -->
+        <div class="modal" id="processingModal">
+            <div class="modal-content modal-processing">
+                <div class="processing-animation">
+                    <div class="processing-ring"></div>
+                    <div class="processing-icon">🔐</div>
+                </div>
+                <h3 id="processingTitle">FHE16 암호화 처리 중</h3>
+                <p id="processingDesc">암호문 상태로 연산을 수행합니다...</p>
+                <div class="processing-steps" id="processingSteps">
+                    <!-- Steps will be shown here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Approval Modal -->
+        <div class="modal" id="approvalModal">
+            <div class="modal-content modal-approval">
+                <div class="modal-header">
+                    <h3>🔑 GovSplit 승인 프로세스</h3>
+                    <button class="modal-close" onclick="closeApprovalModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="approvalBody">
+                    <!-- Approval content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <span class="footer-brand">IRONVEIL Vault™ Demo v1.0</span>
+                <span class="footer-divider">|</span>
+                <span class="footer-tagline">"No One Sees. Only Due Process."</span>
+            </div>
+            <div class="footer-right">
+                <span class="crypto-badge">
+                    <span class="badge-icon">🔐</span>
+                    FHE16 + AES-256-GCM
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
