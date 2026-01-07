@@ -30,6 +30,12 @@ const layerList = document.getElementById('layerList');
 const layerInfoArea = document.getElementById('layerInfoArea');
 const encryptedLayersList = document.getElementById('encryptedLayersList');
 const plainLayersList = document.getElementById('plainLayersList');
+const queueStatus = document.getElementById('queueStatus');
+const queueLength = document.getElementById('queueLength');
+const queueProcessing = document.getElementById('queueProcessing');
+
+// Queue polling interval
+let queuePollInterval = null;
 
 // CNN Layer names
 const CNN_LAYERS = ['Input', 'Conv', 'ReLU', 'Pool', 'FC'];
@@ -253,6 +259,10 @@ async function runInference() {
         } else {
             // Real API call with encryption settings
             const endpoint = apiEndpoint.value.trim() || 'http://localhost:3001';
+
+            // Start polling queue status
+            startQueuePolling(endpoint);
+
             const response = await fetch(`${endpoint}/api/infer-sync`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -262,6 +272,9 @@ async function runInference() {
                     encrypted_layers: effectiveEncryptedLayers
                 })
             });
+
+            // Stop polling when done
+            stopQueuePolling();
 
             if (!response.ok) {
                 throw new Error(`API error: ${response.status}`);
@@ -274,8 +287,58 @@ async function runInference() {
     } catch (error) {
         console.error('Inference error:', error);
         setStatus('error', `Error: ${error.message}`);
+        stopQueuePolling();
     } finally {
         inferBtn.disabled = false;
+        hideQueueStatus();
+    }
+}
+
+// Queue status polling
+function startQueuePolling(endpoint) {
+    showQueueStatus();
+    pollQueueStatus(endpoint);
+    queuePollInterval = setInterval(() => pollQueueStatus(endpoint), 1000);
+}
+
+function stopQueuePolling() {
+    if (queuePollInterval) {
+        clearInterval(queuePollInterval);
+        queuePollInterval = null;
+    }
+}
+
+async function pollQueueStatus(endpoint) {
+    try {
+        const response = await fetch(`${endpoint}/api/queue`);
+        if (response.ok) {
+            const data = await response.json();
+            updateQueueDisplay(data);
+        }
+    } catch (e) {
+        // Ignore polling errors
+    }
+}
+
+function showQueueStatus() {
+    if (queueStatus) queueStatus.style.display = 'block';
+}
+
+function hideQueueStatus() {
+    if (queueStatus) queueStatus.style.display = 'none';
+}
+
+function updateQueueDisplay(data) {
+    if (queueLength) {
+        queueLength.textContent = data.queue_length;
+    }
+    if (queueProcessing) {
+        if (data.is_processing && data.current_task) {
+            const elapsed = Math.round(data.current_task.elapsed_ms / 1000);
+            queueProcessing.textContent = `Processing (${elapsed}s)`;
+        } else {
+            queueProcessing.textContent = 'Idle';
+        }
     }
 }
 

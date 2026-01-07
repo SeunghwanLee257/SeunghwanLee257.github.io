@@ -576,6 +576,36 @@
         .layer-info-value.plain {
             color: #ff5252;
         }
+
+        /* Queue status */
+        .queue-status {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .queue-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .queue-label {
+            color: #8892b0;
+        }
+
+        .queue-value {
+            font-weight: 600;
+            color: #ffc107;
+        }
+
+        .queue-processing {
+            color: #00ff88;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -646,6 +676,14 @@
 
                 <div id="statusArea" class="status info">
                     <span>Draw a digit and click "Run Encrypted Inference"</span>
+                </div>
+
+                <div class="queue-status" id="queueStatus" style="display: none;">
+                    <div class="queue-info">
+                        <span class="queue-label">Server Queue:</span>
+                        <span class="queue-value" id="queueLength">0</span>
+                        <span class="queue-processing" id="queueProcessing"></span>
+                    </div>
                 </div>
 
                 <div class="result-area" id="resultArea">
