@@ -287,15 +287,15 @@ async function runInference() {
     } catch (error) {
         console.error('Inference error:', error);
         setStatus('error', `Error: ${error.message}`);
-        stopQueuePolling();
     } finally {
         inferBtn.disabled = false;
-        hideQueueStatus();
+        stopQueuePolling();
     }
 }
 
 // Queue status polling
 function startQueuePolling(endpoint) {
+    stopQueuePolling(); // Clear any existing interval first
     showQueueStatus();
     pollQueueStatus(endpoint);
     queuePollInterval = setInterval(() => pollQueueStatus(endpoint), 1000);
@@ -306,6 +306,7 @@ function stopQueuePolling() {
         clearInterval(queuePollInterval);
         queuePollInterval = null;
     }
+    hideQueueStatus();
 }
 
 async function pollQueueStatus(endpoint) {
