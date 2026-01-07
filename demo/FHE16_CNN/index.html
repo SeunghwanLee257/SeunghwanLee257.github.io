@@ -449,6 +449,133 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        /* Encryption Settings */
+        .encryption-settings {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 12px;
+        }
+
+        .encryption-settings h3 {
+            font-size: 1rem;
+            color: #00d9ff;
+            margin-bottom: 15px;
+        }
+
+        .layer-selector {
+            margin-top: 15px;
+        }
+
+        .layer-selector label {
+            display: block;
+            margin-bottom: 10px;
+            color: #8892b0;
+        }
+
+        .layer-selector .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            -webkit-appearance: none;
+            margin-bottom: 15px;
+        }
+
+        .layer-selector .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 217, 255, 0.5);
+        }
+
+        .layer-selector .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            cursor: pointer;
+            border: none;
+        }
+
+        .layer-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .layer-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: rgba(255, 82, 82, 0.1);
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            color: #ff5252;
+            transition: all 0.3s ease;
+        }
+
+        .layer-item.encrypted {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+        }
+
+        .layer-item .layer-icon {
+            margin-right: 4px;
+        }
+
+        .layer-hint {
+            font-size: 0.8rem;
+            color: #6a7280;
+            margin-top: 10px;
+        }
+
+        .layer-selector.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Layer info in results */
+        .layer-info {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .layer-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .layer-info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .layer-info-label {
+            color: #8892b0;
+        }
+
+        .layer-info-value {
+            color: #e8e8e8;
+        }
+
+        .layer-info-value.encrypted {
+            color: #00ff88;
+        }
+
+        .layer-info-value.plain {
+            color: #ff5252;
+        }
     </style>
 </head>
 <body>
@@ -490,6 +617,27 @@
                         <div class="toggle active" id="mockToggle"></div>
                     </div>
                 </div>
+
+                <!-- Encryption Settings -->
+                <div class="encryption-settings">
+                    <h3>Encryption Settings</h3>
+                    <div class="setting-row">
+                        <label>Use FHE Encryption</label>
+                        <div class="toggle active" id="encryptionToggle"></div>
+                    </div>
+                    <div class="layer-selector" id="layerSelectorContainer">
+                        <label>Encrypted Layers: <span id="layerCountLabel">5</span> / 5</label>
+                        <input type="range" id="encryptedLayersSlider" min="0" max="5" value="5" class="slider">
+                        <div class="layer-list" id="layerList">
+                            <div class="layer-item encrypted" data-layer="0"><span class="layer-icon">🔐</span> Input</div>
+                            <div class="layer-item encrypted" data-layer="1"><span class="layer-icon">🔐</span> Conv</div>
+                            <div class="layer-item encrypted" data-layer="2"><span class="layer-icon">🔐</span> ReLU</div>
+                            <div class="layer-item encrypted" data-layer="3"><span class="layer-icon">🔐</span> Pool</div>
+                            <div class="layer-item encrypted" data-layer="4"><span class="layer-icon">🔐</span> FC</div>
+                        </div>
+                        <p class="layer-hint">Layers 0 to N-1 are encrypted. After decryption, remaining layers run in plaintext.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Result Area -->
@@ -517,6 +665,17 @@
                     <div class="metric">
                         <div class="metric-value" id="metricEncrypted">-</div>
                         <div class="metric-label">Encrypted</div>
+                    </div>
+                </div>
+
+                <div class="layer-info" id="layerInfoArea" style="display: none;">
+                    <div class="layer-info-row">
+                        <span class="layer-info-label">Encrypted Layers:</span>
+                        <span class="layer-info-value encrypted" id="encryptedLayersList">-</span>
+                    </div>
+                    <div class="layer-info-row">
+                        <span class="layer-info-label">Plaintext Layers:</span>
+                        <span class="layer-info-value plain" id="plainLayersList">-</span>
                     </div>
                 </div>
             </div>

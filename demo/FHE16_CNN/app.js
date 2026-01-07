@@ -21,17 +21,81 @@ const metricTime = document.getElementById('metricTime');
 const metricEncrypted = document.getElementById('metricEncrypted');
 const samplesGrid = document.getElementById('samplesGrid');
 
+// Encryption settings elements
+const encryptionToggle = document.getElementById('encryptionToggle');
+const encryptedLayersSlider = document.getElementById('encryptedLayersSlider');
+const layerCountLabel = document.getElementById('layerCountLabel');
+const layerSelectorContainer = document.getElementById('layerSelectorContainer');
+const layerList = document.getElementById('layerList');
+const layerInfoArea = document.getElementById('layerInfoArea');
+const encryptedLayersList = document.getElementById('encryptedLayersList');
+const plainLayersList = document.getElementById('plainLayersList');
+
+// CNN Layer names
+const CNN_LAYERS = ['Input', 'Conv', 'ReLU', 'Pool', 'FC'];
+
 // State
 let isDrawing = false;
 let hasDrawn = false;
 let useMock = true;
+let useEncryption = true;
+let encryptedLayers = 5;
 
 // Initialize
 function init() {
     setupCanvas();
     setupEventListeners();
+    setupEncryptionSettings();
     renderConfidenceBars();
     loadSamples();
+}
+
+// Setup encryption settings
+function setupEncryptionSettings() {
+    // Encryption toggle
+    encryptionToggle.addEventListener('click', () => {
+        useEncryption = !useEncryption;
+        encryptionToggle.classList.toggle('active', useEncryption);
+        layerSelectorContainer.classList.toggle('disabled', !useEncryption);
+        updateInferButtonText();
+    });
+
+    // Layer slider
+    encryptedLayersSlider.addEventListener('input', (e) => {
+        encryptedLayers = parseInt(e.target.value);
+        layerCountLabel.textContent = encryptedLayers;
+        updateLayerList();
+    });
+
+    // Initialize layer list
+    updateLayerList();
+    updateInferButtonText();
+}
+
+// Update layer list visualization
+function updateLayerList() {
+    const layerItems = layerList.querySelectorAll('.layer-item');
+    layerItems.forEach((item, index) => {
+        const isEncrypted = index < encryptedLayers;
+        item.classList.toggle('encrypted', isEncrypted);
+        const icon = item.querySelector('.layer-icon');
+        icon.textContent = isEncrypted ? '🔐' : '📄';
+    });
+}
+
+// Update inference button text based on encryption settings
+function updateInferButtonText() {
+    const btnText = inferBtn.querySelector('span');
+    if (!useEncryption || encryptedLayers === 0) {
+        btnText.textContent = '📄';
+        inferBtn.innerHTML = '<span>📄</span> Run Plaintext Inference';
+    } else if (encryptedLayers === 5) {
+        btnText.textContent = '🔐';
+        inferBtn.innerHTML = '<span>🔐</span> Run Encrypted Inference';
+    } else {
+        btnText.textContent = '🔐';
+        inferBtn.innerHTML = `<span>🔐</span> Run Hybrid (${encryptedLayers}/5 encrypted)`;
+    }
 }
 
 // Canvas setup
@@ -133,7 +197,8 @@ function clearCanvas() {
     inferBtn.disabled = true;
     resultDigit.textContent = '?';
     metricsArea.style.display = 'none';
-    setStatus('info', 'Draw a digit and click "Run Encrypted Inference"');
+    layerInfoArea.style.display = 'none';
+    setStatus('info', 'Draw a digit and run inference');
     renderConfidenceBars();
 }
 
@@ -168,23 +233,34 @@ async function runInference() {
     if (!hasDrawn) return;
 
     const pixels = getPixelData();
+    const effectiveEncryptedLayers = useEncryption ? encryptedLayers : 0;
 
-    setStatus('processing', 'Running encrypted inference...');
+    const statusMsg = effectiveEncryptedLayers === 0
+        ? 'Running plaintext inference...'
+        : effectiveEncryptedLayers === 5
+            ? 'Running encrypted inference...'
+            : `Running hybrid inference (${effectiveEncryptedLayers}/5 layers encrypted)...`;
+
+    setStatus('processing', statusMsg);
     inferBtn.disabled = true;
 
     try {
         let result;
 
         if (useMock) {
-            // Mock inference
-            result = await mockInference(pixels);
+            // Mock inference with encryption settings
+            result = await mockInference(pixels, effectiveEncryptedLayers);
         } else {
-            // Real API call
+            // Real API call with encryption settings
             const endpoint = apiEndpoint.value.trim() || 'http://localhost:3001';
             const response = await fetch(`${endpoint}/api/infer-sync`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ pixels })
+                body: JSON.stringify({
+                    pixels,
+                    encrypted: useEncryption,
+                    encrypted_layers: effectiveEncryptedLayers
+                })
             });
 
             if (!response.ok) {
@@ -204,10 +280,12 @@ async function runInference() {
 }
 
 // Mock inference for demo
-function mockInference(pixels) {
+function mockInference(pixels, encLayers = 5) {
     return new Promise(resolve => {
-        // Simulate processing time
-        const delay = 500 + Math.random() * 1000;
+        // Simulate processing time - more time for more encrypted layers
+        const baseDelay = 100;
+        const encryptionOverhead = encLayers * 150; // ~150ms per encrypted layer
+        const delay = baseDelay + encryptionOverhead + Math.random() * 200;
 
         setTimeout(() => {
             // Simple heuristic-based prediction
@@ -258,11 +336,19 @@ function mockInference(pixels) {
             const sum = scores.reduce((a, b) => a + b, 0);
             const normalizedScores = scores.map(s => s / sum);
 
+            // Determine which layers were encrypted
+            const encryptedLayerNames = CNN_LAYERS.slice(0, encLayers);
+            const plainLayerNames = CNN_LAYERS.slice(encLayers);
+
             resolve({
                 prediction,
                 scores: normalizedScores,
                 elapsed_ms: Math.round(delay),
-                encrypted: false,
+                encrypted: encLayers > 0,
+                encrypted_layers: encLayers,
+                encrypted_layer_names: encryptedLayerNames,
+                plain_layer_names: plainLayerNames,
+                total_layers: 5,
                 mock: true
             });
         }, delay);
@@ -271,16 +357,36 @@ function mockInference(pixels) {
 
 // Display result
 function displayResult(result) {
-    const { prediction, scores, elapsed_ms, encrypted, mock } = result;
+    const {
+        prediction,
+        scores,
+        elapsed_ms,
+        encrypted,
+        mock,
+        encrypted_layers = 0,
+        encrypted_layer_names = [],
+        plain_layer_names = []
+    } = result;
 
     resultDigit.textContent = prediction;
 
+    // Set status message based on encryption mode
     if (mock) {
-        setStatus('success', 'Demo mode - using mock inference');
+        if (encrypted_layers === 0) {
+            setStatus('success', 'Demo mode - plaintext inference');
+        } else if (encrypted_layers === 5) {
+            setStatus('success', 'Demo mode - fully encrypted inference');
+        } else {
+            setStatus('success', `Demo mode - hybrid inference (${encrypted_layers}/5 layers encrypted)`);
+        }
     } else if (encrypted) {
-        setStatus('success', 'Inference completed on encrypted data!');
+        if (encrypted_layers === 5) {
+            setStatus('success', 'Inference completed on fully encrypted data!');
+        } else {
+            setStatus('success', `Hybrid inference completed (${encrypted_layers}/5 layers encrypted)`);
+        }
     } else {
-        setStatus('success', 'Inference completed');
+        setStatus('success', 'Plaintext inference completed');
     }
 
     // Update confidence bars
@@ -291,7 +397,23 @@ function displayResult(result) {
     // Show metrics
     metricsArea.style.display = 'flex';
     metricTime.textContent = `${elapsed_ms}ms`;
-    metricEncrypted.textContent = encrypted ? 'Yes' : (mock ? 'Mock' : 'No');
+
+    if (encrypted_layers === 0) {
+        metricEncrypted.textContent = 'No';
+    } else if (encrypted_layers === 5) {
+        metricEncrypted.textContent = 'Full';
+    } else {
+        metricEncrypted.textContent = `${encrypted_layers}/5`;
+    }
+
+    // Show layer info
+    layerInfoArea.style.display = 'block';
+    encryptedLayersList.textContent = encrypted_layer_names.length > 0
+        ? encrypted_layer_names.join(' → ')
+        : 'None';
+    plainLayersList.textContent = plain_layer_names.length > 0
+        ? plain_layer_names.join(' → ')
+        : 'None';
 }
 
 // Render confidence bars
