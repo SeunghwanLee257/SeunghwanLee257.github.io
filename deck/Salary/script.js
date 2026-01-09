@@ -1,6 +1,6 @@
 // Slide Navigation
 let currentSlide = 1;
-const totalSlides = 18;
+const totalSlides = 12;
 
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
@@ -120,7 +120,7 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('LatticA_Salary_Pitch_Deck.pdf');
+        pdf.save('LatticA_Salary_IR_Deck.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);

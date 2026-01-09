@@ -19,7 +19,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 18</span>
+        <span id="slideCounter">1 / 12</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -65,8 +65,8 @@
                             </div>
                             <div class="diagram-arrow">
                                 <svg width="40" height="24" viewBox="0 0 40 24">
-                                    <path d="M5 12 L30 12" stroke="#10B981" stroke-width="3"/>
-                                    <polyline points="25,7 30,12 25,17" fill="none" stroke="#10B981" stroke-width="3"/>
+                                    <path d="M5 12 L30 12" stroke="#F97316" stroke-width="3"/>
+                                    <polyline points="25,7 30,12 25,17" fill="none" stroke="#F97316" stroke-width="3"/>
                                 </svg>
                             </div>
                             <div class="diagram-item">
@@ -86,119 +86,146 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Investment Thesis -->
+            <!-- Slide 2: Problem + Evidence -->
             <div class="slide" data-slide="2">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">01</span>
-                        <span class="slide-title">Investment Thesis</span>
+                        <span class="slide-title">Problem</span>
                     </div>
-                    <h2 class="slide-headline">Payroll is <span class="highlight">transparent</span> on-chain. That's broken.</h2>
+                    <h2 class="slide-headline">On-chain payroll is <span class="highlight">publicly visible</span></h2>
 
-                    <div class="thesis-statement">
-                        <p>Payroll is one of the largest real-world transaction categories.<br>
-                        Crypto payroll is growing with stablecoins—but <span class="highlight">on-chain payroll is publicly transparent</span>,<br>
-                        which breaks compensation confidentiality.</p>
+                    <div class="evidence-section">
+                        <div class="evidence-card">
+                            <h4>What's Exposed On-Chain</h4>
+                            <div class="exposed-items">
+                                <div class="exposed-item">
+                                    <span class="exposed-label">From:</span>
+                                    <span class="exposed-value">Treasury Address</span>
+                                </div>
+                                <div class="exposed-item">
+                                    <span class="exposed-label">To:</span>
+                                    <span class="exposed-value">Recipient Wallet</span>
+                                </div>
+                                <div class="exposed-item highlight-exposed">
+                                    <span class="exposed-label">Amount:</span>
+                                    <span class="exposed-value">5,000 USDT</span>
+                                    <span class="exposed-badge">VISIBLE</span>
+                                </div>
+                                <div class="exposed-item">
+                                    <span class="exposed-label">Timestamp:</span>
+                                    <span class="exposed-value">Block #18234567</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verification-card">
+                            <h4>Anyone Can Verify</h4>
+                            <div class="verify-methods">
+                                <div class="verify-method">
+                                    <span class="method-num">1</span>
+                                    <div class="method-content">
+                                        <strong>Etherscan</strong>
+                                        <span>Token Transfers tab</span>
+                                    </div>
+                                </div>
+                                <div class="verify-method">
+                                    <span class="method-num">2</span>
+                                    <div class="method-content">
+                                        <strong>APIs</strong>
+                                        <span>Alchemy, Covalent, The Graph</span>
+                                    </div>
+                                </div>
+                                <div class="verify-method">
+                                    <span class="method-num">3</span>
+                                    <div class="method-content">
+                                        <strong>Analytics</strong>
+                                        <span>Dune, Nansen, Arkham</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="thesis-grid">
-                        <div class="thesis-card">
-                            <div class="thesis-stat">$307B</div>
-                            <p>Total Stablecoin Market Cap</p>
-                        </div>
-                        <div class="thesis-card">
-                            <div class="thesis-stat">23.6K</div>
-                            <p>Monthly Active Crypto Devs</p>
-                        </div>
-                        <div class="thesis-card">
-                            <div class="thesis-stat">$213B</div>
-                            <p>Cross-Border Payments Market</p>
-                        </div>
+                    <div class="consequence-box">
+                        <span class="consequence-icon">⚠</span>
+                        <span>Competitors see salaries → Headhunters target top earners → Security risks for high-value wallets</span>
                     </div>
 
-                    <div class="thesis-comparison">
-                        <div class="comparison-item bad">
-                            <span class="comp-label">Transparent Payroll</span>
-                            <span class="comp-icon">✗</span>
-                            <p>Salary visible to everyone</p>
-                        </div>
-                        <div class="comparison-item good">
-                            <span class="comp-label">Confidential Payroll</span>
-                            <span class="comp-icon">✓</span>
-                            <p>Private by design</p>
-                        </div>
+                    <div class="slide-refs">
+                        <span>Sources: etherscan.io/tokentxns • docs.alchemy.com • dune.com</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 3: Problem -->
+            <!-- Slide 3: Market & Competition -->
             <div class="slide" data-slide="3">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">02</span>
-                        <span class="slide-title">Problem</span>
+                        <span class="slide-title">Market</span>
                     </div>
-                    <h2 class="slide-headline">Public payroll is <span class="highlight">broken</span> for Web3</h2>
+                    <h2 class="slide-headline">$307B stablecoin market, <span class="highlight">no privacy rails</span></h2>
 
-                    <div class="problem-visual">
-                        <div class="tx-example">
-                            <div class="tx-header">On-Chain Transaction</div>
-                            <div class="tx-body">
-                                <div class="tx-row">
-                                    <span class="tx-label">From:</span>
-                                    <span class="tx-value">Company Treasury</span>
-                                </div>
-                                <div class="tx-row">
-                                    <span class="tx-label">To:</span>
-                                    <span class="tx-value">Alice.eth</span>
-                                </div>
-                                <div class="tx-row highlight-row">
-                                    <span class="tx-label">Amount:</span>
-                                    <span class="tx-value">5,000 USDT</span>
-                                    <span class="tx-badge">PUBLIC</span>
-                                </div>
-                            </div>
+                    <div class="market-stats">
+                        <div class="market-stat">
+                            <span class="stat-value">$307B</span>
+                            <span class="stat-label">Stablecoin Market Cap</span>
+                            <span class="stat-source">DefiLlama, Dec 2025</span>
+                        </div>
+                        <div class="market-stat">
+                            <span class="stat-value">$1.2B+</span>
+                            <span class="stat-label">Request Finance Volume</span>
+                            <span class="stat-source">request.finance, Nov 2025</span>
+                        </div>
+                        <div class="market-stat highlight-stat">
+                            <span class="stat-value">$100B+</span>
+                            <span class="stat-label">Safe Multisig Secured</span>
+                            <span class="stat-source">safe.global, 2025</span>
                         </div>
                     </div>
 
-                    <div class="problem-impacts">
-                        <div class="impact-item">
-                            <div class="impact-icon red">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </div>
-                            <div class="impact-text">
-                                <h4>Competitors See Everything</h4>
-                                <p>Salary data exposed to rivals</p>
-                            </div>
+                    <div class="competitor-table">
+                        <div class="comp-header">
+                            <span>Protocol</span>
+                            <span>Category</span>
+                            <span>TVL/Volume</span>
+                            <span>Privacy</span>
                         </div>
-                        <div class="impact-item">
-                            <div class="impact-icon orange">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                            </div>
-                            <div class="impact-text">
-                                <h4>Talent Poachers Target</h4>
-                                <p>Headhunters know who to approach</p>
-                            </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Superfluid</span>
+                            <span>Streaming</span>
+                            <span>~$50M TVL</span>
+                            <span class="no-privacy">✗</span>
                         </div>
-                        <div class="impact-item">
-                            <div class="impact-icon purple">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                </svg>
-                            </div>
-                            <div class="impact-text">
-                                <h4>Security Risk</h4>
-                                <p>High earners become targets</p>
-                            </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Sablier</span>
+                            <span>Streaming</span>
+                            <span>$5.6M TVL</span>
+                            <span class="no-privacy">✗</span>
                         </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Request Finance</span>
+                            <span>Invoicing</span>
+                            <span>$1.2B+ processed</span>
+                            <span class="no-privacy">✗</span>
+                        </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Safe + Modules</span>
+                            <span>Treasury</span>
+                            <span>$100B+ secured</span>
+                            <span class="no-privacy">✗</span>
+                        </div>
+                        <div class="comp-row highlight-row">
+                            <span class="comp-name">LatticA Salary</span>
+                            <span>Payroll</span>
+                            <span>—</span>
+                            <span class="has-privacy">✓ FHE+ZK</span>
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Sources: defillama.com/protocol/superfluid • defillama.com/protocol/sablier • request.finance/post/march-2025 • safe.global</span>
                     </div>
                 </div>
             </div>
@@ -210,97 +237,111 @@
                         <span class="slide-num">03</span>
                         <span class="slide-title">Why Now</span>
                     </div>
-                    <h2 class="slide-headline">Three mega-trends are <span class="highlight">converging</span></h2>
+                    <h2 class="slide-headline">Three converging <span class="highlight">mega-trends</span></h2>
 
                     <div class="trends-grid">
                         <div class="trend-card">
-                            <div class="trend-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                </svg>
-                            </div>
-                            <h4>Stablecoins ↑</h4>
-                            <p class="trend-stat">$307B market cap</p>
-                            <p>Major settlement rail for global payments</p>
+                            <div class="trend-icon">📈</div>
+                            <h4>Stablecoins Exploding</h4>
+                            <p class="trend-stat">$307B market cap (+49% YTD)</p>
+                            <p>USDT $176B, USDC $78B. Transaction volume hit $1T/month in Sep 2025.</p>
                         </div>
                         <div class="trend-card">
-                            <div class="trend-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <path d="M2 12h20"></path>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                </svg>
-                            </div>
-                            <h4>Global Hiring ↑</h4>
-                            <p class="trend-stat">$213B → $321B by 2030</p>
-                            <p>Cross-border payments exploding</p>
+                            <div class="trend-icon">🌍</div>
+                            <h4>Remote Work Standard</h4>
+                            <p class="trend-stat">Cross-border payments $213B → $321B</p>
+                            <p>Global contractor economy demands fast, borderless settlement.</p>
                         </div>
                         <div class="trend-card">
-                            <div class="trend-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                                </svg>
-                            </div>
-                            <h4>L2 Usage ↑</h4>
-                            <p class="trend-stat">$39B HR software market</p>
-                            <p>Web3 infra maturing fast</p>
+                            <div class="trend-icon">⚖️</div>
+                            <h4>Regulatory Clarity</h4>
+                            <p class="trend-stat">GENIUS Act signed July 2025</p>
+                            <p>First US federal framework for stablecoins enables institutional adoption.</p>
                         </div>
                     </div>
 
-                    <div class="why-now-quote">
-                        <p>"Traditional finance is actively investing in stablecoin rails"</p>
-                        <span class="quote-source">— Reuters, on bank investment into stablecoin settlement</span>
+                    <div class="timing-quote">
+                        <p>"Stablecoin transaction volume has surged in 2025, with September being the first month of over $1 trillion."</p>
+                        <span class="quote-source">— Decrypt, Dec 2025</span>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Sources: defillama.com/stablecoins • decrypt.co/352552 • finance.yahoo.com/news/stablecoins-2025</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 5: Solution -->
+            <!-- Slide 5: Solution + Architecture -->
             <div class="slide" data-slide="5">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">04</span>
                         <span class="slide-title">Solution</span>
                     </div>
-                    <h2 class="slide-headline">LatticA Salary = <span class="highlight">Confidential Payroll</span> for Mantle</h2>
+                    <h2 class="slide-headline">LatticA = <span class="highlight">FHE + ZK</span> Confidential Payroll</h2>
 
-                    <div class="solution-stack">
-                        <div class="stack-layer">
-                            <div class="stack-num">1</div>
-                            <div class="stack-content">
-                                <h4>FHE16 Encrypted Payslips</h4>
-                                <p>Client-side encryption; only the employee can decrypt their payslip details</p>
-                            </div>
+                    <div class="solution-flow">
+                        <div class="flow-item">
+                            <div class="flow-icon">CSV</div>
+                            <span>Payroll Data</span>
                         </div>
-                        <div class="stack-layer highlight-layer">
-                            <div class="stack-num">2</div>
-                            <div class="stack-content">
-                                <h4>ZK Privacy Pool Payouts</h4>
-                                <p>Pool-based approach (zkBob-inspired) to reduce salary visibility on-chain</p>
-                            </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item highlight-flow">
+                            <div class="flow-icon">FHE</div>
+                            <span>Encrypt Payslips</span>
                         </div>
-                        <div class="stack-layer">
-                            <div class="stack-num">3</div>
-                            <div class="stack-content">
-                                <h4>Simple Admin UX</h4>
-                                <p>Upload CSV → Create batch → Execute payouts in minutes</p>
-                            </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <div class="flow-icon">📝</div>
+                            <span>Commit</span>
                         </div>
-                        <div class="stack-layer">
-                            <div class="stack-num">4</div>
-                            <div class="stack-content">
-                                <h4>Employee Self-Service</h4>
-                                <p>Connect wallet → Decrypt payslip → Download PDF document</p>
-                            </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item highlight-flow">
+                            <div class="flow-icon">ZK</div>
+                            <span>Pool Payout</span>
                         </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <div class="flow-icon">👤</div>
+                            <span>Employee</span>
+                        </div>
+                    </div>
+
+                    <div class="what-private">
+                        <div class="private-section">
+                            <h4>What's Private</h4>
+                            <ul>
+                                <li>Individual salary amounts (FHE encrypted)</li>
+                                <li>Payment link from treasury to recipient (ZK pool)</li>
+                                <li>Payslip details (client-side decryption only)</li>
+                            </ul>
+                        </div>
+                        <div class="public-section">
+                            <h4>What's Public</h4>
+                            <ul>
+                                <li>Total batch amount (for audit/compliance)</li>
+                                <li>Commitment hash on-chain</li>
+                                <li>Pool deposit/withdrawal events</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="assumption-box">
+                        <div class="assumption-header">
+                            <span class="assumption-icon">⚠</span>
+                            <strong>Current Constraint</strong>
+                        </div>
+                        <p>ZK prover and FHE executor are currently assumed to be the same party for trust/coordination.</p>
+                        <p class="assumption-fix"><strong>Planned:</strong> Lattice-based verifiable computation to remove this assumption.</p>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Refs: eprint.iacr.org (lattice proofs) • zkbob.com (pool pattern)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 6: Product Walkthrough -->
+            <!-- Slide 6: Product Flow -->
             <div class="slide" data-slide="6">
                 <div class="slide-inner">
                     <div class="slide-header">
@@ -309,597 +350,387 @@
                     </div>
                     <h2 class="slide-headline">Two Portals, <span class="highlight">One Workflow</span></h2>
 
-                    <div class="portal-grid">
+                    <div class="dual-portal">
                         <div class="portal-card admin">
                             <div class="portal-header">
-                                <span class="portal-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="8.5" cy="7" r="4"></circle>
-                                        <polyline points="17 11 19 13 23 9"></polyline>
-                                    </svg>
-                                </span>
-                                <h4>Admin Portal</h4>
+                                <span class="portal-badge">Admin</span>
+                                <h4>Organization Portal</h4>
                             </div>
-                            <div class="portal-steps">
-                                <div class="portal-step">
-                                    <span class="step-num">1</span>
-                                    <span>Connect wallet</span>
+                            <div class="portal-flow">
+                                <div class="pflow-step">
+                                    <span class="pflow-num">1</span>
+                                    <span>Connect wallet (multisig compatible)</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">2</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">2</span>
                                     <span>Upload payroll CSV</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">3</span>
-                                    <span>Create batch (encrypt + commit)</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">3</span>
+                                    <span>Create batch → FHE encrypt → Commit</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">4</span>
-                                    <span>Execute payment</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">4</span>
+                                    <span>Execute pool deposit</span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="portal-card employee">
                             <div class="portal-header">
-                                <span class="portal-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                </span>
-                                <h4>Employee Portal</h4>
+                                <span class="portal-badge">Employee</span>
+                                <h4>Contributor Portal</h4>
                             </div>
-                            <div class="portal-steps">
-                                <div class="portal-step">
-                                    <span class="step-num">1</span>
+                            <div class="portal-flow">
+                                <div class="pflow-step">
+                                    <span class="pflow-num">1</span>
                                     <span>Connect wallet</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">2</span>
-                                    <span>View encrypted payslips</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">2</span>
+                                    <span>View encrypted payslip list</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">3</span>
-                                    <span>Decrypt locally</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">3</span>
+                                    <span>Decrypt locally (client-side)</span>
                                 </div>
-                                <div class="portal-step">
-                                    <span class="step-num">4</span>
-                                    <span>Download PDF</span>
+                                <div class="pflow-step">
+                                    <span class="pflow-num">4</span>
+                                    <span>Claim from pool / Download PDF</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="tech-stack-row">
+                        <div class="tech-chip">Next.js Frontend</div>
+                        <div class="tech-chip">Solidity Contracts</div>
+                        <div class="tech-chip">FHE16 WASM</div>
+                        <div class="tech-chip">zkBob-style Pool</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Slide 7: Architecture -->
+            <!-- Slide 7: Why Mantle -->
             <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">06</span>
-                        <span class="slide-title">Architecture</span>
-                    </div>
-                    <h2 class="slide-headline">End-to-End <span class="highlight">Privacy Pipeline</span></h2>
-
-                    <div class="arch-flow">
-                        <div class="arch-step">
-                            <div class="arch-icon">CSV</div>
-                            <span>Payroll Data</span>
-                        </div>
-                        <div class="arch-arrow">→</div>
-                        <div class="arch-step highlight-arch">
-                            <div class="arch-icon">FHE</div>
-                            <span>Encrypt</span>
-                        </div>
-                        <div class="arch-arrow">→</div>
-                        <div class="arch-step">
-                            <div class="arch-icon">📝</div>
-                            <span>Commit</span>
-                        </div>
-                        <div class="arch-arrow">→</div>
-                        <div class="arch-step highlight-arch">
-                            <div class="arch-icon">ZK</div>
-                            <span>Pool Deposit</span>
-                        </div>
-                        <div class="arch-arrow">→</div>
-                        <div class="arch-step">
-                            <div class="arch-icon">🔓</div>
-                            <span>ZK Withdraw</span>
-                        </div>
-                        <div class="arch-arrow">→</div>
-                        <div class="arch-step">
-                            <div class="arch-icon">👤</div>
-                            <span>Employee</span>
-                        </div>
-                    </div>
-
-                    <div class="tech-stack-grid">
-                        <div class="tech-item">
-                            <span class="tech-label">Frontend</span>
-                            <span class="tech-value">Next.js + Wallet</span>
-                        </div>
-                        <div class="tech-item">
-                            <span class="tech-label">Contracts</span>
-                            <span class="tech-value">Payroll + Pool</span>
-                        </div>
-                        <div class="tech-item">
-                            <span class="tech-label">FHE Runtime</span>
-                            <span class="tech-value">WASM Module</span>
-                        </div>
-                        <div class="tech-item">
-                            <span class="tech-label">Privacy</span>
-                            <span class="tech-value">zkBob Pattern</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 8: Why Mantle -->
-            <div class="slide" data-slide="8">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">07</span>
                         <span class="slide-title">Why Mantle</span>
                     </div>
-                    <h2 class="slide-headline">Mantle is the <span class="highlight">"Real Finance" L2</span></h2>
+                    <h2 class="slide-headline">Mantle: The <span class="highlight">"Real Finance"</span> L2</h2>
 
                     <div class="mantle-stats">
                         <div class="mantle-stat">
-                            <span class="stat-value">$555M</span>
+                            <span class="stat-value">$733M</span>
                             <span class="stat-label">Stablecoin Market Cap</span>
+                            <span class="stat-note">+51.7% QoQ (Q3 2025)</span>
                         </div>
                         <div class="mantle-stat">
-                            <span class="stat-value">53K</span>
-                            <span class="stat-label">Avg Daily Active Addresses</span>
+                            <span class="stat-value">$2B+</span>
+                            <span class="stat-label">TVL (ZK Rollup)</span>
+                            <span class="stat-note">World's largest ZK rollup</span>
                         </div>
                         <div class="mantle-stat highlight-stat">
                             <span class="stat-value">$3.79B</span>
                             <span class="stat-label">Ecosystem Treasury</span>
+                            <span class="stat-note">Massive growth capital</span>
                         </div>
                     </div>
 
                     <div class="mantle-reasons">
                         <div class="reason-item">
                             <span class="reason-check">✓</span>
-                            <span>EVM-compatible (Chain ID 5000) — easy Ethereum tooling</span>
+                            <span>EVM-compatible (Chain ID 5000) — seamless Ethereum tooling</span>
                         </div>
                         <div class="reason-item">
                             <span class="reason-check">✓</span>
-                            <span>Strong stablecoin base already on-chain</span>
+                            <span>Strong stablecoin base: USDT, USDe growing rapidly</span>
                         </div>
                         <div class="reason-item">
                             <span class="reason-check">✓</span>
-                            <span>Product pillar "UR" + payroll = natural distribution</span>
+                            <span>Bybit integration → instant distribution channel</span>
                         </div>
                         <div class="reason-item">
                             <span class="reason-check">✓</span>
-                            <span>Massive war chest for ecosystem growth</span>
+                            <span>OP Succinct upgrade completed → ZK validity proofs</span>
                         </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Sources: messari.io/report/state-of-mantle-q3-2025 • defillama.com/chain/mantle</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 9: Market Size -->
-            <div class="slide" data-slide="9">
+            <!-- Slide 8: Business Model + Financials -->
+            <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">08</span>
-                        <span class="slide-title">Market</span>
-                    </div>
-                    <h2 class="slide-headline">TAM → SAM → <span class="highlight">SOM</span></h2>
-
-                    <div class="market-funnel">
-                        <div class="funnel-level tam">
-                            <div class="funnel-label">TAM</div>
-                            <div class="funnel-content">
-                                <h4>Broad Payroll + Workforce Infra</h4>
-                                <div class="funnel-stats">
-                                    <span>$39B HR Software</span>
-                                    <span>$12B Outsourcing</span>
-                                    <span>$213B Cross-border</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="funnel-level sam">
-                            <div class="funnel-label">SAM</div>
-                            <div class="funnel-content">
-                                <h4>Crypto-Native + Stablecoin Payroll</h4>
-                                <div class="funnel-stats">
-                                    <span>$307B Stablecoin Supply</span>
-                                    <span>23.6K Active Devs</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="funnel-level som">
-                            <div class="funnel-label">SOM</div>
-                            <div class="funnel-content">
-                                <h4>Mantle Wedge</h4>
-                                <div class="funnel-stats">
-                                    <span>$555M Stablecoins on Mantle</span>
-                                    <span>Mantle-native DAOs/Apps</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 10: Target Customers -->
-            <div class="slide" data-slide="10">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">09</span>
-                        <span class="slide-title">Customers</span>
-                    </div>
-                    <h2 class="slide-headline">Beachhead: <span class="highlight">Mantle Ecosystem</span> Orgs</h2>
-
-                    <div class="customer-cards">
-                        <div class="customer-card">
-                            <div class="customer-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                                    <path d="M2 17l10 5 10-5"></path>
-                                    <path d="M2 12l10 5 10-5"></path>
-                                </svg>
-                            </div>
-                            <h4>DeFi Protocols</h4>
-                            <p>Contributors + ops payroll for Mantle-native apps</p>
-                        </div>
-                        <div class="customer-card">
-                            <div class="customer-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                            </div>
-                            <h4>DAOs & Grants</h4>
-                            <p>Confidential recurring payouts to contributors</p>
-                        </div>
-                        <div class="customer-card">
-                            <div class="customer-icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <path d="M2 12h20"></path>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                </svg>
-                            </div>
-                            <h4>Web3 Startups</h4>
-                            <p>Global contractors paid in stablecoins</p>
-                        </div>
-                    </div>
-
-                    <div class="why-buy">
-                        <h4>Why They Buy</h4>
-                        <div class="buy-reasons">
-                            <span>Reduce salary leakage</span>
-                            <span>Professionalize payroll ops</span>
-                            <span>Improve contributor safety</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 11: Competition -->
-            <div class="slide" data-slide="11">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">10</span>
-                        <span class="slide-title">Competition</span>
-                    </div>
-                    <h2 class="slide-headline">We sit at the <span class="highlight">intersection</span></h2>
-
-                    <div class="comp-matrix">
-                        <div class="matrix-header">
-                            <span></span>
-                            <span>Payroll Workflow</span>
-                            <span>Privacy</span>
-                            <span>Mantle-Native</span>
-                        </div>
-                        <div class="matrix-row">
-                            <span class="comp-name">Traditional EOR</span>
-                            <span class="has">✓</span>
-                            <span class="missing">✗</span>
-                            <span class="missing">✗</span>
-                        </div>
-                        <div class="matrix-row">
-                            <span class="comp-name">Treasury Tools</span>
-                            <span class="partial">~</span>
-                            <span class="missing">✗</span>
-                            <span class="partial">~</span>
-                        </div>
-                        <div class="matrix-row">
-                            <span class="comp-name">Streaming Protocols</span>
-                            <span class="has">✓</span>
-                            <span class="missing">✗</span>
-                            <span class="missing">✗</span>
-                        </div>
-                        <div class="matrix-row">
-                            <span class="comp-name">Privacy Protocols</span>
-                            <span class="missing">✗</span>
-                            <span class="has">✓</span>
-                            <span class="missing">✗</span>
-                        </div>
-                        <div class="matrix-row highlight-row">
-                            <span class="comp-name">LatticA Salary</span>
-                            <span class="has">✓</span>
-                            <span class="has">✓</span>
-                            <span class="has">✓</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 12: Business Model -->
-            <div class="slide" data-slide="12">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">11</span>
+                        <span class="slide-num">07</span>
                         <span class="slide-title">Business Model</span>
                     </div>
-                    <h2 class="slide-headline">Protocol Fee + SaaS + <span class="highlight">Licensing</span></h2>
+                    <h2 class="slide-headline">Protocol Fee + <span class="highlight">SaaS Hybrid</span></h2>
 
-                    <div class="biz-model-cards">
+                    <div class="biz-model-grid">
                         <div class="biz-card">
                             <div class="biz-icon">%</div>
                             <h4>Protocol Fee</h4>
-                            <p class="biz-rate">10-30 bps</p>
-                            <p>On payroll volume processed</p>
+                            <p class="biz-rate">15-25 bps</p>
+                            <p>On payroll volume processed through privacy pool</p>
                         </div>
                         <div class="biz-card">
                             <div class="biz-icon">$</div>
                             <h4>SaaS Fee</h4>
                             <p class="biz-rate">$5/seat/mo</p>
-                            <p>Per active employee/contributor</p>
+                            <p>Per active contributor on payroll</p>
                         </div>
                         <div class="biz-card">
-                            <div class="biz-icon">📄</div>
-                            <h4>License</h4>
-                            <p class="biz-rate">BSL 1.1</p>
-                            <p>Commercial use requires license</p>
-                        </div>
-                    </div>
-
-                    <div class="biz-addons">
-                        <span class="addon">Compliance integrations</span>
-                        <span class="addon">Relayer SLA</span>
-                        <span class="addon">Reporting</span>
-                        <span class="addon">Accounting exports</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 13: GTM -->
-            <div class="slide" data-slide="13">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">12</span>
-                        <span class="slide-title">Go-To-Market</span>
-                    </div>
-                    <h2 class="slide-headline"><span class="highlight">Mantle-First</span> Strategy</h2>
-
-                    <div class="gtm-phases">
-                        <div class="gtm-phase active-phase">
-                            <div class="phase-badge">Phase 1</div>
-                            <div class="phase-period">0-6 months</div>
-                            <h4>Ecosystem Wedge</h4>
-                            <ul>
-                                <li>10-20 Mantle design partners</li>
-                                <li>"Payroll in a day" onboarding</li>
-                                <li>Partner with Mantle grants/accelerators</li>
-                            </ul>
-                        </div>
-                        <div class="gtm-phase">
-                            <div class="phase-badge">Phase 2</div>
-                            <div class="phase-period">6-18 months</div>
-                            <h4>Broader Web3</h4>
-                            <ul>
-                                <li>Multisig + accounting integrations</li>
-                                <li>Community distribution</li>
-                                <li>Mantle flagship use case</li>
-                            </ul>
-                        </div>
-                        <div class="gtm-phase">
-                            <div class="phase-badge">Phase 3</div>
-                            <div class="phase-period">18+ months</div>
+                            <div class="biz-icon">🏢</div>
                             <h4>Enterprise</h4>
-                            <ul>
-                                <li>Compliance + audit-ready</li>
-                                <li>Fiat/stablecoin bridges</li>
-                                <li>UR integration</li>
-                            </ul>
+                            <p class="biz-rate">Custom</p>
+                            <p>Dedicated relayer, SLA, compliance add-ons</p>
+                        </div>
+                    </div>
+
+                    <div class="financial-projection">
+                        <h4>3-Year Projection (Base Case)</h4>
+                        <div class="fin-table">
+                            <div class="fin-header">
+                                <span></span>
+                                <span>2026</span>
+                                <span>2027</span>
+                                <span>2028</span>
+                            </div>
+                            <div class="fin-row">
+                                <span class="fin-label">Organizations</span>
+                                <span>50</span>
+                                <span>200</span>
+                                <span>600</span>
+                            </div>
+                            <div class="fin-row">
+                                <span class="fin-label">Contributors</span>
+                                <span>2,500</span>
+                                <span>10,000</span>
+                                <span>30,000</span>
+                            </div>
+                            <div class="fin-row">
+                                <span class="fin-label">Payroll Volume</span>
+                                <span>$180M</span>
+                                <span>$780M</span>
+                                <span>$2.52B</span>
+                            </div>
+                            <div class="fin-row highlight-fin">
+                                <span class="fin-label">Annual Revenue</span>
+                                <span>$600K</span>
+                                <span>$2.55M</span>
+                                <span>$8.10M</span>
+                            </div>
+                        </div>
+                        <div class="fin-assumptions">
+                            <span>Assumptions: 20 bps take rate, $5/seat/mo, avg $6K/mo salary</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 14: Financials -->
-            <div class="slide" data-slide="14">
+            <!-- Slide 9: GTM + Roadmap -->
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">13</span>
-                        <span class="slide-title">Financials</span>
-                    </div>
-                    <h2 class="slide-headline">3-Year <span class="highlight">Base Case</span></h2>
-
-                    <div class="financial-table">
-                        <div class="fin-header">
-                            <span></span>
-                            <span>2026</span>
-                            <span>2027</span>
-                            <span>2028</span>
-                        </div>
-                        <div class="fin-row">
-                            <span class="fin-label">Organizations</span>
-                            <span>50</span>
-                            <span>200</span>
-                            <span>600</span>
-                        </div>
-                        <div class="fin-row">
-                            <span class="fin-label">Contributors</span>
-                            <span>2,500</span>
-                            <span>10,000</span>
-                            <span>30,000</span>
-                        </div>
-                        <div class="fin-row">
-                            <span class="fin-label">Payroll Volume</span>
-                            <span>$180M</span>
-                            <span>$780M</span>
-                            <span>$2.52B</span>
-                        </div>
-                        <div class="fin-row highlight-fin">
-                            <span class="fin-label">Total Revenue</span>
-                            <span>$600K</span>
-                            <span>$2.55M</span>
-                            <span>$8.10M</span>
-                        </div>
-                    </div>
-
-                    <div class="fin-assumptions">
-                        <span>Protocol: 25 bps</span>
-                        <span>SaaS: $5/seat/mo</span>
-                        <span>Avg salary: $6-7K/mo</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 15: Value to Mantle -->
-            <div class="slide" data-slide="15">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">14</span>
-                        <span class="slide-title">Ecosystem Impact</span>
-                    </div>
-                    <h2 class="slide-headline">Value to <span class="highlight">Mantle</span></h2>
-
-                    <div class="impact-message">
-                        <p>LatticA Salary is not just a dApp—it's a <span class="highlight">stablecoin utility layer</span> that drives real usage.</p>
-                    </div>
-
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <span class="kpi-label">Volume Retained</span>
-                            <span class="kpi-value">$180M → $2.5B</span>
-                            <span class="kpi-desc">Payroll stays on Mantle</span>
-                        </div>
-                        <div class="kpi-card">
-                            <span class="kpi-label">Monthly Tx</span>
-                            <span class="kpi-value">2.5K → 30.6K</span>
-                            <span class="kpi-desc">Recurring payroll cycles</span>
-                        </div>
-                        <div class="kpi-card">
-                            <span class="kpi-label">Active Accounts</span>
-                            <span class="kpi-value">2.5K → 30K</span>
-                            <span class="kpi-desc">Real users, real value</span>
-                        </div>
-                    </div>
-
-                    <div class="mantle-narrative">
-                        <p>Flagship "real-world finance" narrative for Mantle distribution</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 16: Roadmap -->
-            <div class="slide" data-slide="16">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">15</span>
+                        <span class="slide-num">08</span>
                         <span class="slide-title">Roadmap</span>
                     </div>
-                    <h2 class="slide-headline">From Hackathon to <span class="highlight">Mainnet</span></h2>
+                    <h2 class="slide-headline"><span class="highlight">Mantle-First</span> Go-To-Market</h2>
 
-                    <div class="roadmap-timeline">
-                        <div class="timeline-item done">
-                            <div class="timeline-marker">✓</div>
-                            <div class="timeline-content">
-                                <h4>Prototype</h4>
-                                <p>Mantle Hackathon 2025<br>Frontend + Contracts + FHE</p>
+                    <div class="roadmap-phases">
+                        <div class="phase-card active-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 1</span>
+                                <span class="phase-time">Q1-Q2 2026</span>
                             </div>
+                            <h4>Ecosystem Wedge</h4>
+                            <ul>
+                                <li>Security audit (Quantstamp/Trail of Bits tier)</li>
+                                <li>10-20 Mantle design partners</li>
+                                <li>Mainnet launch on Mantle</li>
+                            </ul>
                         </div>
-                        <div class="timeline-item current">
-                            <div class="timeline-marker">→</div>
-                            <div class="timeline-content">
-                                <h4>Security</h4>
-                                <p>Audit + Key management<br>Threshold / split key</p>
+                        <div class="phase-card">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 2</span>
+                                <span class="phase-time">Q3-Q4 2026</span>
                             </div>
+                            <h4>Scale</h4>
+                            <ul>
+                                <li>Safe multisig integration</li>
+                                <li>Accounting exports (Quickbooks, Xero)</li>
+                                <li>Community distribution via Mantle channels</li>
+                            </ul>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker">○</div>
-                            <div class="timeline-content">
-                                <h4>Mainnet</h4>
-                                <p>Privacy rail integration<br>Self-serve onboarding</p>
+                        <div class="phase-card">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 3</span>
+                                <span class="phase-time">2027+</span>
                             </div>
+                            <h4>Enterprise</h4>
+                            <ul>
+                                <li>Multi-chain expansion</li>
+                                <li>Fiat on/off ramp partnerships</li>
+                                <li>Compliance module (KYC/AML optional)</li>
+                            </ul>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker">○</div>
-                            <div class="timeline-content">
-                                <h4>Integrations</h4>
-                                <p>Multisig, accounting<br>Reporting exports</p>
-                            </div>
-                        </div>
+                    </div>
+
+                    <div class="milestone-highlight">
+                        <span class="milestone-icon">✓</span>
+                        <span>Current: Prototype complete (Mantle Hackathon 2025) — Frontend + Contracts + FHE module</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 17: Ask -->
-            <div class="slide" data-slide="17">
+            <!-- Slide 10: Competitors Deep Dive -->
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">16</span>
+                        <span class="slide-num">09</span>
+                        <span class="slide-title">Competition</span>
+                    </div>
+                    <h2 class="slide-headline">We fill the <span class="highlight">privacy gap</span></h2>
+
+                    <div class="competitor-deep">
+                        <div class="comp-deep-card">
+                            <div class="comp-deep-header">
+                                <span class="comp-deep-name">Superfluid</span>
+                                <span class="comp-deep-cat">Streaming</span>
+                            </div>
+                            <p>Real-time token streaming with per-second settlement. Used for salaries, subscriptions, rewards.</p>
+                            <div class="comp-deep-stats">
+                                <span>~$50M TVL</span>
+                                <span>Polygon, Optimism, Arbitrum</span>
+                            </div>
+                            <div class="comp-gap">Gap: All streams publicly visible</div>
+                        </div>
+
+                        <div class="comp-deep-card">
+                            <div class="comp-deep-header">
+                                <span class="comp-deep-name">Sablier</span>
+                                <span class="comp-deep-cat">Vesting/Payroll</span>
+                            </div>
+                            <p>Token streaming for vesting, payroll, airdrops. Progressive unlock over time.</p>
+                            <div class="comp-deep-stats">
+                                <span>$5.6M TVL</span>
+                                <span>Multi-chain EVM</span>
+                            </div>
+                            <div class="comp-gap">Gap: Stream amounts on-chain</div>
+                        </div>
+
+                        <div class="comp-deep-card">
+                            <div class="comp-deep-header">
+                                <span class="comp-deep-name">Request Finance</span>
+                                <span class="comp-deep-cat">Invoicing</span>
+                            </div>
+                            <p>Crypto invoicing + payment processing. 100K+ payments, $1.2B+ volume.</p>
+                            <div class="comp-deep-stats">
+                                <span>$1.2B processed</span>
+                                <span>25+ chains</span>
+                            </div>
+                            <div class="comp-gap">Gap: Invoice payments transparent</div>
+                        </div>
+
+                        <div class="comp-deep-card">
+                            <div class="comp-deep-header">
+                                <span class="comp-deep-name">Safe + Modules</span>
+                                <span class="comp-deep-cat">Treasury</span>
+                            </div>
+                            <p>Multisig treasury management. Used by EF, Uniswap DAO, Lido for billions.</p>
+                            <div class="comp-deep-stats">
+                                <span>$100B+ secured</span>
+                                <span>Industry standard</span>
+                            </div>
+                            <div class="comp-gap">Gap: All outflows visible on Etherscan</div>
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Sources: defillama.com • superfluid.finance • sablier.com • request.finance • safe.global</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Team -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title">Team</span>
+                    </div>
+                    <h2 class="slide-headline">Cryptography + <span class="highlight">Execution</span></h2>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-avatar">SL</div>
+                            <div class="team-info">
+                                <h4>Seunghwan Lee</h4>
+                                <span class="team-role">CEO</span>
+                                <p>Ph.D, Hanyang University, Korea (2019-2025)<br>Cryptography & Applied Security</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">DK</div>
+                            <div class="team-info">
+                                <h4>Dohyuk Kim</h4>
+                                <span class="team-role">CTO</span>
+                                <p>Ph.D Candidate, Hanyang University (2023-)<br>FHE Implementation & Optimization</p>
+                            </div>
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">YH</div>
+                            <div class="team-info">
+                                <h4>Yunsik Ham</h4>
+                                <span class="team-role">Web3 Developer</span>
+                                <p>Full-stack Web3 Engineering<br>Smart Contracts & Frontend</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="why-us-box">
+                        <h4>Why We Win</h4>
+                        <p>Deep cryptographic expertise (Ph.D-level FHE/ZK research) + shipping velocity (prototype → hackathon → mainnet in 6 months)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Ask -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
                         <span class="slide-title">Ask</span>
                     </div>
                     <h2 class="slide-headline">Partnership <span class="highlight">Request</span></h2>
 
                     <div class="ask-grid">
-                        <div class="ask-card what-we-need">
+                        <div class="ask-card what-need">
                             <h4>What We Need</h4>
                             <ul>
-                                <li>Ecosystem grant for audited mainnet release</li>
-                                <li>Co-marketing + distribution (UR, partners)</li>
+                                <li>Ecosystem grant for security audit + mainnet</li>
+                                <li>Co-marketing via Mantle channels</li>
                                 <li>Intros to top Mantle protocols as design partners</li>
                             </ul>
                         </div>
-                        <div class="ask-card what-mantle-gets">
+                        <div class="ask-card what-give">
                             <h4>What Mantle Gets</h4>
                             <ul>
-                                <li>High-signal real-world use case</li>
-                                <li>Stablecoins + privacy flagship</li>
-                                <li>Measurable KPIs: volume + active accounts</li>
+                                <li>Flagship "real-world finance" use case</li>
+                                <li>Stablecoin utility layer → volume retention</li>
+                                <li>Measurable KPIs: $180M→$2.5B payroll on Mantle</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="ask-cta">
                         <p>Let's make Mantle the home of <span class="highlight">confidential payroll</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 18: Risks & Contact -->
-            <div class="slide" data-slide="18">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">17</span>
-                        <span class="slide-title">Appendix</span>
-                    </div>
-                    <h2 class="slide-headline">Risks & <span class="highlight">Mitigations</span></h2>
-
-                    <div class="risk-grid">
-                        <div class="risk-item">
-                            <span class="risk-name">Privacy + Regulatory</span>
-                            <span class="risk-solution">Compliance-minded rails (zkBob controls)</span>
-                        </div>
-                        <div class="risk-item">
-                            <span class="risk-name">Privacy Guarantees</span>
-                            <span class="risk-solution">Explicit definitions + E2E strategy</span>
-                        </div>
-                        <div class="risk-item">
-                            <span class="risk-name">Enterprise Requirements</span>
-                            <span class="risk-solution">SaaS + BSL licensing path</span>
-                        </div>
                     </div>
 
                     <div class="contact-footer">
@@ -916,7 +747,7 @@
                             </div>
                         </div>
                         <div class="contact-links">
-                            <span>github.com/waLLLnut/LatticA-Salary</span>
+                            <span>github.com/poppyseedDev/LatticA-Salary</span>
                             <span>Built on Mantle</span>
                         </div>
                     </div>
