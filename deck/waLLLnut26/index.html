@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>waLLLnut | IR Deck 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 15</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF 다운로드
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+            <!-- Slide 1: Cover -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="confidential-badge">CONFIDENTIAL</div>
+                    <div class="deco-line"></div>
+                    <h1 class="main-headline">waLLLnut</h1>
+                    <p class="tagline">"합의 자동화 + 감사 가능한 프라이버시"</p>
+                    <p class="sub-tagline">FHE16 기반 원장 비공개 동형암호 연산 인프라</p>
+
+                    <div class="core-value-box">
+                        <div class="value-item">
+                            <span class="value-label">우리가 파는 것</span>
+                            <span class="value-text">"정산 자동화"가 아니라 <strong>"합의 자동화"</strong></span>
+                        </div>
+                        <div class="value-divider"></div>
+                        <div class="value-item">
+                            <span class="value-label">우리가 만드는 것</span>
+                            <span class="value-text">"프라이버시"가 아니라 <strong>"컴플라이언스 가능한 프라이버시"</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="brand-tagline">
+                        <span class="highlight">Deterministic</span> Confidential Coprocessor
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Executive Summary -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title highlight">Executive Summary</span>
+                    </div>
+                    <h2 class="slide-headline">한 줄 요약</h2>
+
+                    <div class="summary-quote">
+                        waLLLnut은 FHE16 기반 <span class="highlight">"원장 비공개"</span> 동형암호 연산으로,<br>
+                        기업 간 정산과 스테이블코인 지급을 <span class="highlight">'프라이빗하지만 감사 가능한 형태'</span>로 표준화하는 회사
+                    </div>
+
+                    <div class="market-entry-grid">
+                        <div class="entry-card domestic">
+                            <div class="entry-badge">국내</div>
+                            <h4>기업 정산 검증 레이어</h4>
+                            <p>엑셀/정산 자동화가 아닌, 원장 공개 없이 합의 가능한 <strong>검증/증빙 SaaS</strong></p>
+                            <div class="entry-link">walllnut.com/deck/excel</div>
+                        </div>
+                        <div class="entry-card global">
+                            <div class="entry-badge">국외</div>
+                            <h4>Private Payroll 인프라</h4>
+                            <p>ZK + Pool + Mantle(Bybit) + FHE16 기반<br><strong>규제/감사 가능한 프라이빗 급여 지급</strong></p>
+                            <div class="entry-link">Regulated Private Payroll</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: 국내 - 문제 정의 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title highlight">Problem (국내)</span>
+                    </div>
+                    <h2 class="slide-headline">정산이 안 끝나는 이유: <span class="highlight">"계산"이 아니라 "신뢰 경계"</span></h2>
+
+                    <div class="problem-visual">
+                        <div class="company-box company-a">
+                            <span class="company-label">지급자 (A)</span>
+                            <p>B의 판매/반품/할인 원장을<br><strong>"못 받거나 못 믿음"</strong><br>(영업기밀)</p>
+                        </div>
+                        <div class="trust-gap">
+                            <svg width="80" height="80" viewBox="0 0 80 80">
+                                <circle cx="40" cy="40" r="35" fill="none" stroke="#EF4444" stroke-width="3" stroke-dasharray="10 5"/>
+                                <text x="40" y="45" text-anchor="middle" fill="#EF4444" font-size="12" font-weight="700">신뢰 경계</text>
+                            </svg>
+                        </div>
+                        <div class="company-box company-b">
+                            <span class="company-label">수령자 (B)</span>
+                            <p>A의 조건/예외/단가 정책을<br><strong>"납득하기 어려움"</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="result-box">
+                        <div class="result-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
+                        <div class="result-content">
+                            <p class="result-flow">메일 + 엑셀 + 표본감사 + 재계산 루프</p>
+                            <p class="result-impact">마감 지연 / 분쟁 / 과지급이 구조화</p>
+                        </div>
+                    </div>
+
+                    <div class="quote-box">
+                        "엑셀로 계산은 되는데, <span class="highlight">원장을 공유할 수 없어서</span> 합의가 안 된다.<br>
+                        그래서 돈/시간이 새고 분쟁이 반복된다."
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: 국내 - 솔루션 -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title highlight">Solution (국내)</span>
+                    </div>
+                    <h2 class="slide-headline">SettleProof: <span class="highlight">"교체형이 아닌 부착형"</span> 검증 레이어</h2>
+
+                    <div class="solution-arch">
+                        <div class="arch-layer">
+                            <div class="layer-num">1</div>
+                            <div class="layer-content">
+                                <h4>Rule Pack</h4>
+                                <p>계약/프로모션 조건을 룰(JSON/DSL)로 표준화<br>룰 해시로 "이번 정산은 이 룰" 고정</p>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="arch-layer highlight-layer">
+                            <div class="layer-num">2</div>
+                            <div class="layer-content">
+                                <h4>Confidential Compute (FHE16)</h4>
+                                <p>민감 필드(단가/수량/마진/특약)만<br><strong>암호문 상태로 계산</strong></p>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="arch-layer">
+                            <div class="layer-num">3</div>
+                            <div class="layer-content">
+                                <h4>Proof Pack</h4>
+                                <p>룰 해시, 입력 커밋, 실행ID, 환경 다이제스트<br><strong>"감사/분쟁 대응 증빙"</strong> 패킷</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="positioning-note">
+                        <span class="note-label">포지셔닝</span>
+                        <span class="note-text">기존 ERP는 <strong>SoR</strong>(System of Record), 우리는 <strong>SoT</strong>(System of Truth/Proof) 레이어</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: 국내 - GTM -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title highlight">GTM (국내)</span>
+                    </div>
+                    <h2 class="slide-headline">"벤더가 연산" 구조 = <span class="highlight">고객 데이터는 우리에게 안 옴</span></h2>
+
+                    <div class="gtm-flow">
+                        <div class="flow-step">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>A/B 각자 데이터 추출</h4>
+                                <p>로컬 에이전트가 표준 스키마 변환</p>
+                            </div>
+                        </div>
+                        <div class="flow-connector">
+                            <svg width="40" height="24" viewBox="0 0 40 24">
+                                <path d="M5 12 L35 12" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="4 2"/>
+                                <polyline points="30,7 35,12 30,17" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="flow-step highlight-step">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>민감 필드 암호화 (FHE)</h4>
+                                <p>서명/커밋 생성 후 벤더(V)에게 전달</p>
+                            </div>
+                        </div>
+                        <div class="flow-connector">
+                            <svg width="40" height="24" viewBox="0 0 40 24">
+                                <path d="M5 12 L35 12" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="4 2"/>
+                                <polyline points="30,7 35,12 30,17" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>벤더(V)가 컨테이너 실행</h4>
+                                <p>정산 결과 + Proof Pack 출력</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="revenue-model">
+                        <h4>매출 구조 (3단)</h4>
+                        <div class="revenue-cards">
+                            <div class="revenue-card">
+                                <span class="revenue-name">Proof Pilot</span>
+                                <span class="revenue-desc">4~6주, 고정비</span>
+                                <span class="revenue-price">3,000만원/건</span>
+                            </div>
+                            <div class="revenue-card">
+                                <span class="revenue-name">SaaS 구독</span>
+                                <span class="revenue-desc">월간 정기 과금</span>
+                                <span class="revenue-price">800만원/월</span>
+                            </div>
+                            <div class="revenue-card">
+                                <span class="revenue-name">벤더 채널</span>
+                                <span class="revenue-desc">리셀/운영 수수료</span>
+                                <span class="revenue-price">수익 쉐어</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: 국외 - 문제 정의 -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title highlight">Problem (국외)</span>
+                    </div>
+                    <h2 class="slide-headline">스테이블코인 급여 = <span class="highlight">"공개 인재 DB"</span></h2>
+
+                    <div class="global-problem">
+                        <div class="problem-card">
+                            <div class="problem-icon red">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </div>
+                            <h4>급여 정보 노출</h4>
+                            <p>지급 내역이 공개되면<br>급여/보상 구조/조직 변화가<br>외부에 노출</p>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-icon orange">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h4>헤드헌터 타겟팅</h4>
+                            <p>경쟁사/헤드헌터가<br>"누구에게 얼마를 주는지"<br>기반으로 인재 공략</p>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-icon blue">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>규제/감사 요구</h4>
+                            <p>기관/규제 입장에서는<br>지급이 합법·정책 준수인지<br>증빙 필요</p>
+                        </div>
+                    </div>
+
+                    <div class="global-quote">
+                        <span class="quote-highlight">"프라이버시가 없으면 급여는 곧 '공개 인재 DB'가 된다"</span>
+                        <p>안 쓰면 헤드헌터들이 너네 직원들 다 데려간다</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: 국외 - 솔루션 -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title highlight">Solution (국외)</span>
+                    </div>
+                    <h2 class="slide-headline">Regulated Private Payroll: <span class="highlight">프라이빗 + 감사 가능</span></h2>
+
+                    <div class="tech-stack">
+                        <div class="stack-item">
+                            <div class="stack-icon zk">ZK</div>
+                            <div class="stack-content">
+                                <h4>Zero-Knowledge</h4>
+                                <p>"이 주소는 KYC/고용계약/정책을 만족한다"를<br>프라이버시 유지한 채 증명</p>
+                            </div>
+                        </div>
+                        <div class="stack-item">
+                            <div class="stack-icon pool">Pool</div>
+                            <div class="stack-content">
+                                <h4>Treasury Pool</h4>
+                                <p>기업 Treasury/지급 유동성을 풀로 관리<br>대규모 정산/지급 최적화</p>
+                            </div>
+                        </div>
+                        <div class="stack-item highlight-stack">
+                            <div class="stack-icon fhe">FHE16</div>
+                            <div class="stack-content">
+                                <h4>Confidential Compute</h4>
+                                <p>급여 산정/정책 적용/세금·공제 계산<br><strong>암호문 상태로 수행 + 감사 Proof 생성</strong></p>
+                            </div>
+                        </div>
+                        <div class="stack-item">
+                            <div class="stack-icon mantle">Mantle</div>
+                            <div class="stack-content">
+                                <h4>Settlement Layer</h4>
+                                <p>지급 실행 + 온체인 분쟁/챌린지<br>(Optimistic Challenge)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Mantle + Bybit -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title highlight">Partnership</span>
+                    </div>
+                    <h2 class="slide-headline">Why <span class="highlight">Mantle + Bybit</span></h2>
+
+                    <div class="partner-grid">
+                        <div class="partner-card mantle-card">
+                            <div class="partner-logo">Mantle</div>
+                            <ul>
+                                <li>RWA/기관 온보딩 강하게 추진 중</li>
+                                <li>Bybit과 협력/유통 레버리지</li>
+                                <li>토큰화 미국 주식(xStocks) 온체인 협업</li>
+                                <li><strong>실제 협력 중 + 라이브스트림에서 지원</strong></li>
+                            </ul>
+                        </div>
+                        <div class="partner-card bybit-card">
+                            <div class="partner-logo">Bybit</div>
+                            <ul>
+                                <li>글로벌 Top 10 거래소</li>
+                                <li>RWA 실물거래 가능</li>
+                                <li><strong>Privacy 솔루션 적극 탐색 중</strong></li>
+                                <li>규제 대응 인프라 니즈</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="partner-message">
+                        <p>"우리는 '프로토콜 하나'가 아니라,<br><span class="highlight">유동성 + 유통 + RWA 내러티브가 있는 생태계</span> 위에서 프라이버시 지급을 만든다"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Why Now -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title highlight">Why Now</span>
+                    </div>
+                    <h2 class="slide-headline">STO / Stablecoin <span class="highlight">규제 정비가 진행 중</span></h2>
+
+                    <div class="timing-grid">
+                        <div class="timing-card">
+                            <div class="timing-badge">STO</div>
+                            <h4>토큰증권 제도 정비</h4>
+                            <ul>
+                                <li>현행 자본시장 규제 틀 안에서 허용</li>
+                                <li>ATS(대체거래소) 승인 진행</li>
+                                <li>토큰증권 유통 플랫폼 선정/승인</li>
+                            </ul>
+                        </div>
+                        <div class="timing-card">
+                            <div class="timing-badge">Stablecoin</div>
+                            <h4>스테이블코인 제도화</h4>
+                            <ul>
+                                <li>원화 스테이블코인 논의</li>
+                                <li>준비금/감사/수탁 규정</li>
+                                <li>2026년 시행 스케줄</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="opportunity-box">
+                        <div class="opp-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="opp-content">
+                            <h4>기회</h4>
+                            <p>스테이블코인은 이제 '기술'이 아니라 <span class="highlight">감사/준비금/리스크 관리</span>의 문제<br>
+                            <strong>프라이빗 솔루션 부재 → 우리 밖에 없음</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Technology Moat -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title highlight">Technology</span>
+                    </div>
+                    <h2 class="slide-headline">FHE16: <span class="highlight">Deterministic Confidential Coprocessor</span></h2>
+
+                    <div class="tech-comparison">
+                        <div class="comp-header">vs ZAMA (FHE 업계 선두)</div>
+                        <div class="comp-grid">
+                            <div class="comp-item advantage">
+                                <div class="comp-label">A. 속도</div>
+                                <p>동일 보안 파라미터/워크로드에서<br><strong>더 낮은 latency/비용</strong></p>
+                                <span class="comp-stat">초고속 부트스트래핑 2.89ms</span>
+                            </div>
+                            <div class="comp-item advantage">
+                                <div class="comp-label">B. Key Size</div>
+                                <p>배포/운영(모바일/다중 노드)에서<br><strong>키 관리 부담 낮춤</strong></p>
+                                <span class="comp-stat">경량화된 키 구조</span>
+                            </div>
+                            <div class="comp-item advantage">
+                                <div class="comp-label">C. Deterministic</div>
+                                <p>크로스 디바이스 간<br><strong>결과가 동일</strong></p>
+                                <span class="comp-stat">표준화 + Optimistic Challenge 가능</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-note">
+                        <span class="note-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </span>
+                        <span>"우리는 '프라이버시'에서 끝나지 않는다. <strong>재실행 가능한 검증(Verification)</strong>까지 같이 판다"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: IP & Team -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title highlight">IP & Asset</span>
+                    </div>
+                    <h2 class="slide-headline">한양대학교 <span class="highlight">특허 매입</span> + 기술 기반</h2>
+
+                    <div class="ip-section">
+                        <div class="ip-card">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h4>특허</h4>
+                            <p>한양대학교 ERICA 캠퍼스<br>동형암호 관련 특허 매입 완료</p>
+                        </div>
+                        <div class="ip-card">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <h4>기술</h4>
+                            <p>FHE16 엔진 자체 개발<br>Deterministic Compute 구현</p>
+                        </div>
+                        <div class="ip-card">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h4>팀</h4>
+                            <p>한양대학교 ERICA 기반<br>암호학/블록체인 전문 인력</p>
+                        </div>
+                    </div>
+
+                    <div class="tips-plan">
+                        <h4>TIPS 활용 계획</h4>
+                        <p>컨트랙트 개발자 채용 → Mantle 협업 가속화</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Roadmap -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title highlight">Roadmap</span>
+                    </div>
+                    <h2 class="slide-headline">연도별 <span class="highlight">마일스톤</span></h2>
+
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-year active-year">
+                            <div class="year-badge">2026</div>
+                            <div class="year-content">
+                                <h4>생존 + 매출 발생</h4>
+                                <ul>
+                                    <li>2억 투자 + TIPS 확보</li>
+                                    <li>국내 Proof Pilot 3건 수주</li>
+                                    <li>구독 1~2건 전환</li>
+                                    <li>한양대 특허 매입 완료</li>
+                                </ul>
+                                <div class="year-goal">
+                                    <span>목표: 투자금 회수 가능성 입증</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="roadmap-year">
+                            <div class="year-badge">2027</div>
+                            <div class="year-content">
+                                <h4>글로벌 파일럿</h4>
+                                <ul>
+                                    <li>TIPS 운용 + 컨트랙트 개발자 채용</li>
+                                    <li>Mantle 기반 Design Partner 확보</li>
+                                    <li>첫 급여 지급 파일럿</li>
+                                    <li>(플랜B) Solana 런치패드 자금조달</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="roadmap-year">
+                            <div class="year-badge">2028</div>
+                            <div class="year-content">
+                                <h4>글로벌 확장</h4>
+                                <ul>
+                                    <li>Global TIPS</li>
+                                    <li>Mantle 주 협력사로 다자 투자 유치</li>
+                                    <li>프라이빗 지급 표준/API 확장</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Revenue Plan -->
+            <div class="slide" data-slide="13">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">12</span>
+                        <span class="slide-title highlight">Revenue</span>
+                    </div>
+                    <h2 class="slide-headline">2년 내 <span class="highlight">현금 3억 확보</span> 계획</h2>
+
+                    <div class="revenue-timeline">
+                        <div class="timeline-phase">
+                            <div class="phase-period">0~2개월</div>
+                            <div class="phase-content">
+                                <h4>MVP 완성</h4>
+                                <p>로컬 에이전트 / 벤더 컨테이너 / Proof Pack 포맷</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="phase-period">2~4개월</div>
+                            <div class="phase-content">
+                                <h4>채널 확보</h4>
+                                <p>채널 2곳 + 인터뷰 20건</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase highlight-phase">
+                            <div class="phase-period">4~8개월</div>
+                            <div class="phase-content">
+                                <h4>유료 전환</h4>
+                                <p>Proof Pilot 3건 → 구독 1~2건</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="phase-period">8~12개월</div>
+                            <div class="phase-content">
+                                <h4>상품화</h4>
+                                <p>OEM/리셀 + 업종 확장</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="revenue-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">2년 총매출</span>
+                            <span class="summary-value">4.62억</span>
+                        </div>
+                        <div class="summary-divider">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">현금전환율 65%</span>
+                            <span class="summary-value highlight">현금 3억</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Risk -->
+            <div class="slide" data-slide="14">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">13</span>
+                        <span class="slide-title highlight">Risk & Mitigation</span>
+                    </div>
+                    <h2 class="slide-headline">리스크 & <span class="highlight">대응</span></h2>
+
+                    <div class="risk-grid">
+                        <div class="risk-card">
+                            <div class="risk-type">국내</div>
+                            <div class="risk-item">
+                                <span class="risk-name">도입 저항 (레거시)</span>
+                                <span class="risk-solution">교체 금지, 벤더 실행 + 사이드카</span>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-name">성능 (FHE latency)</span>
+                                <span class="risk-solution">배치 정산, 민감 필드만 FHE, 캐싱</span>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-name">데이터/보안 심사</span>
+                                <span class="risk-solution">BYOK, 원문 비가시, VPC/온프렘</span>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-name">PMF</span>
+                                <span class="risk-solution">60~120일 내 유료 PoC 미달 시 피봇</span>
+                            </div>
+                        </div>
+                        <div class="risk-card">
+                            <div class="risk-type">국외</div>
+                            <div class="risk-item">
+                                <span class="risk-name">규제/세무/노무</span>
+                                <span class="risk-solution">정책/감사 Pack 모듈화</span>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-name">파트너 의존</span>
+                                <span class="risk-solution">EVM/Solana 멀티체인 확장</span>
+                            </div>
+                            <div class="risk-item">
+                                <span class="risk-name">경쟁 (Zama 등)</span>
+                                <span class="risk-solution">Deterministic + Proof Standard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Ask -->
+            <div class="slide" data-slide="15">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">14</span>
+                        <span class="slide-title highlight">Ask</span>
+                    </div>
+                    <h2 class="slide-headline">투자 요청</h2>
+
+                    <div class="ask-main">
+                        <div class="ask-amount-box">
+                            <span class="ask-label">Raise</span>
+                            <span class="ask-amount">2억원</span>
+                            <span class="ask-round">Seed + TIPS 연계</span>
+                        </div>
+
+                        <div class="use-of-funds">
+                            <h4>Use of Funds</h4>
+                            <div class="fund-items">
+                                <div class="fund-item">
+                                    <span class="fund-name">국내</span>
+                                    <span class="fund-desc">에이전트/컨테이너/Proof Pack 고도화 + 채널 세일즈</span>
+                                </div>
+                                <div class="fund-item">
+                                    <span class="fund-name">국외</span>
+                                    <span class="fund-desc">컨트랙트/프로토콜 개발자 채용, Mantle PoC</span>
+                                </div>
+                                <div class="fund-item">
+                                    <span class="fund-name">공통</span>
+                                    <span class="fund-desc">보안 심사 / 법무·회계 자문 (BYOK, 감사 대응)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="milestones-12m">
+                        <h4>12개월 Milestones</h4>
+                        <div class="milestone-items">
+                            <div class="milestone-item">유료 Proof Pilot 3건</div>
+                            <div class="milestone-item">구독 1~2건</div>
+                            <div class="milestone-item">Mantle 파일럿 1건</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-footer">
+                        <div class="brand-info">
+                            <span class="brand-name">waLLLnut</span>
+                            <span class="brand-desc">Deterministic Confidential Coprocessor</span>
+                        </div>
+                        <div class="contact-info">
+                            <span>shlee@walllnut.com</span>
+                            <span>한양대학교 ERICA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
