@@ -1391,6 +1391,149 @@ body {
     opacity: 0.9;
 }
 
+/* ========== SLIDE 16: Appendix - Benchmark ========== */
+.appendix-slide .slide-inner {
+    padding: 40px 60px;
+}
+
+.appendix-badge {
+    display: inline-block;
+    background: var(--text-light);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.benchmark-section {
+    margin-top: 20px;
+}
+
+.benchmark-table {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.bench-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 1fr;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 16px 20px;
+}
+
+.bench-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 1fr;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+}
+
+.bench-row:last-child {
+    border-bottom: none;
+}
+
+.bench-row:nth-child(even) {
+    background: var(--light-gray);
+}
+
+.bench-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.bench-value {
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+.bench-value.highlight {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 16px;
+}
+
+.bench-note {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.benchmark-conditions {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.benchmark-conditions h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.benchmark-conditions h4::before {
+    content: '⚙️';
+}
+
+.conditions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.condition-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--light-gray);
+    border-radius: 8px;
+}
+
+.condition-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 80px;
+}
+
+.condition-value {
+    font-size: 12px;
+    color: var(--text-medium);
+}
+
+.benchmark-disclaimer {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--secondary-bg);
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary);
+}
+
+.benchmark-disclaimer p {
+    font-size: 12px;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.source-note {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 12px;
+    text-align: right;
+}
+
 /* Print / PDF Styles */
 @media print {
     .controls { display: none !important; }

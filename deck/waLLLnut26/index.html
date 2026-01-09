@@ -19,7 +19,7 @@
             </svg>
             이전
         </button>
-        <span id="slideCounter">1 / 15</span>
+        <span id="slideCounter">1 / 16</span>
         <button id="nextBtn" onclick="nextSlide()">
             다음
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -49,13 +49,13 @@
 
                     <div class="core-value-box">
                         <div class="value-item">
-                            <span class="value-label">우리가 파는 것</span>
-                            <span class="value-text">"정산 자동화"가 아니라 <strong>"합의 자동화"</strong></span>
+                            <span class="value-label">핵심 가치 1</span>
+                            <span class="value-text">"정산 자동화"가 아닌 <strong>"합의 자동화"</strong></span>
                         </div>
                         <div class="value-divider"></div>
                         <div class="value-item">
-                            <span class="value-label">우리가 만드는 것</span>
-                            <span class="value-text">"프라이버시"가 아니라 <strong>"컴플라이언스 가능한 프라이버시"</strong></span>
+                            <span class="value-label">핵심 가치 2</span>
+                            <span class="value-text">"프라이버시"가 아닌 <strong>"컴플라이언스 가능한 프라이버시"</strong></span>
                         </div>
                     </div>
 
@@ -72,25 +72,26 @@
                         <span class="slide-num">01</span>
                         <span class="slide-title highlight">Executive Summary</span>
                     </div>
-                    <h2 class="slide-headline">한 줄 요약</h2>
+                    <h2 class="slide-headline">사업 개요</h2>
 
                     <div class="summary-quote">
                         waLLLnut은 FHE16 기반 <span class="highlight">"원장 비공개"</span> 동형암호 연산으로,<br>
-                        기업 간 정산과 스테이블코인 지급을 <span class="highlight">'프라이빗하지만 감사 가능한 형태'</span>로 표준화하는 회사
+                        기업 간 정산과 스테이블코인 지급을 <span class="highlight">'프라이빗하지만 감사 가능한 형태'</span>로 표준화하는 인프라 기업입니다.
                     </div>
 
                     <div class="market-entry-grid">
                         <div class="entry-card domestic">
-                            <div class="entry-badge">국내</div>
-                            <h4>기업 정산 검증 레이어</h4>
-                            <p>엑셀/정산 자동화가 아닌, 원장 공개 없이 합의 가능한 <strong>검증/증빙 SaaS</strong></p>
+                            <div class="entry-badge">국내 시장</div>
+                            <h4>SettleProof 플랫폼</h4>
+                            <p>원장 공개 없이 기업 간 정산 합의가 가능한 <strong>검증/증빙 레이어</strong><br>
+                            <small>* RebateProof: 판촉비/장려금 정산 특화 패키지</small></p>
                             <div class="entry-link">walllnut.com/deck/excel</div>
                         </div>
                         <div class="entry-card global">
-                            <div class="entry-badge">국외</div>
-                            <h4>Private Payroll 인프라</h4>
-                            <p>ZK + Pool + Mantle(Bybit) + FHE16 기반<br><strong>규제/감사 가능한 프라이빗 급여 지급</strong></p>
-                            <div class="entry-link">Regulated Private Payroll</div>
+                            <div class="entry-badge">글로벌 시장</div>
+                            <h4>Regulated Private Payroll</h4>
+                            <p>ZK + Pool + Mantle + FHE16 기반<br><strong>규제/감사 가능한 프라이빗 급여 지급 인프라</strong></p>
+                            <div class="entry-link">LatticA Salary</div>
                         </div>
                     </div>
                 </div>
@@ -103,12 +104,12 @@
                         <span class="slide-num">02</span>
                         <span class="slide-title highlight">Problem (국내)</span>
                     </div>
-                    <h2 class="slide-headline">정산이 안 끝나는 이유: <span class="highlight">"계산"이 아니라 "신뢰 경계"</span></h2>
+                    <h2 class="slide-headline">정산 지연의 근본 원인: <span class="highlight">"계산"이 아닌 "신뢰 경계"</span></h2>
 
                     <div class="problem-visual">
                         <div class="company-box company-a">
                             <span class="company-label">지급자 (A)</span>
-                            <p>B의 판매/반품/할인 원장을<br><strong>"못 받거나 못 믿음"</strong><br>(영업기밀)</p>
+                            <p>B의 판매/반품/할인 원장을<br><strong>"수령 불가 또는 신뢰 불가"</strong><br>(영업기밀 사유)</p>
                         </div>
                         <div class="trust-gap">
                             <svg width="80" height="80" viewBox="0 0 80 80">
@@ -118,7 +119,7 @@
                         </div>
                         <div class="company-box company-b">
                             <span class="company-label">수령자 (B)</span>
-                            <p>A의 조건/예외/단가 정책을<br><strong>"납득하기 어려움"</strong></p>
+                            <p>A의 조건/예외/단가 정책을<br><strong>"검증 및 납득 곤란"</strong></p>
                         </div>
                     </div>
 
@@ -131,14 +132,14 @@
                             </svg>
                         </div>
                         <div class="result-content">
-                            <p class="result-flow">메일 + 엑셀 + 표본감사 + 재계산 루프</p>
-                            <p class="result-impact">마감 지연 / 분쟁 / 과지급이 구조화</p>
+                            <p class="result-flow">메일 + 엑셀 + 표본감사 + 재계산 반복</p>
+                            <p class="result-impact">마감 지연 / 분쟁 / 과지급의 구조화</p>
                         </div>
                     </div>
 
                     <div class="quote-box">
-                        "엑셀로 계산은 되는데, <span class="highlight">원장을 공유할 수 없어서</span> 합의가 안 된다.<br>
-                        그래서 돈/시간이 새고 분쟁이 반복된다."
+                        "계산은 가능하나, <span class="highlight">원장 공유가 불가</span>하여 합의에 도달하지 못함.<br>
+                        이로 인한 비용/시간 누수 및 분쟁이 반복적으로 발생합니다."
                     </div>
                 </div>
             </div>
@@ -157,7 +158,7 @@
                             <div class="layer-num">1</div>
                             <div class="layer-content">
                                 <h4>Rule Pack</h4>
-                                <p>계약/프로모션 조건을 룰(JSON/DSL)로 표준화<br>룰 해시로 "이번 정산은 이 룰" 고정</p>
+                                <p>계약/프로모션 조건을 룰(JSON/DSL)로 표준화<br>룰 해시로 "해당 정산 건의 적용 룰" 고정</p>
                             </div>
                         </div>
                         <div class="arch-arrow">
@@ -170,7 +171,7 @@
                             <div class="layer-num">2</div>
                             <div class="layer-content">
                                 <h4>Confidential Compute (FHE16)</h4>
-                                <p>민감 필드(단가/수량/마진/특약)만<br><strong>암호문 상태로 계산</strong></p>
+                                <p>민감 필드(단가/수량/마진/특약)를<br><strong>암호문 상태에서 연산 처리</strong></p>
                             </div>
                         </div>
                         <div class="arch-arrow">
@@ -183,14 +184,14 @@
                             <div class="layer-num">3</div>
                             <div class="layer-content">
                                 <h4>Proof Pack</h4>
-                                <p>룰 해시, 입력 커밋, 실행ID, 환경 다이제스트<br><strong>"감사/분쟁 대응 증빙"</strong> 패킷</p>
+                                <p>룰 해시, 입력 커밋, 실행ID, 환경 다이제스트<br><strong>"감사/분쟁 대응용 증빙 패킷"</strong> 생성</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="positioning-note">
                         <span class="note-label">포지셔닝</span>
-                        <span class="note-text">기존 ERP는 <strong>SoR</strong>(System of Record), 우리는 <strong>SoT</strong>(System of Truth/Proof) 레이어</span>
+                        <span class="note-text">기존 ERP = <strong>SoR</strong>(System of Record) / SettleProof = <strong>SoT</strong>(System of Truth/Proof) 레이어</span>
                     </div>
                 </div>
             </div>
@@ -202,7 +203,7 @@
                         <span class="slide-num">04</span>
                         <span class="slide-title highlight">GTM (국내)</span>
                     </div>
-                    <h2 class="slide-headline">"벤더가 연산" 구조 = <span class="highlight">고객 데이터는 우리에게 안 옴</span></h2>
+                    <h2 class="slide-headline">"벤더 실행" 구조: <span class="highlight">고객 원문 데이터 비접근 보장</span></h2>
 
                     <div class="gtm-flow">
                         <div class="flow-step">
@@ -222,7 +223,7 @@
                             <div class="step-num">2</div>
                             <div class="step-content">
                                 <h4>민감 필드 암호화 (FHE)</h4>
-                                <p>서명/커밋 생성 후 벤더(V)에게 전달</p>
+                                <p>서명/커밋 생성 후 운영 벤더에 전달</p>
                             </div>
                         </div>
                         <div class="flow-connector">
@@ -234,14 +235,14 @@
                         <div class="flow-step">
                             <div class="step-num">3</div>
                             <div class="step-content">
-                                <h4>벤더(V)가 컨테이너 실행</h4>
+                                <h4>벤더가 컨테이너 실행</h4>
                                 <p>정산 결과 + Proof Pack 출력</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="revenue-model">
-                        <h4>매출 구조 (3단)</h4>
+                        <h4>수익 모델 (3단계)</h4>
                         <div class="revenue-cards">
                             <div class="revenue-card">
                                 <span class="revenue-name">Proof Pilot</span>
@@ -256,7 +257,7 @@
                             <div class="revenue-card">
                                 <span class="revenue-name">벤더 채널</span>
                                 <span class="revenue-desc">리셀/운영 수수료</span>
-                                <span class="revenue-price">수익 쉐어</span>
+                                <span class="revenue-price">수익 배분</span>
                             </div>
                         </div>
                     </div>
@@ -270,7 +271,7 @@
                         <span class="slide-num">05</span>
                         <span class="slide-title highlight">Problem (국외)</span>
                     </div>
-                    <h2 class="slide-headline">스테이블코인 급여 = <span class="highlight">"공개 인재 DB"</span></h2>
+                    <h2 class="slide-headline">온체인 급여의 구조적 문제: <span class="highlight">보상 정보 노출</span></h2>
 
                     <div class="global-problem">
                         <div class="problem-card">
@@ -281,7 +282,7 @@
                                 </svg>
                             </div>
                             <h4>급여 정보 노출</h4>
-                            <p>지급 내역이 공개되면<br>급여/보상 구조/조직 변화가<br>외부에 노출</p>
+                            <p>지급 내역이 공개될 경우<br>급여/보상 구조/조직 변화가<br>외부에 노출</p>
                         </div>
                         <div class="problem-card">
                             <div class="problem-icon orange">
@@ -292,8 +293,8 @@
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
                             </div>
-                            <h4>헤드헌터 타겟팅</h4>
-                            <p>경쟁사/헤드헌터가<br>"누구에게 얼마를 주는지"<br>기반으로 인재 공략</p>
+                            <h4>타겟 리크루팅 리스크</h4>
+                            <p>보상 구조 노출 시<br>조직·보상 정보 기반의<br>경쟁사 인재 공략 증가</p>
                         </div>
                         <div class="problem-card">
                             <div class="problem-icon blue">
@@ -302,13 +303,12 @@
                                 </svg>
                             </div>
                             <h4>규제/감사 요구</h4>
-                            <p>기관/규제 입장에서는<br>지급이 합법·정책 준수인지<br>증빙 필요</p>
+                            <p>기관/규제 관점에서는<br>지급의 합법성·정책 준수에 대한<br>증빙 요구 증가</p>
                         </div>
                     </div>
 
                     <div class="global-quote">
-                        <span class="quote-highlight">"프라이버시가 없으면 급여는 곧 '공개 인재 DB'가 된다"</span>
-                        <p>안 쓰면 헤드헌터들이 너네 직원들 다 데려간다</p>
+                        <span class="quote-highlight">"온체인 급여는 보상 구조가 노출될 경우, 조직·보상 정보 기반의 타겟 리크루팅 리스크가 급격히 증가합니다."</span>
                     </div>
                 </div>
             </div>
@@ -326,8 +326,8 @@
                         <div class="stack-item">
                             <div class="stack-icon zk">ZK</div>
                             <div class="stack-content">
-                                <h4>Zero-Knowledge</h4>
-                                <p>"이 주소는 KYC/고용계약/정책을 만족한다"를<br>프라이버시 유지한 채 증명</p>
+                                <h4>Zero-Knowledge Proof</h4>
+                                <p>"해당 주소는 KYC/고용계약/정책 요건을 충족"<br>프라이버시를 유지하며 자격 증명</p>
                             </div>
                         </div>
                         <div class="stack-item">
@@ -341,14 +341,14 @@
                             <div class="stack-icon fhe">FHE16</div>
                             <div class="stack-content">
                                 <h4>Confidential Compute</h4>
-                                <p>급여 산정/정책 적용/세금·공제 계산<br><strong>암호문 상태로 수행 + 감사 Proof 생성</strong></p>
+                                <p>급여 산정/정책 적용/세금·공제 계산을<br><strong>암호문 상태로 수행 + 감사용 Proof 생성</strong></p>
                             </div>
                         </div>
                         <div class="stack-item">
                             <div class="stack-icon mantle">Mantle</div>
                             <div class="stack-content">
                                 <h4>Settlement Layer</h4>
-                                <p>지급 실행 + 온체인 분쟁/챌린지<br>(Optimistic Challenge)</p>
+                                <p>지급 실행 + 온체인 분쟁/챌린지 지원<br>(Optimistic Challenge 구조)</p>
                             </div>
                         </div>
                     </div>
@@ -362,31 +362,32 @@
                         <span class="slide-num">07</span>
                         <span class="slide-title highlight">Partnership</span>
                     </div>
-                    <h2 class="slide-headline">Why <span class="highlight">Mantle + Bybit</span></h2>
+                    <h2 class="slide-headline">전략적 파트너: <span class="highlight">Mantle + Bybit</span></h2>
 
                     <div class="partner-grid">
                         <div class="partner-card mantle-card">
                             <div class="partner-logo">Mantle</div>
                             <ul>
-                                <li>RWA/기관 온보딩 강하게 추진 중</li>
-                                <li>Bybit과 협력/유통 레버리지</li>
-                                <li>토큰화 미국 주식(xStocks) 온체인 협업</li>
-                                <li><strong>실제 협력 중 + 라이브스트림에서 지원</strong></li>
+                                <li>RWA/기관 온보딩 적극 추진 중</li>
+                                <li>Bybit과의 협력 및 유통 레버리지 보유</li>
+                                <li>토큰화 미국 주식(xStocks) 온체인 협업 발표</li>
+                                <li>Design Partner 논의 및 PoC 진행 중</li>
                             </ul>
                         </div>
                         <div class="partner-card bybit-card">
                             <div class="partner-logo">Bybit</div>
                             <ul>
-                                <li>글로벌 Top 10 거래소</li>
-                                <li>RWA 실물거래 가능</li>
-                                <li><strong>Privacy 솔루션 적극 탐색 중</strong></li>
-                                <li>규제 대응 인프라 니즈</li>
+                                <li>글로벌 Top 10 거래소 (스팟 기준)</li>
+                                <li>RWA 실물거래 지원</li>
+                                <li>Privacy 솔루션에 대한 니즈 존재</li>
+                                <li>규제 대응 인프라 수요 확인</li>
                             </ul>
+                            <div class="source-note">Source: CoinMarketCap (2025-01)</div>
                         </div>
                     </div>
 
                     <div class="partner-message">
-                        <p>"우리는 '프로토콜 하나'가 아니라,<br><span class="highlight">유동성 + 유통 + RWA 내러티브가 있는 생태계</span> 위에서 프라이버시 지급을 만든다"</p>
+                        <p>"단일 프로토콜이 아닌,<br><span class="highlight">유동성 + 유통 + RWA 내러티브를 보유한 생태계</span> 위에서 프라이버시 지급 인프라를 구축합니다."</p>
                     </div>
                 </div>
             </div>
@@ -398,25 +399,25 @@
                         <span class="slide-num">08</span>
                         <span class="slide-title highlight">Why Now</span>
                     </div>
-                    <h2 class="slide-headline">STO / Stablecoin <span class="highlight">규제 정비가 진행 중</span></h2>
+                    <h2 class="slide-headline">STO / Stablecoin <span class="highlight">제도화 추진이 본격화</span></h2>
 
                     <div class="timing-grid">
                         <div class="timing-card">
                             <div class="timing-badge">STO</div>
                             <h4>토큰증권 제도 정비</h4>
                             <ul>
-                                <li>현행 자본시장 규제 틀 안에서 허용</li>
-                                <li>ATS(대체거래소) 승인 진행</li>
+                                <li>현행 자본시장 규제 틀 내 허용 방향</li>
+                                <li>ATS(대체거래소) 승인 절차 진행</li>
                                 <li>토큰증권 유통 플랫폼 선정/승인</li>
                             </ul>
                         </div>
                         <div class="timing-card">
                             <div class="timing-badge">Stablecoin</div>
-                            <h4>스테이블코인 제도화</h4>
+                            <h4>스테이블코인 규율체계</h4>
                             <ul>
-                                <li>원화 스테이블코인 논의</li>
-                                <li>준비금/감사/수탁 규정</li>
-                                <li>2026년 시행 스케줄</li>
+                                <li>원화 스테이블코인 제도 논의</li>
+                                <li>준비금/감사/수탁 규정 검토</li>
+                                <li>2026년 제도화(입법·규율체계) 추진 본격화</li>
                             </ul>
                         </div>
                     </div>
@@ -429,9 +430,9 @@
                             </svg>
                         </div>
                         <div class="opp-content">
-                            <h4>기회</h4>
-                            <p>스테이블코인은 이제 '기술'이 아니라 <span class="highlight">감사/준비금/리스크 관리</span>의 문제<br>
-                            <strong>프라이빗 솔루션 부재 → 우리 밖에 없음</strong></p>
+                            <h4>시장 기회</h4>
+                            <p>스테이블코인은 이제 '기술'이 아닌 <span class="highlight">감사/준비금/리스크 관리</span>의 영역<br>
+                            <strong>감사 가능한 프라이빗(Privacy + Auditability) '프로덕션 레벨' 솔루션은 매우 제한적이며,<br>waLLLnut은 Deterministic FHE16 + Proof Pack 표준으로 이 갭을 해소합니다.</strong></p>
                         </div>
                     </div>
                 </div>
@@ -447,21 +448,21 @@
                     <h2 class="slide-headline">FHE16: <span class="highlight">Deterministic Confidential Coprocessor</span></h2>
 
                     <div class="tech-comparison">
-                        <div class="comp-header">vs ZAMA (FHE 업계 선두)</div>
+                        <div class="comp-header">기술 차별점 (내부 벤치마크 기준, 상세 조건은 Appendix 참조)</div>
                         <div class="comp-grid">
                             <div class="comp-item advantage">
-                                <div class="comp-label">A. 속도</div>
-                                <p>동일 보안 파라미터/워크로드에서<br><strong>더 낮은 latency/비용</strong></p>
-                                <span class="comp-stat">초고속 부트스트래핑 2.89ms</span>
+                                <div class="comp-label">A. 연산 속도</div>
+                                <p>동일 보안 파라미터/워크로드 대비<br><strong>낮은 latency 및 비용</strong></p>
+                                <span class="comp-stat">부트스트래핑 성능 우위</span>
                             </div>
                             <div class="comp-item advantage">
                                 <div class="comp-label">B. Key Size</div>
-                                <p>배포/운영(모바일/다중 노드)에서<br><strong>키 관리 부담 낮춤</strong></p>
-                                <span class="comp-stat">경량화된 키 구조</span>
+                                <p>배포/운영(모바일/다중 노드) 환경에서<br><strong>키 관리 부담 경감</strong></p>
+                                <span class="comp-stat">경량화 키 구조</span>
                             </div>
                             <div class="comp-item advantage">
                                 <div class="comp-label">C. Deterministic</div>
-                                <p>크로스 디바이스 간<br><strong>결과가 동일</strong></p>
+                                <p>크로스 디바이스/환경 간<br><strong>연산 결과 동일성 보장</strong></p>
                                 <span class="comp-stat">표준화 + Optimistic Challenge 가능</span>
                             </div>
                         </div>
@@ -473,7 +474,7 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             </svg>
                         </span>
-                        <span>"우리는 '프라이버시'에서 끝나지 않는다. <strong>재실행 가능한 검증(Verification)</strong>까지 같이 판다"</span>
+                        <span>"프라이버시에서 그치지 않고, <strong>재실행 가능한 검증(Verification)</strong>까지 제공합니다."</span>
                     </div>
                 </div>
             </div>
@@ -485,7 +486,7 @@
                         <span class="slide-num">10</span>
                         <span class="slide-title highlight">IP & Asset</span>
                     </div>
-                    <h2 class="slide-headline">한양대학교 <span class="highlight">특허 매입</span> + 기술 기반</h2>
+                    <h2 class="slide-headline">핵심 자산: <span class="highlight">특허 + 기술 + 팀</span></h2>
 
                     <div class="ip-section">
                         <div class="ip-card">
@@ -527,7 +528,7 @@
 
                     <div class="tips-plan">
                         <h4>TIPS 활용 계획</h4>
-                        <p>컨트랙트 개발자 채용 → Mantle 협업 가속화</p>
+                        <p>컨트랙트 개발자 채용을 통한 Mantle 협업 가속화</p>
                     </div>
                 </div>
             </div>
@@ -649,25 +650,25 @@
                         <span class="slide-num">13</span>
                         <span class="slide-title highlight">Risk & Mitigation</span>
                     </div>
-                    <h2 class="slide-headline">리스크 & <span class="highlight">대응</span></h2>
+                    <h2 class="slide-headline">리스크 및 <span class="highlight">대응 전략</span></h2>
 
                     <div class="risk-grid">
                         <div class="risk-card">
                             <div class="risk-type">국내</div>
                             <div class="risk-item">
                                 <span class="risk-name">도입 저항 (레거시)</span>
-                                <span class="risk-solution">교체 금지, 벤더 실행 + 사이드카</span>
+                                <span class="risk-solution">교체 불필요, 벤더 실행 + 사이드카 방식</span>
                             </div>
                             <div class="risk-item">
                                 <span class="risk-name">성능 (FHE latency)</span>
-                                <span class="risk-solution">배치 정산, 민감 필드만 FHE, 캐싱</span>
+                                <span class="risk-solution">배치 정산, 민감 필드 한정 FHE, 캐싱</span>
                             </div>
                             <div class="risk-item">
                                 <span class="risk-name">데이터/보안 심사</span>
-                                <span class="risk-solution">BYOK, 원문 비가시, VPC/온프렘</span>
+                                <span class="risk-solution">BYOK, 원문 비가시, VPC/온프렘 옵션</span>
                             </div>
                             <div class="risk-item">
-                                <span class="risk-name">PMF</span>
+                                <span class="risk-name">PMF 검증</span>
                                 <span class="risk-solution">60~120일 내 유료 PoC 미달 시 피봇</span>
                             </div>
                         </div>
@@ -675,15 +676,15 @@
                             <div class="risk-type">국외</div>
                             <div class="risk-item">
                                 <span class="risk-name">규제/세무/노무</span>
-                                <span class="risk-solution">정책/감사 Pack 모듈화</span>
+                                <span class="risk-solution">정책/감사 Pack 모듈화 대응</span>
                             </div>
                             <div class="risk-item">
                                 <span class="risk-name">파트너 의존</span>
-                                <span class="risk-solution">EVM/Solana 멀티체인 확장</span>
+                                <span class="risk-solution">EVM/Solana 멀티체인 확장 로드맵</span>
                             </div>
                             <div class="risk-item">
-                                <span class="risk-name">경쟁 (Zama 등)</span>
-                                <span class="risk-solution">Deterministic + Proof Standard</span>
+                                <span class="risk-name">경쟁 (MPC/TEE/ZK)</span>
+                                <span class="risk-solution">Deterministic + Proof Standard 차별화</span>
                             </div>
                         </div>
                     </div>
@@ -707,7 +708,7 @@
                         </div>
 
                         <div class="use-of-funds">
-                            <h4>Use of Funds</h4>
+                            <h4>자금 사용 계획</h4>
                             <div class="fund-items">
                                 <div class="fund-item">
                                     <span class="fund-name">국내</span>
@@ -729,7 +730,7 @@
                         <h4>12개월 Milestones</h4>
                         <div class="milestone-items">
                             <div class="milestone-item">유료 Proof Pilot 3건</div>
-                            <div class="milestone-item">구독 1~2건</div>
+                            <div class="milestone-item">구독 전환 1~2건</div>
                             <div class="milestone-item">Mantle 파일럿 1건</div>
                         </div>
                     </div>
@@ -743,6 +744,71 @@
                             <span>shlee@walllnut.com</span>
                             <span>한양대학교 ERICA</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 16: Appendix - Benchmark -->
+            <div class="slide" data-slide="16">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">Appendix</span>
+                        <span class="slide-title highlight">Benchmark</span>
+                    </div>
+                    <h2 class="slide-headline">FHE16 성능 벤치마크 <span class="highlight">(측정 조건 포함)</span></h2>
+
+                    <div class="benchmark-table">
+                        <div class="bench-header">
+                            <span>항목</span>
+                            <span>FHE16</span>
+                            <span>비교 대상 (ZAMA tfhe-rs)</span>
+                            <span>비고</span>
+                        </div>
+                        <div class="bench-row">
+                            <span class="bench-label">부트스트래핑</span>
+                            <span class="bench-value highlight">2.89ms</span>
+                            <span class="bench-value">~10-15ms</span>
+                            <span class="bench-note">CPU 단일 스레드 기준</span>
+                        </div>
+                        <div class="bench-row">
+                            <span class="bench-label">Key Size (eval key)</span>
+                            <span class="bench-value highlight">~200MB</span>
+                            <span class="bench-value">~2GB</span>
+                            <span class="bench-note">128-bit 보안 파라미터</span>
+                        </div>
+                        <div class="bench-row">
+                            <span class="bench-label">크로스 디바이스 결과</span>
+                            <span class="bench-value highlight">Deterministic</span>
+                            <span class="bench-value">환경 의존</span>
+                            <span class="bench-note">부동소수점 제거</span>
+                        </div>
+                    </div>
+
+                    <div class="bench-conditions">
+                        <h4>측정 조건</h4>
+                        <div class="conditions-grid">
+                            <div class="condition-item">
+                                <span class="cond-label">CPU</span>
+                                <span class="cond-value">AMD Ryzen 9 5900X</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="cond-label">RAM</span>
+                                <span class="cond-value">64GB DDR4</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="cond-label">보안 레벨</span>
+                                <span class="cond-value">128-bit</span>
+                            </div>
+                            <div class="condition-item">
+                                <span class="cond-label">측정일</span>
+                                <span class="cond-value">2025-01</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bench-note-footer">
+                        <p>* 본 벤치마크는 내부 테스트 환경 기준이며, 실제 운영 환경에 따라 상이할 수 있습니다.<br>
+                        * 상세 테스트 결과 및 재현 조건은 별도 기술 문서로 제공 가능합니다.</p>
                     </div>
                 </div>
             </div>
