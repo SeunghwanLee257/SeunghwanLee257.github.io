@@ -8,12 +8,12 @@
 :root {
     --slide-width: 1280px;
     --slide-height: 720px;
-    --primary: #8B5CF6;
-    --primary-light: #A78BFA;
-    --primary-dark: #7C3AED;
-    --primary-bg: #EDE9FE;
-    --secondary: #F59E0B;
-    --secondary-bg: #FEF3C7;
+    --primary: #FF6A00;
+    --primary-light: #FF8533;
+    --primary-dark: #E55D00;
+    --primary-bg: #FFF4ED;
+    --secondary: #1E293B;
+    --secondary-bg: #F1F5F9;
     --accent: #10B981;
     --accent-bg: #D1FAE5;
     --white: #FFFFFF;
@@ -113,7 +113,7 @@ body {
     height: var(--slide-height);
     background: var(--light-gray);
     border-radius: 4px;
-    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 10px 40px rgba(255, 106, 0, 0.2);
     overflow: hidden;
     position: relative;
 }
@@ -166,7 +166,7 @@ body {
     margin-bottom: 24px;
 }
 
-/* ========== SLIDE 1: Cover ========== */
+/* ========== SLIDE 1: Cover (New Design) ========== */
 .title-slide {
     background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
     display: flex;
@@ -175,6 +175,7 @@ body {
     align-items: center;
     text-align: center;
     color: var(--white);
+    position: relative;
 }
 
 .confidential-badge {
@@ -190,6 +191,14 @@ body {
     letter-spacing: 2px;
 }
 
+.cover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
 .deco-line {
     width: 80px;
     height: 4px;
@@ -199,12 +208,16 @@ body {
 }
 
 .title-slide .main-headline {
-    font-size: 72px;
+    font-size: 64px;
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.2;
     color: var(--white);
-    margin: 0 0 16px;
+    margin: 0 0 20px;
     letter-spacing: -2px;
+}
+
+.title-slide .main-headline .highlight {
+    color: var(--primary);
 }
 
 .title-slide .tagline {
@@ -215,9 +228,51 @@ body {
 }
 
 .title-slide .sub-tagline {
-    font-size: 16px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 40px;
+}
+
+/* Cover Bottom Brand */
+.cover-bottom {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.brand-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.brand-mark .brand-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+.brand-mark .brand-tag {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Target Market Badge */
+.target-badge {
+    display: inline-block;
+    background: rgba(255, 106, 0, 0.2);
+    color: var(--primary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 24px;
 }
 
 .core-value-box {
@@ -267,6 +322,301 @@ body {
 
 .brand-tagline .highlight {
     color: var(--primary-light);
+}
+
+/* ========== SLIDE 2: Problem Pain Point ========== */
+.pain-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.pain-quote {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-dark);
+    text-align: center;
+    padding: 32px;
+    background: var(--white);
+    border-radius: 16px;
+    border-left: 6px solid var(--red);
+}
+
+.pain-examples {
+    display: flex;
+    gap: 20px;
+}
+
+.pain-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+}
+
+.pain-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: var(--red);
+}
+
+.pain-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.pain-card p {
+    font-size: 14px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+/* Reference Footer */
+.reference-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 60px;
+    right: 60px;
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.reference-footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.reference-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ========== SLIDE 3: Market Drivers ========== */
+.drivers-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 32px;
+}
+
+.driver-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    border-top: 4px solid var(--primary);
+}
+
+.driver-stat {
+    margin-bottom: 16px;
+}
+
+.stat-num {
+    display: block;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-medium);
+    margin-top: 8px;
+}
+
+.driver-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.driver-card p {
+    font-size: 13px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+/* ========== SLIDE 4: Solution Overview ========== */
+.solution-main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.solution-statement {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-dark);
+    text-align: center;
+    padding: 28px;
+    background: var(--primary-bg);
+    border-radius: 16px;
+    border: 2px solid var(--primary);
+}
+
+.solution-statement .highlight {
+    color: var(--primary);
+}
+
+.solution-products {
+    display: flex;
+    gap: 20px;
+}
+
+.product-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    border-top: 4px solid var(--medium-gray);
+}
+
+.product-card.domestic {
+    border-top-color: var(--accent);
+}
+
+.product-card.global {
+    border-top-color: var(--primary);
+}
+
+.product-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.product-card.domestic .product-badge {
+    background: var(--accent-bg);
+    color: var(--accent);
+}
+
+.product-card.global .product-badge {
+    background: var(--primary-bg);
+    color: var(--primary);
+}
+
+.product-card h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    font-size: 14px;
+    color: var(--text-medium);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.product-link {
+    font-size: 12px;
+    color: var(--text-light);
+    padding: 8px 12px;
+    background: var(--light-gray);
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* ========== Demo Slide Styles ========== */
+.demo-main {
+    display: flex;
+    gap: 32px;
+    margin-top: 20px;
+    height: calc(100% - 120px);
+}
+
+.demo-screenshot {
+    flex: 1.2;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--medium-gray);
+}
+
+.demo-screenshot img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+}
+
+.demo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    gap: 12px;
+}
+
+.demo-placeholder svg {
+    opacity: 0.5;
+}
+
+.demo-placeholder span {
+    font-size: 14px;
+}
+
+.demo-features {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.demo-feature {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid var(--primary);
+}
+
+.demo-feature h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.demo-feature p {
+    font-size: 13px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.demo-cta {
+    background: var(--primary);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: var(--white);
+}
+
+.demo-cta span {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* ========== SLIDE 2: Summary ========== */
@@ -448,7 +798,7 @@ body {
 }
 
 .quote-box .highlight {
-    color: var(--secondary);
+    color: var(--gold);
 }
 
 /* ========== SLIDE 4: Solution (국내) ========== */
@@ -663,8 +1013,8 @@ body {
 }
 
 .problem-icon.orange {
-    background: rgba(245, 158, 11, 0.1);
-    color: var(--secondary);
+    background: rgba(255, 106, 0, 0.1);
+    color: var(--primary);
 }
 
 .problem-icon.blue {
@@ -778,7 +1128,7 @@ body {
 }
 
 .partner-card.bybit-card {
-    border-top-color: var(--secondary);
+    border-top-color: var(--gold);
 }
 
 .partner-logo {
@@ -825,7 +1175,7 @@ body {
 }
 
 .partner-message .highlight {
-    color: var(--secondary);
+    color: var(--gold);
 }
 
 /* ========== SLIDE 9: Why Now ========== */
@@ -912,7 +1262,7 @@ body {
 }
 
 .opp-content .highlight {
-    color: var(--secondary);
+    color: var(--gold);
 }
 
 /* ========== SLIDE 10: Technology ========== */
@@ -1202,7 +1552,111 @@ body {
     color: var(--primary);
 }
 
-/* ========== SLIDE 14: Risk ========== */
+/* ========== SLIDE 14: Enterprise PoC Package ========== */
+.poc-main {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.poc-packages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.poc-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    border-left: 4px solid var(--medium-gray);
+}
+
+.poc-card.highlight {
+    border-left-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.poc-tier {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.poc-card h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.poc-card p {
+    font-size: 14px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.poc-price {
+    display: block;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--primary);
+    margin-top: 12px;
+}
+
+.poc-benefits {
+    flex: 0.8;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.poc-benefits h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.benefit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--light-gray);
+    border-radius: 8px;
+}
+
+.benefit-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--primary-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.benefit-item span {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* ========== SLIDE 14: Risk (Old) ========== */
 .risk-grid {
     display: flex;
     gap: 24px;
@@ -1501,14 +1955,16 @@ body {
     border-radius: 8px;
 }
 
-.condition-label {
+.condition-label,
+.cond-label {
     font-size: 12px;
     font-weight: 700;
     color: var(--primary);
     min-width: 80px;
 }
 
-.condition-value {
+.condition-value,
+.cond-value {
     font-size: 12px;
     color: var(--text-medium);
 }
@@ -1516,9 +1972,9 @@ body {
 .benchmark-disclaimer {
     margin-top: 20px;
     padding: 16px 20px;
-    background: var(--secondary-bg);
+    background: var(--primary-bg);
     border-radius: 8px;
-    border-left: 4px solid var(--secondary);
+    border-left: 4px solid var(--primary);
 }
 
 .benchmark-disclaimer p {
