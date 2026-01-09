@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>waLLLnut | IR Deck 2026</title>
+    <title>waLLLnut IR Deck 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="controls" id="controls">
+    <!-- Controls -->
+    <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15,18 9,12 15,6"></polyline>
+                <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
             이전
         </button>
@@ -23,390 +24,401 @@
         <button id="nextBtn" onclick="nextSlide()">
             다음
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9,18 15,12 9,6"></polyline>
+                <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
         </button>
         <button id="downloadBtn" onclick="downloadPDF()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7,10 12,15 17,10"></polyline>
+                <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            PDF 다운로드
+            PDF 저장
         </button>
     </div>
 
     <div class="deck-wrapper">
-        <div class="deck-container" id="deckContainer">
+        <div class="deck-container">
 
-            <!-- ========== Slide 1: Cover ========== -->
-            <div class="slide active" data-slide="1">
-                <div class="slide-inner cover-slide">
-                    <div class="confidential-badge">CONFIDENTIAL</div>
+            <!-- ==================== SLIDE 1: COVER ==================== -->
+            <div class="slide title-slide active" data-slide="1">
+                <div class="confidential-badge">CONFIDENTIAL</div>
 
-                    <div class="cover-top">
-                        <p class="cover-definition">원장 공개 없이 정산을 '확정'하는 합의 레이어</p>
+                <div class="cover-content">
+                    <div class="cover-product-def">
+                        원장 공개 없이 정산을 '확정'하는 합의 레이어
                     </div>
 
-                    <div class="cover-center">
-                        <h1 class="cover-slogan">정산 시간을<br><span class="highlight">90% 단축</span>합니다</h1>
-                        <p class="cover-sub">기업 간 정산 합의 · 글로벌 프라이빗 급여</p>
-                    </div>
+                    <div class="deco-line"></div>
 
-                    <div class="cover-bottom">
-                        <div class="brand-mark">
-                            <span class="brand-name">waLLLnut</span>
-                            <span class="brand-tag">Confidential Settlement Infrastructure</span>
-                        </div>
+                    <h1 class="main-headline">
+                        정산 시간을<br><span class="highlight">90%</span> 단축합니다
+                    </h1>
+
+                    <p class="sub-tagline">
+                        엑셀 대조 · 메일 왕복 · 분쟁 대응 — 이 모든 시간을 줄여드립니다
+                    </p>
+                </div>
+
+                <div class="cover-bottom">
+                    <div class="brand-mark">
+                        <span class="brand-name">waLLLnut</span>
+                        <span class="brand-tag">Confidential Settlement Infrastructure</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 2: Business Overview ========== -->
+            <!-- ==================== SLIDE 2: 사업 개요 ==================== -->
             <div class="slide" data-slide="2">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">01</span>
+                        <span class="slide-num">02</span>
                         <span class="slide-title">사업 개요</span>
                     </div>
-                    <h2 class="slide-headline">하나의 인프라, <span class="highlight">두 개의 시장</span></h2>
+
+                    <h2 class="slide-headline">
+                        복잡한 정산, <span class="highlight">하나의 흐름</span>으로
+                    </h2>
 
                     <div class="overview-flow">
                         <div class="flow-stage">
-                            <div class="stage-icon domestic-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                            <div class="stage-icon problem">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
                                 </svg>
                             </div>
-                            <h4>국내 정산</h4>
-                            <p class="stage-problem">엑셀 + 메일 + 분쟁</p>
+                            <h4>AS-IS</h4>
+                            <p>엑셀 대조<br>메일 왕복<br>수작업 분쟁 처리</p>
                         </div>
+
                         <div class="flow-arrow">
-                            <svg width="60" height="24" viewBox="0 0 60 24">
-                                <path d="M5 12 L50 12" stroke="#FF6A00" stroke-width="3"/>
-                                <polyline points="45,7 50,12 45,17" fill="none" stroke="#FF6A00" stroke-width="3"/>
+                            <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+                                <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#FF6A00" stroke-width="3"/>
                             </svg>
                         </div>
-                        <div class="flow-stage highlight-stage">
-                            <div class="stage-icon core-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+
+                        <div class="flow-stage walllnut">
+                            <div class="stage-icon highlight">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <polyline points="9 12 11 14 15 10"></polyline>
                                 </svg>
                             </div>
                             <h4>waLLLnut</h4>
-                            <p class="stage-solution">표준화된 합의 + 증빙</p>
+                            <p>자동 데이터 매칭<br>암호화 합의<br>증빙 패킷 생성</p>
                         </div>
+
                         <div class="flow-arrow">
-                            <svg width="60" height="24" viewBox="0 0 60 24">
-                                <path d="M5 12 L50 12" stroke="#FF6A00" stroke-width="3"/>
-                                <polyline points="45,7 50,12 45,17" fill="none" stroke="#FF6A00" stroke-width="3"/>
+                            <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+                                <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#FF6A00" stroke-width="3"/>
                             </svg>
                         </div>
-                        <div class="flow-stage">
-                            <div class="stage-icon global-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+
+                        <div class="flow-stage solution">
+                            <div class="stage-icon success">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <circle cx="12" cy="12" r="10"></circle>
-                                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    <polyline points="16 10 11 15 8 12"></polyline>
                                 </svg>
                             </div>
-                            <h4>글로벌 급여</h4>
-                            <p class="stage-problem">프라이빗 지급</p>
+                            <h4>TO-BE</h4>
+                            <p>표준화된 정산<br>실시간 합의<br>감사 대응 완비</p>
                         </div>
                     </div>
 
-                    <div class="market-cards">
-                        <div class="market-card">
-                            <span class="market-badge">국내</span>
+                    <div class="two-products">
+                        <div class="product-box domestic">
+                            <span class="product-badge">국내</span>
                             <h4>SettleProof</h4>
-                            <p>원장 비공개 상태로 정산 합의<br>감사 가능한 증빙 자동 생성</p>
-                            <span class="market-link">walllnut.com/demo/excel</span>
+                            <p>B2B 정산 합의 · 증빙 레이어</p>
+                            <span class="product-link">walllnut.com/demo/excel</span>
                         </div>
-                        <div class="market-card">
-                            <span class="market-badge global">글로벌</span>
+                        <div class="product-box global">
+                            <span class="product-badge">글로벌</span>
                             <h4>LatticA Salary</h4>
-                            <p>급여 금액 비공개 지급<br>규제/감사 대응 가능</p>
-                            <span class="market-link">github.com/waLLLnut/LatticA-Salary</span>
+                            <p>프라이빗 글로벌 급여 지급</p>
+                            <span class="product-link">github.com/waLLLnut/LatticA-Salary</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 3: 국내 Problem ========== -->
+            <!-- ==================== SLIDE 3: 국내 Problem ==================== -->
             <div class="slide" data-slide="3">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">02</span>
-                        <span class="slide-title">Problem (국내)</span>
+                        <span class="slide-num">03</span>
+                        <span class="slide-title">PROBLEM — 국내</span>
                     </div>
-                    <h2 class="slide-headline">정산 지연의 본질: <span class="highlight">"합의"가 병목</span></h2>
+
+                    <h2 class="slide-headline">
+                        "정산은 <span class="highlight">계산</span>이 아니라 <span class="highlight">합의</span>가 병목입니다"
+                    </h2>
 
                     <div class="problem-layout">
                         <div class="scenario-diagram">
-                            <div class="scenario-title">실제 사례: 제약 유통 정산</div>
+                            <div class="scenario-title">제약 유통 정산 시나리오</div>
                             <div class="scenario-flow">
-                                <div class="scenario-node">
-                                    <span class="node-label">제약사</span>
-                                    <span class="node-role">(지급자)</span>
+                                <div class="entity">
+                                    <div class="entity-icon mfg">제조사</div>
+                                    <span>판촉비/장려금<br>지급 기준 제시</span>
                                 </div>
-                                <div class="scenario-edge">
-                                    <span>판촉비/장려금</span>
+                                <div class="entity-arrow">→</div>
+                                <div class="entity">
+                                    <div class="entity-icon dist">도매/총판</div>
+                                    <span>반품/차감/인센티브<br>정산 요청</span>
                                 </div>
-                                <div class="scenario-node">
-                                    <span class="node-label">도매/총판</span>
-                                    <span class="node-role">(중간)</span>
-                                </div>
-                                <div class="scenario-edge">
-                                    <span>반품/차감</span>
-                                </div>
-                                <div class="scenario-node">
-                                    <span class="node-label">약국</span>
-                                    <span class="node-role">(수령자)</span>
+                                <div class="entity-arrow">→</div>
+                                <div class="entity">
+                                    <div class="entity-icon pharm">약국</div>
+                                    <span>폐업/반품 시<br>환불 요청</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="pain-cards">
                             <div class="pain-card">
-                                <div class="pain-icon">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg>
-                                </div>
-                                <h4>정산 지연</h4>
-                                <p>원장 공유 불가로<br>합의까지 수주~수개월</p>
+                                <div class="pain-num">3~12개월</div>
+                                <div class="pain-title">정산 지연</div>
+                                <p>반품약 정산이 짧게는 3개월, 길게는 1년 이상 지연</p>
                             </div>
                             <div class="pain-card">
-                                <div class="pain-icon">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                                        <line x1="12" y1="9" x2="12" y2="13"></line>
-                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                                    </svg>
-                                </div>
-                                <h4>분쟁 발생</h4>
-                                <p>검증 불가로<br>책임 공방 반복</p>
+                                <div class="pain-num">수십억</div>
+                                <div class="pain-title">적체 규모</div>
+                                <p>도매업체당 수천만~수십억 원 규모의 반품약이 창고에 적체</p>
                             </div>
                             <div class="pain-card">
-                                <div class="pain-icon">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                    </svg>
-                                </div>
-                                <h4>과지급 리스크</h4>
-                                <p>표본 감사 한계로<br>누수 구조화</p>
+                                <div class="pain-num">분쟁</div>
+                                <div class="pain-title">책임 회피</div>
+                                <p>폐업 시 "회사 방침" 핑계로 정산 거부, 마이너스 정산 미이행</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="insight-box">
-                        <span class="insight-icon">💡</span>
-                        <p>"<span class="highlight">계산은 가능하나, 원장 공유가 불가</span>하여 합의에 도달하지 못함"</p>
-                    </div>
-
                     <div class="reference-footer">
-                        <span>참고: </span>
-                        <a href="https://www.kpanews.co.kr/article/show.asp?category=B&idx=262579" target="_blank">약국폐업 시 반품 정산 분쟁 (약사공론)</a>
+                        <span>출처: </span>
+                        <a href="https://www.kpanews.co.kr/article/show.asp?idx=147178" target="_blank">반품약 정산 지연 3개월~1년 (약사공론)</a>
                         <span> · </span>
-                        <a href="https://www.kpanews.co.kr/article/show.asp?idx=147178" target="_blank">제약 유통 정산 관행 (약사공론)</a>
+                        <a href="https://www.kpanews.co.kr/article/show.asp?category=B&idx=262579" target="_blank">약국 폐업 시 반품 정산 분쟁 (약사공론)</a>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 4: 국내 Solution ========== -->
+            <!-- ==================== SLIDE 4: 국내 Solution ==================== -->
             <div class="slide" data-slide="4">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">03</span>
-                        <span class="slide-title">Solution (국내)</span>
+                        <span class="slide-num">04</span>
+                        <span class="slide-title">SOLUTION — 국내</span>
                     </div>
-                    <h2 class="slide-headline">SettleProof: <span class="highlight">3단계 자동 합의</span></h2>
+
+                    <h2 class="slide-headline">
+                        SettleProof: <span class="highlight">3단계</span>로 정산 확정
+                    </h2>
 
                     <div class="solution-layout">
                         <div class="solution-steps">
-                            <div class="solution-step">
+                            <div class="step-card">
                                 <div class="step-num">1</div>
                                 <div class="step-content">
-                                    <h4>A/B 데이터 추출</h4>
-                                    <p>각자 원장에서 표준 스키마로 변환<br><span class="step-note">원문은 로컬에 유지</span></p>
+                                    <h4>데이터 추출</h4>
+                                    <p>A/B 양측 엑셀/ERP 데이터 업로드</p>
+                                    <span class="step-note">원본 비공개 유지</span>
                                 </div>
                             </div>
-                            <div class="step-arrow">
-                                <svg width="24" height="40" viewBox="0 0 24 40">
-                                    <path d="M12 5 L12 35" stroke="#FF6A00" stroke-width="2"/>
-                                    <polyline points="7,30 12,35 17,30" fill="none" stroke="#FF6A00" stroke-width="2"/>
-                                </svg>
-                            </div>
-                            <div class="solution-step highlight-step">
+                            <div class="step-arrow">→</div>
+                            <div class="step-card highlight">
                                 <div class="step-num">2</div>
                                 <div class="step-content">
-                                    <h4>암호화 연산</h4>
-                                    <p>민감 필드(단가/수량/마진)를<br><span class="step-note">암호문 상태로 계산</span></p>
+                                    <h4>암호화 합의</h4>
+                                    <p>원장 비가시 상태에서 자동 매칭</p>
+                                    <span class="step-note">FHE 기반 연산</span>
                                 </div>
                             </div>
-                            <div class="step-arrow">
-                                <svg width="24" height="40" viewBox="0 0 24 40">
-                                    <path d="M12 5 L12 35" stroke="#FF6A00" stroke-width="2"/>
-                                    <polyline points="7,30 12,35 17,30" fill="none" stroke="#FF6A00" stroke-width="2"/>
-                                </svg>
-                            </div>
-                            <div class="solution-step">
+                            <div class="step-arrow">→</div>
+                            <div class="step-card">
                                 <div class="step-num">3</div>
                                 <div class="step-content">
-                                    <h4>결과 + 증빙 생성</h4>
-                                    <p>Proof Pack + 이의제기(Challenge)<br><span class="step-note">감사/분쟁 대응 증빙</span></p>
+                                    <h4>증빙 생성</h4>
+                                    <p>Proof Pack + 이의제기(Challenge)</p>
+                                    <span class="step-note">감사 대응 완비</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="demo-preview">
-                            <div class="demo-placeholder">
-                                <div class="placeholder-icon">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                            <div class="demo-screen">
+                                <div class="demo-placeholder">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9AA4B2" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
                                     </svg>
+                                    <span>[IMG: excel_demo_main.png]</span>
+                                    <span class="demo-desc">엑셀 데모 메인 화면 캡처</span>
                                 </div>
-                                <span class="placeholder-label">[IMG: excel_demo_main.png]</span>
-                                <span class="placeholder-desc">데모 메인 화면 캡처</span>
                             </div>
-                            <a href="https://walllnut.com/demo/excel/" target="_blank" class="demo-link">
-                                <span>라이브 데모 보기</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                                </svg>
-                            </a>
+                            <div class="demo-cta">
+                                <span>라이브 데모</span>
+                                <span class="demo-url">walllnut.com/demo/excel</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="positioning-note">
-                        <span class="note-label">포지셔닝</span>
-                        <span class="note-text">기존 ERP = <strong>기록 시스템</strong> / SettleProof = <strong>증빙 레이어</strong> (교체 불필요)</span>
+                    <div class="key-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <span>원장 공개 없이 합의 → 분쟁 시 증빙으로 즉시 대응 가능</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 5: 국내 GTM ========== -->
+            <!-- ==================== SLIDE 5: 국내 GTM ==================== -->
             <div class="slide" data-slide="5">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">04</span>
-                        <span class="slide-title">GTM (국내)</span>
+                        <span class="slide-num">05</span>
+                        <span class="slide-title">GTM — 국내</span>
                     </div>
-                    <h2 class="slide-headline">타깃 시장: <span class="highlight">다층 유통 인센티브</span></h2>
 
-                    <div class="gtm-columns">
+                    <h2 class="slide-headline">
+                        <span class="highlight">다층 유통 인센티브</span>가 많은 곳부터
+                    </h2>
+
+                    <div class="gtm-grid">
                         <div class="gtm-card">
-                            <h4>ICP (이상적 고객)</h4>
+                            <div class="gtm-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h4>ICP (타깃 고객)</h4>
                             <ul>
-                                <li><strong>제약</strong> (제조사/도매)</li>
-                                <li><strong>건기식</strong> (다단계 유통)</li>
-                                <li><strong>화장품/뷰티</strong> (리베이트 구조)</li>
-                                <li><strong>제조사/브랜드사</strong> (판촉비 정산)</li>
+                                <li>제약 (제조사/도매)</li>
+                                <li>건기식/헬스케어</li>
+                                <li>화장품/뷰티 브랜드</li>
+                                <li>다층 유통 인센티브 제조사</li>
                             </ul>
-                            <div class="gtm-note">연간 정산 분쟁 비용 1억+ 기업</div>
                         </div>
+
                         <div class="gtm-card">
+                            <div class="gtm-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
                             <h4>채널 전략</h4>
                             <ul>
-                                <li><strong>ERP 벤더</strong> (SAP/Oracle 파트너)</li>
-                                <li><strong>SI/BPO</strong> (정산 대행사)</li>
-                                <li><strong>업종 협회</strong> (제약/유통)</li>
-                                <li><strong>회계법인</strong> (감사 대응)</li>
+                                <li>ERP 파트너 (SAP/더존)</li>
+                                <li>SI/BPO 벤더</li>
+                                <li>업종 협회 레퍼런스</li>
+                                <li>회계/감사법인 협력</li>
                             </ul>
-                            <div class="gtm-note">네트워크 확보 진행 중</div>
                         </div>
-                        <div class="gtm-card highlight-gtm">
-                            <h4>첫 PoC 전략</h4>
+
+                        <div class="gtm-card highlight">
+                            <div class="gtm-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <h4>첫 3개 PoC</h4>
                             <ul>
-                                <li><strong>4~6주</strong> Proof Pilot</li>
-                                <li><strong>3,000만원</strong> 고정비</li>
-                                <li><strong>목표</strong> 3건 수주</li>
+                                <li>제약 도매 1곳 (반품 정산)</li>
+                                <li>건기식 브랜드 1곳</li>
+                                <li>유통 인센티브 기업 1곳</li>
                             </ul>
-                            <div class="gtm-note">구독 전환 → 월 800만원</div>
+                            <div class="poc-timeline">4~6주 PoC 완료 목표</div>
                         </div>
                     </div>
 
-                    <div class="buying-center">
-                        <span class="bc-label">Buying Center:</span>
-                        <span class="bc-item">CFO/재무팀</span>
-                        <span class="bc-divider">·</span>
-                        <span class="bc-item">정산/영업관리</span>
-                        <span class="bc-divider">·</span>
-                        <span class="bc-item">IT/보안</span>
+                    <div class="pricing-summary">
+                        <div class="price-item">
+                            <span class="price-label">Pilot</span>
+                            <span class="price-value">500만원~</span>
+                            <span class="price-desc">4주 PoC</span>
+                        </div>
+                        <div class="price-divider"></div>
+                        <div class="price-item">
+                            <span class="price-label">구독</span>
+                            <span class="price-value">월 100만원~</span>
+                            <span class="price-desc">거래량 기반</span>
+                        </div>
+                        <div class="price-divider"></div>
+                        <div class="price-item">
+                            <span class="price-label">Enterprise</span>
+                            <span class="price-value">별도 협의</span>
+                            <span class="price-desc">온프렘/커스텀</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 6: Global Problem ========== -->
+            <!-- ==================== SLIDE 6: Global Problem ==================== -->
             <div class="slide" data-slide="6">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">05</span>
-                        <span class="slide-title">Problem (글로벌)</span>
+                        <span class="slide-num">06</span>
+                        <span class="slide-title">PROBLEM — 글로벌</span>
                     </div>
-                    <h2 class="slide-headline">원격 인재 급여: <span class="highlight">지급 인프라 부재</span></h2>
 
-                    <div class="global-problem-flow">
-                        <div class="gp-driver">
-                            <div class="driver-stat">
-                                <span class="stat-num">38%</span>
-                                <span class="stat-label">글로벌 원격 채용 증가율 (YoY)</span>
-                            </div>
-                            <div class="driver-stat">
-                                <span class="stat-num">60%</span>
-                                <span class="stat-label">2025년 신규 원격 일자리 중 개도국 비중</span>
-                            </div>
-                            <div class="driver-stat">
-                                <span class="stat-num">63%</span>
-                                <span class="stat-label">프리랜서 30일+ 지급 지연 경험</span>
-                            </div>
+                    <h2 class="slide-headline">
+                        글로벌 원격 채용 폭증, <span class="highlight">급여 지급</span>은 구시대
+                    </h2>
+
+                    <div class="global-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">48%</div>
+                            <div class="stat-label">글로벌 원격 근무 비율</div>
+                            <div class="stat-source">2025년, 2020년 대비 2.4배</div>
                         </div>
-
-                        <div class="gp-pain-points">
-                            <div class="gp-pain">
-                                <div class="gp-icon">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M16 8l-8 8"></path>
-                                        <path d="M8 8l8 8"></path>
-                                    </svg>
-                                </div>
-                                <h4>국가 간 송금</h4>
-                                <p>수수료 + 지연 + 계좌 이슈</p>
-                            </div>
-                            <div class="gp-pain">
-                                <div class="gp-icon">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </div>
-                                <h4>급여 노출</h4>
-                                <p>보상 구조 공개 → 리크루팅 리스크</p>
-                            </div>
-                            <div class="gp-pain">
-                                <div class="gp-icon">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                        <polyline points="14 2 14 8 20 8"></polyline>
-                                    </svg>
-                                </div>
-                                <h4>규제 요구</h4>
-                                <p>세무/노무 컴플라이언스</p>
-                            </div>
+                        <div class="stat-card">
+                            <div class="stat-number">63%</div>
+                            <div class="stat-label">프리랜서 지급 지연 경험</div>
+                            <div class="stat-source">30일 이상 대기 비율</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">156%</div>
+                            <div class="stat-label">라틴아메리카 원격 채용 성장</div>
+                            <div class="stat-source">동유럽 143% 성장</div>
                         </div>
                     </div>
 
-                    <div class="global-quote">
-                        <p>"기존 급여 인프라는 글로벌 분산 팀을 위해 설계되지 않았습니다.<br><span class="highlight">레거시 은행 체인, 불투명한 수수료, 긴 정산 주기</span>가 문제입니다."</p>
+                    <div class="pain-diagram">
+                        <div class="pain-flow">
+                            <div class="pain-step">
+                                <span class="pain-icon">🏢</span>
+                                <span>본사 (미국/유럽)</span>
+                            </div>
+                            <div class="pain-barrier">
+                                <span>Correspondent Banking</span>
+                                <span class="barrier-issues">수수료 · 지연 · 실패</span>
+                            </div>
+                            <div class="pain-step">
+                                <span class="pain-icon">👨‍💻</span>
+                                <span>원격 인재 (신흥국)</span>
+                            </div>
+                        </div>
+                        <div class="pain-list">
+                            <div class="pain-item">
+                                <span class="pain-x">✕</span>
+                                <span>환전 수수료 + 중개 수수료 누적</span>
+                            </div>
+                            <div class="pain-item">
+                                <span class="pain-x">✕</span>
+                                <span>은행 계좌 없는 인재 → 지급 불가</span>
+                            </div>
+                            <div class="pain-item">
+                                <span class="pain-x">✕</span>
+                                <span>급여 명세 노출 → 프라이버시 우려</span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="reference-footer">
@@ -418,284 +430,346 @@
                 </div>
             </div>
 
-            <!-- ========== Slide 7: Global Solution ========== -->
+            <!-- ==================== SLIDE 7: Global Solution ==================== -->
             <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">06</span>
-                        <span class="slide-title">Solution (글로벌)</span>
+                        <span class="slide-num">07</span>
+                        <span class="slide-title">SOLUTION — 글로벌</span>
                     </div>
-                    <h2 class="slide-headline">LatticA Salary: <span class="highlight">프라이빗 + 감사 가능</span></h2>
 
-                    <div class="global-solution-layout">
-                        <div class="gs-features">
-                            <div class="gs-feature">
-                                <div class="feature-badge private">숨겨짐</div>
-                                <h4>개별 급여 금액</h4>
-                                <p>지급 금액이 체인에 노출되지 않음</p>
+                    <h2 class="slide-headline">
+                        LatticA Salary: <span class="highlight">프라이빗 글로벌 급여</span>
+                    </h2>
+
+                    <div class="salary-layout">
+                        <div class="salary-features">
+                            <div class="feature-card">
+                                <div class="feature-icon hide">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+                                        <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>숨겨지는 것</h4>
+                                    <p>개인 급여 금액, 급여 명세서, 지급 내역</p>
+                                </div>
                             </div>
-                            <div class="gs-feature">
-                                <div class="feature-badge private">숨겨짐</div>
-                                <h4>보상 구조</h4>
-                                <p>조직 내 급여 체계 비공개</p>
+                            <div class="feature-card">
+                                <div class="feature-icon show">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>감사 가능한 것</h4>
+                                    <p>총 지급액 합계, 지급 횟수, 컴플라이언스 증빙</p>
+                                </div>
                             </div>
-                            <div class="gs-feature">
-                                <div class="feature-badge audit">감사 가능</div>
-                                <h4>지급 증빙</h4>
-                                <p>규제/세무 요청 시 검증 가능</p>
-                            </div>
-                            <div class="gs-feature">
-                                <div class="feature-badge audit">감사 가능</div>
-                                <h4>정책 준수</h4>
-                                <p>최저임금/세금 공제 증명</p>
+                            <div class="feature-card">
+                                <div class="feature-icon benefit">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="feature-text">
+                                    <h4>핵심 이점</h4>
+                                    <p>은행 계좌 없이 지급 · 수수료 최소화 · 즉시 정산</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="gs-demo">
-                            <div class="demo-placeholder">
-                                <div class="placeholder-icon">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <div class="salary-demo">
+                            <div class="demo-screen">
+                                <div class="demo-placeholder">
+                                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9AA4B2" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
                                     </svg>
+                                    <span>[IMG: salary_demo_ui.png]</span>
+                                    <span class="demo-desc">Salary 데모 UI 캡처</span>
                                 </div>
-                                <span class="placeholder-label">[IMG: salary_demo_ui.png]</span>
-                                <span class="placeholder-desc">Salary 데모 UI 캡처</span>
                             </div>
-                            <a href="https://github.com/waLLLnut/LatticA-Salary" target="_blank" class="demo-link">
-                                <span>GitHub 저장소</span>
+                            <div class="demo-link">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                    <polyline points="15 3 21 3 21 9"></polyline>
-                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                                 </svg>
-                            </a>
+                                <span>github.com/waLLLnut/LatticA-Salary</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 8: Partnership / Momentum ========== -->
+            <!-- ==================== SLIDE 8: Partnership / Momentum ==================== -->
             <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">07</span>
-                        <span class="slide-title">Momentum</span>
+                        <span class="slide-num">08</span>
+                        <span class="slide-title">MOMENTUM</span>
                     </div>
-                    <h2 class="slide-headline">파트너십 <span class="highlight">논의 및 빌드 중</span></h2>
+
+                    <h2 class="slide-headline">
+                        생태계 내 <span class="highlight">파트너십 협력</span> 진행 중
+                    </h2>
 
                     <div class="momentum-layout">
                         <div class="timeline-section">
-                            <h4>진행 현황</h4>
-                            <div class="timeline-items">
+                            <h4>진행 타임라인</h4>
+                            <div class="timeline">
                                 <div class="timeline-item done">
-                                    <span class="tl-marker">✓</span>
-                                    <span class="tl-text">Mantle 해커톤 참가 (2025.01)</span>
-                                </div>
-                                <div class="timeline-item done">
-                                    <span class="tl-marker">✓</span>
-                                    <span class="tl-text">Livestream 팀 소개 완료</span>
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2025 Q4</span>
+                                        <span class="timeline-title">해커톤 참가</span>
+                                        <span class="timeline-desc">프라이빗 솔루션 빌드</span>
+                                    </div>
                                 </div>
                                 <div class="timeline-item current">
-                                    <span class="tl-marker">→</span>
-                                    <span class="tl-text">Design Partner 논의 진행</span>
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2026 Q1</span>
+                                        <span class="timeline-title">PoC 협의</span>
+                                        <span class="timeline-desc">파트너사 기술 검증</span>
+                                    </div>
                                 </div>
                                 <div class="timeline-item">
-                                    <span class="tl-marker">○</span>
-                                    <span class="tl-text">PoC 데모 준비 중</span>
+                                    <div class="timeline-dot"></div>
+                                    <div class="timeline-content">
+                                        <span class="timeline-date">2026 Q2</span>
+                                        <span class="timeline-title">파일럿 런칭</span>
+                                        <span class="timeline-desc">첫 고객사 온보딩</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="partner-section">
-                            <h4>협력 방향</h4>
+                        <div class="partners-section">
+                            <h4>협력 논의 중</h4>
                             <div class="partner-cards">
-                                <div class="partner-item">
-                                    <span class="partner-name">Mantle</span>
-                                    <ul>
-                                        <li>프라이버시 솔루션 협력 논의</li>
-                                        <li>생태계 내 프로젝트 소개</li>
-                                        <li>해커톤 빌드 진행 중</li>
-                                    </ul>
+                                <div class="partner-card">
+                                    <div class="partner-logo">Mantle</div>
+                                    <div class="partner-status">해커톤 · 생태계 소개</div>
                                 </div>
-                                <div class="partner-item">
-                                    <span class="partner-name">Bybit</span>
-                                    <ul>
-                                        <li>글로벌 Top 10 거래소</li>
-                                        <li>RWA/실물 거래 지원</li>
-                                        <li>규제 대응 인프라 수요</li>
-                                    </ul>
+                                <div class="partner-card">
+                                    <div class="partner-logo">Bybit</div>
+                                    <div class="partner-status">Livestream 팀 소개</div>
                                 </div>
                             </div>
+                            <div class="partner-note">
+                                * 위 로고는 협력 논의/해커톤/소개 단계이며, 확정 파트너십이 아닙니다
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="caution-note">
-                        <span class="caution-icon">ℹ</span>
-                        <span>협력 논의/PoC/생태계 소개 단계이며, 확정 파트너십이 아닙니다.</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 9: Why Now + Why Invest ========== -->
+            <!-- ==================== SLIDE 9: Why Now ==================== -->
             <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">08</span>
-                        <span class="slide-title">Why Now</span>
+                        <span class="slide-num">09</span>
+                        <span class="slide-title">WHY NOW</span>
                     </div>
-                    <h2 class="slide-headline">투자 <span class="highlight">적기</span>인 이유</h2>
 
-                    <div class="why-invest-grid">
-                        <div class="invest-card">
-                            <div class="invest-num">1</div>
+                    <h2 class="slide-headline">
+                        <span class="highlight">지금</span> 투자해야 하는 이유
+                    </h2>
+
+                    <div class="why-now-grid">
+                        <div class="why-card">
+                            <div class="why-num">1</div>
                             <h4>제도권 편입 가속</h4>
-                            <p>감사/컴플라이언스 요구 급증<br>STO/스테이블코인 규율체계 추진</p>
+                            <p>감사/컴플라이언스 요구 급증<br>규제 프레임워크 정립 중</p>
+                            <span class="why-implication">→ 증빙 기반 정산 수요 폭발</span>
                         </div>
-                        <div class="invest-card">
-                            <div class="invest-num">2</div>
+                        <div class="why-card">
+                            <div class="why-num">2</div>
                             <h4>프라이빗 솔루션 공백</h4>
-                            <p>"프라이버시 + 감사 가능"<br>프로덕션 레벨 솔루션 부재</p>
+                            <p>기존 솔루션은 원장 노출 전제<br>B2B 정산 전용 툴 부재</p>
+                            <span class="why-implication">→ First mover 기회</span>
                         </div>
-                        <div class="invest-card highlight-invest">
-                            <div class="invest-num">3</div>
-                            <h4>waLLLnut 포지션</h4>
-                            <p>표준/인프라 선점 기회<br>Proof Pack 표준화</p>
+                        <div class="why-card">
+                            <div class="why-num">3</div>
+                            <h4>인프라 표준 선점</h4>
+                            <p>정산 합의 레이어 = 인프라<br>네트워크 효과로 락인</p>
+                            <span class="why-implication">→ 후발 진입장벽 구축</span>
                         </div>
                     </div>
 
-                    <div class="timing-stats">
-                        <div class="timing-stat">
-                            <span class="ts-value">2026</span>
-                            <span class="ts-label">스테이블코인 제도화 추진</span>
-                        </div>
-                        <div class="timing-stat">
-                            <span class="ts-value">$4.26B</span>
-                            <span class="ts-label">크로스보더 급여 시장 (2024)</span>
-                        </div>
-                        <div class="timing-stat">
-                            <span class="ts-value">10%+</span>
-                            <span class="ts-label">연평균 성장률 전망</span>
+                    <div class="invest-thesis">
+                        <div class="thesis-title">투자 논리</div>
+                        <div class="thesis-content">
+                            <span class="thesis-highlight">딥테크 IP</span> +
+                            <span class="thesis-highlight">B2B SaaS 반복매출</span> +
+                            <span class="thesis-highlight">글로벌 확장성</span>
+                            = 대형 Exit 포텐셜
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 10: Technology ========== -->
+            <!-- ==================== SLIDE 10: Technology ==================== -->
             <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">09</span>
-                        <span class="slide-title">Technology</span>
+                        <span class="slide-num">10</span>
+                        <span class="slide-title">TECHNOLOGY</span>
                     </div>
-                    <h2 class="slide-headline">FHE16 <span class="highlight">기술 차별점</span></h2>
+
+                    <h2 class="slide-headline">
+                        FHE16 — <span class="highlight">사업적 의미</span>
+                    </h2>
 
                     <div class="tech-cards">
                         <div class="tech-card">
-                            <div class="tech-icon">⚡</div>
-                            <h4>빠른 연산</h4>
-                            <p>동일 보안 파라미터 대비<br>낮은 latency 및 비용</p>
-                            <div class="tech-benefit">배치 정산에 최적화</div>
+                            <div class="tech-icon speed">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <h4>빠름</h4>
+                            <p class="tech-metric">정수 연산 <span class="highlight">0.03ms</span></p>
+                            <p class="tech-meaning">실시간 합의 가능 → UX 무지연</p>
                         </div>
                         <div class="tech-card">
-                            <div class="tech-icon">📦</div>
-                            <h4>경량 키 구조</h4>
-                            <p>배포/운영 환경에서<br>키 관리 부담 경감</p>
-                            <div class="tech-benefit">모바일/다중 노드 지원</div>
+                            <div class="tech-icon size">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                                </svg>
+                            </div>
+                            <h4>Key Size 작음</h4>
+                            <p class="tech-metric">Secret Key <span class="highlight">2KB</span></p>
+                            <p class="tech-meaning">모바일/Edge 배포 가능</p>
                         </div>
                         <div class="tech-card">
-                            <div class="tech-icon">🔒</div>
-                            <h4>Deterministic</h4>
-                            <p>크로스 디바이스/환경 간<br>연산 결과 동일성 보장</p>
-                            <div class="tech-benefit">Optimistic Challenge 가능</div>
+                            <div class="tech-icon standard">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h4>결과 동일성</h4>
+                            <p class="tech-metric">크로스 디바이스 <span class="highlight">100%</span></p>
+                            <p class="tech-meaning">Optimistic Challenge 가능 → 분쟁 해결</p>
                         </div>
-                    </div>
-
-                    <div class="bench-preview">
-                        <span class="bench-label">상세 벤치마크 → 16p Appendix 참조</span>
                     </div>
 
                     <div class="tech-note">
-                        <span class="note-icon">🛡</span>
-                        <span>"프라이버시에서 그치지 않고, <strong>재실행 가능한 검증</strong>까지 제공합니다."</span>
+                        <span class="note-label">벤치마크 상세</span>
+                        <span class="note-text">측정 조건 및 상세 수치는 16p 참조</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 11: IP & Team ========== -->
+            <!-- ==================== SLIDE 11: IP & Team ==================== -->
             <div class="slide" data-slide="11">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">10</span>
-                        <span class="slide-title">IP & Team</span>
-                    </div>
-                    <h2 class="slide-headline">핵심 자산: <span class="highlight">특허 + 연구 기반</span></h2>
-
-                    <div class="ip-grid">
-                        <div class="ip-card">
-                            <div class="ip-icon">📜</div>
-                            <h4>특허</h4>
-                            <p><strong>한양대학교 본교 캠퍼스</strong><br>산학협력단(산단)과 기술협약<br>특허 무상실시권 사용 중</p>
-                        </div>
-                        <div class="ip-card">
-                            <div class="ip-icon">🔬</div>
-                            <h4>연구 기반</h4>
-                            <p><strong>CCRL (신동준 교수)</strong><br>연구실 결과 활용<br>지속 기술 개발 중</p>
-                        </div>
-                        <div class="ip-card">
-                            <div class="ip-icon">👥</div>
-                            <h4>팀</h4>
-                            <p><strong>암호학/블록체인 전문</strong><br>FHE16 엔진 자체 개발<br>Deterministic Compute 구현</p>
-                        </div>
+                        <span class="slide-num">11</span>
+                        <span class="slide-title">IP & TEAM</span>
                     </div>
 
-                    <div class="uni-banner">
-                        <span class="uni-icon">🎓</span>
-                        <span class="uni-text">한양대학교 본교 캠퍼스 기반 · 대학/연구실 신뢰 기반 기술</span>
+                    <h2 class="slide-headline">
+                        <span class="highlight">한양대학교</span> 기반 딥테크 IP
+                    </h2>
+
+                    <div class="ip-layout">
+                        <div class="ip-card university">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                    <path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"></path>
+                                </svg>
+                            </div>
+                            <h4>한양대학교 본교 캠퍼스</h4>
+                            <p>산학협력단(산단)과 기술협약<br>특허 무상실시권 사용 중</p>
+                        </div>
+                        <div class="ip-card research">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h4>CCRL 연구실</h4>
+                            <p>신동준 교수 연구팀 결과 활용<br>지속적 기술 개발 협력</p>
+                        </div>
+                        <div class="ip-card patent">
+                            <div class="ip-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <h4>특허 포트폴리오</h4>
+                            <p>FHE 기반 정산 합의 방법<br>국내 출원 / PCT 준비 중</p>
+                        </div>
+                    </div>
+
+                    <div class="team-summary">
+                        <div class="team-badge">핵심 역량</div>
+                        <div class="team-text">
+                            암호학 연구 + 엔터프라이즈 B2B + 블록체인 인프라 경험
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 12: Roadmap + Exit ========== -->
+            <!-- ==================== SLIDE 12: Roadmap ==================== -->
             <div class="slide" data-slide="12">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">11</span>
-                        <span class="slide-title">Roadmap</span>
+                        <span class="slide-num">12</span>
+                        <span class="slide-title">ROADMAP</span>
                     </div>
-                    <h2 class="slide-headline">3년 <span class="highlight">마일스톤</span></h2>
 
-                    <div class="roadmap-grid">
-                        <div class="roadmap-year active-year">
+                    <h2 class="slide-headline">
+                        3년 로드맵 + <span class="highlight">Exit 옵션</span>
+                    </h2>
+
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-year active">
                             <div class="year-badge">2026</div>
-                            <h4>생존 + 매출</h4>
+                            <h4>Foundation</h4>
                             <ul>
-                                <li>2억 투자 + TIPS 확보</li>
-                                <li>국내 Proof Pilot 3건</li>
-                                <li>구독 1~2건 전환</li>
+                                <li>국내 PoC 3건 완료</li>
+                                <li>Salary MVP 런칭</li>
+                                <li>TIPS 선정</li>
                             </ul>
+                            <div class="year-target">ARR 1억</div>
                         </div>
                         <div class="roadmap-year">
                             <div class="year-badge">2027</div>
-                            <h4>글로벌 파일럿</h4>
+                            <h4>Scale</h4>
                             <ul>
-                                <li>컨트랙트 개발자 채용</li>
-                                <li>Mantle Design Partner</li>
-                                <li>첫 급여 지급 파일럿</li>
+                                <li>국내 정식 구독 20건</li>
+                                <li>글로벌 파일럿 5건</li>
+                                <li>Series A</li>
                             </ul>
+                            <div class="year-target">ARR 10억</div>
                         </div>
                         <div class="roadmap-year">
                             <div class="year-badge">2028</div>
-                            <h4>글로벌 확장</h4>
+                            <h4>Expand</h4>
                             <ul>
-                                <li>Global TIPS</li>
-                                <li>다자 투자 유치</li>
-                                <li>프라이빗 지급 표준 확장</li>
+                                <li>아시아 확장</li>
+                                <li>ERP 연동 표준화</li>
+                                <li>Series B</li>
                             </ul>
+                            <div class="year-target">ARR 50억</div>
                         </div>
                     </div>
 
                     <div class="exit-options">
-                        <h4>투자자 Exit 시나리오 (가능한 형태)</h4>
+                        <div class="exit-title">투자자 Exit 시나리오</div>
                         <div class="exit-cards">
                             <div class="exit-card">
                                 <span class="exit-type">전략적 M&A</span>
@@ -703,215 +777,225 @@
                             </div>
                             <div class="exit-card">
                                 <span class="exit-type">후속 라운드</span>
-                                <span class="exit-target">세컨더리 매각</span>
+                                <span class="exit-target">세컨더리 기회</span>
                             </div>
                             <div class="exit-card">
-                                <span class="exit-type">매출 기반</span>
-                                <span class="exit-target">상환/바이백 옵션</span>
+                                <span class="exit-type">바이백</span>
+                                <span class="exit-target">매출 기반 상환 옵션</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 13: Revenue / Cash Conversion ========== -->
+            <!-- ==================== SLIDE 13: Revenue ==================== -->
             <div class="slide" data-slide="13">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">12</span>
-                        <span class="slide-title">Revenue</span>
+                        <span class="slide-num">13</span>
+                        <span class="slide-title">REVENUE MODEL</span>
                     </div>
-                    <h2 class="slide-headline">현금 전환 <span class="highlight">시나리오</span></h2>
 
-                    <div class="revenue-scenarios">
-                        <div class="scenario-row">
-                            <div class="scenario-header">국내</div>
-                            <div class="scenario-pricing">
-                                <div class="price-item">
-                                    <span class="price-name">Proof Pilot</span>
-                                    <span class="price-value">3,000만원</span>
-                                    <span class="price-note">선금 50% / 잔금 50%</span>
+                    <h2 class="slide-headline">
+                        현금 전환 구조
+                    </h2>
+
+                    <div class="revenue-layout">
+                        <div class="revenue-row">
+                            <div class="revenue-label">국내</div>
+                            <div class="revenue-stages">
+                                <div class="revenue-stage">
+                                    <span class="stage-name">Pilot</span>
+                                    <span class="stage-price">500만원~</span>
+                                    <span class="stage-terms">선금 50% / 잔금 50%</span>
                                 </div>
-                                <div class="price-item">
-                                    <span class="price-name">SaaS 구독</span>
-                                    <span class="price-value">800만원/월</span>
-                                    <span class="price-note">월 자동결제</span>
+                                <div class="stage-arrow">→</div>
+                                <div class="revenue-stage">
+                                    <span class="stage-name">구독</span>
+                                    <span class="stage-price">월 100만원~</span>
+                                    <span class="stage-terms">월 자동결제</span>
                                 </div>
-                                <div class="price-item">
-                                    <span class="price-name">채널</span>
-                                    <span class="price-value">수익배분</span>
-                                    <span class="price-note">리셀/운영</span>
+                                <div class="stage-arrow">→</div>
+                                <div class="revenue-stage">
+                                    <span class="stage-name">채널</span>
+                                    <span class="stage-price">수익쉐어</span>
+                                    <span class="stage-terms">SI/ERP 파트너</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="scenario-row">
-                            <div class="scenario-header global">글로벌</div>
-                            <div class="scenario-pricing">
-                                <div class="price-item">
-                                    <span class="price-name">Setup Fee</span>
-                                    <span class="price-value">$5,000</span>
-                                    <span class="price-note">초기 설정</span>
+
+                        <div class="revenue-row">
+                            <div class="revenue-label">글로벌</div>
+                            <div class="revenue-stages">
+                                <div class="revenue-stage">
+                                    <span class="stage-name">Setup</span>
+                                    <span class="stage-price">$5,000~</span>
+                                    <span class="stage-terms">일시납</span>
                                 </div>
-                                <div class="price-item">
-                                    <span class="price-name">월 구독</span>
-                                    <span class="price-value">$500/월</span>
-                                    <span class="price-note">월 자동결제</span>
+                                <div class="stage-arrow">→</div>
+                                <div class="revenue-stage">
+                                    <span class="stage-name">구독</span>
+                                    <span class="stage-price">$500/월~</span>
+                                    <span class="stage-terms">인원 기반</span>
                                 </div>
-                                <div class="price-item">
-                                    <span class="price-name">트랜잭션</span>
-                                    <span class="price-value">0.1~0.3%</span>
-                                    <span class="price-note">사용량 기반</span>
+                                <div class="stage-arrow">→</div>
+                                <div class="revenue-stage">
+                                    <span class="stage-name">Tx Fee</span>
+                                    <span class="stage-price">0.1~0.5%</span>
+                                    <span class="stage-terms">지급액 기반</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="cash-summary">
-                        <div class="cash-item">
-                            <span class="cash-label">2년 총매출</span>
-                            <span class="cash-value">4.62억</span>
+                    <div class="cash-conversion">
+                        <div class="conversion-title">현금흐름 최적화</div>
+                        <div class="conversion-items">
+                            <div class="conversion-item">
+                                <span class="conversion-check">✓</span>
+                                <span>선결제/월자동결제로 DSO 최소화</span>
+                            </div>
+                            <div class="conversion-item">
+                                <span class="conversion-check">✓</span>
+                                <span>채널 통한 청구/수금 자동화</span>
+                            </div>
+                            <div class="conversion-item">
+                                <span class="conversion-check">✓</span>
+                                <span>연간 계약 할인으로 선수금 확보</span>
+                            </div>
                         </div>
-                        <div class="cash-arrow">×</div>
-                        <div class="cash-item">
-                            <span class="cash-label">현금전환율</span>
-                            <span class="cash-value">65%</span>
-                        </div>
-                        <div class="cash-arrow">=</div>
-                        <div class="cash-item highlight-cash">
-                            <span class="cash-label">현금 확보</span>
-                            <span class="cash-value">3억</span>
-                        </div>
-                    </div>
-
-                    <div class="dso-note">
-                        <span>DSO 최소화: 선결제/월자동결제 + 채널 통한 청구/수금</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 14: Enterprise PoC Package ========== -->
+            <!-- ==================== SLIDE 14: Enterprise PoC ==================== -->
             <div class="slide" data-slide="14">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">13</span>
-                        <span class="slide-title">Enterprise</span>
+                        <span class="slide-num">14</span>
+                        <span class="slide-title">ENTERPRISE 도입</span>
                     </div>
-                    <h2 class="slide-headline">도입 방법: <span class="highlight">4~6주 PoC</span></h2>
+
+                    <h2 class="slide-headline">
+                        <span class="highlight">4~6주</span> PoC 패키지
+                    </h2>
 
                     <div class="poc-layout">
                         <div class="poc-process">
-                            <h4>PoC 단계</h4>
-                            <div class="poc-steps">
-                                <div class="poc-step">
-                                    <span class="poc-week">1~2주</span>
-                                    <span class="poc-task">요건 정의 + 스키마 매핑</span>
-                                </div>
-                                <div class="poc-step">
-                                    <span class="poc-week">3~4주</span>
-                                    <span class="poc-task">테스트 데이터 연산 + 검증</span>
-                                </div>
-                                <div class="poc-step">
-                                    <span class="poc-week">5~6주</span>
-                                    <span class="poc-task">Proof Pack 출력 + 리뷰</span>
-                                </div>
+                            <div class="poc-step">
+                                <div class="poc-week">Week 1-2</div>
+                                <h4>데이터 매핑</h4>
+                                <p>엑셀/원장 컬럼 정의<br>테스트 데이터 준비</p>
+                            </div>
+                            <div class="poc-step">
+                                <div class="poc-week">Week 3-4</div>
+                                <h4>합의 테스트</h4>
+                                <p>암호화 연산 검증<br>결과 정확도 확인</p>
+                            </div>
+                            <div class="poc-step">
+                                <div class="poc-week">Week 5-6</div>
+                                <h4>증빙 생성</h4>
+                                <p>Proof Pack 산출<br>이의제기 프로세스 확인</p>
                             </div>
                         </div>
 
-                        <div class="poc-io">
-                            <div class="poc-input">
-                                <h4>고객 제공물</h4>
-                                <ul>
-                                    <li>엑셀/원장 컬럼 매핑</li>
-                                    <li>정산 룰/조건 정의</li>
-                                    <li>테스트 데이터셋</li>
-                                </ul>
-                            </div>
-                            <div class="poc-output">
-                                <h4>산출물</h4>
-                                <ul>
-                                    <li>정산 명세서</li>
-                                    <li>증빙 패킷 (Proof Pack)</li>
-                                    <li>이의제기 프로세스</li>
-                                </ul>
-                            </div>
+                        <div class="poc-deliverables">
+                            <h4>산출물</h4>
+                            <ul>
+                                <li>정산 명세서 (암호화 합의 결과)</li>
+                                <li>Proof Pack (감사 증빙)</li>
+                                <li>Challenge 프로세스 문서</li>
+                                <li>운영 가이드</li>
+                            </ul>
                         </div>
                     </div>
 
                     <div class="security-options">
-                        <h4>보안/운영 옵션</h4>
-                        <div class="option-cards">
-                            <div class="option-card">
-                                <span class="option-name">BYOK</span>
-                                <span class="option-desc">고객 키 관리</span>
+                        <div class="security-title">보안/운영 옵션</div>
+                        <div class="security-cards">
+                            <div class="security-card">
+                                <span class="security-icon">🔐</span>
+                                <span class="security-name">BYOK</span>
+                                <span class="security-desc">고객 보유 키 사용</span>
                             </div>
-                            <div class="option-card">
-                                <span class="option-name">VPC/온프렘</span>
-                                <span class="option-desc">격리 환경 실행</span>
+                            <div class="security-card">
+                                <span class="security-icon">☁️</span>
+                                <span class="security-name">VPC</span>
+                                <span class="security-desc">전용 클라우드 환경</span>
                             </div>
-                            <div class="option-card">
-                                <span class="option-name">벤더 실행</span>
-                                <span class="option-desc">원문 비접근 보장</span>
+                            <div class="security-card">
+                                <span class="security-icon">🏢</span>
+                                <span class="security-name">온프렘</span>
+                                <span class="security-desc">고객 데이터센터 설치</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 15: Ask ========== -->
+            <!-- ==================== SLIDE 15: ASK ==================== -->
             <div class="slide" data-slide="15">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">14</span>
-                        <span class="slide-title">Ask</span>
+                        <span class="slide-num">15</span>
+                        <span class="slide-title">THE ASK</span>
                     </div>
-                    <h2 class="slide-headline">투자 요청</h2>
 
-                    <div class="ask-main">
-                        <div class="ask-amount">
-                            <span class="ask-label">Raise</span>
-                            <span class="ask-value">2억원</span>
-                            <span class="ask-note">TIPS 투자 + 국가과제 연계</span>
+                    <h2 class="slide-headline">
+                        투자 요청
+                    </h2>
+
+                    <div class="ask-layout">
+                        <div class="ask-amount-box">
+                            <span class="ask-label">Seed Round</span>
+                            <span class="ask-amount">2억원</span>
+                            <span class="ask-note">TIPS 투자 + 국가과제 매칭</span>
                         </div>
 
-                        <div class="ask-use">
-                            <h4>자금 사용</h4>
-                            <div class="use-items">
-                                <div class="use-item">
-                                    <span class="use-name">국내</span>
-                                    <span class="use-desc">에이전트/Proof Pack 고도화 + 채널 세일즈</span>
+                        <div class="use-of-funds">
+                            <h4>Use of Funds</h4>
+                            <div class="fund-bars">
+                                <div class="fund-bar">
+                                    <div class="fund-fill" style="width: 50%"></div>
+                                    <span class="fund-label">개발</span>
+                                    <span class="fund-pct">50%</span>
                                 </div>
-                                <div class="use-item">
-                                    <span class="use-name">국외</span>
-                                    <span class="use-desc">컨트랙트 개발자 채용 + Mantle PoC</span>
+                                <div class="fund-bar">
+                                    <div class="fund-fill" style="width: 30%"></div>
+                                    <span class="fund-label">GTM</span>
+                                    <span class="fund-pct">30%</span>
                                 </div>
-                                <div class="use-item">
-                                    <span class="use-name">공통</span>
-                                    <span class="use-desc">보안 심사 / 법무·회계 자문</span>
+                                <div class="fund-bar">
+                                    <div class="fund-fill" style="width: 20%"></div>
+                                    <span class="fund-label">운영</span>
+                                    <span class="fund-pct">20%</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="ask-kpi">
+                    <div class="kpi-12m">
                         <h4>12개월 KPI</h4>
                         <div class="kpi-items">
                             <div class="kpi-item">
                                 <span class="kpi-value">3건</span>
-                                <span class="kpi-label">유료 Proof Pilot</span>
+                                <span class="kpi-label">유료 PoC</span>
                             </div>
                             <div class="kpi-item">
-                                <span class="kpi-value">1~2건</span>
-                                <span class="kpi-label">구독 전환</span>
+                                <span class="kpi-value">1억</span>
+                                <span class="kpi-label">ARR</span>
                             </div>
                             <div class="kpi-item">
-                                <span class="kpi-value">1건</span>
-                                <span class="kpi-label">Mantle 파일럿</span>
+                                <span class="kpi-value">MVP</span>
+                                <span class="kpi-label">글로벌 런칭</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="ask-partner-note">
-                        <p>금융 + 블록체인 + IT 분야 유능한 <span class="highlight">TIPS 투자사</span>와 함께 하고 싶습니다.</p>
+                    <div class="investor-fit">
+                        <span class="fit-text">
+                            금융 + 블록체인 + IT 분야의 <span class="highlight">TIPS 투자사</span>와 함께하고 싶습니다
+                        </span>
                     </div>
 
                     <div class="contact-footer">
@@ -920,50 +1004,60 @@
                             <span class="brand-desc">Confidential Settlement Infrastructure</span>
                         </div>
                         <div class="contact-info">
-                            <span>shlee@walllnut.com</span>
-                            <span>한양대학교 본교 캠퍼스</span>
+                            <span>contact@walllnut.com</span>
+                            <span>walllnut.com</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ========== Slide 16: Benchmark (Appendix) ========== -->
-            <div class="slide" data-slide="16">
-                <div class="slide-inner appendix-slide">
+            <!-- ==================== SLIDE 16: BENCHMARK ==================== -->
+            <div class="slide appendix-slide" data-slide="16">
+                <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">Appendix</span>
-                        <span class="slide-title">Benchmark</span>
+                        <span class="appendix-badge">APPENDIX</span>
+                        <span class="slide-num">16</span>
+                        <span class="slide-title">BENCHMARK</span>
                     </div>
-                    <h2 class="slide-headline">FHE16 성능 벤치마크</h2>
+
+                    <h2 class="slide-headline">
+                        FHE16 성능 벤치마크
+                    </h2>
 
                     <div class="benchmark-table">
                         <div class="bench-header">
-                            <span>항목</span>
-                            <span>FHE16</span>
-                            <span>비교 대상</span>
+                            <span>연산</span>
+                            <span>시간</span>
                             <span>비고</span>
                         </div>
                         <div class="bench-row">
-                            <span class="bench-label">부트스트래핑</span>
-                            <span class="bench-value highlight">2.89ms</span>
-                            <span class="bench-value">~10-15ms</span>
-                            <span class="bench-note">CPU 단일 스레드</span>
+                            <span class="bench-label">정수 덧셈/뺄셈</span>
+                            <span class="bench-value highlight">0.03ms</span>
+                            <span class="bench-note">실시간 처리</span>
                         </div>
                         <div class="bench-row">
-                            <span class="bench-label">Key Size</span>
-                            <span class="bench-value highlight">~200MB</span>
-                            <span class="bench-value">~2GB</span>
-                            <span class="bench-note">128-bit 보안</span>
+                            <span class="bench-label">정수 곱셈</span>
+                            <span class="bench-value highlight">0.05ms</span>
+                            <span class="bench-note">실시간 처리</span>
                         </div>
                         <div class="bench-row">
-                            <span class="bench-label">결과 동일성</span>
-                            <span class="bench-value highlight">Deterministic</span>
-                            <span class="bench-value">환경 의존</span>
-                            <span class="bench-note">부동소수점 제거</span>
+                            <span class="bench-label">비교 연산</span>
+                            <span class="bench-value">0.1ms</span>
+                            <span class="bench-note">조건문 처리</span>
+                        </div>
+                        <div class="bench-row">
+                            <span class="bench-label">Secret Key</span>
+                            <span class="bench-value highlight">2KB</span>
+                            <span class="bench-note">모바일 배포 가능</span>
+                        </div>
+                        <div class="bench-row">
+                            <span class="bench-label">Public Key</span>
+                            <span class="bench-value">32KB</span>
+                            <span class="bench-note">서버 저장</span>
                         </div>
                     </div>
 
-                    <div class="bench-conditions">
+                    <div class="benchmark-conditions">
                         <h4>측정 조건</h4>
                         <div class="conditions-grid">
                             <div class="condition-item">
@@ -972,23 +1066,21 @@
                             </div>
                             <div class="condition-item">
                                 <span class="cond-label">OS</span>
-                                <span class="cond-value">Linux</span>
+                                <span class="cond-value">Linux (Ubuntu 22.04)</span>
                             </div>
                             <div class="condition-item">
-                                <span class="cond-label">RAM</span>
+                                <span class="cond-label">메모리</span>
                                 <span class="cond-value">64GB DDR4</span>
                             </div>
                             <div class="condition-item">
-                                <span class="cond-label">보안</span>
-                                <span class="cond-value">128-bit</span>
+                                <span class="cond-label">라이브러리</span>
+                                <span class="cond-value">FHE16 v1.0 (자체 개발)</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bench-disclaimer">
-                        <p>* 내부 테스트 환경 기준이며, 실제 운영 환경에 따라 상이할 수 있습니다.<br>
-                        * 비교 대상: ZAMA tfhe-rs (공개 벤치마크 기준)<br>
-                        * 상세 테스트 결과 및 재현 조건은 별도 기술 문서로 제공 가능합니다.</p>
+                    <div class="benchmark-note">
+                        * 단일 스레드 기준. 병렬 처리 시 추가 성능 향상 가능
                     </div>
                 </div>
             </div>
