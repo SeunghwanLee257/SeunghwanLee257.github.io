@@ -29,7 +29,7 @@
 
 body {
     font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #E8E6F5;
+    background: #1E1B4B;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@ body {
     left: 0;
     right: 0;
     height: 60px;
-    background: #D4D1E8;
+    background: #0F0D24;
     display: flex;
     justify-content: center;
     align-items: center;
