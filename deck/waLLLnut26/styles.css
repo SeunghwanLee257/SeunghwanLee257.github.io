@@ -1857,39 +1857,26 @@ body {
     text-align: center;
 }
 
-/* ========== Deck Footer (Copyright) ========== */
-.deck-footer {
-    width: var(--slide-width);
-    margin-top: 8px;
-    margin-bottom: 40px;
-}
-
-.footer-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-}
-
-.footer-logo {
-    width: 32px;
-    height: 32px;
-}
-
-.footer-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.5);
+/* ========== Slide Copyright (inside each slide via ::after) ========== */
+.slide-inner::after {
+    content: "© 2026 waLLLnut Inc.";
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    font-size: 11px;
+    color: var(--gray);
     font-weight: 500;
+}
+
+/* Hide copyright on title slide */
+.title-slide::after {
+    display: none;
 }
 
 /* Print */
 @media print {
     .controls { display: none !important; }
     .deck-wrapper { padding: 0; }
-    .deck-footer { display: none !important; }
     .slide { display: block !important; page-break-after: always; box-shadow: none; }
     body { background: white; }
 }
