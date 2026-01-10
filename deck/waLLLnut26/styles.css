@@ -1003,6 +1003,69 @@ body {
     font-style: italic;
 }
 
+/* Solution Hints - 합의 조건 */
+.solution-hints {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.hint-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.hint-arrow {
+    font-size: 16px;
+    color: var(--green);
+    font-weight: 700;
+}
+
+.hint-text {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--text-dark);
+    border-radius: 8px;
+}
+
+.hint-text b {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* FHE Connection */
+.fhe-connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    background: var(--primary-bg);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+
+.fhe-badge {
+    background: var(--primary);
+    color: var(--white);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.fhe-text {
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
 /* ========== SLIDE 5: GTM Target List ========== */
 .gtm-target-list { margin-bottom: 24px; }
 
