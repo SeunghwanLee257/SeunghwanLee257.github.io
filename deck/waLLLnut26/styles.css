@@ -1003,65 +1003,66 @@ body {
     font-style: italic;
 }
 
-/* Solution Hints - 합의 조건 */
-.solution-hints {
+/* Solution Hints - 합의 조건 (Full Width) */
+.solution-hints-full {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin-top: 16px;
+    gap: 24px;
+    margin-top: 20px;
+    margin-bottom: 16px;
 }
 
-.hint-item {
+.solution-hints-full .hint-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
-.hint-arrow {
-    font-size: 16px;
+.solution-hints-full .hint-arrow {
+    font-size: 18px;
     color: var(--green);
     font-weight: 700;
 }
 
-.hint-text {
+.solution-hints-full .hint-text {
     background: var(--green-bg);
-    border-left: 3px solid var(--green);
-    padding: 8px 14px;
-    font-size: 13px;
+    border-left: 4px solid var(--green);
+    padding: 12px 18px;
+    font-size: 15px;
     color: var(--text-dark);
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-.hint-text b {
+.solution-hints-full .hint-text b {
     color: var(--green);
     font-weight: 700;
 }
 
-/* FHE Connection */
-.fhe-connection {
+/* FHE Connection (Full Width) */
+.fhe-connection-full {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-top: 16px;
+    gap: 16px;
     background: var(--primary-bg);
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    padding: 12px 20px;
+    border: 3px solid var(--primary);
+    border-radius: 16px;
+    padding: 16px 28px;
+    margin-bottom: 16px;
 }
 
 .fhe-badge {
     background: var(--primary);
     color: var(--white);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 16px;
     font-weight: 700;
 }
 
 .fhe-text {
-    font-size: 15px;
+    font-size: 18px;
     color: var(--text-dark);
     font-weight: 600;
 }
@@ -1464,28 +1465,38 @@ body {
 
 .zama-ref a:hover { text-decoration: underline; }
 
-/* ========== SLIDE 7: Web3 Matrix (2x3) ========== */
-.web3-matrix { display: flex; flex-direction: column; gap: 24px; }
+/* ========== SLIDE 7: Web3 Matrix (2x3) v2 - 15pt+ fonts ========== */
+.web3-matrix-v2 { display: flex; flex-direction: column; gap: 28px; }
 
-.matrix-row {
+.matrix-row-v2 {
     display: flex;
     align-items: stretch;
-    gap: 16px;
+    gap: 20px;
 }
 
-.matrix-label {
-    width: 80px;
+.matrix-label-v2 {
+    width: 90px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    font-weight: 800;
+    gap: 8px;
     background: var(--light-gray);
-    border-radius: 12px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 20px 16px;
 }
 
-.matrix-card {
+.matrix-label-v2 .label-icon {
+    font-size: 28px;
+}
+
+.matrix-label-v2 .label-text {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.matrix-card-v2 {
     flex: 1;
     background: var(--light-gray);
     border-radius: 16px;
@@ -1493,21 +1504,21 @@ body {
     text-align: center;
 }
 
-.matrix-card.advantage {
+.matrix-card-v2.advantage {
     background: var(--green-bg);
-    border-top: 4px solid var(--green);
+    border-top: 5px solid var(--green);
 }
 
-.matrix-card.problem {
+.matrix-card-v2.problem {
     background: #FEE2E2;
-    border-top: 4px solid var(--red);
+    border-top: 5px solid var(--red);
 }
 
-.matrix-icon { font-size: 32px; margin-bottom: 12px; }
-.matrix-card h4 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
-.matrix-card.advantage h4 { color: var(--green); }
-.matrix-card.problem h4 { color: var(--red); }
-.matrix-card p { font-size: 14px; color: var(--text-medium); line-height: 1.5; }
+.matrix-icon-v2 { font-size: 36px; margin-bottom: 14px; }
+.matrix-card-v2 h4 { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+.matrix-card-v2.advantage h4 { color: var(--green); }
+.matrix-card-v2.problem h4 { color: var(--red); }
+.matrix-card-v2 p { font-size: 15px; color: var(--text-medium); line-height: 1.6; }
 
 /* ========== SLIDE 8: Solution + Momentum v2 ========== */
 .solution-momentum-layout-v2 { display: flex; gap: 32px; margin-bottom: 20px; }
@@ -1792,10 +1803,39 @@ body {
     text-align: center;
 }
 
+/* ========== Deck Footer (Copyright) ========== */
+.deck-footer {
+    width: var(--slide-width);
+    margin-top: 24px;
+    margin-bottom: 40px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.footer-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
 /* Print */
 @media print {
     .controls { display: none !important; }
     .deck-wrapper { padding: 0; }
+    .deck-footer { display: none !important; }
     .slide { display: block !important; page-break-after: always; box-shadow: none; }
     body { background: white; }
 }
