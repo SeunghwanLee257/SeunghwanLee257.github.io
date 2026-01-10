@@ -12,8 +12,8 @@ const DB_VERSION = 2;
 
 let db = null;
 let globalSecretKey = null;
-let dataA = null; // 제조사 원장
-let dataB = null; // 총판 원장
+let dataA = null; // 유통업체 원장
+let dataB = null; // 납품업체 원장
 let encryptedDataA = null;
 let encryptedDataB = null;
 let settlementResult = null;
@@ -229,70 +229,70 @@ async function initSecretKey() {
 
 // ============== Sample Data ==============
 function generateSampleDataA() {
-    // 제조사 데이터: 출하량, 단가, 할인 정책
+    // 유통업체 데이터: 매입액, 판매 실적, 판촉비 지급 기준
     return {
-        company: '㈜글로벌제약',
+        company: '㈜메가마트',
         period: '2025-Q1',
         transactions: [
-            { month: '2025-01', sku: 'MED-001', productName: '비타민D 1000IU', qty: 15000, unitPrice: 8500, shipmentValue: 127500000 },
-            { month: '2025-01', sku: 'MED-002', productName: '오메가3 프리미엄', qty: 8000, unitPrice: 15000, shipmentValue: 120000000 },
-            { month: '2025-01', sku: 'MED-003', productName: '프로바이오틱스', qty: 12000, unitPrice: 12000, shipmentValue: 144000000 },
-            { month: '2025-02', sku: 'MED-001', productName: '비타민D 1000IU', qty: 18000, unitPrice: 8500, shipmentValue: 153000000 },
-            { month: '2025-02', sku: 'MED-002', productName: '오메가3 프리미엄', qty: 9500, unitPrice: 15000, shipmentValue: 142500000 },
-            { month: '2025-02', sku: 'MED-003', productName: '프로바이오틱스', qty: 14000, unitPrice: 12000, shipmentValue: 168000000 },
-            { month: '2025-03', sku: 'MED-001', productName: '비타민D 1000IU', qty: 20000, unitPrice: 8500, shipmentValue: 170000000 },
-            { month: '2025-03', sku: 'MED-002', productName: '오메가3 프리미엄', qty: 11000, unitPrice: 15000, shipmentValue: 165000000 },
-            { month: '2025-03', sku: 'MED-003', productName: '프로바이오틱스', qty: 16000, unitPrice: 12000, shipmentValue: 192000000 },
+            { month: '2025-01', sku: 'FOOD-001', productName: '프리미엄 우유 1L', qty: 85000, unitPrice: 2800, purchaseValue: 238000000 },
+            { month: '2025-01', sku: 'FOOD-002', productName: '유기농 요거트', qty: 62000, unitPrice: 3500, purchaseValue: 217000000 },
+            { month: '2025-01', sku: 'FOOD-003', productName: '자연산 치즈', qty: 28000, unitPrice: 8900, purchaseValue: 249200000 },
+            { month: '2025-02', sku: 'FOOD-001', productName: '프리미엄 우유 1L', qty: 92000, unitPrice: 2800, purchaseValue: 257600000 },
+            { month: '2025-02', sku: 'FOOD-002', productName: '유기농 요거트', qty: 71000, unitPrice: 3500, purchaseValue: 248500000 },
+            { month: '2025-02', sku: 'FOOD-003', productName: '자연산 치즈', qty: 35000, unitPrice: 8900, purchaseValue: 311500000 },
+            { month: '2025-03', sku: 'FOOD-001', productName: '프리미엄 우유 1L', qty: 98000, unitPrice: 2800, purchaseValue: 274400000 },
+            { month: '2025-03', sku: 'FOOD-002', productName: '유기농 요거트', qty: 78000, unitPrice: 3500, purchaseValue: 273000000 },
+            { month: '2025-03', sku: 'FOOD-003', productName: '자연산 치즈', qty: 42000, unitPrice: 8900, purchaseValue: 373800000 },
         ],
         incentivePolicy: {
-            tier1: { min: 100000000, max: 200000000, rate: 0.03 },
-            tier2: { min: 200000000, max: 500000000, rate: 0.04 },
-            tier3: { min: 500000000, max: Infinity, rate: 0.05 }
+            tier1: { min: 500000000, max: 1000000000, rate: 0.02 },
+            tier2: { min: 1000000000, max: 3000000000, rate: 0.03 },
+            tier3: { min: 3000000000, max: Infinity, rate: 0.04 }
         },
-        returns: [
-            { month: '2025-01', sku: 'MED-001', qty: 200, value: 1700000 },
-            { month: '2025-02', sku: 'MED-003', qty: 150, value: 1800000 },
-            { month: '2025-03', sku: 'MED-002', qty: 100, value: 1500000 },
+        deductions: [
+            { month: '2025-01', sku: 'FOOD-001', type: '반품', qty: 1200, value: 3360000 },
+            { month: '2025-02', sku: 'FOOD-002', type: '품질이슈', qty: 800, value: 2800000 },
+            { month: '2025-03', sku: 'FOOD-003', type: '반품', qty: 500, value: 4450000 },
         ]
     };
 }
 
 function generateSampleDataB() {
-    // 총판 데이터: 실제 판매량, 재고, 프로모션 실적
+    // 납품업체 데이터: 납품 실적, 매출액, 주장 장려금
     return {
-        company: '㈜메디팜유통',
+        company: '㈜프레시푸드',
         period: '2025-Q1',
         sales: [
-            { month: '2025-01', sku: 'MED-001', productName: '비타민D 1000IU', sellOutQty: 14500, sellOutValue: 145000000, promoQty: 2000 },
-            { month: '2025-01', sku: 'MED-002', productName: '오메가3 프리미엄', sellOutQty: 7800, sellOutValue: 140400000, promoQty: 1000 },
-            { month: '2025-01', sku: 'MED-003', productName: '프로바이오틱스', sellOutQty: 11500, sellOutValue: 161000000, promoQty: 1500 },
-            { month: '2025-02', sku: 'MED-001', productName: '비타민D 1000IU', sellOutQty: 17200, sellOutValue: 172000000, promoQty: 2500 },
-            { month: '2025-02', sku: 'MED-002', productName: '오메가3 프리미엄', sellOutQty: 9200, sellOutValue: 165600000, promoQty: 1200 },
-            { month: '2025-02', sku: 'MED-003', productName: '프로바이오틱스', sellOutQty: 13500, sellOutValue: 189000000, promoQty: 1800 },
-            { month: '2025-03', sku: 'MED-001', productName: '비타민D 1000IU', sellOutQty: 19500, sellOutValue: 195000000, promoQty: 3000 },
-            { month: '2025-03', sku: 'MED-002', productName: '오메가3 프리미엄', sellOutQty: 10800, sellOutValue: 194400000, promoQty: 1500 },
-            { month: '2025-03', sku: 'MED-003', productName: '프로바이오틱스', sellOutQty: 15800, sellOutValue: 221200000, promoQty: 2200 },
+            { month: '2025-01', sku: 'FOOD-001', productName: '프리미엄 우유 1L', deliveryQty: 85000, deliveryValue: 238000000, promoSupport: 5000000 },
+            { month: '2025-01', sku: 'FOOD-002', productName: '유기농 요거트', deliveryQty: 62000, deliveryValue: 217000000, promoSupport: 4000000 },
+            { month: '2025-01', sku: 'FOOD-003', productName: '자연산 치즈', deliveryQty: 28000, deliveryValue: 249200000, promoSupport: 6000000 },
+            { month: '2025-02', sku: 'FOOD-001', productName: '프리미엄 우유 1L', deliveryQty: 92000, deliveryValue: 257600000, promoSupport: 5500000 },
+            { month: '2025-02', sku: 'FOOD-002', productName: '유기농 요거트', deliveryQty: 71000, deliveryValue: 248500000, promoSupport: 4500000 },
+            { month: '2025-02', sku: 'FOOD-003', productName: '자연산 치즈', deliveryQty: 35000, deliveryValue: 311500000, promoSupport: 7000000 },
+            { month: '2025-03', sku: 'FOOD-001', productName: '프리미엄 우유 1L', deliveryQty: 98000, deliveryValue: 274400000, promoSupport: 6000000 },
+            { month: '2025-03', sku: 'FOOD-002', productName: '유기농 요거트', deliveryQty: 78000, deliveryValue: 273000000, promoSupport: 5000000 },
+            { month: '2025-03', sku: 'FOOD-003', productName: '자연산 치즈', deliveryQty: 42000, deliveryValue: 373800000, promoSupport: 8000000 },
         ],
         inventory: [
-            { sku: 'MED-001', beginningStock: 5000, endingStock: 6300 },
-            { sku: 'MED-002', beginningStock: 3000, endingStock: 3500 },
-            { sku: 'MED-003', beginningStock: 4000, endingStock: 4200 },
+            { sku: 'FOOD-001', beginningStock: 12000, endingStock: 8500 },
+            { sku: 'FOOD-002', beginningStock: 8000, endingStock: 6200 },
+            { sku: 'FOOD-003', beginningStock: 5000, endingStock: 4800 },
         ],
-        claimedIncentive: 58500000 // 총판이 주장하는 장려금
+        claimedIncentive: 72000000 // 납품업체가 주장하는 장려금
     };
 }
 
 // ============== Rule Pack ==============
 const RULE_PACK = {
-    programName: '2025년 1분기 판촉정산',
+    programName: '2025년 1분기 판매장려금',
     period: { start: '2025-01-01', end: '2025-03-31' },
-    baseCondition: '월 매출 1억 이상 시 장려금 지급',
+    baseCondition: '분기 납품액 5억 이상 시 장려금 지급',
     tiers: [
-        { minSales: 100000000, maxSales: 200000000, incentiveRate: 0.03, description: '1억~2억: 3%' },
-        { minSales: 200000000, maxSales: 500000000, incentiveRate: 0.04, description: '2억~5억: 4%' },
-        { minSales: 500000000, maxSales: Infinity, incentiveRate: 0.05, description: '5억+: 5%' }
+        { minSales: 500000000, maxSales: 1000000000, incentiveRate: 0.02, description: '5~10억: 2%' },
+        { minSales: 1000000000, maxSales: 3000000000, incentiveRate: 0.03, description: '10~30억: 3%' },
+        { minSales: 3000000000, maxSales: Infinity, incentiveRate: 0.04, description: '30억+: 4%' }
     ],
-    exclusions: ['반품 제외', '프로모션 물량 별도 정산'],
+    exclusions: ['반품/품질이슈 차감', '판촉지원비 별도'],
     version: '1.0.0'
 };
 
@@ -322,19 +322,19 @@ function updateSummaryA() {
         return;
     }
 
-    const totalShipment = dataA.transactions.reduce((sum, t) => sum + t.shipmentValue, 0);
-    const totalReturns = dataA.returns.reduce((sum, r) => sum + r.value, 0);
+    const totalPurchase = dataA.transactions.reduce((sum, t) => sum + t.purchaseValue, 0);
+    const totalDeductions = dataA.deductions.reduce((sum, d) => sum + d.value, 0);
     const skuCount = [...new Set(dataA.transactions.map(t => t.sku))].length;
 
     el.innerHTML = `
         <div class="summary-grid">
             <div class="summary-item">
-                <span class="label">총 출하액</span>
-                <span class="value">${formatKRW(totalShipment)}</span>
+                <span class="label">총 매입액</span>
+                <span class="value">${formatKRW(totalPurchase)}</span>
             </div>
             <div class="summary-item">
-                <span class="label">반품액</span>
-                <span class="value">${formatKRW(totalReturns)}</span>
+                <span class="label">차감액</span>
+                <span class="value">${formatKRW(totalDeductions)}</span>
             </div>
             <div class="summary-item">
                 <span class="label">SKU 수</span>
@@ -355,19 +355,19 @@ function updateSummaryB() {
         return;
     }
 
-    const totalSellOut = dataB.sales.reduce((sum, s) => sum + s.sellOutValue, 0);
-    const totalPromo = dataB.sales.reduce((sum, s) => sum + s.promoQty, 0);
+    const totalDelivery = dataB.sales.reduce((sum, s) => sum + s.deliveryValue, 0);
+    const totalPromoSupport = dataB.sales.reduce((sum, s) => sum + s.promoSupport, 0);
     const claimed = dataB.claimedIncentive;
 
     el.innerHTML = `
         <div class="summary-grid">
             <div class="summary-item">
-                <span class="label">총 판매액</span>
-                <span class="value">${formatKRW(totalSellOut)}</span>
+                <span class="label">총 납품액</span>
+                <span class="value">${formatKRW(totalDelivery)}</span>
             </div>
             <div class="summary-item">
-                <span class="label">프로모션 수량</span>
-                <span class="value">${totalPromo.toLocaleString()}개</span>
+                <span class="label">판촉지원비</span>
+                <span class="value">${formatKRW(totalPromoSupport)}</span>
             </div>
             <div class="summary-item">
                 <span class="label">주장 장려금</span>
@@ -404,15 +404,15 @@ function checkExecuteButton() {
 // ============== Upload Functions ==============
 function uploadDataA() {
     const modal = document.getElementById('uploadModal');
-    document.getElementById('modalTitle').textContent = '㈜글로벌제약 원장 업로드';
+    document.getElementById('modalTitle').textContent = '㈜메가마트 원장 업로드';
 
     document.getElementById('modalBody').innerHTML = `
         <p style="margin-bottom: 20px; color: var(--medium); font-size: 14px;">
-            제조사의 출하/반품 데이터를 업로드합니다. 실제 환경에서는 ERP 연동 또는 파일 업로드로 진행됩니다.
+            유통업체의 매입/차감 데이터를 업로드합니다. 실제 환경에서는 ERP 연동 또는 파일 업로드로 진행됩니다.
         </p>
 
         <div class="data-preview">
-            <h4>샘플 데이터 미리보기 (3개월 출하 내역)</h4>
+            <h4>샘플 데이터 미리보기 (3개월 매입 내역)</h4>
             <table class="preview-table">
                 <thead>
                     <tr>
@@ -420,7 +420,7 @@ function uploadDataA() {
                         <th>SKU</th>
                         <th>품목</th>
                         <th>수량</th>
-                        <th>출하액</th>
+                        <th>매입액</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -430,7 +430,7 @@ function uploadDataA() {
                             <td>${t.sku}</td>
                             <td>${t.productName}</td>
                             <td>${t.qty.toLocaleString()}</td>
-                            <td>${formatKRW(t.shipmentValue)}</td>
+                            <td>${formatKRW(t.purchaseValue)}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -464,7 +464,7 @@ async function confirmUploadA() {
         period: dataA.period,
         transactions: await encryptData(dataA.transactions, globalSecretKey),
         incentivePolicy: await encryptData(dataA.incentivePolicy, globalSecretKey),
-        returns: await encryptData(dataA.returns, globalSecretKey),
+        deductions: await encryptData(dataA.deductions, globalSecretKey),
         commitment: await hashData(dataA)
     };
 
@@ -481,23 +481,23 @@ async function confirmUploadA() {
 
 function uploadDataB() {
     const modal = document.getElementById('uploadModal');
-    document.getElementById('modalTitle').textContent = '㈜메디팜유통 원장 업로드';
+    document.getElementById('modalTitle').textContent = '㈜프레시푸드 원장 업로드';
 
     document.getElementById('modalBody').innerHTML = `
         <p style="margin-bottom: 20px; color: var(--medium); font-size: 14px;">
-            총판의 판매(sell-out)/재고 데이터를 업로드합니다. 원장 원본은 외부에 공개되지 않습니다.
+            납품업체의 납품/판촉지원 데이터를 업로드합니다. 원장 원본은 외부에 공개되지 않습니다.
         </p>
 
         <div class="data-preview">
-            <h4>샘플 데이터 미리보기 (3개월 판매 내역)</h4>
+            <h4>샘플 데이터 미리보기 (3개월 납품 내역)</h4>
             <table class="preview-table">
                 <thead>
                     <tr>
                         <th>월</th>
                         <th>SKU</th>
                         <th>품목</th>
-                        <th>판매수량</th>
-                        <th>판매액</th>
+                        <th>납품수량</th>
+                        <th>납품액</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -506,8 +506,8 @@ function uploadDataB() {
                             <td>${s.month}</td>
                             <td>${s.sku}</td>
                             <td>${s.productName}</td>
-                            <td>${s.sellOutQty.toLocaleString()}</td>
-                            <td>${formatKRW(s.sellOutValue)}</td>
+                            <td>${s.deliveryQty.toLocaleString()}</td>
+                            <td>${formatKRW(s.deliveryValue)}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -568,7 +568,7 @@ function viewEncryptedA() {
     }
 
     const modal = document.getElementById('encryptedModal');
-    document.getElementById('encryptedTitle').textContent = '㈜글로벌제약 암호화 데이터';
+    document.getElementById('encryptedTitle').textContent = '㈜메가마트 암호화 데이터';
 
     document.getElementById('encryptedBody').innerHTML = `
         <div class="encrypted-view">
@@ -577,7 +577,7 @@ function viewEncryptedA() {
             </p>
 
             <div class="encrypted-field">
-                <div class="field-label"><span class="lock-icon">🔒</span> 거래 내역 (transactions)</div>
+                <div class="field-label"><span class="lock-icon">🔒</span> 매입 내역 (transactions)</div>
                 <div class="field-value">${encryptedDataA.transactions.data.slice(0, 200)}...</div>
             </div>
 
@@ -587,8 +587,8 @@ function viewEncryptedA() {
             </div>
 
             <div class="encrypted-field">
-                <div class="field-label"><span class="lock-icon">🔒</span> 반품 내역 (returns)</div>
-                <div class="field-value">${encryptedDataA.returns.data.slice(0, 200)}...</div>
+                <div class="field-label"><span class="lock-icon">🔒</span> 차감 내역 (deductions)</div>
+                <div class="field-value">${encryptedDataA.deductions.data.slice(0, 200)}...</div>
             </div>
 
             <div class="encrypted-field">
@@ -608,7 +608,7 @@ function viewEncryptedB() {
     }
 
     const modal = document.getElementById('encryptedModal');
-    document.getElementById('encryptedTitle').textContent = '㈜메디팜유통 암호화 데이터';
+    document.getElementById('encryptedTitle').textContent = '㈜프레시푸드 암호화 데이터';
 
     document.getElementById('encryptedBody').innerHTML = `
         <div class="encrypted-view">
@@ -617,7 +617,7 @@ function viewEncryptedB() {
             </p>
 
             <div class="encrypted-field">
-                <div class="field-label"><span class="lock-icon">🔒</span> 판매 내역 (sales)</div>
+                <div class="field-label"><span class="lock-icon">🔒</span> 납품 내역 (sales)</div>
                 <div class="field-value">${encryptedDataB.sales.data.slice(0, 200)}...</div>
             </div>
 
@@ -694,13 +694,13 @@ async function executeSettlement() {
 
     // Decrypt data (simulating FHE computation)
     await sleep(300);
-    addLog('crypto', '[Decrypt] Company A 거래 데이터 복호화...');
+    addLog('crypto', '[Decrypt] Company A 매입 데이터 복호화...');
     const decryptedTransactions = await decryptData(encryptedDataA.transactions, globalSecretKey);
-    const decryptedReturns = await decryptData(encryptedDataA.returns, globalSecretKey);
+    const decryptedDeductions = await decryptData(encryptedDataA.deductions, globalSecretKey);
     const decryptedPolicy = await decryptData(encryptedDataA.incentivePolicy, globalSecretKey);
 
     await sleep(300);
-    addLog('crypto', '[Decrypt] Company B 판매 데이터 복호화...');
+    addLog('crypto', '[Decrypt] Company B 납품 데이터 복호화...');
     const decryptedSales = await decryptData(encryptedDataB.sales, globalSecretKey);
     const decryptedClaimed = await decryptData(encryptedDataB.claimedIncentive, globalSecretKey);
 
@@ -708,42 +708,49 @@ async function executeSettlement() {
     await sleep(400);
     addLog('info', '[Step 4] 정산 로직 실행...');
 
-    // 월별 매출 집계
+    // 월별 납품액 집계
     const monthlySales = {};
     decryptedSales.forEach(s => {
         if (!monthlySales[s.month]) monthlySales[s.month] = 0;
-        monthlySales[s.month] += s.sellOutValue;
+        monthlySales[s.month] += s.deliveryValue;
     });
 
-    addLog('info', `[계산] 1월 매출: ${formatKRW(monthlySales['2025-01'])}`);
-    addLog('info', `[계산] 2월 매출: ${formatKRW(monthlySales['2025-02'])}`);
-    addLog('info', `[계산] 3월 매출: ${formatKRW(monthlySales['2025-03'])}`);
+    // 분기 총 납품액 계산
+    const quarterlyTotal = Object.values(monthlySales).reduce((sum, v) => sum + v, 0);
+    addLog('info', `[계산] 1월 납품액: ${formatKRW(monthlySales['2025-01'])}`);
+    addLog('info', `[계산] 2월 납품액: ${formatKRW(monthlySales['2025-02'])}`);
+    addLog('info', `[계산] 3월 납품액: ${formatKRW(monthlySales['2025-03'])}`);
+    addLog('info', `[계산] 분기 총액: ${formatKRW(quarterlyTotal)}`);
 
-    // 장려금 계산 (버킷별)
+    // 장려금 계산 (분기 총액 기준)
     await sleep(300);
     let totalIncentive = 0;
     const incentiveDetails = [];
     const bucketBreakdown = [];
 
+    // 분기 총액 기준 티어 판정
+    let rate = 0;
+    let tier = '';
+    let tierNum = 0;
+
+    if (quarterlyTotal >= 3000000000) {
+        rate = 0.04;
+        tier = 'Tier 3 (4%)';
+        tierNum = 3;
+    } else if (quarterlyTotal >= 1000000000) {
+        rate = 0.03;
+        tier = 'Tier 2 (3%)';
+        tierNum = 2;
+    } else if (quarterlyTotal >= 500000000) {
+        rate = 0.02;
+        tier = 'Tier 1 (2%)';
+        tierNum = 1;
+    }
+
+    addLog('success', `[티어 판정] 분기 ${formatKRW(quarterlyTotal)} → ${tier}`);
+
+    // 월별 장려금 계산
     Object.entries(monthlySales).forEach(([month, sales]) => {
-        let rate = 0;
-        let tier = '';
-        let tierNum = 0;
-
-        if (sales >= 500000000) {
-            rate = 0.05;
-            tier = 'Tier 3 (5%)';
-            tierNum = 3;
-        } else if (sales >= 200000000) {
-            rate = 0.04;
-            tier = 'Tier 2 (4%)';
-            tierNum = 2;
-        } else if (sales >= 100000000) {
-            rate = 0.03;
-            tier = 'Tier 1 (3%)';
-            tierNum = 1;
-        }
-
         const incentive = Math.floor(sales * rate);
         totalIncentive += incentive;
         incentiveDetails.push({ month, sales, tier, tierNum, rate, incentive });
@@ -761,24 +768,24 @@ async function executeSettlement() {
             netIncentive: incentive
         });
 
-        addLog('success', `[${month}] ${tier} → 장려금: ${formatKRW(incentive)}`);
+        addLog('success', `[${month}] ${formatKRW(sales)} × ${(rate*100)}% = ${formatKRW(incentive)}`);
     });
 
-    // 반품 차감 (월별 배분)
+    // 차감액 적용
     await sleep(200);
-    const totalReturns = decryptedReturns.reduce((sum, r) => sum + r.value, 0);
-    const returnDeduction = Math.floor(totalReturns * 0.03);
+    const totalDeductionAmount = decryptedDeductions.reduce((sum, d) => sum + d.value, 0);
+    const incentiveDeduction = Math.floor(totalDeductionAmount * rate);
 
-    // 반품 차감을 월별로 배분
-    const deductionPerMonth = Math.floor(returnDeduction / 3);
+    // 차감을 월별로 배분
+    const deductionPerMonth = Math.floor(incentiveDeduction / 3);
     bucketBreakdown.forEach(bucket => {
         bucket.deductions = deductionPerMonth;
         bucket.netIncentive = bucket.grossIncentive - deductionPerMonth;
     });
 
-    addLog('warning', `[차감] 반품분 장려금 차감: -${formatKRW(returnDeduction)}`);
+    addLog('warning', `[차감] 반품/품질이슈분 차감: -${formatKRW(incentiveDeduction)}`);
 
-    const finalIncentive = totalIncentive - returnDeduction;
+    const finalIncentive = totalIncentive - incentiveDeduction;
     const claimedIncentive = decryptedClaimed.value;
     const difference = finalIncentive - claimedIncentive;
 
@@ -799,11 +806,12 @@ async function executeSettlement() {
         settlementId,
         ruleHash,
         period: '2025-Q1',
+        quarterlyTotal,
         monthlySales,
         incentiveDetails,
         bucketBreakdown,
         totalIncentive,
-        returnDeduction,
+        returnDeduction: incentiveDeduction,
         finalIncentive,
         claimedIncentive,
         difference,
@@ -817,7 +825,7 @@ async function executeSettlement() {
     const allItems = [
         ...decryptedTransactions,
         ...decryptedSales,
-        ...decryptedReturns
+        ...decryptedDeductions
     ];
     const merkleRoot = await calculateMerkleRoot(allItems);
 
@@ -1213,12 +1221,12 @@ function openChallenge() {
                         ${samples.map((s, i) => `
                             <tr>
                                 <td>${i + 1}</td>
-                                <td><span class="source-badge source-${s.source}">${s.source === 'A' ? '제조사' : '총판'}</span></td>
+                                <td><span class="source-badge source-${s.source}">${s.source === 'A' ? '유통업체' : '납품업체'}</span></td>
                                 <td>${s.data.month}</td>
                                 <td class="mono">${s.data.sku}</td>
                                 <td>${s.data.productName}</td>
-                                <td class="number">${(s.data.qty || s.data.sellOutQty || 0).toLocaleString()}</td>
-                                <td class="number">${formatKRW(s.data.shipmentValue || s.data.sellOutValue || 0)}</td>
+                                <td class="number">${(s.data.qty || s.data.deliveryQty || 0).toLocaleString()}</td>
+                                <td class="number">${formatKRW(s.data.purchaseValue || s.data.deliveryValue || 0)}</td>
                                 <td>
                                     <select class="verify-select" id="verify-${i}">
                                         <option value="">선택</option>
