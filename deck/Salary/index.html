@@ -65,8 +65,8 @@
                             </div>
                             <div class="diagram-arrow">
                                 <svg width="40" height="24" viewBox="0 0 40 24">
-                                    <path d="M5 12 L30 12" stroke="#F97316" stroke-width="3"/>
-                                    <polyline points="25,7 30,12 25,17" fill="none" stroke="#F97316" stroke-width="3"/>
+                                    <path d="M5 12 L30 12" stroke="rgba(226, 226, 226, 0.795)" stroke-width="3"/>
+                                    <polyline points="25,7 30,12 25,17" fill="none" stroke="rgba(226, 226, 226, 0.795)" stroke-width="3"/>
                                 </svg>
                             </div>
                             <div class="diagram-item">
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="consequence-box">
-                        <span class="consequence-icon">⚠</span>
+                        <span class="consequence-icon">⚠️</span>
                         <span>Competitors see salaries → Headhunters target top earners → Security risks for high-value wallets</span>
                     </div>
 
@@ -282,12 +282,18 @@
 
                     <div class="solution-flow">
                         <div class="flow-item">
-                            <div class="flow-icon">CSV</div>
+                            <div class="flow-icon payroll-icon">
+                                <span class="desktop-emoji">🖥️</span>
+                                <span class="csv-text">CSV</span>
+                            </div>
                             <span>Payroll Data</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item highlight-flow">
-                            <div class="flow-icon">FHE</div>
+                            <div class="flow-icon fhe-icon">
+                                <span class="gear-emoji">⚙️</span>
+                                <span class="fhe-text">FHE</span>
+                            </div>
                             <span>Encrypt Payslips</span>
                         </div>
                         <div class="flow-arrow">→</div>
@@ -297,12 +303,15 @@
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item highlight-flow">
-                            <div class="flow-icon">ZK</div>
+                            <div class="flow-icon zk-icon">
+                                <span class="magnifier-emoji">🔍</span>
+                                <span class="zk-text">ZK</span>
+                            </div>
                             <span>Pool Payout</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item">
-                            <div class="flow-icon">👤</div>
+                            <div class="flow-icon">👨‍💼</div>
                             <span>Employee</span>
                         </div>
                     </div>
@@ -328,7 +337,7 @@
 
                     <div class="assumption-box">
                         <div class="assumption-header">
-                            <span class="assumption-icon">⚠</span>
+                            <span class="assumption-icon">⚠️</span>
                             <strong>Current Constraint</strong>
                         </div>
                         <p>ZK prover and FHE executor are currently assumed to be the same party for trust/coordination.</p>
@@ -583,8 +592,13 @@
                     </div>
 
                     <div class="milestone-highlight">
-                        <span class="milestone-icon">✓</span>
-                        <span>Current: Prototype complete (Mantle Hackathon 2025) — Frontend + Contracts + FHE module</span>
+                        <span class="milestone-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="11" stroke="white" stroke-width="2" fill="none"/>
+                                <path d="M8 12L11 15L16 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span><strong class="current-text">Current</strong><br class="current-br">Prototype complete (Mantle Hackathon 2025)<br>— Frontend + Contracts + FHE module</span>
                     </div>
                 </div>
             </div>
@@ -669,7 +683,7 @@
 
                     <div class="team-grid">
                         <div class="team-card">
-                            <div class="team-avatar">SL</div>
+                            <div class="team-avatar">👨🏻‍💻</div>
                             <div class="team-info">
                                 <h4>Seunghwan Lee</h4>
                                 <span class="team-role">CEO</span>
@@ -677,7 +691,7 @@
                             </div>
                         </div>
                         <div class="team-card">
-                            <div class="team-avatar">DK</div>
+                            <div class="team-avatar">👨🏻‍💼</div>
                             <div class="team-info">
                                 <h4>Dohyuk Kim</h4>
                                 <span class="team-role">CTO</span>
@@ -685,7 +699,7 @@
                             </div>
                         </div>
                         <div class="team-card">
-                            <div class="team-avatar">YH</div>
+                            <div class="team-avatar">🧑🏻‍💻</div>
                             <div class="team-info">
                                 <h4>Yunsik Ham</h4>
                                 <span class="team-role">Web3 Developer</span>
