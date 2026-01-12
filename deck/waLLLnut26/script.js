@@ -1,6 +1,6 @@
 // Slide Navigation
 let currentSlide = 1;
-const totalSlides = 16;
+const totalSlides = 14;
 
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
@@ -158,6 +158,21 @@ document.addEventListener('touchend', (e) => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     updateSlide();
+
+    // Add copyright to all slides except slide 1
+    document.querySelectorAll('.slide-inner').forEach((inner, index) => {
+        if (index === 0) return; // Skip title slide
+        const copyright = document.createElement('div');
+        copyright.className = 'slide-copyright';
+        copyright.innerHTML = `
+            <svg width="18" height="18" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="46" height="46" rx="12" fill="#F1F5F9"/>
+                <path d="M11.6582 27.4746C11.6583 30.0105 13.7337 32.0664 16.293 32.0664H21.1709V20.4658H24.8291V32.0664H29.707C32.2663 32.0664 34.3417 30.0105 34.3418 27.4746V20.4658H38V28.4414C37.9998 32.4454 34.7236 35.6914 30.6826 35.6914H15.3174C11.2764 35.6914 8.00018 32.4454 8 28.4414V20.4658H11.6582V27.4746ZM23.0029 10.3047C27.3132 10.3049 30.8076 13.7672 30.8076 18.0381V28.4297H27.4141V18.3008C27.414 15.8869 25.4391 13.9299 23.0029 13.9297C20.5666 13.9297 18.5909 15.8867 18.5908 18.3008V28.4297H15.1973V18.0381C15.1973 13.767 18.6925 10.3047 23.0029 10.3047Z" fill="#94A3B8"/>
+            </svg>
+            <span>© 2026 waLLLnut Inc.</span>
+        `;
+        inner.appendChild(copyright);
+    });
 });
 
 // Fullscreen toggle (press F)
