@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 <body>
     <div class="controls" id="controls">
@@ -19,7 +20,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 14</span>
+        <span id="slideCounter">1 / 15</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -55,8 +56,8 @@
                             </div>
                             <h1>LatticA Salary</h1>
                         </div>
-                        <p class="tagline">Privacy-First On-Chain Payroll</p>
-                        <p class="sub-tagline">FHE + ZK Confidential Infrastructure for Crypto-Native Organizations</p>
+                        <p class="tagline">AML-Ready Shield Pool for On-Chain Payroll</p>
+                        <p class="sub-tagline">Privacy + Compliance: FHE + ZK Infrastructure for Regulated Crypto Payments</p>
 
                         <div class="title-diagram">
                             <div class="diagram-item">
@@ -86,83 +87,130 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Problem + Evidence -->
+            <!-- Slide 2: Problem - Privacy vs Compliance -->
             <div class="slide" data-slide="2">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">01</span>
                         <span class="slide-title">Problem</span>
                     </div>
-                    <h2 class="slide-headline">On-chain payroll is <span class="highlight">publicly visible</span></h2>
+                    <h2 class="slide-headline">Private Payroll은 가능하다. 그러나 <span class="highlight">규제 대응이 불가능</span>하다</h2>
 
-                    <div class="evidence-section">
-                        <div class="evidence-card">
-                            <h4>What's Exposed On-Chain</h4>
-                            <div class="exposed-items">
-                                <div class="exposed-item">
-                                    <span class="exposed-label">From:</span>
-                                    <span class="exposed-value">Treasury Address</span>
-                                </div>
-                                <div class="exposed-item">
-                                    <span class="exposed-label">To:</span>
-                                    <span class="exposed-value">Recipient Wallet</span>
-                                </div>
-                                <div class="exposed-item highlight-exposed">
-                                    <span class="exposed-label">Amount:</span>
-                                    <span class="exposed-value">5,000 USDT</span>
-                                    <span class="exposed-badge">VISIBLE</span>
-                                </div>
-                                <div class="exposed-item">
-                                    <span class="exposed-label">Timestamp:</span>
-                                    <span class="exposed-value">Block #18234567</span>
+                    <div class="problem-dual">
+                        <div class="problem-card solved">
+                            <div class="problem-card-header">
+                                <span class="status-badge solved">✓ SOLVED</span>
+                                <h4>Private Payroll</h4>
+                            </div>
+                            <div class="problem-card-body">
+                                <p class="problem-desc">ZK Pool 기반 솔루션으로 급여 지급의 프라이버시는 이미 구현 가능</p>
+                                <div class="solution-examples">
+                                    <span class="example-chip">zkBob</span>
+                                    <span class="example-chip">Tornado Cash</span>
+                                    <span class="example-chip">Railgun</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="verification-card">
-                            <h4>Anyone Can Verify</h4>
-                            <div class="verify-methods">
-                                <div class="verify-method">
-                                    <span class="method-num">1</span>
-                                    <div class="method-content">
-                                        <strong>Etherscan</strong>
-                                        <span>Token Transfers tab</span>
+                        <div class="problem-arrow">BUT</div>
+
+                        <div class="problem-card unsolved">
+                            <div class="problem-card-header">
+                                <span class="status-badge unsolved">✗ UNSOLVED</span>
+                                <h4>AML/Compliance</h4>
+                            </div>
+                            <div class="problem-card-body">
+                                <p class="problem-desc">강력한 ZK Privacy는 규제 기관의 감사 요청에 대응 불가</p>
+                                <div class="consequence-list">
+                                    <div class="consequence-item">
+                                        <span class="consequence-icon-small">⚖️</span>
+                                        <span>OFAC 제재 주소 확인 불가</span>
                                     </div>
-                                </div>
-                                <div class="verify-method">
-                                    <span class="method-num">2</span>
-                                    <div class="method-content">
-                                        <strong>APIs</strong>
-                                        <span>Alchemy, Covalent, The Graph</span>
+                                    <div class="consequence-item">
+                                        <span class="consequence-icon-small">🔍</span>
+                                        <span>자금세탁 추적 불가</span>
                                     </div>
-                                </div>
-                                <div class="verify-method">
-                                    <span class="method-num">3</span>
-                                    <div class="method-content">
-                                        <strong>Analytics</strong>
-                                        <span>Dune, Nansen, Arkham</span>
+                                    <div class="consequence-item">
+                                        <span class="consequence-icon-small">📋</span>
+                                        <span>세무 감사 증빙 불가</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="consequence-box">
-                        <span class="consequence-icon">⚠️</span>
-                        <span>Competitors see salaries → Headhunters target top earners → Security risks for high-value wallets</span>
+                    <div class="dilemma-box">
+                        <div class="dilemma-header">
+                            <span class="dilemma-icon">⚠️</span>
+                            <strong>The Privacy-Compliance Dilemma</strong>
+                        </div>
+                        <p>강력한 Privacy 솔루션은 <strong>그 누구도 책임지지 못하는 영역</strong>으로 자금을 끌고 간다</p>
+                        <div class="dilemma-result">
+                            <span>결과:</span>
+                            <span class="result-item bad">Tornado Cash 제재 (OFAC 2022)</span>
+                            <span class="result-item bad">개발자 기소/유죄 (2024-2025)</span>
+                            <span class="result-item bad">기관 도입 불가</span>
+                        </div>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: etherscan.io/tokentxns • docs.alchemy.com • dune.com</span>
+                        <span>Sources: OFAC Tornado Cash Sanctions (Aug 2022) • US v. Storm/Semenov (2024-2025)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 3: Market & Competition -->
+            <!-- Slide 3: Pool Visualization -->
             <div class="slide" data-slide="3">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">02</span>
+                        <span class="slide-title">How ZK Pool Works</span>
+                    </div>
+                    <h2 class="slide-headline">ZK Pool: 송신자가 <span class="highlight">익명화</span>되는 구조</h2>
+
+                    <div class="pool-visualization-container">
+                        <div id="poolDiagram" class="pool-diagram"></div>
+                    </div>
+
+                    <div class="pool-legend">
+                        <div class="legend-section">
+                            <h5>ZK Pool 동작 원리</h5>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <span class="legend-dot pool"></span>
+                                    <span>ZK Privacy Pool (내부 익명)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot sender"></span>
+                                    <span>송신자 주소 (Pool 입금 시 공개)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot receiver"></span>
+                                    <span>수신자 주소 (Pool 출금 시 공개)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="legend-section problem-section">
+                            <h5>AML 추적 문제</h5>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <span class="legend-dot blocked"></span>
+                                    <span>추적 차단점: Pool에서 연결 끊김</span>
+                                </div>
+                                <div class="legend-item problem-text">
+                                    <span>🚫 규제기관이 의심 TX 추적 시 → Pool에서 막힘 → 송신자 특정 불가</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Market & Competition -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
                         <span class="slide-title">Market</span>
                     </div>
                     <h2 class="slide-headline">$307B stablecoin market, <span class="highlight">no privacy rails</span></h2>
@@ -230,11 +278,11 @@
                 </div>
             </div>
 
-            <!-- Slide 4: Why Now -->
-            <div class="slide" data-slide="4">
+            <!-- Slide 5: Why Now -->
+            <div class="slide" data-slide="5">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">03</span>
+                        <span class="slide-num">04</span>
                         <span class="slide-title">Why Now</span>
                     </div>
                     <h2 class="slide-headline">Three converging <span class="highlight">mega-trends</span></h2>
@@ -271,11 +319,11 @@
                 </div>
             </div>
 
-            <!-- Slide 5: Solution + Architecture -->
-            <div class="slide" data-slide="5">
+            <!-- Slide 6: Solution + Architecture -->
+            <div class="slide" data-slide="6">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">04</span>
+                        <span class="slide-num">05</span>
                         <span class="slide-title">Solution</span>
                     </div>
                     <h2 class="slide-headline">LatticA = <span class="highlight">FHE + ZK</span> Confidential Payroll</h2>
@@ -350,11 +398,11 @@
                 </div>
             </div>
 
-            <!-- Slide 6: Privacy Solutions Landscape -->
-            <div class="slide" data-slide="6">
+            <!-- Slide 7: Privacy Solutions Landscape -->
+            <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">05</span>
+                        <span class="slide-num">06</span>
                         <span class="slide-title">Privacy Landscape</span>
                     </div>
                     <h2 class="slide-headline">기존 Privacy 솔루션의 <span class="highlight">구조적 한계</span></h2>
@@ -416,11 +464,11 @@
                 </div>
             </div>
 
-            <!-- Slide 7: How LatticA Solves This -->
-            <div class="slide" data-slide="7">
+            <!-- Slide 8: How LatticA Solves This -->
+            <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">06</span>
+                        <span class="slide-num">07</span>
                         <span class="slide-title">Technical Solution</span>
                     </div>
                     <h2 class="slide-headline">ZK Witness를 <span class="highlight">암호화 로깅</span>하는 구조</h2>
@@ -507,11 +555,11 @@
                 </div>
             </div>
 
-            <!-- Slide 8: Product Flow -->
-            <div class="slide" data-slide="8">
+            <!-- Slide 9: Product Flow -->
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">07</span>
+                        <span class="slide-num">08</span>
                         <span class="slide-title">Product</span>
                     </div>
                     <h2 class="slide-headline">Two Portals, <span class="highlight">One Workflow</span></h2>
@@ -577,11 +625,11 @@
                 </div>
             </div>
 
-            <!-- Slide 9: Why Mantle -->
-            <div class="slide" data-slide="9">
+            <!-- Slide 10: Why Mantle -->
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">08</span>
+                        <span class="slide-num">09</span>
                         <span class="slide-title">Why Mantle</span>
                     </div>
                     <h2 class="slide-headline">Mantle: The <span class="highlight">"Real Finance"</span> L2</h2>
@@ -629,11 +677,11 @@
                 </div>
             </div>
 
-            <!-- Slide 10: Business Model + Financials -->
-            <div class="slide" data-slide="10">
+            <!-- Slide 11: Business Model + Financials -->
+            <div class="slide" data-slide="11">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">09</span>
+                        <span class="slide-num">10</span>
                         <span class="slide-title">Business Model</span>
                     </div>
                     <h2 class="slide-headline">Protocol Fee + <span class="highlight">SaaS Hybrid</span></h2>
@@ -700,11 +748,11 @@
                 </div>
             </div>
 
-            <!-- Slide 11: GTM + Roadmap -->
-            <div class="slide" data-slide="11">
+            <!-- Slide 12: GTM + Roadmap -->
+            <div class="slide" data-slide="12">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">10</span>
+                        <span class="slide-num">11</span>
                         <span class="slide-title">Roadmap</span>
                     </div>
                     <h2 class="slide-headline"><span class="highlight">Mantle-First</span> Go-To-Market</h2>
@@ -760,11 +808,11 @@
                 </div>
             </div>
 
-            <!-- Slide 12: Competitors Deep Dive -->
-            <div class="slide" data-slide="12">
+            <!-- Slide 13: Competitors Deep Dive -->
+            <div class="slide" data-slide="13">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">11</span>
+                        <span class="slide-num">12</span>
                         <span class="slide-title">Competition</span>
                     </div>
                     <h2 class="slide-headline">We fill the <span class="highlight">privacy gap</span></h2>
@@ -829,11 +877,11 @@
                 </div>
             </div>
 
-            <!-- Slide 13: Team -->
-            <div class="slide" data-slide="13">
+            <!-- Slide 14: Team -->
+            <div class="slide" data-slide="14">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">12</span>
+                        <span class="slide-num">13</span>
                         <span class="slide-title">Team</span>
                     </div>
                     <h2 class="slide-headline">Cryptography + <span class="highlight">Execution</span></h2>
@@ -872,11 +920,11 @@
                 </div>
             </div>
 
-            <!-- Slide 14: Ask -->
-            <div class="slide" data-slide="14">
+            <!-- Slide 15: Ask -->
+            <div class="slide" data-slide="15">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">13</span>
+                        <span class="slide-num">14</span>
                         <span class="slide-title">Ask</span>
                     </div>
                     <h2 class="slide-headline">Partnership <span class="highlight">Request</span></h2>
