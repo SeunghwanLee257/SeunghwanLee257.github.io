@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 <body>
     <div class="controls" id="controls">
@@ -158,39 +157,106 @@
                     </div>
                     <h2 class="slide-headline">ZK Pool: 송신자가 <span class="highlight">익명화</span>되는 구조</h2>
 
-                    <div class="pool-visualization-container">
-                        <div id="poolDiagram" class="pool-diagram"></div>
-                    </div>
-
-                    <div class="pool-legend">
-                        <div class="legend-section">
-                            <h5>ZK Pool 동작 원리</h5>
-                            <div class="legend-items">
-                                <div class="legend-item">
-                                    <span class="legend-dot pool"></span>
-                                    <span>ZK Privacy Pool (내부 익명)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-dot sender"></span>
-                                    <span>송신자 주소 (Pool 입금 시 공개)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-dot receiver"></span>
-                                    <span>수신자 주소 (Pool 출금 시 공개)</span>
-                                </div>
+                    <div class="pool-viz-wrapper">
+                        <!-- Senders Column -->
+                        <div class="pool-col senders-col">
+                            <div class="col-label">송신자 (입금)</div>
+                            <div class="address-node sender-node">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0xA3f...</span>
+                            </div>
+                            <div class="address-node sender-node">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0x7B2...</span>
+                            </div>
+                            <div class="address-node sender-node">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0xC9d...</span>
                             </div>
                         </div>
-                        <div class="legend-section problem-section">
-                            <h5>AML 추적 문제</h5>
-                            <div class="legend-items">
-                                <div class="legend-item">
-                                    <span class="legend-dot blocked"></span>
-                                    <span>추적 차단점: Pool에서 연결 끊김</span>
-                                </div>
-                                <div class="legend-item problem-text">
-                                    <span>🚫 규제기관이 의심 TX 추적 시 → Pool에서 막힘 → 송신자 특정 불가</span>
+
+                        <!-- Flow Arrows In -->
+                        <div class="flow-arrows-col">
+                            <div class="flow-line in-flow"></div>
+                            <div class="flow-line in-flow"></div>
+                            <div class="flow-line in-flow"></div>
+                        </div>
+
+                        <!-- Central Pool -->
+                        <div class="pool-center">
+                            <div class="pool-orb">
+                                <div class="pool-glow"></div>
+                                <div class="pool-inner">
+                                    <span class="pool-icon">🔐</span>
+                                    <span class="pool-title">ZK Privacy Pool</span>
+                                    <span class="pool-subtitle">(내부 익명)</span>
                                 </div>
                             </div>
+                            <div class="pool-blocked-indicator">
+                                <span class="blocked-x">✕</span>
+                                <span class="blocked-label">추적 차단!</span>
+                            </div>
+                        </div>
+
+                        <!-- Flow Arrows Out -->
+                        <div class="flow-arrows-col">
+                            <div class="flow-line out-flow"></div>
+                            <div class="flow-line out-flow"></div>
+                            <div class="flow-line out-flow"></div>
+                        </div>
+
+                        <!-- Receivers Column -->
+                        <div class="pool-col receivers-col">
+                            <div class="col-label">수신자 (출금)</div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0x5E8...</span>
+                            </div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0x1F4...</span>
+                            </div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">0x9A7...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AML Investigator -->
+                    <div class="aml-track-section">
+                        <div class="aml-investigator">
+                            <span class="aml-icon">🔍</span>
+                            <span class="aml-label">AML 조사관</span>
+                        </div>
+                        <div class="aml-track-line">
+                            <span class="track-arrow">- - - - - - - →</span>
+                        </div>
+                        <div class="aml-blocked-msg">
+                            <span class="blocked-icon">🚫</span>
+                            <span>수신자 → Pool... 그 다음은? <strong>추적 불가!</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="pool-legend-v2">
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 sender"></span>
+                            <span>송신자: Pool 입금 시 공개</span>
+                        </div>
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 pool"></span>
+                            <span>ZK Pool: 내부 완전 익명</span>
+                        </div>
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 receiver"></span>
+                            <span>수신자: Pool 출금 시 공개</span>
+                        </div>
+                        <div class="legend-card problem">
+                            <span class="legend-dot-v2 blocked"></span>
+                            <span>문제: 송신자↔수신자 연결 끊김</span>
                         </div>
                     </div>
                 </div>
@@ -268,43 +334,95 @@
                 </div>
             </div>
 
-            <!-- Slide 5: Why Now -->
+            <!-- Slide 5: Why Now - Why AML-Ready Shield Pool is Needed -->
             <div class="slide" data-slide="5">
-                <div class="slide-inner">
+                <div class="slide-inner why-now-v2">
                     <div class="slide-header">
                         <span class="slide-num">04</span>
                         <span class="slide-title">Why Now</span>
                     </div>
-                    <h2 class="slide-headline">Three converging <span class="highlight">mega-trends</span></h2>
+                    <h2 class="slide-headline">왜 <span class="highlight">AML-Ready Shield Pool</span>이 필요한가?</h2>
 
-                    <div class="trends-grid">
-                        <div class="trend-card">
-                            <div class="trend-icon">📈</div>
-                            <h4>Stablecoins Exploding</h4>
-                            <p class="trend-stat">$306B market cap (+49% YoY)</p>
-                            <p>USDT $183B, USDC $74B. Biggest growth year on record. Transaction volume hit $1T/month in Sep 2025.</p>
+                    <div class="why-aml-grid">
+                        <!-- Card 1: Regulation Enforcement -->
+                        <div class="why-aml-card regulation">
+                            <div class="why-icon-badge">⚖️</div>
+                            <h4>규제 강제력 본격화</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet bad">!</span>
+                                    <span><strong>Tornado Cash 제재</strong> — OFAC 2022, 개발자 기소/유죄 (2024)</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">!</span>
+                                    <span><strong>GENIUS Act</strong> — 미국 최초 연방 스테이블코인 규제 (2025.7)</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">!</span>
+                                    <span><strong>EU MiCA</strong> — 유럽 암호화폐 규제 전면 시행</span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion bad">
+                                Privacy만 있고 AML 없으면 → <strong>제재 대상</strong>
+                            </div>
                         </div>
-                        <div class="trend-card">
-                            <div class="trend-icon">🌍</div>
-                            <h4>Crypto Payroll Adoption</h4>
-                            <p class="trend-stat">25% of businesses now use crypto payroll</p>
-                            <p>USDC (63%) + USDT (28.6%) dominate payroll. 43% of SE Asia B2B payments use stablecoins.</p>
+
+                        <!-- Card 2: Institutional Demand -->
+                        <div class="why-aml-card institutional">
+                            <div class="why-icon-badge">🏢</div>
+                            <h4>기관/기업의 Privacy 수요</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet need">→</span>
+                                    <span>DAO 급여 = 모든 지급 내역 <strong>온체인 공개</strong></span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet need">→</span>
+                                    <span>경쟁사가 우리 인건비 구조를 <strong>실시간 확인 가능</strong></span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet need">→</span>
+                                    <span>직원 급여 비교로 인한 <strong>조직 갈등 유발</strong></span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion need">
+                                기업은 Privacy가 필요하지만 → <strong>규제 준수도 필수</strong>
+                            </div>
                         </div>
-                        <div class="trend-card">
-                            <div class="trend-icon">⚖️</div>
-                            <h4>Regulatory Clarity</h4>
-                            <p class="trend-stat">GENIUS Act signed July 2025</p>
-                            <p>First US federal framework. EU MiCA fully enforced. Global stablecoin rules converging.</p>
+
+                        <!-- Card 3: The Solution Gap -->
+                        <div class="why-aml-card solution">
+                            <div class="why-icon-badge">🛡️</div>
+                            <h4>현재 솔루션의 한계</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet bad">✗</span>
+                                    <span><strong>zkBob, Railgun</strong> — Privacy 제공, AML 대응 불가</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">✗</span>
+                                    <span><strong>Superfluid, Sablier</strong> — AML OK, Privacy 없음</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet good">✓</span>
+                                    <span><strong>LatticA Salary</strong> — Privacy + AML = <strong>둘 다 충족</strong></span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion good">
+                                AML-Ready Shield Pool = <strong>유일한 해결책</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="timing-quote">
-                        <p>"The total stablecoin market cap grew by 49% in 2025, going from $205B to $306B — the biggest year on record."</p>
-                        <span class="quote-source">— <a href="https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025" target="_blank">Arkham Intelligence Research, Jan 2026</a></span>
+                    <div class="why-summary-bar">
+                        <div class="summary-icon">💡</div>
+                        <div class="summary-text">
+                            <strong>핵심:</strong> 규제 없이는 <span class="red-text">제재</span>, Privacy 없이는 <span class="red-text">도입 불가</span> → <span class="highlight">AML-Ready Shield Pool</span>만이 기관 도입 가능
+                        </div>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: <a href="https://defillama.com/stablecoins" target="_blank">defillama.com/stablecoins</a> • <a href="https://finance.yahoo.com/news/stablecoins-2025-record-growth-genius-140102611.html" target="_blank">Yahoo Finance GENIUS Act</a> • <a href="https://www.riseworks.io/blog/2025-crypto-payroll-report" target="_blank">Rise Crypto Payroll Report</a></span>
+                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash</a> • <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act S.394</a> • <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank">EU MiCA</a></span>
                     </div>
                 </div>
             </div>
