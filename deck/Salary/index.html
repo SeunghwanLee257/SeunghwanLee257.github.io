@@ -87,74 +87,64 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Problem - Privacy vs Compliance -->
+            <!-- Slide 2: Problem - Privacy vs Compliance (Refined Design) -->
             <div class="slide" data-slide="2">
-                <div class="slide-inner">
+                <div class="slide-inner problem-slide-v2">
                     <div class="slide-header">
                         <span class="slide-num">01</span>
                         <span class="slide-title">Problem</span>
                     </div>
                     <h2 class="slide-headline">Private Payroll은 가능하다. 그러나 <span class="highlight">규제 대응이 불가능</span>하다</h2>
 
-                    <div class="problem-dual">
-                        <div class="problem-card solved">
-                            <div class="problem-card-header">
-                                <span class="status-badge solved">✓ SOLVED</span>
-                                <h4>Private Payroll</h4>
-                            </div>
-                            <div class="problem-card-body">
-                                <p class="problem-desc">ZK Pool 기반 솔루션으로 급여 지급의 프라이버시는 이미 구현 가능</p>
-                                <div class="solution-examples">
-                                    <span class="example-chip">zkBob</span>
-                                    <span class="example-chip">Tornado Cash</span>
-                                    <span class="example-chip">Railgun</span>
-                                </div>
+                    <div class="problem-visual-flow">
+                        <!-- Left: Solved -->
+                        <div class="problem-block solved-block">
+                            <div class="block-badge solved">✓ SOLVED</div>
+                            <div class="block-title">Private Payroll</div>
+                            <div class="block-desc">ZK Pool 기반 솔루션으로 급여 지급의 프라이버시는 이미 구현 가능</div>
+                            <div class="block-examples">
+                                <span class="ex-chip">zkBob</span>
+                                <span class="ex-chip">Tornado Cash</span>
+                                <span class="ex-chip">Railgun</span>
                             </div>
                         </div>
 
-                        <div class="problem-arrow">BUT</div>
+                        <!-- Center: VS Arrow -->
+                        <div class="problem-vs">
+                            <div class="vs-line"></div>
+                            <div class="vs-text">BUT</div>
+                            <div class="vs-line"></div>
+                        </div>
 
-                        <div class="problem-card unsolved">
-                            <div class="problem-card-header">
-                                <span class="status-badge unsolved">✗ UNSOLVED</span>
-                                <h4>AML/Compliance</h4>
-                            </div>
-                            <div class="problem-card-body">
-                                <p class="problem-desc">강력한 ZK Privacy는 규제 기관의 감사 요청에 대응 불가</p>
-                                <div class="consequence-list">
-                                    <div class="consequence-item">
-                                        <span class="consequence-icon-small">⚖️</span>
-                                        <span>OFAC 제재 주소 확인 불가</span>
-                                    </div>
-                                    <div class="consequence-item">
-                                        <span class="consequence-icon-small">🔍</span>
-                                        <span>자금세탁 추적 불가</span>
-                                    </div>
-                                    <div class="consequence-item">
-                                        <span class="consequence-icon-small">📋</span>
-                                        <span>세무 감사 증빙 불가</span>
-                                    </div>
-                                </div>
+                        <!-- Right: Unsolved -->
+                        <div class="problem-block unsolved-block">
+                            <div class="block-badge unsolved">✗ UNSOLVED</div>
+                            <div class="block-title">AML / Compliance</div>
+                            <div class="block-desc">강력한 ZK Privacy는 규제 기관의 감사 요청에 대응 불가</div>
+                            <div class="block-consequences">
+                                <div class="cons-item"><span class="cons-icon">⚖️</span> OFAC 제재 주소 확인 불가</div>
+                                <div class="cons-item"><span class="cons-icon">🔍</span> 자금세탁 추적 불가</div>
+                                <div class="cons-item"><span class="cons-icon">📋</span> 세무 감사 증빙 불가</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dilemma-box">
-                        <div class="dilemma-header">
-                            <span class="dilemma-icon">⚠️</span>
-                            <strong>The Privacy-Compliance Dilemma</strong>
+                    <!-- Bottom: Dilemma Result Bar -->
+                    <div class="dilemma-result-bar">
+                        <div class="drb-icon">⚠️</div>
+                        <div class="drb-content">
+                            <div class="drb-title">The Privacy-Compliance Dilemma</div>
+                            <div class="drb-text">강력한 Privacy 솔루션은 <strong>그 누구도 책임지지 못하는 영역</strong>으로 자금을 끌고 간다</div>
                         </div>
-                        <p>강력한 Privacy 솔루션은 <strong>그 누구도 책임지지 못하는 영역</strong>으로 자금을 끌고 간다</p>
-                        <div class="dilemma-result">
-                            <span>결과:</span>
-                            <span class="result-item bad">Tornado Cash 제재 (OFAC 2022)</span>
-                            <span class="result-item bad">개발자 기소/유죄 (2024-2025)</span>
-                            <span class="result-item bad">기관 도입 불가</span>
+                        <div class="drb-results">
+                            <span class="drb-tag bad">Tornado Cash 제재 (OFAC 2022)</span>
+                            <span class="drb-tag bad">개발자 기소/유죄 (2024-2025)</span>
+                            <span class="drb-tag bad">기관 도입 불가</span>
                         </div>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: OFAC Tornado Cash Sanctions (Aug 2022) • US v. Storm/Semenov (2024-2025)</span>
+                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">treasury.gov/tornado-cash-sanctions</a> • <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank">justice.gov/tornado-cash-indictment</a></span>
                     </div>
                 </div>
             </div>
@@ -213,23 +203,23 @@
                         <span class="slide-num">03</span>
                         <span class="slide-title">Market</span>
                     </div>
-                    <h2 class="slide-headline">$307B stablecoin market, <span class="highlight">no privacy rails</span></h2>
+                    <h2 class="slide-headline">$306B stablecoin market, <span class="highlight">no privacy rails</span></h2>
 
                     <div class="market-stats">
                         <div class="market-stat">
-                            <span class="stat-value">$307B</span>
-                            <span class="stat-label">Stablecoin Market Cap</span>
-                            <span class="stat-source">DefiLlama, Dec 2025</span>
+                            <span class="stat-value">$306B</span>
+                            <span class="stat-label">Stablecoin Market Cap (+49% YoY)</span>
+                            <span class="stat-source"><a href="https://defillama.com/stablecoins" target="_blank">defillama.com/stablecoins</a></span>
                         </div>
                         <div class="market-stat">
-                            <span class="stat-value">$1.2B+</span>
-                            <span class="stat-label">Request Finance Volume</span>
-                            <span class="stat-source">request.finance, Nov 2025</span>
+                            <span class="stat-value">$8.9T</span>
+                            <span class="stat-label">On-chain TX Volume (H1 2025)</span>
+                            <span class="stat-source"><a href="https://coinlaw.io/stablecoin-statistics/" target="_blank">coinlaw.io/stablecoin-statistics</a></span>
                         </div>
                         <div class="market-stat highlight-stat">
-                            <span class="stat-value">$100B+</span>
-                            <span class="stat-label">Safe Multisig Secured</span>
-                            <span class="stat-source">safe.global, 2025</span>
+                            <span class="stat-value">25%</span>
+                            <span class="stat-label">Businesses Using Crypto Payroll</span>
+                            <span class="stat-source"><a href="https://www.riseworks.io/blog/2025-crypto-payroll-report" target="_blank">riseworks.io/crypto-payroll-report</a></span>
                         </div>
                     </div>
 
@@ -273,7 +263,7 @@
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: defillama.com/protocol/superfluid • defillama.com/protocol/sablier • request.finance/post/march-2025 • safe.global</span>
+                        <span>Sources: <a href="https://defillama.com/protocol/superfluid" target="_blank">defillama.com/superfluid</a> • <a href="https://defillama.com/protocol/sablier" target="_blank">defillama.com/sablier</a> • <a href="https://request.finance" target="_blank">request.finance</a> • <a href="https://safe.global" target="_blank">safe.global</a></span>
                     </div>
                 </div>
             </div>
@@ -291,30 +281,30 @@
                         <div class="trend-card">
                             <div class="trend-icon">📈</div>
                             <h4>Stablecoins Exploding</h4>
-                            <p class="trend-stat">$307B market cap (+49% YTD)</p>
-                            <p>USDT $176B, USDC $78B. Transaction volume hit $1T/month in Sep 2025.</p>
+                            <p class="trend-stat">$306B market cap (+49% YoY)</p>
+                            <p>USDT $183B, USDC $74B. Biggest growth year on record. Transaction volume hit $1T/month in Sep 2025.</p>
                         </div>
                         <div class="trend-card">
                             <div class="trend-icon">🌍</div>
-                            <h4>Remote Work Standard</h4>
-                            <p class="trend-stat">Cross-border payments $213B → $321B</p>
-                            <p>Global contractor economy demands fast, borderless settlement.</p>
+                            <h4>Crypto Payroll Adoption</h4>
+                            <p class="trend-stat">25% of businesses now use crypto payroll</p>
+                            <p>USDC (63%) + USDT (28.6%) dominate payroll. 43% of SE Asia B2B payments use stablecoins.</p>
                         </div>
                         <div class="trend-card">
                             <div class="trend-icon">⚖️</div>
                             <h4>Regulatory Clarity</h4>
                             <p class="trend-stat">GENIUS Act signed July 2025</p>
-                            <p>First US federal framework for stablecoins enables institutional adoption.</p>
+                            <p>First US federal framework. EU MiCA fully enforced. Global stablecoin rules converging.</p>
                         </div>
                     </div>
 
                     <div class="timing-quote">
-                        <p>"Stablecoin transaction volume has surged in 2025, with September being the first month of over $1 trillion."</p>
-                        <span class="quote-source">— Decrypt, Dec 2025</span>
+                        <p>"The total stablecoin market cap grew by 49% in 2025, going from $205B to $306B — the biggest year on record."</p>
+                        <span class="quote-source">— <a href="https://info.arkm.com/research/how-stablecoins-reached-a-300-billion-market-cap-in-2025" target="_blank">Arkham Intelligence Research, Jan 2026</a></span>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: defillama.com/stablecoins • decrypt.co/352552 • finance.yahoo.com/news/stablecoins-2025</span>
+                        <span>Sources: <a href="https://defillama.com/stablecoins" target="_blank">defillama.com/stablecoins</a> • <a href="https://finance.yahoo.com/news/stablecoins-2025-record-growth-genius-140102611.html" target="_blank">Yahoo Finance GENIUS Act</a> • <a href="https://www.riseworks.io/blog/2025-crypto-payroll-report" target="_blank">Rise Crypto Payroll Report</a></span>
                     </div>
                 </div>
             </div>
