@@ -94,6 +94,39 @@ async function downloadPDF() {
             slides.forEach(s => s.style.display = 'none');
             slide.style.display = 'block';
 
+            // For slide 4 (demo slide), replace iframe with placeholder
+            const iframe = slide.querySelector('.demo-iframe');
+            let placeholder = null;
+            if (iframe) {
+                iframe.style.display = 'none';
+                placeholder = document.createElement('div');
+                placeholder.className = 'demo-placeholder-pdf';
+                placeholder.innerHTML = `
+                    <div style="
+                        width: 100%;
+                        height: 100%;
+                        background: #E2E8F0;
+                        border-radius: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        color: #64748B;
+                        font-size: 24px;
+                        gap: 16px;
+                    ">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        <span style="font-weight: 600;">Live Demo</span>
+                        <span style="font-size: 16px;">waLLLnut.com/demo/excel</span>
+                    </div>
+                `;
+                iframe.parentElement.appendChild(placeholder);
+            }
+
             // Wait for render
             await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -117,6 +150,12 @@ async function downloadPDF() {
             // Add image to PDF
             const imgData = canvas.toDataURL('image/jpeg', 0.95);
             pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720, undefined, 'FAST');
+
+            // Restore iframe and remove placeholder
+            if (iframe && placeholder) {
+                iframe.style.display = '';
+                placeholder.remove();
+            }
         }
 
         // Save PDF
