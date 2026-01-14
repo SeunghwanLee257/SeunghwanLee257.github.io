@@ -19,7 +19,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 15</span>
+        <span id="slideCounter">1 / 13</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -269,67 +269,69 @@
                         <span class="slide-num">03</span>
                         <span class="slide-title">Market</span>
                     </div>
-                    <h2 class="slide-headline">$306B stablecoin market, <span class="highlight">no privacy rails</span></h2>
-
-                    <div class="market-stats">
-                        <div class="market-stat">
-                            <span class="stat-value">$306B</span>
-                            <span class="stat-label">Stablecoin Market Cap (+49% YoY)</span>
-                            <span class="stat-source"><a href="https://defillama.com/stablecoins" target="_blank">defillama.com/stablecoins</a></span>
-                        </div>
-                        <div class="market-stat">
-                            <span class="stat-value">$8.9T</span>
-                            <span class="stat-label">On-chain TX Volume (H1 2025)</span>
-                            <span class="stat-source"><a href="https://coinlaw.io/stablecoin-statistics/" target="_blank">coinlaw.io/stablecoin-statistics</a></span>
-                        </div>
-                        <div class="market-stat highlight-stat">
-                            <span class="stat-value">25%</span>
-                            <span class="stat-label">Businesses Using Crypto Payroll</span>
-                            <span class="stat-source"><a href="https://www.riseworks.io/blog/2025-crypto-payroll-report" target="_blank">riseworks.io/crypto-payroll-report</a></span>
-                        </div>
-                    </div>
+                    <h2 class="slide-headline">Shielded Pool / Dark Pool 시장: <span class="highlight">Privacy는 있지만 규제 대응 없음</span></h2>
 
                     <div class="competitor-table">
                         <div class="comp-header">
                             <span>Protocol</span>
-                            <span>Category</span>
-                            <span>TVL/Volume</span>
-                            <span>Privacy</span>
+                            <span>Type</span>
+                            <span>Privacy Tech</span>
+                            <span>AML/Audit</span>
+                            <span>Status</span>
                         </div>
                         <div class="comp-row">
-                            <span class="comp-name">Superfluid</span>
-                            <span>Streaming</span>
-                            <span>~$50M TVL</span>
+                            <span class="comp-name">Tornado Cash</span>
+                            <span>ZK Pool</span>
+                            <span class="has-privacy">✓ ZK-SNARK</span>
                             <span class="no-privacy">✗</span>
+                            <span class="status-bad">OFAC 제재 (2022)</span>
                         </div>
                         <div class="comp-row">
-                            <span class="comp-name">Sablier</span>
-                            <span>Streaming</span>
-                            <span>$5.6M TVL</span>
+                            <span class="comp-name">zkBob</span>
+                            <span>ZK Pool</span>
+                            <span class="has-privacy">✓ ZK</span>
                             <span class="no-privacy">✗</span>
+                            <span class="status-warn">기관 도입 불가</span>
                         </div>
                         <div class="comp-row">
-                            <span class="comp-name">Request Finance</span>
-                            <span>Invoicing</span>
-                            <span>$1.2B+ processed</span>
+                            <span class="comp-name">Railgun</span>
+                            <span>ZK Privacy</span>
+                            <span class="has-privacy">✓ ZK</span>
                             <span class="no-privacy">✗</span>
+                            <span class="status-warn">감사 불가</span>
                         </div>
                         <div class="comp-row">
-                            <span class="comp-name">Safe + Modules</span>
-                            <span>Treasury</span>
-                            <span>$100B+ secured</span>
+                            <span class="comp-name">Zcash</span>
+                            <span>L1 Privacy</span>
+                            <span class="has-privacy">✓ zk-SNARK</span>
                             <span class="no-privacy">✗</span>
+                            <span class="status-bad">주요 거래소 상장폐지</span>
+                        </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Ethereum</span>
+                            <span>L1 Public</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="has-privacy">✓</span>
+                            <span class="status-neutral">완전 투명</span>
                         </div>
                         <div class="comp-row highlight-row">
-                            <span class="comp-name">LatticA Salary</span>
-                            <span>Payroll</span>
-                            <span>—</span>
-                            <span class="has-privacy">✓ FHE+ZK</span>
+                            <span class="comp-name">LatticA</span>
+                            <span>FHE+ZK Pool</span>
+                            <span class="has-privacy">✓ FHE16+ZK</span>
+                            <span class="has-privacy">✓ Auditable</span>
+                            <span class="status-good">규제 준수 가능</span>
+                        </div>
+                    </div>
+
+                    <div class="market-insight-box">
+                        <div class="insight-icon">💡</div>
+                        <div class="insight-content">
+                            <strong>시장 갭:</strong> Privacy Pool은 많지만, <span class="highlight">규제 대응 가능한 솔루션은 전무</span>
                         </div>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: <a href="https://defillama.com/protocol/superfluid" target="_blank">defillama.com/superfluid</a> • <a href="https://defillama.com/protocol/sablier" target="_blank">defillama.com/sablier</a> • <a href="https://request.finance" target="_blank">request.finance</a> • <a href="https://safe.global" target="_blank">safe.global</a></span>
+                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash</a> • <a href="https://zkbob.com" target="_blank">zkBob</a> • <a href="https://defillama.com" target="_blank">DeFiLlama</a></span>
                     </div>
                 </div>
             </div>
@@ -370,7 +372,7 @@
                         <!-- Card 2: Transparent = No Adoption -->
                         <div class="why-aml-card institutional">
                             <div class="why-icon-badge">👁️</div>
-                            <h4>투명 결제 = 도입 거부</h4>
+                            <h4>기존 결제 = 책임 사용자 전가</h4>
                             <div class="why-points">
                                 <div class="why-point">
                                     <span class="point-bullet need">→</span>
@@ -381,12 +383,16 @@
                                     <span>경쟁사가 <strong>인건비 구조 실시간 분석</strong></span>
                                 </div>
                                 <div class="why-point">
+                                    <span class="point-bullet bad">⚠️</span>
+                                    <span><strong>zkBob 면책조항:</strong> "사용 시 모든 피해는 사용자가 전담"</span>
+                                </div>
+                                <div class="why-point">
                                     <span class="point-bullet need">→</span>
                                     <span>Superfluid, Sablier — <strong>완전 투명</strong></span>
                                 </div>
                             </div>
                             <div class="why-conclusion need">
-                                Privacy 없으면 → <strong>기업이 안 씀</strong>
+                                Privacy 없으면 → <strong>기업이 안 씀</strong><br>Privacy만 있으면 → <strong>책임 회피 불가</strong>
                             </div>
                         </div>
 
@@ -434,149 +440,81 @@
                         <span class="slide-num">05</span>
                         <span class="slide-title">Solution</span>
                     </div>
-                    <h2 class="slide-headline">LatticA = <span class="highlight">FHE + ZK</span> Confidential Payroll</h2>
+                    <h2 class="slide-headline">LatticA = <span class="highlight">기업은 자유롭게 사용, 감사는 LatticA가 대응</span></h2>
 
                     <div class="solution-flow">
                         <div class="flow-item">
                             <div class="flow-icon payroll-icon">
-                                <span class="desktop-emoji">🖥️</span>
-                                <span class="csv-text">CSV</span>
+                                <span class="desktop-emoji">🏢</span>
                             </div>
-                            <span>Payroll Data</span>
+                            <span>Setup</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item highlight-flow">
                             <div class="flow-icon fhe-icon">
-                                <span class="gear-emoji">⚙️</span>
-                                <span class="fhe-text">FHE</span>
+                                <span class="gear-emoji">🔐</span>
                             </div>
-                            <span>Encrypt Payslips</span>
+                            <span>(pk, sk) 생성</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item">
                             <div class="flow-icon">📝</div>
-                            <span>Commit</span>
+                            <span>pk 등록</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item highlight-flow">
                             <div class="flow-icon zk-icon">
-                                <span class="magnifier-emoji">🔍</span>
-                                <span class="zk-text">ZK</span>
+                                <span class="magnifier-emoji">🔀</span>
                             </div>
-                            <span>Pool Payout</span>
+                            <span>sk Sharing</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item">
-                            <div class="flow-icon">👨‍💼</div>
-                            <span>Employee</span>
+                            <div class="flow-icon">👥</div>
+                            <span>각 서버 분산 보관</span>
                         </div>
                     </div>
 
                     <div class="what-private">
                         <div class="private-section">
-                            <h4>What's Private</h4>
+                            <h4>평상시 운영</h4>
                             <ul>
-                                <li>Individual salary amounts (FHE encrypted)</li>
-                                <li>Payment link from treasury to recipient (ZK pool)</li>
-                                <li>Payslip details (client-side decryption only)</li>
+                                <li><strong>기업:</strong> Shielded Pool로 자유롭게 거래</li>
+                                <li><strong>LatticA:</strong> 암호화된 로그만 저장 (읽을 수 없음)</li>
+                                <li><strong>사용자:</strong> 완전한 Privacy 보장</li>
                             </ul>
                         </div>
                         <div class="public-section">
-                            <h4>What's Public</h4>
+                            <h4>감사 요청 시</h4>
                             <ul>
-                                <li>Total batch amount (for audit/compliance)</li>
-                                <li>Commitment hash on-chain</li>
-                                <li>Pool deposit/withdrawal events</li>
+                                <li><strong>규제 기관:</strong> 특정 TX 감사 요청</li>
+                                <li><strong>LatticA:</strong> FHE 동형 연산으로 필요한 로그만 연산</li>
+                                <li><strong>기업:</strong> 연산 결과 보고서만 받아서 제출</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="assumption-box">
                         <div class="assumption-header">
-                            <span class="assumption-icon">⚠️</span>
-                            <strong>Current Constraint</strong>
+                            <span class="assumption-icon">💡</span>
+                            <strong>핵심 가치</strong>
                         </div>
-                        <p>ZK prover and FHE executor are currently assumed to be the same party for trust/coordination.</p>
-                        <p class="assumption-fix"><strong>Planned:</strong> Lattice-based verifiable computation to remove this assumption.</p>
+                        <p><strong>기업은 마음 놓고 사용</strong> → Shielded Pool의 모든 Privacy 혜택</p>
+                        <p><strong>감사 대응은 결과 보고서만</strong> → LatticA가 FHE 연산으로 처리</p>
+                        <p class="assumption-fix"><strong>결과:</strong> Privacy + Compliance 동시 달성, 기업 부담 제로</p>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Refs: eprint.iacr.org (lattice proofs) • zkbob.com (pool pattern)</span>
+                        <span>Refs: FHE16 homomorphic computation • Secret sharing (Shamir, etc.)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 7: Privacy Solutions Landscape -->
+            <!-- Slide 7: How LatticA Solves This -->
             <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">06</span>
-                        <span class="slide-title">Privacy Landscape</span>
-                    </div>
-                    <h2 class="slide-headline">기존 Privacy 솔루션의 <span class="highlight">구조적 한계</span></h2>
-
-                    <div class="privacy-types">
-                        <div class="privacy-type-card">
-                            <div class="type-header type-a">
-                                <span class="type-badge">Type A</span>
-                                <span class="type-name">Full Private Chain</span>
-                            </div>
-                            <div class="type-body">
-                                <p class="type-desc">모든 거래가 Private</p>
-                                <div class="type-example">Zcash, Monero</div>
-                            </div>
-                            <div class="type-problem">
-                                <span>❌</span> 사실상 Private Chain → 규제 불가 → <strong>거래소 상장폐지</strong>
-                            </div>
-                        </div>
-
-                        <div class="privacy-type-card">
-                            <div class="type-header type-b">
-                                <span class="type-badge">Type B</span>
-                                <span class="type-name">ZK Pool 구조</span>
-                            </div>
-                            <div class="type-body">
-                                <p class="type-desc">Pool 내부 Private, 외부 Public</p>
-                                <div class="type-detail">
-                                    <span class="detail-item">수신자: <span class="public-tag">Public</span></span>
-                                    <span class="detail-item">송신자: <span class="private-tag">Pool 내 익명</span></span>
-                                </div>
-                                <div class="type-example">Tornado Cash, zkBob</div>
-                            </div>
-                            <div class="type-problem">
-                                <span>❌</span> ZK 강력 → 감사 요청 대응 불가 → <strong>Tornado Cash 제재</strong>
-                            </div>
-                        </div>
-
-                        <div class="privacy-type-card highlight-type">
-                            <div class="type-header type-c">
-                                <span class="type-badge">LatticA</span>
-                                <span class="type-name">Auditable Privacy Pool</span>
-                            </div>
-                            <div class="type-body">
-                                <p class="type-desc">ZK Pool + <strong>Encrypted Witness Logging</strong></p>
-                                <div class="type-detail">
-                                    <span class="detail-item">평상시: <span class="private-tag">완전 Private</span></span>
-                                    <span class="detail-item">감사시: <span class="audit-tag">Selective Disclosure</span></span>
-                                </div>
-                            </div>
-                            <div class="type-solution">
-                                <span>✅</span> Privacy 유지 + 규제 대응 = <strong>기관 도입 가능</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-refs">
-                        <span>Tornado Cash sanctioned by OFAC (Aug 2022) • Zcash/Monero delisted from major exchanges (2024-2025)</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 8: How LatticA Solves This -->
-            <div class="slide" data-slide="8">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">07</span>
                         <span class="slide-title">Technical Solution</span>
                     </div>
                     <h2 class="slide-headline">ZK Witness를 <span class="highlight">암호화 로깅</span>하는 구조</h2>
@@ -663,133 +601,50 @@
                 </div>
             </div>
 
-            <!-- Slide 9: Product Flow -->
+            <!-- Slide 8: Market Urgency -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title">Market Urgency</span>
+                    </div>
+                    <h2 class="slide-headline" style="font-size: 2.8rem; line-height: 1.3;">Private Fund, Hedging, RWA: <span class="highlight">프라이버시 솔루션이 시급</span></h2>
+
+                    <div class="mantle-reasons" style="gap: 2rem; margin-top: 3rem;">
+                        <div class="reason-item" style="font-size: 1.5rem; padding: 1.8rem;">
+                            <span class="reason-check" style="font-size: 2rem;">🏦</span>
+                            <span><strong>Private Fund & Hedging:</strong> 투자 전략과 포지션 노출 불가 → Privacy 필수</span>
+                        </div>
+                        <div class="reason-item" style="font-size: 1.5rem; padding: 1.8rem;">
+                            <span class="reason-check" style="font-size: 2rem;">🏛️</span>
+                            <span><strong>RWA (Real World Assets):</strong> 기관 자산 토큰화 → 거래 내역 비공개 필수</span>
+                        </div>
+                        <div class="reason-item highlight-stat" style="font-size: 1.5rem; padding: 1.8rem; background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107;">
+                            <span class="reason-check" style="font-size: 2rem;">🚀</span>
+                            <span><strong>Mantle + Bybit 올인:</strong> RWA & Real Finance에 집중 투자 중</span>
+                        </div>
+                        <div class="reason-item" style="font-size: 1.5rem; padding: 1.8rem;">
+                            <span class="reason-check" style="font-size: 2rem;">⚡</span>
+                            <span><strong>$3.79B Ecosystem Treasury:</strong> 대규모 성장 자본 확보</span>
+                        </div>
+                    </div>
+
+                    <div class="value-prop-bar" style="margin-top: 3rem; padding: 2rem; font-size: 1.4rem;">
+                        <span class="vp-icon" style="font-size: 2.5rem;">💡</span>
+                        <span><strong>결론:</strong> 향후 Private Fund, Hedging, RWA와 같이 <span class="highlight">심각한 프라이버시 솔루션이 필요한 곳</span>에 LatticA가 매우 시급</span>
+                    </div>
+
+                    <div class="slide-refs" style="font-size: 1.1rem;">
+                        <span>Sources: messari.io/report/state-of-mantle-q3-2025 • Mantle RWA Initiative • Bybit partnerships</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Business Model + Financials -->
             <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">08</span>
-                        <span class="slide-title">Product</span>
-                    </div>
-                    <h2 class="slide-headline">Two Portals, <span class="highlight">One Workflow</span></h2>
-
-                    <div class="dual-portal">
-                        <div class="portal-card admin">
-                            <div class="portal-header">
-                                <span class="portal-badge">Admin</span>
-                                <h4>Organization Portal</h4>
-                            </div>
-                            <div class="portal-flow">
-                                <div class="pflow-step">
-                                    <span class="pflow-num">1</span>
-                                    <span>Connect wallet (multisig compatible)</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">2</span>
-                                    <span>Upload payroll CSV</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">3</span>
-                                    <span>Create batch → FHE encrypt → Commit</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">4</span>
-                                    <span>Execute pool deposit</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="portal-card employee">
-                            <div class="portal-header">
-                                <span class="portal-badge">Employee</span>
-                                <h4>Contributor Portal</h4>
-                            </div>
-                            <div class="portal-flow">
-                                <div class="pflow-step">
-                                    <span class="pflow-num">1</span>
-                                    <span>Connect wallet</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">2</span>
-                                    <span>View encrypted payslip list</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">3</span>
-                                    <span>Decrypt locally (client-side)</span>
-                                </div>
-                                <div class="pflow-step">
-                                    <span class="pflow-num">4</span>
-                                    <span>Claim from pool / Download PDF</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tech-stack-row">
-                        <div class="tech-chip">Next.js Frontend</div>
-                        <div class="tech-chip">Solidity Contracts</div>
-                        <div class="tech-chip">FHE16 WASM</div>
-                        <div class="tech-chip">zkBob-style Pool</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 10: Why Mantle -->
-            <div class="slide" data-slide="10">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">09</span>
-                        <span class="slide-title">Why Mantle</span>
-                    </div>
-                    <h2 class="slide-headline">Mantle: The <span class="highlight">"Real Finance"</span> L2</h2>
-
-                    <div class="mantle-stats">
-                        <div class="mantle-stat">
-                            <span class="stat-value">$733M</span>
-                            <span class="stat-label">Stablecoin Market Cap</span>
-                            <span class="stat-note">+51.7% QoQ (Q3 2025)</span>
-                        </div>
-                        <div class="mantle-stat">
-                            <span class="stat-value">$2B+</span>
-                            <span class="stat-label">TVL (ZK Rollup)</span>
-                            <span class="stat-note">World's largest ZK rollup</span>
-                        </div>
-                        <div class="mantle-stat highlight-stat">
-                            <span class="stat-value">$3.79B</span>
-                            <span class="stat-label">Ecosystem Treasury</span>
-                            <span class="stat-note">Massive growth capital</span>
-                        </div>
-                    </div>
-
-                    <div class="mantle-reasons">
-                        <div class="reason-item">
-                            <span class="reason-check">✓</span>
-                            <span>EVM-compatible (Chain ID 5000) — seamless Ethereum tooling</span>
-                        </div>
-                        <div class="reason-item">
-                            <span class="reason-check">✓</span>
-                            <span>Strong stablecoin base: USDT, USDe growing rapidly</span>
-                        </div>
-                        <div class="reason-item">
-                            <span class="reason-check">✓</span>
-                            <span>Bybit integration → instant distribution channel</span>
-                        </div>
-                        <div class="reason-item">
-                            <span class="reason-check">✓</span>
-                            <span>OP Succinct upgrade completed → ZK validity proofs</span>
-                        </div>
-                    </div>
-
-                    <div class="slide-refs">
-                        <span>Sources: messari.io/report/state-of-mantle-q3-2025 • defillama.com/chain/mantle</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 11: Business Model + Financials -->
-            <div class="slide" data-slide="11">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">10</span>
                         <span class="slide-title">Business Model</span>
                     </div>
                     <h2 class="slide-headline">Protocol Fee + <span class="highlight">SaaS Hybrid</span></h2>
@@ -856,11 +711,11 @@
                 </div>
             </div>
 
-            <!-- Slide 12: GTM + Roadmap -->
-            <div class="slide" data-slide="12">
+            <!-- Slide 10: GTM + Roadmap -->
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">11</span>
+                        <span class="slide-num">09</span>
                         <span class="slide-title">Roadmap</span>
                     </div>
                     <h2 class="slide-headline"><span class="highlight">Mantle-First</span> Go-To-Market</h2>
@@ -911,147 +766,152 @@
                 </div>
             </div>
 
-            <!-- Slide 13: Competitors Deep Dive -->
-            <div class="slide" data-slide="13">
+            <!-- Slide 11: Competitors Deep Dive -->
+            <div class="slide" data-slide="11">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">12</span>
+                        <span class="slide-num">10</span>
                         <span class="slide-title">Competition</span>
                     </div>
-                    <h2 class="slide-headline">We fill the <span class="highlight">privacy gap</span></h2>
+                    <h2 class="slide-headline">ZK Pool + <span class="highlight">규제 대응 프로젝트 비교</span></h2>
 
-                    <div class="competitor-deep">
-                        <div class="comp-deep-card">
-                            <div class="comp-deep-header">
-                                <span class="comp-deep-name">Superfluid</span>
-                                <span class="comp-deep-cat">Streaming</span>
-                            </div>
-                            <p>Real-time token streaming with per-second settlement. Used for salaries, subscriptions, rewards.</p>
-                            <div class="comp-deep-stats">
-                                <span>~$50M TVL</span>
-                                <span>Polygon, Optimism, Arbitrum</span>
-                            </div>
-                            <div class="comp-gap">Gap: All streams publicly visible</div>
+                    <div class="competitor-table">
+                        <div class="comp-header">
+                            <span>Protocol</span>
+                            <span>Category</span>
+                            <span>Privacy</span>
+                            <span>AML/Audit</span>
+                            <span>장단점</span>
                         </div>
-
-                        <div class="comp-deep-card">
-                            <div class="comp-deep-header">
-                                <span class="comp-deep-name">Sablier</span>
-                                <span class="comp-deep-cat">Vesting/Payroll</span>
-                            </div>
-                            <p>Token streaming for vesting, payroll, airdrops. Progressive unlock over time.</p>
-                            <div class="comp-deep-stats">
-                                <span>$5.6M TVL</span>
-                                <span>Multi-chain EVM</span>
-                            </div>
-                            <div class="comp-gap">Gap: Stream amounts on-chain</div>
+                        <div class="comp-row">
+                            <span class="comp-name">Tornado Cash</span>
+                            <span>ZK Pool</span>
+                            <span class="has-privacy">✓ Strong</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="comp-gap">장: 강력한 Privacy | 단: OFAC 제재, 개발자 유죄</span>
                         </div>
-
-                        <div class="comp-deep-card">
-                            <div class="comp-deep-header">
-                                <span class="comp-deep-name">Request Finance</span>
-                                <span class="comp-deep-cat">Invoicing</span>
-                            </div>
-                            <p>Crypto invoicing + payment processing. 100K+ payments, $1.2B+ volume.</p>
-                            <div class="comp-deep-stats">
-                                <span>$1.2B processed</span>
-                                <span>25+ chains</span>
-                            </div>
-                            <div class="comp-gap">Gap: Invoice payments transparent</div>
+                        <div class="comp-row">
+                            <span class="comp-name">zkBob</span>
+                            <span>ZK Pool</span>
+                            <span class="has-privacy">✓ Strong</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="comp-gap">장: 프라이버시 보장 | 단: 감사 불가, 기관 도입 불가</span>
                         </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Chainalysis</span>
+                            <span>Compliance</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="has-privacy">✓ AML</span>
+                            <span class="comp-gap">장: 규제 대응 가능 | 단: Privacy 전무</span>
+                        </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Elliptic</span>
+                            <span>Compliance</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="has-privacy">✓ AML</span>
+                            <span class="comp-gap">장: 기관 채택 | 단: 거래 내역 완전 공개</span>
+                        </div>
+                        <div class="comp-row">
+                            <span class="comp-name">Aztec (종료)</span>
+                            <span>ZK Privacy</span>
+                            <span class="has-privacy">✓ Strong</span>
+                            <span class="no-privacy">✗</span>
+                            <span class="comp-gap">장: ZK 기반 Privacy | 단: 프로젝트 종료 (2024)</span>
+                        </div>
+                        <div class="comp-row highlight-row">
+                            <span class="comp-name">LatticA</span>
+                            <span>FHE+ZK Pool</span>
+                            <span class="has-privacy">✓ Strong</span>
+                            <span class="has-privacy">✓ Auditable</span>
+                            <span class="status-good">장: Privacy + Compliance 동시 달성 | 단: 초기 단계</span>
+                        </div>
+                    </div>
 
-                        <div class="comp-deep-card">
-                            <div class="comp-deep-header">
-                                <span class="comp-deep-name">Safe + Modules</span>
-                                <span class="comp-deep-cat">Treasury</span>
-                            </div>
-                            <p>Multisig treasury management. Used by EF, Uniswap DAO, Lido for billions.</p>
-                            <div class="comp-deep-stats">
-                                <span>$100B+ secured</span>
-                                <span>Industry standard</span>
-                            </div>
-                            <div class="comp-gap">Gap: All outflows visible on Etherscan</div>
+                    <div class="market-insight-box">
+                        <div class="insight-icon">💡</div>
+                        <div class="insight-content">
+                            <strong>핵심 차별점:</strong> Privacy와 Compliance를 <span class="highlight">동시에 만족하는 유일한 솔루션</span>
                         </div>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Sources: defillama.com • superfluid.finance • sablier.com • request.finance • safe.global</span>
+                        <span>Sources: tornado.cash • zkbob.com • chainalysis.com • elliptic.co • aztec.network (archived)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 14: Team -->
-            <div class="slide" data-slide="14">
+            <!-- Slide 12: Team -->
+            <div class="slide" data-slide="12">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">13</span>
+                        <span class="slide-num">11</span>
                         <span class="slide-title">Team</span>
                     </div>
-                    <h2 class="slide-headline">Cryptography + <span class="highlight">Execution</span></h2>
+                    <h2 class="slide-headline" style="font-size: 2.6rem;">Cryptography + <span class="highlight">Execution</span></h2>
 
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <div class="team-avatar">👨🏻‍💻</div>
+                    <div class="team-grid" style="gap: 2.5rem; margin-top: 3rem;">
+                        <div class="team-card" style="padding: 2rem;">
+                            <div class="team-avatar" style="font-size: 4rem;">👨🏻‍💻</div>
                             <div class="team-info">
-                                <h4>Seunghwan Lee</h4>
-                                <span class="team-role">CEO</span>
-                                <p>Ph.D, Hanyang University, Korea (2019-2025)<br>Cryptography & Applied Security</p>
+                                <h4 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Seunghwan Lee</h4>
+                                <span class="team-role" style="font-size: 1.3rem;">CEO</span>
+                                <p style="font-size: 1.2rem; margin-top: 1rem;">Ph.D, Hanyang University, Korea (2019-2025)<br>Cryptography & Applied Security</p>
                             </div>
                         </div>
-                        <div class="team-card">
-                            <div class="team-avatar">👨🏻‍💼</div>
+                        <div class="team-card" style="padding: 2rem;">
+                            <div class="team-avatar" style="font-size: 4rem;">👨🏻‍💼</div>
                             <div class="team-info">
-                                <h4>Dohyuk Kim</h4>
-                                <span class="team-role">CTO</span>
-                                <p>Ph.D Candidate, Hanyang University (2023-)<br>FHE Implementation & Optimization</p>
+                                <h4 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Dohyuk Kim</h4>
+                                <span class="team-role" style="font-size: 1.3rem;">CTO</span>
+                                <p style="font-size: 1.2rem; margin-top: 1rem;">Ph.D Candidate, Hanyang University (2023-)<br>FHE Implementation & Optimization</p>
                             </div>
                         </div>
-                        <div class="team-card">
-                            <div class="team-avatar">🧑🏻‍💻</div>
+                        <div class="team-card" style="padding: 2rem;">
+                            <div class="team-avatar" style="font-size: 4rem;">🧑🏻‍💻</div>
                             <div class="team-info">
-                                <h4>Yunsik Ham</h4>
-                                <span class="team-role">Web3 Developer</span>
-                                <p>Full-stack Web3 Engineering<br>Smart Contracts & Frontend</p>
+                                <h4 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Yunsik Ham</h4>
+                                <span class="team-role" style="font-size: 1.3rem;">Web3 Developer</span>
+                                <p style="font-size: 1.2rem; margin-top: 1rem;">Full-stack Web3 Engineering<br>Smart Contracts & Frontend</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="why-us-box">
-                        <h4>Why We Win</h4>
+                    <div class="why-us-box" style="margin-top: 3rem; padding: 2rem;">
+                        <h4 style="font-size: 1.8rem;">Why We Win</h4>
                         <div class="why-us-content">
                             <div class="why-us-card">
-                                <p><strong>Deep cryptographic expertise</strong><br>(Ph.D-level FHE/ZK research)</p>
+                                <p style="font-size: 1.3rem;"><strong>Deep cryptographic expertise</strong><br>(Ph.D-level FHE/ZK research)</p>
                             </div>
                             <span class="why-us-plus">+</span>
                             <div class="why-us-card shipping-card">
-                                <p><strong>Shipping velocity</strong><br>(prototype → hackathon → mainnet in 6 months)</p>
+                                <p style="font-size: 1.3rem;"><strong>Shipping velocity</strong><br>(prototype → hackathon → mainnet in 6 months)</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 15: Ask -->
-            <div class="slide" data-slide="15">
+            <!-- Slide 13: Ask -->
+            <div class="slide" data-slide="13">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">14</span>
+                        <span class="slide-num">12</span>
                         <span class="slide-title">Ask</span>
                     </div>
-                    <h2 class="slide-headline">Partnership <span class="highlight">Request</span></h2>
+                    <h2 class="slide-headline" style="font-size: 2.6rem;">Partnership <span class="highlight">Request</span></h2>
 
-                    <div class="ask-grid">
-                        <div class="ask-card what-need">
-                            <h4>What We Need</h4>
-                            <ul>
+                    <div class="ask-grid" style="gap: 3rem; margin-top: 3rem;">
+                        <div class="ask-card what-need" style="padding: 2.5rem;">
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">What We Need</h4>
+                            <ul style="font-size: 1.4rem; line-height: 2.2;">
                                 <li>Ecosystem grant for security audit + mainnet</li>
                                 <li>Co-marketing via Mantle channels</li>
                                 <li>Intros to top Mantle protocols as design partners</li>
                             </ul>
                         </div>
-                        <div class="ask-card what-give">
-                            <h4>What Mantle Gets</h4>
-                            <ul>
+                        <div class="ask-card what-give" style="padding: 2.5rem;">
+                            <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">What Mantle Gets</h4>
+                            <ul style="font-size: 1.4rem; line-height: 2.2;">
                                 <li>Flagship "real-world finance" use case</li>
                                 <li>Stablecoin utility layer → volume retention</li>
                                 <li>Measurable KPIs: $180M→$2.5B payroll on Mantle</li>
@@ -1059,23 +919,23 @@
                         </div>
                     </div>
 
-                    <div class="contact-footer">
+                    <div class="contact-footer" style="margin-top: 3rem;">
                         <div class="ask-cta">
-                            <p>Let's make Mantle the home of <span class="highlight">confidential payroll</span></p>
+                            <p style="font-size: 1.8rem;">Let's make Mantle the home of <span class="highlight">confidential payroll</span></p>
                         </div>
                         <div class="brand-section">
                             <div class="brand-name-row">
                                 <div class="brand-logo">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
                                 </div>
-                                <span class="brand-name">LatticA Salary</span>
+                                <span class="brand-name" style="font-size: 1.6rem;">LatticA Salary</span>
                             </div>
-                            <span class="brand-desc">Privacy-First On-Chain Payroll</span>
+                            <span class="brand-desc" style="font-size: 1.2rem;">Privacy-First On-Chain Payroll</span>
                         </div>
-                        <div class="contact-links">
+                        <div class="contact-links" style="font-size: 1.2rem;">
                             <span class="link-with-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>

@@ -2774,6 +2774,58 @@ body {
     font-weight: 700;
 }
 
+/* Status badges for slide 4 & 11 */
+.status-bad {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.status-warn {
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.status-neutral {
+    color: var(--text-medium);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-good {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Market insight box */
+.market-insight-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-top: 2rem;
+}
+
+.insight-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.insight-content {
+    font-size: 16px;
+    color: white;
+    line-height: 1.6;
+}
+
+.insight-content .highlight {
+    color: #FEF3C7;
+    font-weight: 700;
+}
+
 /* Print / PDF Styles */
 @media print {
     .controls { display: none !important; }
