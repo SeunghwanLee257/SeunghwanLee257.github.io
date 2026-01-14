@@ -1,6 +1,6 @@
 // Slide Navigation
 let currentSlide = 1;
-const totalSlides = 15;
+const totalSlides = 13;
 
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
