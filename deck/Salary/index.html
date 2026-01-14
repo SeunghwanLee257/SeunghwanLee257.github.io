@@ -19,7 +19,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 12</span>
+        <span id="slideCounter">1 / 11</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -93,18 +93,18 @@
                         <span class="slide-num" style="font-size: 17px;">01</span>
                         <span class="slide-title" style="font-size: 17px;">Problem</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Private Payroll은 가능하다. 그러나 <span class="highlight">규제 대응이 불가능</span>하다</h2>
+                    <h2 class="slide-headline" style="font-size: 2.8rem; line-height: 1.3;">Private Payroll은 가능하다. 그러나 <span class="highlight">규제 대응이 불가능</span>하다</h2>
 
                     <div class="problem-visual-flow">
                         <!-- Left: Solved -->
                         <div class="problem-block solved-block">
                             <div class="block-badge solved">✓ SOLVED</div>
-                            <div class="block-title">Private Payroll</div>
-                            <div class="block-desc">ZK Pool 기반 솔루션으로 급여 지급의 프라이버시는 이미 구현 가능</div>
+                            <div class="block-title" style="font-size: 20px;">Private Payroll</div>
+                            <div class="block-desc" style="font-size: 16px;"><a href="https://zkbob.com" target="_blank" style="color: inherit; text-decoration: underline;">ZK Pool 기반 솔루션</a>으로 급여 지급의 프라이버시는 이미 구현 가능</div>
                             <div class="block-examples">
-                                <span class="ex-chip">zkBob</span>
-                                <span class="ex-chip">Tornado Cash</span>
-                                <span class="ex-chip">Railgun</span>
+                                <a href="https://zkbob.com" target="_blank" class="ex-chip" style="text-decoration: none;">zkBob</a>
+                                <a href="https://tornado.cash" target="_blank" class="ex-chip" style="text-decoration: none;">Tornado Cash</a>
+                                <a href="https://railgun.org" target="_blank" class="ex-chip" style="text-decoration: none;">Railgun</a>
                             </div>
                         </div>
 
@@ -118,12 +118,12 @@
                         <!-- Right: Unsolved -->
                         <div class="problem-block unsolved-block">
                             <div class="block-badge unsolved">✗ UNSOLVED</div>
-                            <div class="block-title">AML / Compliance</div>
-                            <div class="block-desc">강력한 ZK Privacy는 규제 기관의 감사 요청에 대응 불가</div>
+                            <div class="block-title" style="font-size: 20px;">AML / Compliance</div>
+                            <div class="block-desc" style="font-size: 16px;">강력한 ZK Privacy는 <a href="https://www.fatf-gafi.org/en/publications/Methodsandtrends/Virtual-assets-red-flag-indicators.html" target="_blank" style="color: inherit; text-decoration: underline;">규제 기관의 감사 요청</a>에 대응 불가</div>
                             <div class="block-consequences">
-                                <div class="cons-item"><span class="cons-icon">⚖️</span> OFAC 제재 주소 확인 불가</div>
-                                <div class="cons-item"><span class="cons-icon">🔍</span> 자금세탁 추적 불가</div>
-                                <div class="cons-item"><span class="cons-icon">📋</span> 세무 감사 증빙 불가</div>
+                                <div class="cons-item" style="font-size: 15px;"><span class="cons-icon">⚖️</span> <a href="https://ofac.treasury.gov/sanctions-list-service" target="_blank" style="color: inherit; text-decoration: underline;">OFAC 제재 주소</a> 확인 불가</div>
+                                <div class="cons-item" style="font-size: 15px;"><span class="cons-icon">🔍</span> 자금세탁 추적 불가</div>
+                                <div class="cons-item" style="font-size: 15px;"><span class="cons-icon">📋</span> 세무 감사 증빙 불가</div>
                             </div>
                         </div>
                     </div>
@@ -132,18 +132,22 @@
                     <div class="dilemma-result-bar">
                         <div class="drb-icon">⚠️</div>
                         <div class="drb-content">
-                            <div class="drb-title">The Privacy-Compliance Dilemma</div>
-                            <div class="drb-text">강력한 Privacy 솔루션은 <strong>그 누구도 책임지지 못하는 영역</strong>으로 자금을 끌고 간다</div>
+                            <div class="drb-title" style="font-size: 16px;">The Privacy-Compliance Dilemma</div>
+                            <div class="drb-text" style="font-size: 15px;">강력한 Privacy 솔루션은 <strong>그 누구도 책임지지 못하는 영역</strong>으로 자금을 끌고 간다</div>
                         </div>
                         <div class="drb-results">
-                            <span class="drb-tag bad">Tornado Cash 제재 (OFAC 2022)</span>
-                            <span class="drb-tag bad">개발자 기소/유죄 (2024-2025)</span>
+                            <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank" class="drb-tag bad" style="text-decoration: none; display: block;">Tornado Cash 제재 (OFAC 2022)</a>
+                            <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank" class="drb-tag bad" style="text-decoration: none; display: block;">개발자 기소/유죄 (2024-2025)</a>
                             <span class="drb-tag bad">기관 도입 불가</span>
                         </div>
                     </div>
 
-                    <div class="slide-refs">
-                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">treasury.gov/tornado-cash-sanctions</a> • <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank">justice.gov/tornado-cash-indictment</a></span>
+                    <div class="slide-refs" style="font-size: 14px;">
+                        <span>Sources:
+                            <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash Sanctions</a> •
+                            <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank">DoJ Indictment</a> •
+                            <a href="https://www.fatf-gafi.org/en/publications/Methodsandtrends/Virtual-assets-red-flag-indicators.html" target="_blank">FATF AML Guidelines</a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -155,31 +159,22 @@
                         <span class="slide-num" style="font-size: 17px;">02</span>
                         <span class="slide-title" style="font-size: 17px;">How ZK Pool Works</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">ZK Pool: 송신자가 <span class="highlight">익명화</span>되는 구조</h2>
+                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">ZK Pool: <span class="highlight">관리자조차 모르는</span> 수신자 익명화</h2>
 
                     <div class="pool-viz-wrapper">
-                        <!-- Senders Column -->
+                        <!-- Admin Column (Left) -->
                         <div class="pool-col senders-col">
-                            <div class="col-label">송신자 (입금)</div>
-                            <div class="address-node sender-node">
-                                <span class="node-icon">👤</span>
-                                <span class="node-addr">0xA3f...</span>
+                            <div class="col-label">관리자 (입금)</div>
+                            <div class="address-node sender-node" style="border-color: #2563eb;">
+                                <span class="node-icon">🏢</span>
+                                <span class="node-addr" style="font-size: 14px;">0xABC...def (Admin)</span>
                             </div>
-                            <div class="address-node sender-node">
-                                <span class="node-icon">👤</span>
-                                <span class="node-addr">0x7B2...</span>
-                            </div>
-                            <div class="address-node sender-node">
-                                <span class="node-icon">👤</span>
-                                <span class="node-addr">0xC9d...</span>
-                            </div>
+                            <div style="margin-top: 10px; font-size: 13px; color: #666; text-align: center; max-width: 140px;">금액만 입금<br>사용처 알 수 없음</div>
                         </div>
 
                         <!-- Flow Arrows In -->
                         <div class="flow-arrows-col">
-                            <div class="flow-line in-flow"></div>
-                            <div class="flow-line in-flow"></div>
-                            <div class="flow-line in-flow"></div>
+                            <div class="flow-line in-flow" style="margin-top: 30px;"></div>
                         </div>
 
                         <!-- Central Pool -->
@@ -188,8 +183,8 @@
                                 <div class="pool-glow"></div>
                                 <div class="pool-inner">
                                     <span class="pool-icon">🔐</span>
-                                    <span class="pool-title">ZK Privacy Pool</span>
-                                    <span class="pool-subtitle">(내부 익명)</span>
+                                    <span class="pool-title" style="font-size: 14px;">ZK Privacy Pool</span>
+                                    <span class="pool-subtitle" style="font-size: 11px;">0x789...Pool</span>
                                 </div>
                             </div>
                             <div class="pool-blocked-indicator">
@@ -205,7 +200,7 @@
                             <div class="flow-line out-flow"></div>
                         </div>
 
-                        <!-- Receivers Column -->
+                        <!-- Receivers Column (Right) -->
                         <div class="pool-col receivers-col">
                             <div class="col-label">수신자 (출금)</div>
                             <div class="address-node receiver-node">
@@ -226,29 +221,29 @@
                         </div>
                     </div>
 
-                    <!-- AML Investigator -->
+                    <!-- AML Investigator (Left side tracking) -->
                     <div class="aml-track-section">
                         <div class="aml-investigator">
                             <span class="aml-icon">🔍</span>
                             <span class="aml-label">AML 조사관</span>
                         </div>
                         <div class="aml-track-line">
-                            <span class="track-arrow">- - - - - - - →</span>
+                            <span class="track-arrow">→ → → →</span>
                         </div>
                         <div class="aml-blocked-msg">
                             <span class="blocked-icon">🚫</span>
-                            <span>수신자 → Pool... 그 다음은? <strong>추적 불가!</strong></span>
+                            <span>수신자 ← Pool ← 관리자... <strong>연결 불가!</strong></span>
                         </div>
                     </div>
 
                     <div class="pool-legend-v2">
                         <div class="legend-card">
-                            <span class="legend-dot-v2 sender"></span>
-                            <span>송신자: Pool 입금 시 공개</span>
+                            <span class="legend-dot-v2 sender" style="background: #2563eb;"></span>
+                            <span>관리자: Pool 입금만 (사용처 모름)</span>
                         </div>
                         <div class="legend-card">
                             <span class="legend-dot-v2 pool"></span>
-                            <span>ZK Pool: 내부 완전 익명</span>
+                            <span>ZK Pool (0x789...Pool): 내부 완전 익명</span>
                         </div>
                         <div class="legend-card">
                             <span class="legend-dot-v2 receiver"></span>
@@ -256,7 +251,7 @@
                         </div>
                         <div class="legend-card problem">
                             <span class="legend-dot-v2 blocked"></span>
-                            <span>문제: 송신자↔수신자 연결 끊김</span>
+                            <span>문제: 관리자↔수신자 연결 끊김</span>
                         </div>
                     </div>
                 </div>
@@ -271,67 +266,77 @@
                     </div>
                     <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">L2 Chain 비교: <span class="highlight">Privacy 솔루션 전무</span></h2>
 
-                    <div class="competitor-table">
-                        <div class="comp-header" style="font-size: 17px;">
-                            <span>L2 Chain</span>
-                            <span>TVL</span>
-                            <span>Tech Stack</span>
-                            <span>Privacy</span>
-                            <span>특징</span>
+                    <div class="l2-comparison-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
+                        <!-- Arbitrum -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Arbitrum</h3>
+                            <div style="font-size: 13px; color: #999; line-height: 1.7; margin-top: 1rem;">
+                                <a href="https://l2beat.com/scaling/projects/arbitrum" target="_blank" style="color: inherit; text-decoration: underline;">TVL $18.2B</a> • Optimistic Rollup<br>
+                                최대 TVL, DeFi 중심<br>
+                                <span style="color: #ef4444; font-weight: 600;">Privacy 기술: 없음</span>
+                            </div>
                         </div>
-                        <div class="comp-row" style="font-size: 17px;">
-                            <span class="comp-name">Arbitrum</span>
-                            <span>$18.2B</span>
-                            <span>Optimistic Rollup</span>
-                            <span class="no-privacy">✗</span>
-                            <span>최대 TVL, DeFi 중심</span>
+
+                        <!-- Base -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Base</h3>
+                            <div style="font-size: 13px; color: #999; line-height: 1.7; margin-top: 1rem;">
+                                <a href="https://l2beat.com/scaling/projects/base" target="_blank" style="color: inherit; text-decoration: underline;">TVL $12.8B</a> • Optimistic Rollup<br>
+                                Coinbase 운영, 빠른 성장<br>
+                                <span style="color: #ef4444; font-weight: 600;">Privacy 기술: 없음</span>
+                            </div>
                         </div>
-                        <div class="comp-row" style="font-size: 17px;">
-                            <span class="comp-name">Base</span>
-                            <span>$12.8B</span>
-                            <span>Optimistic Rollup</span>
-                            <span class="no-privacy">✗</span>
-                            <span>Coinbase 운영, 빠른 성장</span>
+
+                        <!-- Optimism -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Optimism</h3>
+                            <div style="font-size: 13px; color: #999; line-height: 1.7; margin-top: 1rem;">
+                                <a href="https://l2beat.com/scaling/projects/optimism" target="_blank" style="color: inherit; text-decoration: underline;">TVL $8.1B</a> • Optimistic Rollup<br>
+                                OP Stack 생태계<br>
+                                <span style="color: #ef4444; font-weight: 600;">Privacy 기술: 없음</span>
+                            </div>
                         </div>
-                        <div class="comp-row" style="font-size: 17px;">
-                            <span class="comp-name">Optimism</span>
-                            <span>$8.1B</span>
-                            <span>Optimistic Rollup</span>
-                            <span class="no-privacy">✗</span>
-                            <span>OP Stack 생태계</span>
+
+                        <!-- Polygon zkEVM -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Polygon zkEVM</h3>
+                            <div style="font-size: 13px; color: #999; line-height: 1.7; margin-top: 1rem;">
+                                <a href="https://l2beat.com/scaling/projects/polygonzkevm" target="_blank" style="color: inherit; text-decoration: underline;">TVL $1.2B</a> • ZK Rollup<br>
+                                ZK 기술, 낮은 수수료<br>
+                                <span style="color: #ef4444; font-weight: 600;">Privacy 기술: 없음 (ZK는 검증용)</span>
+                            </div>
                         </div>
-                        <div class="comp-row" style="font-size: 17px;">
-                            <span class="comp-name">Polygon zkEVM</span>
-                            <span>$1.2B</span>
-                            <span>ZK Rollup</span>
-                            <span class="no-privacy">✗</span>
-                            <span>ZK 기술, 낮은 수수료</span>
+
+                        <!-- Mantle -->
+                        <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Mantle</h3>
+                            <div style="font-size: 13px; color: #999; line-height: 1.7; margin-top: 1rem;">
+                                <a href="https://l2beat.com/scaling/projects/mantle" target="_blank" style="color: inherit; text-decoration: underline;">TVL $2.1B</a> • Optimistic + ZK<br>
+                                RWA 집중, Bybit 지원<br>
+                                <span style="color: #ef4444; font-weight: 600;">Privacy 기술: 없음</span>
+                            </div>
                         </div>
-                        <div class="comp-row" style="font-size: 17px;">
-                            <span class="comp-name">Mantle</span>
-                            <span>$2.1B</span>
-                            <span>Optimistic + ZK</span>
-                            <span class="no-privacy">✗</span>
-                            <span>RWA 집중, Bybit 지원</span>
-                        </div>
-                        <div class="comp-row highlight-row" style="font-size: 17px;">
-                            <span class="comp-name">LatticA on Mantle</span>
-                            <span>—</span>
-                            <span>FHE+ZK</span>
-                            <span class="has-privacy">✓ Auditable</span>
-                            <span>유일한 규제 준수 Privacy</span>
+
+                        <!-- LatticA on Mantle -->
+                        <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(255, 193, 7, 0.12) 0%, rgba(255, 152, 0, 0.08) 100%); border-radius: 12px; border: 2px solid #ffc107;">
+                            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; color: #ffc107;">LatticA<br><span style="font-size: 1.4rem; font-weight: 600;">on Mantle</span></h3>
+                            <div style="font-size: 13px; color: #ccc; line-height: 1.7; margin-top: 1rem;">
+                                FHE + ZK Infrastructure<br>
+                                규제 준수 Shielded Payment<br>
+                                <span style="color: #4ade80; font-weight: 600;">✓ Auditable Privacy</span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="market-insight-box" style="padding: 24px 32px; margin-top: 2.5rem;">
                         <div class="insight-icon" style="font-size: 38px;">💡</div>
                         <div class="insight-content" style="font-size: 19px;">
-                            <strong>시장 갭:</strong> 모든 주요 L2는 <span class="highlight">Privacy 솔루션이 없음</span> → LatticA가 Mantle에서 선점
+                            <strong>시장 갭:</strong> 모든 주요 L2는 <span class="highlight">Privacy 솔루션이 없음</span> (ZK는 검증용일 뿐, 프라이버시 보장 없음) → LatticA가 Mantle에서 선점
                         </div>
                     </div>
 
                     <div class="slide-refs" style="font-size: 14px;">
-                        <span>Sources: <a href="https://l2beat.com" target="_blank">L2Beat</a> • <a href="https://defillama.com" target="_blank">DeFiLlama</a> (Jan 2026)</span>
+                        <span>Sources: <a href="https://l2beat.com" target="_blank">L2Beat</a> • <a href="https://defillama.com" target="_blank">DeFiLlama</a> (Jan 2026) • <a href="https://docs.polygon.technology/zkEVM/" target="_blank">Polygon zkEVM Docs</a> (ZK for verification, not privacy)</span>
                     </div>
                 </div>
             </div>
@@ -440,7 +445,7 @@
                         <span class="slide-num" style="font-size: 17px;">05</span>
                         <span class="slide-title" style="font-size: 17px;">Solution</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">LatticA = <span class="highlight">기업은 자유롭게 사용, 감사는 LatticA가 대응</span></h2>
+                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;"><span class="highlight">기업은 자유롭게, 감사는 LatticA가 대응</span></h2>
 
                     <div class="solution-flow">
                         <div class="flow-item">
@@ -466,7 +471,7 @@
                             <div class="flow-icon zk-icon">
                                 <span class="magnifier-emoji">🔀</span>
                             </div>
-                            <span>sk Sharing</span>
+                            <span>sk Secret Sharing</span>
                         </div>
                         <div class="flow-arrow">→</div>
                         <div class="flow-item">
@@ -488,7 +493,7 @@
                             <h4>감사 요청 시</h4>
                             <ul>
                                 <li><strong>규제 기관:</strong> 특정 TX 감사 요청</li>
-                                <li><strong>LatticA:</strong> FHE 동형 연산으로 필요한 로그만 연산</li>
+                                <li><strong>LatticA:</strong> Secret Sharing으로 분산된 sk 조각을 다수 동의로 복원, FHE 동형 연산으로 필요한 로그만 연산</li>
                                 <li><strong>기업:</strong> 연산 결과 보고서만 받아서 제출</li>
                             </ul>
                         </div>
@@ -500,12 +505,13 @@
                             <strong>핵심 가치</strong>
                         </div>
                         <p><strong>기업은 마음 놓고 사용</strong> → Shielded Pool의 모든 Privacy 혜택</p>
-                        <p><strong>감사 대응은 결과 보고서만</strong> → LatticA가 FHE 연산으로 처리</p>
+                        <p><strong>감사 대응은 결과 보고서만</strong> → LatticA가 Secret Sharing + FHE 연산으로 처리</p>
+                        <p><strong>키 관리:</strong> Secret Sharing (Shamir 등)으로 sk를 분산 저장, 다수 동의 시에만 복원 가능</p>
                         <p class="assumption-fix"><strong>결과:</strong> Privacy + Compliance 동시 달성, 기업 부담 제로</p>
                     </div>
 
                     <div class="slide-refs">
-                        <span>Refs: FHE16 homomorphic computation • Secret sharing (Shamir, etc.)</span>
+                        <span>Refs: FHE16 homomorphic computation • <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing" target="_blank">Shamir's Secret Sharing</a></span>
                     </div>
                 </div>
             </div>
@@ -517,85 +523,85 @@
                         <span class="slide-num" style="font-size: 17px;">06</span>
                         <span class="slide-title" style="font-size: 17px;">Technical Solution</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">ZK Witness를 <span class="highlight">암호화 로깅</span>하는 구조</h2>
+                    <h2 class="slide-headline" style="font-size: 3.6rem; line-height: 1.3;">ZK Witness를 <span class="highlight">암호화 로깅</span>하는 구조</h2>
 
-                    <div class="tech-flow-diagram">
+                    <div class="tech-flow-diagram" style="margin-top: 3rem;">
                         <div class="flow-stage-box">
-                            <div class="stage-label">Transaction</div>
-                            <div class="stage-content">
-                                <span class="stage-icon">💸</span>
+                            <div class="stage-label" style="font-size: 1.5rem;">Transaction</div>
+                            <div class="stage-content" style="font-size: 1.6rem;">
+                                <span class="stage-icon" style="font-size: 3rem;">💸</span>
                                 <span>ZK Pool로 급여 지급</span>
                             </div>
                         </div>
-                        <div class="flow-arrow-box">→</div>
+                        <div class="flow-arrow-box" style="font-size: 2.5rem;">→</div>
                         <div class="flow-stage-box highlight-stage">
-                            <div class="stage-label">Logging</div>
-                            <div class="stage-content">
-                                <span class="stage-icon">🔐</span>
+                            <div class="stage-label" style="font-size: 1.5rem;">Logging</div>
+                            <div class="stage-content" style="font-size: 1.6rem;">
+                                <span class="stage-icon" style="font-size: 3rem;">🔐</span>
                                 <span>Witness 암호화 저장</span>
                             </div>
-                            <div class="stage-note">Binding: SNARK 기반</div>
+                            <div class="stage-note" style="font-size: 1.3rem;">Binding: SNARK 기반</div>
                         </div>
-                        <div class="flow-arrow-box">→</div>
+                        <div class="flow-arrow-box" style="font-size: 2.5rem;">→</div>
                         <div class="flow-stage-box">
-                            <div class="stage-label">Normal State</div>
-                            <div class="stage-content">
-                                <span class="stage-icon">🔒</span>
+                            <div class="stage-label" style="font-size: 1.5rem;">Normal State</div>
+                            <div class="stage-content" style="font-size: 1.6rem;">
+                                <span class="stage-icon" style="font-size: 3rem;">🔒</span>
                                 <span>완전 Private 유지</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="key-management-section">
-                        <h4>Key Management Options</h4>
+                    <div class="key-management-section" style="margin-top: 3rem;">
+                        <h4 style="font-size: 2.2rem; margin-bottom: 2rem;">Key Management Options</h4>
                         <div class="key-options">
-                            <div class="key-option">
-                                <span class="option-badge">Option A</span>
+                            <div class="key-option" style="padding: 2rem;">
+                                <span class="option-badge" style="font-size: 1.4rem;">Option A</span>
                                 <div class="option-content">
-                                    <strong>분산 키 관리 (MPC/TSS)</strong>
-                                    <p>다수 당사자 동의 시에만 복호화 가능</p>
+                                    <strong style="font-size: 1.8rem;">분산 키 관리 (SS-MPC)</strong>
+                                    <p style="font-size: 1.5rem; margin-top: 1rem;">Secret Sharing + MPC로 다수 동의 시에만 복호화 가능</p>
                                 </div>
                             </div>
-                            <div class="key-option">
-                                <span class="option-badge">Option B</span>
+                            <div class="key-option" style="padding: 2rem;">
+                                <span class="option-badge" style="font-size: 1.4rem;">Option B</span>
                                 <div class="option-content">
-                                    <strong>기업 직접 관리</strong>
-                                    <p>조직이 자체 Secret Key 보유</p>
+                                    <strong style="font-size: 1.8rem;">기업 직접 관리</strong>
+                                    <p style="font-size: 1.5rem; margin-top: 1rem;">조직이 자체 Secret Key 보유</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="audit-flow-box">
-                        <div class="audit-header">
-                            <span class="audit-icon">⚖️</span>
-                            <strong>Valid 감사 요청 시 Flow</strong>
+                    <div class="audit-flow-box" style="margin-top: 3rem; padding: 2.5rem;">
+                        <div class="audit-header" style="margin-bottom: 2rem;">
+                            <span class="audit-icon" style="font-size: 2.5rem;">⚖️</span>
+                            <strong style="font-size: 2rem;">Valid 감사 요청 시 Flow</strong>
                         </div>
                         <div class="audit-steps">
-                            <div class="audit-step">
-                                <span class="step-num">1</span>
+                            <div class="audit-step" style="font-size: 1.5rem;">
+                                <span class="step-num" style="font-size: 1.6rem;">1</span>
                                 <span>규제기관 → 특정 TX 감사 요청</span>
                             </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step">
-                                <span class="step-num">2</span>
+                            <div class="audit-arrow" style="font-size: 2rem;">→</div>
+                            <div class="audit-step" style="font-size: 1.5rem;">
+                                <span class="step-num" style="font-size: 1.6rem;">2</span>
                                 <span>해당 TX의 Witness만 복호화</span>
                             </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step">
-                                <span class="step-num">3</span>
+                            <div class="audit-arrow" style="font-size: 2rem;">→</div>
+                            <div class="audit-step" style="font-size: 1.5rem;">
+                                <span class="step-num" style="font-size: 1.6rem;">3</span>
                                 <span>송신자 주소 추출 + KYC 매칭</span>
                             </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step highlight-step">
-                                <span class="step-num">4</span>
+                            <div class="audit-arrow" style="font-size: 2rem;">→</div>
+                            <div class="audit-step highlight-step" style="font-size: 1.5rem;">
+                                <span class="step-num" style="font-size: 1.6rem;">4</span>
                                 <span><strong>신원 확인 완료</strong></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="value-prop-bar">
-                        <span class="vp-icon">💡</span>
+                    <div class="value-prop-bar" style="margin-top: 3rem; padding: 2rem; font-size: 1.7rem;">
+                        <span class="vp-icon" style="font-size: 2.5rem;">💡</span>
                         <span><strong>핵심 가치:</strong> 평상시 완벽한 Privacy → 합법적 요청 시에만 Selective Disclosure</span>
                     </div>
                 </div>
@@ -608,31 +614,31 @@
                         <span class="slide-num" style="font-size: 17px;">07</span>
                         <span class="slide-title" style="font-size: 17px;">Business Model</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">수익 모델: <span class="highlight">기본 Fee + 감사 Fee</span></h2>
+                    <h2 class="slide-headline" style="font-size: 3rem; line-height: 1.3;">수익 모델: <span class="highlight">기본 Fee + 감사 Fee</span></h2>
 
                     <div class="biz-model-grid">
-                        <div class="biz-card" style="padding: 2.5rem;">
-                            <div class="biz-icon" style="font-size: 4rem;">%</div>
-                            <h4 style="font-size: 2rem; margin: 1.5rem 0;">기본 Protocol Fee</h4>
-                            <p class="biz-rate" style="font-size: 2.5rem; font-weight: 900; margin: 1rem 0;">15-25 bps</p>
-                            <p style="font-size: 1.4rem; line-height: 1.6;">Privacy Pool 거래 volume 기준<br>모든 거래에 적용</p>
+                        <div class="biz-card" style="padding: 2.2rem;">
+                            <div class="biz-icon" style="font-size: 3.5rem;">%</div>
+                            <h4 style="font-size: 1.8rem; margin: 1.2rem 0;">기본 Protocol Fee</h4>
+                            <p class="biz-rate" style="font-size: 2.2rem; font-weight: 900; margin: 0.8rem 0;">15-25 bps</p>
+                            <p style="font-size: 1.3rem; line-height: 1.6;">Privacy Pool 거래 volume 기준<br>모든 거래에 적용</p>
                         </div>
-                        <div class="biz-card" style="padding: 2.5rem;">
-                            <div class="biz-icon" style="font-size: 4rem;">🔍</div>
-                            <h4 style="font-size: 2rem; margin: 1.5rem 0;">감사 Fee</h4>
-                            <p class="biz-rate" style="font-size: 2.5rem; font-weight: 900; margin: 1rem 0;">$500-2K</p>
-                            <p style="font-size: 1.4rem; line-height: 1.6;">감사 요청 당 1회 과금<br>LatticA FHE 연산 + 보고서 생성</p>
+                        <div class="biz-card" style="padding: 2.2rem;">
+                            <div class="biz-icon" style="font-size: 3.5rem;">🔍</div>
+                            <h4 style="font-size: 1.8rem; margin: 1.2rem 0;">감사 Fee</h4>
+                            <p class="biz-rate" style="font-size: 2.2rem; font-weight: 900; margin: 0.8rem 0;">$500-2K</p>
+                            <p style="font-size: 1.3rem; line-height: 1.6;">감사 요청 당 1회 과금<br>LatticA FHE 연산 + 보고서 생성</p>
                         </div>
-                        <div class="biz-card" style="padding: 2.5rem;">
-                            <div class="biz-icon" style="font-size: 4rem;">🏢</div>
-                            <h4 style="font-size: 2rem; margin: 1.5rem 0;">Enterprise</h4>
-                            <p class="biz-rate" style="font-size: 2.5rem; font-weight: 900; margin: 1rem 0;">Custom</p>
-                            <p style="font-size: 1.4rem; line-height: 1.6;">전용 인프라, SLA 보장<br>무제한 감사 패키지 옵션</p>
+                        <div class="biz-card" style="padding: 2.2rem;">
+                            <div class="biz-icon" style="font-size: 3.5rem;">🏢</div>
+                            <h4 style="font-size: 1.8rem; margin: 1.2rem 0;">Enterprise</h4>
+                            <p class="biz-rate" style="font-size: 2.2rem; font-weight: 900; margin: 0.8rem 0;">Custom</p>
+                            <p style="font-size: 1.3rem; line-height: 1.6;">전용 인프라, SLA 보장<br>무제한 감사 패키지 옵션</p>
                         </div>
                     </div>
 
-                    <div class="value-prop-bar" style="margin-top: 3.5rem; padding: 2.5rem; font-size: 1.6rem;">
-                        <span class="vp-icon" style="font-size: 3rem;">💡</span>
+                    <div class="value-prop-bar" style="margin-top: 3rem; padding: 2.2rem; font-size: 1.5rem;">
+                        <span class="vp-icon" style="font-size: 2.5rem;">💡</span>
                         <span><strong>핵심:</strong> 기본 거래 Fee로 안정적 수익 + 감사 Fee로 <span class="highlight">규제 준수 가치 수익화</span></span>
                     </div>
                 </div>
@@ -645,34 +651,34 @@
                         <span class="slide-num" style="font-size: 17px;">08</span>
                         <span class="slide-title" style="font-size: 17px;">Why Mantle</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Mantle = <span class="highlight">RWA & Real Finance 집중</span></h2>
+                    <h2 class="slide-headline" style="font-size: 3rem; line-height: 1.3;">Mantle = <span class="highlight">RWA & Real Finance 집중</span></h2>
 
-                    <div class="mantle-reasons" style="gap: 2.5rem; margin-top: 3.5rem;">
-                        <div class="reason-item" style="font-size: 1.7rem; padding: 2.2rem;">
-                            <span class="reason-check" style="font-size: 2.5rem;">🏛️</span>
-                            <span><strong>RWA 생태계 구축 중:</strong> Mantle은 RWA 토큰화에 올인, Bybit와 협력하여 기관급 인프라 제공</span>
+                    <div class="mantle-reasons" style="gap: 2.2rem; margin-top: 3rem;">
+                        <div class="reason-item" style="font-size: 1.6rem; padding: 2rem;">
+                            <span class="reason-check" style="font-size: 2.3rem;">🏛️</span>
+                            <span><strong><a href="https://www.mantle.xyz/blog/announcements/mantles-ecosystem-evolution-rwa-and-beyond" target="_blank" style="color: inherit; text-decoration: underline;">RWA 생태계 구축 중</a>:</strong> Mantle은 RWA 토큰화에 올인, <a href="https://www.bybit.com" target="_blank" style="color: inherit; text-decoration: underline;">Bybit</a>와 협력하여 기관급 인프라 제공</span>
                         </div>
-                        <div class="reason-item" style="font-size: 1.7rem; padding: 2.2rem;">
-                            <span class="reason-check" style="font-size: 2.5rem;">💰</span>
-                            <span><strong>$3.79B Ecosystem Treasury:</strong> 대규모 성장 자본으로 Privacy 인프라 투자 가능</span>
+                        <div class="reason-item" style="font-size: 1.6rem; padding: 2rem;">
+                            <span class="reason-check" style="font-size: 2.3rem;">💰</span>
+                            <span><strong><a href="https://messari.io/project/mantle/quarterly-reports/q4-2025" target="_blank" style="color: inherit; text-decoration: underline;">$3.79B Ecosystem Treasury</a>:</strong> 대규모 성장 자본으로 Privacy 인프라 투자 가능</span>
                         </div>
-                        <div class="reason-item highlight-stat" style="font-size: 1.7rem; padding: 2.2rem; background: rgba(255, 193, 7, 0.12); border-left: 5px solid #ffc107;">
-                            <span class="reason-check" style="font-size: 2.5rem;">🚀</span>
+                        <div class="reason-item highlight-stat" style="font-size: 1.6rem; padding: 2rem; background: rgba(255, 193, 7, 0.12); border-left: 5px solid #ffc107;">
+                            <span class="reason-check" style="font-size: 2.3rem;">🚀</span>
                             <span><strong>Perfect Fit:</strong> RWA는 Privacy 필수 → LatticA가 유일한 규제 준수 솔루션</span>
                         </div>
-                        <div class="reason-item" style="font-size: 1.7rem; padding: 2.2rem;">
-                            <span class="reason-check" style="font-size: 2.5rem;">⚡</span>
-                            <span><strong>$2.1B TVL + ZK Tech:</strong> Optimistic + ZK 하이브리드로 확장성 확보</span>
+                        <div class="reason-item" style="font-size: 1.6rem; padding: 2rem;">
+                            <span class="reason-check" style="font-size: 2.3rem;">⚡</span>
+                            <span><strong><a href="https://l2beat.com/scaling/projects/mantle" target="_blank" style="color: inherit; text-decoration: underline;">$2.1B TVL</a> + ZK Tech:</strong> Optimistic + ZK 하이브리드로 확장성 확보</span>
                         </div>
                     </div>
 
-                    <div class="value-prop-bar" style="margin-top: 3.5rem; padding: 2.5rem; font-size: 1.6rem;">
-                        <span class="vp-icon" style="font-size: 3rem;">💡</span>
+                    <div class="value-prop-bar" style="margin-top: 3rem; padding: 2.2rem; font-size: 1.5rem;">
+                        <span class="vp-icon" style="font-size: 2.8rem;">💡</span>
                         <span><strong>결론:</strong> Mantle의 RWA 전략에 <span class="highlight">Privacy + Compliance가 핵심 인프라</span></span>
                     </div>
 
                     <div class="slide-refs" style="font-size: 14px; margin-top: 2rem;">
-                        <span>Sources: <a href="https://www.mantle.xyz/blog/announcements/mantles-ecosystem-evolution-rwa-and-beyond" target="_blank">Mantle RWA Initiative</a> • messari.io/mantle-q4-2025</span>
+                        <span>Sources: <a href="https://www.mantle.xyz/blog/announcements/mantles-ecosystem-evolution-rwa-and-beyond" target="_blank">Mantle RWA Initiative</a> • <a href="https://messari.io/project/mantle/quarterly-reports/q4-2025" target="_blank">Messari Mantle Q4 2025</a> • <a href="https://l2beat.com/scaling/projects/mantle" target="_blank">L2Beat Mantle</a></span>
                     </div>
                 </div>
             </div>
@@ -688,7 +694,6 @@
 
                     <div class="team-grid" style="gap: 3rem; margin-top: 4rem;">
                         <div class="team-card" style="padding: 2.5rem;">
-                            <div class="team-avatar" style="font-size: 5rem;">👨🏻‍💻</div>
                             <div class="team-info">
                                 <h4 style="font-size: 2.2rem; margin-bottom: 0.8rem;">Seunghwan Lee</h4>
                                 <span class="team-role" style="font-size: 1.6rem;">CEO</span>
@@ -696,7 +701,6 @@
                             </div>
                         </div>
                         <div class="team-card" style="padding: 2.5rem;">
-                            <div class="team-avatar" style="font-size: 5rem;">👨🏻‍💼</div>
                             <div class="team-info">
                                 <h4 style="font-size: 2.2rem; margin-bottom: 0.8rem;">Dohyuk Kim</h4>
                                 <span class="team-role" style="font-size: 1.6rem;">CTO</span>
@@ -704,7 +708,6 @@
                             </div>
                         </div>
                         <div class="team-card" style="padding: 2.5rem;">
-                            <div class="team-avatar" style="font-size: 5rem;">🧑🏻‍💻</div>
                             <div class="team-info">
                                 <h4 style="font-size: 2.2rem; margin-bottom: 0.8rem;">Yunsik Ham</h4>
                                 <span class="team-role" style="font-size: 1.6rem;">Web3 Developer</span>
@@ -724,7 +727,7 @@
                     </div>
                     <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Partnership <span class="highlight">Request</span></h2>
 
-                    <div class="ask-grid" style="gap: 3.5rem; margin-top: 4rem;">
+                    <div class="ask-grid" style="gap: 3.5rem; margin-top: 3rem;">
                         <div class="ask-card what-need" style="padding: 3rem;">
                             <h4 style="font-size: 2.4rem; margin-bottom: 2rem;">What We Need</h4>
                             <ul style="font-size: 1.7rem; line-height: 2.5;">
@@ -743,7 +746,7 @@
                         </div>
                     </div>
 
-                    <div class="contact-footer" style="margin-top: 4rem;">
+                    <div class="contact-footer" style="margin-top: 3rem;">
                         <div class="ask-cta">
                             <p style="font-size: 2.1rem;">Let's make Mantle the home of <span class="highlight">compliant privacy</span></p>
                         </div>
@@ -770,22 +773,12 @@
                             <span>Built on Mantle</span>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Slide 12: Final Slogan -->
-            <div class="slide" data-slide="12">
-                <div class="slide-inner" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); display: flex; align-items: center; justify-content: center; position: relative;">
-                    <div style="text-align: center; max-width: 900px;">
-                        <p style="font-size: 3.5rem; font-weight: 700; color: #ffffff; line-height: 1.4; margin-bottom: 2rem;">
-                            Privacy by default,<br>
-                            <span style="color: var(--primary);">Compliance when needed</span>
+                    <!-- Slogan at bottom -->
+                    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                        <p style="font-size: 2rem; font-weight: 700; color: #ffffff; line-height: 1.4;">
+                            Privacy by default, <span style="color: var(--primary);">Compliance when needed</span>
                         </p>
-                        <div style="margin-top: 4rem; display: flex; align-items: center; justify-content: center; gap: 2rem;">
-                            <img src="https://walllnut.com/asset/head-logo.svg" alt="waLLLnut" style="height: 50px; filter: brightness(0) invert(1);">
-                            <span style="font-size: 2rem; color: #666;">×</span>
-                            <span style="font-size: 2.5rem; font-weight: 800; color: white;">LatticA</span>
-                        </div>
                     </div>
                 </div>
             </div>
