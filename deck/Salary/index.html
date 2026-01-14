@@ -257,14 +257,107 @@
                 </div>
             </div>
 
-            <!-- Slide 4: L2 Chain Comparison -->
+            <!-- Slide 4: Why Now - Compliant Shielded Payment System -->
             <div class="slide" data-slide="4">
-                <div class="slide-inner">
+                <div class="slide-inner why-now-v2">
                     <div class="slide-header">
                         <span class="slide-num" style="font-size: 17px;">03</span>
+                        <span class="slide-title" style="font-size: 17px;">Why Now</span>
+                    </div>
+                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Why <span class="highlight">Compliant Shielded Payment</span> is needed?</h2>
+
+                    <div class="why-aml-grid">
+                        <!-- Card 1: Privacy-only = Sanctions -->
+                        <div class="why-aml-card regulation">
+                            <div class="why-icon-badge">⚠️</div>
+                            <h4>Privacy Only = Sanctions</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet bad">✗</span>
+                                    <span><strong>Tornado Cash</strong> — OFAC sanctions, dev convicted</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">✗</span>
+                                    <span><strong>Zcash, Monero</strong> — Delisted from exchanges</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">✗</span>
+                                    <span><strong>zkBob, Railgun</strong> — No institutional adoption</span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion bad">
+                                No AML → <strong>Unusable</strong>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Transparent = No Adoption -->
+                        <div class="why-aml-card institutional">
+                            <div class="why-icon-badge">👁️</div>
+                            <h4>Transparent Payment = Liability</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet need">→</span>
+                                    <span><strong>On-chain payroll</strong> — Salaries fully public</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet need">→</span>
+                                    <span><strong>Competitor access</strong> — Real-time cost analysis</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet bad">⚠️</span>
+                                    <span><strong>zkBob</strong> — "Users bear all risks"</span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion need">
+                                No Privacy → <strong>Won't use</strong><br>Privacy only → <strong>Too risky</strong>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: The Answer -->
+                        <div class="why-aml-card solution">
+                            <div class="why-icon-badge">🛡️</div>
+                            <h4>Compliant Shielded Payment</h4>
+                            <div class="why-points">
+                                <div class="why-point">
+                                    <span class="point-bullet good">✓</span>
+                                    <span><strong>Privacy by Default</strong> — ZK Pool anonymization</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet good">✓</span>
+                                    <span><strong>Audit Disclosure</strong> — Encrypted Witness</span>
+                                </div>
+                                <div class="why-point">
+                                    <span class="point-bullet good">✓</span>
+                                    <span><strong>Regulation Ready</strong> — GENIUS Act, MiCA</span>
+                                </div>
+                            </div>
+                            <div class="why-conclusion good">
+                                <strong>Only Compliant Solution</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="why-summary-bar">
+                        <div class="summary-icon">💡</div>
+                        <div class="summary-text">
+                            <strong>Conclusion:</strong> Privacy Only → <span class="red-text">Sanctions</span>, Transparent → <span class="red-text">No Adoption</span> → Only <span class="highlight">Compliant Shielded Payment</span> works
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash</a> • <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act S.394</a> • <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank">EU MiCA</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: L2 Chain Comparison -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num" style="font-size: 17px;">04</span>
                         <span class="slide-title" style="font-size: 17px;">Market</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">L2 Chain Comparison: <span class="highlight">No Privacy Solutions</span></h2>
+                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">L2 Chains: <span class="highlight">No Native Privacy</span></h2>
 
                     <div class="l2-comparison-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
                         <!-- Arbitrum -->
@@ -331,109 +424,12 @@
                     <div class="market-insight-box" style="padding: 24px 32px; margin-top: 2.5rem;">
                         <div class="insight-icon" style="font-size: 38px;">💡</div>
                         <div class="insight-content" style="font-size: 19px;">
-                            <strong>Market Gap:</strong> All major L2s have <span class="highlight">no Privacy solutions</span> (ZK is for verification only, no privacy guarantee) → LatticA captures this on Mantle
+                            <strong>Market Gap:</strong> All major L2s have <span class="highlight">no native Privacy solutions</span>. Third-party protocols like <a href="https://railgun.org" target="_blank" style="color: inherit; text-decoration: underline;">RAILGUN</a> exist but aren't native features → LatticA captures this on Mantle
                         </div>
                     </div>
 
                     <div class="slide-refs" style="font-size: 14px;">
-                        <span>Sources: <a href="https://l2beat.com" target="_blank">L2Beat</a> • <a href="https://defillama.com" target="_blank">DeFiLlama</a> (Jan 2026) • <a href="https://docs.polygon.technology/zkEVM/" target="_blank">Polygon zkEVM Docs</a> (ZK for verification, not privacy)</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 5: Why Now - Compliant Shielded Payment System -->
-            <div class="slide" data-slide="5">
-                <div class="slide-inner why-now-v2">
-                    <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">04</span>
-                        <span class="slide-title" style="font-size: 17px;">Why Now</span>
-                    </div>
-                    <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Why <span class="highlight">Compliant Shielded Payment</span> is needed?</h2>
-
-                    <div class="why-aml-grid">
-                        <!-- Card 1: Privacy-only = Sanctions -->
-                        <div class="why-aml-card regulation">
-                            <div class="why-icon-badge">⚠️</div>
-                            <h4>Privacy Only = Sanctions</h4>
-                            <div class="why-points">
-                                <div class="why-point">
-                                    <span class="point-bullet bad">✗</span>
-                                    <span><strong>Tornado Cash</strong> — OFAC sanctions, dev convicted (2024)</span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet bad">✗</span>
-                                    <span><strong>Zcash, Monero</strong> — Delisted from major exchanges</span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet bad">✗</span>
-                                    <span><strong>zkBob, Railgun</strong> — No institutional adoption (no AML response)</span>
-                                </div>
-                            </div>
-                            <div class="why-conclusion bad">
-                                Privacy Payment without AML → <strong>Unusable</strong>
-                            </div>
-                        </div>
-
-                        <!-- Card 2: Transparent = No Adoption -->
-                        <div class="why-aml-card institutional">
-                            <div class="why-icon-badge">👁️</div>
-                            <h4>Existing Payment = Liability on Users</h4>
-                            <div class="why-points">
-                                <div class="why-point">
-                                    <span class="point-bullet need">→</span>
-                                    <span>On-chain payroll = <strong>Salaries public to the world</strong></span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet need">→</span>
-                                    <span>Competitors can <strong>analyze labor cost structure in real-time</strong></span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet bad">⚠️</span>
-                                    <span><strong>zkBob disclaimer:</strong> "Users bear all risks from usage"</span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet need">→</span>
-                                    <span>Superfluid, Sablier — <strong>Fully transparent</strong></span>
-                                </div>
-                            </div>
-                            <div class="why-conclusion need">
-                                No Privacy → <strong>Enterprises won't use</strong><br>Privacy only → <strong>Cannot avoid liability</strong>
-                            </div>
-                        </div>
-
-                        <!-- Card 3: The Answer -->
-                        <div class="why-aml-card solution">
-                            <div class="why-icon-badge">🛡️</div>
-                            <h4>Answer: Compliant Shielded Payment</h4>
-                            <div class="why-points">
-                                <div class="why-point">
-                                    <span class="point-bullet good">✓</span>
-                                    <span><strong>Privacy by Default</strong> — Payroll anonymization via ZK Pool</span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet good">✓</span>
-                                    <span><strong>Disclosure on Audit</strong> — AML response via Encrypted Witness</span>
-                                </div>
-                                <div class="why-point">
-                                    <span class="point-bullet good">✓</span>
-                                    <span><strong>Regulation Ready</strong> — Compliant with GENIUS Act, MiCA</span>
-                                </div>
-                            </div>
-                            <div class="why-conclusion good">
-                                LatticA = <strong>Only Compliant Privacy Payment</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="why-summary-bar">
-                        <div class="summary-icon">💡</div>
-                        <div class="summary-text">
-                            <strong>Conclusion:</strong> Privacy Only → <span class="red-text">Sanctions</span>, Transparent → <span class="red-text">Adoption Refused</span> → Only <span class="highlight">Compliant Shielded Payment</span> enables institutional adoption
-                        </div>
-                    </div>
-
-                    <div class="slide-refs">
-                        <span>Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash</a> • <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act S.394</a> • <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank">EU MiCA</a></span>
+                        <span>Sources: <a href="https://l2beat.com" target="_blank">L2Beat</a> • <a href="https://defillama.com" target="_blank">DeFiLlama</a> (Jan 2026) • <a href="https://docs.polygon.technology/zkEVM/" target="_blank">Polygon zkEVM Docs</a> (ZK for verification, not privacy) • <a href="https://railgun.org" target="_blank">RAILGUN</a></span>
                     </div>
                 </div>
             </div>
