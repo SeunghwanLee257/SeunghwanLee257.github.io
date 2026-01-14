@@ -263,9 +263,9 @@ body {
 }
 
 .title-slide .sub-tagline {
-    font-size: 16px;
+    font-size: 20px;
     color: rgba(240, 240, 240, 0.89);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .title-diagram {
