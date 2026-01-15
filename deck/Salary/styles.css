@@ -19,7 +19,7 @@
     --mantle: #1E293B;
     --mantle-light: #334155;
     --white: #f3f3f3;
-    --light-gray: #F8FAFC;
+    --light-gray: #efefef;
     --medium-gray: #E2E8F0;
     --text-dark: #1b1b1b;
     --text-medium: #494949;
@@ -931,7 +931,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 16px;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
 }
 
@@ -980,7 +980,7 @@ body {
 }
 
 .flow-icon.payroll-icon .csv-text {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #1b1b1b;
     line-height: 1;
@@ -1060,7 +1060,7 @@ body {
 }
 
 .private-section h4, .public-section h4 {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -1071,7 +1071,7 @@ body {
 }
 
 .private-section ul li, .public-section ul li {
-    font-size: 17px;
+    font-size: 18px;
     color: var(--text-medium);
     padding: 4px 0;
     padding-left: 20px;
@@ -1097,7 +1097,7 @@ body {
     background: var(--accent-bg);
     border-left: 4px solid var(--accent);
     padding: 14px 18px;
-    border-radius: 0 12px 12px 0;
+    border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -1119,7 +1119,7 @@ body {
 }
 
 .assumption-box p {
-    font-size: 19px;
+    font-size: 20px;
     color: var(--text-medium);
     line-height: 1.5;
 }
@@ -1198,7 +1198,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     flex-shrink: 0;
 }
@@ -1208,7 +1208,7 @@ body {
 }
 
 .pflow-step span:last-child {
-    font-size: 14px;
+    font-size: 18px;
     color: var(--text-dark);
 }
 
@@ -1223,7 +1223,7 @@ body {
     background: rgba(246, 246, 246, 0.552);
     padding: 8px 22px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: #1b1b1b;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -2004,7 +2004,7 @@ body {
 .dilemma-box {
     background: linear-gradient(135deg, #FEF2F2 0%, #FEF3C7 100%);
     border-radius: 12px;
-    padding: 20px;
+    padding: 10px;
     border-left: 4px solid var(--red);
 }
 
@@ -2326,7 +2326,13 @@ body {
 .legend-dot-v2 {
     width: 14px;
     height: 14px;
+    min-width: 14px;
+    min-height: 14px;
+    max-width: 14px;
+    max-height: 14px;
     border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
 }
 
 .legend-dot-v2.sender { background: var(--primary); }
@@ -2506,8 +2512,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
 .flow-stage-box {
@@ -2516,7 +2522,7 @@ body {
     padding: 16px 20px;
     text-align: center;
     border: 2px solid var(--medium-gray);
-    min-width: 160px;
+    min-width: 80px;
 }
 
 .flow-stage-box.highlight-stage {
@@ -2536,7 +2542,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 4px;
     font-size: 14px;
     font-weight: 600;
     color: var(--text-dark);
@@ -2583,7 +2589,7 @@ body {
     align-items: flex-start;
     gap: 12px;
     padding: 12px;
-    background: var(--light-gray);
+    background: white;
     border-radius: 8px;
 }
 
@@ -2618,8 +2624,8 @@ body {
 .audit-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 4px;
+    margin-bottom: 8px;
     font-size: 14px;
 }
 
@@ -2639,9 +2645,9 @@ body {
     align-items: center;
     gap: 8px;
     background: white;
-    padding: 10px 14px;
+    padding: 10px 8px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .audit-step.highlight-step {
@@ -2651,15 +2657,15 @@ body {
 
 .step-num {
     width: 20px;
-    height: 20px;
+    height:20px;
     background: var(--primary);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 8px;
+    font-weight: 500;
 }
 
 .audit-step.highlight-step .step-num {
@@ -2668,7 +2674,7 @@ body {
 }
 
 .audit-arrow {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-light);
 }
 
@@ -2684,7 +2690,7 @@ body {
 }
 
 .vp-icon {
-    font-size: 20px;
+    font-size: 10px;
 }
 
 /* ========== SLIDE 5: Why Now V2 - AML Necessity ========== */
