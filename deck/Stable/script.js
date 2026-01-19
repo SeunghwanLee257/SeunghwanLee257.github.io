@@ -101,7 +101,7 @@ async function downloadPDF() {
             const canvas = await html2canvas(slide, {
                 scale: 2, // 2x for better quality
                 useCORS: true,
-                backgroundColor: '#0F172A',
+                backgroundColor: '#F8FAFC',
                 logging: false,
                 width: 1280,
                 height: 720,
@@ -120,7 +120,7 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('IRONVEIL_Vault_IR_Deck.pdf');
+        pdf.save('waLLLnut_Koscom_Stablecoin_Proposal.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);
