@@ -460,76 +460,203 @@
                         <span class="slide-num">06</span>
                         <span class="slide-title">Core Technology</span>
                     </div>
-                    <h2 class="slide-headline"><span class="highlight">FHE16</span> + <span class="highlight">ZK-SNARK</span> 기술 스택</h2>
+                    <h2 class="slide-headline">ZK + FHE <span class="highlight">역할 분리</span> 아키텍처</h2>
 
-                    <div class="tech-stack-grid">
-                        <div class="tech-stack-card fhe-card">
-                            <div class="tech-badge">동형암호</div>
-                            <h4>🔐 FHE16 (Fully Homomorphic Encryption)</h4>
-                            <div class="tech-specs">
-                                <div class="spec-item">
-                                    <span class="spec-label">RLWE 파라미터</span>
-                                    <span class="spec-value">N=1024, Q=167,772,161</span>
+                    <div class="tech-role-grid">
+                        <div class="tech-role-card zk-role">
+                            <div class="role-header">
+                                <span class="role-icon">⚡</span>
+                                <h4>ZK-SNARK (Noir/Barretenberg)</h4>
+                                <span class="role-badge">전송 검증</span>
+                            </div>
+                            <div class="role-purpose">
+                                <strong>목적:</strong> 저비용 전송 + 정책/분기 준수 증명
+                            </div>
+                            <div class="role-specs">
+                                <div class="spec-row">
+                                    <span>회로</span><span>Plonk + UltraHonk</span>
                                 </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">지원 연산</span>
-                                    <span class="spec-value">16비트 정수 (0~65,535)</span>
+                                <div class="spec-row">
+                                    <span>증명</span><span>~12초 (서버)</span>
                                 </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">보안 수준</span>
-                                    <span class="spec-value">128-bit 양자내성</span>
+                                <div class="spec-row">
+                                    <span>검증</span><span>&lt; 1ms (온체인)</span>
                                 </div>
                             </div>
-                            <div class="tech-feature">
-                                <span>✓</span> 암호화 상태에서 잔액 연산 가능
+                            <div class="role-tasks">
+                                <span class="task-chip">잔액 검증</span>
+                                <span class="task-chip">정책 준수</span>
+                                <span class="task-chip">if/else 분기</span>
                             </div>
                         </div>
 
-                        <div class="tech-stack-card zk-card">
-                            <div class="tech-badge">영지식증명</div>
-                            <h4>⚡ ZK-SNARK (Noir/Barretenberg)</h4>
-                            <div class="tech-specs">
-                                <div class="spec-item">
-                                    <span class="spec-label">회로</span>
-                                    <span class="spec-value">Plonk + UltraHonk</span>
+                        <div class="tech-role-card fhe-role">
+                            <div class="role-header">
+                                <span class="role-icon">🔐</span>
+                                <h4>FHE16 (RLWE)</h4>
+                                <span class="role-badge">감사 엔진</span>
+                            </div>
+                            <div class="role-purpose">
+                                <strong>목적:</strong> 암호문 상태에서 규제 신호 계산
+                            </div>
+                            <div class="role-specs">
+                                <div class="spec-row">
+                                    <span>파라미터</span><span>N=1024, Q=167,772,161</span>
                                 </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">증명 시간</span>
-                                    <span class="spec-value">~12초 (서버)</span>
+                                <div class="spec-row">
+                                    <span>Ciphertext</span><span>1056 fields (32 c0 + 1024 c1)</span>
                                 </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">검증 시간</span>
-                                    <span class="spec-value">< 1ms (온체인)</span>
+                                <div class="spec-row">
+                                    <span>보안</span><span>128-bit 양자내성</span>
                                 </div>
                             </div>
-                            <div class="tech-feature">
-                                <span>✓</span> FHE 연산의 정확성 증명
+                            <div class="role-tasks">
+                                <span class="task-chip">누적 집계</span>
+                                <span class="task-chip">한도 트리거</span>
+                                <span class="task-chip">감사 태그</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="tech-operations">
-                        <h4>지원 연산 게이트</h4>
-                        <div class="op-chips">
-                            <span class="op-chip">ADD (덧셈)</span>
-                            <span class="op-chip">NEG (부정)</span>
-                            <span class="op-chip">EQ (동등 비교)</span>
-                            <span class="op-chip">LT (크기 비교)</span>
-                            <span class="op-chip">SELECT (조건 선택)</span>
-                            <span class="op-chip">MAX (최대값)</span>
-                            <span class="op-chip">ABS (절대값)</span>
+                    <div class="tech-flow-summary">
+                        <div class="flow-item">
+                            <span class="flow-num">1</span>
+                            <span class="flow-text"><strong>ZK</strong>로 전송 유효성 + 정책 준수 증명</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <span class="flow-num">2</span>
+                            <span class="flow-text"><strong>RLWE</strong>로 Audit Tag 암호화 기록</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <span class="flow-num">3</span>
+                            <span class="flow-text"><strong>Eval Key</strong>로 누적/트리거 계산</span>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">
+                            <span class="flow-num">4</span>
+                            <span class="flow-text"><strong>Threshold</strong> 복호 (트리거 시)</span>
                         </div>
                     </div>
 
                     <div class="benchmark-note">
-                        <span class="note-icon">🔬</span>
-                        <span><strong>핵심:</strong> 암호화 상태에서 결제 검증 → 프라이버시 유지하며 잔액 확인</span>
+                        <span class="note-icon">💡</span>
+                        <span><strong>핵심:</strong> ZK는 싸고 빠른 전송, FHE는 프라이빗 규제 엔진 → 역할 분리로 비용 최적화</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 8: GovSplit KMS -->
+            <!-- Slide 8: Audit Tag & Compliance Engine -->
             <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06-2</span>
+                        <span class="slide-title">Compliance Engine</span>
+                    </div>
+                    <h2 class="slide-headline">RLWE <span class="highlight">Audit Tag</span> + 규제 엔진</h2>
+
+                    <div class="audit-tag-section">
+                        <div class="audit-tag-card">
+                            <h4>📝 Audit Tag 구조</h4>
+                            <div class="tag-fields">
+                                <div class="tag-field">
+                                    <span class="field-name">sender_kyc_id</span>
+                                    <span class="field-desc">송금자 토큰화 ID</span>
+                                </div>
+                                <div class="tag-field">
+                                    <span class="field-name">receiver_kyc_id</span>
+                                    <span class="field-desc">수신자 토큰화 ID</span>
+                                </div>
+                                <div class="tag-field">
+                                    <span class="field-name">amount</span>
+                                    <span class="field-desc">거래 금액</span>
+                                </div>
+                                <div class="tag-field">
+                                    <span class="field-name">policy_id</span>
+                                    <span class="field-desc">적용 정책 코드</span>
+                                </div>
+                                <div class="tag-field">
+                                    <span class="field-name">timestamp</span>
+                                    <span class="field-desc">거래 시점</span>
+                                </div>
+                            </div>
+                            <div class="tag-note">
+                                모든 필드가 <strong>RLWE로 암호화</strong>되어 기록
+                            </div>
+                        </div>
+
+                        <div class="compliance-engine-card">
+                            <h4>⚙️ Compliance Engine (Eval Key 활용)</h4>
+                            <div class="engine-capabilities">
+                                <div class="capability">
+                                    <span class="cap-icon">📊</span>
+                                    <div class="cap-content">
+                                        <strong>암호문 집계</strong>
+                                        <span>복호 없이 누적액/카운트/평균 계산</span>
+                                    </div>
+                                </div>
+                                <div class="capability">
+                                    <span class="cap-icon">🚨</span>
+                                    <div class="cap-content">
+                                        <strong>한도 트리거</strong>
+                                        <span>일/월 한도 초과 시 플래그 생성</span>
+                                    </div>
+                                </div>
+                                <div class="capability">
+                                    <span class="cap-icon">📈</span>
+                                    <div class="cap-content">
+                                        <strong>리스크 스코어</strong>
+                                        <span>가중합 기반 이상거래 점수 산출</span>
+                                    </div>
+                                </div>
+                                <div class="capability">
+                                    <span class="cap-icon">📋</span>
+                                    <div class="cap-content">
+                                        <strong>정기 보고</strong>
+                                        <span>집계 통계만 복호 (원문 비공개)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="audit-flow-diagram">
+                        <div class="audit-flow-step">
+                            <span class="step-icon">📤</span>
+                            <span class="step-label">TX 발생</span>
+                        </div>
+                        <div class="audit-flow-arrow">→</div>
+                        <div class="audit-flow-step">
+                            <span class="step-icon">🔒</span>
+                            <span class="step-label">RLWE 암호화</span>
+                        </div>
+                        <div class="audit-flow-arrow">→</div>
+                        <div class="audit-flow-step">
+                            <span class="step-icon">⚙️</span>
+                            <span class="step-label">Eval Key 연산</span>
+                        </div>
+                        <div class="audit-flow-arrow">→</div>
+                        <div class="audit-flow-step highlight-step">
+                            <span class="step-icon">🔔</span>
+                            <span class="step-label">트리거 발생</span>
+                        </div>
+                        <div class="audit-flow-arrow">→</div>
+                        <div class="audit-flow-step">
+                            <span class="step-icon">🔑</span>
+                            <span class="step-label">Threshold 복호</span>
+                        </div>
+                    </div>
+
+                    <div class="benchmark-note">
+                        <span class="note-icon">🎯</span>
+                        <span><strong>핵심 가치:</strong> 평소엔 완전 비공개, 규제 트리거 시에만 <span class="highlight">최소 정보 선택 공개</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: GovSplit KMS -->
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">07</span>
@@ -606,7 +733,7 @@
             </div>
 
             <!-- Slide 9: Use Cases -->
-            <div class="slide" data-slide="9">
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">08</span>
@@ -669,7 +796,7 @@
             </div>
 
             <!-- Slide 10: Value Proposition -->
-            <div class="slide" data-slide="10">
+            <div class="slide" data-slide="11">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">09</span>
@@ -734,8 +861,8 @@
                 </div>
             </div>
 
-            <!-- Slide 11: Competition -->
-            <div class="slide" data-slide="11">
+            <!-- Slide 12: Competition -->
+            <div class="slide" data-slide="12">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">10</span>
@@ -802,8 +929,8 @@
                 </div>
             </div>
 
-            <!-- Slide 12: Koscom Partnership -->
-            <div class="slide" data-slide="12">
+            <!-- Slide 13: Koscom Partnership -->
+            <div class="slide" data-slide="13">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">11</span>
@@ -872,8 +999,8 @@
                 </div>
             </div>
 
-            <!-- Slide 13: Regulatory Strategy -->
-            <div class="slide" data-slide="13">
+            <!-- Slide 14: Regulatory Strategy -->
+            <div class="slide" data-slide="14">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">12</span>
@@ -960,8 +1087,8 @@
                 </div>
             </div>
 
-            <!-- Slide 14: Roadmap -->
-            <div class="slide" data-slide="14">
+            <!-- Slide 15: Roadmap -->
+            <div class="slide" data-slide="15">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">13</span>
@@ -1032,8 +1159,8 @@
                 </div>
             </div>
 
-            <!-- Slide 15: Team & Ask -->
-            <div class="slide" data-slide="15">
+            <!-- Slide 16: Team & Ask -->
+            <div class="slide" data-slide="16">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">14</span>
