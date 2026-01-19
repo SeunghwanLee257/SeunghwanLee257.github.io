@@ -1884,6 +1884,327 @@ body {
     color: var(--text-dark);
 }
 
+/* ========== SLIDE 5: Pool Visualization ========== */
+.pool-viz-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 16px;
+    background: linear-gradient(135deg, #F8FAFC 0%, var(--primary-bg) 50%, #F8FAFC 100%);
+    border-radius: 20px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.pool-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.col-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    padding: 6px 14px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 4px;
+}
+
+.senders-col .col-label { color: var(--primary); }
+.receivers-col .col-label { color: var(--green); }
+
+.sender-note {
+    font-size: 11px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.address-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.address-node:hover {
+    transform: scale(1.05);
+}
+
+.sender-node {
+    border: 2px solid var(--primary);
+}
+
+.receiver-node {
+    border: 2px solid var(--green);
+}
+
+.node-icon {
+    font-size: 18px;
+}
+
+.node-addr {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.from-pool-tag {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-bg);
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Flow Arrows */
+.flow-arrows-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0;
+}
+
+.flow-line {
+    width: 50px;
+    height: 3px;
+    position: relative;
+}
+
+.flow-line.in-flow {
+    background: linear-gradient(90deg, var(--primary) 0%, #A78BFA 100%);
+}
+
+.flow-line.in-flow::after {
+    content: '→';
+    position: absolute;
+    right: -8px;
+    top: -10px;
+    color: #A78BFA;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.flow-line.out-flow {
+    background: linear-gradient(90deg, #A78BFA 0%, var(--green) 100%);
+}
+
+.flow-line.out-flow::after {
+    content: '→';
+    position: absolute;
+    right: -8px;
+    top: -10px;
+    color: var(--green);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Central Pool */
+.pool-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pool-orb {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pool-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(227, 113, 32, 0.3) 0%, rgba(227, 113, 32, 0) 70%);
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+.pool-inner {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary) 0%, #f59e0b 50%, #fbbf24 100%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 8px 32px rgba(227, 113, 32, 0.4);
+    z-index: 1;
+}
+
+.pool-icon {
+    font-size: 28px;
+    margin-bottom: 2px;
+}
+
+.pool-title {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.pool-subtitle {
+    font-size: 10px;
+    opacity: 0.9;
+}
+
+.pool-blocked-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEE2E2;
+    border: 2px solid var(--red);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.blocked-x {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--red);
+}
+
+.blocked-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+}
+
+/* AML Track Section */
+.aml-track-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #FEF2F2;
+    border-radius: 12px;
+    padding: 10px 20px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--red);
+}
+
+.aml-investigator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--red);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.aml-icon {
+    font-size: 16px;
+}
+
+.aml-track-line {
+    flex: 0.5;
+}
+
+.track-arrow {
+    font-size: 14px;
+    color: var(--red);
+    letter-spacing: 2px;
+}
+
+.aml-blocked-msg {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--red);
+}
+
+.blocked-icon {
+    font-size: 16px;
+}
+
+.aml-solution {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--green);
+    background: #D1FAE5;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.solution-icon {
+    font-size: 16px;
+}
+
+/* Pool Legend V2 */
+.pool-legend-v2 {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.legend-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 13px;
+    color: var(--text-medium);
+}
+
+.legend-card.solution {
+    background: #D1FAE5;
+    color: var(--green);
+    font-weight: 600;
+}
+
+.legend-dot-v2 {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.legend-dot-v2.sender { background: var(--primary); }
+.legend-dot-v2.pool { background: linear-gradient(135deg, var(--primary) 0%, #f59e0b 100%); }
+.legend-dot-v2.receiver { background: var(--green); }
+.legend-dot-v2.audit { background: var(--green); }
+
 /* Print / PDF Styles */
 @media print {
     .controls { display: none !important; }

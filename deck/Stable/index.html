@@ -261,83 +261,117 @@
                 </div>
             </div>
 
-            <!-- Slide 5: Solution Overview -->
+            <!-- Slide 5: Solution Overview with Pool Visualization -->
             <div class="slide" data-slide="5">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">04</span>
                         <span class="slide-title">Solution</span>
                     </div>
-                    <h2 class="slide-headline"><span class="highlight">비연결성</span> + <span class="highlight">선택적 공개</span></h2>
+                    <h2 class="slide-headline">FHE+ZK <span class="highlight">프라이버시 풀</span> 동작 원리</h2>
 
-                    <div class="solution-overview">
-                        <div class="solution-state normal-state">
-                            <div class="state-header">
-                                <span class="state-badge normal">평상시</span>
-                                <h4>완전한 비연결성 (Unlinkability)</h4>
+                    <!-- Pool Visualization -->
+                    <div class="pool-viz-wrapper">
+                        <!-- Sender Column (Left) -->
+                        <div class="pool-col senders-col">
+                            <div class="col-label">송금자 (입금)</div>
+                            <div class="address-node sender-node">
+                                <span class="node-icon">🏢</span>
+                                <span class="node-addr">기업 A</span>
                             </div>
-                            <div class="state-content">
-                                <div class="state-item">
-                                    <span class="state-icon">🔐</span>
-                                    <span>ZK Shielded Pool로 거래 익명화</span>
+                            <div class="address-node sender-node">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">개인 B</span>
+                            </div>
+                            <div class="sender-note">FHE 암호화 입금<br>금액/신원 비공개</div>
+                        </div>
+
+                        <!-- Flow Arrows In -->
+                        <div class="flow-arrows-col">
+                            <div class="flow-line in-flow"></div>
+                            <div class="flow-line in-flow"></div>
+                        </div>
+
+                        <!-- Central Pool -->
+                        <div class="pool-center">
+                            <div class="pool-orb">
+                                <div class="pool-glow"></div>
+                                <div class="pool-inner">
+                                    <span class="pool-icon">🛡️</span>
+                                    <span class="pool-title">FHE+ZK Pool</span>
+                                    <span class="pool-subtitle">프라이버시 결제</span>
                                 </div>
-                                <div class="state-item">
-                                    <span class="state-icon">📝</span>
-                                    <span>암호화된 Witness 자동 로깅 (RLWE)</span>
-                                </div>
-                                <div class="state-item">
-                                    <span class="state-icon">👁️</span>
-                                    <span>외부 관찰자는 송/수신자 연결 불가</span>
-                                </div>
+                            </div>
+                            <div class="pool-blocked-indicator">
+                                <span class="blocked-x">✕</span>
+                                <span class="blocked-label">추적 차단</span>
                             </div>
                         </div>
 
-                        <div class="solution-arrow">
-                            <span>감사 요청 시</span>
-                            <svg width="40" height="24" viewBox="0 0 40 24">
-                                <path d="M5 12 L30 12" stroke="#e37120" stroke-width="3"/>
-                                <polyline points="25,7 30,12 25,17" fill="none" stroke="#e37120" stroke-width="3"/>
-                            </svg>
+                        <!-- Flow Arrows Out -->
+                        <div class="flow-arrows-col">
+                            <div class="flow-line out-flow"></div>
+                            <div class="flow-line out-flow"></div>
+                            <div class="flow-line out-flow"></div>
                         </div>
 
-                        <div class="solution-state audit-state">
-                            <div class="state-header">
-                                <span class="state-badge audit">감사 요청 시</span>
-                                <h4>선택적 공개 (Selective Disclosure)</h4>
+                        <!-- Receivers Column (Right) -->
+                        <div class="pool-col receivers-col">
+                            <div class="col-label">수신자 (출금)</div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">🏬</span>
+                                <span class="node-addr">가맹점 X</span>
                             </div>
-                            <div class="state-content">
-                                <div class="state-item">
-                                    <span class="state-icon">🔑</span>
-                                    <span>GovSplit KMS로 키 복구 (⌈n/3⌉ 승인)</span>
-                                </div>
-                                <div class="state-item">
-                                    <span class="state-icon">🔓</span>
-                                    <span>특정 TX만 복호화 (FHE 연산)</span>
-                                </div>
-                                <div class="state-item">
-                                    <span class="state-icon">✅</span>
-                                    <span>KYC 정보와 매칭하여 신원 확인</span>
-                                </div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">🏭</span>
+                                <span class="node-addr">공급업체 Y</span>
+                            </div>
+                            <div class="address-node receiver-node">
+                                <span class="from-pool-tag">from: Pool</span>
+                                <span class="node-icon">👥</span>
+                                <span class="node-addr">직원 Z</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="tech-modules">
-                        <div class="module-chip">
-                            <span class="module-name">FHE16</span>
-                            <span class="module-desc">동형암호 연산</span>
+                    <!-- AML Investigator Section -->
+                    <div class="aml-track-section">
+                        <div class="aml-investigator">
+                            <span class="aml-icon">🔍</span>
+                            <span class="aml-label">AML 조사관</span>
                         </div>
-                        <div class="module-chip">
-                            <span class="module-name">RLWE</span>
-                            <span class="module-desc">양자내성 암호화</span>
+                        <div class="aml-track-line">
+                            <span class="track-arrow">→ → → →</span>
                         </div>
-                        <div class="module-chip">
-                            <span class="module-name">ZK-SNARK</span>
-                            <span class="module-desc">영지식 증명</span>
+                        <div class="aml-blocked-msg">
+                            <span class="blocked-icon">🚫</span>
+                            <span>수신자 ← Pool ← 송금자... <strong>연결 불가!</strong></span>
                         </div>
-                        <div class="module-chip">
-                            <span class="module-name">GovSplit KMS</span>
-                            <span class="module-desc">분산 키 관리</span>
+                        <div class="aml-solution">
+                            <span class="solution-icon">✅</span>
+                            <span><strong>GovSplit KMS</strong>로 선택적 복호화 가능</span>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="pool-legend-v2">
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 sender"></span>
+                            <span>송금자: FHE 암호화 입금</span>
+                        </div>
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 pool"></span>
+                            <span>FHE+ZK Pool: 완전 익명</span>
+                        </div>
+                        <div class="legend-card">
+                            <span class="legend-dot-v2 receiver"></span>
+                            <span>수신자: Pool에서 출금만 보임</span>
+                        </div>
+                        <div class="legend-card solution">
+                            <span class="legend-dot-v2 audit"></span>
+                            <span>감사 시: 선택적 공개 가능</span>
                         </div>
                     </div>
                 </div>
