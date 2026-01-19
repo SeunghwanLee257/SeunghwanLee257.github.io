@@ -92,28 +92,28 @@
                         <span class="slide-num">01</span>
                         <span class="slide-title">Executive Summary</span>
                     </div>
-                    <h2 class="slide-headline"><span class="highlight">한국 자본시장</span>을 위한 프라이버시 결제 인프라</h2>
+                    <h2 class="slide-headline"><span class="highlight">원화 스테이블코인</span> 프라이버시 결제 인프라</h2>
 
                     <div class="exec-grid">
                         <div class="exec-card problem-card">
                             <div class="exec-icon">⚠️</div>
                             <h4>문제</h4>
-                            <p>블록체인 결제는 <strong>완전 투명</strong>(경쟁사 노출) 또는 <strong>완전 비공개</strong>(규제 불가) 양극단</p>
+                            <p>블록체인 결제는 <strong>완전 투명</strong>(정보 노출) 또는 <strong>완전 비공개</strong>(규제 불가)</p>
                         </div>
                         <div class="exec-card solution-card">
                             <div class="exec-icon">💡</div>
                             <h4>솔루션</h4>
-                            <p><strong>FHE16 + ZK</strong> 기반 프라이버시 결제<br>평상시 <span class="highlight">비연결성</span>, 요청 시 <span class="highlight">선택적 공개</span></p>
+                            <p><strong>FHE16 + ZK-SNARK</strong> 기반<br>평상시 <span class="highlight">비연결성</span>, 요청 시 <span class="highlight">선택적 공개</span></p>
                         </div>
                         <div class="exec-card market-card">
                             <div class="exec-icon">📊</div>
                             <h4>시장 기회</h4>
-                            <p>2027년 토큰증권 시장 <strong>367조원</strong> 전망<br>원화 스테이블코인 법제화 진행 중</p>
+                            <p>원화 스테이블코인 <strong>법제화 진행 중</strong><br>디지털자산기본법 2025.06 통과</p>
                         </div>
                         <div class="exec-card ask-card">
                             <div class="exec-icon">🤝</div>
                             <h4>제안</h4>
-                            <p>Koscom 인프라에 <strong>OEM 모듈</strong>로 통합<br>원화 스테이블코인 결제 레이어 공급</p>
+                            <p>Koscom KSDC에 <strong>프라이버시 레이어</strong> 공급<br>스테이블코인 결제 인프라 협력</p>
                         </div>
                     </div>
 
@@ -419,86 +419,77 @@
                 </div>
             </div>
 
-            <!-- Slide 7: Performance Benchmarks -->
+            <!-- Slide 7: Core Technology -->
             <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">06</span>
-                        <span class="slide-title">Performance</span>
+                        <span class="slide-title">Core Technology</span>
                     </div>
-                    <h2 class="slide-headline">성능 <span class="highlight">벤치마크</span></h2>
+                    <h2 class="slide-headline"><span class="highlight">FHE16</span> + <span class="highlight">ZK-SNARK</span> 기술 스택</h2>
 
-                    <div class="benchmark-grid">
-                        <div class="benchmark-card">
-                            <div class="benchmark-metric">
-                                <span class="metric-value">~12초</span>
-                                <span class="metric-label">Proof 생성 시간</span>
+                    <div class="tech-stack-grid">
+                        <div class="tech-stack-card fhe-card">
+                            <div class="tech-badge">동형암호</div>
+                            <h4>🔐 FHE16 (Fully Homomorphic Encryption)</h4>
+                            <div class="tech-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">RLWE 파라미터</span>
+                                    <span class="spec-value">N=1024, Q=167,772,161</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">지원 연산</span>
+                                    <span class="spec-value">16비트 정수 (0~65,535)</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">보안 수준</span>
+                                    <span class="spec-value">128-bit 양자내성</span>
+                                </div>
                             </div>
-                            <div class="benchmark-detail">
-                                Plonky2 백엔드 (서버 사이드)<br>
-                                Halo2: ~8분 (모바일 저메모리)
-                            </div>
-                        </div>
-                        <div class="benchmark-card">
-                            <div class="benchmark-metric">
-                                <span class="metric-value">50-200KB</span>
-                                <span class="metric-label">Proof 크기</span>
-                            </div>
-                            <div class="benchmark-detail">
-                                모바일 네트워크 전송 가능<br>
-                                Ciphertext: 1,056 필드
-                            </div>
-                        </div>
-                        <div class="benchmark-card">
-                            <div class="benchmark-metric">
-                                <span class="metric-value">ms 단위</span>
-                                <span class="metric-label">검증 시간</span>
-                            </div>
-                            <div class="benchmark-detail">
-                                BN254 SNARK 검증<br>
-                                온체인 즉시 확인
+                            <div class="tech-feature">
+                                <span>✓</span> 암호화 상태에서 잔액 연산 가능
                             </div>
                         </div>
-                        <div class="benchmark-card">
-                            <div class="benchmark-metric">
-                                <span class="metric-value">120MB</span>
-                                <span class="metric-label">모바일 메모리</span>
+
+                        <div class="tech-stack-card zk-card">
+                            <div class="tech-badge">영지식증명</div>
+                            <h4>⚡ ZK-SNARK (Noir/Barretenberg)</h4>
+                            <div class="tech-specs">
+                                <div class="spec-item">
+                                    <span class="spec-label">회로</span>
+                                    <span class="spec-value">Plonk + UltraHonk</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">증명 시간</span>
+                                    <span class="spec-value">~12초 (서버)</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">검증 시간</span>
+                                    <span class="spec-value">< 1ms (온체인)</span>
+                                </div>
                             </div>
-                            <div class="benchmark-detail">
-                                Halo2 IPA 백엔드<br>
-                                스마트폰 결제 가능
+                            <div class="tech-feature">
+                                <span>✓</span> FHE 연산의 정확성 증명
                             </div>
                         </div>
                     </div>
 
-                    <div class="mobile-strategy">
-                        <h4>📱 모바일 결제 전략</h4>
-                        <div class="strategy-flow">
-                            <div class="strategy-step">
-                                <span class="step-num">1</span>
-                                <span>사용자가 결제 요청</span>
-                            </div>
-                            <div class="strategy-arrow">→</div>
-                            <div class="strategy-step">
-                                <span class="step-num">2</span>
-                                <span>서버에서 Proof 생성 (12초)</span>
-                            </div>
-                            <div class="strategy-arrow">→</div>
-                            <div class="strategy-step">
-                                <span class="step-num">3</span>
-                                <span>모바일에서 검증 (ms)</span>
-                            </div>
-                            <div class="strategy-arrow">→</div>
-                            <div class="strategy-step highlight-step">
-                                <span class="step-num">4</span>
-                                <span>결제 완료</span>
-                            </div>
+                    <div class="tech-operations">
+                        <h4>지원 연산 게이트</h4>
+                        <div class="op-chips">
+                            <span class="op-chip">ADD (덧셈)</span>
+                            <span class="op-chip">NEG (부정)</span>
+                            <span class="op-chip">EQ (동등 비교)</span>
+                            <span class="op-chip">LT (크기 비교)</span>
+                            <span class="op-chip">SELECT (조건 선택)</span>
+                            <span class="op-chip">MAX (최대값)</span>
+                            <span class="op-chip">ABS (절대값)</span>
                         </div>
                     </div>
 
                     <div class="benchmark-note">
-                        <span class="note-icon">⚡</span>
-                        <span>서버 사이드 증명 + 클라이언트 검증 = <strong>실시간 결제 경험</strong></span>
+                        <span class="note-icon">🔬</span>
+                        <span><strong>핵심:</strong> 암호화 상태에서 결제 검증 → 프라이버시 유지하며 잔액 확인</span>
                     </div>
                 </div>
             </div>
@@ -594,10 +585,10 @@
                             <div class="usecase-badge">핵심 PoC</div>
                             <h4>🏦 원화 스테이블코인 결제</h4>
                             <div class="usecase-desc">
-                                <p>KSDC/KRW24 등 원화 스테이블코인을 활용한 프라이버시 결제 인프라</p>
+                                <p>KSDC/KRW24 스테이블코인 프라이버시 결제 인프라</p>
                                 <ul>
-                                    <li>기업 간 B2B 결제 (거래 금액 비공개)</li>
-                                    <li>토큰증권 발행/배분 대금 결제</li>
+                                    <li>기업 간 B2B 결제 (금액/상대방 비공개)</li>
+                                    <li>실시간 원화 정산 + 프라이버시</li>
                                     <li>Atomic Settlement 연동</li>
                                 </ul>
                             </div>
@@ -608,20 +599,20 @@
                         </div>
 
                         <div class="usecase-card">
-                            <h4>📊 토큰증권 청산 결제</h4>
+                            <h4>💳 리테일 결제</h4>
                             <div class="usecase-desc">
-                                <p>STO 발행 및 유통 과정의 청산 결제</p>
+                                <p>일반 사용자 스테이블코인 결제</p>
                                 <ul>
-                                    <li>투자자 포트폴리오 비공개</li>
-                                    <li>규제 요청 시 선택적 공개</li>
+                                    <li>결제 내역 비공개 (프라이버시)</li>
+                                    <li>가맹점 정보 수집 최소화</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="usecase-card">
-                            <h4>💼 기관 간 대량 이체</h4>
+                            <h4>💼 기관 간 청산</h4>
                             <div class="usecase-desc">
-                                <p>증권사, 자산운용사 간 대량 결제</p>
+                                <p>금융기관 간 대량 결제/청산</p>
                                 <ul>
                                     <li>경쟁사 거래 패턴 분석 차단</li>
                                     <li>내부 감사 기능 유지</li>
@@ -630,12 +621,12 @@
                         </div>
 
                         <div class="usecase-card">
-                            <h4>💳 MyData 연동 결제</h4>
+                            <h4>🌐 국제 송금</h4>
                             <div class="usecase-desc">
-                                <p>개인정보 최소화 결제 서비스</p>
+                                <p>크로스보더 스테이블코인 송금</p>
                                 <ul>
-                                    <li>선택적 정보 공개 (ZKP)</li>
-                                    <li>PIPA 준수</li>
+                                    <li>FATF Travel Rule 준수</li>
+                                    <li>프라이버시 보호 국제 결제</li>
                                 </ul>
                             </div>
                         </div>
@@ -660,7 +651,7 @@
                                 <p>한국 최초 <strong>규제 준수 프라이버시</strong> 결제 인프라</p>
                                 <ul>
                                     <li>글로벌 대비 선도적 포지션</li>
-                                    <li>토큰증권 시장 367조원 선점</li>
+                                    <li>스테이블코인 결제 시장 선점</li>
                                 </ul>
                             </div>
                         </div>
@@ -1020,6 +1011,13 @@
                         <div class="team-grid">
                             <div class="team-card">
                                 <div class="team-info">
+                                    <h4>신동준 교수</h4>
+                                    <span class="team-role">Advisor</span>
+                                    <p>한양대학교 정보보안 연구실<br>암호학/FHE 분야 국내 최고 권위자</p>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="team-info">
                                     <h4>이승환</h4>
                                     <span class="team-role">CEO</span>
                                     <p>한양대학교 박사 (2019-2025)<br>FHE 구현 및 최적화 전문</p>
@@ -1030,13 +1028,6 @@
                                     <h4>김도혁</h4>
                                     <span class="team-role">CTO</span>
                                     <p>한양대학교 박사과정 (2023-)<br>FHE 구현 및 최적화 전문</p>
-                                </div>
-                            </div>
-                            <div class="team-card">
-                                <div class="team-info">
-                                    <h4>함윤식</h4>
-                                    <span class="team-role">Web3 Developer</span>
-                                    <p>Full-stack Web3 엔지니어링<br>스마트 컨트랙트 & 프론트엔드</p>
                                 </div>
                             </div>
                         </div>
