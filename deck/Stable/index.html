@@ -19,7 +19,7 @@
             </svg>
             이전
         </button>
-        <span id="slideCounter">1 / 18</span>
+        <span id="slideCounter">1 / 17</span>
         <button id="nextBtn" onclick="nextSlide()">
             다음
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -656,96 +656,11 @@
                 </div>
             </div>
 
-            <!-- Slide 8: PoC 8주 (D12) -->
+            <!-- Slide 8: 가격/상업 모델 -->
             <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">07</span>
-                        <span class="slide-title">PoC Plan</span>
-                    </div>
-                    <h2 class="slide-headline">8주 PoC <span class="highlight">로드맵</span></h2>
-
-                    <!-- D12: PoC 8-week Timeline -->
-                    <div class="poc-timeline-gantt">
-                        <div class="gantt-header">
-                            <span class="gantt-task-col">작업</span>
-                            <span class="gantt-week">W1</span>
-                            <span class="gantt-week">W2</span>
-                            <span class="gantt-week">W3</span>
-                            <span class="gantt-week">W4</span>
-                            <span class="gantt-week">W5</span>
-                            <span class="gantt-week">W6</span>
-                            <span class="gantt-week">W7</span>
-                            <span class="gantt-week">W8</span>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">환경 구축 + 연동</span>
-                            <div class="gantt-bar bar-blue" style="grid-column: 2 / 4;"></div>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">Shield/Unshield 구현</span>
-                            <div class="gantt-bar bar-green" style="grid-column: 3 / 5;"></div>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">Audit Log + Eval Key</span>
-                            <div class="gantt-bar bar-orange" style="grid-column: 4 / 6;"></div>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">DVP 통합 테스트</span>
-                            <div class="gantt-bar bar-purple" style="grid-column: 5 / 7;"></div>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">GovSplit 플로우</span>
-                            <div class="gantt-bar bar-teal" style="grid-column: 6 / 8;"></div>
-                        </div>
-                        <div class="gantt-row">
-                            <span class="gantt-task">보안점검 + 데모</span>
-                            <div class="gantt-bar bar-red" style="grid-column: 7 / 10;"></div>
-                        </div>
-                    </div>
-
-                    <div class="poc-kpis">
-                        <h4>📊 PoC 성공 기준 (KPIs)</h4>
-                        <div class="kpi-grid">
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>DVP 시나리오 1개 <strong>Atomic Settlement</strong> 성공</span>
-                            </div>
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>Shield/Unshield + <strong>링크 끊김</strong> 데모</span>
-                            </div>
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>Audit Tag 생성 + <strong>AuditLogRoot 앵커링</strong></span>
-                            </div>
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>한도 트리거 3종 <strong>복호 없이 계산</strong></span>
-                            </div>
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>선택적 공개 <strong>GovSplit 승인 플로우</strong></span>
-                            </div>
-                            <div class="kpi-item">
-                                <span class="kpi-check">☐</span>
-                                <span>외부 보안점검 <strong>최소 1회</strong></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="poc-summary">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>목표:</strong> 8주 내 <span class="highlight">규제 준수 프라이버시 결제</span> 기술 검증 완료</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 9: 가격/상업 모델 -->
-            <div class="slide" data-slide="9">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">08</span>
                         <span class="slide-title">Commercial Model</span>
                     </div>
                     <h2 class="slide-headline">수익 모델 <span class="highlight">옵션</span></h2>
@@ -815,10 +730,10 @@
             </div>
 
             <!-- Slide 10: 리스크 & 완화 -->
-            <div class="slide" data-slide="10">
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">09</span>
+                        <span class="slide-num">08</span>
                         <span class="slide-title">Risk & Mitigation</span>
                     </div>
                     <h2 class="slide-headline">주요 <span class="highlight">리스크</span> & 완화 전략</h2>
@@ -893,7 +808,7 @@
             <!-- ============================================ -->
 
             <!-- Appendix Divider -->
-            <div class="slide" data-slide="11">
+            <div class="slide" data-slide="10">
                 <div class="slide-inner appendix-divider">
                     <div class="appendix-badge">APPENDIX</div>
                     <h1 class="appendix-title">기술 상세 자료</h1>
@@ -911,7 +826,7 @@
             </div>
 
             <!-- Appendix 1: ZK + FHE 역할 분리 -->
-            <div class="slide" data-slide="12">
+            <div class="slide" data-slide="11">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A1</span>
@@ -1005,7 +920,7 @@
             </div>
 
             <!-- Appendix 2: Compliance Mapping -->
-            <div class="slide" data-slide="13">
+            <div class="slide" data-slide="12">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A2</span>
@@ -1069,7 +984,7 @@
             </div>
 
             <!-- Appendix 3: Data Plan -->
-            <div class="slide" data-slide="14">
+            <div class="slide" data-slide="13">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A3</span>
@@ -1158,7 +1073,7 @@
             </div>
 
             <!-- Appendix 4: Fraud Proof & Slashing -->
-            <div class="slide" data-slide="15">
+            <div class="slide" data-slide="14">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A4</span>
@@ -1265,7 +1180,7 @@
             </div>
 
             <!-- Appendix 5: Issuer Controls -->
-            <div class="slide" data-slide="16">
+            <div class="slide" data-slide="15">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A5</span>
@@ -1348,7 +1263,7 @@
             </div>
 
             <!-- Appendix 6: RACI -->
-            <div class="slide" data-slide="17">
+            <div class="slide" data-slide="16">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A6</span>
@@ -1416,7 +1331,7 @@
             </div>
 
             <!-- Appendix 7: Team & Contact -->
-            <div class="slide" data-slide="18">
+            <div class="slide" data-slide="17">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">A7</span>
