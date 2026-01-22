@@ -1,13 +1,7 @@
-/* ================================================
-   waLLLnut × KOSCOM Deck - Script
-   Navigation + PDF Export + Auto-Fit Text
-   ================================================ */
-
-// === CONFIGURATION ===
+// Slide Navigation
 let currentSlide = 1;
-const totalSlides = 12;
+const totalSlides = 18;
 
-// === SLIDE NAVIGATION ===
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
         slide.classList.remove('active');
@@ -57,50 +51,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// === AUTO-FIT TEXT (Overflow Prevention) ===
-// Pure JS - ResizeObserver based
-
-function autoFitSlides() {
-    const slideInners = document.querySelectorAll('.slide-inner');
-
-    slideInners.forEach(inner => {
-        // Skip if already fitted
-        if (inner.dataset.fitted === 'true') return;
-
-        const containerHeight = 720 - 96; // slide height minus padding
-        const contentHeight = inner.scrollHeight;
-
-        // If content overflows, scale down
-        if (contentHeight > containerHeight) {
-            const scale = containerHeight / contentHeight;
-            const clampedScale = Math.max(scale, 0.75); // Don't go below 75%
-
-            inner.style.transform = `scale(${clampedScale})`;
-            inner.style.transformOrigin = 'top left';
-            inner.style.width = `${100 / clampedScale}%`;
-            inner.style.height = `${100 / clampedScale}%`;
-            inner.dataset.fitted = 'true';
-        }
-    });
-}
-
-// Run auto-fit on load
-window.addEventListener('load', autoFitSlides);
-
-// === ALTERNATIVE: fitty.js Integration ===
-// To use fitty.js instead:
-// 1. Add: <script src="https://cdn.jsdelivr.net/npm/fitty@2.3.6/dist/fitty.min.js"></script>
-// 2. Uncomment below:
-//
-// window.addEventListener('load', () => {
-//     fitty('.slide-title-main, .title-main', {
-//         minSize: 24,
-//         maxSize: 56,
-//         multiLine: true
-//     });
-// });
-
-// === PDF DOWNLOAD ===
+// PDF Download - High Quality, One slide per page
 async function downloadPDF() {
     const downloadBtn = document.getElementById('downloadBtn');
     const originalHTML = downloadBtn.innerHTML;
@@ -109,7 +60,7 @@ async function downloadPDF() {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin">
             <circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"></circle>
         </svg>
-        생성중...
+        PDF 생성 중...
     `;
     downloadBtn.disabled = true;
 
@@ -124,7 +75,7 @@ async function downloadPDF() {
 
     const { jsPDF } = window.jspdf;
 
-    // Create PDF (1280x720 = 16:9)
+    // Create PDF with exact slide dimensions (1280x720 = 16:9)
     const pdf = new jsPDF({
         orientation: 'landscape',
         unit: 'px',
@@ -146,11 +97,11 @@ async function downloadPDF() {
             // Wait for render
             await new Promise(resolve => setTimeout(resolve, 100));
 
-            // Capture with html2canvas
+            // Capture with html2canvas - high quality settings
             const canvas = await html2canvas(slide, {
-                scale: 2,
+                scale: 2, // 2x for better quality
                 useCORS: true,
-                backgroundColor: '#FFFFFF',
+                backgroundColor: '#F8FAFC',
                 logging: false,
                 width: 1280,
                 height: 720,
@@ -169,11 +120,11 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('waLLLnut-KOSCOM-Proposal.pdf');
+        pdf.save('waLLLnut_Koscom_Stablecoin_Proposal.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);
-        alert('PDF 생성 중 오류가 발생했습니다.');
+        alert('PDF 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
         // Restore original state
         slides.forEach(s => s.style.display = '');
@@ -187,7 +138,7 @@ async function downloadPDF() {
     }
 }
 
-// === TOUCH/SWIPE SUPPORT ===
+// Touch/Swipe support
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -204,7 +155,12 @@ document.addEventListener('touchend', (e) => {
     }
 }, { passive: true });
 
-// === FULLSCREEN (F key) ===
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    updateSlide();
+});
+
+// Fullscreen toggle (press F)
 document.addEventListener('keydown', (e) => {
     if (e.key === 'f' || e.key === 'F') {
         if (!document.fullscreenElement) {
@@ -213,9 +169,4 @@ document.addEventListener('keydown', (e) => {
             document.exitFullscreen();
         }
     }
-});
-
-// === INITIALIZATION ===
-document.addEventListener('DOMContentLoaded', () => {
-    updateSlide();
 });
