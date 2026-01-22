@@ -3567,11 +3567,16 @@ body {
 }
 
 /* Slide 3: DVP Integration Diagram */
+[data-slide="3"] .slide-headline {
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
 .dvp-integration-diagram {
     background: white;
     border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 20px;
+    padding: 20px 30px;
+    margin-bottom: 12px;
 }
 
 .dvp-row {
@@ -3585,15 +3590,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 14px;
     background: var(--light-gray);
     border-radius: 12px;
-    min-width: 120px;
+    min-width: 110px;
 }
 
 .dvp-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
+    font-size: 28px;
+    margin-bottom: 4px;
 }
 
 .dvp-label {
@@ -3611,14 +3616,14 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 .dvp-leg {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12px 20px;
+    padding: 8px 16px;
     background: var(--light-gray);
     border-radius: 10px;
 }
@@ -3701,18 +3706,18 @@ body {
 .dvp-benefits-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 6px;
+    margin-bottom: 10px;
 }
 
 .dvp-benefit {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 16px;
+    padding: 8px 14px;
     background: white;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-medium);
 }
 
@@ -3726,10 +3731,10 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 20px;
+    padding: 10px 16px;
     background: var(--primary-bg);
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-dark);
 }
 
