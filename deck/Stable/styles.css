@@ -4823,20 +4823,20 @@ body {
 /* Slide References (list format) */
 .slide-references-list {
     position: absolute;
-    bottom: 14px;
+    bottom: 16px;
     left: 60px;
     right: 60px;
     background: var(--light-gray);
-    border-radius: 10px;
-    padding: 10px 16px;
-    border-left: 3px solid var(--primary);
+    border-radius: 12px;
+    padding: 14px 20px;
+    border-left: 4px solid var(--primary);
 }
 
 .slide-references-list .ref-title {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 800;
     color: var(--text-dark);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .slide-references-list .ref-items {
@@ -4845,11 +4845,11 @@ body {
     margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 20px;
+    gap: 6px 24px;
 }
 
 .slide-references-list .ref-items li {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-medium);
     line-height: 1.5;
 }
@@ -4857,7 +4857,7 @@ body {
 .slide-references-list .ref-items li a {
     color: var(--primary);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .slide-references-list .ref-items li a:hover {
