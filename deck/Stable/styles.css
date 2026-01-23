@@ -4820,37 +4820,48 @@ body {
     margin-bottom: 8px;
 }
 
-/* Slide References (bottom footnotes) */
-.slide-references {
+/* Slide References (list format) */
+.slide-references-list {
     position: absolute;
-    bottom: 12px;
+    bottom: 14px;
     left: 60px;
     right: 60px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 10px;
-    color: var(--text-light);
-    border-top: 1px solid var(--medium-gray);
-    padding-top: 8px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    padding: 10px 16px;
+    border-left: 3px solid var(--primary);
 }
 
-.slide-references .ref-label {
+.slide-references-list .ref-title {
+    font-size: 12px;
     font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+.slide-references-list .ref-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+}
+
+.slide-references-list .ref-items li {
+    font-size: 11px;
     color: var(--text-medium);
-    font-size: 10px;
+    line-height: 1.5;
 }
 
-.slide-references a {
-    color: var(--text-light);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--text-light);
-    transition: color 0.2s;
-}
-
-.slide-references a:hover {
+.slide-references-list .ref-items li a {
     color: var(--primary);
-    border-bottom-color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.slide-references-list .ref-items li a:hover {
+    text-decoration: underline;
 }
 
 /* Print / PDF Styles */
