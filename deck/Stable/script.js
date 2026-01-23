@@ -1,6 +1,6 @@
 // Slide Navigation
 let currentSlide = 1;
-let totalSlides = 17; // Will be updated dynamically
+const totalSlides = 18;
 
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
@@ -10,8 +10,6 @@ function updateSlide() {
     const activeSlide = document.querySelector(`[data-slide="${currentSlide}"]`);
     if (activeSlide) {
         activeSlide.classList.add('active');
-        // Apply auto-fit after slide becomes visible
-        requestAnimationFrame(() => autoFitSlide(activeSlide));
     }
 
     document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
@@ -33,79 +31,6 @@ function prevSlide() {
         updateSlide();
     }
 }
-
-// ========== AUTO-FIT SYSTEM ==========
-// Automatically scales down content if it overflows the slide
-
-function autoFitSlide(slide) {
-    const inner = slide.querySelector('.slide-inner');
-    if (!inner) return;
-
-    // Skip title slide and appendix divider
-    if (inner.classList.contains('title-slide') || inner.classList.contains('appendix-divider')) {
-        inner.style.transform = '';
-        inner.style.transformOrigin = '';
-        return;
-    }
-
-    // Reset any previous scaling
-    inner.style.transform = '';
-    inner.style.transformOrigin = 'top left';
-
-    const containerW = 1280;
-    const containerH = 720;
-    const paddingX = 120; // 60px * 2
-    const paddingY = 80;  // 40px * 2
-
-    const contentW = inner.scrollWidth;
-    const contentH = inner.scrollHeight;
-
-    // Check if content overflows
-    if (contentH > containerH || contentW > containerW) {
-        const scaleX = containerW / contentW;
-        const scaleY = containerH / contentH;
-        const scale = Math.min(scaleX, scaleY, 1);
-
-        if (scale < 1) {
-            // Minimum scale to maintain readability
-            const finalScale = Math.max(scale, 0.75);
-            inner.style.transform = `scale(${finalScale})`;
-            inner.style.transformOrigin = 'top left';
-
-            // Log overflow for debugging
-            if (scale < 0.9) {
-                console.warn(`Slide ${slide.dataset.slide} scaled to ${(finalScale * 100).toFixed(0)}% (content: ${contentH}px > container: ${containerH}px)`);
-            }
-        }
-    }
-}
-
-// Apply auto-fit to all slides on load and resize
-function autoFitAllSlides() {
-    document.querySelectorAll('.slide').forEach(slide => {
-        // Temporarily show slide for measurement
-        const wasHidden = !slide.classList.contains('active');
-        if (wasHidden) {
-            slide.style.visibility = 'hidden';
-            slide.style.display = 'block';
-        }
-
-        autoFitSlide(slide);
-
-        if (wasHidden) {
-            slide.style.display = '';
-            slide.style.visibility = '';
-        }
-    });
-}
-
-// ResizeObserver for responsive auto-fit
-const resizeObserver = new ResizeObserver(() => {
-    const activeSlide = document.querySelector('.slide.active');
-    if (activeSlide) {
-        autoFitSlide(activeSlide);
-    }
-});
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
@@ -232,27 +157,7 @@ document.addEventListener('touchend', (e) => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    // Count actual slides
-    totalSlides = document.querySelectorAll('.slide').length;
-
-    // Setup resize observer
-    const container = document.querySelector('.deck-container');
-    if (container) {
-        resizeObserver.observe(container);
-    }
-
-    // Initial auto-fit after fonts load
-    if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-            autoFitAllSlides();
-            updateSlide();
-        });
-    } else {
-        setTimeout(() => {
-            autoFitAllSlides();
-            updateSlide();
-        }, 100);
-    }
+    updateSlide();
 });
 
 // Fullscreen toggle (press F)
