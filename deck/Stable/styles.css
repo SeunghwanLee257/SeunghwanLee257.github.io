@@ -4891,14 +4891,14 @@ body {
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px 16px;
 }
 
 .slide-references-list .ref-items li {
-    font-size: 13px;
+    font-size: 11px;
     color: var(--text-medium);
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 .slide-references-list .ref-items li a {
