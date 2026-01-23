@@ -187,50 +187,67 @@
                         <span class="slide-num">02</span>
                         <span class="slide-title">Market Opportunity</span>
                     </div>
-                    <h2 class="slide-headline">기업 간 결제: <span class="highlight">기존 vs KSDC+프라이버시</span></h2>
+                    <h2 class="slide-headline">KOSCOM이 넘볼 수 있는 <span class="highlight">3대 시장</span></h2>
 
+                    <!-- 상단: 3대 시장 카드 -->
+                    <div class="market-cards-row">
+                        <div class="market-card-mini">
+                            <span class="mcard-icon">💳</span>
+                            <div class="mcard-info">
+                                <h4>기업구매전용카드</h4>
+                                <span class="mcard-size">43.9조 <small>(2024)</small></span>
+                            </div>
+                        </div>
+                        <div class="market-card-mini">
+                            <span class="mcard-icon">🏢</span>
+                            <div class="mcard-info">
+                                <h4>법인카드 결제</h4>
+                                <span class="mcard-size">62.2조 <small>(2025 3Q)</small></span>
+                            </div>
+                        </div>
+                        <div class="market-card-mini">
+                            <span class="mcard-icon">⚡</span>
+                            <div class="mcard-info">
+                                <h4>B2B PG 결제</h4>
+                                <span class="mcard-size">1.5조/일 <small>(2025)</small></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 중앙: 기존 vs 신규 비교 -->
                     <div class="market-comparison-layout">
-                        <!-- 기존 방식 -->
                         <div class="market-existing">
                             <div class="market-section-header bad">
-                                <span>❌ 기존 카드/PG 결제</span>
+                                <span>❌ 기존 방식</span>
                             </div>
                             <div class="market-pain-list">
                                 <div class="pain-item">
                                     <span class="pain-label">수수료</span>
                                     <span class="pain-value bad-value">1.5~3.5%</span>
-                                    <span class="pain-detail">카드사 + VAN + PG 중첩</span>
+                                    <span class="pain-detail">카드사+VAN+PG 중첩</span>
                                 </div>
                                 <div class="pain-item">
                                     <span class="pain-label">정산</span>
-                                    <span class="pain-value bad-value">D+3 ~ D+5</span>
-                                    <span class="pain-detail">현금 흐름 압박, 금융비용 발생</span>
+                                    <span class="pain-value bad-value">D+3~D+5</span>
+                                    <span class="pain-detail">현금흐름 압박</span>
                                 </div>
                                 <div class="pain-item">
-                                    <span class="pain-label">프라이버시</span>
+                                    <span class="pain-label">투명성</span>
                                     <span class="pain-value bad-value">전체 노출</span>
-                                    <span class="pain-detail">거래처·금액·패턴 카드사에 공개</span>
-                                </div>
-                                <div class="pain-item">
-                                    <span class="pain-label">규모</span>
-                                    <span class="pain-value">43.9조/년</span>
-                                    <span class="pain-detail">기업구매전용카드 (2024)</span>
+                                    <span class="pain-detail">거래처·금액 카드사 공개</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 화살표 -->
                         <div class="market-arrow-section">
                             <div class="market-arrow-box">
-                                <svg width="40" height="40" viewBox="0 0 40 40">
-                                    <path d="M8 20 L28 20" stroke="var(--primary)" stroke-width="3"/>
-                                    <polyline points="24,14 30,20 24,26" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                                <svg width="36" height="36" viewBox="0 0 36 36">
+                                    <path d="M6 18 L26 18" stroke="var(--primary)" stroke-width="3"/>
+                                    <polyline points="22,12 28,18 22,24" fill="none" stroke="var(--primary)" stroke-width="3"/>
                                 </svg>
-                                <span class="arrow-label">KSDC 전환</span>
                             </div>
                         </div>
 
-                        <!-- 새로운 방식 -->
                         <div class="market-new">
                             <div class="market-section-header good">
                                 <span>✅ KSDC + waLLLnut</span>
@@ -238,40 +255,43 @@
                             <div class="market-gain-list">
                                 <div class="gain-item">
                                     <span class="gain-label">수수료</span>
-                                    <span class="gain-value good-value">&lt; 0.1%</span>
-                                    <span class="gain-detail">VAN/PG 중개 제거, 온체인 직결제</span>
+                                    <span class="gain-value good-value">대폭 절감</span>
+                                    <span class="gain-detail"><strong>Koscom:</strong> VAN/PG 중개 제거</span>
                                 </div>
                                 <div class="gain-item">
                                     <span class="gain-label">정산</span>
                                     <span class="gain-value good-value">T+0 즉시</span>
-                                    <span class="gain-detail">Atomic Settlement, 현금 즉시 확보</span>
+                                    <span class="gain-detail"><strong>Koscom:</strong> Atomic Settlement</span>
                                 </div>
                                 <div class="gain-item">
                                     <span class="gain-label">프라이버시</span>
-                                    <span class="gain-value good-value">완전 비공개</span>
-                                    <span class="gain-detail">ZK Pool 비연결성 + 감사 가능</span>
-                                </div>
-                                <div class="gain-item">
-                                    <span class="gain-label">타겟</span>
-                                    <span class="gain-value">수수료 차액</span>
-                                    <span class="gain-detail">1.4~3.4%p 절감 → 기업 전환 동기</span>
+                                    <span class="gain-value good-value">비공개</span>
+                                    <span class="gain-detail"><strong>waLLLnut:</strong> ZK Pool + 감사 가능</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="market-summary-box">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>왜 Koscom + waLLLnut?</strong> 코스콤의 <span class="highlight">기관 결제 인프라</span> + waLLLnut의 <span class="highlight">감사 가능 프라이버시</span> = 수수료 90%↓ + 즉시 정산 + 거래 비공개</span>
+                    <!-- 하단: 역할 분리 요약 -->
+                    <div class="market-role-summary">
+                        <div class="role-chip koscom-role">
+                            <strong>Koscom</strong> KSDC 발행·정산 인프라 (수수료 절감 + 즉시 정산)
+                        </div>
+                        <span class="role-plus">+</span>
+                        <div class="role-chip wallnut-role">
+                            <strong>waLLLnut</strong> 프라이버시 레이어 (거래 비공개 + 감사 가능)
+                        </div>
                     </div>
 
                     <div class="slide-references-list">
                         <div class="ref-title">📎 References</div>
                         <ul class="ref-items">
                             <li><a href="https://www.hankyung.com/article/2025042285231" target="_blank">기업구매전용카드 2024년 43.9조원</a> — 한국경제 2025.04</li>
-                            <li><a href="https://www.hani.co.kr/arti/economy/finance/1209538.html" target="_blank">기업구매전용카드 2025 상반기 22.8조원 (+전년 동기 대비 성장)</a> — 한겨레 2025.09</li>
-                            <li><a href="https://www.newsis.com/view/NISX20251031_0003384818" target="_blank">법인카드 2025 3Q 누적 62.2조원 / 4.2억건 / 평균 14.8만원</a> — 뉴시스 2025.10</li>
+                            <li><a href="https://www.hani.co.kr/arti/economy/finance/1209538.html" target="_blank">기업구매전용카드 2025 상반기 22.8조원</a> — 한겨레 2025.09</li>
+                            <li><a href="https://www.newsis.com/view/NISX20251031_0003384818" target="_blank">법인카드 2025 3Q: 62.2조 / 4.2억건 / 평균 14.8만원</a> — 뉴시스 2025.10</li>
                             <li><a href="https://www.bok.or.kr/portal/bbs/B0000502/view.do?menuNo=201265&nttId=10093789" target="_blank">PG 2025 상반기 일평균 3,314만건 / 1.5조원</a> — 한국은행 2025</li>
+                            <li><a href="https://www.chungoose.kr/blog/25%EB%85%84-pg-%EC%88%98%EC%88%98%EB%A3%8C-%EC%99%84%EB%B2%BD-%EB%B9%84%EA%B5%90-%ED%86%A0%EC%8A%A4-%EC%9D%B4%EB%8B%88%EC%8B%9C%EC%8A%A4-%EB%93%B1" target="_blank">PG 수수료 1.8~3.5% 구조</a> — 청구스 2025</li>
+                            <li><a href="https://www.korea.kr/news/policyNewsView.do?newsId=148953893" target="_blank">카드 수수료율 0.5~1.5% (영세~중소)</a> — 정책브리핑 2025</li>
                         </ul>
                     </div>
                 </div>
