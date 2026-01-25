@@ -267,6 +267,10 @@ async function runInference() {
             // Start polling queue status
             startQueuePolling(endpoint);
 
+            // 5 minute timeout for long FHE inference
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5 * 60 * 1000);
+
             const response = await fetch(`${endpoint}/api/infer-sync`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -274,8 +278,11 @@ async function runInference() {
                     pixels,
                     encrypted: useEncryption,
                     encrypted_layers: effectiveEncryptedLayers
-                })
+                }),
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
 
             // Stop polling when done
             stopQueuePolling();
@@ -315,7 +322,15 @@ function stopQueuePolling() {
 
 async function pollQueueStatus(endpoint) {
     try {
-        const response = await fetch(`${endpoint}/api/queue`);
+        // 10 second timeout for queue status polling
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10 * 1000);
+
+        const response = await fetch(`${endpoint}/api/queue`, {
+            signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
         if (response.ok) {
             const data = await response.json();
             updateQueueDisplay(data);
