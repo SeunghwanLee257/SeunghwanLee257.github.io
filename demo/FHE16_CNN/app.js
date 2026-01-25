@@ -33,6 +33,9 @@ const plainLayersList = document.getElementById('plainLayersList');
 const queueStatus = document.getElementById('queueStatus');
 const queueLength = document.getElementById('queueLength');
 const queueProcessing = document.getElementById('queueProcessing');
+const ciphertextArea = document.getElementById('ciphertextArea');
+const ciphertextContent = document.getElementById('ciphertextContent');
+const ciphertextSize = document.getElementById('ciphertextSize');
 
 // Queue polling interval
 let queuePollInterval = null;
@@ -204,6 +207,7 @@ function clearCanvas() {
     resultDigit.textContent = '?';
     metricsArea.style.display = 'none';
     layerInfoArea.style.display = 'none';
+    ciphertextArea.style.display = 'none';
     setStatus('info', 'Draw a digit and run inference');
     renderConfidenceBars();
 }
@@ -404,6 +408,22 @@ function mockInference(pixels, encLayers = 5) {
             const encryptedLayerNames = CNN_LAYERS.slice(0, encLayers);
             const plainLayerNames = CNN_LAYERS.slice(encLayers);
 
+            // Generate mock ciphertext sample (looks like real FHE ciphertext hex)
+            let ciphertextSample = null;
+            let ciphertextTotalSize = 0;
+            if (encLayers > 0) {
+                // FHE ciphertext is typically very large (MB range)
+                ciphertextTotalSize = encLayers * 2.5 * 1024 * 1024; // ~2.5MB per layer
+                // Generate realistic-looking hex string (256 bytes = 512 hex chars)
+                const hexChars = '0123456789abcdef';
+                let hex = '';
+                for (let i = 0; i < 512; i++) {
+                    hex += hexChars[Math.floor(Math.random() * 16)];
+                    if ((i + 1) % 64 === 0 && i < 511) hex += '\n';
+                }
+                ciphertextSample = hex;
+            }
+
             resolve({
                 prediction,
                 scores: normalizedScores,
@@ -413,7 +433,9 @@ function mockInference(pixels, encLayers = 5) {
                 encrypted_layer_names: encryptedLayerNames,
                 plain_layer_names: plainLayerNames,
                 total_layers: 5,
-                mock: true
+                mock: true,
+                ciphertext_sample: ciphertextSample,
+                ciphertext_total_size: ciphertextTotalSize
             });
         }, delay);
     });
@@ -429,7 +451,9 @@ function displayResult(result) {
         mock,
         encrypted_layers = 0,
         encrypted_layer_names = [],
-        plain_layer_names = []
+        plain_layer_names = [],
+        ciphertext_sample = null,
+        ciphertext_total_size = 0
     } = result;
 
     resultDigit.textContent = prediction;
@@ -478,6 +502,24 @@ function displayResult(result) {
     plainLayersList.textContent = plain_layer_names.length > 0
         ? plain_layer_names.join(' → ')
         : 'None';
+
+    // Show ciphertext preview if available
+    if (ciphertext_sample && encrypted_layers > 0) {
+        ciphertextArea.style.display = 'block';
+        ciphertextContent.textContent = ciphertext_sample;
+        ciphertextSize.textContent = formatBytes(ciphertext_total_size);
+    } else {
+        ciphertextArea.style.display = 'none';
+    }
+}
+
+// Format bytes to human readable
+function formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
 // Render confidence bars

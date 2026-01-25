@@ -577,6 +577,61 @@
             color: #ff5252;
         }
 
+        /* Ciphertext Preview */
+        .ciphertext-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+        }
+
+        .ciphertext-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .ciphertext-icon {
+            font-size: 1.2rem;
+        }
+
+        .ciphertext-title {
+            font-weight: 600;
+            color: #00ff88;
+            flex: 1;
+        }
+
+        .ciphertext-size {
+            font-size: 0.8rem;
+            color: #8892b0;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .ciphertext-content {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.7rem;
+            line-height: 1.4;
+            color: #00d9ff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 6px;
+            word-break: break-all;
+            max-height: 120px;
+            overflow-y: auto;
+            letter-spacing: 0.5px;
+        }
+
+        .ciphertext-note {
+            font-size: 0.75rem;
+            color: #6a7490;
+            margin-top: 8px;
+            text-align: center;
+        }
+
         /* Queue status */
         .queue-status {
             margin-top: 10px;
@@ -714,6 +769,21 @@
                     <div class="layer-info-row">
                         <span class="layer-info-label">Plaintext Layers:</span>
                         <span class="layer-info-value plain" id="plainLayersList">-</span>
+                    </div>
+                </div>
+
+                <!-- Ciphertext Preview -->
+                <div class="ciphertext-preview" id="ciphertextArea" style="display: none;">
+                    <div class="ciphertext-header">
+                        <span class="ciphertext-icon">🔐</span>
+                        <span class="ciphertext-title">Ciphertext Preview</span>
+                        <span class="ciphertext-size" id="ciphertextSize">0 bytes</span>
+                    </div>
+                    <div class="ciphertext-content" id="ciphertextContent">
+                        <!-- Ciphertext hex will be shown here -->
+                    </div>
+                    <div class="ciphertext-note">
+                        Showing first 256 bytes of encrypted data (actual size shown above)
                     </div>
                 </div>
             </div>
