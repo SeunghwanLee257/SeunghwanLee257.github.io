@@ -120,7 +120,7 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('RebateProof_IR_Deck.pdf');
+        pdf.save('정산Proof_IR_Deck.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);
