@@ -1,6 +1,6 @@
 // Slide Navigation
 let currentSlide = 1;
-const totalSlides = 11;
+const totalSlides = 10;
 
 function updateSlide() {
     document.querySelectorAll('.slide').forEach(slide => {
@@ -120,7 +120,7 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('LatticA_Salary_Solana_IR_Deck.pdf');
+        pdf.save('LatticA_Payroll_Solana_IR_Deck.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);
