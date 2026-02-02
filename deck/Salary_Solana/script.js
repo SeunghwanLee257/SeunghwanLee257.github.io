@@ -120,7 +120,7 @@ async function downloadPDF() {
         }
 
         // Save PDF
-        pdf.save('LatticA_Payroll_Solana_IR_Deck.pdf');
+        pdf.save('Auditable_Darkpool_Solana_IR_Deck.pdf');
 
     } catch (error) {
         console.error('PDF generation error:', error);
