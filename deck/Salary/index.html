@@ -19,7 +19,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 11</span>
+        <span id="slideCounter">1 / 10</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -446,27 +446,28 @@
                 </div>
             </div>
 
-            <!-- Slide 6: Solution + Architecture -->
+            <!-- Slide 6: Solution + Technical Architecture (merged) -->
             <div class="slide" data-slide="6">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num" style="font-size: 17px;">05</span>
                         <span class="slide-title" style="font-size: 17px;">Solution</span>
                     </div>
-                    <h2 class="slide-headline" style="font-size: 2.4rem; line-height: 1.2;"><span class="highlight">Unlinkability</span> for Enterprises, <span class="highlight">Selective Disclosure</span> by LatticA</h2>
+                    <h2 class="slide-headline" style="font-size: 2.0rem; line-height: 1.2;"><span class="highlight">Encrypted ZK Witness</span> for <span class="highlight">Selective Disclosure</span></h2>
 
-                    <div class="what-private" style="gap: 20px; margin-bottom: 18px; margin-top: 30px;">
-                        <div class="private-section" style="padding: 14px 20px;">
-                            <h4 style="font-size: 24px; font-weight: 800; margin-bottom: 10px;">Normal Operation</h4>
-                            <ul style="font-size: 13px; line-height: 1.6;">
+                    <!-- Normal vs Audit side-by-side -->
+                    <div class="what-private" style="gap: 14px; margin-bottom: 10px; margin-top: 14px;">
+                        <div class="private-section" style="padding: 10px 16px;">
+                            <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 6px;">Normal Operation</h4>
+                            <ul style="font-size: 12px; line-height: 1.5;">
                                 <li><strong>Enterprise:</strong> Transact via Shielded Pool with <span class="highlight">unlinkability</span></li>
-                                <li><strong>LatticA:</strong> Store encrypted logs only</li>
+                                <li><strong>LatticA:</strong> Store encrypted witness logs only</li>
                                 <li><strong>Users:</strong> Full <span class="highlight">unlinkability</span> guaranteed</li>
                             </ul>
                         </div>
-                        <div class="public-section" style="padding: 14px 20px;">
-                            <h4 style="font-size: 24px; font-weight: 800; margin-bottom: 10px;">On <span class="highlight">KYC</span>/Audit Request</h4>
-                            <ul style="font-size: 13px; line-height: 1.6;">
+                        <div class="public-section" style="padding: 10px 16px;">
+                            <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 6px;">On <span class="highlight">KYC</span>/Audit Request</h4>
+                            <ul style="font-size: 12px; line-height: 1.5;">
                                 <li><strong>Regulator:</strong> Request <span class="highlight">KYC</span> audit for specific TX</li>
                                 <li><strong>LatticA:</strong> Restore sk via Secret Sharing → <span class="highlight">Selectively disclose</span> via FHE</li>
                                 <li><strong>Enterprise:</strong> Submit computed report only</li>
@@ -474,119 +475,68 @@
                         </div>
                     </div>
 
-                    <div class="assumption-box" style="padding: 12px 16px;">
-                        <div class="assumption-header" style="margin-bottom: 11px;">
-                            <span class="assumption-icon" style="font-size: 18px;"></span>
-                            <strong style="font-size: 24px;">Core Value</strong>
-                        </div>
-                        <p style="font-size: 16px; line-height: 1.4; margin: 4px 0;"><strong><span class="highlight">Unlinkability</span> benefits:</strong> Shielded Pool usage with full confidence</p>
-                        <p style="font-size: 16px; line-height: 1.4; margin: 4px 0;"><strong><span class="highlight">Selective disclosure</span>:</strong> LatticA manages <span class="highlight">KYC</span> via Secret Sharing + FHE</p>
-                        <p style="font-size: 16px; line-height: 1.4; margin: 4px 0;"><strong>Key management:</strong> sk distributed (Shamir), recoverable with majority consent</p>
-                        <p class="assumption-fix" style="font-size: 16px; line-height: 1.4; margin: 9px 0 4px 0;"><strong>Result:</strong> <span class="highlight">Unlinkability</span> + <span class="highlight">KYC</span> Compliance, zero enterprise burden</p>
-                    </div>
-
-                    <div class="slide-refs" style="font-size: 12px;">
-                        <span>Refs: FHE16 homomorphic computation • <a href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing" target="_blank">Shamir's Secret Sharing</a></span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 7: How LatticA Solves This -->
-            <div class="slide" data-slide="7">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">06</span>
-                        <span class="slide-title" style="font-size: 17px;">Technical Solution</span>
-                    </div>
-                    <h2 class="slide-headline" style="font-size: 2.2rem; line-height: 1.2;"><span class="highlight">Encrypted ZK Witness</span> for <span class="highlight">Selective Disclosure</span></h2>
-
-                    <div class="tech-flow-diagram" style="margin-top: 1.2rem;">
-                        <div class="flow-stage-box" style="padding: 10px;">
-                            <div class="stage-label" style="font-size: 0.95rem;">Transaction</div>
-                            <div class="stage-content" style="font-size: 1rem;">
-                                <span class="stage-icon" style="font-size: 1.8rem;"></span>
-                                <span>Payroll via ZK Pool</span>
-                            </div>
-                        </div>
-                        <div class="flow-arrow-box" style="font-size: 1.4rem;">→</div>
-                        <div class="flow-stage-box highlight-stage" style="padding: 10px;">
-                            <div class="stage-label" style="font-size: 0.95rem;">Logging</div>
-                            <div class="stage-content" style="font-size: 1rem;">
-                                <span class="stage-icon" style="font-size: 1.8rem;"></span>
-                                <span>Store encrypted Witness</span>
-                            </div>
-                            <div class="stage-note" style="font-size: 0.9rem;">Binding: SNARK-based</div>
-                        </div>
-                        <div class="flow-arrow-box" style="font-size: 1.4rem;">→</div>
-                        <div class="flow-stage-box" style="padding: 10px;">
-                            <div class="stage-label" style="font-size: 0.95rem;">Normal State</div>
-                            <div class="stage-content" style="font-size: 1rem;">
-                                <span class="stage-icon" style="font-size: 1.8rem;"></span>
-                                <span>Full <span class="highlight">Unlinkability</span> maintained</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="key-management-section" style="margin-top: 1.2rem;">
-                        <h4 style="font-size: 1.3rem; margin-bottom: 1rem;">Key Management Options</h4>
+                    <!-- Key Management Options -->
+                    <div class="key-management-section" style="margin-top: 0.6rem;">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.6rem;">Key Management Options</h4>
                         <div class="key-options">
-                            <div class="key-option" style="padding: 1rem;">
-                                <span class="option-badge" style="font-size: 0.95rem;">Option A</span>
+                            <div class="key-option" style="padding: 0.7rem;">
+                                <span class="option-badge" style="font-size: 0.85rem;">Option A</span>
                                 <div class="option-content">
-                                    <strong style="font-size: 1.1rem;">Distributed Key Management (SS-MPC)</strong>
-                                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Decryption only with majority consent via Secret Sharing + MPC</p>
+                                    <strong style="font-size: 0.95rem;">Distributed Key Management (SS-MPC)</strong>
+                                    <p style="font-size: 0.85rem; margin-top: 0.3rem;">Decryption only with majority consent via Secret Sharing + MPC</p>
                                 </div>
                             </div>
-                            <div class="key-option" style="padding: 1rem;">
-                                <span class="option-badge" style="font-size: 0.95rem;">Option B</span>
+                            <div class="key-option" style="padding: 0.7rem;">
+                                <span class="option-badge" style="font-size: 0.85rem;">Option B</span>
                                 <div class="option-content">
-                                    <strong style="font-size: 1.1rem;">Direct Enterprise Management</strong>
-                                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">Organization holds its own Secret Key</p>
+                                    <strong style="font-size: 0.95rem;">Direct Enterprise Management</strong>
+                                    <p style="font-size: 0.85rem; margin-top: 0.3rem;">Organization holds its own Secret Key</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="audit-flow-box" style="margin-top: calc(1.2rem - 15px); padding: 1.2rem;">
-                        <div class="audit-header" style="margin-bottom: 1rem;">
-                            <span class="audit-icon" style="font-size: 1.4rem;"></span>
-                            <strong style="font-size: 1.2rem;">Flow on Valid <span class="highlight">KYC</span> Audit Request</strong>
+                    <!-- Audit Flow -->
+                    <div class="audit-flow-box" style="margin-top: 0.6rem; padding: 0.8rem;">
+                        <div class="audit-header" style="margin-bottom: 0.6rem;">
+                            <span class="audit-icon" style="font-size: 1.2rem;"></span>
+                            <strong style="font-size: 1rem;">Audit Flow: <span class="highlight">KYC</span> Request → Identity Verified</strong>
                         </div>
                         <div class="audit-steps">
-                            <div class="audit-step" style="font-size: 0.95rem;">
-                                <span class="step-num" style="font-size: 1.1rem;">1</span>
-                                <span>Regulator → Request <span class="highlight">KYC</span> audit of specific TX</span>
+                            <div class="audit-step" style="font-size: 0.85rem;">
+                                <span class="step-num" style="font-size: 0.95rem;">1</span>
+                                <span>Regulator requests audit</span>
                             </div>
-                            <div class="audit-arrow" style="font-size: 1.2rem;">→</div>
-                            <div class="audit-step" style="font-size: 0.95rem;">
-                                <span class="step-num" style="font-size: 1.1rem;">2</span>
-                                <span>Decrypt only that TX's Witness</span>
+                            <div class="audit-arrow" style="font-size: 1rem;">→</div>
+                            <div class="audit-step" style="font-size: 0.85rem;">
+                                <span class="step-num" style="font-size: 0.95rem;">2</span>
+                                <span>Decrypt TX witness</span>
                             </div>
-                            <div class="audit-arrow" style="font-size: 1.2rem;">→</div>
-                            <div class="audit-step" style="font-size: 0.95rem;">
-                                <span class="step-num" style="font-size: 1.1rem;">3</span>
-                                <span><span class="highlight">Selectively disclose</span>: Extract sender + match <span class="highlight">KYC</span></span>
+                            <div class="audit-arrow" style="font-size: 1rem;">→</div>
+                            <div class="audit-step" style="font-size: 0.85rem;">
+                                <span class="step-num" style="font-size: 0.95rem;">3</span>
+                                <span><span class="highlight">Selective disclosure</span>: sender + <span class="highlight">KYC</span></span>
                             </div>
-                            <div class="audit-arrow" style="font-size: 1.2rem;">→</div>
-                            <div class="audit-step highlight-step" style="font-size: 0.95rem;">
-                                <span class="step-num" style="font-size: 1.1rem;">4</span>
+                            <div class="audit-arrow" style="font-size: 1rem;">→</div>
+                            <div class="audit-step highlight-step" style="font-size: 0.85rem;">
+                                <span class="step-num" style="font-size: 0.95rem;">4</span>
                                 <span><strong>Identity Verified</strong></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="value-prop-bar" style="margin-top: 1rem; padding: 1rem; font-size: 1.1rem;">
-                        <span class="vp-icon" style="font-size: 1.4rem;"></span>
+                    <div class="value-prop-bar" style="margin-top: 0.6rem; padding: 0.7rem; font-size: 0.95rem;">
+                        <span class="vp-icon" style="font-size: 1.2rem;"></span>
                         <span><strong>Core Value:</strong> Perfect <span class="highlight">Unlinkability</span> normally → <span class="highlight">Selective Disclosure</span> only on legitimate requests</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 8: Business Model + Financials -->
-            <div class="slide" data-slide="8">
+            <!-- Slide 7: Business Model + Financials -->
+            <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">07</span>
+                        <span class="slide-num" style="font-size: 17px;">06</span>
                         <span class="slide-title" style="font-size: 17px;">Business Model</span>
                     </div>
                     <h2 class="slide-headline" style="font-size: 2.4rem; line-height: 1.2; margin-bottom: 1rem;">Revenue <span class="highlight">Projections</span></h2>
@@ -691,11 +641,11 @@
                 </div>
             </div>
 
-            <!-- Slide 9: Why Mantle -->
-            <div class="slide" data-slide="9">
+            <!-- Slide 8: Why Mantle -->
+            <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">08</span>
+                        <span class="slide-num" style="font-size: 17px;">07</span>
                         <span class="slide-title" style="font-size: 17px;">Why Mantle</span>
                     </div>
                     <h2 class="slide-headline" style="font-size: 2.1rem; line-height: 1.25;">Mantle = <span class="highlight">RWA & Real Finance Focus</span></h2>
@@ -750,11 +700,11 @@
                 </div>
             </div>
 
-            <!-- Slide 10: Team -->
-            <div class="slide" data-slide="10">
+            <!-- Slide 9: Team -->
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">09</span>
+                        <span class="slide-num" style="font-size: 17px;">08</span>
                         <span class="slide-title" style="font-size: 17px;">Team</span>
                     </div>
                     <h2 class="slide-headline" style="font-size: 3.2rem; line-height: 1.3;">Cryptography + <span class="highlight">Execution</span></h2>
@@ -785,11 +735,11 @@
                 </div>
             </div>
 
-            <!-- Slide 11: Ask -->
-            <div class="slide" data-slide="11">
+            <!-- Slide 10: Ask -->
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num" style="font-size: 17px;">10</span>
+                        <span class="slide-num" style="font-size: 17px;">09</span>
                         <span class="slide-title" style="font-size: 17px;">Ask</span>
                     </div>
                     <h2 class="slide-headline" style="font-size: 1.9rem; line-height: 1.3;">Partnership <span class="highlight">Request</span></h2>
