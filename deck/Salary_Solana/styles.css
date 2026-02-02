@@ -384,6 +384,63 @@ body {
     font-weight: 700;
 }
 
+/* Tech Stack Section on Title Slide */
+.tech-stack-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    margin-top: 8px;
+}
+
+.tech-stack-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tech-stack-logos {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tech-logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.tech-logo-item img {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.tech-logo-fallback {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.tech-logo-item span {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-medium);
+}
+
 /* ========== SLIDE 2: Problem V2 - Refined Design ========== */
 .problem-slide-v2 {
     padding-bottom: 50px;
