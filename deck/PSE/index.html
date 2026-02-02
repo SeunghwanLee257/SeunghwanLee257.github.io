@@ -19,7 +19,7 @@
             </svg>
             Prev
         </button>
-        <span id="slideCounter">1 / 9</span>
+        <span id="slideCounter">1 / 10</span>
         <button id="nextBtn" onclick="nextSlide()">
             Next
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -212,10 +212,36 @@
                 </div>
             </div>
 
-            <!-- Slide 7: B-3 Cross-Device Non-Determinism Deep Dive -->
+            <!-- Slide 7: B-3 Evidence Screenshots -->
             <div class="slide" data-slide="7">
-                <div class="slide-inner" style="padding: 50px 80px;">
+                <div class="slide-inner" style="padding: 40px 60px;">
                     <span class="slide-num">B-3</span>
+                    <div class="section-label">Evidence</div>
+                    <h2 class="big-headline" style="font-size:36px; margin-bottom:12px;">Same operation, <span class="accent">different ciphertext.</span></h2>
+                    <p class="sub-text" style="font-size:15px; margin-bottom:12px;">Running <code>tfhe_cpu_gpu_compare</code> on two different machines produces different ciphertext arrays for the same FHE addition. Verification passes locally but cross-device values diverge.</p>
+                    <div style="display:flex; gap:16px; margin-bottom:12px;">
+                        <div style="flex:1;">
+                            <div style="font-size:12px; font-weight:600; color:#999; margin-bottom:6px;">Device A (cascadelake CPU)</div>
+                            <img src="cross-device-1.jpg" alt="Device A output" style="width:100%; border-radius:8px; border:1px solid #e5e5e5;">
+                        </div>
+                        <div style="flex:1;">
+                            <div style="font-size:12px; font-weight:600; color:#999; margin-bottom:6px;">Device B (cascadelake CPU, different run)</div>
+                            <img src="cross-device-2.jpg" alt="Device B output" style="width:100%; border-radius:8px; border:1px solid #e5e5e5;">
+                        </div>
+                    </div>
+                    <div class="insight-bar" style="font-size:13px;">
+                        Both runs: <code>cargo run --release</code> with <code>RUSTFLAGS='-C target-cpu=cascadelake'</code>, <code>OUTPUT_MODE=int64</code>. Array A values differ between runs. The FHE ciphertext is non-deterministic across executions due to floating-point FFT rounding differences.
+                    </div>
+                    <div class="ref">
+                        Source: <a href="https://x.com/scarrots93">x.com/scarrots93</a> | tfhers_version/1.4.0/tfhe-ct-test
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: B-4 Cross-Device Non-Determinism Deep Dive -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner" style="padding: 50px 80px;">
+                    <span class="slide-num">B-4</span>
                     <div class="section-label">The real problem</div>
                     <h2 class="big-headline" style="font-size:38px; margin-bottom:16px;"><span class="accent">Different device</span> = Different result.</h2>
 
@@ -261,8 +287,8 @@
                 </div>
             </div>
 
-            <!-- Slide 8: C-1 PSE Contributor -->
-            <div class="slide" data-slide="8">
+            <!-- Slide 9: C-1 PSE Contributor -->
+            <div class="slide" data-slide="9">
                 <div class="slide-inner">
                     <span class="slide-num">C-1</span>
                     <div class="section-label">Contributor eligibility</div>
@@ -293,8 +319,8 @@
                 </div>
             </div>
 
-            <!-- Slide 9: C-2 Ethereum FHE Teams -->
-            <div class="slide" data-slide="9">
+            <!-- Slide 10: C-2 Ethereum FHE Teams -->
+            <div class="slide" data-slide="10">
                 <div class="slide-inner">
                     <span class="slide-num">C-2</span>
                     <div class="section-label">Collaboration</div>
