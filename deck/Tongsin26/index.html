@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FHE 기반 블록체인 프라이버시 — 통신학회 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  color: #1a1a1a;
+  background: #fff;
+  line-height: 1.7;
+}
+
+.slides-container {
+  display: flex;
+  height: 100vh;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  padding: 60px 100px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+.slide-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  padding: 14px 0; background: rgba(255,255,255,0.95); border-bottom: 1px solid #eee;
+  font-size: 16px; z-index: 1000; backdrop-filter: blur(8px);
+}
+.nav button {
+  background: #1a1a1a; color: #fff; border: none; padding: 10px 28px;
+  cursor: pointer; font-size: 15px; border-radius: 4px; transition: all .15s;
+}
+.nav button:hover { background: #333; }
+.nav button.pdf-btn { background: #0066ff; }
+.nav button.pdf-btn:hover { background: #0052cc; }
+.nav .counter { color: #666; font-variant-numeric: tabular-nums; min-width: 80px; text-align: center; font-size: 16px; }
+
+.progress { position: fixed; top: 0; left: 0; height: 4px; background: #0066ff; z-index: 1001; transition: width 0.3s; }
+
+.tag { display: inline-block; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: #0066ff; margin-bottom: 20px; font-weight: 600; }
+h1 { font-size: 64px; font-weight: 700; line-height: 1.15; margin-bottom: 28px; }
+h2 { font-size: 48px; font-weight: 700; line-height: 1.2; margin-bottom: 24px; }
+h3 { font-size: 28px; font-weight: 600; margin-bottom: 14px; color: #333; }
+p { font-size: 24px; color: #444; margin-bottom: 18px; max-width: 900px; }
+.lead { font-size: 28px; color: #555; margin-bottom: 36px; max-width: 800px; }
+.sm { font-size: 18px; color: #888; }
+ul { list-style: none; padding: 0; margin-bottom: 20px; }
+ul li { font-size: 22px; color: #444; padding: 10px 0 10px 32px; position: relative; }
+ul li::before { content: '→'; position: absolute; left: 0; color: #0066ff; font-weight: 600; }
+a { color: #0066ff; text-decoration: none; }
+code { background: #f5f5f5; padding: 4px 10px; border-radius: 4px; font-size: 20px; }
+
+.fig { margin: 28px 0; text-align: center; }
+.fig img { max-width: 100%; max-height: 420px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.fig .cap { font-size: 17px; color: #888; margin-top: 14px; }
+
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 28px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 28px; }
+.g23 { display: grid; grid-template-columns: 2fr 3fr; gap: 40px; margin-top: 28px; align-items: center; }
+.g32 { display: grid; grid-template-columns: 3fr 2fr; gap: 40px; margin-top: 28px; align-items: center; }
+
+.metric { text-align: left; }
+.metric .label { font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 6px; }
+.metric .value { font-size: 60px; font-weight: 700; color: #1a1a1a; line-height: 1.1; }
+.metric .value.blue { color: #0066ff; }
+.metric .value.red { color: #c62828; }
+.metric .value.green { color: #11998e; }
+.metric .desc { font-size: 18px; color: #666; margin-top: 6px; }
+
+.card { background: #f8f9fa; border-radius: 12px; padding: 30px; margin-bottom: 18px; }
+.card.blue { background: #e8f4ff; border: 1px solid #cce4ff; }
+.card.green { background: #e8f8f0; border: 1px solid #c8ecd8; }
+.card.orange { background: #fff8e8; border: 1px solid #ffe8c0; }
+.card.red { background: #fff0f0; border: 1px solid #ffd0d0; }
+.card h3 { margin-bottom: 12px; font-size: 24px; }
+.card p { font-size: 20px; color: #555; margin-bottom: 0; }
+
+.num-item { display: flex; gap: 20px; margin-bottom: 24px; }
+.num-item .num { font-size: 18px; font-weight: 700; color: #0066ff; min-width: 40px; height: 40px; background: #e8f4ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.num-item .text h3 { font-size: 22px; margin-bottom: 6px; }
+.num-item .text p { font-size: 19px; color: #666; margin-bottom: 0; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 20px; }
+th { text-align: left; font-weight: 600; padding: 14px 16px; border-bottom: 2px solid #1a1a1a; font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; color: #666; }
+td { padding: 14px 16px; border-bottom: 1px solid #eee; }
+tr.hl td { background: #e8f4ff; font-weight: 600; color: #0066ff; }
+
+.divider { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; }
+.divider .tag { color: rgba(255,255,255,0.7); }
+.divider h2 { color: #fff; font-size: 54px; }
+.divider .lead { color: rgba(255,255,255,0.9); }
+.divider.blue { background: linear-gradient(135deg, #0066ff 0%, #00c6ff 100%); }
+.divider.green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+.divider.orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.divider.dark { background: #1a1a1a; }
+
+.title-slide { background: #1a1a1a; color: #fff; }
+.title-slide h1 { color: #fff; font-size: 58px; margin-bottom: 24px; }
+.title-slide .lead { color: rgba(255,255,255,0.7); font-size: 26px; }
+
+.hook { background: #c62828; color: #fff; text-align: center; }
+.hook h2 { color: #fff; font-size: 52px; max-width: 1000px; margin: 0 auto 28px; }
+.hook p { color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto; font-size: 26px; }
+.hook .big-num { font-size: 160px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 28px; }
+
+.conclusion { background: #0066ff; color: #fff; }
+.conclusion h2 { color: #fff; font-size: 50px; margin-bottom: 32px; }
+.conclusion .point { font-size: 32px; margin-bottom: 20px; color: #fff; }
+.conclusion .point strong { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 4px; }
+
+.footer { position: fixed; bottom: 0; left: 0; right: 0; text-align: center; padding: 14px; font-size: 14px; color: #bbb; background: rgba(255,255,255,0.9); z-index: 999; }
+
+@media print {
+  .nav, .progress, .footer { display: none !important; }
+  .slides-container { display: block !important; transform: none !important; }
+  .slide { min-width: auto; height: auto; page-break-after: always; padding: 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="nav">
+  <button onclick="go(-1)">← 이전</button>
+  <span class="counter"><span id="cur">1</span> / <span id="tot"></span></span>
+  <button onclick="go(1)">다음 →</button>
+  <button class="pdf-btn" onclick="downloadPDF()">PDF</button>
+</div>
+
+<div class="slides-container" id="slides">
+
+<!-- ========== 1. TITLE ========== -->
+<div class="slide title-slide">
+  <div class="slide-inner">
+    <p class="sm" style="color:rgba(255,255,255,0.5); margin-bottom:40px;">2026 한국통신학회 하계학술대회</p>
+    <h1>통신 지연 한계를 넘는<br>블록체인 프라이버시 기술</h1>
+    <p class="lead">MPC의 통신 복잡도 문제와 FHE 기반 해결책</p>
+    <p class="sm" style="margin-top:50px; color:rgba(255,255,255,0.5);">
+      이승환, 김도혁, 신동준<br>
+      한양대학교 정보통신학과
+    </p>
+  </div>
+</div>
+
+<!-- ========== 2. 발표 개요 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">발표 개요</span>
+    <h2>오늘 논의할 내용</h2>
+    <div class="g2" style="margin-top:36px;">
+      <div>
+        <div class="num-item"><span class="num">1</span><div class="text"><h3>문제 정의</h3><p>블록체인 프라이버시와 통신 지연의 관계</p></div></div>
+        <div class="num-item"><span class="num">2</span><div class="text"><h3>MPC의 한계</h3><p>물리적 통신 지연이 왜 치명적인가</p></div></div>
+        <div class="num-item"><span class="num">3</span><div class="text"><h3>FHE 솔루션</h3><p>통신 없이 연산하는 새로운 패러다임</p></div></div>
+      </div>
+      <div>
+        <div class="num-item"><span class="num">4</span><div class="text"><h3>FHE16 기술</h3><p>정수 연산 기반 고속 부트스트래핑</p></div></div>
+        <div class="num-item"><span class="num">5</span><div class="text"><h3>실제 응용</h3><p>감사 가능한 다크풀 구현</p></div></div>
+        <div class="num-item"><span class="num">6</span><div class="text"><h3>결론</h3><p>통신 관점에서의 FHE의 의의</p></div></div>
+      </div>
+    </div>
+    <div class="card blue" style="margin-top:32px;">
+      <h3>핵심 주장</h3>
+      <p>광통신의 물리적 한계로 인해 <strong>MPC 기반 프라이버시는 글로벌 블록체인에서 근본적으로 불가능</strong>합니다. 통신이 필요 없는 FHE만이 유일한 해결책입니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 3. SECTION: 문제 정의 ========== -->
+<div class="slide divider orange">
+  <div class="slide-inner">
+    <span class="tag">Part 1</span>
+    <h2>문제 정의</h2>
+    <p class="lead">블록체인은 왜 프라이버시가 필요하고, 왜 어려운가</p>
+  </div>
+</div>
+
+<!-- ========== 4. 블록체인의 투명성 문제 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">배경</span>
+    <h2>블록체인의 투명성은 양날의 검</h2>
+    <div class="g2">
+      <div>
+        <div class="card red">
+          <h3>투명성의 문제점</h3>
+          <ul style="margin-top:12px;">
+            <li>모든 거래가 전 세계에 영구 공개</li>
+            <li>지갑 주소로 자산/거래 패턴 추적 가능</li>
+            <li>기업 기밀 유출 (공급망, 가격 정책)</li>
+            <li>MEV 공격: 선행매매, 샌드위치 공격</li>
+          </ul>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">2023년 MEV 손실</div>
+          <div class="value red">$6.8억+</div>
+        </div>
+      </div>
+      <div>
+        <div class="card green">
+          <h3>프라이버시의 필요성</h3>
+          <ul style="margin-top:12px;">
+            <li>개인 금융 정보 보호</li>
+            <li>기업의 블록체인 도입 장벽 해소</li>
+            <li>규제 컴플라이언스와 프라이버시 양립</li>
+            <li>공정한 거래 환경 (MEV 방지)</li>
+          </ul>
+        </div>
+        <div class="card" style="margin-top:20px;">
+          <h3>기관 투자자 설문</h3>
+          <p>78%가 "프라이버시 부재"를 블록체인 도입의 최대 장벽으로 지목 (Chainalysis 2024)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 5. 블록체인의 분산 특성 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">통신 관점</span>
+    <h2>블록체인 = 전 세계 분산 시스템</h2>
+    <div class="g2">
+      <div>
+        <p>블록체인의 검증자(Validator)는 <strong>전 세계에 분산</strong>되어 있습니다.</p>
+        <ul style="margin-top:20px;">
+          <li>Ethereum: 전 세계 ~800,000 검증자</li>
+          <li>Solana: 주요 데이터센터 분산</li>
+          <li>모든 검증자가 <strong>동일한 상태</strong>에 합의해야 함</li>
+        </ul>
+        <div class="card blue" style="margin-top:24px;">
+          <h3>핵심 질문</h3>
+          <p>프라이버시를 위해 암호화된 상태에서 연산하면서, 전 세계에 분산된 검증자들이 어떻게 합의할 수 있는가?</p>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>주요 검증자 위치</h3>
+          <table style="margin-top:12px;">
+            <tr><td>미국 (버지니아, 캘리포니아)</td></tr>
+            <tr><td>유럽 (프랑크푸르트, 런던)</td></tr>
+            <tr><td>아시아 (도쿄, 싱가포르, 서울)</td></tr>
+          </table>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">서울 ↔ 버지니아 거리</div>
+          <div class="value">11,000km</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 6. SECTION: MPC의 한계 ========== -->
+<div class="slide divider">
+  <div class="slide-inner">
+    <span class="tag">Part 2</span>
+    <h2>MPC의 통신 한계</h2>
+    <p class="lead">왜 기존 암호 프로토콜은 블록체인에서 작동하지 않는가</p>
+  </div>
+</div>
+
+<!-- ========== 7. MPC 기본 개념 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">MPC 개요</span>
+    <h2>다자간 연산(MPC)의 두 가지 방식</h2>
+    <div class="g2">
+      <div class="card">
+        <h3>1. Garbled Circuits (GC)</h3>
+        <p>회로를 "난독화"하여 전송, 상대방이 평가</p>
+        <ul style="margin-top:16px;">
+          <li>통신량: O(|회로|) — 회로 크기에 비례</li>
+          <li>라운드: 상수 (2-3회)</li>
+          <li>문제: 회로 재사용 불가, 2자 전용</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2. Secret Sharing (SS)</h3>
+        <p>데이터를 조각으로 나눠 분산 연산</p>
+        <ul style="margin-top:16px;">
+          <li>통신량: O(1) per gate</li>
+          <li>라운드: <strong>O(곱셈 수)</strong> — 핵심 문제!</li>
+          <li>문제: 매 곱셈마다 통신 필요</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card red" style="margin-top:28px;">
+      <h3>공통된 근본 문제</h3>
+      <p>두 방식 모두 <strong>참여자 간 통신이 필수</strong>입니다. 블록체인처럼 전 세계에 분산된 시스템에서는 통신 지연이 성능을 지배합니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 8. 물리적 한계: 빛의 속도 ========== -->
+<div class="slide hook">
+  <div class="slide-inner">
+    <div class="big-num">100ms+</div>
+    <h2>서울 ↔ 미국 간 최소 통신 지연</h2>
+    <p>광섬유에서 빛은 진공의 약 67% 속도로 이동합니다.<br>11,000km를 왕복하는 데 <strong>물리적 최소 110ms</strong>가 필요합니다.<br>이것은 기술 발전으로 줄일 수 없는 <strong>물리 법칙의 한계</strong>입니다.</p>
+  </div>
+</div>
+
+<!-- ========== 9. RTT 상세 분석 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">통신 지연 분석</span>
+    <h2>광통신의 물리적 한계</h2>
+    <div class="g2">
+      <div>
+        <div class="metric">
+          <div class="label">광섬유 내 빛의 속도</div>
+          <div class="value">~200,000 km/s</div>
+          <div class="desc">진공 대비 약 67% (굴절률 ~1.5)</div>
+        </div>
+        <div class="metric" style="margin-top:28px;">
+          <div class="label">서울 ↔ 버지니아 거리</div>
+          <div class="value">~11,000 km</div>
+          <div class="desc">태평양 해저 케이블 경로</div>
+        </div>
+        <div class="metric" style="margin-top:28px;">
+          <div class="label">이론적 최소 RTT</div>
+          <div class="value blue">~110ms</div>
+          <div class="desc">2 × 11,000km ÷ 200,000km/s</div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>실제 측정값</h3>
+          <table style="margin-top:12px;">
+            <tr><th>경로</th><th>RTT</th></tr>
+            <tr><td>서울 ↔ 버지니아</td><td>~180ms</td></tr>
+            <tr><td>서울 ↔ 프랑크푸르트</td><td>~250ms</td></tr>
+            <tr><td>서울 ↔ 도쿄</td><td>~30ms</td></tr>
+          </table>
+        </div>
+        <div class="card orange" style="margin-top:20px;">
+          <h3>핵심 통찰</h3>
+          <p>라우터 지연, 패킷 처리 등으로 실제 RTT는 이론값의 1.5~2배입니다. 이것은 <strong>기술 발전으로 개선할 수 없는 물리적 한계</strong>입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 10. SS-MPC의 치명적 문제 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">Secret Sharing MPC</span>
+    <h2>왜 SS-MPC는 블록체인에서 실패하는가</h2>
+    <div class="g2">
+      <div>
+        <p>SPDZ 등 Secret Sharing 기반 MPC에서:</p>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">곱셈당 필요한 통신 라운드</div>
+          <div class="value">2-3회</div>
+          <div class="desc">Beaver triple 소비 + 재구성</div>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">단순 스마트 컨트랙트</div>
+          <div class="value">~100 곱셈</div>
+          <div class="desc">잔액 확인, 서명 검증, 상태 업데이트</div>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">글로벌 참여 시</div>
+          <div class="value red">~180ms × 3 × 100</div>
+        </div>
+      </div>
+      <div class="card red">
+        <h3>단일 트랜잭션 처리 시간</h3>
+        <p style="font-size:48px; font-weight:700; color:#c62828; margin:20px 0;">54초</p>
+        <p>이것은 패킷 손실, 네트워크 혼잡이 <strong>전혀 없는</strong> 이상적 조건입니다.</p>
+        <ul style="margin-top:16px;">
+          <li>사용자: 54초 대기 불가</li>
+          <li>검증자: 합의 타임아웃</li>
+          <li>블록체인: 처리량 붕괴</li>
+        </ul>
+        <p style="margin-top:16px; font-weight:600;">결론: SS-MPC는 글로벌 블록체인에서 <strong>근본적으로 불가능</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 11. GC-MPC의 문제 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">Garbled Circuits</span>
+    <h2>GC-MPC도 해결책이 아닌 이유</h2>
+    <div class="g32">
+      <div>
+        <p>Garbled Circuits는 라운드 수는 적지만, 다른 문제가 있습니다:</p>
+        <div class="num-item" style="margin-top:24px;"><span class="num">1</span><div class="text"><h3>통신량 폭발</h3><p>256비트 곱셈 회로 ≈ 500KB. 복잡한 컨트랙트 = GB 단위 전송</p></div></div>
+        <div class="num-item"><span class="num">2</span><div class="text"><h3>일회용 회로</h3><p>같은 회로 재사용 불가. 매 트랜잭션마다 새로 생성/전송</p></div></div>
+        <div class="num-item"><span class="num">3</span><div class="text"><h3>2자간 프로토콜</h3><p>N명의 검증자로 확장 시 복잡도 급증</p></div></div>
+      </div>
+      <div class="card orange">
+        <h3>근본적 한계</h3>
+        <p>MPC는 <strong>"알려진 참여자 간의 대화형 프로토콜"</strong>을 위해 설계되었습니다.</p>
+        <p style="margin-top:16px;">블록체인은 <strong>"불특정 다수 검증자의 비대화형 합의"</strong>를 요구합니다.</p>
+        <p style="margin-top:20px; font-weight:600; font-size:24px;">패러다임 자체가 맞지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 12. SECTION: FHE 솔루션 ========== -->
+<div class="slide divider blue">
+  <div class="slide-inner">
+    <span class="tag">Part 3</span>
+    <h2>FHE: 통신 없는 암호 연산</h2>
+    <p class="lead">완전 동형 암호로 패러다임을 전환하다</p>
+  </div>
+</div>
+
+<!-- ========== 13. FHE 기본 개념 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">FHE 개요</span>
+    <h2>완전 동형 암호(FHE)란?</h2>
+    <div class="g2">
+      <div>
+        <p><strong>암호화된 상태에서 연산</strong>이 가능한 암호 체계</p>
+        <div class="num-item" style="margin-top:28px;"><span class="num">1</span><div class="text"><h3>사용자: 데이터 암호화</h3><p>Enc(x) — 비밀키로 암호화</p></div></div>
+        <div class="num-item"><span class="num">2</span><div class="text"><h3>서버: 암호문으로 연산</h3><p>f(Enc(x)) = Enc(f(x))</p></div></div>
+        <div class="num-item"><span class="num">3</span><div class="text"><h3>사용자: 결과 복호화</h3><p>Dec(Enc(f(x))) = f(x)</p></div></div>
+      </div>
+      <div>
+        <div class="card green">
+          <h3>통신 관점에서의 핵심</h3>
+          <ul style="margin-top:12px;">
+            <li><strong>연산 중 통신 불필요</strong></li>
+            <li>서버는 암호문만으로 독립 연산</li>
+            <li>여러 서버가 동시에 같은 연산 가능</li>
+            <li>결과는 항상 동일 (결정적)</li>
+          </ul>
+        </div>
+        <div class="card blue" style="margin-top:20px;">
+          <h3>블록체인에 완벽한 이유</h3>
+          <p>각 검증자가 <strong>독립적으로, 통신 없이</strong> 동일한 연산을 수행하고, 동일한 결과에 도달합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 14. MPC vs FHE 비교 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">비교</span>
+    <h2>MPC vs FHE: 통신 복잡도</h2>
+    <table style="margin-top:36px; font-size:22px;">
+      <tr>
+        <th>항목</th>
+        <th>Secret Sharing MPC</th>
+        <th>Garbled Circuits</th>
+        <th style="background:#e8f4ff;">FHE</th>
+      </tr>
+      <tr>
+        <td><strong>연산 중 통신</strong></td>
+        <td>매 곱셈마다 필요</td>
+        <td>초기 전송 필요</td>
+        <td style="background:#e8f4ff; color:#0066ff; font-weight:600;">불필요</td>
+      </tr>
+      <tr>
+        <td><strong>라운드 복잡도</strong></td>
+        <td>O(곱셈 깊이)</td>
+        <td>O(1)</td>
+        <td style="background:#e8f4ff; color:#0066ff; font-weight:600;">O(0)</td>
+      </tr>
+      <tr>
+        <td><strong>통신량</strong></td>
+        <td>O(n) per gate</td>
+        <td>O(|회로|)</td>
+        <td style="background:#e8f4ff; color:#0066ff; font-weight:600;">O(1) 입출력만</td>
+      </tr>
+      <tr>
+        <td><strong>다자간 확장</strong></td>
+        <td>통신량 증가</td>
+        <td>복잡도 급증</td>
+        <td style="background:#e8f4ff; color:#0066ff; font-weight:600;">영향 없음</td>
+      </tr>
+      <tr>
+        <td><strong>글로벌 블록체인</strong></td>
+        <td style="color:#c62828;">불가능</td>
+        <td style="color:#c62828;">비실용적</td>
+        <td style="background:#e8f4ff; color:#0066ff; font-weight:600;">가능</td>
+      </tr>
+    </table>
+    <div class="card green" style="margin-top:32px;">
+      <h3>결론</h3>
+      <p>FHE는 <strong>유일하게 통신 라운드가 0인</strong> 암호 연산 방식입니다. 이것이 글로벌 블록체인에서 FHE만이 작동하는 이유입니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 15. FHE의 문제: 부트스트래핑 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">FHE의 과제</span>
+    <h2>부트스트래핑: FHE의 병목</h2>
+    <div class="g23">
+      <div>
+        <p>FHE는 연산마다 <strong>노이즈가 누적</strong>됩니다.</p>
+        <div class="card red" style="margin-top:20px;">
+          <h3>문제</h3>
+          <p>노이즈가 임계값을 넘으면 복호화 실패</p>
+          <p style="margin-top:12px;">→ 주기적으로 노이즈 "새로고침" 필요</p>
+          <p style="margin-top:12px;">→ 이것이 <strong>부트스트래핑</strong></p>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">기존 부트스트래핑 시간</div>
+          <div class="value red">50-200ms</div>
+          <div class="desc">매 게이트 연산마다 필요</div>
+        </div>
+      </div>
+      <div class="fig" style="margin:0;">
+        <img src="fig_kr3.PNG" alt="부트스트래핑 파이프라인">
+        <div class="cap">부트스트래핑 파이프라인: Key Switching → Modulus Change → Blind Rotation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 16. SECTION: FHE16 ========== -->
+<div class="slide divider green">
+  <div class="slide-inner">
+    <span class="tag">Part 4</span>
+    <h2>FHE16: 고속 부트스트래핑</h2>
+    <p class="lead">IEEE Access 2025 · ePrint 2024/1916</p>
+  </div>
+</div>
+
+<!-- ========== 17. FHE16 핵심 아이디어 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">핵심 혁신</span>
+    <h2>16비트 정수 연산으로 모든 것을 대체</h2>
+    <div class="g2">
+      <div>
+        <div class="card red">
+          <h3>기존 방식 (TFHE-rs)</h3>
+          <p>64비트 FFT (Fast Fourier Transform) 사용</p>
+          <ul style="margin-top:12px;">
+            <li>부동소수점 반올림 오류</li>
+            <li>플랫폼마다 다른 결과</li>
+            <li>복잡한 명령어 시퀀스</li>
+          </ul>
+        </div>
+        <div class="card green" style="margin-top:20px;">
+          <h3>FHE16 방식</h3>
+          <p>16비트 NTT (Number Theoretic Transform)</p>
+          <ul style="margin-top:12px;">
+            <li>순수 정수 연산만 사용</li>
+            <li>모든 플랫폼에서 동일한 결과</li>
+            <li>SIMD 최적화에 유리</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card blue">
+          <h3>왜 16비트인가?</h3>
+          <p>Intel <code>vpmulhw</code> 명령어:</p>
+          <p style="margin-top:12px;">16bit × 16bit → 상위 16bit 추출</p>
+          <p style="margin-top:12px;"><strong>단 1 CPU 사이클</strong>에 실행</p>
+          <p style="margin-top:16px;">512비트 AVX512 레지스터에서 <strong>32개 연산 동시 수행</strong></p>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">합성 모듈러스</div>
+          <div class="value blue">q = p₁ · p₂</div>
+          <div class="desc">p₁, p₂는 16비트 소수</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 18. 결정적 연산의 중요성 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">통신 관점</span>
+    <h2>결정적 연산: 합의의 핵심</h2>
+    <div class="g2">
+      <div>
+        <div class="card red">
+          <h3>TFHE-rs (FFT 기반)</h3>
+          <p>부동소수점 반올림이 다음에 따라 달라짐:</p>
+          <ul style="margin-top:12px;">
+            <li>CPU 아키텍처 (x86 vs ARM)</li>
+            <li>컴파일러 버전 및 최적화</li>
+            <li>명령어 스케줄링</li>
+          </ul>
+          <p style="margin-top:16px; font-weight:600; color:#c62828;">→ 검증자마다 다른 결과<br>→ 합의 실패</p>
+        </div>
+      </div>
+      <div>
+        <div class="card green">
+          <h3>FHE16 (정수 기반)</h3>
+          <p>모든 연산이 정수 모듈러 산술</p>
+          <ul style="margin-top:12px;">
+            <li>같은 입력 → 같은 출력</li>
+            <li>플랫폼, 컴파일러 무관</li>
+            <li>비트 단위 완벽한 재현성</li>
+          </ul>
+          <p style="margin-top:16px; font-weight:600; color:#11998e;">→ 모든 검증자가 동일한 결과<br>→ 합의 성공</p>
+        </div>
+      </div>
+    </div>
+    <div class="fig" style="margin-top:24px;">
+      <img src="fig_kr2.PNG" alt="임계값 FHE" style="max-height:240px;">
+      <div class="cap">Threshold FHE: 모든 참여자가 동일한 암호문을 생성해야 복호화 성공</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 19. 성능 결과 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">성능</span>
+    <h2>FHE16 벤치마크 결과</h2>
+    <div class="g2">
+      <div>
+        <div class="metric">
+          <div class="label">부트스트래핑 시간</div>
+          <div class="value blue">2.89ms</div>
+          <div class="desc">싱글 스레드, AVX512, d=512</div>
+        </div>
+        <div class="metric" style="margin-top:32px;">
+          <div class="label">vs TFHE-rs</div>
+          <div class="value green">4× 빠름</div>
+        </div>
+        <div class="metric" style="margin-top:32px;">
+          <div class="label">vs OpenFHE</div>
+          <div class="value green">6.2× 빠름</div>
+        </div>
+        <div class="metric" style="margin-top:32px;">
+          <div class="label">키 크기</div>
+          <div class="value">14.4 MiB</div>
+          <div class="desc">TFHE-rs 대비 3.8× 작음</div>
+        </div>
+      </div>
+      <div>
+        <table>
+          <tr><th>시스템</th><th>시간</th><th>키 크기</th></tr>
+          <tr><td>OpenFHE</td><td>23 ms</td><td>26.4 MiB</td></tr>
+          <tr><td>TFHE-rs</td><td>14 ms</td><td>55 MiB</td></tr>
+          <tr class="hl"><td>FHE16</td><td>2.89 ms</td><td>14.4 MiB</td></tr>
+        </table>
+        <div class="card" style="margin-top:24px;">
+          <h3>의의</h3>
+          <p>2.89ms면 게이트당 통신 RTT(180ms)의 <strong>1.6%</strong>입니다. 연산이 더 이상 병목이 아닙니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 20. 멀티스레드 스케일링 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">확장성</span>
+    <h2>멀티스레드 및 SIMD 최적화</h2>
+    <div class="g2">
+      <div class="fig" style="margin:0;">
+        <img src="Multi-thread.PNG" alt="멀티스레드 스케일링">
+        <div class="cap">스레드 수에 따른 분할 상환 시간</div>
+      </div>
+      <div>
+        <div class="metric">
+          <div class="label">48코어 분할 상환 시간</div>
+          <div class="value blue">0.09ms</div>
+          <div class="desc">싱글 스레드 대비 38× 향상</div>
+        </div>
+        <div class="card" style="margin-top:28px;">
+          <h3>MIMC 배치 처리</h3>
+          <p>Multiple Instruction Multiple Ciphertext</p>
+          <ul style="margin-top:12px;">
+            <li>BL 키를 캐시에 한 번 로드</li>
+            <li>모든 암호문 일괄 처리</li>
+            <li>메모리 대역폭 최적화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 21. SECTION: 응용 ========== -->
+<div class="slide divider orange">
+  <div class="slide-inner">
+    <span class="tag">Part 5</span>
+    <h2>실제 응용: 감사 가능 다크풀</h2>
+    <p class="lead">프라이버시와 컴플라이언스를 동시에</p>
+  </div>
+</div>
+
+<!-- ========== 22. 다크풀 개념 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">응용</span>
+    <h2>감사 가능한 다크풀이란?</h2>
+    <div class="g2">
+      <div>
+        <p><strong>딜레마:</strong></p>
+        <ul style="margin-top:16px;">
+          <li>사용자: 프라이버시 원함</li>
+          <li>규제기관: 감사 가능성 원함</li>
+        </ul>
+        <div class="card green" style="margin-top:24px;">
+          <h3>우리의 해결책</h3>
+          <p>트랜잭션은 대중에게 비공개</p>
+          <p style="margin-top:12px;">but, 감사인은 협력하여 복호화 가능</p>
+          <ul style="margin-top:12px;">
+            <li>2-of-3 Threshold 복호화</li>
+            <li>단독 복호화 불가능</li>
+            <li>온체인 증명 검증</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>이중 회로 아키텍처</h3>
+          <div class="num-item" style="margin-top:16px;"><span class="num">1</span><div class="text"><h3>ZK 회로 (Noir)</h3><p>출금의 유효성 증명 — 잔액 충분, 이중 지불 없음</p></div></div>
+          <div class="num-item"><span class="num">2</span><div class="text"><h3>FHE 회로 (RLWE)</h3><p>신원이 감사인용으로 올바르게 암호화됨을 증명</p></div></div>
+        </div>
+        <div class="card blue" style="margin-top:16px;">
+          <h3>브릿지</h3>
+          <p>공유 Poseidon 커밋먼트가 두 증명이 같은 사용자임을 보장</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 23. FHE16의 역할 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">기술적 필요성</span>
+    <h2>왜 FHE16이 필수인가</h2>
+    <div class="g2">
+      <div>
+        <div class="card red">
+          <h3>TFHE-rs의 문제</h3>
+          <p>Threshold 복호화 시나리오:</p>
+          <ul style="margin-top:12px;">
+            <li>감사인 1: Intel 서버</li>
+            <li>감사인 2: AWS VM</li>
+            <li>감사인 3: Mac (ARM)</li>
+          </ul>
+          <p style="margin-top:16px;">FFT 반올림 차이로 <strong>각자 다른 부분 복호화 결과</strong></p>
+          <p style="margin-top:12px; font-weight:600; color:#c62828;">→ Threshold 복호화 실패</p>
+        </div>
+      </div>
+      <div>
+        <div class="card green">
+          <h3>FHE16의 해결</h3>
+          <p>순수 정수 연산으로:</p>
+          <ul style="margin-top:12px;">
+            <li>플랫폼 무관 동일 결과</li>
+            <li>아키텍처 무관 동일 결과</li>
+            <li>컴파일러 무관 동일 결과</li>
+          </ul>
+          <p style="margin-top:16px; font-weight:600; color:#11998e;">→ Threshold 복호화 성공</p>
+        </div>
+        <div class="metric" style="margin-top:24px;">
+          <div class="label">제약 조건 감소</div>
+          <div class="value blue">42×</div>
+          <div class="desc">1.1M → 26K (negacyclic row 하드코딩)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 24. 데모 결과 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">구현</span>
+    <h2>Solana 기반 프로토타입</h2>
+    <div class="g2">
+      <div>
+        <div class="card">
+          <h3>기술 스택</h3>
+          <ul style="margin-top:12px;">
+            <li><strong>ZK:</strong> Noir + Honk (Aztec)</li>
+            <li><strong>FHE:</strong> RLWE 기반 암호화</li>
+            <li><strong>Threshold:</strong> Shamir 2-of-3</li>
+            <li><strong>Chain:</strong> Solana</li>
+            <li><strong>Hash:</strong> Poseidon (ZK 친화적)</li>
+          </ul>
+        </div>
+        <div class="card blue" style="margin-top:16px;">
+          <h3>리소스</h3>
+          <ul>
+            <li><a href="https://github.com/Ham3798/auditable-dark-pool/">GitHub 저장소</a></li>
+            <li><a href="https://zk-rlwe-pool-solana.vercel.app/">라이브 데모</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="metric">
+          <div class="label">ZK 증명 생성</div>
+          <div class="value">~5초</div>
+          <div class="desc">브라우저 WASM</div>
+        </div>
+        <div class="metric" style="margin-top:28px;">
+          <div class="label">온체인 검증</div>
+          <div class="value green">~200ms</div>
+          <div class="desc">Solana 트랜잭션</div>
+        </div>
+        <div class="metric" style="margin-top:28px;">
+          <div class="label">Solana 해커톤</div>
+          <div class="value blue">수상</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 25. 관련 연구 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">출판물</span>
+    <h2>관련 연구 성과</h2>
+    <div style="margin-top:32px;">
+      <div class="card blue">
+        <h3>1. FHE16 — IEEE Access 2025</h3>
+        <p>"Fast and Compact Bootstrapping Using 16-bit Integer Arithmetic"</p>
+        <p class="sm" style="margin-top:10px;">이승환, 김도혁, 신동준 · <a href="https://eprint.iacr.org/2024/1916">ePrint 2024/1916</a></p>
+      </div>
+      <div class="card green" style="margin-top:20px;">
+        <h3>2. Primitive Gate Bootstrapping — ePrint 2025</h3>
+        <p>"Low-Latency FHE Arithmetic Using Parallel Prefix Group Circuit"</p>
+        <p class="sm" style="margin-top:10px;">김도혁, 김상현, 이승환, 신동준 · <a href="https://eprint.iacr.org/2025/2150">ePrint 2025/2150</a></p>
+      </div>
+      <div class="card" style="margin-top:20px;">
+        <h3>3. Actively Secure MPC — CRYPTO 2025</h3>
+        <p>"Constant Complexity MPC in Dishonest Majority"</p>
+        <p class="sm" style="margin-top:10px;">이승환, 노지훈, 김태진, 김도혁, 신동준 · <a href="https://eprint.iacr.org/2025/810">ePrint 2025/810</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 26. SECTION: 결론 ========== -->
+<div class="slide divider dark">
+  <div class="slide-inner">
+    <span class="tag">Part 6</span>
+    <h2>결론</h2>
+    <p class="lead">통신 관점에서 본 블록체인 프라이버시의 미래</p>
+  </div>
+</div>
+
+<!-- ========== 27. 핵심 논지 정리 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">요약</span>
+    <h2>핵심 논지</h2>
+    <div style="margin-top:36px;">
+      <div class="num-item"><span class="num">1</span><div class="text"><h3>블록체인은 전 세계 분산 시스템</h3><p>검증자가 한국, 미국, 유럽 등에 분산 — 물리적 통신 지연 불가피</p></div></div>
+      <div class="num-item"><span class="num">2</span><div class="text"><h3>MPC는 통신에 의존</h3><p>Secret Sharing: 곱셈마다 라운드 필요 → 54초/트랜잭션<br>Garbled Circuits: 회로 전송 필요 → 대역폭 문제</p></div></div>
+      <div class="num-item"><span class="num">3</span><div class="text"><h3>물리 법칙이 MPC를 막음</h3><p>서울-버지니아 RTT ~180ms는 광속의 한계. 기술 발전으로 개선 불가.</p></div></div>
+      <div class="num-item"><span class="num">4</span><div class="text"><h3>FHE는 통신이 필요 없음</h3><p>각 검증자가 독립 연산 → 라운드 복잡도 O(0)</p></div></div>
+      <div class="num-item"><span class="num">5</span><div class="text"><h3>FHE16이 FHE를 실용화</h3><p>2.89ms 부트스트래핑 + 결정적 연산 → 글로벌 블록체인에서 작동</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 28. 결론 슬라이드 ========== -->
+<div class="slide conclusion">
+  <div class="slide-inner" style="text-align:center;">
+    <h2>결론</h2>
+    <p class="point"><strong>광통신의 물리적 한계</strong>로 인해<br>MPC 기반 프라이버시는 글로벌 블록체인에서 <strong>근본적으로 불가능</strong></p>
+    <p class="point" style="margin-top:40px;"><strong>통신이 필요 없는 FHE</strong>만이<br>블록체인 프라이버시의 <strong>유일한 해결책</strong></p>
+    <p class="point" style="margin-top:40px;"><strong>FHE16</strong>의 고속 + 결정적 연산이<br>이를 <strong>실용화</strong>합니다</p>
+  </div>
+</div>
+
+<!-- ========== 29. 향후 연구 ========== -->
+<div class="slide">
+  <div class="slide-inner">
+    <span class="tag">향후 연구</span>
+    <h2>앞으로의 방향</h2>
+    <div class="g2" style="margin-top:32px;">
+      <div class="card">
+        <h3>하드웨어 가속</h3>
+        <p>16비트 MAC → FPGA DSP 슬라이스</p>
+        <p style="margin-top:12px;">GPU용 소수별 병렬화</p>
+        <p style="margin-top:12px;">목표: <strong>서브밀리초 부트스트래핑</strong></p>
+      </div>
+      <div class="card">
+        <h3>fhEVM 통합</h3>
+        <p>Fhenix, Inco 등 FHE 블록체인과 통합</p>
+        <p style="margin-top:12px;">FHE16의 결정성 + 속도 제공</p>
+        <p style="margin-top:12px;">프로덕션 암호화 스마트 컨트랙트</p>
+      </div>
+      <div class="card">
+        <h3>Primitive Gate 확장</h3>
+        <p>다중 입력 게이트로 회로 깊이 감소</p>
+        <p style="margin-top:12px;">O(log n) 깊이 산술 회로</p>
+        <p style="margin-top:12px;">18-50% 추가 지연 시간 감소</p>
+      </div>
+      <div class="card">
+        <h3>프로덕션 다크풀</h3>
+        <p>WASM 최적화, 멀티에셋 지원</p>
+        <p style="margin-top:12px;">분산 릴레이어 네트워크</p>
+        <p style="margin-top:12px;">보안 감사 및 메인넷 출시</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 30. Q&A ========== -->
+<div class="slide title-slide" style="text-align:center;">
+  <div class="slide-inner">
+    <h1 style="font-size:90px;">Q&A</h1>
+    <p class="lead" style="max-width:600px; margin:28px auto;">감사합니다</p>
+    <p style="margin-top:50px; color:rgba(255,255,255,0.6); font-size:20px;">
+      Seunghwan Lee · <a href="mailto:shlee@walllnut.com" style="color:#0066ff;">shlee@walllnut.com</a>
+    </p>
+    <p style="margin-top:28px; font-size:17px; color:rgba(255,255,255,0.4);">
+      <a href="https://eprint.iacr.org/2024/1916" style="color:rgba(255,255,255,0.6);">FHE16</a> ·
+      <a href="https://eprint.iacr.org/2025/2150" style="color:rgba(255,255,255,0.6);">PGB</a> ·
+      <a href="https://eprint.iacr.org/2025/810" style="color:rgba(255,255,255,0.6);">CRYPTO 2025</a> ·
+      <a href="https://github.com/Ham3798/auditable-dark-pool/" style="color:rgba(255,255,255,0.6);">다크풀 데모</a>
+    </p>
+  </div>
+</div>
+
+</div><!-- end slides-container -->
+
+<div class="footer">2026 한국통신학회 · 한양대학교 정보통신학과</div>
+
+<script>
+const container = document.getElementById('slides');
+const slides = container.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+document.getElementById('tot').textContent = total;
+
+function update() {
+  container.style.transform = `translateX(-${current * 100}vw)`;
+  document.getElementById('cur').textContent = current + 1;
+  document.getElementById('progress').style.width = `${((current + 1) / total) * 100}%`;
+}
+
+function go(delta) {
+  current = Math.max(0, Math.min(total - 1, current + delta));
+  update();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); go(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  if (e.key === 'Home') { e.preventDefault(); current = 0; update(); }
+  if (e.key === 'End') { e.preventDefault(); current = total - 1; update(); }
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) go(diff > 0 ? 1 : -1);
+});
+
+function downloadPDF() {
+  const btn = document.querySelector('.pdf-btn');
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  const opt = {
+    margin: 0,
+    filename: 'FHE-블록체인-통신학회.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'in', format: [16, 9], orientation: 'landscape' },
+    pagebreak: { mode: ['css', 'legacy'] }
+  };
+
+  const tempContainer = document.createElement('div');
+  tempContainer.style.position = 'absolute';
+  tempContainer.style.left = '-9999px';
+  document.body.appendChild(tempContainer);
+
+  slides.forEach(slide => {
+    const clone = slide.cloneNode(true);
+    clone.style.minWidth = '1600px';
+    clone.style.width = '1600px';
+    clone.style.height = '900px';
+    clone.style.pageBreakAfter = 'always';
+    clone.style.display = 'flex';
+    tempContainer.appendChild(clone);
+  });
+
+  html2pdf().set(opt).from(tempContainer).save().then(() => {
+    document.body.removeChild(tempContainer);
+    btn.textContent = 'PDF';
+    btn.disabled = false;
+  }).catch(() => {
+    document.body.removeChild(tempContainer);
+    btn.textContent = 'PDF';
+    btn.disabled = false;
+    alert('Ctrl+P로 인쇄해주세요.');
+  });
+}
+
+update();
+</script>
+</body>
+</html>
