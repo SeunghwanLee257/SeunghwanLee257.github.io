@@ -4891,6 +4891,776 @@ body {
     color: var(--text-light);
 }
 
+/* ========== NEW SLIDES: Core Message, Deal-breaker, Regulatory Map, DvP Innovation, Roadmap, PoC ========== */
+
+/* Slide 2: Message Cards */
+.message-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.message-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--medium-gray);
+}
+
+.message-card.executive-msg {
+    border-left-color: #8B5CF6;
+    background: linear-gradient(90deg, #F5F3FF 0%, white 30%);
+}
+
+.message-card.practitioner-msg {
+    border-left-color: var(--primary);
+    background: linear-gradient(90deg, var(--primary-bg) 0%, white 30%);
+}
+
+.message-card.regulator-msg {
+    border-left-color: var(--green);
+    background: linear-gradient(90deg, #ECFDF5 0%, white 30%);
+}
+
+.msg-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.msg-icon {
+    font-size: 22px;
+}
+
+.msg-audience {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.msg-content {
+    font-size: 16px;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.msg-content strong {
+    color: var(--text-dark);
+}
+
+/* Regulatory Privacy Definition Box */
+.regulatory-privacy-def {
+    background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    border-radius: 14px;
+    padding: 18px 24px;
+    color: white;
+}
+
+.regulatory-privacy-def h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #FEF3C7;
+}
+
+.def-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.def-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.def-num {
+    width: 22px;
+    height: 22px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+/* Slide 3: Deal-breaker Grid */
+.dealbreaker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.db-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-top: 3px solid var(--red);
+}
+
+.db-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.db-icon {
+    font-size: 22px;
+}
+
+.db-num {
+    width: 22px;
+    height: 22px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.db-card h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.db-problem {
+    font-size: 13px;
+    color: var(--text-medium);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.db-counter {
+    font-size: 11px;
+    color: var(--text-light);
+    padding: 6px 10px;
+    background: #FEF2F2;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.counter-label {
+    font-weight: 700;
+    color: var(--red);
+}
+
+.db-rebuttal {
+    font-size: 11px;
+    color: var(--text-medium);
+    padding: 6px 10px;
+    background: #ECFDF5;
+    border-radius: 8px;
+}
+
+.rebuttal-label {
+    font-weight: 700;
+    color: var(--green);
+}
+
+.dealbreaker-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    border-radius: 14px;
+    padding: 16px 28px;
+    color: white;
+    font-size: 18px;
+}
+
+/* Slide 4: Regulatory Timeline & Actor Map */
+.reg-timeline-section {
+    margin-bottom: 16px;
+}
+
+.reg-timeline {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-track {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.timeline-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    border-left: 3px solid var(--medium-gray);
+}
+
+.timeline-item.confirmed {
+    border-left-color: var(--green);
+    background: #ECFDF5;
+}
+
+.timeline-item.pending {
+    border-left-color: var(--orange);
+    background: #FEF3C7;
+}
+
+.timeline-item.undecided {
+    border-left-color: var(--text-light);
+    background: #F1F5F9;
+}
+
+.tl-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.tl-event {
+    font-size: 11px;
+    color: var(--text-medium);
+    line-height: 1.4;
+}
+
+.tl-status {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-top: 4px;
+}
+
+.confirmed-badge {
+    background: var(--green);
+    color: white;
+}
+
+.pending-badge {
+    background: var(--orange);
+    color: white;
+}
+
+.undecided-badge {
+    background: var(--text-light);
+    color: white;
+}
+
+/* Actor Map */
+.actor-map {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 12px;
+}
+
+.actor-layer {
+    margin-bottom: 8px;
+}
+
+.actor-layer .layer-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.regulator-layer .layer-label { color: #8B5CF6; }
+.infra-layer .layer-label { color: var(--primary); }
+.business-layer .layer-label { color: var(--green); }
+
+.actor-nodes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.actor-node {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    border: 1px solid var(--medium-gray);
+}
+
+.actor-node.ksd-node,
+.actor-node.koscom-node {
+    border: 2px solid var(--primary);
+    background: var(--primary-bg);
+}
+
+.actor-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.actor-concern {
+    font-size: 10px;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.highlight-concern {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+.layer-arrow {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 4px 0;
+}
+
+.reg-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #FEF3C7;
+    border-left: 4px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-dark);
+}
+
+/* Slide 5: DvP Innovation */
+.dvp-innovation-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dvp-current, .dvp-future {
+    flex: 1;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.dvp-current {
+    border: 2px solid var(--red);
+}
+
+.dvp-future {
+    border: 2px solid var(--green);
+    background: linear-gradient(135deg, #ECFDF5 0%, white 100%);
+}
+
+.dvp-current h4, .dvp-future h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.dvp-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.flow-step {
+    padding: 8px 14px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.flow-step.delay {
+    background: #FEE2E2;
+    color: var(--red);
+}
+
+.flow-step.atomic-step {
+    background: var(--green);
+    color: white;
+    font-weight: 700;
+}
+
+.flow-arrow {
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.highlight-arrow {
+    color: var(--green) !important;
+}
+
+.current-problems, .future-benefits {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.problem-chip {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    background: #FEE2E2;
+    color: var(--red);
+    border-radius: 12px;
+}
+
+.benefit-chip {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    background: #D1FAE5;
+    color: #059669;
+    border-radius: 12px;
+}
+
+.vs-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.vs-divider .vs-text {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--primary);
+    padding: 10px 14px;
+    background: var(--primary-bg);
+    border-radius: 10px;
+}
+
+/* Payment Leg Section */
+.payment-leg-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 14px;
+}
+
+.payment-leg-section h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.privacy-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.privacy-point {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--text-medium);
+}
+
+.privacy-point:last-child {
+    grid-column: span 2;
+    background: var(--primary-bg);
+    border: 1px solid var(--primary);
+}
+
+.pp-num {
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+/* Slide 7: Roadmap Grid */
+.roadmap-grid {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 16px;
+}
+
+.phase-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--medium-gray);
+}
+
+.phase-card.phase1-card {
+    border-top-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary-bg) 0%, white 100%);
+}
+
+.phase-card.phase2-card {
+    border-top-color: var(--green);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.phase-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+}
+
+.phase-badge.phase2-badge {
+    background: var(--green);
+}
+
+.phase-timeline {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.phase-card h4 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.phase-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.03);
+    border-radius: 8px;
+}
+
+.detail-label {
+    font-weight: 700;
+    color: var(--text-light);
+    min-width: 60px;
+}
+
+.detail-value {
+    color: var(--text-medium);
+    flex: 1;
+}
+
+.phase-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roadmap-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    border-radius: 14px;
+    padding: 16px 28px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Slide 10: PoC Blueprint */
+.poc-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.poc-scope, .poc-deliverables {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.poc-scope h4, .poc-deliverables h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.scope-items, .deliverable-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.scope-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.scope-item.included {
+    background: #ECFDF5;
+    color: var(--text-medium);
+}
+
+.scope-item.included .scope-icon {
+    color: var(--green);
+    font-weight: 800;
+}
+
+.scope-item.excluded {
+    background: #F1F5F9;
+    color: var(--text-light);
+}
+
+.scope-item.excluded .scope-icon {
+    color: var(--text-light);
+}
+
+.deliverable-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-medium);
+}
+
+.del-icon {
+    font-size: 16px;
+}
+
+.del-name {
+    font-weight: 600;
+}
+
+/* PoC Timeline */
+.poc-timeline {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 14px;
+}
+
+.poc-timeline h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.timeline-weeks {
+    display: flex;
+    gap: 12px;
+}
+
+.week-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    border-left: 3px solid var(--primary);
+}
+
+.week-num {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.week-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.week-detail {
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.poc-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-bg);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
 /* Print / PDF Styles */
 @media print {
     .controls { display: none !important; }
