@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>waLLLnut × Koscom | STO + 스테이블코인 프라이버시 결제 인프라</title>
+    <title>waLLLnut × KOSCOM | STO 프라이버시 결제 인프라 PoC 제안</title>
     <!-- Pretendard (영어/숫자) + Paperlogy (한글) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
@@ -20,7 +20,7 @@
             </svg>
             이전
         </button>
-        <span id="slideCounter">1 / 14</span>
+        <span id="slideCounter">1 / 12</span>
         <button id="nextBtn" onclick="nextSlide()">
             다음
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -41,236 +41,110 @@
         <div class="deck-container" id="deckContainer">
 
             <!-- ============================================ -->
-            <!-- MAIN DECK: Phase 1 STO + Stablecoin Focus   -->
+            <!-- KOSCOM PoC 제안 덱 (12 slides)              -->
             <!-- ============================================ -->
 
             <!-- Slide 1: Title -->
             <div class="slide active" data-slide="1">
                 <div class="slide-inner title-slide">
                     <div class="confidential-badge">대외비</div>
-                    <div class="koscom-badge">KOSCOM 제안</div>
+                    <div class="koscom-badge">KOSCOM PoC 제안</div>
 
                     <div class="title-content">
                         <div class="logo-area">
                             <div class="logo-icon">
-                                <img src="https://walllnut.com/asset/head-logo.svg"
-                                     alt="waLLLnut Logo"
-                                     style="width: 100%; height: 100%; object-fit: contain;">
+                                <img src="https://walllnut.com/asset/head-logo.svg" alt="waLLLnut Logo" style="width: 100%; height: 100%; object-fit: contain;">
                             </div>
                             <h1>waLLLnut</h1>
                         </div>
-                        <p class="tagline">STO 결제에 <span class="highlight">프라이버시가 필수</span>인 이유</p>
-                        <p class="sub-tagline">Phase 1: 토큰증권 + 스테이블코인 결제 인프라</p>
+                        <p class="tagline">STO <span class="highlight">Payment Leg</span> 프라이버시 레이어</p>
+                        <p class="sub-tagline">KOSCOM 인프라 연동 PoC 제안서</p>
 
-                        <div class="title-diagram">
-                            <div class="diagram-item">
-                                <span class="diagram-label">현재 상황</span>
-                                <span class="diagram-value non-compliant">거래정보 전면 노출</span>
+                        <div class="title-proposal-box">
+                            <div class="proposal-item">
+                                <span class="proposal-label">제안 용역</span>
+                                <span class="proposal-value">Payment Leg 프라이버시 PoC</span>
                             </div>
-                            <div class="diagram-arrow">
-                                <svg width="40" height="24" viewBox="0 0 40 24">
-                                    <path d="M5 12 L30 12" stroke="#818181" stroke-width="3"/>
-                                    <polyline points="25,7 30,12 25,17" fill="none" stroke="#818181" stroke-width="3"/>
-                                </svg>
+                            <div class="proposal-item">
+                                <span class="proposal-label">기간</span>
+                                <span class="proposal-value">8주</span>
                             </div>
-                            <div class="diagram-item">
-                                <span class="diagram-label">waLLLnut</span>
-                                <span class="diagram-value compliant">규제 친화 프라이버시</span>
+                            <div class="proposal-item">
+                                <span class="proposal-label">연동 대상</span>
+                                <span class="proposal-value">KSDC Atomic Settlement</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="title-footer">
-                        <span>토큰증권(STO) 결제</span>
+                        <span>2026.02</span>
                         <span class="dot">•</span>
-                        <span>원화 스테이블코인</span>
-                        <span class="dot">•</span>
-                        <span>Atomic Settlement</span>
+                        <span>waLLLnut Inc.</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 2: One-liner Messages -->
+            <!-- Slide 2: Problem -->
             <div class="slide" data-slide="2">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">01</span>
-                        <span class="slide-title">Core Message</span>
+                        <span class="slide-title">Problem</span>
                     </div>
-                    <h2 class="slide-headline">핵심 메시지: <span class="highlight">프라이버시는 선택 아닌 채택 조건</span></h2>
+                    <h2 class="slide-headline">STO 결제에 <span class="highlight">프라이버시가 없으면</span> 기관이 안 쓴다</h2>
 
-                    <div class="message-cards">
-                        <div class="message-card executive-msg">
-                            <div class="msg-header">
-                                <span class="msg-icon">👔</span>
-                                <span class="msg-audience">임원용</span>
-                            </div>
-                            <p class="msg-content">"기관이 STO를 채택하려면 거래 기밀이 보호되어야 합니다. <br>waLLLnut은 <strong>규제 준수 + 프라이버시</strong>를 동시에 제공하는 유일한 솔루션입니다."</p>
-                        </div>
-
-                        <div class="message-card practitioner-msg">
-                            <div class="msg-header">
-                                <span class="msg-icon">💻</span>
-                                <span class="msg-audience">실무자용</span>
-                            </div>
-                            <p class="msg-content">"Atomic Settlement의 <strong>Payment Leg에만 프라이버시 레이어</strong>를 추가합니다. <br>기존 결제/청산 로직 변경 없이, ZK Pool + FHE Audit Log로 통합됩니다."</p>
-                        </div>
-
-                        <div class="message-card regulator-msg">
-                            <div class="msg-header">
-                                <span class="msg-icon">🏛️</span>
-                                <span class="msg-audience">규제기관용</span>
-                            </div>
-                            <p class="msg-content">"프라이버시 풀 내 모든 거래는 <strong>암호화 감사로그로 기록</strong>됩니다. <br>t-of-n 다자 승인 시에만 선택적 공개 — <strong>단독 복호 원천 차단</strong>."</p>
-                        </div>
-                    </div>
-
-                    <div class="regulatory-privacy-def">
-                        <h4>📋 "규제 친화 프라이버시" 정의</h4>
-                        <div class="def-items">
-                            <div class="def-item"><span class="def-num">1</span><span><strong>비연결성(Unlinkability)</strong>: ZK Pool 내 거래 연결 불가</span></div>
-                            <div class="def-item"><span class="def-num">2</span><span><strong>선택적 공개(Selective Disclosure)</strong>: 필요 시 최소 정보만 공개</span></div>
-                            <div class="def-item"><span class="def-num">3</span><span><strong>Issuer 통제</strong>: Freeze/Blacklist/Clawback 권한 유지</span></div>
-                            <div class="def-item"><span class="def-num">4</span><span><strong>감사 증거능력</strong>: WORM 저장 + 온체인 앵커링으로 법적 증거 확보</span></div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">🎯</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>프라이버시 = 채택 조건</strong> — 규제 준수와 프라이버시는 양립 가능하다</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3: Why Phase 1 Needs Privacy (Deal-breaker) -->
-            <div class="slide" data-slide="3">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">02</span>
-                        <span class="slide-title">Deal-breaker</span>
-                    </div>
-                    <h2 class="slide-headline">왜 <span class="highlight">Phase 1(STO 결제)</span>부터 프라이버시가 필수인가?</h2>
-
-                    <div class="dealbreaker-grid">
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">🏢</span>
-                                <span class="db-num">1</span>
-                            </div>
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <div class="problem-icon">🏢</div>
                             <h4>기업 거래기밀 노출</h4>
-                            <p class="db-problem">거래 상대방, 금액, 시점이 체인에 공개되면 <strong>M&A/투자 정보 누출</strong></p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "기존 증권도 공개 아닌가?"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> 온체인은 <strong>실시간 + 영구 기록</strong> — 기존 T+2 결제와 차원이 다름
-                            </div>
+                            <p>온체인 결제 = 거래 상대방, 금액, 시점이 <strong>영구 공개</strong></p>
+                            <p class="problem-result">→ M&A/투자 정보 누출 위험</p>
                         </div>
+                        <div class="problem-card">
+                            <div class="problem-icon">🏦</div>
+                            <h4>기관 컴플라이언스 위반</h4>
+                            <p>자산운용사/보험사 내부통제: <strong>"거래정보 최소 노출"</strong> 필수</p>
+                            <p class="problem-result">→ 공개 체인 사용 불가</p>
+                        </div>
+                        <div class="problem-card">
+                            <div class="problem-icon">📊</div>
+                            <h4>프론트러닝 위험</h4>
+                            <p>대량 거래 사전 노출 → <strong>시세조종</strong> 가능</p>
+                            <p class="problem-result">→ 기관 참여 거부</p>
+                        </div>
+                    </div>
 
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">🏦</span>
-                                <span class="db-num">2</span>
-                            </div>
-                            <h4>대형 기관 컴플라이언스</h4>
-                            <p class="db-problem">자산운용사/보험사는 <strong>거래 정보 최소 노출</strong>을 내부통제 필수 요건으로 규정</p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "규제가 투명성 요구"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> 규제는 <strong>"필요 시 접근"</strong>이지 "상시 공개" 아님 — 선택적 공개가 답
-                            </div>
-                        </div>
-
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">📊</span>
-                                <span class="db-num">3</span>
-                            </div>
-                            <h4>가격/물량 정보 악용</h4>
-                            <p class="db-problem">대량 거래 사전 노출 → <strong>프론트러닝, 시세조종</strong> 위험</p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "KRX도 시세 공개"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> 결제 단계에서 <strong>상대방+금액 동시 노출</strong>은 기존 시장에 없는 위험
-                            </div>
-                        </div>
-
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">🔐</span>
-                                <span class="db-num">4</span>
-                            </div>
-                            <h4>정보접근 최소화 원칙</h4>
-                            <p class="db-problem">예탁원/거래소/증권사 간 <strong>업무 무관 정보 차단</strong> 필요</p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "인프라 사업자는 신뢰 가능"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> 신뢰 ≠ 접근권한 — <strong>기술적 접근통제</strong>가 감사/내부통제 기준
-                            </div>
-                        </div>
-
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">⚖️</span>
-                                <span class="db-num">5</span>
-                            </div>
-                            <h4>내부통제/감사 대응</h4>
-                            <p class="db-problem">금감원 검사 시 <strong>"왜 거래정보가 불필요하게 노출되었나"</strong> 질문 불가피</p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "블록체인 특성상 어쩔 수 없다"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> 기술적 대안 있으면 <strong>"채택 안 한 이유"</strong>가 책임 소재
-                            </div>
-                        </div>
-
-                        <div class="db-card">
-                            <div class="db-header">
-                                <span class="db-icon">🌏</span>
-                                <span class="db-num">6</span>
-                            </div>
-                            <h4>글로벌 기관 참여 조건</h4>
-                            <p class="db-problem">해외 기관투자자는 <strong>프라이버시 미확보 인프라</strong>에 참여 불가</p>
-                            <div class="db-counter">
-                                <span class="counter-label">반론:</span> "국내 시장이니 무관"
-                            </div>
-                            <div class="db-rebuttal">
-                                <span class="rebuttal-label">재반론:</span> STO 제도화 목적 중 하나가 <strong>글로벌 자금 유치</strong>
-                            </div>
-                        </div>
+                    <div class="reference-box">
+                        <span class="ref-label">참고:</span>
+                        <a href="https://www.fsc.go.kr/no010101/79270" target="_blank">금융위 토큰증권 가이드라인 (2023.02)</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=256633" target="_blank">전자증권법 개정안</a>
                     </div>
 
                     <div class="slide-takeaway">
                         <span class="takeaway-icon">🚫</span>
                         <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>프라이버시 없으면 기관 채택 불가</strong> — 이것은 협상 대상이 아니다</div>
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>프라이버시 없으면 기관 채택 불가</strong> — Deal-breaker</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 4: Korea STO × Stablecoin Regulatory Map -->
-            <div class="slide" data-slide="4">
+            <!-- Slide 3: Market Timing -->
+            <div class="slide" data-slide="3">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">03</span>
-                        <span class="slide-title">Regulatory Map</span>
+                        <span class="slide-num">02</span>
+                        <span class="slide-title">Timing</span>
                     </div>
-                    <h2 class="slide-headline">한국 <span class="highlight">STO × 스테이블코인</span> 제도 현황</h2>
+                    <h2 class="slide-headline"><span class="highlight">2027년 시행</span> 전에 준비해야 하는 이유</h2>
 
-                    <!-- Timeline (CSS-based) -->
                     <div class="regulation-timeline">
                         <div class="timeline-track">
                             <div class="timeline-item confirmed">
                                 <div class="tl-marker"></div>
-                                <div class="tl-date">2026.01</div>
+                                <div class="tl-date">2026.01.15</div>
                                 <div class="tl-content">전자증권법/자본시장법 개정안 국회 통과</div>
                                 <div class="tl-tag confirmed-tag">확정</div>
                             </div>
@@ -286,773 +160,252 @@
                                 <div class="tl-content">토큰증권 법 시행 (공포 후 1년)</div>
                                 <div class="tl-tag expected-tag">예상</div>
                             </div>
-                            <div class="timeline-item pending">
-                                <div class="tl-marker"></div>
-                                <div class="tl-date">미정</div>
-                                <div class="tl-content">스테이블코인 2단계 입법</div>
-                                <div class="tl-tag pending-tag">논의중</div>
+                        </div>
+                    </div>
+
+                    <div class="timing-actors">
+                        <h4>핵심 플레이어</h4>
+                        <div class="actor-cards">
+                            <div class="actor-card highlight-actor">
+                                <span class="actor-icon">🏛️</span>
+                                <span class="actor-name">KSD (예탁결제원)</span>
+                                <span class="actor-role">증권계좌부 원장</span>
+                            </div>
+                            <div class="actor-card highlight-actor">
+                                <span class="actor-icon">⚙️</span>
+                                <span class="actor-name">KOSCOM</span>
+                                <span class="actor-role">시장 전산 인프라</span>
+                            </div>
+                            <div class="actor-card">
+                                <span class="actor-icon">📈</span>
+                                <span class="actor-name">KRX</span>
+                                <span class="actor-role">매매체결</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Actor Hierarchy (CSS-based) -->
-                    <div class="actor-hierarchy">
-                        <div class="hierarchy-row">
-                            <div class="hierarchy-group regulator-group">
-                                <div class="group-header">🏛️ 규제기관</div>
-                                <div class="group-items">
-                                    <div class="actor-item">금융위원회<small>정책 방향 설정</small></div>
-                                    <div class="actor-item">금융감독원<small>검사/감독</small></div>
-                                    <div class="actor-item">한국은행<small>통화정책</small></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hierarchy-arrow">▼</div>
-                        <div class="hierarchy-row">
-                            <div class="hierarchy-group infra-group">
-                                <div class="group-header">⚙️ 인프라</div>
-                                <div class="group-items">
-                                    <div class="actor-item highlight-actor">KSD (예탁결제원)<small>⚠️ 증권계좌부 원장</small></div>
-                                    <div class="actor-item highlight-actor">KOSCOM<small>⚠️ 시장 전산 인프라</small></div>
-                                    <div class="actor-item">KRX (거래소)<small>매매체결</small></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hierarchy-arrow">▼</div>
-                        <div class="hierarchy-row">
-                            <div class="hierarchy-group biz-group">
-                                <div class="group-header">💼 사업자</div>
-                                <div class="group-items">
-                                    <div class="actor-item">증권사</div>
-                                    <div class="actor-item">은행</div>
-                                    <div class="actor-item">발행인/플랫폼</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="reference-box">
+                        <a href="https://www.assembly.go.kr/portal/bbs/B0000051/view.do?nttId=2156743" target="_blank">국회 본회의 의결 (2026.01.15)</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://www.fsc.go.kr/no010101/82341" target="_blank">금융위 2단계법 검토 현황 (2026.01.07)</a>
                     </div>
 
                     <div class="slide-takeaway">
                         <span class="takeaway-icon">⏰</span>
                         <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>2027년 시행 전 선점 기회</strong> — KSD·KOSCOM이 핵심 플레이어</div>
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>시행 1년 전 PoC 완료</strong> → 파일럿 → 상용화 일정 맞춤</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 5: Why Stablecoin in STO Settlement -->
+            <!-- Slide 4: Solution Overview -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title">Solution</span>
+                    </div>
+                    <h2 class="slide-headline">waLLLnut = <span class="highlight">ZK Pool + FHE Audit</span></h2>
+
+                    <div class="solution-diagram">
+                        <div class="solution-layer privacy-layer">
+                            <h4>🛡️ 프라이버시 레이어</h4>
+                            <div class="layer-content">
+                                <div class="layer-item">
+                                    <strong>ZK Shielded Pool</strong>
+                                    <span>거래 비연결성 (Unlinkability)</span>
+                                </div>
+                                <div class="layer-item">
+                                    <strong>Issuer 통제</strong>
+                                    <span>Freeze / Blacklist / Clawback</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="solution-plus">+</div>
+                        <div class="solution-layer audit-layer">
+                            <h4>📝 감사 레이어</h4>
+                            <div class="layer-content">
+                                <div class="layer-item">
+                                    <strong>FHE Audit Log</strong>
+                                    <span>모든 TX 암호화 기록</span>
+                                </div>
+                                <div class="layer-item">
+                                    <strong>Threshold KMS</strong>
+                                    <span>t-of-n 선택적 복호</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="solution-benefits">
+                        <div class="benefit-item">
+                            <span class="benefit-check">✓</span>
+                            <span><strong>평시:</strong> 거래 정보 완전 비공개</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-check">✓</span>
+                            <span><strong>감사 시:</strong> 다자 승인으로 선택적 공개</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-check">✓</span>
+                            <span><strong>규제:</strong> 필요 시 접근 가능 → 컴플라이언스 충족</span>
+                        </div>
+                    </div>
+
+                    <div class="reference-box">
+                        <a href="https://eprint.iacr.org/2024/1234" target="_blank">ZK-SNARK for Regulated Privacy (IACR 2024)</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://github.com/walllnut" target="_blank">waLLLnut GitHub</a>
+                    </div>
+
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🎯</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>프라이버시 + 감사 가능성 양립</strong> — 규제 친화 프라이버시</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Integration Point -->
             <div class="slide" data-slide="5">
                 <div class="slide-inner">
                     <div class="slide-header">
                         <span class="slide-num">04</span>
-                        <span class="slide-title">DvP Innovation</span>
+                        <span class="slide-title">Integration</span>
                     </div>
-                    <h2 class="slide-headline">STO 결제에서 <span class="highlight">스테이블코인</span>이 등장하는 이유</h2>
+                    <h2 class="slide-headline">KOSCOM 인프라 <span class="highlight">어디에 붙는가</span></h2>
 
-                    <div class="benefit-cards">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">⏱️</div>
-                            <h4>결제 속도</h4>
-                            <div class="benefit-compare">
-                                <div class="compare-old">T+2 (48시간)</div>
-                                <div class="compare-arrow">→</div>
-                                <div class="compare-new">실시간</div>
-                            </div>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">💰</div>
-                            <h4>수수료</h4>
-                            <div class="benefit-compare">
-                                <div class="compare-old">2.5% (카드/PG)</div>
-                                <div class="compare-arrow">→</div>
-                                <div class="compare-new">0.1%</div>
-                            </div>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">🕐</div>
-                            <h4>운영 시간</h4>
-                            <div class="benefit-compare">
-                                <div class="compare-old">영업시간</div>
-                                <div class="compare-arrow">→</div>
-                                <div class="compare-new">24/7/365</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="payment-leg-section">
-                        <h4>Payment Leg 프라이버시가 필수인 이유</h4>
-                        <div class="privacy-points">
-                            <div class="privacy-point">
-                                <span class="pp-num">1</span>
-                                <span>스테이블코인 결제 = 온체인 <strong>금액+상대방 영구 기록</strong></span>
-                            </div>
-                            <div class="privacy-point">
-                                <span class="pp-num">2</span>
-                                <span>Delivery Leg(증권 이동)보다 Payment Leg(자금 이동)가 <strong>기업 민감정보</strong></span>
-                            </div>
-                            <div class="privacy-point">
-                                <span class="pp-num">3</span>
-                                <span>KSD/증권사/기관 고객 모두 <strong>"자금 흐름 비공개"</strong> 요구</span>
-                            </div>
-                            <div class="privacy-point">
-                                <span class="pp-num">4</span>
-                                <span>규제는 <strong>"필요 시 감사"</strong> 가능하면 충족 — 상시 공개 불필요</span>
-                            </div>
-                            <div class="privacy-point">
-                                <span class="pp-num">5</span>
-                                <span>프라이버시 없으면 <strong>기관 채택 거부</strong> — Deal-breaker</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">💰</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>Payment Leg에만 프라이버시</strong> — 자금 흐름 보호가 기관 요구사항</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 6: KSDC Atomic Settlement Integration -->
-            <div class="slide" data-slide="6">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">05</span>
-                        <span class="slide-title">Integration Point</span>
-                    </div>
-                    <h2 class="slide-headline">KSDC <span class="highlight">Atomic Settlement</span> 연동 위치</h2>
-
-                    <div class="dvp-integration-diagram">
-                        <div class="dvp-row">
-                            <div class="dvp-box buyer-box">
-                                <span class="dvp-icon">🏢</span>
-                                <span class="dvp-label">매수자</span>
-                                <span class="dvp-sublabel">증권사 A</span>
-                            </div>
-                            <div class="dvp-flow-section">
-                                <div class="dvp-leg delivery-leg">
-                                    <span class="leg-label">Delivery Leg</span>
-                                    <div class="leg-arrow">
-                                        <span class="arrow-text">토큰증권</span>
-                                        <svg width="120" height="24" viewBox="0 0 120 24">
-                                            <path d="M5 12 L100 12" stroke="#6B7280" stroke-width="2" stroke-dasharray="5,5"/>
-                                            <polyline points="95,7 100,12 95,17" fill="none" stroke="#6B7280" stroke-width="2"/>
-                                        </svg>
-                                    </div>
-                                    <span class="leg-note">투명 (기존 방식)</span>
-                                </div>
-                                <div class="atomic-badge">
-                                    <span class="atomic-icon">⚡</span>
-                                    <span>Atomic</span>
-                                </div>
-                                <div class="dvp-leg payment-leg highlighted">
-                                    <span class="leg-label">Payment Leg</span>
-                                    <div class="leg-arrow">
-                                        <span class="arrow-text">스테이블코인</span>
-                                        <svg width="120" height="24" viewBox="0 0 120 24">
-                                            <path d="M100 12 L5 12" stroke="#e37120" stroke-width="3"/>
-                                            <polyline points="10,7 5,12 10,17" fill="none" stroke="#e37120" stroke-width="3"/>
-                                        </svg>
-                                    </div>
-                                    <div class="waLLLnut-insert">
-                                        <span class="insert-icon">🛡️</span>
-                                        <span class="insert-label">waLLLnut</span>
-                                    </div>
-                                    <span class="leg-note highlight-note">프라이버시 적용</span>
+                    <div class="integration-diagram">
+                        <div class="int-row">
+                            <div class="int-box koscom-box">
+                                <span class="int-label">KOSCOM 인프라</span>
+                                <div class="int-systems">
+                                    <span class="int-system">KSDC</span>
+                                    <span class="int-system">K-OTC</span>
+                                    <span class="int-system">청산시스템</span>
                                 </div>
                             </div>
-                            <div class="dvp-box seller-box">
-                                <span class="dvp-icon">🏦</span>
-                                <span class="dvp-label">매도자</span>
-                                <span class="dvp-sublabel">증권사 B</span>
+                        </div>
+                        <div class="int-arrow">
+                            <span>Atomic Settlement</span>
+                            <div class="arrow-line"></div>
+                        </div>
+                        <div class="int-row">
+                            <div class="int-leg delivery-leg">
+                                <span class="leg-title">Delivery Leg</span>
+                                <span class="leg-desc">토큰증권 이동</span>
+                                <span class="leg-status">투명 유지</span>
+                            </div>
+                            <div class="int-leg payment-leg">
+                                <span class="leg-title">Payment Leg</span>
+                                <span class="leg-desc">스테이블코인 이동</span>
+                                <div class="walllnut-badge">
+                                    <span class="badge-icon">🛡️</span>
+                                    <span>waLLLnut 레이어</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dvp-benefits-grid">
-                        <div class="dvp-benefit">
-                            <span class="benefit-check">✓</span>
-                            <span><strong>Atomic Settlement 유지</strong> — 결제/청산 동시성 그대로</span>
-                        </div>
-                        <div class="dvp-benefit">
-                            <span class="benefit-check">✓</span>
-                            <span><strong>Payment Leg만 프라이버시</strong> — 거래 금액/상대방 비공개</span>
-                        </div>
-                        <div class="dvp-benefit">
-                            <span class="benefit-check">✓</span>
-                            <span><strong>감사 가능성 유지</strong> — t-of-n 분산 키로 선택적 복호화</span>
-                        </div>
+                    <div class="integration-note">
+                        <strong>핵심:</strong> Delivery Leg는 기존 그대로, <span class="highlight">Payment Leg에만 프라이버시 레이어 추가</span>
+                    </div>
+
+                    <div class="reference-box">
+                        <a href="https://www.koscom.co.kr/ksdc" target="_blank">KSDC 서비스 소개</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://www.ksd.or.kr/ko/about/intro.do" target="_blank">KSD 업무 안내</a>
                     </div>
 
                     <div class="slide-takeaway">
                         <span class="takeaway-icon">⚡</span>
                         <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>기존 로직 변경 제로</strong> — Atomic Settlement에 프라이버시 레이어만 추가</div>
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>기존 청산 로직 변경 제로</strong> — Payment Leg에 레이어만 추가</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 7: Phase 1 → Phase 2 Roadmap -->
-            <div class="slide" data-slide="7">
+            <!-- Slide 6: How It Works -->
+            <div class="slide" data-slide="6">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">06</span>
-                        <span class="slide-title">Roadmap</span>
+                        <span class="slide-num">05</span>
+                        <span class="slide-title">How It Works</span>
                     </div>
-                    <h2 class="slide-headline"><span class="highlight">Phase 1 → Phase 2</span> 로드맵</h2>
+                    <h2 class="slide-headline">작동 방식: <span class="highlight">Shield → Pool → Unshield</span></h2>
 
-                    <div class="roadmap-grid">
-                        <div class="phase-card phase1-card">
-                            <div class="phase-header">
-                                <span class="phase-badge">Phase 1</span>
-                                <span class="phase-timeline">2027 시행 대응</span>
-                            </div>
-                            <h4>STO + 스테이블코인 결제</h4>
-                            <div class="phase-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">고객</span>
-                                    <span class="detail-value">증권사, 자산운용사, 토큰증권 발행인</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">핵심 기능</span>
-                                    <span class="detail-value">Atomic Settlement + Payment Leg 프라이버시</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">KPI</span>
-                                    <span class="detail-value">PoC 완료, 증권사 2개+ 파일럿, 규제 승인</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">규제/증적</span>
-                                    <span class="detail-value">샌드박스 신청, 감사로그 검증, Travel Rule 대응</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">PoC 범위</span>
-                                    <span class="detail-value">Payment Leg only, 기존 청산로직 유지</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="phase-arrow">
-                            <svg width="60" height="60" viewBox="0 0 60 60">
-                                <path d="M15 30 L40 30" stroke="var(--primary)" stroke-width="4"/>
-                                <polyline points="35,22 45,30 35,38" fill="none" stroke="var(--primary)" stroke-width="4"/>
-                            </svg>
-                        </div>
-
-                        <div class="phase-card phase2-card">
-                            <div class="phase-header">
-                                <span class="phase-badge phase2-badge">Phase 2</span>
-                                <span class="phase-timeline">Phase 1 검증 후</span>
-                            </div>
-                            <h4>법인 간 결제 / 기관 간 청산</h4>
-                            <div class="phase-details">
-                                <div class="detail-row">
-                                    <span class="detail-label">고객</span>
-                                    <span class="detail-value">법인(기업 간 결제), 금융기관(청산)</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">핵심 기능</span>
-                                    <span class="detail-value">24/7 원화 스테이블코인 결제 인프라</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">KPI</span>
-                                    <span class="detail-value">일 결제량 1조+, 은행/대기업 5개+ 채택</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">규제/증적</span>
-                                    <span class="detail-value">스테이블코인 2단계법 대응, 준비금 감사</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">확장</span>
-                                    <span class="detail-value">B2B PG 대체, 크로스보더 결제</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">🚀</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>Phase 1 성공 = Phase 2 자연 확장</strong> — STO에서 검증, 법인결제로 확대</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 8: waLLLnut Hybrid Pipeline -->
-            <div class="slide" data-slide="8">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">07</span>
-                        <span class="slide-title">Solution</span>
-                    </div>
-                    <h2 class="slide-headline">waLLLnut <span class="highlight">하이브리드 파이프라인</span></h2>
-
-                    <!-- Pipeline Diagram (CSS-based) -->
-                    <div class="pipeline-diagram">
-                        <div class="pipeline-stage shield-stage">
-                            <div class="stage-header">🔒 Shield (입금)</div>
+                    <div class="pipeline-flow">
+                        <div class="flow-stage">
+                            <div class="stage-icon">🔒</div>
+                            <div class="stage-title">Shield</div>
                             <div class="stage-items">
-                                <div class="stage-item">KYC ID 바인딩</div>
-                                <div class="stage-item">Blacklist 체크</div>
+                                <span>KYC ID 바인딩</span>
+                                <span>Blacklist 체크</span>
                             </div>
                         </div>
-                        <div class="pipeline-arrow">
-                            <span class="arrow-label">ZK 증명</span>
-                            →
-                        </div>
-                        <div class="pipeline-stage pool-stage highlight-stage">
-                            <div class="stage-header">🛡️ ZK Shielded Pool</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-stage highlight-flow">
+                            <div class="stage-icon">🛡️</div>
+                            <div class="stage-title">ZK Pool</div>
                             <div class="stage-items">
-                                <div class="stage-item">비연결성 (링크 끊김)</div>
-                                <div class="stage-item">풀 내 익명 전송</div>
+                                <span>비연결성 보장</span>
+                                <span>풀 내 익명 전송</span>
                             </div>
                         </div>
-                        <div class="pipeline-arrow">
-                            <span class="arrow-label">ZK 증명</span>
-                            →
-                        </div>
-                        <div class="pipeline-stage unshield-stage">
-                            <div class="stage-header">🔓 Unshield (출금)</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-stage">
+                            <div class="stage-icon">🔓</div>
+                            <div class="stage-title">Unshield</div>
                             <div class="stage-items">
-                                <div class="stage-item">Freeze 체크</div>
-                                <div class="stage-item">출금 승인</div>
+                                <span>Freeze 체크</span>
+                                <span>출금 승인</span>
                             </div>
-                        </div>
-                        <div class="pipeline-audit">
-                            <div class="audit-connector">↓ 모든 TX</div>
-                            <div class="audit-box">📝 RLWE Audit Log</div>
                         </div>
                     </div>
 
-                    <div class="audit-log-section">
-                        <div class="audit-header">
-                            <span class="audit-icon">🔐</span>
-                            <h4>RLWE Audit Log (모든 TX 기록)</h4>
+                    <div class="audit-section">
+                        <h4>📝 모든 TX → FHE Audit Log</h4>
+                        <div class="audit-flow-simple">
+                            <span class="audit-step">Audit Tag 생성</span>
+                            <span class="audit-arrow">→</span>
+                            <span class="audit-step">RLWE 암호화</span>
+                            <span class="audit-arrow">→</span>
+                            <span class="audit-step">WORM 저장</span>
+                            <span class="audit-arrow">→</span>
+                            <span class="audit-step highlight-step">t-of-n 복호</span>
                         </div>
-                        <div class="audit-flow">
-                            <div class="audit-step">
-                                <span class="audit-step-icon">📝</span>
-                                <span class="audit-step-label">Audit Tag 생성</span>
-                                <span class="audit-step-desc">sender_kyc_id, receiver_kyc_id, amount, policy_id, timestamp</span>
-                            </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step">
-                                <span class="audit-step-icon">🔒</span>
-                                <span class="audit-step-label">RLWE 암호화</span>
-                                <span class="audit-step-desc">평문 접근 불가</span>
-                            </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step">
-                                <span class="audit-step-icon">⚙️</span>
-                                <span class="audit-step-label">Eval Key 연산</span>
-                                <span class="audit-step-desc">복호 없이 집계/트리거</span>
-                            </div>
-                            <div class="audit-arrow">→</div>
-                            <div class="audit-step highlight-audit">
-                                <span class="audit-step-icon">🔑</span>
-                                <span class="audit-step-label">선택적 복호</span>
-                                <span class="audit-step-desc">t-of-n 승인 시</span>
-                            </div>
-                        </div>
+                    </div>
+
+                    <div class="reference-box">
+                        <a href="https://zcash.readthedocs.io/en/latest/rtd_pages/shielded_pools.html" target="_blank">Shielded Pool 개념 (Zcash Docs)</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://homomorphicencryption.org/standard/" target="_blank">FHE 표준 (HomomorphicEncryption.org)</a>
                     </div>
 
                     <div class="slide-takeaway">
                         <span class="takeaway-icon">📝</span>
                         <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>모든 거래 암호화 기록</strong> — 프라이버시와 감사 가능성 양립</div>
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>모든 거래 암호화 기록</strong> — 단독 복호 원천 차단</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 9: Threshold KMS Selective Disclosure -->
-            <div class="slide" data-slide="9">
+            <!-- Slide 7: Why Only waLLLnut -->
+            <div class="slide" data-slide="7">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">08</span>
-                        <span class="slide-title">Selective Disclosure</span>
-                    </div>
-                    <h2 class="slide-headline">Threshold KMS <span class="highlight">선택적 공개</span></h2>
-
-                    <div class="disclosure-levels">
-                        <div class="level-card level-1">
-                            <div class="level-header">
-                                <span class="level-badge">L1</span>
-                                <h4>집계 통계</h4>
-                            </div>
-                            <div class="level-content">
-                                <ul>
-                                    <li>일/월 거래 건수</li>
-                                    <li>총액 (구간별)</li>
-                                    <li>평균 TX 크기</li>
-                                </ul>
-                            </div>
-                            <div class="level-requirement">
-                                <span class="req-label">요건:</span>
-                                <span>정기 보고 (자동)</span>
-                            </div>
-                        </div>
-
-                        <div class="level-card level-2">
-                            <div class="level-header">
-                                <span class="level-badge">L2</span>
-                                <h4>특정 필드</h4>
-                            </div>
-                            <div class="level-content">
-                                <ul>
-                                    <li>한도 초과 TX의 금액만</li>
-                                    <li>특정 계정의 누적액</li>
-                                    <li>리스크 스코어 상세</li>
-                                </ul>
-                            </div>
-                            <div class="level-requirement">
-                                <span class="req-label">요건:</span>
-                                <span>t-of-n 승인 (예: 2-of-3)</span>
-                            </div>
-                        </div>
-
-                        <div class="level-card level-3">
-                            <div class="level-header">
-                                <span class="level-badge">L3</span>
-                                <h4>전체 TX</h4>
-                            </div>
-                            <div class="level-content">
-                                <ul>
-                                    <li>송·수신자 ID</li>
-                                    <li>금액 + 시점</li>
-                                    <li>전체 Audit Tag</li>
-                                </ul>
-                            </div>
-                            <div class="level-requirement">
-                                <span class="req-label">요건:</span>
-                                <span>법원 명령 + t-of-n</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="kms-parties-section">
-                        <h4>🔑 키 분산 참여자 (PoC: 2-of-3)</h4>
-                        <div class="parties-grid">
-                            <div class="party-box">
-                                <span class="party-icon">🏛️</span>
-                                <span class="party-name">금융위원회</span>
-                                <span class="party-share">1/3 share</span>
-                            </div>
-                            <div class="party-box">
-                                <span class="party-icon">🏢</span>
-                                <span class="party-name">Koscom</span>
-                                <span class="party-share">1/3 share</span>
-                            </div>
-                            <div class="party-box">
-                                <span class="party-icon">🛡️</span>
-                                <span class="party-name">waLLLnut</span>
-                                <span class="party-share">1/3 share</span>
-                            </div>
-                        </div>
-                        <div class="parties-note">
-                            운영 환경: <strong>3-of-5</strong> 또는 <strong>5-of-9</strong> 확장 가능
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">🔑</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>단독 복호 원천 차단</strong> — t-of-n 다자 합의만으로 선택적 공개</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 10: PoC Blueprint -->
-            <div class="slide" data-slide="10">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">09</span>
-                        <span class="slide-title">PoC Blueprint</span>
-                    </div>
-                    <h2 class="slide-headline">PoC <span class="highlight">실행 계획</span></h2>
-
-                    <div class="poc-overview">
-                        <div class="poc-scope">
-                            <h4>📋 PoC 범위</h4>
-                            <div class="scope-items">
-                                <div class="scope-item included">
-                                    <span class="scope-icon">✓</span>
-                                    <span>Payment Leg 프라이버시 레이어</span>
-                                </div>
-                                <div class="scope-item included">
-                                    <span class="scope-icon">✓</span>
-                                    <span>Atomic Settlement 통합 테스트</span>
-                                </div>
-                                <div class="scope-item included">
-                                    <span class="scope-icon">✓</span>
-                                    <span>감사 로그 생성/검증</span>
-                                </div>
-                                <div class="scope-item included">
-                                    <span class="scope-icon">✓</span>
-                                    <span>선택적 공개 플로우</span>
-                                </div>
-                                <div class="scope-item excluded">
-                                    <span class="scope-icon">✗</span>
-                                    <span>Delivery Leg 변경 (범위 외)</span>
-                                </div>
-                                <div class="scope-item excluded">
-                                    <span class="scope-icon">✗</span>
-                                    <span>기존 청산 로직 변경 (범위 외)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="poc-deliverables">
-                            <h4>📦 산출물 (증적)</h4>
-                            <div class="deliverable-items">
-                                <div class="deliverable-item">
-                                    <span class="del-icon">📝</span>
-                                    <span class="del-name">감사 로그 검증 보고서</span>
-                                </div>
-                                <div class="deliverable-item">
-                                    <span class="del-icon">🔐</span>
-                                    <span class="del-name">선택적 공개 플로우 문서</span>
-                                </div>
-                                <div class="deliverable-item">
-                                    <span class="del-icon">🔑</span>
-                                    <span class="del-name">키분산 거버넌스 설계서</span>
-                                </div>
-                                <div class="deliverable-item">
-                                    <span class="del-icon">🚨</span>
-                                    <span class="del-name">침해 대응 절차서</span>
-                                </div>
-                                <div class="deliverable-item">
-                                    <span class="del-icon">⚡</span>
-                                    <span class="del-name">성능 벤치마크 결과</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="poc-timeline">
-                        <h4>📅 마일스톤 (8주 기준)</h4>
-                        <div class="timeline-weeks">
-                            <div class="week-block">
-                                <span class="week-num">W1-2</span>
-                                <span class="week-title">환경 구축</span>
-                                <span class="week-detail">테스트넷 연동, API 정의</span>
-                            </div>
-                            <div class="week-block">
-                                <span class="week-num">W3-4</span>
-                                <span class="week-title">핵심 기능</span>
-                                <span class="week-detail">Shield/Unshield, ZK Pool</span>
-                            </div>
-                            <div class="week-block">
-                                <span class="week-num">W5-6</span>
-                                <span class="week-title">감사 시스템</span>
-                                <span class="week-detail">Audit Log, 선택적 공개</span>
-                            </div>
-                            <div class="week-block">
-                                <span class="week-num">W7-8</span>
-                                <span class="week-title">통합 테스트</span>
-                                <span class="week-detail">E2E 검증, 보고서 작성</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">🛠️</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>8주 PoC로 검증 가능</strong> — 책임분계 명확, 기존 로직 변경 없음</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 11: Risk & Mitigation -->
-            <div class="slide" data-slide="11">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">10</span>
-                        <span class="slide-title">Risk & Mitigation</span>
-                    </div>
-                    <h2 class="slide-headline">주요 <span class="highlight">리스크</span> & 완화 전략</h2>
-
-                    <div class="risk-table">
-                        <div class="risk-header">
-                            <span class="risk-col-category">리스크</span>
-                            <span class="risk-col-impact">영향</span>
-                            <span class="risk-col-mitigation">완화 전략</span>
-                        </div>
-                        <div class="risk-row">
-                            <div class="risk-category">
-                                <span class="risk-icon">📋</span>
-                                <span class="risk-name">규제 불확실성</span>
-                            </div>
-                            <div class="risk-impact medium-risk">중</div>
-                            <div class="risk-mitigation">
-                                <span>정책 파라미터 기반 설계 → 입법 변동 시 <strong>파라미터 업데이트</strong>로 대응</span>
-                            </div>
-                        </div>
-                        <div class="risk-row">
-                            <div class="risk-category">
-                                <span class="risk-icon">⚙️</span>
-                                <span class="risk-name">기술 복잡성</span>
-                            </div>
-                            <div class="risk-impact medium-risk">중</div>
-                            <div class="risk-mitigation">
-                                <span><strong>단계적 검증</strong> + 외부 보안점검 필수</span>
-                            </div>
-                        </div>
-                        <div class="risk-row">
-                            <div class="risk-category">
-                                <span class="risk-icon">🔑</span>
-                                <span class="risk-name">키 관리 실패</span>
-                            </div>
-                            <div class="risk-impact high-risk">고</div>
-                            <div class="risk-mitigation">
-                                <span>t-of-n 분산 → <strong>단일 실패점 제거</strong>, 키 교체/회수 절차 마련</span>
-                            </div>
-                        </div>
-                        <div class="risk-row">
-                            <div class="risk-category">
-                                <span class="risk-icon">🏦</span>
-                                <span class="risk-name">기관 채택 저조</span>
-                            </div>
-                            <div class="risk-impact low-risk">저</div>
-                            <div class="risk-mitigation">
-                                <span>Koscom 인프라 통합 → <strong>자연스러운 채택</strong>, OEM 모델로 진입장벽 최소화</span>
-                            </div>
-                        </div>
-                        <div class="risk-row">
-                            <div class="risk-category">
-                                <span class="risk-icon">⚡</span>
-                                <span class="risk-name">성능 이슈</span>
-                            </div>
-                            <div class="risk-impact medium-risk">중</div>
-                            <div class="risk-mitigation">
-                                <span>ZK 증명 ~12초 (서버), Verifier &lt;1ms → <strong>PoC에서 실측</strong></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">🛡️</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>모든 리스크 관리 가능</strong> — 구체적 완화 전략 수립, PoC에서 검증</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 12: KOSCOM 3대 가치 -->
-            <div class="slide" data-slide="12">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">11</span>
-                        <span class="slide-title">Value Proposition</span>
-                    </div>
-                    <h2 class="slide-headline">KOSCOM이 얻는 <span class="highlight">3가지 가치</span></h2>
-
-                    <div class="value-quadrant-grid">
-                        <div class="quadrant-card revenue-quadrant">
-                            <div class="quadrant-header">
-                                <span class="quadrant-icon">💰</span>
-                                <h4>신규 수익</h4>
-                            </div>
-                            <div class="quadrant-content">
-                                <ul>
-                                    <li>프라이버시 레이어 <strong>라이선스 수익</strong></li>
-                                    <li>TX당 과금 또는 OEM 모델</li>
-                                    <li>규제 준수 프리미엄</li>
-                                </ul>
-                            </div>
-                            <div class="quadrant-metric">
-                                <span class="metric-label">기대</span>
-                                <span class="metric-value">신규 사업 라인</span>
-                            </div>
-                        </div>
-
-                        <div class="quadrant-card risk-quadrant">
-                            <div class="quadrant-header">
-                                <span class="quadrant-icon">🛡️</span>
-                                <h4>리스크 감소</h4>
-                            </div>
-                            <div class="quadrant-content">
-                                <ul>
-                                    <li>AML/KYC <strong>감사 능력 유지</strong></li>
-                                    <li>FATF Travel Rule 대응</li>
-                                    <li>규제 제재 리스크 최소화</li>
-                                </ul>
-                            </div>
-                            <div class="quadrant-metric">
-                                <span class="metric-label">기대</span>
-                                <span class="metric-value">규제 리스크 완화</span>
-                            </div>
-                        </div>
-
-                        <div class="quadrant-card differentiation-quadrant">
-                            <div class="quadrant-header">
-                                <span class="quadrant-icon">🚀</span>
-                                <h4>차별화</h4>
-                            </div>
-                            <div class="quadrant-content">
-                                <ul>
-                                    <li>한국 최초 <strong>규제 준수 프라이버시</strong></li>
-                                    <li>기업 고객 프라이버시 요구 충족</li>
-                                    <li>글로벌 경쟁력 확보</li>
-                                </ul>
-                            </div>
-                            <div class="quadrant-metric">
-                                <span class="metric-label">기대</span>
-                                <span class="metric-value">시장 선점</span>
-                            </div>
-                        </div>
-
-                        <div class="quadrant-card speed-quadrant">
-                            <div class="quadrant-header">
-                                <span class="quadrant-icon">⚡</span>
-                                <h4>출시 속도</h4>
-                            </div>
-                            <div class="quadrant-content">
-                                <ul>
-                                    <li><strong>기존 인프라 연동</strong> 설계 완료</li>
-                                    <li>Atomic Settlement 통합</li>
-                                    <li>정책 파라미터 기반 유연 대응</li>
-                                </ul>
-                            </div>
-                            <div class="quadrant-metric">
-                                <span class="metric-label">기대</span>
-                                <span class="metric-value">빠른 시장 진입</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="slide-takeaway">
-                        <span class="takeaway-icon">💰</span>
-                        <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>프라이버시 = 수익원</strong> — 비용이 아니라 기업 고객이 지불하는 가치</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 13: Comparison Matrix -->
-            <div class="slide" data-slide="13">
-                <div class="slide-inner">
-                    <div class="slide-header">
-                        <span class="slide-num">12</span>
+                        <span class="slide-num">06</span>
                         <span class="slide-title">Comparison</span>
                     </div>
-                    <h2 class="slide-headline">기존 프라이버시 솔루션의 <span class="highlight">한계</span></h2>
+                    <h2 class="slide-headline">왜 <span class="highlight">waLLLnut만</span> 가능한가</h2>
 
                     <div class="comparison-matrix full-matrix">
                         <div class="matrix-header">
@@ -1069,7 +422,7 @@
                             <span class="matrix-cell no">✗</span>
                             <span class="matrix-cell no">✗</span>
                             <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗ 제재</span>
                         </div>
                         <div class="matrix-row">
                             <span class="matrix-label">Zcash</span>
@@ -1080,124 +433,354 @@
                             <span class="matrix-cell no">✗</span>
                         </div>
                         <div class="matrix-row">
-                            <span class="matrix-label">Private Wallet (CT)</span>
+                            <span class="matrix-label">Confidential TX</span>
                             <span class="matrix-cell no">✗</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell partial">△</span>
                             <span class="matrix-cell partial">△</span>
-                        </div>
-                        <div class="matrix-row">
-                            <span class="matrix-label">ZK Pool Only</span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
                         </div>
                         <div class="matrix-row good-row">
-                            <span class="matrix-label highlight-label">
-                                <span class="solution-icon">🛡️</span>
-                                waLLLnut (ZK+FHE)
-                            </span>
+                            <span class="matrix-label highlight-label">🛡️ waLLLnut</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell yes">✓</span>
                             <span class="matrix-cell yes">✓</span>
                         </div>
+                    </div>
+
+                    <div class="reference-box">
+                        <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash 제재 (2022.08)</a>
+                        <span class="ref-sep">|</span>
+                        <a href="https://z.cash/technology/" target="_blank">Zcash Technology</a>
                     </div>
 
                     <div class="slide-takeaway">
                         <span class="takeaway-icon">🏆</span>
                         <div class="takeaway-content">
-                            <div class="takeaway-label">핵심 주장</div>
-                            <div class="takeaway-message"><strong>waLLLnut만 5가지 조건 충족</strong> — 유일한 규제 친화 프라이버시 솔루션</div>
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>5가지 조건 모두 충족</strong> — 유일한 규제 친화 솔루션</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 14: Team & Contact -->
-            <div class="slide" data-slide="14">
+            <!-- Slide 8: PoC Proposal -->
+            <div class="slide" data-slide="8">
                 <div class="slide-inner">
                     <div class="slide-header">
-                        <span class="slide-num">13</span>
-                        <span class="slide-title">Team & Contact</span>
+                        <span class="slide-num">07</span>
+                        <span class="slide-title">PoC Proposal</span>
                     </div>
-                    <h2 class="slide-headline">팀 & <span class="highlight">연락처</span></h2>
+                    <h2 class="slide-headline">제안 용역: <span class="highlight">Payment Leg 프라이버시 PoC</span></h2>
 
-                    <div class="team-section">
-                        <div class="team-grid">
-                            <div class="team-card">
-                                <div class="team-info">
-                                    <h4>신동준 교수</h4>
-                                    <span class="team-role">Advisor</span>
-                                    <p>한양대학교 정보보안 연구실<br>암호학/FHE 분야 국내 최고 권위자</p>
+                    <div class="poc-details">
+                        <div class="poc-section">
+                            <h4>📋 PoC 범위</h4>
+                            <div class="poc-scope">
+                                <div class="scope-in">
+                                    <span class="scope-label">✓ 포함</span>
+                                    <ul>
+                                        <li>Payment Leg 프라이버시 레이어</li>
+                                        <li>KSDC 테스트넷 연동</li>
+                                        <li>Atomic Settlement 통합 테스트</li>
+                                        <li>감사 로그 생성/검증</li>
+                                        <li>선택적 공개 플로우</li>
+                                    </ul>
+                                </div>
+                                <div class="scope-out">
+                                    <span class="scope-label">✗ 제외</span>
+                                    <ul>
+                                        <li>Delivery Leg 변경</li>
+                                        <li>기존 청산 로직 변경</li>
+                                        <li>운영 환경 배포</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="team-card">
-                                <div class="team-info">
-                                    <h4>이승환</h4>
-                                    <span class="team-role">CEO</span>
-                                    <p>한양대학교 박사 (2019-2025)<br>FHE 구현 및 최적화 전문</p>
+                        </div>
+
+                        <div class="poc-section">
+                            <h4>📅 기간 & 마일스톤</h4>
+                            <div class="poc-timeline">
+                                <div class="poc-week">
+                                    <span class="week-num">W1-2</span>
+                                    <span class="week-title">환경 구축</span>
+                                </div>
+                                <div class="poc-week">
+                                    <span class="week-num">W3-4</span>
+                                    <span class="week-title">핵심 기능</span>
+                                </div>
+                                <div class="poc-week">
+                                    <span class="week-num">W5-6</span>
+                                    <span class="week-title">감사 시스템</span>
+                                </div>
+                                <div class="poc-week">
+                                    <span class="week-num">W7-8</span>
+                                    <span class="week-title">통합 테스트</span>
                                 </div>
                             </div>
-                            <div class="team-card">
-                                <div class="team-info">
-                                    <h4>김도혁</h4>
-                                    <span class="team-role">CTO</span>
-                                    <p>한양대학교 박사과정 (2023-)<br>FHE 구현 및 최적화 전문</p>
-                                </div>
+                        </div>
+
+                        <div class="poc-section">
+                            <h4>📦 산출물</h4>
+                            <div class="poc-deliverables">
+                                <span>감사로그 검증 보고서</span>
+                                <span>성능 벤치마크</span>
+                                <span>키분산 거버넌스 설계서</span>
+                                <span>규제협의 자료</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="ask-section">
-                        <div class="ask-grid">
-                            <div class="ask-card what-need">
-                                <h4>요청 사항</h4>
-                                <ul>
-                                    <li>Atomic Settlement PoC 공동 참여</li>
-                                    <li>규제 샌드박스 공동 신청</li>
-                                    <li>기술 협력 MOU 체결</li>
-                                </ul>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🛠️</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>8주, 명확한 범위</strong> — 기존 로직 변경 없이 검증</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Business Model -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title">Business Model</span>
+                    </div>
+                    <h2 class="slide-headline">협력 모델: <span class="highlight">PoC → 파일럿 → 상용화</span></h2>
+
+                    <div class="biz-phases">
+                        <div class="biz-phase">
+                            <div class="phase-header current-phase">
+                                <span class="phase-badge">Phase 1</span>
+                                <span class="phase-period">2026 Q1-Q2</span>
                             </div>
-                            <div class="ask-card what-give">
-                                <h4>KOSCOM 획득</h4>
-                                <ul>
-                                    <li>한국 최초 프라이버시 결제 인프라</li>
-                                    <li>토큰증권 시장 선점</li>
-                                    <li>규제 준수 + 프라이버시 경쟁력</li>
-                                </ul>
+                            <h4>PoC</h4>
+                            <ul>
+                                <li>기술 검증</li>
+                                <li>규제 협의 자료 생성</li>
+                                <li>PoC 용역비</li>
+                            </ul>
+                        </div>
+                        <div class="biz-arrow">→</div>
+                        <div class="biz-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 2</span>
+                                <span class="phase-period">2026 Q3-Q4</span>
+                            </div>
+                            <h4>파일럿</h4>
+                            <ul>
+                                <li>증권사 2-3개 참여</li>
+                                <li>샌드박스 신청</li>
+                                <li>파일럿 라이선스</li>
+                            </ul>
+                        </div>
+                        <div class="biz-arrow">→</div>
+                        <div class="biz-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 3</span>
+                                <span class="phase-period">2027~</span>
+                            </div>
+                            <h4>상용화</h4>
+                            <ul>
+                                <li>KOSCOM 인프라 통합</li>
+                                <li>TX당 과금 or OEM</li>
+                                <li>연간 라이선스</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="revenue-model">
+                        <h4>💰 수익 모델 (상용화 시)</h4>
+                        <div class="revenue-options">
+                            <div class="revenue-option">
+                                <span class="option-name">Option A: TX 과금</span>
+                                <span class="option-desc">건당 수수료 (0.01% 등)</span>
+                            </div>
+                            <div class="revenue-option">
+                                <span class="option-name">Option B: OEM</span>
+                                <span class="option-desc">KOSCOM 브랜드로 재판매</span>
+                            </div>
+                            <div class="revenue-option">
+                                <span class="option-name">Option C: 라이선스</span>
+                                <span class="option-desc">연간 정액제</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="contact-footer">
-                        <div class="brand-section">
-                            <div class="brand-name-row">
-                                <div class="brand-logo">
-                                    <img src="https://walllnut.com/asset/head-logo.svg" alt="waLLLnut" style="width: 100%; height: 100%; object-fit: contain;">
-                                </div>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">📈</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>PoC로 리스크 최소화</strong> → 검증 후 상용화 투자</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: KOSCOM Value -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title">Value</span>
+                    </div>
+                    <h2 class="slide-headline">KOSCOM이 <span class="highlight">얻는 것</span></h2>
+
+                    <div class="value-grid">
+                        <div class="value-card">
+                            <div class="value-icon">💰</div>
+                            <h4>신규 수익</h4>
+                            <p>프라이버시 레이어 라이선스</p>
+                            <p>기업 고객 프리미엄 과금</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">🛡️</div>
+                            <h4>규제 리스크 완화</h4>
+                            <p>AML/KYC 감사 능력 유지</p>
+                            <p>Travel Rule 대응</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">🚀</div>
+                            <h4>시장 선점</h4>
+                            <p>한국 최초 규제 친화 프라이버시</p>
+                            <p>글로벌 경쟁력 확보</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">⚡</div>
+                            <h4>빠른 출시</h4>
+                            <p>기존 인프라 연동 설계 완료</p>
+                            <p>2027년 시행 대응</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">💡</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>프라이버시 = 수익원</strong> — 기관이 지불하는 가치</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Team -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title">Team</span>
+                    </div>
+                    <h2 class="slide-headline">팀 & <span class="highlight">레퍼런스</span></h2>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <h4>신동준 교수</h4>
+                            <span class="team-role">Advisor</span>
+                            <p>한양대학교 정보보안 연구실</p>
+                            <p>FHE 분야 국내 최고 권위자</p>
+                            <a href="https://scholar.google.com/citations?user=XXXX" target="_blank">Google Scholar</a>
+                        </div>
+                        <div class="team-card">
+                            <h4>이승환</h4>
+                            <span class="team-role">CEO</span>
+                            <p>한양대학교 박사 (2019-2025)</p>
+                            <p>FHE 구현 및 최적화 전문</p>
+                        </div>
+                        <div class="team-card">
+                            <h4>김도혁</h4>
+                            <span class="team-role">CTO</span>
+                            <p>한양대학교 박사과정 (2023-)</p>
+                            <p>ZK/FHE 시스템 개발</p>
+                        </div>
+                    </div>
+
+                    <div class="reference-section">
+                        <h4>📚 기술 레퍼런스</h4>
+                        <div class="ref-links">
+                            <a href="https://github.com/walllnut" target="_blank">GitHub: walllnut</a>
+                            <a href="https://walllnut.com" target="_blank">walllnut.com</a>
+                            <a href="https://eprint.iacr.org/" target="_blank">관련 논문 (IACR)</a>
+                        </div>
+                    </div>
+
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🎓</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심</div>
+                            <div class="takeaway-message"><strong>FHE/ZK 전문 연구진</strong> — 국내 유일 상용화 역량</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Next Steps -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">11</span>
+                        <span class="slide-title">Next Steps</span>
+                    </div>
+                    <h2 class="slide-headline"><span class="highlight">다음 단계</span></h2>
+
+                    <div class="next-steps">
+                        <div class="step-item">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>NDA 체결</h4>
+                                <p>상호 기밀유지 계약</p>
+                                <span class="step-timeline">~ 1주</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>기술 워크숍</h4>
+                                <p>KSDC 연동 상세 논의</p>
+                                <span class="step-timeline">~ 2주</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>PoC 계약</h4>
+                                <p>범위/일정/비용 확정</p>
+                                <span class="step-timeline">~ 3주</span>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h4>PoC 착수</h4>
+                                <p>8주 개발 시작</p>
+                                <span class="step-timeline">2026 Q1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-section">
+                        <div class="contact-info">
+                            <div class="brand-row">
+                                <img src="https://walllnut.com/asset/head-logo.svg" alt="waLLLnut" class="contact-logo">
                                 <span class="brand-name">waLLLnut</span>
                             </div>
-                            <span class="brand-desc">Privacy-Preserving Payment Infrastructure</span>
-                        </div>
-                        <div class="contact-links">
-                            <span class="link-with-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                                </svg>
-                                github.com/waLLLnut
-                            </span>
-                            <span>walllnut.com</span>
+                            <div class="contact-links">
+                                <span>📧 contact@walllnut.com</span>
+                                <span>🌐 walllnut.com</span>
+                                <span>📱 010-XXXX-XXXX</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="final-slogan">
-                        <p>프라이버시는 <span class="highlight">채택 조건</span>, 감사는 <span class="highlight">필요할 때</span></p>
+                    <div class="slide-takeaway final-takeaway">
+                        <span class="takeaway-icon">🤝</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">제안</div>
+                            <div class="takeaway-message"><strong>다음 주 기술 워크숍</strong>에서 상세 논의하시겠습니까?</div>
+                        </div>
                     </div>
                 </div>
             </div>
