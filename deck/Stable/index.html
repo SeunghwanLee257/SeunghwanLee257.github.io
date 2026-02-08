@@ -10,10 +10,6 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <!-- Mermaid for diagrams -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-    <!-- ApexCharts for advanced charts -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
     <!-- PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -260,44 +256,69 @@
                     </div>
                     <h2 class="slide-headline">한국 <span class="highlight">STO × 스테이블코인</span> 제도 현황</h2>
 
-                    <!-- Mermaid Timeline Diagram -->
-                    <div class="mermaid-timeline-container">
-                        <div class="mermaid" id="regTimeline">
-                            timeline
-                                title STO/스테이블코인 제도화 타임라인
-                                section 확정
-                                    2026.01 : 전자증권법/자본시장법 개정안 국회 통과
-                                    2026.02 : 토큰증권 협의체 킥오프
-                                section 예상
-                                    2027.01 : 토큰증권 법 시행 (공포 후 1년)
-                                section 논의중
-                                    미정 : 스테이블코인 2단계 입법
+                    <!-- Timeline (CSS-based) -->
+                    <div class="regulation-timeline">
+                        <div class="timeline-track">
+                            <div class="timeline-item confirmed">
+                                <div class="tl-marker"></div>
+                                <div class="tl-date">2026.01</div>
+                                <div class="tl-content">전자증권법/자본시장법 개정안 국회 통과</div>
+                                <div class="tl-tag confirmed-tag">확정</div>
+                            </div>
+                            <div class="timeline-item confirmed">
+                                <div class="tl-marker"></div>
+                                <div class="tl-date">2026.02</div>
+                                <div class="tl-content">토큰증권 협의체 킥오프</div>
+                                <div class="tl-tag confirmed-tag">확정</div>
+                            </div>
+                            <div class="timeline-item expected">
+                                <div class="tl-marker"></div>
+                                <div class="tl-date">2027.01</div>
+                                <div class="tl-content">토큰증권 법 시행 (공포 후 1년)</div>
+                                <div class="tl-tag expected-tag">예상</div>
+                            </div>
+                            <div class="timeline-item pending">
+                                <div class="tl-marker"></div>
+                                <div class="tl-date">미정</div>
+                                <div class="tl-content">스테이블코인 2단계 입법</div>
+                                <div class="tl-tag pending-tag">논의중</div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Actor Hierarchy Chart -->
-                    <div class="actor-hierarchy-container">
-                        <div class="mermaid" id="actorMap">
-                            flowchart TB
-                                subgraph REG["🏛️ 규제기관"]
-                                    FSC["금융위원회<br/><small>정책 방향 설정</small>"]
-                                    FSS["금융감독원<br/><small>검사/감독</small>"]
-                                    BOK["한국은행<br/><small>통화정책</small>"]
-                                end
-                                subgraph INFRA["⚙️ 인프라"]
-                                    KSD["KSD (예탁결제원)<br/><small>⚠️ 증권계좌부 원장</small>"]
-                                    KOSCOM["KOSCOM<br/><small>⚠️ 시장 전산 인프라</small>"]
-                                    KRX["KRX (거래소)<br/><small>매매체결</small>"]
-                                end
-                                subgraph BIZ["💼 사업자"]
-                                    SEC["증권사"]
-                                    BANK["은행"]
-                                    ISSUER["발행인/플랫폼"]
-                                end
-                                REG --> INFRA
-                                INFRA --> BIZ
-                                style KSD fill:#fff7ed,stroke:#e37120,stroke-width:2px
-                                style KOSCOM fill:#fff7ed,stroke:#e37120,stroke-width:2px
+                    <!-- Actor Hierarchy (CSS-based) -->
+                    <div class="actor-hierarchy">
+                        <div class="hierarchy-row">
+                            <div class="hierarchy-group regulator-group">
+                                <div class="group-header">🏛️ 규제기관</div>
+                                <div class="group-items">
+                                    <div class="actor-item">금융위원회<small>정책 방향 설정</small></div>
+                                    <div class="actor-item">금융감독원<small>검사/감독</small></div>
+                                    <div class="actor-item">한국은행<small>통화정책</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hierarchy-arrow">▼</div>
+                        <div class="hierarchy-row">
+                            <div class="hierarchy-group infra-group">
+                                <div class="group-header">⚙️ 인프라</div>
+                                <div class="group-items">
+                                    <div class="actor-item highlight-actor">KSD (예탁결제원)<small>⚠️ 증권계좌부 원장</small></div>
+                                    <div class="actor-item highlight-actor">KOSCOM<small>⚠️ 시장 전산 인프라</small></div>
+                                    <div class="actor-item">KRX (거래소)<small>매매체결</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hierarchy-arrow">▼</div>
+                        <div class="hierarchy-row">
+                            <div class="hierarchy-group biz-group">
+                                <div class="group-header">💼 사업자</div>
+                                <div class="group-items">
+                                    <div class="actor-item">증권사</div>
+                                    <div class="actor-item">은행</div>
+                                    <div class="actor-item">발행인/플랫폼</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -542,27 +563,40 @@
                     </div>
                     <h2 class="slide-headline">waLLLnut <span class="highlight">하이브리드 파이프라인</span></h2>
 
-                    <!-- Mermaid Pipeline Diagram -->
-                    <div class="pipeline-mermaid-container">
-                        <div class="mermaid" id="pipelineDiagram">
-                            flowchart LR
-                                subgraph SHIELD["🔒 Shield (입금)"]
-                                    S1["KYC ID 바인딩"]
-                                    S2["Blacklist 체크"]
-                                end
-                                subgraph POOL["🛡️ ZK Shielded Pool"]
-                                    P1["비연결성<br/>(링크 끊김)"]
-                                    P2["풀 내 익명 전송"]
-                                end
-                                subgraph UNSHIELD["🔓 Unshield (출금)"]
-                                    U1["Freeze 체크"]
-                                    U2["출금 승인"]
-                                end
-                                SHIELD -->|"ZK 증명"| POOL
-                                POOL -->|"ZK 증명"| UNSHIELD
-                                POOL -->|"모든 TX"| AUDIT["📝 RLWE Audit Log"]
-                                style POOL fill:#fff7ed,stroke:#e37120,stroke-width:3px
-                                style AUDIT fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px
+                    <!-- Pipeline Diagram (CSS-based) -->
+                    <div class="pipeline-diagram">
+                        <div class="pipeline-stage shield-stage">
+                            <div class="stage-header">🔒 Shield (입금)</div>
+                            <div class="stage-items">
+                                <div class="stage-item">KYC ID 바인딩</div>
+                                <div class="stage-item">Blacklist 체크</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-arrow">
+                            <span class="arrow-label">ZK 증명</span>
+                            →
+                        </div>
+                        <div class="pipeline-stage pool-stage highlight-stage">
+                            <div class="stage-header">🛡️ ZK Shielded Pool</div>
+                            <div class="stage-items">
+                                <div class="stage-item">비연결성 (링크 끊김)</div>
+                                <div class="stage-item">풀 내 익명 전송</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-arrow">
+                            <span class="arrow-label">ZK 증명</span>
+                            →
+                        </div>
+                        <div class="pipeline-stage unshield-stage">
+                            <div class="stage-header">🔓 Unshield (출금)</div>
+                            <div class="stage-items">
+                                <div class="stage-item">Freeze 체크</div>
+                                <div class="stage-item">출금 승인</div>
+                            </div>
+                        </div>
+                        <div class="pipeline-audit">
+                            <div class="audit-connector">↓ 모든 TX</div>
+                            <div class="audit-box">📝 RLWE Audit Log</div>
                         </div>
                     </div>
 

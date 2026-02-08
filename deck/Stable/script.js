@@ -158,37 +158,8 @@ document.addEventListener('touchend', (e) => {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     updateSlide();
-    initializeMermaid();
     initializeCharts();
 });
-
-// Initialize Mermaid diagrams
-function initializeMermaid() {
-    if (typeof mermaid !== 'undefined') {
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                primaryColor: '#fff7ed',
-                primaryTextColor: '#1b1b1b',
-                primaryBorderColor: '#e37120',
-                lineColor: '#818181',
-                secondaryColor: '#f0f9ff',
-                tertiaryColor: '#ecfdf5',
-                fontFamily: 'Pretendard, Paperlogy, sans-serif'
-            },
-            flowchart: {
-                useMaxWidth: true,
-                htmlLabels: true,
-                curve: 'basis'
-            },
-            timeline: {
-                useMaxWidth: true
-            }
-        });
-        mermaid.contentLoaded();
-    }
-}
 
 // Initialize Chart.js charts
 function initializeCharts() {
