@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>waLLLnut × Koscom | STO + 스테이블코인 프라이버시 결제 인프라</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Pretendard (영어/숫자) + Paperlogy (한글) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <!-- ApexCharts for advanced charts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
+    <!-- PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -253,86 +260,44 @@
                     </div>
                     <h2 class="slide-headline">한국 <span class="highlight">STO × 스테이블코인</span> 제도 현황</h2>
 
-                    <div class="reg-timeline-section">
-                        <div class="reg-timeline">
-                            <div class="timeline-track">
-                                <div class="timeline-item confirmed">
-                                    <span class="tl-date">2026.01</span>
-                                    <span class="tl-event">전자증권법/자본시장법 개정안 국회 통과</span>
-                                    <span class="tl-status confirmed-badge">확정</span>
-                                </div>
-                                <div class="timeline-item confirmed">
-                                    <span class="tl-date">2026.02</span>
-                                    <span class="tl-event">토큰증권 협의체 킥오프 (금융위/금감원/예탁원/금투협)</span>
-                                    <span class="tl-status confirmed-badge">확정</span>
-                                </div>
-                                <div class="timeline-item pending">
-                                    <span class="tl-date">2027.01</span>
-                                    <span class="tl-event">토큰증권 법 시행 예상 (공포 후 1년)</span>
-                                    <span class="tl-status pending-badge">예상</span>
-                                </div>
-                                <div class="timeline-item undecided">
-                                    <span class="tl-date">미정</span>
-                                    <span class="tl-event">스테이블코인 발행/유통 규율 (2단계 입법)</span>
-                                    <span class="tl-status undecided-badge">논의중</span>
-                                </div>
-                            </div>
+                    <!-- Mermaid Timeline Diagram -->
+                    <div class="mermaid-timeline-container">
+                        <div class="mermaid" id="regTimeline">
+                            timeline
+                                title STO/스테이블코인 제도화 타임라인
+                                section 확정
+                                    2026.01 : 전자증권법/자본시장법 개정안 국회 통과
+                                    2026.02 : 토큰증권 협의체 킥오프
+                                section 예상
+                                    2027.01 : 토큰증권 법 시행 (공포 후 1년)
+                                section 논의중
+                                    미정 : 스테이블코인 2단계 입법
                         </div>
                     </div>
 
-                    <div class="actor-map">
-                        <div class="actor-layer regulator-layer">
-                            <span class="layer-label">규제</span>
-                            <div class="actor-nodes">
-                                <div class="actor-node">
-                                    <span class="actor-name">금융위원회</span>
-                                    <span class="actor-concern">정책 방향 설정, 제도 설계</span>
-                                </div>
-                                <div class="actor-node">
-                                    <span class="actor-name">금융감독원</span>
-                                    <span class="actor-concern">검사/감독, 컴플라이언스 검증</span>
-                                </div>
-                                <div class="actor-node">
-                                    <span class="actor-name">한국은행</span>
-                                    <span class="actor-concern">통화정책 영향, 결제시스템 안정</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layer-arrow">↓</div>
-                        <div class="actor-layer infra-layer">
-                            <span class="layer-label">인프라</span>
-                            <div class="actor-nodes">
-                                <div class="actor-node ksd-node">
-                                    <span class="actor-name">KSD (예탁결제원)</span>
-                                    <span class="actor-concern highlight-concern">증권계좌부/원장 지위 — 분산원장 법적 인정 민감</span>
-                                </div>
-                                <div class="actor-node koscom-node">
-                                    <span class="actor-name">KOSCOM</span>
-                                    <span class="actor-concern highlight-concern">시장 전산/인프라 — 결제 시스템 공급 포지션</span>
-                                </div>
-                                <div class="actor-node">
-                                    <span class="actor-name">KRX (거래소)</span>
-                                    <span class="actor-concern">매매체결, 시장 운영</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layer-arrow">↓</div>
-                        <div class="actor-layer business-layer">
-                            <span class="layer-label">사업자</span>
-                            <div class="actor-nodes">
-                                <div class="actor-node">
-                                    <span class="actor-name">증권사</span>
-                                    <span class="actor-concern">투자계약증권 유통, 고객 서비스</span>
-                                </div>
-                                <div class="actor-node">
-                                    <span class="actor-name">은행</span>
-                                    <span class="actor-concern">스테이블코인 발행/준비금 관리</span>
-                                </div>
-                                <div class="actor-node">
-                                    <span class="actor-name">발행인/플랫폼</span>
-                                    <span class="actor-concern">토큰증권 발행, ST 플랫폼 운영</span>
-                                </div>
-                            </div>
+                    <!-- Actor Hierarchy Chart -->
+                    <div class="actor-hierarchy-container">
+                        <div class="mermaid" id="actorMap">
+                            flowchart TB
+                                subgraph REG["🏛️ 규제기관"]
+                                    FSC["금융위원회<br/><small>정책 방향 설정</small>"]
+                                    FSS["금융감독원<br/><small>검사/감독</small>"]
+                                    BOK["한국은행<br/><small>통화정책</small>"]
+                                end
+                                subgraph INFRA["⚙️ 인프라"]
+                                    KSD["KSD (예탁결제원)<br/><small>⚠️ 증권계좌부 원장</small>"]
+                                    KOSCOM["KOSCOM<br/><small>⚠️ 시장 전산 인프라</small>"]
+                                    KRX["KRX (거래소)<br/><small>매매체결</small>"]
+                                end
+                                subgraph BIZ["💼 사업자"]
+                                    SEC["증권사"]
+                                    BANK["은행"]
+                                    ISSUER["발행인/플랫폼"]
+                                end
+                                REG --> INFRA
+                                INFRA --> BIZ
+                                style KSD fill:#fff7ed,stroke:#e37120,stroke-width:2px
+                                style KOSCOM fill:#fff7ed,stroke:#e37120,stroke-width:2px
                         </div>
                     </div>
 
@@ -352,44 +317,22 @@
                     </div>
                     <h2 class="slide-headline">STO 결제에서 <span class="highlight">스테이블코인</span>이 등장하는 이유</h2>
 
-                    <div class="dvp-innovation-section">
-                        <div class="dvp-current">
-                            <h4>현재 증권 결제 (T+2)</h4>
-                            <div class="dvp-flow">
-                                <div class="flow-step">매매체결</div>
-                                <div class="flow-arrow">→</div>
-                                <div class="flow-step delay">+1일</div>
-                                <div class="flow-arrow">→</div>
-                                <div class="flow-step">청산</div>
-                                <div class="flow-arrow">→</div>
-                                <div class="flow-step delay">+1일</div>
-                                <div class="flow-arrow">→</div>
-                                <div class="flow-step">결제 완료</div>
+                    <div class="chart-comparison-section">
+                        <div class="comparison-charts">
+                            <!-- Settlement Time Comparison Chart -->
+                            <div class="chart-card">
+                                <h4>결제 소요시간 비교</h4>
+                                <canvas id="settlementTimeChart" width="280" height="180"></canvas>
                             </div>
-                            <div class="current-problems">
-                                <span class="problem-chip">결제 지연</span>
-                                <span class="problem-chip">운영시간 제약</span>
-                                <span class="problem-chip">현금 묶임</span>
+                            <!-- Cost Comparison Chart -->
+                            <div class="chart-card">
+                                <h4>수수료 비교</h4>
+                                <canvas id="feeComparisonChart" width="280" height="180"></canvas>
                             </div>
-                        </div>
-
-                        <div class="vs-divider">
-                            <span class="vs-text">VS</span>
-                        </div>
-
-                        <div class="dvp-future">
-                            <h4>Atomic Settlement + 스테이블코인</h4>
-                            <div class="dvp-flow">
-                                <div class="flow-step">매매체결</div>
-                                <div class="flow-arrow highlight-arrow">→</div>
-                                <div class="flow-step atomic-step">Atomic DvP</div>
-                                <div class="flow-arrow highlight-arrow">→</div>
-                                <div class="flow-step">즉시 결제</div>
-                            </div>
-                            <div class="future-benefits">
-                                <span class="benefit-chip">24/7/365</span>
-                                <span class="benefit-chip">Near Real-time</span>
-                                <span class="benefit-chip">자금효율↑</span>
+                            <!-- Availability Chart -->
+                            <div class="chart-card">
+                                <h4>운영 가용성</h4>
+                                <canvas id="availabilityChart" width="280" height="180"></canvas>
                             </div>
                         </div>
                     </div>
@@ -599,52 +542,27 @@
                     </div>
                     <h2 class="slide-headline">waLLLnut <span class="highlight">하이브리드 파이프라인</span></h2>
 
-                    <div class="hybrid-pipeline">
-                        <div class="pipeline-step shield-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <div class="step-icon">🔒</div>
-                                <h4>Shield (입금)</h4>
-                                <div class="step-details">
-                                    <span class="detail-item">KYC ID 바인딩</span>
-                                    <span class="detail-item">Blacklist 체크</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pipeline-arrow">→</div>
-
-                        <div class="pipeline-step pool-step highlighted-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <div class="step-icon">🛡️</div>
-                                <h4>ZK Shielded Pool</h4>
-                                <div class="step-details">
-                                    <span class="detail-item highlight">비연결성 (링크 끊김)</span>
-                                    <span class="detail-item">풀 내 익명 전송</span>
-                                </div>
-                            </div>
-                            <div class="audit-branch">
-                                <div class="branch-arrow">↓</div>
-                                <div class="branch-content">
-                                    <span class="branch-label">모든 TX마다</span>
-                                    <span class="branch-icon">📝</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pipeline-arrow">→</div>
-
-                        <div class="pipeline-step unshield-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <div class="step-icon">🔓</div>
-                                <h4>Unshield (출금)</h4>
-                                <div class="step-details">
-                                    <span class="detail-item">Freeze 체크</span>
-                                    <span class="detail-item">출금 승인</span>
-                                </div>
-                            </div>
+                    <!-- Mermaid Pipeline Diagram -->
+                    <div class="pipeline-mermaid-container">
+                        <div class="mermaid" id="pipelineDiagram">
+                            flowchart LR
+                                subgraph SHIELD["🔒 Shield (입금)"]
+                                    S1["KYC ID 바인딩"]
+                                    S2["Blacklist 체크"]
+                                end
+                                subgraph POOL["🛡️ ZK Shielded Pool"]
+                                    P1["비연결성<br/>(링크 끊김)"]
+                                    P2["풀 내 익명 전송"]
+                                end
+                                subgraph UNSHIELD["🔓 Unshield (출금)"]
+                                    U1["Freeze 체크"]
+                                    U2["출금 승인"]
+                                end
+                                SHIELD -->|"ZK 증명"| POOL
+                                POOL -->|"ZK 증명"| UNSHIELD
+                                POOL -->|"모든 TX"| AUDIT["📝 RLWE Audit Log"]
+                                style POOL fill:#fff7ed,stroke:#e37120,stroke-width:3px
+                                style AUDIT fill:#f0f9ff,stroke:#0ea5e9,stroke-width:2px
                         </div>
                     </div>
 
@@ -1056,7 +974,20 @@
                     </div>
                     <h2 class="slide-headline">기존 프라이버시 솔루션의 <span class="highlight">한계</span></h2>
 
-                    <div class="comparison-matrix">
+                    <div class="radar-chart-section">
+                        <div class="radar-chart-container">
+                            <canvas id="comparisonRadar" width="500" height="320"></canvas>
+                        </div>
+                        <div class="radar-legend">
+                            <div class="legend-item"><span class="legend-color tornado"></span>Tornado Cash</div>
+                            <div class="legend-item"><span class="legend-color zcash"></span>Zcash</div>
+                            <div class="legend-item"><span class="legend-color ct"></span>Private Wallet (CT)</div>
+                            <div class="legend-item"><span class="legend-color zkpool"></span>ZK Pool Only</div>
+                            <div class="legend-item walllnut"><span class="legend-color walllnut"></span><strong>waLLLnut (ZK+FHE)</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-matrix compact">
                         <div class="matrix-header">
                             <span class="matrix-col"></span>
                             <span class="matrix-col">비연결성</span>
@@ -1064,50 +995,6 @@
                             <span class="matrix-col">Issuer 통제</span>
                             <span class="matrix-col">양자내성</span>
                             <span class="matrix-col">한국 규제</span>
-                        </div>
-                        <div class="matrix-row bad-row">
-                            <span class="matrix-label">
-                                <span class="solution-icon">🌪️</span>
-                                Tornado Cash
-                            </span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗ 제재</span>
-                        </div>
-                        <div class="matrix-row bad-row">
-                            <span class="matrix-label">
-                                <span class="solution-icon">🔐</span>
-                                Zcash
-                            </span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell partial">△</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗ 상폐</span>
-                        </div>
-                        <div class="matrix-row partial-row">
-                            <span class="matrix-label">
-                                <span class="solution-icon">💳</span>
-                                Private Wallet (CT)
-                            </span>
-                            <span class="matrix-cell no">✗ 추적가능</span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell partial">△</span>
-                            <span class="matrix-cell partial">△</span>
-                        </div>
-                        <div class="matrix-row partial-row">
-                            <span class="matrix-label">
-                                <span class="solution-icon">🏊</span>
-                                ZK Pool Only
-                            </span>
-                            <span class="matrix-cell yes">✓</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗</span>
-                            <span class="matrix-cell no">✗ 위험</span>
                         </div>
                         <div class="matrix-row good-row">
                             <span class="matrix-label highlight-label">
