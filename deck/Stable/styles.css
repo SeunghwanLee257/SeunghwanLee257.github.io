@@ -5724,17 +5724,21 @@ code, .monospace, .spec-value, .field-name {
     padding: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     text-align: center;
+    height: 200px;
+    overflow: hidden;
 }
 
 .chart-card h4 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-dark);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .chart-card canvas {
     max-width: 100%;
+    max-height: 150px !important;
+    height: 150px !important;
 }
 
 /* Radar chart section */
@@ -5751,6 +5755,13 @@ code, .monospace, .spec-value, .field-name {
     border-radius: 14px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    height: 320px;
+    overflow: hidden;
+}
+
+.radar-chart-container canvas {
+    max-height: 280px !important;
+    height: 280px !important;
 }
 
 .radar-legend {
@@ -5768,7 +5779,7 @@ code, .monospace, .spec-value, .field-name {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-medium);
 }
 
@@ -5856,23 +5867,23 @@ code, .monospace, .spec-value, .field-name {
 }
 
 .tl-date {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 800;
     color: var(--text-dark);
     margin-bottom: 4px;
 }
 
 .tl-content {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-medium);
-    max-width: 150px;
+    max-width: 180px;
     line-height: 1.4;
 }
 
 .tl-tag {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 10px;
     margin-top: 6px;
 }
@@ -5934,7 +5945,7 @@ code, .monospace, .spec-value, .field-name {
 }
 
 .group-header {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -5951,8 +5962,8 @@ code, .monospace, .spec-value, .field-name {
 .actor-item {
     background: var(--white);
     border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 10px 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text-dark);
     display: flex;
@@ -5962,7 +5973,7 @@ code, .monospace, .spec-value, .field-name {
 }
 
 .actor-item small {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--text-light);
     margin-top: 2px;
@@ -6003,7 +6014,7 @@ code, .monospace, .spec-value, .field-name {
 }
 
 .stage-header {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -6018,8 +6029,8 @@ code, .monospace, .spec-value, .field-name {
 .stage-item {
     background: var(--white);
     border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 11px;
+    padding: 8px 12px;
+    font-size: 13px;
     color: var(--text-medium);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
@@ -6029,14 +6040,14 @@ code, .monospace, .spec-value, .field-name {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 28px;
     color: var(--text-light);
-    padding: 0 4px;
+    padding: 0 8px;
     align-self: center;
 }
 
 .arrow-label {
-    font-size: 10px;
+    font-size: 12px;
     color: var(--text-light);
     margin-bottom: 2px;
 }
@@ -6050,7 +6061,7 @@ code, .monospace, .spec-value, .field-name {
 }
 
 .audit-connector {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--accent);
     margin-bottom: 4px;
 }
@@ -6059,8 +6070,8 @@ code, .monospace, .spec-value, .field-name {
     background: #f0f9ff;
     border: 2px solid #0ea5e9;
     border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 13px;
+    padding: 10px 18px;
+    font-size: 15px;
     font-weight: 600;
     color: #0369a1;
 }
