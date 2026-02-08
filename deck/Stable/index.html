@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Chart.js for data visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <!-- PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -136,6 +134,14 @@
                             <div class="def-item"><span class="def-num">4</span><span><strong>감사 증거능력</strong>: WORM 저장 + 온체인 앵커링으로 법적 증거 확보</span></div>
                         </div>
                     </div>
+
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🎯</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>프라이버시 = 채택 조건</strong> — 규제 준수와 프라이버시는 양립 가능하다</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -240,9 +246,12 @@
                         </div>
                     </div>
 
-                    <div class="dealbreaker-summary">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>결론:</strong> 프라이버시 없으면 기관 채택 불가 → <span class="highlight">Deal-breaker</span></span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🚫</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>프라이버시 없으면 기관 채택 불가</strong> — 이것은 협상 대상이 아니다</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -322,9 +331,12 @@
                         </div>
                     </div>
 
-                    <div class="reg-note">
-                        <span class="note-icon">⚠️</span>
-                        <span><strong>스테이블코인 제도화:</strong> 금융위 '2단계법 주요내용 미확정' 공식 입장 (2026.01.07) — 발행인 요건/준비금/유통 구조 <span class="highlight">논의 중</span></span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">⏰</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>2027년 시행 전 선점 기회</strong> — KSD·KOSCOM이 핵심 플레이어</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -338,22 +350,32 @@
                     </div>
                     <h2 class="slide-headline">STO 결제에서 <span class="highlight">스테이블코인</span>이 등장하는 이유</h2>
 
-                    <div class="chart-comparison-section">
-                        <div class="comparison-charts">
-                            <!-- Settlement Time Comparison Chart -->
-                            <div class="chart-card">
-                                <h4>결제 소요시간 비교</h4>
-                                <canvas id="settlementTimeChart" width="280" height="180"></canvas>
+                    <div class="benefit-cards">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">⏱️</div>
+                            <h4>결제 속도</h4>
+                            <div class="benefit-compare">
+                                <div class="compare-old">T+2 (48시간)</div>
+                                <div class="compare-arrow">→</div>
+                                <div class="compare-new">실시간</div>
                             </div>
-                            <!-- Cost Comparison Chart -->
-                            <div class="chart-card">
-                                <h4>수수료 비교</h4>
-                                <canvas id="feeComparisonChart" width="280" height="180"></canvas>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">💰</div>
+                            <h4>수수료</h4>
+                            <div class="benefit-compare">
+                                <div class="compare-old">2.5% (카드/PG)</div>
+                                <div class="compare-arrow">→</div>
+                                <div class="compare-new">0.1%</div>
                             </div>
-                            <!-- Availability Chart -->
-                            <div class="chart-card">
-                                <h4>운영 가용성</h4>
-                                <canvas id="availabilityChart" width="280" height="180"></canvas>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">🕐</div>
+                            <h4>운영 시간</h4>
+                            <div class="benefit-compare">
+                                <div class="compare-old">영업시간</div>
+                                <div class="compare-arrow">→</div>
+                                <div class="compare-new">24/7/365</div>
                             </div>
                         </div>
                     </div>
@@ -384,9 +406,12 @@
                         </div>
                     </div>
 
-                    <div class="integration-note">
-                        <span class="note-icon">💡</span>
-                        <span><strong>waLLLnut 포지션:</strong> Delivery Leg는 투명 유지, <span class="highlight">Payment Leg에만 프라이버시 레이어 적용</span></span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">💰</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>Payment Leg에만 프라이버시</strong> — 자금 흐름 보호가 기관 요구사항</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -462,9 +487,12 @@
                         </div>
                     </div>
 
-                    <div class="integration-note">
-                        <span class="note-icon">💡</span>
-                        <span><strong>핵심:</strong> 기존 Atomic Settlement 로직 변경 없이, <span class="highlight">Payment Leg에 프라이버시 레이어만 추가</span></span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">⚡</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>기존 로직 변경 제로</strong> — Atomic Settlement에 프라이버시 레이어만 추가</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -547,9 +575,12 @@
                         </div>
                     </div>
 
-                    <div class="roadmap-note">
-                        <span class="note-icon">🎯</span>
-                        <span><strong>전략:</strong> Phase 1에서 <span class="highlight">규제 승인 + 기관 채택</span> 검증 → Phase 2로 자연스럽게 확장</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🚀</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>Phase 1 성공 = Phase 2 자연 확장</strong> — STO에서 검증, 법인결제로 확대</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -632,9 +663,12 @@
                         </div>
                     </div>
 
-                    <div class="pipeline-summary">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>핵심:</strong> <span class="highlight">모든 TX마다 암호화 로그 기록</span> — 평시 비공개, 감사 시 선택 공개</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">📝</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>모든 거래 암호화 기록</strong> — 프라이버시와 감사 가능성 양립</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -728,9 +762,12 @@
                         </div>
                     </div>
 
-                    <div class="disclosure-summary">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>핵심:</strong> <span class="highlight">단독 복호 원천 차단</span> — 다수 참여자 합의 시에만 복호화</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🔑</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>단독 복호 원천 차단</strong> — t-of-n 다자 합의만으로 선택적 공개</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -828,9 +865,12 @@
                         </div>
                     </div>
 
-                    <div class="poc-note">
-                        <span class="note-icon">💡</span>
-                        <span><strong>책임 분계:</strong> waLLLnut = 프라이버시 레이어 / Koscom = 인프라 연동 / 공동 = 규제 협의</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🛠️</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>8주 PoC로 검증 가능</strong> — 책임분계 명확, 기존 로직 변경 없음</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -902,9 +942,12 @@
                         </div>
                     </div>
 
-                    <div class="risk-summary">
-                        <span class="summary-icon">🛡️</span>
-                        <span><strong>결론:</strong> 모든 리스크에 대해 <span class="highlight">구체적 완화 전략</span> 수립 → PoC에서 검증</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🛡️</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>모든 리스크 관리 가능</strong> — 구체적 완화 전략 수립, PoC에서 검증</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -992,9 +1035,12 @@
                         </div>
                     </div>
 
-                    <div class="value-summary-box">
-                        <span class="summary-icon">🎯</span>
-                        <span><strong>핵심:</strong> 프라이버시는 <span class="highlight">비용</span>이 아니라 <span class="highlight">수익원</span> — 기업 고객이 원하는 가치</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">💰</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>프라이버시 = 수익원</strong> — 비용이 아니라 기업 고객이 지불하는 가치</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1008,20 +1054,7 @@
                     </div>
                     <h2 class="slide-headline">기존 프라이버시 솔루션의 <span class="highlight">한계</span></h2>
 
-                    <div class="radar-chart-section">
-                        <div class="radar-chart-container">
-                            <canvas id="comparisonRadar" width="500" height="320"></canvas>
-                        </div>
-                        <div class="radar-legend">
-                            <div class="legend-item"><span class="legend-color tornado"></span>Tornado Cash</div>
-                            <div class="legend-item"><span class="legend-color zcash"></span>Zcash</div>
-                            <div class="legend-item"><span class="legend-color ct"></span>Private Wallet (CT)</div>
-                            <div class="legend-item"><span class="legend-color zkpool"></span>ZK Pool Only</div>
-                            <div class="legend-item walllnut"><span class="legend-color walllnut"></span><strong>waLLLnut (ZK+FHE)</strong></div>
-                        </div>
-                    </div>
-
-                    <div class="comparison-matrix compact">
+                    <div class="comparison-matrix full-matrix">
                         <div class="matrix-header">
                             <span class="matrix-col"></span>
                             <span class="matrix-col">비연결성</span>
@@ -1029,6 +1062,38 @@
                             <span class="matrix-col">Issuer 통제</span>
                             <span class="matrix-col">양자내성</span>
                             <span class="matrix-col">한국 규제</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label">Tornado Cash</span>
+                            <span class="matrix-cell yes">✓</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label">Zcash</span>
+                            <span class="matrix-cell yes">✓</span>
+                            <span class="matrix-cell partial">△</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label">Private Wallet (CT)</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell yes">✓</span>
+                            <span class="matrix-cell yes">✓</span>
+                            <span class="matrix-cell partial">△</span>
+                            <span class="matrix-cell partial">△</span>
+                        </div>
+                        <div class="matrix-row">
+                            <span class="matrix-label">ZK Pool Only</span>
+                            <span class="matrix-cell yes">✓</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
+                            <span class="matrix-cell no">✗</span>
                         </div>
                         <div class="matrix-row good-row">
                             <span class="matrix-label highlight-label">
@@ -1043,9 +1108,12 @@
                         </div>
                     </div>
 
-                    <div class="solution-highlight">
-                        <span class="highlight-icon">💡</span>
-                        <span><strong>waLLLnut:</strong> ZK Pool로 <span class="highlight">비연결성</span> + FHE Audit Log로 <span class="highlight">감사 가능</span> = 양립 해결</span>
+                    <div class="slide-takeaway">
+                        <span class="takeaway-icon">🏆</span>
+                        <div class="takeaway-content">
+                            <div class="takeaway-label">핵심 주장</div>
+                            <div class="takeaway-message"><strong>waLLLnut만 5가지 조건 충족</strong> — 유일한 규제 친화 프라이버시 솔루션</div>
+                        </div>
                     </div>
                 </div>
             </div>
