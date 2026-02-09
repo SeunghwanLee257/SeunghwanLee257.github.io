@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auditable Dark Pool on Solana | 프라이버시 × 컴플라이언스</title>
+    <title>Auditable Dark Pool on Solana</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
@@ -39,986 +39,761 @@
     <div class="deck-wrapper">
         <div class="deck-container" id="deckContainer">
 
-            <!-- Slide 1: Title - Visual Hero -->
+            <!-- Slide 1: Title -->
             <div class="slide active" data-slide="1">
-                <div class="slide-inner title-slide">
-                    <div class="hero-visual">
-                        <svg viewBox="0 0 600 400" class="hero-svg">
-                            <defs>
-                                <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#9945FF;stop-opacity:0.6"/>
-                                    <stop offset="100%" style="stop-color:#14F195;stop-opacity:0.6"/>
-                                </linearGradient>
-                                <filter id="glow">
-                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                                    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                </filter>
-                            </defs>
-                            <!-- Shield shape -->
-                            <path d="M300 40 L480 100 L480 220 C480 300 300 380 300 380 C300 380 120 300 120 220 L120 100 Z"
-                                  fill="none" stroke="url(#heroGrad)" stroke-width="3" filter="url(#glow)"/>
-                            <!-- Lock icon -->
-                            <rect x="250" y="160" width="100" height="80" rx="8" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                            <path d="M270 160 V130 C270 105 330 105 330 130 V160" fill="none" stroke="#9945FF" stroke-width="4" stroke-linecap="round"/>
-                            <circle cx="300" cy="200" r="12" fill="#14F195"/>
-                            <rect x="296" y="200" width="8" height="20" fill="#14F195"/>
-                            <!-- Privacy particles -->
-                            <circle cx="180" cy="150" r="4" fill="#9945FF" opacity="0.8"><animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/></circle>
-                            <circle cx="420" cy="180" r="3" fill="#14F195" opacity="0.6"><animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/></circle>
-                            <circle cx="200" cy="280" r="5" fill="#14F195" opacity="0.7"><animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite"/></circle>
-                            <circle cx="400" cy="290" r="4" fill="#9945FF" opacity="0.5"><animate attributeName="opacity" values="0.5;0.2;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
-                            <!-- Eye icon (audit) -->
-                            <ellipse cx="300" cy="310" rx="35" ry="20" fill="none" stroke="#14F195" stroke-width="2" opacity="0.6"/>
-                            <circle cx="300" cy="310" r="8" fill="#14F195" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <div class="title-content">
-                        <div class="solana-badge">
-                            <svg viewBox="0 0 397 311" width="20" height="16">
-                                <path fill="#14F195" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"/>
-                                <path fill="#14F195" d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"/>
-                                <path fill="#14F195" d="M332.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
-                            </svg>
-                            Solana Privacy Hack
-                        </div>
-                        <h1>Auditable Dark Pool</h1>
-                        <p class="title-tagline">Private SOL Transfers with 2-of-3 Auditable Compliance</p>
-                    </div>
-                    <div class="title-meta">
-                        <span>Solana Meetup</span>
-                        <span class="meta-sep">|</span>
-                        <span>2026.02</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9945FF;stop-opacity:0.4"/>
+                                <stop offset="100%" style="stop-color:#14F195;stop-opacity:0.4"/>
+                            </linearGradient>
+                            <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#9945FF"/>
+                                <stop offset="100%" style="stop-color:#14F195"/>
+                            </linearGradient>
+                            <filter id="glow1">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Ambient circles -->
+                        <circle cx="200" cy="200" r="300" fill="url(#grad1)" opacity="0.3"/>
+                        <circle cx="1100" cy="500" r="250" fill="url(#grad1)" opacity="0.2"/>
+
+                        <!-- Shield shape -->
+                        <g transform="translate(640, 280)" filter="url(#glow1)">
+                            <path d="M0 -120 L100 -80 L100 40 C100 100 0 150 0 150 C0 150 -100 100 -100 40 L-100 -80 Z"
+                                  fill="none" stroke="url(#textGrad)" stroke-width="3"/>
+                            <!-- Lock -->
+                            <rect x="-25" y="-10" width="50" height="40" rx="5" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <path d="M-15 -10 V-30 C-15 -50 15 -50 15 -30 V-10" fill="none" stroke="#9945FF" stroke-width="3"/>
+                            <circle cx="0" cy="10" r="8" fill="#14F195"/>
+                        </g>
+
+                        <!-- Floating particles -->
+                        <circle cx="300" cy="300" r="6" fill="#9945FF" opacity="0.7">
+                            <animate attributeName="cy" values="300;280;300" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="980" cy="250" r="5" fill="#14F195" opacity="0.6">
+                            <animate attributeName="cy" values="250;270;250" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="400" cy="500" r="7" fill="#14F195" opacity="0.5">
+                            <animate attributeName="cy" values="500;480;500" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="900" cy="450" r="5" fill="#9945FF" opacity="0.6">
+                            <animate attributeName="cy" values="450;470;450" dur="3.5s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Badge -->
+                        <g transform="translate(640, 120)">
+                            <path d="M-100 0 Q-100 -25 -75 -25 L75 -25 Q100 -25 100 0 Q100 25 75 25 L-75 25 Q-100 25 -100 0"
+                                  fill="rgba(20, 241, 149, 0.15)" stroke="#14F195" stroke-width="1"/>
+                            <text x="0" y="7" text-anchor="middle" fill="#14F195" font-size="16" font-weight="600" letter-spacing="2">SOLANA PRIVACY HACK</text>
+                        </g>
+
+                        <!-- Title -->
+                        <text x="640" y="480" text-anchor="middle" fill="url(#textGrad)" font-size="72" font-weight="800" letter-spacing="-2">Auditable Dark Pool</text>
+                        <text x="640" y="540" text-anchor="middle" fill="#a0a0a0" font-size="24">Private SOL Transfers with 2-of-3 Auditable Compliance</text>
+
+                        <!-- Bottom meta -->
+                        <text x="640" y="660" text-anchor="middle" fill="#64748b" font-size="18">Solana Meetup  |  2026.02</text>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 2: Problem - Visual Comparison -->
+            <!-- Slide 2: Problem -->
             <div class="slide" data-slide="2">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">01</span>
-                        <span class="slide-label">Problem</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <defs>
+                            <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ff4757;stop-opacity:0.3"/>
+                                <stop offset="100%" style="stop-color:#ff6b81;stop-opacity:0.1"/>
+                            </linearGradient>
+                        </defs>
 
-                    <div class="problem-visual">
-                        <svg viewBox="0 0 1000 500" class="problem-svg">
-                            <!-- Left: Public Chain -->
-                            <g transform="translate(100, 50)">
-                                <rect x="0" y="0" width="300" height="400" rx="16" fill="#1a1a2e" stroke="#ff4757" stroke-width="2"/>
-                                <rect x="0" y="0" width="300" height="50" rx="16" fill="#ff4757"/>
-                                <rect x="0" y="42" width="300" height="16" fill="#ff4757"/>
-                                <text x="150" y="33" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">퍼블릭 체인</text>
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">01</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">PROBLEM</text>
 
-                                <!-- Eye icons watching -->
-                                <g transform="translate(150, 120)">
-                                    <circle cx="0" cy="0" r="40" fill="none" stroke="#ff4757" stroke-width="2" opacity="0.3"/>
-                                    <circle cx="0" cy="0" r="60" fill="none" stroke="#ff4757" stroke-width="1" opacity="0.2"/>
-                                    <circle cx="0" cy="0" r="80" fill="none" stroke="#ff4757" stroke-width="1" opacity="0.1"/>
-                                    <ellipse cx="0" cy="0" rx="25" ry="15" fill="none" stroke="#ff4757" stroke-width="2"/>
-                                    <circle cx="0" cy="0" r="6" fill="#ff4757"/>
-                                </g>
+                        <!-- Left: Public Chain -->
+                        <g transform="translate(280, 320)">
+                            <!-- Glow circle -->
+                            <circle cx="0" cy="0" r="180" fill="url(#redGrad)"/>
+                            <circle cx="0" cy="0" r="140" fill="none" stroke="#ff4757" stroke-width="2" opacity="0.5"/>
 
-                                <!-- Transaction exposed -->
-                                <g transform="translate(50, 200)">
-                                    <rect x="0" y="0" width="200" height="40" rx="6" fill="#2a2a4e" stroke="#ff4757" stroke-width="1"/>
-                                    <text x="100" y="25" text-anchor="middle" fill="#ff4757" font-size="10">Alice → Bob: 1000 SOL</text>
-                                </g>
-                                <g transform="translate(50, 250)">
-                                    <rect x="0" y="0" width="200" height="40" rx="6" fill="#2a2a4e" stroke="#ff4757" stroke-width="1"/>
-                                    <text x="100" y="25" text-anchor="middle" fill="#ff4757" font-size="10">Pattern: 매주 목요일 대량 이체</text>
-                                </g>
-
-                                <!-- X mark -->
-                                <g transform="translate(130, 330)">
-                                    <circle cx="20" cy="20" r="25" fill="#ff4757" opacity="0.2"/>
-                                    <line x1="8" y1="8" x2="32" y2="32" stroke="#ff4757" stroke-width="3"/>
-                                    <line x1="32" y1="8" x2="8" y2="32" stroke="#ff4757" stroke-width="3"/>
-                                </g>
-                                <text x="150" y="395" text-anchor="middle" fill="#ff4757" font-size="12">투명성 = 프론트러닝 리스크</text>
+                            <!-- Multiple watching eyes -->
+                            <g transform="translate(0, -20)">
+                                <ellipse cx="0" cy="0" rx="50" ry="30" fill="none" stroke="#ff4757" stroke-width="3"/>
+                                <circle cx="0" cy="0" r="15" fill="#ff4757"/>
+                                <circle cx="0" cy="0" r="6" fill="#0a0a15"/>
                             </g>
 
-                            <!-- VS -->
-                            <g transform="translate(450, 220)">
-                                <circle cx="50" cy="50" r="40" fill="#1a1a2e" stroke="#64748b" stroke-width="2"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#64748b" font-size="18" font-weight="700">VS</text>
+                            <!-- Rays -->
+                            <g stroke="#ff4757" stroke-width="2" opacity="0.4">
+                                <line x1="0" y1="-80" x2="0" y2="-120"/>
+                                <line x1="60" y1="-50" x2="90" y2="-75"/>
+                                <line x1="-60" y1="-50" x2="-90" y2="-75"/>
+                                <line x1="80" y1="0" x2="120" y2="0"/>
+                                <line x1="-80" y1="0" x2="-120" y2="0"/>
                             </g>
 
-                            <!-- Right: Anonymous Pool -->
-                            <g transform="translate(600, 50)">
-                                <rect x="0" y="0" width="300" height="400" rx="16" fill="#1a1a2e" stroke="#ff4757" stroke-width="2"/>
-                                <rect x="0" y="0" width="300" height="50" rx="16" fill="#ff4757"/>
-                                <rect x="0" y="42" width="300" height="16" fill="#ff4757"/>
-                                <text x="150" y="33" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">완전 익명 (Tornado)</text>
+                            <text x="0" y="100" text-anchor="middle" fill="#ff4757" font-size="28" font-weight="700">퍼블릭 체인</text>
+                            <text x="0" y="135" text-anchor="middle" fill="#a0a0a0" font-size="18">모든 거래 영구 공개</text>
+                            <text x="0" y="165" text-anchor="middle" fill="#a0a0a0" font-size="18">프론트러닝 위험</text>
+                        </g>
 
-                                <!-- Black box -->
-                                <g transform="translate(100, 100)">
-                                    <rect x="0" y="0" width="100" height="100" rx="8" fill="#0a0a15" stroke="#64748b" stroke-width="2"/>
-                                    <text x="50" y="50" text-anchor="middle" fill="#64748b" font-size="24">?</text>
-                                    <text x="50" y="75" text-anchor="middle" fill="#64748b" font-size="10">Black Box</text>
-                                </g>
+                        <!-- VS -->
+                        <g transform="translate(640, 320)">
+                            <text x="0" y="10" text-anchor="middle" fill="#64748b" font-size="36" font-weight="800">VS</text>
+                        </g>
 
-                                <!-- Regulators blocked -->
-                                <g transform="translate(50, 220)">
-                                    <rect x="0" y="0" width="200" height="35" rx="6" fill="#2a2a4e"/>
-                                    <text x="100" y="23" text-anchor="middle" fill="#64748b" font-size="11">규제기관 감사 불가</text>
-                                </g>
-                                <g transform="translate(50, 265)">
-                                    <rect x="0" y="0" width="200" height="35" rx="6" fill="#2a2a4e"/>
-                                    <text x="100" y="23" text-anchor="middle" fill="#64748b" font-size="11">AML/CFT 미충족</text>
-                                </g>
+                        <!-- Right: Anonymous -->
+                        <g transform="translate(1000, 320)">
+                            <circle cx="0" cy="0" r="180" fill="url(#redGrad)"/>
+                            <circle cx="0" cy="0" r="140" fill="none" stroke="#ff4757" stroke-width="2" opacity="0.5"/>
 
-                                <!-- Banned -->
-                                <g transform="translate(130, 325)">
-                                    <circle cx="20" cy="20" r="25" fill="#ff4757" opacity="0.2"/>
-                                    <circle cx="20" cy="20" r="20" fill="none" stroke="#ff4757" stroke-width="3"/>
-                                    <line x1="6" y1="34" x2="34" y2="6" stroke="#ff4757" stroke-width="3"/>
-                                </g>
-                                <text x="150" y="395" text-anchor="middle" fill="#ff4757" font-size="12">OFAC 제재 대상</text>
+                            <!-- Black hole / mystery -->
+                            <circle cx="0" cy="-20" r="50" fill="#0a0a15" stroke="#64748b" stroke-width="2"/>
+                            <text x="0" y="-5" text-anchor="middle" fill="#64748b" font-size="48">?</text>
+
+                            <!-- Ban symbol -->
+                            <g transform="translate(60, -60)">
+                                <circle cx="0" cy="0" r="25" fill="none" stroke="#ff4757" stroke-width="3"/>
+                                <line x1="-18" y1="18" x2="18" y2="-18" stroke="#ff4757" stroke-width="3"/>
                             </g>
-                        </svg>
-                    </div>
 
-                    <div class="bottom-insight">
-                        <span class="insight-icon">💡</span>
-                        <span>필요한 것: <strong>기본 프라이버시 + 조건부 감사</strong> — "평소엔 숨기고, 필요할 때만 공개"</span>
-                    </div>
+                            <text x="0" y="100" text-anchor="middle" fill="#ff4757" font-size="28" font-weight="700">완전 익명</text>
+                            <text x="0" y="135" text-anchor="middle" fill="#a0a0a0" font-size="18">규제 감사 불가</text>
+                            <text x="0" y="165" text-anchor="middle" fill="#a0a0a0" font-size="18">OFAC 제재 대상</text>
+                        </g>
+
+                        <!-- Bottom insight -->
+                        <g transform="translate(640, 620)">
+                            <path d="M-350 0 L-320 -30 L320 -30 L350 0 L320 30 L-320 30 Z" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="8" text-anchor="middle" fill="#14F195" font-size="20" font-weight="600">💡 필요한 것: 기본 프라이버시 + 조건부 감사</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 3: Solution - Hero Visual -->
+            <!-- Slide 3: Solution -->
             <div class="slide" data-slide="3">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">02</span>
-                        <span class="slide-label">Solution</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <defs>
+                            <linearGradient id="centerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#9945FF;stop-opacity:0.3"/>
+                                <stop offset="100%" style="stop-color:#14F195;stop-opacity:0.3"/>
+                            </linearGradient>
+                            <filter id="blur1">
+                                <feGaussianBlur stdDeviation="20"/>
+                            </filter>
+                        </defs>
 
-                    <div class="solution-visual">
-                        <svg viewBox="0 0 1000 480" class="solution-svg">
-                            <defs>
-                                <linearGradient id="solGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#9945FF"/>
-                                    <stop offset="100%" style="stop-color:#14F195"/>
-                                </linearGradient>
-                            </defs>
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">02</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">SOLUTION</text>
 
-                            <!-- Central Pool -->
-                            <g transform="translate(350, 80)">
-                                <!-- Glowing circle -->
-                                <circle cx="150" cy="150" r="140" fill="none" stroke="url(#solGrad)" stroke-width="3" opacity="0.3"/>
-                                <circle cx="150" cy="150" r="120" fill="#1a1a2e" stroke="url(#solGrad)" stroke-width="2"/>
+                        <!-- Center glow -->
+                        <ellipse cx="640" cy="360" rx="200" ry="200" fill="url(#centerGlow)" filter="url(#blur1)"/>
 
-                                <!-- Shield inside -->
-                                <path d="M150 60 L230 90 L230 170 C230 220 150 260 150 260 C150 260 70 220 70 170 L70 90 Z"
-                                      fill="none" stroke="#14F195" stroke-width="2"/>
-                                <text x="150" y="130" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Auditable</text>
-                                <text x="150" y="155" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Dark Pool</text>
+                        <!-- Central hub -->
+                        <circle cx="640" cy="340" r="120" fill="#1a1a2e" stroke="url(#textGrad)" stroke-width="3"/>
+                        <circle cx="640" cy="340" r="100" fill="none" stroke="url(#textGrad)" stroke-width="1" opacity="0.5"/>
 
-                                <!-- Lock -->
-                                <g transform="translate(130, 175)">
-                                    <rect x="0" y="10" width="40" height="30" rx="4" fill="#14F195" opacity="0.3" stroke="#14F195" stroke-width="1"/>
-                                    <path d="M8 10 V0 C8 -12 32 -12 32 0 V10" fill="none" stroke="#14F195" stroke-width="2"/>
-                                </g>
+                        <!-- Shield in center -->
+                        <g transform="translate(640, 320)">
+                            <path d="M0 -50 L40 -35 L40 15 C40 45 0 65 0 65 C0 65 -40 45 -40 15 L-40 -35 Z"
+                                  fill="none" stroke="#14F195" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="12" fill="#14F195" opacity="0.3"/>
+                            <text x="0" y="5" text-anchor="middle" fill="#14F195" font-size="18">🔒</text>
+                        </g>
+                        <text x="640" y="400" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Auditable</text>
+                        <text x="640" y="425" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">Dark Pool</text>
 
-                                <text x="150" y="240" text-anchor="middle" fill="#9945FF" font-size="11">Private SOL Transfers</text>
-                            </g>
+                        <!-- User (Left) -->
+                        <g transform="translate(280, 340)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <!-- User icon -->
+                            <circle cx="0" cy="-15" r="20" fill="none" stroke="#9945FF" stroke-width="2"/>
+                            <path d="M-30 35 C-30 10 30 10 30 35" fill="none" stroke="#9945FF" stroke-width="2"/>
+                            <text x="0" y="100" text-anchor="middle" fill="#9945FF" font-size="22" font-weight="600">유저</text>
+                            <text x="0" y="130" text-anchor="middle" fill="#a0a0a0" font-size="16">익명 송금</text>
+                            <text x="0" y="155" text-anchor="middle" fill="#a0a0a0" font-size="16">상대방/금액 비공개</text>
+                        </g>
 
-                            <!-- User Side (Left) -->
-                            <g transform="translate(50, 150)">
-                                <circle cx="60" cy="60" r="50" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <!-- User icon -->
-                                <circle cx="60" cy="45" r="15" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <path d="M35 85 C35 65 85 65 85 85" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <text x="60" y="130" text-anchor="middle" fill="#9945FF" font-size="12" font-weight="600">유저</text>
+                        <!-- Curved arrow: User to Center -->
+                        <path d="M360 340 Q500 280 520 340" fill="none" stroke="#9945FF" stroke-width="2" stroke-dasharray="8,4"/>
+                        <polygon points="520,340 505,330 508,345" fill="#9945FF"/>
 
-                                <!-- Benefits -->
-                                <g transform="translate(-20, 145)">
-                                    <rect x="0" y="0" width="160" height="28" rx="14" fill="#9945FF" opacity="0.15"/>
-                                    <text x="80" y="19" text-anchor="middle" fill="#9945FF" font-size="10">✓ 익명 송금</text>
-                                </g>
-                                <g transform="translate(-20, 180)">
-                                    <rect x="0" y="0" width="160" height="28" rx="14" fill="#9945FF" opacity="0.15"/>
-                                    <text x="80" y="19" text-anchor="middle" fill="#9945FF" font-size="10">✓ 상대방/금액 비공개</text>
-                                </g>
-                            </g>
+                        <!-- Auditor (Right) -->
+                        <g transform="translate(1000, 340)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <!-- Eye icon -->
+                            <ellipse cx="0" cy="-5" rx="30" ry="18" fill="none" stroke="#14F195" stroke-width="2"/>
+                            <circle cx="0" cy="-5" r="10" fill="#14F195"/>
+                            <text x="0" y="100" text-anchor="middle" fill="#14F195" font-size="22" font-weight="600">감사자</text>
+                            <text x="0" y="130" text-anchor="middle" fill="#a0a0a0" font-size="16">2-of-3 합의시 복호화</text>
+                            <text x="0" y="155" text-anchor="middle" fill="#a0a0a0" font-size="16">모든 시도 로깅</text>
+                        </g>
 
-                            <!-- Arrow Left to Center -->
-                            <g transform="translate(170, 200)">
-                                <line x1="0" y1="0" x2="170" y2="30" stroke="#9945FF" stroke-width="2" stroke-dasharray="5,5"/>
-                                <polygon points="170,30 155,25 158,38" fill="#9945FF"/>
-                            </g>
+                        <!-- Curved arrow: Center to Auditor -->
+                        <path d="M760 340 Q780 280 920 340" fill="none" stroke="#14F195" stroke-width="2" stroke-dasharray="8,4"/>
+                        <polygon points="920,340 905,330 908,345" fill="#14F195"/>
 
-                            <!-- Auditor Side (Right) -->
-                            <g transform="translate(790, 150)">
-                                <circle cx="60" cy="60" r="50" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <!-- Eye icon -->
-                                <ellipse cx="60" cy="55" rx="25" ry="15" fill="none" stroke="#14F195" stroke-width="2"/>
-                                <circle cx="60" cy="55" r="8" fill="#14F195"/>
-                                <text x="60" y="130" text-anchor="middle" fill="#14F195" font-size="12" font-weight="600">감사자</text>
+                        <!-- 2-of-3 Badge -->
+                        <g transform="translate(640, 550)">
+                            <ellipse cx="0" cy="0" rx="120" ry="35" fill="#1a1a2e" stroke="url(#textGrad)" stroke-width="2"/>
+                            <text x="0" y="8" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">🔐 2-of-3 Threshold</text>
+                        </g>
 
-                                <!-- Benefits -->
-                                <g transform="translate(-20, 145)">
-                                    <rect x="0" y="0" width="160" height="28" rx="14" fill="#14F195" opacity="0.15"/>
-                                    <text x="80" y="19" text-anchor="middle" fill="#14F195" font-size="10">✓ 2-of-3 합의 시 복호화</text>
-                                </g>
-                                <g transform="translate(-20, 180)">
-                                    <rect x="0" y="0" width="160" height="28" rx="14" fill="#14F195" opacity="0.15"/>
-                                    <text x="80" y="19" text-anchor="middle" fill="#14F195" font-size="10">✓ 모든 시도 로깅</text>
-                                </g>
-                            </g>
-
-                            <!-- Arrow Center to Right -->
-                            <g transform="translate(640, 230)">
-                                <line x1="0" y1="0" x2="140" y2="-30" stroke="#14F195" stroke-width="2" stroke-dasharray="5,5"/>
-                                <polygon points="140,-30 125,-35 128,-22" fill="#14F195"/>
-                            </g>
-
-                            <!-- 2-of-3 Badge -->
-                            <g transform="translate(400, 380)">
-                                <rect x="0" y="0" width="200" height="50" rx="25" fill="#1a1a2e" stroke="url(#solGrad)" stroke-width="2"/>
-                                <text x="100" y="32" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">🔐 2-of-3 Threshold</text>
-                            </g>
-                        </svg>
-                    </div>
-
-                    <div class="bottom-insight">
-                        <span class="insight-icon">🎯</span>
-                        <span>핵심: <strong>단일 주체가 프라이버시를 깰 수 없음</strong> — 합의 기반 감사</span>
-                    </div>
+                        <!-- Bottom tagline -->
+                        <text x="640" y="660" text-anchor="middle" fill="#64748b" font-size="18">단일 주체가 프라이버시를 깰 수 없음 — 합의 기반 감사</text>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 4: User Flow - Visual Pipeline -->
+            <!-- Slide 4: Demo Flow -->
             <div class="slide" data-slide="4">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">03</span>
-                        <span class="slide-label">Demo Flow</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <defs>
+                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+                            </marker>
+                            <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#14F195"/>
+                            </marker>
+                        </defs>
 
-                    <div class="flow-visual">
-                        <svg viewBox="0 0 1100 450" class="flow-svg">
-                            <defs>
-                                <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#9945FF"/>
-                                    <stop offset="100%" style="stop-color:#14F195"/>
-                                </linearGradient>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
-                                </marker>
-                            </defs>
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">03</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">DEMO FLOW</text>
 
-                            <!-- Step 1: Initialize -->
-                            <g transform="translate(50, 80)">
-                                <circle cx="80" cy="80" r="70" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <text x="80" y="20" text-anchor="middle" fill="#9945FF" font-size="24" font-weight="700">1</text>
-                                <!-- Database icon -->
-                                <ellipse cx="80" cy="70" rx="35" ry="12" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <path d="M45 70 L45 110 C45 120 115 120 115 110 L115 70" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <ellipse cx="80" cy="110" rx="35" ry="12" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <text x="80" y="175" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Initialize</text>
-                                <text x="80" y="195" text-anchor="middle" fill="#a0a0a0" font-size="11">Pool 생성</text>
+                        <!-- Step 1: Initialize -->
+                        <g transform="translate(200, 300)">
+                            <circle cx="0" cy="0" r="80" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <!-- Database icon -->
+                            <ellipse cx="0" cy="-20" rx="35" ry="12" fill="none" stroke="#9945FF" stroke-width="2"/>
+                            <path d="M-35 -20 L-35 20 C-35 32 35 32 35 20 L35 -20" fill="none" stroke="#9945FF" stroke-width="2"/>
+                            <ellipse cx="0" cy="20" rx="35" ry="12" fill="none" stroke="#9945FF" stroke-width="2"/>
+
+                            <text x="0" y="-100" text-anchor="middle" fill="#9945FF" font-size="36" font-weight="800">1</text>
+                            <text x="0" y="120" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">Initialize</text>
+                            <text x="0" y="150" text-anchor="middle" fill="#a0a0a0" font-size="16">Pool 생성</text>
+                        </g>
+
+                        <!-- Arrow 1→2 -->
+                        <line x1="300" y1="300" x2="420" y2="300" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Step 2: Deposit -->
+                        <g transform="translate(520, 300)">
+                            <circle cx="0" cy="0" r="80" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <!-- Download icon -->
+                            <path d="M0 -30 L0 15" stroke="#9945FF" stroke-width="3"/>
+                            <polyline points="-20,0 0,20 20,0" fill="none" stroke="#9945FF" stroke-width="3"/>
+                            <line x1="-30" y1="30" x2="30" y2="30" stroke="#9945FF" stroke-width="3"/>
+
+                            <text x="0" y="-100" text-anchor="middle" fill="#9945FF" font-size="36" font-weight="800">2</text>
+                            <text x="0" y="120" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">Deposit</text>
+                            <text x="0" y="150" text-anchor="middle" fill="#a0a0a0" font-size="16">SOL → Shielded Pool</text>
+                        </g>
+
+                        <!-- Arrow 2→3 -->
+                        <line x1="620" y1="300" x2="740" y2="300" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Step 3: Withdraw (Highlighted) -->
+                        <g transform="translate(840, 300)">
+                            <!-- Glow -->
+                            <circle cx="0" cy="0" r="100" fill="#14F195" opacity="0.1"/>
+                            <circle cx="0" cy="0" r="80" fill="#1a1a2e" stroke="#14F195" stroke-width="3"/>
+                            <!-- Upload icon -->
+                            <path d="M0 20 L0 -25" stroke="#14F195" stroke-width="3"/>
+                            <polyline points="-20,-10 0,-30 20,-10" fill="none" stroke="#14F195" stroke-width="3"/>
+                            <line x1="-30" y1="30" x2="30" y2="30" stroke="#14F195" stroke-width="3"/>
+
+                            <text x="0" y="-100" text-anchor="middle" fill="#14F195" font-size="36" font-weight="800">3</text>
+                            <text x="0" y="120" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">Withdraw</text>
+                            <text x="0" y="150" text-anchor="middle" fill="#14F195" font-size="16">ZK + Audit Proof</text>
+                        </g>
+
+                        <!-- Arrow 3→4 -->
+                        <line x1="940" y1="300" x2="1020" y2="300" stroke="#14F195" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+                        <!-- Step 4: Verified -->
+                        <g transform="translate(1100, 300)">
+                            <circle cx="0" cy="0" r="60" fill="#14F195" opacity="0.2"/>
+                            <circle cx="0" cy="0" r="50" fill="none" stroke="#14F195" stroke-width="2"/>
+                            <!-- Checkmark -->
+                            <polyline points="-20,0 -5,15 25,-15" fill="none" stroke="#14F195" stroke-width="4"/>
+                            <text x="0" y="100" text-anchor="middle" fill="#14F195" font-size="20" font-weight="600">Verified</text>
+                        </g>
+
+                        <!-- Bottom explanation -->
+                        <g transform="translate(640, 550)">
+                            <text x="0" y="0" text-anchor="middle" fill="#fff" font-size="20" font-weight="600">Withdraw 시점 온체인 검증</text>
+                            <g transform="translate(-200, 40)">
+                                <circle cx="0" cy="0" r="8" fill="#9945FF"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">ZK: 출금 유효성</text>
                             </g>
-
-                            <!-- Arrow 1→2 -->
-                            <line x1="200" y1="160" x2="300" y2="160" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
-
-                            <!-- Step 2: Deposit -->
-                            <g transform="translate(320, 80)">
-                                <circle cx="80" cy="80" r="70" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <text x="80" y="20" text-anchor="middle" fill="#9945FF" font-size="24" font-weight="700">2</text>
-                                <!-- Download arrow icon -->
-                                <rect x="55" y="50" width="50" height="50" rx="6" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                <line x1="80" y1="60" x2="80" y2="90" stroke="#9945FF" stroke-width="3"/>
-                                <polyline points="65,78 80,93 95,78" fill="none" stroke="#9945FF" stroke-width="3"/>
-                                <text x="80" y="175" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Deposit</text>
-                                <text x="80" y="195" text-anchor="middle" fill="#a0a0a0" font-size="11">SOL → Shielded Pool</text>
+                            <g transform="translate(150, 40)">
+                                <circle cx="0" cy="0" r="8" fill="#14F195"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">Audit: 아이덴티티 암호화</text>
                             </g>
-
-                            <!-- Arrow 2→3 -->
-                            <line x1="470" y1="160" x2="570" y2="160" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
-
-                            <!-- Step 3: Withdraw (Highlighted) -->
-                            <g transform="translate(590, 60)">
-                                <rect x="0" y="0" width="200" height="220" rx="16" fill="#1a1a2e" stroke="url(#flowGrad)" stroke-width="3"/>
-                                <text x="100" y="30" text-anchor="middle" fill="#14F195" font-size="24" font-weight="700">3</text>
-                                <!-- Upload arrow icon -->
-                                <rect x="65" y="50" width="70" height="60" rx="6" fill="none" stroke="#14F195" stroke-width="2"/>
-                                <line x1="100" y1="95" x2="100" y2="60" stroke="#14F195" stroke-width="3"/>
-                                <polyline points="85,72 100,57 115,72" fill="none" stroke="#14F195" stroke-width="3"/>
-                                <text x="100" y="135" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Withdraw</text>
-
-                                <!-- Two proofs -->
-                                <g transform="translate(20, 150)">
-                                    <rect x="0" y="0" width="75" height="30" rx="4" fill="#9945FF" opacity="0.3"/>
-                                    <text x="37" y="20" text-anchor="middle" fill="#9945FF" font-size="10" font-weight="600">ZK Proof</text>
-                                </g>
-                                <g transform="translate(105, 150)">
-                                    <rect x="0" y="0" width="75" height="30" rx="4" fill="#14F195" opacity="0.3"/>
-                                    <text x="37" y="20" text-anchor="middle" fill="#14F195" font-size="10" font-weight="600">Audit Proof</text>
-                                </g>
-                                <text x="100" y="205" text-anchor="middle" fill="#a0a0a0" font-size="10">온체인 동시 검증</text>
-                            </g>
-
-                            <!-- Arrow 3→4 -->
-                            <line x1="800" y1="170" x2="870" y2="170" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
-
-                            <!-- Step 4: Verified -->
-                            <g transform="translate(890, 90)">
-                                <circle cx="70" cy="70" r="60" fill="#14F195" opacity="0.2" stroke="#14F195" stroke-width="2"/>
-                                <!-- Checkmark -->
-                                <polyline points="40,70 60,90 100,50" fill="none" stroke="#14F195" stroke-width="4" stroke-linecap="round"/>
-                                <text x="70" y="165" text-anchor="middle" fill="#14F195" font-size="14" font-weight="600">Verified</text>
-                            </g>
-
-                            <!-- Bottom verification detail -->
-                            <g transform="translate(200, 330)">
-                                <rect x="0" y="0" width="700" height="80" rx="12" fill="#1a1a2e" stroke="#2a2a4e" stroke-width="1"/>
-                                <text x="350" y="25" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Withdraw 시점 온체인 검증</text>
-                                <g transform="translate(80, 40)">
-                                    <rect x="0" y="0" width="240" height="28" rx="4" fill="#9945FF" opacity="0.15"/>
-                                    <text x="120" y="19" text-anchor="middle" fill="#9945FF" font-size="11">ZK: 출금 유효성 검증</text>
-                                </g>
-                                <g transform="translate(380, 40)">
-                                    <rect x="0" y="0" width="240" height="28" rx="4" fill="#14F195" opacity="0.15"/>
-                                    <text x="120" y="19" text-anchor="middle" fill="#14F195" font-size="11">Audit: 아이덴티티 암호화 검증</text>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 5: Architecture - Dual Layer Diagram -->
+            <!-- Slide 5: Architecture -->
             <div class="slide" data-slide="5">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">04</span>
-                        <span class="slide-label">Architecture</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">04</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">ARCHITECTURE</text>
+                        <text x="640" y="80" text-anchor="middle" fill="#fff" font-size="28" font-weight="700">ZK + RLWE (Threshold Decryption)</text>
 
-                    <div class="arch-visual">
-                        <svg viewBox="0 0 1100 500" class="arch-svg">
-                            <defs>
-                                <linearGradient id="privacyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#9945FF"/>
-                                    <stop offset="100%" style="stop-color:#7B3FE4"/>
-                                </linearGradient>
-                                <linearGradient id="complianceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#14F195"/>
-                                    <stop offset="100%" style="stop-color:#00D4AA"/>
-                                </linearGradient>
-                            </defs>
+                        <!-- Privacy Layer (Left blob) -->
+                        <g transform="translate(320, 300)">
+                            <ellipse cx="0" cy="0" rx="220" ry="180" fill="#9945FF" opacity="0.1"/>
+                            <ellipse cx="0" cy="0" rx="200" ry="160" fill="none" stroke="#9945FF" stroke-width="2"/>
 
-                            <!-- Privacy Layer (Top) -->
-                            <g transform="translate(50, 30)">
-                                <rect x="0" y="0" width="450" height="200" rx="12" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <rect x="0" y="0" width="450" height="45" rx="12" fill="url(#privacyGrad)"/>
-                                <rect x="0" y="37" width="450" height="16" fill="url(#privacyGrad)"/>
+                            <text x="0" y="-120" text-anchor="middle" fill="#9945FF" font-size="22" font-weight="700">Privacy Layer</text>
 
-                                <!-- Lock icon -->
-                                <g transform="translate(20, 12)">
-                                    <rect x="0" y="8" width="18" height="14" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/>
-                                    <path d="M4 8 V4 C4 -1 14 -1 14 4 V8" fill="none" stroke="#fff" stroke-width="1.5"/>
-                                </g>
-                                <text x="55" y="30" fill="#fff" font-size="14" font-weight="700">Privacy Layer (ZK Circuit)</text>
-
-                                <!-- Noir box -->
-                                <g transform="translate(30, 70)">
-                                    <rect x="0" y="0" width="180" height="100" rx="8" fill="#2a2a4e"/>
-                                    <text x="90" y="30" text-anchor="middle" fill="#9945FF" font-size="13" font-weight="600">Noir Circuit</text>
-                                    <line x1="30" y1="45" x2="150" y2="45" stroke="#3a3a5e" stroke-width="1"/>
-                                    <text x="90" y="65" text-anchor="middle" fill="#a0a0a0" font-size="10">출금 유효성 증명</text>
-                                    <text x="90" y="82" text-anchor="middle" fill="#a0a0a0" font-size="10">Merkle proof 검증</text>
-                                </g>
-
-                                <!-- Sunspot box -->
-                                <g transform="translate(240, 70)">
-                                    <rect x="0" y="0" width="180" height="100" rx="8" fill="#2a2a4e"/>
-                                    <text x="90" y="30" text-anchor="middle" fill="#9945FF" font-size="13" font-weight="600">Sunspot Verifier</text>
-                                    <line x1="30" y1="45" x2="150" y2="45" stroke="#3a3a5e" stroke-width="1"/>
-                                    <text x="90" y="65" text-anchor="middle" fill="#a0a0a0" font-size="10">Noir → Solana 컴파일</text>
-                                    <text x="90" y="82" text-anchor="middle" fill="#a0a0a0" font-size="10">온체인 검증</text>
-                                </g>
+                            <!-- Noir -->
+                            <g transform="translate(-70, -40)">
+                                <circle cx="0" cy="0" r="45" fill="#1a1a2e" stroke="#9945FF" stroke-width="1"/>
+                                <text x="0" y="-5" text-anchor="middle" fill="#9945FF" font-size="16" font-weight="600">Noir</text>
+                                <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">ZK 회로</text>
                             </g>
 
-                            <!-- Compliance Layer (Top Right) -->
-                            <g transform="translate(600, 30)">
-                                <rect x="0" y="0" width="450" height="200" rx="12" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <rect x="0" y="0" width="450" height="45" rx="12" fill="url(#complianceGrad)"/>
-                                <rect x="0" y="37" width="450" height="16" fill="url(#complianceGrad)"/>
-
-                                <!-- Eye icon -->
-                                <g transform="translate(20, 12)">
-                                    <ellipse cx="10" cy="12" rx="10" ry="6" fill="none" stroke="#1a1a2e" stroke-width="1.5"/>
-                                    <circle cx="10" cy="12" r="3" fill="#1a1a2e"/>
-                                </g>
-                                <text x="55" y="30" fill="#1a1a2e" font-size="14" font-weight="700">Compliance Layer (Audit Circuit)</text>
-
-                                <!-- RLWE box -->
-                                <g transform="translate(30, 70)">
-                                    <rect x="0" y="0" width="180" height="100" rx="8" fill="#2a2a4e"/>
-                                    <text x="90" y="30" text-anchor="middle" fill="#14F195" font-size="13" font-weight="600">RLWE Encryption</text>
-                                    <line x1="30" y1="45" x2="150" y2="45" stroke="#3a3a5e" stroke-width="1"/>
-                                    <text x="90" y="65" text-anchor="middle" fill="#a0a0a0" font-size="10">아이덴티티 암호화</text>
-                                    <text x="90" y="82" text-anchor="middle" fill="#a0a0a0" font-size="10">ZK로 정확성 증명</text>
-                                </g>
-
-                                <!-- 2-of-3 box -->
-                                <g transform="translate(240, 70)">
-                                    <rect x="0" y="0" width="180" height="100" rx="8" fill="#2a2a4e"/>
-                                    <text x="90" y="30" text-anchor="middle" fill="#14F195" font-size="13" font-weight="600">2-of-3 Threshold</text>
-                                    <line x1="30" y1="45" x2="150" y2="45" stroke="#3a3a5e" stroke-width="1"/>
-                                    <text x="90" y="65" text-anchor="middle" fill="#a0a0a0" font-size="10">Shamir Secret Sharing</text>
-                                    <text x="90" y="82" text-anchor="middle" fill="#a0a0a0" font-size="10">단독 복호화 불가</text>
-                                </g>
+                            <!-- Sunspot -->
+                            <g transform="translate(70, -40)">
+                                <circle cx="0" cy="0" r="45" fill="#1a1a2e" stroke="#9945FF" stroke-width="1"/>
+                                <text x="0" y="-5" text-anchor="middle" fill="#9945FF" font-size="16" font-weight="600">Sunspot</text>
+                                <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">검증기</text>
                             </g>
 
-                            <!-- Bridge Connection (wa_commitment) -->
-                            <g transform="translate(400, 260)">
-                                <rect x="0" y="0" width="300" height="80" rx="40" fill="#1a1a2e" stroke="url(#flowGrad)" stroke-width="3"/>
-                                <!-- Chain link icons -->
-                                <g transform="translate(40, 25)">
-                                    <ellipse cx="15" cy="15" rx="12" ry="8" fill="none" stroke="#9945FF" stroke-width="2" transform="rotate(-30 15 15)"/>
-                                    <ellipse cx="30" cy="15" rx="12" ry="8" fill="none" stroke="#14F195" stroke-width="2" transform="rotate(30 30 15)"/>
-                                </g>
-                                <text x="150" y="38" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">wa_commitment</text>
-                                <text x="150" y="58" text-anchor="middle" fill="#a0a0a0" font-size="11">= Poseidon(owner_x, owner_y)</text>
+                            <text x="0" y="80" text-anchor="middle" fill="#a0a0a0" font-size="16">출금 유효성 증명</text>
+                            <text x="0" y="105" text-anchor="middle" fill="#a0a0a0" font-size="16">Merkle proof 검증</text>
+                        </g>
+
+                        <!-- Bridge (Center) -->
+                        <g transform="translate(640, 450)">
+                            <!-- Chain link shape -->
+                            <ellipse cx="-25" cy="0" rx="35" ry="20" fill="none" stroke="#9945FF" stroke-width="2" transform="rotate(-20)"/>
+                            <ellipse cx="25" cy="0" rx="35" ry="20" fill="none" stroke="#14F195" stroke-width="2" transform="rotate(20)"/>
+
+                            <text x="0" y="60" text-anchor="middle" fill="#fff" font-size="18" font-weight="600">wa_commitment</text>
+                            <text x="0" y="85" text-anchor="middle" fill="#64748b" font-size="15">= Poseidon(owner_x, owner_y)</text>
+                        </g>
+
+                        <!-- Arrows to bridge -->
+                        <path d="M450 380 Q550 450 600 450" fill="none" stroke="#9945FF" stroke-width="2" stroke-dasharray="6,3"/>
+                        <path d="M830 380 Q730 450 680 450" fill="none" stroke="#14F195" stroke-width="2" stroke-dasharray="6,3"/>
+
+                        <!-- Compliance Layer (Right blob) -->
+                        <g transform="translate(960, 300)">
+                            <ellipse cx="0" cy="0" rx="220" ry="180" fill="#14F195" opacity="0.1"/>
+                            <ellipse cx="0" cy="0" rx="200" ry="160" fill="none" stroke="#14F195" stroke-width="2"/>
+
+                            <text x="0" y="-120" text-anchor="middle" fill="#14F195" font-size="22" font-weight="700">Compliance Layer</text>
+
+                            <!-- RLWE -->
+                            <g transform="translate(-70, -40)">
+                                <circle cx="0" cy="0" r="45" fill="#1a1a2e" stroke="#14F195" stroke-width="1"/>
+                                <text x="0" y="-5" text-anchor="middle" fill="#14F195" font-size="16" font-weight="600">RLWE</text>
+                                <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">암호화</text>
                             </g>
 
-                            <!-- Arrows to bridge -->
-                            <line x1="275" y1="230" x2="450" y2="280" stroke="#9945FF" stroke-width="2" stroke-dasharray="5,5"/>
-                            <line x1="825" y1="230" x2="650" y2="280" stroke="#14F195" stroke-width="2" stroke-dasharray="5,5"/>
-
-                            <!-- Solana on-chain -->
-                            <g transform="translate(300, 380)">
-                                <rect x="0" y="0" width="500" height="90" rx="12" fill="#1a1a2e" stroke="#64748b" stroke-width="1"/>
-                                <g transform="translate(30, 30)">
-                                    <svg viewBox="0 0 397 311" width="30" height="24">
-                                        <path fill="#14F195" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"/>
-                                        <path fill="#14F195" d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"/>
-                                        <path fill="#14F195" d="M332.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
-                                    </svg>
-                                </g>
-                                <text x="80" y="48" fill="#fff" font-size="13" font-weight="600">Solana On-Chain</text>
-                                <text x="250" y="55" text-anchor="middle" fill="#a0a0a0" font-size="11">ZK Proof + Audit Proof 동시 검증 → 출금 승인</text>
+                            <!-- 2-of-3 -->
+                            <g transform="translate(70, -40)">
+                                <circle cx="0" cy="0" r="45" fill="#1a1a2e" stroke="#14F195" stroke-width="1"/>
+                                <text x="0" y="-5" text-anchor="middle" fill="#14F195" font-size="16" font-weight="600">2-of-3</text>
+                                <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">Threshold</text>
                             </g>
 
-                            <!-- Arrow from bridge to solana -->
-                            <line x1="550" y1="340" x2="550" y2="375" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
-                        </svg>
-                    </div>
+                            <text x="0" y="80" text-anchor="middle" fill="#a0a0a0" font-size="16">아이덴티티 암호화</text>
+                            <text x="0" y="105" text-anchor="middle" fill="#a0a0a0" font-size="16">합의시에만 복호화</text>
+                        </g>
+
+                        <!-- Bottom: Solana -->
+                        <g transform="translate(640, 640)">
+                            <text x="0" y="0" text-anchor="middle" fill="#64748b" font-size="16">두 회로가 wa_commitment로 연결 — 프라이버시와 감사 가능성 동시 보장</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 6: Tech Stack - Icon Grid -->
+            <!-- Slide 6: Tech Stack -->
             <div class="slide" data-slide="6">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">05</span>
-                        <span class="slide-label">Tech Stack</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">05</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">TECH STACK</text>
 
-                    <div class="stack-visual">
-                        <svg viewBox="0 0 1100 500" class="stack-svg">
-                            <!-- Stack Icons in 2 rows -->
-                            <!-- Row 1 -->
-                            <g transform="translate(80, 50)">
-                                <rect x="0" y="0" width="150" height="150" rx="16" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <text x="75" y="55" text-anchor="middle" fill="#9945FF" font-size="36">🔮</text>
-                                <text x="75" y="95" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Noir</text>
-                                <text x="75" y="120" text-anchor="middle" fill="#a0a0a0" font-size="11">ZK 회로 개발</text>
-                                <text x="75" y="138" text-anchor="middle" fill="#64748b" font-size="10">Aztec</text>
+                        <!-- Hexagon grid layout -->
+                        <!-- Row 1 -->
+                        <g transform="translate(280, 220)">
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <text x="0" y="-10" text-anchor="middle" fill="#9945FF" font-size="20" font-weight="700">Noir</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">ZK 회로</text>
+                        </g>
+
+                        <g transform="translate(440, 220)">
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <text x="0" y="-10" text-anchor="middle" fill="#9945FF" font-size="20" font-weight="700">Sunspot</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">컴파일러</text>
+                        </g>
+
+                        <g transform="translate(600, 220)">
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="-10" text-anchor="middle" fill="#14F195" font-size="20" font-weight="700">Pinocchio</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">Proof</text>
+                        </g>
+
+                        <!-- Row 2 -->
+                        <g transform="translate(360, 340)">
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="-10" text-anchor="middle" fill="#14F195" font-size="20" font-weight="700">Honk</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">Proof 시스템</text>
+                        </g>
+
+                        <g transform="translate(520, 340)">
+                            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="-10" text-anchor="middle" fill="#14F195" font-size="20" font-weight="700">Poseidon</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#a0a0a0" font-size="15">해시</text>
+                        </g>
+
+                        <!-- Solana badge -->
+                        <g transform="translate(440, 480)">
+                            <ellipse cx="0" cy="0" rx="140" ry="45" fill="#1a1a2e" stroke="url(#textGrad)" stroke-width="2"/>
+                            <text x="0" y="8" text-anchor="middle" fill="#14F195" font-size="20" font-weight="700">⚡ Helius RPC</text>
+                        </g>
+
+                        <!-- Repo structure (right side) -->
+                        <g transform="translate(850, 200)">
+                            <text x="0" y="0" fill="#fff" font-size="22" font-weight="700">레포 구조</text>
+
+                            <g transform="translate(0, 50)">
+                                <circle cx="0" cy="0" r="6" fill="#9945FF"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">audit_circuit</text>
                             </g>
-
-                            <g transform="translate(270, 50)">
-                                <rect x="0" y="0" width="150" height="150" rx="16" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <text x="75" y="55" text-anchor="middle" fill="#9945FF" font-size="36">☀️</text>
-                                <text x="75" y="95" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Sunspot</text>
-                                <text x="75" y="120" text-anchor="middle" fill="#a0a0a0" font-size="11">Noir → Solana</text>
-                                <text x="75" y="138" text-anchor="middle" fill="#64748b" font-size="10">Reilabs</text>
+                            <g transform="translate(0, 95)">
+                                <circle cx="0" cy="0" r="6" fill="#9945FF"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">noir_circuit</text>
                             </g>
-
-                            <g transform="translate(460, 50)">
-                                <rect x="0" y="0" width="150" height="150" rx="16" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <text x="75" y="55" text-anchor="middle" fill="#14F195" font-size="36">🪵</text>
-                                <text x="75" y="95" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Pinocchio</text>
-                                <text x="75" y="120" text-anchor="middle" fill="#a0a0a0" font-size="11">Proof 파이프라인</text>
-                                <text x="75" y="138" text-anchor="middle" fill="#64748b" font-size="10">Solana</text>
+                            <g transform="translate(0, 140)">
+                                <circle cx="0" cy="0" r="6" fill="#14F195"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">shielded_pool_program</text>
                             </g>
-
-                            <g transform="translate(650, 50)">
-                                <rect x="0" y="0" width="150" height="150" rx="16" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <text x="75" y="55" text-anchor="middle" fill="#14F195" font-size="36">🎺</text>
-                                <text x="75" y="95" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Honk</text>
-                                <text x="75" y="120" text-anchor="middle" fill="#a0a0a0" font-size="11">Proof 시스템</text>
-                                <text x="75" y="138" text-anchor="middle" fill="#64748b" font-size="10">Aztec</text>
+                            <g transform="translate(0, 185)">
+                                <circle cx="0" cy="0" r="6" fill="#64748b"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">client</text>
                             </g>
-
-                            <g transform="translate(840, 50)">
-                                <rect x="0" y="0" width="150" height="150" rx="16" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <text x="75" y="55" text-anchor="middle" fill="#14F195" font-size="36">🌀</text>
-                                <text x="75" y="95" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">Poseidon</text>
-                                <text x="75" y="120" text-anchor="middle" fill="#a0a0a0" font-size="11">해시 함수</text>
-                                <text x="75" y="138" text-anchor="middle" fill="#64748b" font-size="10">Commitment</text>
+                            <g transform="translate(0, 230)">
+                                <circle cx="0" cy="0" r="6" fill="#64748b"/>
+                                <text x="20" y="6" fill="#a0a0a0" font-size="18">demo-frontend</text>
                             </g>
-
-                            <!-- Solana infra row -->
-                            <g transform="translate(270, 230)">
-                                <rect x="0" y="0" width="340" height="100" rx="16" fill="#1a1a2e" stroke="url(#flowGrad)" stroke-width="2"/>
-                                <g transform="translate(30, 35)">
-                                    <svg viewBox="0 0 397 311" width="35" height="28">
-                                        <path fill="#14F195" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"/>
-                                        <path fill="#14F195" d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"/>
-                                        <path fill="#14F195" d="M332.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
-                                    </svg>
-                                </g>
-                                <text x="90" y="55" fill="#fff" font-size="16" font-weight="600">Helius RPC</text>
-                                <text x="170" y="75" text-anchor="middle" fill="#a0a0a0" font-size="12">Solana 인프라 | Devnet + Mainnet Ready</text>
-                            </g>
-
-                            <!-- Repo Structure -->
-                            <g transform="translate(650, 230)">
-                                <rect x="0" y="0" width="340" height="230" rx="16" fill="#1a1a2e" stroke="#2a2a4e" stroke-width="1"/>
-                                <text x="170" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">📁 레포 구조</text>
-
-                                <g transform="translate(40, 55)">
-                                    <rect x="0" y="0" width="260" height="32" rx="4" fill="#2a2a4e"/>
-                                    <text x="20" y="21" fill="#9945FF" font-size="12">📂 audit_circuit</text>
-                                </g>
-                                <g transform="translate(40, 95)">
-                                    <rect x="0" y="0" width="260" height="32" rx="4" fill="#2a2a4e"/>
-                                    <text x="20" y="21" fill="#9945FF" font-size="12">📂 noir_circuit</text>
-                                </g>
-                                <g transform="translate(40, 135)">
-                                    <rect x="0" y="0" width="260" height="32" rx="4" fill="#2a2a4e"/>
-                                    <text x="20" y="21" fill="#14F195" font-size="12">📂 shielded_pool_program</text>
-                                </g>
-                                <g transform="translate(40, 175)">
-                                    <rect x="0" y="0" width="260" height="32" rx="4" fill="#2a2a4e"/>
-                                    <text x="20" y="21" fill="#64748b" font-size="12">📂 client / demo-frontend</text>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 7: Performance - Bar Chart Visual -->
+            <!-- Slide 7: Performance -->
             <div class="slide" data-slide="7">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">06</span>
-                        <span class="slide-label">Performance</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">06</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">PERFORMANCE</text>
 
-                    <h2 class="visual-headline">제약 수 <span class="highlight-num">42×</span> 감소</h2>
+                        <!-- Big number -->
+                        <text x="640" y="200" text-anchor="middle" fill="url(#textGrad)" font-size="120" font-weight="800">42×</text>
+                        <text x="640" y="250" text-anchor="middle" fill="#a0a0a0" font-size="24">제약 수 감소</text>
 
-                    <div class="perf-visual">
-                        <svg viewBox="0 0 1000 380" class="perf-svg">
-                            <!-- Before bar -->
-                            <g transform="translate(150, 50)">
-                                <text x="0" y="20" fill="#ff4757" font-size="14" font-weight="600">Before</text>
-                                <rect x="0" y="35" width="600" height="80" rx="8" fill="#ff4757" opacity="0.3"/>
-                                <rect x="0" y="35" width="600" height="80" rx="8" fill="url(#beforeGrad)"/>
-                                <text x="620" y="85" fill="#ff4757" font-size="24" font-weight="700">1.1M</text>
-                                <text x="620" y="110" fill="#a0a0a0" font-size="12">제약</text>
-                            </g>
+                        <!-- Before bar -->
+                        <g transform="translate(200, 340)">
+                            <text x="0" y="0" fill="#ff4757" font-size="18" font-weight="600">Before</text>
+                            <!-- Wavy/organic bar -->
+                            <path d="M0 30 Q200 20 400 30 Q600 40 800 30 L800 70 Q600 80 400 70 Q200 60 0 70 Z" fill="#ff4757" opacity="0.6"/>
+                            <text x="850" y="60" fill="#ff4757" font-size="28" font-weight="700">1.1M</text>
+                        </g>
 
-                            <!-- After bar -->
-                            <g transform="translate(150, 170)">
-                                <text x="0" y="20" fill="#14F195" font-size="14" font-weight="600">After</text>
-                                <rect x="0" y="35" width="14" height="80" rx="8" fill="#14F195"/>
-                                <text x="30" y="85" fill="#14F195" font-size="24" font-weight="700">26K</text>
-                                <text x="30" y="110" fill="#a0a0a0" font-size="12">제약</text>
+                        <!-- After bar -->
+                        <g transform="translate(200, 450)">
+                            <text x="0" y="0" fill="#14F195" font-size="18" font-weight="600">After</text>
+                            <path d="M0 30 Q10 25 19 30 L19 70 Q10 75 0 70 Z" fill="#14F195"/>
+                            <text x="50" y="60" fill="#14F195" font-size="28" font-weight="700">26K</text>
+                        </g>
 
-                                <!-- 42x badge -->
-                                <g transform="translate(100, 45)">
-                                    <rect x="0" y="0" width="80" height="50" rx="25" fill="#14F195" opacity="0.2" stroke="#14F195" stroke-width="2"/>
-                                    <text x="40" y="33" text-anchor="middle" fill="#14F195" font-size="18" font-weight="700">42×</text>
-                                </g>
-                            </g>
-
-                            <defs>
-                                <linearGradient id="beforeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#ff4757;stop-opacity:0.8"/>
-                                    <stop offset="100%" style="stop-color:#ff4757;stop-opacity:0.4"/>
-                                </linearGradient>
-                            </defs>
-
-                            <!-- Optimization explanation -->
-                            <g transform="translate(150, 290)">
-                                <rect x="0" y="0" width="700" height="80" rx="12" fill="#1a1a2e" stroke="#14F195" stroke-width="1"/>
-                                <text x="25" y="30" fill="#14F195" font-size="14" font-weight="600">💡 Constant PK Optimization</text>
-                                <text x="25" y="55" fill="#a0a0a0" font-size="12">RLWE 연산 시 Public Key를 상수로 고정 → 제약 수 대폭 감소 → 온체인 검증 현실화</text>
-                            </g>
-                        </svg>
-                    </div>
+                        <!-- Optimization note -->
+                        <g transform="translate(640, 580)">
+                            <text x="0" y="0" text-anchor="middle" fill="#14F195" font-size="20" font-weight="600">💡 Constant PK Optimization</text>
+                            <text x="0" y="35" text-anchor="middle" fill="#a0a0a0" font-size="18">Public Key를 상수로 고정 → 온체인 검증 현실화</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 8: Progress - Checklist Visual -->
+            <!-- Slide 8: Progress -->
             <div class="slide" data-slide="8">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">07</span>
-                        <span class="slide-label">Progress</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">07</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">PROGRESS</text>
 
-                    <div class="progress-visual">
-                        <svg viewBox="0 0 1000 450" class="progress-svg">
-                            <!-- Progress bar -->
-                            <g transform="translate(100, 30)">
-                                <rect x="0" y="0" width="800" height="12" rx="6" fill="#2a2a4e"/>
-                                <rect x="0" y="0" width="800" height="12" rx="6" fill="url(#flowGrad)"/>
-                                <text x="820" y="12" fill="#14F195" font-size="14" font-weight="700">100%</text>
+                        <!-- Circular progress -->
+                        <g transform="translate(350, 350)">
+                            <circle cx="0" cy="0" r="150" fill="none" stroke="#2a2a4e" stroke-width="20"/>
+                            <circle cx="0" cy="0" r="150" fill="none" stroke="url(#textGrad)" stroke-width="20"
+                                    stroke-dasharray="942" stroke-dashoffset="0" transform="rotate(-90)"/>
+                            <text x="0" y="15" text-anchor="middle" fill="#14F195" font-size="56" font-weight="800">100%</text>
+                            <text x="0" y="50" text-anchor="middle" fill="#a0a0a0" font-size="18">Demo Ready</text>
+                        </g>
+
+                        <!-- Checklist -->
+                        <g transform="translate(650, 180)">
+                            <g transform="translate(0, 0)">
+                                <circle cx="0" cy="0" r="15" fill="#14F195" opacity="0.3"/>
+                                <text x="0" y="6" text-anchor="middle" fill="#14F195" font-size="16">✓</text>
+                                <text x="35" y="6" fill="#fff" font-size="20">회로 2종 연결 (ZK + Audit)</text>
                             </g>
-
-                            <!-- Checklist items -->
-                            <g transform="translate(100, 70)">
-                                <g transform="translate(0, 0)">
-                                    <circle cx="25" cy="25" r="22" fill="#14F195" opacity="0.2"/>
-                                    <polyline points="15,25 22,32 35,18" fill="none" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="65" y="32" fill="#fff" font-size="15">회로 2종 연결 (ZK + Audit)</text>
-                                </g>
-                                <g transform="translate(0, 60)">
-                                    <circle cx="25" cy="25" r="22" fill="#14F195" opacity="0.2"/>
-                                    <polyline points="15,25 22,32 35,18" fill="none" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="65" y="32" fill="#fff" font-size="15">온체인 Verifier 배포</text>
-                                </g>
-                                <g transform="translate(0, 120)">
-                                    <circle cx="25" cy="25" r="22" fill="#14F195" opacity="0.2"/>
-                                    <polyline points="15,25 22,32 35,18" fill="none" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="65" y="32" fill="#fff" font-size="15">Devnet Deposit/Withdraw 작동</text>
-                                </g>
-                                <g transform="translate(400, 0)">
-                                    <circle cx="25" cy="25" r="22" fill="#14F195" opacity="0.2"/>
-                                    <polyline points="15,25 22,32 35,18" fill="none" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="65" y="32" fill="#fff" font-size="15">Demo Frontend 구현</text>
-                                </g>
-                                <g transform="translate(400, 60)">
-                                    <circle cx="25" cy="25" r="22" fill="#14F195" opacity="0.2"/>
-                                    <polyline points="15,25 22,32 35,18" fill="none" stroke="#14F195" stroke-width="3" stroke-linecap="round"/>
-                                    <text x="65" y="32" fill="#fff" font-size="15">데모 영상 제작</text>
-                                </g>
+                            <g transform="translate(0, 55)">
+                                <circle cx="0" cy="0" r="15" fill="#14F195" opacity="0.3"/>
+                                <text x="0" y="6" text-anchor="middle" fill="#14F195" font-size="16">✓</text>
+                                <text x="35" y="6" fill="#fff" font-size="20">온체인 Verifier 배포</text>
                             </g>
-
-                            <!-- Demo link box -->
-                            <g transform="translate(200, 290)">
-                                <rect x="0" y="0" width="600" height="100" rx="16" fill="#1a1a2e" stroke="url(#flowGrad)" stroke-width="2"/>
-                                <g transform="translate(40, 35)">
-                                    <circle cx="20" cy="20" r="18" fill="#9945FF" opacity="0.2"/>
-                                    <text x="20" y="27" text-anchor="middle" fill="#9945FF" font-size="20">▶</text>
-                                </g>
-                                <text x="100" y="45" fill="#fff" font-size="16" font-weight="600">Demo</text>
-                                <text x="100" y="70" fill="#14F195" font-size="14">github.com/Ham3798/auditable-dark-pool</text>
+                            <g transform="translate(0, 110)">
+                                <circle cx="0" cy="0" r="15" fill="#14F195" opacity="0.3"/>
+                                <text x="0" y="6" text-anchor="middle" fill="#14F195" font-size="16">✓</text>
+                                <text x="35" y="6" fill="#fff" font-size="20">Devnet Deposit/Withdraw 작동</text>
                             </g>
+                            <g transform="translate(0, 165)">
+                                <circle cx="0" cy="0" r="15" fill="#14F195" opacity="0.3"/>
+                                <text x="0" y="6" text-anchor="middle" fill="#14F195" font-size="16">✓</text>
+                                <text x="35" y="6" fill="#fff" font-size="20">Demo Frontend 구현</text>
+                            </g>
+                            <g transform="translate(0, 220)">
+                                <circle cx="0" cy="0" r="15" fill="#14F195" opacity="0.3"/>
+                                <text x="0" y="6" text-anchor="middle" fill="#14F195" font-size="16">✓</text>
+                                <text x="35" y="6" fill="#fff" font-size="20">데모 영상 제작</text>
+                            </g>
+                        </g>
 
-                            <!-- Footnote -->
-                            <text x="500" y="430" text-anchor="middle" fill="#64748b" font-size="11">* 현재 End-to-End 데모 가능 — 미감사 상태, 실사용 주의</text>
-                        </svg>
-                    </div>
+                        <!-- Demo link -->
+                        <g transform="translate(640, 580)">
+                            <text x="0" y="0" text-anchor="middle" fill="#14F195" font-size="20" font-weight="600">📂 github.com/Ham3798/auditable-dark-pool</text>
+                            <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="16">* End-to-End 데모 가능 — 미감사 상태</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 9: Challenges - Card Visual -->
+            <!-- Slide 9: Challenges -->
             <div class="slide" data-slide="9">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">08</span>
-                        <span class="slide-label">Challenges</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">08</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">CHALLENGES</text>
 
-                    <div class="challenge-visual">
-                        <svg viewBox="0 0 1100 450" class="challenge-svg">
-                            <!-- Challenge 1 -->
-                            <g transform="translate(50, 50)">
-                                <rect x="0" y="0" width="320" height="350" rx="16" fill="#1a1a2e" stroke="#ff4757" stroke-width="2"/>
-                                <circle cx="50" cy="50" r="30" fill="#ff4757" opacity="0.2"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#ff4757" font-size="24" font-weight="700">1</text>
+                        <!-- Challenge 1 -->
+                        <g transform="translate(250, 300)">
+                            <circle cx="0" cy="0" r="100" fill="#ff4757" opacity="0.1"/>
+                            <circle cx="0" cy="0" r="80" fill="none" stroke="#ff4757" stroke-width="2"/>
+                            <!-- Explosion icon -->
+                            <polygon points="0,-35 8,-10 35,-15 15,5 25,35 0,18 -25,35 -15,5 -35,-15 -8,-10" fill="none" stroke="#ff4757" stroke-width="2"/>
 
-                                <!-- Explosion icon -->
-                                <g transform="translate(130, 80)">
-                                    <polygon points="30,0 38,22 60,25 42,40 48,62 30,50 12,62 18,40 0,25 22,22" fill="none" stroke="#ff4757" stroke-width="2"/>
-                                </g>
+                            <text x="0" y="-120" text-anchor="middle" fill="#ff4757" font-size="36" font-weight="800">1</text>
+                            <text x="0" y="130" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">RLWE 제약 폭증</text>
+                            <text x="0" y="165" text-anchor="middle" fill="#a0a0a0" font-size="16">동형암호 → 제약 수 폭발</text>
+                            <text x="0" y="200" text-anchor="middle" fill="#14F195" font-size="16">→ Constant PK로 해결</text>
+                        </g>
 
-                                <text x="160" y="170" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">RLWE 제약 폭증</text>
-                                <text x="160" y="200" text-anchor="middle" fill="#a0a0a0" font-size="12">동형암호 연산 →</text>
-                                <text x="160" y="220" text-anchor="middle" fill="#a0a0a0" font-size="12">제약 수 기하급수적 증가</text>
+                        <!-- Challenge 2 -->
+                        <g transform="translate(640, 300)">
+                            <circle cx="0" cy="0" r="100" fill="#f39c12" opacity="0.1"/>
+                            <circle cx="0" cy="0" r="80" fill="none" stroke="#f39c12" stroke-width="2"/>
+                            <!-- Bug icon -->
+                            <ellipse cx="0" cy="0" rx="30" ry="25" fill="none" stroke="#f39c12" stroke-width="2"/>
+                            <line x1="-25" y1="-15" x2="-40" y2="-25" stroke="#f39c12" stroke-width="2"/>
+                            <line x1="25" y1="-15" x2="40" y2="-25" stroke="#f39c12" stroke-width="2"/>
+                            <line x1="-30" y1="5" x2="-45" y2="5" stroke="#f39c12" stroke-width="2"/>
+                            <line x1="30" y1="5" x2="45" y2="5" stroke="#f39c12" stroke-width="2"/>
 
-                                <g transform="translate(30, 260)">
-                                    <rect x="0" y="0" width="260" height="50" rx="8" fill="#14F195" opacity="0.15"/>
-                                    <text x="130" y="32" text-anchor="middle" fill="#14F195" font-size="12">→ Constant PK 최적화로 해결</text>
-                                </g>
-                            </g>
+                            <text x="0" y="-120" text-anchor="middle" fill="#f39c12" font-size="36" font-weight="800">2</text>
+                            <text x="0" y="130" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">툴체인 디버깅</text>
+                            <text x="0" y="165" text-anchor="middle" fill="#a0a0a0" font-size="16">회로/컴파일/온체인 각각 다름</text>
+                            <text x="0" y="200" text-anchor="middle" fill="#14F195" font-size="16">→ 모듈별 분리 테스트</text>
+                        </g>
 
-                            <!-- Challenge 2 -->
-                            <g transform="translate(390, 50)">
-                                <rect x="0" y="0" width="320" height="350" rx="16" fill="#1a1a2e" stroke="#f39c12" stroke-width="2"/>
-                                <circle cx="50" cy="50" r="30" fill="#f39c12" opacity="0.2"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#f39c12" font-size="24" font-weight="700">2</text>
+                        <!-- Challenge 3 -->
+                        <g transform="translate(1030, 300)">
+                            <circle cx="0" cy="0" r="100" fill="#3498db" opacity="0.1"/>
+                            <circle cx="0" cy="0" r="80" fill="none" stroke="#3498db" stroke-width="2"/>
+                            <!-- Key + people icon -->
+                            <circle cx="-15" cy="-15" r="15" fill="none" stroke="#3498db" stroke-width="2"/>
+                            <path d="M-35 20 C-35 5 5 5 5 20" fill="none" stroke="#3498db" stroke-width="2"/>
+                            <circle cx="25" cy="-5" r="10" fill="none" stroke="#3498db" stroke-width="2"/>
+                            <line x1="25" y1="5" x2="25" y2="25" stroke="#3498db" stroke-width="2"/>
+                            <line x1="25" y1="15" x2="35" y2="20" stroke="#3498db" stroke-width="2"/>
 
-                                <!-- Bug icon -->
-                                <g transform="translate(120, 70)">
-                                    <ellipse cx="40" cy="35" rx="30" ry="25" fill="none" stroke="#f39c12" stroke-width="2"/>
-                                    <line x1="40" y1="10" x2="40" y2="0" stroke="#f39c12" stroke-width="2"/>
-                                    <line x1="25" y1="15" x2="15" y2="5" stroke="#f39c12" stroke-width="2"/>
-                                    <line x1="55" y1="15" x2="65" y2="5" stroke="#f39c12" stroke-width="2"/>
-                                    <line x1="10" y1="35" x2="0" y2="35" stroke="#f39c12" stroke-width="2"/>
-                                    <line x1="70" y1="35" x2="80" y2="35" stroke="#f39c12" stroke-width="2"/>
-                                </g>
-
-                                <text x="160" y="170" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">툴체인 디버깅</text>
-                                <text x="160" y="200" text-anchor="middle" fill="#a0a0a0" font-size="12">회로/컴파일/온체인/프론트</text>
-                                <text x="160" y="220" text-anchor="middle" fill="#a0a0a0" font-size="12">각각 다른 환경</text>
-
-                                <g transform="translate(30, 260)">
-                                    <rect x="0" y="0" width="260" height="50" rx="8" fill="#14F195" opacity="0.15"/>
-                                    <text x="130" y="32" text-anchor="middle" fill="#14F195" font-size="12">→ 모듈별 분리 + 단계별 테스트</text>
-                                </g>
-                            </g>
-
-                            <!-- Challenge 3 -->
-                            <g transform="translate(730, 50)">
-                                <rect x="0" y="0" width="320" height="350" rx="16" fill="#1a1a2e" stroke="#3498db" stroke-width="2"/>
-                                <circle cx="50" cy="50" r="30" fill="#3498db" opacity="0.2"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#3498db" font-size="24" font-weight="700">3</text>
-
-                                <!-- Key/People icon -->
-                                <g transform="translate(110, 70)">
-                                    <circle cx="40" cy="15" r="12" fill="none" stroke="#3498db" stroke-width="2"/>
-                                    <path d="M20 50 C20 35 60 35 60 50" fill="none" stroke="#3498db" stroke-width="2"/>
-                                    <rect x="55" y="35" width="25" height="18" rx="3" fill="none" stroke="#3498db" stroke-width="2"/>
-                                    <circle cx="67" cy="44" r="4" fill="#3498db"/>
-                                </g>
-
-                                <text x="160" y="170" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">운영 UX 설계</text>
-                                <text x="160" y="200" text-anchor="middle" fill="#a0a0a0" font-size="12">2-of-3 복호화는 보안성만큼</text>
-                                <text x="160" y="220" text-anchor="middle" fill="#a0a0a0" font-size="12">운영 절차(키관리/로그)가 중요</text>
-
-                                <g transform="translate(30, 260)">
-                                    <rect x="0" y="0" width="260" height="50" rx="8" fill="#14F195" opacity="0.15"/>
-                                    <text x="130" y="32" text-anchor="middle" fill="#14F195" font-size="12">→ 거버넌스 프레임워크 필요</text>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
+                            <text x="0" y="-120" text-anchor="middle" fill="#3498db" font-size="36" font-weight="800">3</text>
+                            <text x="0" y="130" text-anchor="middle" fill="#fff" font-size="22" font-weight="600">운영 UX 설계</text>
+                            <text x="0" y="165" text-anchor="middle" fill="#a0a0a0" font-size="16">2-of-3 키관리/로그 중요</text>
+                            <text x="0" y="200" text-anchor="middle" fill="#14F195" font-size="16">→ 거버넌스 프레임워크</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 10: HE Stack Update - Feature Grid -->
+            <!-- Slide 10: HE Stack -->
             <div class="slide" data-slide="10">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">09</span>
-                        <span class="slide-label">HE Stack</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">09</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">HE STACK UPDATE</text>
 
-                    <div class="he-visual">
-                        <svg viewBox="0 0 1100 480" class="he-svg">
-                            <!-- Feature cards row 1 -->
-                            <g transform="translate(50, 40)">
-                                <rect x="0" y="0" width="230" height="160" rx="12" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <rect x="15" y="15" width="80" height="28" rx="14" fill="#9945FF" opacity="0.3"/>
-                                <text x="55" y="34" text-anchor="middle" fill="#9945FF" font-size="11" font-weight="600">Security</text>
-                                <!-- Shield icon -->
-                                <g transform="translate(85, 60)">
-                                    <path d="M30 5 L55 15 L55 40 C55 60 30 75 30 75 C30 75 5 60 5 40 L5 15 Z" fill="none" stroke="#9945FF" stroke-width="2"/>
-                                    <text x="30" y="50" text-anchor="middle" fill="#9945FF" font-size="14">🔐</text>
-                                </g>
-                                <text x="115" y="125" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">오류분석 2⁻¹²⁸</text>
-                                <text x="115" y="145" text-anchor="middle" fill="#a0a0a0" font-size="10">암호학적 보안 수준 충족</text>
-                            </g>
+                        <!-- 4 Feature circles in a diamond pattern -->
+                        <g transform="translate(400, 250)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <text x="0" y="-15" text-anchor="middle" fill="#9945FF" font-size="18" font-weight="700">Security</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#fff" font-size="16">2⁻¹²⁸</text>
+                            <text x="0" y="100" text-anchor="middle" fill="#a0a0a0" font-size="15">암호학적 보안 충족</text>
+                        </g>
 
-                            <g transform="translate(300, 40)">
-                                <rect x="0" y="0" width="230" height="160" rx="12" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <rect x="15" y="15" width="60" height="28" rx="14" fill="#14F195" opacity="0.3"/>
-                                <text x="45" y="34" text-anchor="middle" fill="#14F195" font-size="11" font-weight="600">Speed</text>
-                                <!-- Rocket icon -->
-                                <g transform="translate(85, 55)">
-                                    <text x="30" y="40" text-anchor="middle" font-size="40">🚀</text>
-                                </g>
-                                <text x="115" y="125" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">ZAMA 대비 더 빠름</text>
-                                <text x="115" y="145" text-anchor="middle" fill="#a0a0a0" font-size="10">내부 벤치마크 기준</text>
-                            </g>
+                        <g transform="translate(640, 180)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="-15" text-anchor="middle" fill="#14F195" font-size="18" font-weight="700">Speed</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#fff" font-size="16">🚀</text>
+                            <text x="0" y="100" text-anchor="middle" fill="#a0a0a0" font-size="15">ZAMA 대비 더 빠름</text>
+                        </g>
 
-                            <g transform="translate(550, 40)">
-                                <rect x="0" y="0" width="230" height="160" rx="12" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <rect x="15" y="15" width="95" height="28" rx="14" fill="#9945FF" opacity="0.3"/>
-                                <text x="62" y="34" text-anchor="middle" fill="#9945FF" font-size="11" font-weight="600">Deterministic</text>
-                                <!-- Sync icon -->
-                                <g transform="translate(85, 55)">
-                                    <text x="30" y="40" text-anchor="middle" font-size="40">🔄</text>
-                                </g>
-                                <text x="115" y="125" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">디바이스 무관 재현</text>
-                                <text x="115" y="145" text-anchor="middle" fill="#a0a0a0" font-size="10">어느 환경에서든 동일 결과</text>
-                            </g>
+                        <g transform="translate(880, 250)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <text x="0" y="-15" text-anchor="middle" fill="#9945FF" font-size="18" font-weight="700">Deterministic</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#fff" font-size="16">🔄</text>
+                            <text x="0" y="100" text-anchor="middle" fill="#a0a0a0" font-size="15">디바이스 무관 재현</text>
+                        </g>
 
-                            <g transform="translate(800, 40)">
-                                <rect x="0" y="0" width="230" height="160" rx="12" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <rect x="15" y="15" width="75" height="28" rx="14" fill="#14F195" opacity="0.3"/>
-                                <text x="52" y="34" text-anchor="middle" fill="#14F195" font-size="11" font-weight="600">Verifiable</text>
-                                <!-- Checkmark -->
-                                <g transform="translate(85, 55)">
-                                    <text x="30" y="40" text-anchor="middle" font-size="40">✅</text>
-                                </g>
-                                <text x="115" y="125" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Plonky3 검증 가능</text>
-                                <text x="115" y="145" text-anchor="middle" fill="#a0a0a0" font-size="10">ZK로 HE 연산 검증</text>
-                            </g>
+                        <g transform="translate(640, 380)">
+                            <circle cx="0" cy="0" r="70" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <text x="0" y="-15" text-anchor="middle" fill="#14F195" font-size="18" font-weight="700">Verifiable</text>
+                            <text x="0" y="15" text-anchor="middle" fill="#fff" font-size="16">✓</text>
+                            <text x="0" y="100" text-anchor="middle" fill="#a0a0a0" font-size="15">Plonky3 검증 가능</text>
+                        </g>
 
-                            <!-- Next feature - full width -->
-                            <g transform="translate(150, 230)">
-                                <rect x="0" y="0" width="800" height="120" rx="16" fill="#1a1a2e" stroke="url(#flowGrad)" stroke-width="3"/>
-                                <rect x="20" y="20" width="60" height="28" rx="14" fill="url(#flowGrad)"/>
-                                <text x="50" y="39" text-anchor="middle" fill="#1a1a2e" font-size="11" font-weight="700">Next</text>
+                        <!-- Connecting lines -->
+                        <line x1="460" y1="220" x2="580" y2="180" stroke="#2a2a4e" stroke-width="1"/>
+                        <line x1="700" y1="180" x2="820" y2="220" stroke="#2a2a4e" stroke-width="1"/>
+                        <line x1="460" y1="280" x2="580" y2="350" stroke="#2a2a4e" stroke-width="1"/>
+                        <line x1="700" y1="350" x2="820" y2="280" stroke="#2a2a4e" stroke-width="1"/>
 
-                                <g transform="translate(100, 35)">
-                                    <svg viewBox="0 0 397 311" width="40" height="32">
-                                        <path fill="#14F195" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"/>
-                                        <path fill="#14F195" d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"/>
-                                        <path fill="#14F195" d="M332.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
-                                    </svg>
-                                </g>
-                                <text x="170" y="55" fill="#fff" font-size="18" font-weight="600">Solana Token Extension (ElGamal) + Auditable</text>
-                                <text x="170" y="85" fill="#a0a0a0" font-size="13">SPL 토큰 레벨로 감사 가능한 프라이버시 일반화</text>
-                            </g>
-
-                            <!-- Conclusion -->
-                            <g transform="translate(150, 380)">
-                                <rect x="0" y="0" width="800" height="60" rx="12" fill="#2a2a4e"/>
-                                <text x="400" y="38" text-anchor="middle" fill="#fff" font-size="14">
-                                    <tspan fill="#14F195" font-weight="600">확장 방향:</tspan>
-                                    <tspan fill="#a0a0a0"> SOL뿐 아니라 SPL/Token Extension 레벨로 "감사 가능한 프라이버시" 일반화</tspan>
-                                </text>
-                            </g>
-                        </svg>
-                    </div>
+                        <!-- Next: Token Extension -->
+                        <g transform="translate(640, 580)">
+                            <path d="M-300 -25 L-280 -45 L280 -45 L300 -25 L300 25 L280 45 L-280 45 L-300 25 Z"
+                                  fill="#1a1a2e" stroke="url(#textGrad)" stroke-width="2"/>
+                            <text x="0" y="-5" text-anchor="middle" fill="#14F195" font-size="18" font-weight="700">Next: Solana Token Extension (ElGamal) + Auditable</text>
+                            <text x="0" y="25" text-anchor="middle" fill="#a0a0a0" font-size="16">SPL 토큰 레벨로 감사 가능한 프라이버시 일반화</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 11: Roadmap - Timeline Visual -->
+            <!-- Slide 11: Roadmap -->
             <div class="slide" data-slide="11">
-                <div class="slide-inner visual-slide">
-                    <div class="mini-header">
-                        <span class="slide-num">10</span>
-                        <span class="slide-label">Roadmap</span>
-                    </div>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Header -->
+                        <text x="100" y="80" fill="#9945FF" font-size="18" font-weight="700">10</text>
+                        <text x="140" y="80" fill="#64748b" font-size="18" font-weight="600">ROADMAP</text>
 
-                    <div class="roadmap-visual">
-                        <svg viewBox="0 0 1100 450" class="roadmap-svg">
-                            <!-- Timeline line -->
-                            <line x1="100" y1="150" x2="1000" y2="150" stroke="#2a2a4e" stroke-width="4"/>
-                            <line x1="100" y1="150" x2="550" y2="150" stroke="url(#flowGrad)" stroke-width="4"/>
+                        <!-- Timeline path -->
+                        <path d="M150 350 Q400 350 450 280 Q500 210 640 210 Q780 210 830 280 Q880 350 1130 350"
+                              fill="none" stroke="#2a2a4e" stroke-width="4"/>
+                        <path d="M150 350 Q400 350 450 280 Q500 210 640 210"
+                              fill="none" stroke="url(#textGrad)" stroke-width="4"/>
 
-                            <!-- Short term -->
-                            <g transform="translate(100, 120)">
-                                <circle cx="0" cy="30" r="15" fill="#9945FF"/>
-                                <text x="0" y="0" text-anchor="middle" fill="#9945FF" font-size="14" font-weight="600">단기</text>
-                            </g>
+                        <!-- Current marker -->
+                        <circle cx="640" cy="210" r="15" fill="#14F195"/>
+                        <text x="640" y="180" text-anchor="middle" fill="#14F195" font-size="16" font-weight="600">NOW</text>
 
-                            <g transform="translate(150, 200)">
-                                <rect x="0" y="0" width="350" height="200" rx="12" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
-                                <g transform="translate(20, 30)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#9945FF" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#9945FF" font-size="13">🌐 WASM Proof Generation</text>
-                                </g>
-                                <g transform="translate(20, 85)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#9945FF" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#9945FF" font-size="13">🪙 Multi-Asset (SPL 토큰)</text>
-                                </g>
-                                <g transform="translate(20, 140)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#9945FF" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#9945FF" font-size="13">📡 Relayer Network</text>
-                                </g>
-                            </g>
+                        <!-- Short term (left arc) -->
+                        <g transform="translate(300, 400)">
+                            <text x="0" y="-30" text-anchor="middle" fill="#9945FF" font-size="20" font-weight="700">단기</text>
+                            <text x="0" y="10" text-anchor="middle" fill="#fff" font-size="18">WASM Proof Generation</text>
+                            <text x="0" y="45" text-anchor="middle" fill="#fff" font-size="18">Multi-Asset (SPL)</text>
+                            <text x="0" y="80" text-anchor="middle" fill="#fff" font-size="18">Relayer Network</text>
+                        </g>
 
-                            <!-- Mid term -->
-                            <g transform="translate(550, 120)">
-                                <circle cx="0" cy="30" r="15" fill="#14F195"/>
-                                <text x="0" y="0" text-anchor="middle" fill="#14F195" font-size="14" font-weight="600">중기</text>
-                            </g>
+                        <!-- Mid term (right arc) -->
+                        <g transform="translate(980, 400)">
+                            <text x="0" y="-30" text-anchor="middle" fill="#14F195" font-size="20" font-weight="700">중기</text>
+                            <text x="0" y="10" text-anchor="middle" fill="#fff" font-size="18">Token Extension 결합</text>
+                            <text x="0" y="45" text-anchor="middle" fill="#fff" font-size="18">Auditable Token Transfer</text>
+                            <text x="0" y="80" text-anchor="middle" fill="#fff" font-size="18">Plonky3 검증 파이프라인</text>
+                        </g>
 
-                            <g transform="translate(600, 200)">
-                                <rect x="0" y="0" width="350" height="200" rx="12" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
-                                <g transform="translate(20, 30)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#14F195" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#14F195" font-size="13">🔗 Token Extension 결합</text>
-                                </g>
-                                <g transform="translate(20, 85)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#14F195" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#14F195" font-size="13">🔍 Auditable Token Transfer</text>
-                                </g>
-                                <g transform="translate(20, 140)">
-                                    <rect x="0" y="0" width="310" height="45" rx="6" fill="#14F195" opacity="0.15"/>
-                                    <text x="155" y="30" text-anchor="middle" fill="#14F195" font-size="13">⚡ Plonky3 검증 파이프라인</text>
-                                </g>
-                            </g>
-
-                            <!-- Future dot -->
-                            <g transform="translate(1000, 120)">
-                                <circle cx="0" cy="30" r="15" fill="#64748b" stroke="#64748b" stroke-width="2" stroke-dasharray="4,4"/>
-                            </g>
-
-                            <!-- Vision box at bottom -->
-                            <g transform="translate(250, 430)">
-                                <text x="300" y="0" text-anchor="middle" fill="#fff" font-size="16">
-                                    <tspan fill="#14F195" font-weight="600">🎯 비전:</tspan>
-                                    <tspan fill="#a0a0a0"> Solana 생태계에서 "프라이버시 + 컴플라이언스"의 표준 레이어 구축</tspan>
-                                </text>
-                            </g>
-                        </svg>
-                    </div>
+                        <!-- Vision -->
+                        <g transform="translate(640, 620)">
+                            <text x="0" y="0" text-anchor="middle" fill="#14F195" font-size="20" font-weight="600">🎯 비전: Solana 생태계에서 "프라이버시 + 컴플라이언스"의 표준 레이어</text>
+                        </g>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Slide 12: Q&A - Clean End -->
+            <!-- Slide 12: Q&A -->
             <div class="slide" data-slide="12">
-                <div class="slide-inner title-slide end-slide">
-                    <div class="end-visual">
-                        <svg viewBox="0 0 400 300" class="end-svg">
-                            <defs>
-                                <linearGradient id="endGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#9945FF;stop-opacity:0.6"/>
-                                    <stop offset="100%" style="stop-color:#14F195;stop-opacity:0.6"/>
-                                </linearGradient>
-                            </defs>
-                            <!-- Q&A bubble -->
-                            <circle cx="200" cy="130" r="100" fill="none" stroke="url(#endGrad)" stroke-width="3"/>
-                            <circle cx="200" cy="130" r="80" fill="#1a1a2e" stroke="url(#endGrad)" stroke-width="2"/>
-                            <text x="200" y="115" text-anchor="middle" fill="#fff" font-size="36" font-weight="700">Q&amp;A</text>
-                            <text x="200" y="150" text-anchor="middle" fill="#a0a0a0" font-size="12">질문 환영합니다</text>
+                <div class="slide-inner">
+                    <svg viewBox="0 0 1280 720" class="full-svg">
+                        <!-- Ambient -->
+                        <circle cx="640" cy="300" r="250" fill="url(#grad1)" opacity="0.3"/>
 
-                            <!-- Floating particles -->
-                            <circle cx="80" cy="80" r="4" fill="#9945FF" opacity="0.6"><animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/></circle>
-                            <circle cx="320" cy="100" r="3" fill="#14F195" opacity="0.5"><animate attributeName="opacity" values="0.5;0.2;0.5" dur="1.5s" repeatCount="indefinite"/></circle>
-                            <circle cx="100" cy="200" r="5" fill="#14F195" opacity="0.7"><animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite"/></circle>
-                            <circle cx="300" cy="220" r="4" fill="#9945FF" opacity="0.4"><animate attributeName="opacity" values="0.4;0.2;0.4" dur="1.8s" repeatCount="indefinite"/></circle>
-                        </svg>
-                    </div>
+                        <!-- Q&A -->
+                        <g transform="translate(640, 280)">
+                            <circle cx="0" cy="0" r="120" fill="none" stroke="url(#textGrad)" stroke-width="3"/>
+                            <circle cx="0" cy="0" r="100" fill="#1a1a2e"/>
+                            <text x="0" y="20" text-anchor="middle" fill="url(#textGrad)" font-size="64" font-weight="800">Q&amp;A</text>
+                        </g>
 
-                    <p class="end-tagline">프라이버시와 컴플라이언스, 둘 다 가능합니다</p>
+                        <!-- Floating particles -->
+                        <circle cx="400" cy="200" r="6" fill="#9945FF" opacity="0.6">
+                            <animate attributeName="cy" values="200;180;200" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="880" cy="250" r="5" fill="#14F195" opacity="0.5">
+                            <animate attributeName="cy" values="250;270;250" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="350" cy="400" r="7" fill="#14F195" opacity="0.4">
+                            <animate attributeName="cy" values="400;380;400" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="930" cy="380" r="5" fill="#9945FF" opacity="0.5">
+                            <animate attributeName="cy" values="380;400;380" dur="3.5s" repeatCount="indefinite"/>
+                        </circle>
 
-                    <div class="end-links">
-                        <div class="end-link">
-                            <span class="link-icon">📂</span>
-                            <span class="link-label">Repo</span>
-                            <span class="link-url">github.com/Ham3798/auditable-dark-pool</span>
-                        </div>
-                        <div class="end-link">
-                            <span class="link-icon">▶️</span>
-                            <span class="link-label">Demo</span>
-                            <span class="link-url">데모 영상 링크</span>
-                        </div>
-                        <div class="end-link">
-                            <span class="link-icon">👋</span>
-                            <span class="link-label">Contact</span>
-                            <span class="link-url">waLLLnut Team</span>
-                        </div>
-                    </div>
+                        <!-- Tagline -->
+                        <text x="640" y="460" text-anchor="middle" fill="#a0a0a0" font-size="24">프라이버시와 컴플라이언스, 둘 다 가능합니다</text>
 
-                    <div class="title-meta">
-                        <span>Thank you!</span>
-                    </div>
+                        <!-- Links -->
+                        <g transform="translate(400, 540)">
+                            <circle cx="0" cy="0" r="8" fill="#9945FF"/>
+                            <text x="20" y="6" fill="#fff" font-size="18">Repo: github.com/Ham3798/auditable-dark-pool</text>
+                        </g>
+                        <g transform="translate(400, 585)">
+                            <circle cx="0" cy="0" r="8" fill="#14F195"/>
+                            <text x="20" y="6" fill="#fff" font-size="18">Contact: waLLLnut Team</text>
+                        </g>
+
+                        <!-- Thank you -->
+                        <text x="640" y="680" text-anchor="middle" fill="#64748b" font-size="20">Thank you!</text>
+                    </svg>
                 </div>
             </div>
 
