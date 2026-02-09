@@ -6983,6 +6983,1259 @@ code, .monospace, .spec-value, .field-name {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
+/* ========== NEW SLIDE COMPONENTS (2026 Restructure) ========== */
+
+/* Slide 1: Title (Formal) */
+.doc-badge {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background: rgba(217, 53, 53, 0.1);
+    color: var(--red);
+    padding: 6px 16px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(217, 53, 53, 0.3);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+.title-logo {
+    width: 50px;
+    height: 50px;
+}
+
+.title-main {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.title-sub {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-medium);
+}
+
+.title-meta {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    gap: 16px;
+    font-size: 15px;
+    color: var(--text-medium);
+}
+
+.meta-sep {
+    color: var(--text-light);
+}
+
+/* Slide 2: Executive Summary Grid */
+.exec-summary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.exec-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    padding: 14px 20px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.exec-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.exec-value {
+    font-size: 15px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.exec-footer {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #fff7ed 100%);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+/* Slide 3: Background Content */
+.background-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.bg-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.bg-section h4 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.bg-list {
+    list-style: none;
+}
+
+.bg-list li {
+    font-size: 15px;
+    color: var(--text-medium);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.bg-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.bg-ref {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.bg-ref a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.highlight-section {
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #fff7ed 100%);
+    border: 2px solid var(--primary);
+}
+
+.highlight-section h4 {
+    color: var(--primary);
+}
+
+.highlight-section p {
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Slide 4: Timeline Section */
+.timeline-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+}
+
+.timeline-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 150px;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+}
+
+.timeline-row:last-child {
+    border-bottom: none;
+}
+
+.tl-date-col {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.tl-content-col {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tl-title {
+    font-size: 15px;
+    color: var(--text-medium);
+}
+
+.tl-status {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+.status-confirmed {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--green);
+}
+
+.status-expected {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--accent);
+}
+
+.tl-ref-col {
+    text-align: right;
+}
+
+.tl-ref-col a {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.timing-implication {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.timing-implication h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.timing-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.timing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 20px;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.timing-period {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.timing-task {
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+.timing-arrow {
+    font-size: 20px;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+/* Slide 5: Problem Table */
+.problem-table {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+}
+
+.problem-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+}
+
+.problem-row.header-row {
+    background: var(--mantle);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.problem-row:last-child {
+    border-bottom: none;
+}
+
+.prob-col-issue {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.prob-col-desc {
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+.prob-col-risk {
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 600;
+}
+
+.slide-footnote {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.slide-footnote a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.slide-bottom-box {
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #fff7ed 100%);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.slide-bottom-box.action-box {
+    background: linear-gradient(135deg, #D1FAE5 0%, #ECFDF5 100%);
+    border-color: var(--green);
+}
+
+/* Slide 6: Architecture Diagram */
+.arch-diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.arch-layer {
+    flex: 1;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.layer-header {
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+.privacy-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #f59e0b 100%);
+}
+
+.audit-header {
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+}
+
+.layer-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.layer-component {
+    padding: 14px;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.layer-component strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.layer-component ul {
+    list-style: none;
+}
+
+.layer-component ul li {
+    font-size: 13px;
+    color: var(--text-medium);
+    padding: 3px 0;
+    padding-left: 16px;
+    position: relative;
+}
+
+.layer-component ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+.arch-connector {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-light);
+}
+
+.arch-result {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.result-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.result-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.result-desc {
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+/* Slide 7: Integration Architecture */
+.integration-arch {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.int-top {
+    margin-bottom: 16px;
+}
+
+.int-box {
+    padding: 16px 24px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.koscom-infra {
+    background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+    color: white;
+}
+
+.box-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.box-items {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 15px;
+}
+
+.int-middle {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.atomic-label {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.int-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.leg-box {
+    padding: 16px 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.leg-box.delivery {
+    background: var(--light-gray);
+}
+
+.leg-box.payment {
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #fff7ed 100%);
+    border: 2px solid var(--primary);
+}
+
+.leg-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+
+.leg-desc {
+    display: block;
+    font-size: 13px;
+    color: var(--text-medium);
+    margin-bottom: 10px;
+}
+
+.leg-note {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.walllnut-layer {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--primary);
+    color: white;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.integration-points {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+}
+
+.integration-points h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.integration-points ul {
+    list-style: none;
+}
+
+.integration-points ul li {
+    font-size: 14px;
+    color: var(--text-medium);
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.integration-points ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Slide 8: Data Flow Table */
+.dataflow-table {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.df-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.5fr;
+    background: var(--mantle);
+    color: white;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.df-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.5fr;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+    font-size: 14px;
+}
+
+.df-row:last-child {
+    border-bottom: none;
+}
+
+.df-col-data {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.df-col-normal, .df-col-audit, .df-col-method {
+    color: var(--text-medium);
+}
+
+.hide-status {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.show-status {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.privacy-note {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* Slide 9: Governance Models */
+.gov-models {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.gov-model {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.gov-model h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.key-holders {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    min-width: 80px;
+}
+
+.holder-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.holder-share {
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.model-note {
+    font-size: 13px;
+    color: var(--text-medium);
+    text-align: center;
+    padding: 10px;
+    background: var(--primary-bg);
+    border-radius: 8px;
+}
+
+.gov-procedures {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+}
+
+.gov-procedures h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.gov-procedures ol {
+    list-style: none;
+    counter-reset: step;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gov-procedures ol li {
+    counter-increment: step;
+    font-size: 13px;
+    color: var(--text-medium);
+    padding: 8px 14px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gov-procedures ol li::before {
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Slide 10: Scope Columns */
+.scope-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.scope-col {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.scope-col h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.scope-col.in-scope h4 {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--green);
+}
+
+.scope-col.out-scope h4 {
+    background: rgba(217, 53, 53, 0.1);
+    color: var(--red);
+}
+
+.scope-col ul {
+    list-style: none;
+}
+
+.scope-col ul li {
+    font-size: 14px;
+    color: var(--text-medium);
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.scope-col ul li:last-child {
+    border-bottom: none;
+}
+
+.scope-col.in-scope ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+}
+
+.scope-col.out-scope ul li::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-weight: 700;
+}
+
+.deliverables-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.deliverables-section h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.deliverable-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.del-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.del-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.del-desc {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* Slide 11: KPI Table */
+.kpi-table {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.kpi-header {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.5fr;
+    background: var(--mantle);
+    color: white;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.kpi-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.5fr;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+    font-size: 14px;
+}
+
+.kpi-row:last-child {
+    border-bottom: none;
+}
+
+.kpi-col-metric {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.kpi-col-target {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.kpi-col-method {
+    color: var(--text-medium);
+}
+
+.test-scenarios {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.test-scenarios h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.test-scenarios ol {
+    list-style: none;
+    counter-reset: scenario;
+}
+
+.test-scenarios ol li {
+    counter-increment: scenario;
+    font-size: 14px;
+    color: var(--text-medium);
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.test-scenarios ol li:last-child {
+    border-bottom: none;
+}
+
+.test-scenarios ol li::before {
+    content: counter(scenario);
+    position: absolute;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Slide 12: Comparison Matrix (Formal) */
+.comparison-matrix.formal-matrix {
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.matrix-header {
+    display: grid;
+    grid-template-columns: 1.8fr repeat(4, 1fr);
+    background: var(--mantle);
+    color: white;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.matrix-row {
+    display: grid;
+    grid-template-columns: 1.8fr repeat(4, 1fr);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--medium-gray);
+    align-items: center;
+    font-size: 14px;
+}
+
+.matrix-row:last-child {
+    border-bottom: none;
+}
+
+.matrix-row.highlight-row {
+    background: linear-gradient(135deg, var(--primary-bg) 0%, #fff7ed 100%);
+}
+
+.matrix-label {
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: left;
+}
+
+.matrix-cell {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.cell-yes {
+    color: var(--green);
+}
+
+.cell-no {
+    color: var(--red);
+}
+
+.cell-partial {
+    color: var(--orange);
+}
+
+.comparison-note {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+}
+
+.comparison-note p {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.comparison-note ul {
+    list-style: none;
+}
+
+.comparison-note ul li {
+    font-size: 14px;
+    color: var(--text-medium);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.comparison-note ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Slide 13: Team Cards */
+.team-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.team-member {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    text-align: center;
+}
+
+.team-member h4 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.team-member .role-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    font-size: 13px;
+    color: var(--text-medium);
+    line-height: 1.5;
+}
+
+.team-member a {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.reference-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.reference-section h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.ref-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ref-list li a {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: underline;
+    padding: 6px 12px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Slide 14: Next Steps Timeline */
+.next-steps-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.step-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.step-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.step-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.step-desc {
+    font-size: 13px;
+    color: var(--text-medium);
+}
+
+.step-period {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.contact-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: linear-gradient(135deg, var(--mantle) 0%, var(--mantle-light) 100%);
+    border-radius: 14px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.contact-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.contact-name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ========== SVG Infographic Containers ========== */
+.svg-arch-container,
+.svg-integration-container,
+.svg-governance-container {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.arch-svg,
+.integration-svg,
+.governance-svg {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+}
+
+.svg-arch-container svg text,
+.svg-integration-container svg text,
+.svg-governance-container svg text {
+    font-family: 'Paperlogy', 'Pretendard', sans-serif;
+}
+
 /* Print / PDF Styles */
 @media print {
     .controls { display: none !important; }
