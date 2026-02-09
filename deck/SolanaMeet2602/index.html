@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditable Dark Pool on Solana | 프라이버시 × 컴플라이언스</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls" id="controls">
+        <button id="prevBtn" onclick="prevSlide()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+        </button>
+        <span id="slideCounter">1 / 12</span>
+        <button id="nextBtn" onclick="nextSlide()">
+            다음
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </button>
+        <button id="downloadBtn" onclick="downloadPDF()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            PDF
+        </button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container" id="deckContainer">
+
+            <!-- Slide 1: Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-inner title-slide">
+                    <div class="solana-badge">Solana Privacy Hack</div>
+
+                    <div class="title-content">
+                        <div class="logo-area">
+                            <div class="solana-logo">
+                                <svg viewBox="0 0 397 311" width="48" height="38">
+                                    <path fill="#00FFA3" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"/>
+                                    <path fill="#00FFA3" d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"/>
+                                    <path fill="#00FFA3" d="M332.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+                                </svg>
+                            </div>
+                            <h1>Auditable Dark Pool</h1>
+                        </div>
+                        <p class="title-main">프라이버시 × 컴플라이언스</p>
+                        <p class="title-sub">Private SOL Transfers with 2-of-3 Auditable Compliance</p>
+                    </div>
+
+                    <div class="title-meta">
+                        <span>Solana Meetup</span>
+                        <span class="meta-sep">|</span>
+                        <span>2026.02</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Problem Definition -->
+            <div class="slide" data-slide="2">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">01</span>
+                        <span class="slide-title">Problem</span>
+                    </div>
+                    <h2 class="slide-headline">투명성 vs 컴플라이언스 딜레마</h2>
+
+                    <div class="problem-grid">
+                        <div class="problem-card">
+                            <div class="problem-icon">🔓</div>
+                            <h4>퍼블릭 체인의 비용</h4>
+                            <ul>
+                                <li>모든 거래가 영구 공개</li>
+                                <li>상대방/패턴 노출 → 프론트러닝</li>
+                                <li>기관 채택 불가</li>
+                            </ul>
+                            <div class="problem-result bad">투명성 = 비용</div>
+                        </div>
+
+                        <div class="problem-vs">
+                            <span>VS</span>
+                        </div>
+
+                        <div class="problem-card">
+                            <div class="problem-icon">🔒</div>
+                            <h4>완전 익명의 한계</h4>
+                            <ul>
+                                <li>규제기관 감사 불가</li>
+                                <li>AML/CFT 요건 미충족</li>
+                                <li>제재 대상 (Tornado Cash)</li>
+                            </ul>
+                            <div class="problem-result bad">익명 = 불법</div>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-box">
+                        <strong>필요한 것:</strong> 기본 프라이버시 + 조건부 감사 — "평소엔 숨기고, 필요할 때만 공개"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Product Introduction -->
+            <div class="slide" data-slide="3">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">02</span>
+                        <span class="slide-title">Solution</span>
+                    </div>
+                    <h2 class="slide-headline">Auditable Dark Pool</h2>
+
+                    <div class="product-hero">
+                        <p class="hero-tagline">"Private SOL transfers with 2-of-3 auditable compliance"</p>
+                    </div>
+
+                    <div class="two-perspective">
+                        <div class="perspective-card user">
+                            <div class="perspective-icon">👤</div>
+                            <h4>유저 관점</h4>
+                            <ul>
+                                <li>SOL 익명 송금</li>
+                                <li>상대방/금액 비공개</li>
+                                <li>온체인에서 검증 가능</li>
+                            </ul>
+                        </div>
+
+                        <div class="perspective-card auditor">
+                            <div class="perspective-icon">🔍</div>
+                            <h4>감사자 관점</h4>
+                            <ul>
+                                <li>2-of-3 합의 시에만 복호화</li>
+                                <li>단독 접근 불가</li>
+                                <li>모든 복호화 시도 로깅</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-insight">
+                        <span class="insight-label">핵심</span>
+                        <span class="insight-text">단일 주체가 프라이버시를 깰 수 없음 — 합의 기반 감사</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: User Flow -->
+            <div class="slide" data-slide="4">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">03</span>
+                        <span class="slide-title">Demo Flow</span>
+                    </div>
+                    <h2 class="slide-headline">유저 플로우 (데모 시나리오)</h2>
+
+                    <div class="flow-diagram">
+                        <div class="flow-step">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>Initialize</h4>
+                                <p>Pool 생성 및 초기화</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>Deposit</h4>
+                                <p>SOL → Shielded Pool<br>Merkle root 업데이트</p>
+                            </div>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step highlight">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>Withdraw</h4>
+                                <p>ZK Proof + Audit Proof<br>온체인 동시 검증</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="withdraw-detail">
+                        <h4>Withdraw 시점 온체인 검증</h4>
+                        <div class="verify-items">
+                            <div class="verify-item">
+                                <span class="verify-badge zk">ZK</span>
+                                <span class="verify-text">Shielded withdrawal이 유효한지</span>
+                            </div>
+                            <div class="verify-item">
+                                <span class="verify-badge audit">Audit</span>
+                                <span class="verify-text">아이덴티티 암호화가 올바른지 (RLWE)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Architecture -->
+            <div class="slide" data-slide="5">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">04</span>
+                        <span class="slide-title">Architecture</span>
+                    </div>
+                    <h2 class="slide-headline">ZK + RLWE (Threshold Decryption)</h2>
+
+                    <div class="arch-svg-container">
+                        <svg viewBox="0 0 1150 260" class="arch-svg">
+                            <defs>
+                                <linearGradient id="zkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#9945FF"/>
+                                    <stop offset="100%" style="stop-color:#14F195"/>
+                                </linearGradient>
+                                <linearGradient id="auditGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#14F195"/>
+                                    <stop offset="100%" style="stop-color:#00FFA3"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- ZK Circuit -->
+                            <rect x="20" y="20" width="480" height="220" rx="8" fill="#1a1a2e" stroke="#9945FF" stroke-width="2"/>
+                            <rect x="20" y="20" width="480" height="40" rx="8" fill="url(#zkGrad)"/>
+                            <rect x="20" y="52" width="480" height="8" fill="url(#zkGrad)"/>
+                            <text x="260" y="47" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Privacy Layer (ZK Circuit)</text>
+
+                            <rect x="40" y="80" width="200" height="70" rx="6" fill="#2a2a4e"/>
+                            <text x="140" y="105" text-anchor="middle" fill="#9945FF" font-size="12" font-weight="700">Noir Circuit</text>
+                            <text x="140" y="125" text-anchor="middle" fill="#a0a0a0" font-size="10">출금 유효성 증명</text>
+                            <text x="140" y="140" text-anchor="middle" fill="#a0a0a0" font-size="10">Merkle proof 검증</text>
+
+                            <rect x="260" y="80" width="220" height="70" rx="6" fill="#2a2a4e"/>
+                            <text x="370" y="105" text-anchor="middle" fill="#9945FF" font-size="12" font-weight="700">Sunspot Verifier</text>
+                            <text x="370" y="125" text-anchor="middle" fill="#a0a0a0" font-size="10">Noir → Solana 컴파일</text>
+                            <text x="370" y="140" text-anchor="middle" fill="#a0a0a0" font-size="10">온체인 검증</text>
+
+                            <!-- Bridge -->
+                            <rect x="140" y="165" width="220" height="60" rx="8" fill="#14F195" opacity="0.15" stroke="#14F195" stroke-width="2"/>
+                            <text x="250" y="192" text-anchor="middle" fill="#14F195" font-size="11" font-weight="700">wa_commitment</text>
+                            <text x="250" y="210" text-anchor="middle" fill="#a0a0a0" font-size="10">= Poseidon(owner_x, owner_y)</text>
+
+                            <!-- Arrow -->
+                            <text x="540" y="130" text-anchor="middle" fill="#64748b" font-size="24">⟷</text>
+
+                            <!-- Audit Circuit -->
+                            <rect x="600" y="20" width="530" height="220" rx="8" fill="#1a1a2e" stroke="#14F195" stroke-width="2"/>
+                            <rect x="600" y="20" width="530" height="40" rx="8" fill="url(#auditGrad2)"/>
+                            <rect x="600" y="52" width="530" height="8" fill="url(#auditGrad2)"/>
+                            <text x="865" y="47" text-anchor="middle" fill="#1a1a2e" font-size="14" font-weight="700">Compliance Layer (Audit Circuit)</text>
+
+                            <rect x="620" y="80" width="230" height="70" rx="6" fill="#2a2a4e"/>
+                            <text x="735" y="105" text-anchor="middle" fill="#14F195" font-size="12" font-weight="700">RLWE Encryption</text>
+                            <text x="735" y="125" text-anchor="middle" fill="#a0a0a0" font-size="10">아이덴티티 암호화</text>
+                            <text x="735" y="140" text-anchor="middle" fill="#a0a0a0" font-size="10">ZK로 정확성 증명</text>
+
+                            <rect x="870" y="80" width="240" height="70" rx="6" fill="#2a2a4e"/>
+                            <text x="990" y="105" text-anchor="middle" fill="#14F195" font-size="12" font-weight="700">2-of-3 Threshold</text>
+                            <text x="990" y="125" text-anchor="middle" fill="#a0a0a0" font-size="10">Shamir Secret Sharing</text>
+                            <text x="990" y="140" text-anchor="middle" fill="#a0a0a0" font-size="10">단독 복호화 불가</text>
+
+                            <rect x="700" y="165" width="180" height="60" rx="8" fill="#9945FF" opacity="0.15" stroke="#9945FF" stroke-width="2"/>
+                            <text x="790" y="200" text-anchor="middle" fill="#9945FF" font-size="11" font-weight="700">합의 시에만 복호</text>
+                        </svg>
+                    </div>
+
+                    <div class="arch-note">
+                        <strong>핵심:</strong> 두 회로가 wa_commitment로 연결 — 프라이버시와 감사 가능성 동시 보장
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Tech Stack -->
+            <div class="slide" data-slide="6">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">05</span>
+                        <span class="slide-title">Tech Stack</span>
+                    </div>
+                    <h2 class="slide-headline">구현 스택 & 레포 구조</h2>
+
+                    <div class="stack-grid">
+                        <div class="stack-item">
+                            <span class="stack-name">Noir</span>
+                            <span class="stack-desc">ZK 회로 개발 (Aztec)</span>
+                        </div>
+                        <div class="stack-item">
+                            <span class="stack-name">Sunspot</span>
+                            <span class="stack-desc">Noir → Solana 컴파일 (Reilabs)</span>
+                        </div>
+                        <div class="stack-item">
+                            <span class="stack-name">Pinocchio</span>
+                            <span class="stack-desc">Proof 파이프라인</span>
+                        </div>
+                        <div class="stack-item">
+                            <span class="stack-name">Honk</span>
+                            <span class="stack-desc">Proof 시스템</span>
+                        </div>
+                        <div class="stack-item">
+                            <span class="stack-name">Poseidon</span>
+                            <span class="stack-desc">해시 함수 (Commitment)</span>
+                        </div>
+                        <div class="stack-item">
+                            <span class="stack-name">Helius RPC</span>
+                            <span class="stack-desc">Solana 인프라</span>
+                        </div>
+                    </div>
+
+                    <div class="repo-structure">
+                        <h4>레포 구조</h4>
+                        <div class="repo-tree">
+                            <div class="repo-item"><span class="folder">📁</span> audit_circuit</div>
+                            <div class="repo-item"><span class="folder">📁</span> noir_circuit</div>
+                            <div class="repo-item"><span class="folder">📁</span> shielded_pool_program</div>
+                            <div class="repo-item"><span class="folder">📁</span> client</div>
+                            <div class="repo-item"><span class="folder">📁</span> demo-frontend</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Performance -->
+            <div class="slide" data-slide="7">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">06</span>
+                        <span class="slide-title">Performance</span>
+                    </div>
+                    <h2 class="slide-headline">성능 최적화: 제약 수 42× 감소</h2>
+
+                    <div class="perf-comparison">
+                        <div class="perf-before">
+                            <div class="perf-label">Before</div>
+                            <div class="perf-bar before">
+                                <div class="bar-fill" style="width: 100%;"></div>
+                            </div>
+                            <div class="perf-value">1.1M 제약</div>
+                        </div>
+                        <div class="perf-arrow">→</div>
+                        <div class="perf-after">
+                            <div class="perf-label">After</div>
+                            <div class="perf-bar after">
+                                <div class="bar-fill" style="width: 2.4%;"></div>
+                            </div>
+                            <div class="perf-value">26K 제약</div>
+                        </div>
+                    </div>
+
+                    <div class="optimization-detail">
+                        <h4>Constant PK Optimization</h4>
+                        <p>RLWE 연산을 회로에 넣으면 제약 수가 폭발하는 문제 해결</p>
+                        <ul>
+                            <li>Public Key를 상수로 고정</li>
+                            <li>제약 수 <strong>42배 감소</strong> (1.1M → 26K)</li>
+                            <li>온체인 검증 현실화</li>
+                        </ul>
+                    </div>
+
+                    <div class="perf-note">
+                        <strong>교훈:</strong> 온체인 검증을 위해서는 이런 최적화가 필수
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Progress -->
+            <div class="slide" data-slide="8">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">07</span>
+                        <span class="slide-title">Progress</span>
+                    </div>
+                    <h2 class="slide-headline">진행 상황 (현재 데모 기준)</h2>
+
+                    <div class="progress-checklist">
+                        <div class="check-item done">
+                            <span class="check-icon">✓</span>
+                            <span class="check-text">회로 2종 연결 (ZK + Audit)</span>
+                        </div>
+                        <div class="check-item done">
+                            <span class="check-icon">✓</span>
+                            <span class="check-text">온체인 Verifier 배포</span>
+                        </div>
+                        <div class="check-item done">
+                            <span class="check-icon">✓</span>
+                            <span class="check-text">Devnet Deposit/Withdraw 작동</span>
+                        </div>
+                        <div class="check-item done">
+                            <span class="check-icon">✓</span>
+                            <span class="check-text">Demo Frontend 구현</span>
+                        </div>
+                        <div class="check-item done">
+                            <span class="check-icon">✓</span>
+                            <span class="check-text">데모 영상 제작</span>
+                        </div>
+                    </div>
+
+                    <div class="demo-link-box">
+                        <span class="demo-label">Demo</span>
+                        <span class="demo-url">github.com/Ham3798/auditable-dark-pool</span>
+                    </div>
+
+                    <div class="slide-footnote">
+                        * 현재 End-to-End 데모 가능 — 미감사 상태, 실사용 주의
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Challenges -->
+            <div class="slide" data-slide="9">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">08</span>
+                        <span class="slide-title">Challenges</span>
+                    </div>
+                    <h2 class="slide-headline">우여곡절 & 어려웠던 점</h2>
+
+                    <div class="challenge-grid">
+                        <div class="challenge-card">
+                            <div class="challenge-num">1</div>
+                            <h4>RLWE 제약 폭증</h4>
+                            <p>동형암호 연산을 회로에 넣으면 제약 수가 기하급수적으로 증가</p>
+                            <div class="challenge-solution">→ Constant PK 최적화로 해결</div>
+                        </div>
+                        <div class="challenge-card">
+                            <div class="challenge-num">2</div>
+                            <h4>툴체인 디버깅</h4>
+                            <p>회로/컴파일/온체인/프론트 각각 다른 환경 → 통합 디버깅 어려움</p>
+                            <div class="challenge-solution">→ 모듈별 분리 + 단계별 테스트</div>
+                        </div>
+                        <div class="challenge-card">
+                            <div class="challenge-num">3</div>
+                            <h4>운영 UX 설계</h4>
+                            <p>2-of-3 복호화는 보안성만큼 운영 절차(키관리/로그)가 중요</p>
+                            <div class="challenge-solution">→ 거버넌스 프레임워크 필요</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: HE Stack Update -->
+            <div class="slide" data-slide="10">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">09</span>
+                        <span class="slide-title">HE Stack</span>
+                    </div>
+                    <h2 class="slide-headline">동형암호(HE) 스택 업데이트</h2>
+
+                    <div class="he-features">
+                        <div class="he-item">
+                            <span class="he-badge">Security</span>
+                            <h4>오류분석 2<sup>-128</sup> 달성</h4>
+                            <p>암호학적 보안 수준 충족</p>
+                        </div>
+                        <div class="he-item">
+                            <span class="he-badge">Speed</span>
+                            <h4>ZAMA 대비 더 빠름</h4>
+                            <p>내부 벤치마크 기준</p>
+                        </div>
+                        <div class="he-item">
+                            <span class="he-badge">Deterministic</span>
+                            <h4>디바이스 무관 재현 가능</h4>
+                            <p>어느 환경에서든 동일 결과</p>
+                        </div>
+                        <div class="he-item">
+                            <span class="he-badge">Verifiable</span>
+                            <h4>Plonky3 검증 가능</h4>
+                            <p>ZK로 HE 연산 검증</p>
+                        </div>
+                        <div class="he-item full-width">
+                            <span class="he-badge special">Next</span>
+                            <h4>Solana Token Extension (ElGamal) + Auditable</h4>
+                            <p>SPL 토큰 레벨로 감사 가능한 프라이버시 일반화</p>
+                        </div>
+                    </div>
+
+                    <div class="he-conclusion">
+                        <strong>확장 방향:</strong> SOL뿐 아니라 SPL/Token Extension 레벨로 "감사 가능한 프라이버시" 일반화
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Roadmap -->
+            <div class="slide" data-slide="11">
+                <div class="slide-inner">
+                    <div class="slide-header">
+                        <span class="slide-num">10</span>
+                        <span class="slide-title">Roadmap</span>
+                    </div>
+                    <h2 class="slide-headline">로드맵 (다음 단계)</h2>
+
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-section">
+                            <div class="roadmap-label">단기</div>
+                            <div class="roadmap-items">
+                                <div class="roadmap-item">WASM Proof Generation</div>
+                                <div class="roadmap-item">Multi-Asset (SPL 토큰)</div>
+                                <div class="roadmap-item">Relayer Network</div>
+                            </div>
+                        </div>
+                        <div class="roadmap-section">
+                            <div class="roadmap-label">중기</div>
+                            <div class="roadmap-items">
+                                <div class="roadmap-item">Token Extension 결합</div>
+                                <div class="roadmap-item">Auditable Token Transfer</div>
+                                <div class="roadmap-item">Plonky3 검증 파이프라인</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vision-box">
+                        <h4>비전</h4>
+                        <p>Solana 생태계에서 "프라이버시 + 컴플라이언스"의 표준 레이어 구축</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Q&A -->
+            <div class="slide" data-slide="12">
+                <div class="slide-inner title-slide end-slide">
+                    <div class="end-content">
+                        <h2>Q&A</h2>
+                        <p class="end-tagline">프라이버시와 컴플라이언스, 둘 다 가능합니다</p>
+
+                        <div class="links-box">
+                            <div class="link-item">
+                                <span class="link-label">Repo</span>
+                                <span class="link-url">github.com/Ham3798/auditable-dark-pool</span>
+                            </div>
+                            <div class="link-item">
+                                <span class="link-label">Demo</span>
+                                <span class="link-url">데모 영상 링크</span>
+                            </div>
+                            <div class="link-item">
+                                <span class="link-label">Contact</span>
+                                <span class="link-url">waLLLnut Team</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="title-meta">
+                        <span>Thank you!</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
