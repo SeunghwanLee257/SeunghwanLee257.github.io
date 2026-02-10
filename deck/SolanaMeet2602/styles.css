@@ -1062,6 +1062,35 @@ html, body {
     color: var(--warning);
 }
 
+.rwa-badge.current {
+    background: rgba(153, 69, 255, 0.15);
+    color: var(--purple);
+}
+
+.rwa-badge.upcoming {
+    background: var(--border);
+    color: var(--text-muted);
+}
+
+/* Trace Year Label */
+.rwa-item.trace-year {
+    padding: 8px 14px;
+    background: transparent;
+    border: none;
+}
+
+.trace-year-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.rwa-item.current-item {
+    background: rgba(153, 69, 255, 0.08);
+    border-color: var(--purple);
+}
+
 /* Timeline Compact */
 .timeline-compact {
     display: flex;
