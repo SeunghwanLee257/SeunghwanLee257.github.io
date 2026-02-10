@@ -428,7 +428,6 @@
                         <!-- 왼쪽: RWA/Stablecoin -->
                         <div class="rwa-compact">
                             <div class="rwa-item">
-                                <span class="rwa-icon-sm">💵</span>
                                 <div class="rwa-text">
                                     <strong>Stablecoin</strong>
                                     <span>USDC/USDT 프라이빗 트랜스퍼</span>
@@ -436,7 +435,6 @@
                                 <span class="rwa-badge ready">MiCA</span>
                             </div>
                             <div class="rwa-item">
-                                <span class="rwa-icon-sm">🏛</span>
                                 <div class="rwa-text">
                                     <strong>RWA</strong>
                                     <span>토큰화 채권/주식 OTC</span>
@@ -444,7 +442,6 @@
                                 <span class="rwa-badge ready">GENIUS</span>
                             </div>
                             <div class="rwa-item">
-                                <span class="rwa-icon-sm">🔐</span>
                                 <div class="rwa-text">
                                     <strong>Token Extension</strong>
                                     <span>Solana Confidential Transfer</span>
@@ -453,53 +450,31 @@
                             </div>
                         </div>
 
-                        <!-- 오른쪽: Timeline (RWA 포맷) -->
+                        <!-- 오른쪽: Timeline -->
                         <div class="rwa-compact">
                             <div class="rwa-item trace-year">
                                 <span class="trace-year-label">2025</span>
                             </div>
                             <div class="rwa-item">
-                                <span class="rwa-icon-sm">🏆</span>
                                 <div class="rwa-text">
                                     <strong>Solana Startup Village</strong>
-                                    <span>3등 수상</span>
                                 </div>
-                                <span class="rwa-badge ready">완료</span>
-                            </div>
-                            <div class="rwa-item">
-                                <span class="rwa-icon-sm">🎯</span>
-                                <div class="rwa-text">
-                                    <strong>Colosseum 인터뷰</strong>
-                                    <span>수상 실패</span>
-                                </div>
-                                <span class="rwa-badge pending">실패</span>
+                                <span class="rwa-badge ready">3등</span>
                             </div>
                             <div class="rwa-item trace-year">
                                 <span class="trace-year-label">2026</span>
                             </div>
                             <div class="rwa-item current-item">
-                                <span class="rwa-icon-sm">🔥</span>
                                 <div class="rwa-text">
                                     <strong>Solana Privacy Hack</strong>
-                                    <span>금요일 발표</span>
                                 </div>
                                 <span class="rwa-badge current">진행중</span>
                             </div>
                             <div class="rwa-item">
-                                <span class="rwa-icon-sm">✅</span>
                                 <div class="rwa-text">
                                     <strong>Mantle ZK Hack</strong>
-                                    <span>데모데이 완료</span>
                                 </div>
                                 <span class="rwa-badge ready">Top 5</span>
-                            </div>
-                            <div class="rwa-item">
-                                <span class="rwa-icon-sm">📅</span>
-                                <div class="rwa-text">
-                                    <strong>Startup Village & Colosseum</strong>
-                                    <span>상반기 예정</span>
-                                </div>
-                                <span class="rwa-badge upcoming">예정</span>
                             </div>
                         </div>
                     </div>
@@ -518,68 +493,69 @@
                     <p class="slide-label">08 — TOKEN EXTENSION</p>
                     <h2 class="slide-title">Solana Confidential Transfer</h2>
 
-                    <div class="token-ext-layout">
-                        <!-- ElGamal 암호화 설명 -->
-                        <div class="elgamal-section">
-                            <div class="section-header">
-                                <span class="section-icon">◈</span>
-                                <span class="section-title">ElGamal Encryption</span>
-                            </div>
-                            <div class="elgamal-details">
-                                <div class="elgamal-item">
-                                    <span class="elgamal-label">기반</span>
-                                    <span class="elgamal-value">Elliptic Curve (Curve25519)</span>
-                                </div>
-                                <div class="elgamal-item">
-                                    <span class="elgamal-label">특성</span>
-                                    <span class="elgamal-value">Additively Homomorphic</span>
-                                </div>
-                                <div class="elgamal-item">
-                                    <span class="elgamal-label">지갑</span>
-                                    <span class="elgamal-value">Private Balance 숨김</span>
-                                </div>
+                    <div class="elgamal-diagram">
+                        <!-- 왼쪽: 지갑 A -->
+                        <div class="wallet-box">
+                            <div class="wallet-label">Wallet A</div>
+                            <div class="wallet-balance">
+                                <span class="balance-label">Balance</span>
+                                <span class="balance-encrypted">Enc(100)</span>
                             </div>
                         </div>
 
-                        <!-- Flow: HE 로깅 → 선택적 감사 -->
-                        <div class="he-audit-flow">
-                            <div class="flow-header">동형암호 기반 감사</div>
-                            <div class="flow-steps-compact">
-                                <div class="flow-step-item">
-                                    <div class="step-circle">1</div>
-                                    <div class="step-content">
-                                        <strong>Enc(balance)</strong>
-                                        <span>암호화된 잔액</span>
-                                    </div>
-                                </div>
-                                <span class="flow-arrow-sm">→</span>
-                                <div class="flow-step-item">
-                                    <div class="step-circle">2</div>
-                                    <div class="step-content">
-                                        <strong>HE 로깅</strong>
-                                        <span>복호화 없이 기록</span>
-                                    </div>
-                                </div>
-                                <span class="flow-arrow-sm">→</span>
-                                <div class="flow-step-item highlight-step">
-                                    <div class="step-circle">3</div>
-                                    <div class="step-content">
-                                        <strong>선택적 감사</strong>
-                                        <span>2-of-3 복호화</span>
-                                    </div>
-                                </div>
+                        <!-- 중앙: 전송 플로우 -->
+                        <div class="transfer-flow">
+                            <div class="transfer-arrow">
+                                <div class="arrow-line"></div>
+                                <div class="arrow-head"></div>
+                            </div>
+                            <div class="transfer-info">
+                                <div class="transfer-label">Transfer</div>
+                                <div class="transfer-value">Enc(10)</div>
+                            </div>
+                            <div class="elgamal-badge">ElGamal HE</div>
+                        </div>
+
+                        <!-- 오른쪽: 지갑 B -->
+                        <div class="wallet-box">
+                            <div class="wallet-label">Wallet B</div>
+                            <div class="wallet-balance">
+                                <span class="balance-label">Balance</span>
+                                <span class="balance-encrypted">Enc(50)</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="key-point success">
-                        <span class="key-badge success">핵심</span>
-                        <span class="key-text">ElGamal HE → 프라이빗 잔액 + 선택적 감사 가능</span>
+                    <!-- HE 특성 설명 -->
+                    <div class="he-property">
+                        <div class="he-equation">
+                            <span class="eq-part">Enc(100) - Enc(10)</span>
+                            <span class="eq-arrow">=</span>
+                            <span class="eq-part highlight">Enc(90)</span>
+                        </div>
+                        <div class="he-desc">복호화 없이 잔액 업데이트 (Additively Homomorphic)</div>
+                    </div>
+
+                    <!-- 감사 플로우 -->
+                    <div class="audit-flow-visual">
+                        <div class="audit-step">
+                            <div class="audit-icon">◇</div>
+                            <div class="audit-text">암호화 로깅</div>
+                        </div>
+                        <div class="audit-arrow">→</div>
+                        <div class="audit-step">
+                            <div class="audit-icon">◈</div>
+                            <div class="audit-text">온체인 저장</div>
+                        </div>
+                        <div class="audit-arrow">→</div>
+                        <div class="audit-step highlight">
+                            <div class="audit-icon">◆</div>
+                            <div class="audit-text">2-of-3 복호화</div>
+                        </div>
                     </div>
 
                     <div class="slide-refs">
                         <a href="https://spl.solana.com/confidential-token" target="_blank">Solana Confidential Token</a> ·
-                        <a href="https://docs.solana.com/developing/programming-model/token-extensions" target="_blank">Token Extension Docs</a> ·
                         <a href="https://en.wikipedia.org/wiki/ElGamal_encryption" target="_blank">ElGamal Encryption</a>
                     </div>
                 </div>
