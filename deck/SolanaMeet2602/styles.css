@@ -125,7 +125,7 @@ html, body {
 
 /* Typography */
 .label {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: 3px;
     color: var(--green);
@@ -133,7 +133,7 @@ html, body {
 }
 
 .hero-title {
-    font-size: 96px;
+    font-size: 120px;
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -3px;
@@ -144,7 +144,7 @@ html, body {
 }
 
 .subtitle {
-    font-size: 28px;
+    font-size: 36px;
     color: var(--text-secondary);
     line-height: 1.5;
 }
@@ -171,7 +171,7 @@ html, body {
 }
 
 .slide-title {
-    font-size: 42px;
+    font-size: 46px;
     font-weight: 700;
     letter-spacing: -2px;
     margin-bottom: 20px;
@@ -192,11 +192,14 @@ html, body {
 
 .problem-block {
     flex: 1;
-    padding: 20px 24px;
+    padding: 24px 28px;
     border-radius: 16px;
     background: var(--surface);
     border: 1px solid var(--border);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .block-badge {
@@ -221,19 +224,41 @@ html, body {
 }
 
 .problem-block h3 {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: 700;
-    margin: 12px 0 8px;
+    margin: 12px 0 10px;
+    letter-spacing: 0.5px;
+}
+
+.block-extra {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+}
+
+.extra-item {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.extra-item.good {
+    color: var(--positive);
+}
+
+.extra-item.bad {
+    color: var(--negative);
 }
 
 .problem-block.solved h3 { color: var(--positive); }
 .problem-block.unsolved h3 { color: var(--negative); }
 
 .block-desc {
-    font-size: 18px;
+    font-size: 24px;
     color: var(--text-secondary);
     margin-bottom: 12px;
     line-height: 1.3;
+    letter-spacing: 0.5px;
 }
 
 .block-examples {
@@ -265,8 +290,9 @@ html, body {
 }
 
 .cons-item {
-    font-size: 16px;
+    font-size: 22px;
     color: var(--text-secondary);
+    letter-spacing: 0.5px;
 }
 
 .problem-vs {
@@ -380,7 +406,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 32px;
     flex: 1;
     margin-bottom: 20px;
 }
@@ -388,27 +414,27 @@ html, body {
 .pool-column {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     align-items: center;
 }
 
 .col-label {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
     color: var(--text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .pool-node {
-    padding: 12px 20px;
+    padding: 16px 28px;
     background: var(--surface);
     border-radius: 12px;
     border: 2px solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    min-width: 120px;
+    gap: 6px;
+    min-width: 140px;
 }
 
 .pool-node.sender {
@@ -424,14 +450,14 @@ html, body {
 }
 
 .node-addr {
-    font-size: 16px;
+    font-size: 20px;
     font-family: monospace;
     color: var(--text-secondary);
 }
 
 .from-tag {
-    font-size: 11px;
-    padding: 2px 8px;
+    font-size: 13px;
+    padding: 4px 10px;
     background: rgba(20, 241, 149, 0.2);
     color: var(--green);
     border-radius: 10px;
@@ -447,8 +473,8 @@ html, body {
 }
 
 .flow-line {
-    width: 40px;
-    height: 3px;
+    width: 60px;
+    height: 4px;
     background: var(--border);
     position: relative;
 }
@@ -605,7 +631,7 @@ html, body {
 }
 
 .key-text {
-    font-size: 20px;
+    font-size: 24px;
     color: var(--text-secondary);
 }
 
@@ -630,7 +656,7 @@ html, body {
 }
 
 .callout-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--negative);
     margin-bottom: 8px;
@@ -643,8 +669,8 @@ html, body {
 }
 
 .callout-item {
-    font-size: 16px;
-    padding: 4px 12px;
+    font-size: 18px;
+    padding: 6px 14px;
     background: var(--surface);
     border-radius: 12px;
 }
@@ -709,13 +735,13 @@ html, body {
 }
 
 .log-step-text {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.3;
 }
 
 .log-step-text small {
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .log-arrow {
@@ -727,12 +753,12 @@ html, body {
 .log-storage {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
+    gap: 8px;
+    padding: 10px 18px;
     background: rgba(20, 241, 149, 0.15);
     border: 1px solid rgba(20, 241, 149, 0.4);
     border-radius: 12px;
-    margin-top: 8px;
+    margin-top: 12px;
 }
 
 .log-icon {
@@ -740,7 +766,7 @@ html, body {
 }
 
 .log-text {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--green);
 }
@@ -751,8 +777,8 @@ html, body {
 }
 
 .pool-orb.small {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
 }
 
 .pool-orb.small .pool-emoji {
@@ -760,7 +786,7 @@ html, body {
 }
 
 .pool-orb.small .pool-name {
-    font-size: 14px;
+    font-size: 22px;
 }
 
 .pool-glow.green {
@@ -811,13 +837,13 @@ html, body {
 }
 
 .step-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .step-desc {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--text-muted);
 }
 
@@ -838,7 +864,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--text-secondary);
 }
 
@@ -991,7 +1017,7 @@ html, body {
 }
 
 .achievement-text {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
 }
 
@@ -1332,11 +1358,11 @@ html, body {
 }
 
 .challenge-text strong {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .challenge-text span {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-muted);
 }
 
@@ -1344,7 +1370,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .drop-arrow {
@@ -1372,11 +1398,17 @@ html, body {
 }
 
 .ratio-inline {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.ratio-inline-white {
+    font-size: 17px;
+    color: var(--text);
+    font-weight: 600;
 }
 
 /* ============================================
@@ -1399,14 +1431,14 @@ html, body {
 }
 
 .feature-title {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--text-muted);
     margin-bottom: 12px;
 }
 
 .feature-value {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     background: linear-gradient(135deg, var(--purple), var(--green));
     -webkit-background-clip: text;
@@ -1415,7 +1447,7 @@ html, body {
 }
 
 .feature-desc {
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text-secondary);
 }
 
@@ -1440,7 +1472,7 @@ html, body {
 }
 
 .next-text {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600;
 }
 
@@ -1630,7 +1662,7 @@ html, body {
 }
 
 .ct-user {
-    width: 240px;
+    width: 300px;
     background: var(--surface);
     border: 2px solid var(--border);
     border-radius: 16px;
@@ -1638,10 +1670,10 @@ html, body {
 }
 
 .ct-user-header {
-    padding: 12px;
+    padding: 16px;
     background: linear-gradient(135deg, var(--purple), var(--green));
     color: var(--bg);
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     text-align: center;
 }
@@ -1672,15 +1704,15 @@ html, body {
 }
 
 .key-label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--text-muted);
-    min-width: 80px;
+    min-width: 95px;
 }
 
 .key-value {
     font-family: monospace;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--text);
 }
@@ -1695,13 +1727,13 @@ html, body {
 }
 
 .bal-label {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--text-muted);
 }
 
 .bal-value {
     font-family: monospace;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--green);
 }
@@ -1735,7 +1767,7 @@ html, body {
 .transfer-amt {
     display: block;
     font-family: monospace;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text);
 }
@@ -1747,7 +1779,7 @@ html, body {
 
 .transfer-note {
     display: block;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--green);
     margin-top: 4px;
 }
@@ -1782,12 +1814,16 @@ html, body {
 }
 
 .point-text {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
 }
 
 .ct-point.plus .point-num {
     background: var(--green);
+}
+
+.ct-arrow {
+    width: 140px;
 }
 
 /* ============================================
@@ -1828,7 +1864,7 @@ html, body {
 }
 
 .layer-title-sm {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 12px;
 }
@@ -1844,10 +1880,10 @@ html, body {
 }
 
 .layer-chips .chip {
-    padding: 6px 14px;
+    padding: 10px 18px;
     background: var(--surface);
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -1882,11 +1918,11 @@ html, body {
 }
 
 .stack-chip {
-    padding: 8px 18px;
+    padding: 12px 24px;
     background: linear-gradient(135deg, rgba(153, 69, 255, 0.1), rgba(20, 241, 149, 0.1));
     border: 1px solid var(--border);
     border-radius: 12px;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -1944,13 +1980,23 @@ html, body {
     color: var(--green);
 }
 
+.collab-badge.rwa {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+
+.collab-badge.infra {
+    background: rgba(139, 139, 158, 0.15);
+    color: var(--text-secondary);
+}
+
 .collab-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
 }
 
 .collab-desc {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-secondary);
     padding-left: 4px;
 }
@@ -2022,14 +2068,14 @@ html, body {
 
 .trace-name {
     flex: 1;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
 }
 
 .trace-result {
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -2037,6 +2083,247 @@ html, body {
 .trace-result.fail { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
 .trace-result.now { background: rgba(153, 69, 255, 0.15); color: var(--purple); }
 .trace-result.upcoming { background: var(--border); color: var(--text-muted); }
+
+/* ============================================
+   Slide 5 - Demo Details
+   ============================================ */
+
+.demo-details {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.demo-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.detail-icon {
+    font-size: 24px;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detail-content strong {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.detail-content span {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Audit Flow */
+.audit-flow {
+    padding: 20px 32px;
+    background: rgba(20, 241, 149, 0.08);
+    border: 1px solid rgba(20, 241, 149, 0.3);
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.audit-flow-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.audit-flow-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.audit-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--surface);
+    border-radius: 10px;
+}
+
+.audit-step.highlight {
+    background: var(--green);
+}
+
+.audit-step.highlight .audit-step-num,
+.audit-step.highlight .audit-step-text {
+    color: var(--bg);
+}
+
+.audit-step-num {
+    width: 26px;
+    height: 26px;
+    background: var(--green);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.audit-step.highlight .audit-step-num {
+    background: var(--bg);
+    color: var(--green);
+}
+
+.audit-step-text {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.audit-arrow {
+    font-size: 18px;
+    color: var(--green);
+}
+
+/* ============================================
+   Slide 6 - Tech Highlights
+   ============================================ */
+
+.tech-highlights {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.tech-item {
+    padding: 14px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.tech-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.tech-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ============================================
+   Slide 9 - Lessons Section
+   ============================================ */
+
+.lessons-section {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.lesson-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, rgba(153, 69, 255, 0.08), rgba(20, 241, 149, 0.08));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.lesson-badge {
+    font-size: 20px;
+}
+
+.lesson-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ============================================
+   Slide 10 - HE Comparison
+   ============================================ */
+
+.he-comparison {
+    padding: 20px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.comp-header {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+}
+
+.comp-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comp-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
+
+.comp-item.ours {
+    background: rgba(20, 241, 149, 0.08);
+    border: 1px solid rgba(20, 241, 149, 0.3);
+}
+
+.comp-name {
+    font-size: 16px;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.comp-arrow {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.comp-result {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.comp-result.bad {
+    color: var(--text-muted);
+}
+
+.comp-result.good {
+    color: var(--green);
+    font-weight: 600;
+}
 
 /* ============================================
    Responsive
