@@ -36,29 +36,73 @@
                 </div>
             </div>
 
-            <!-- 2. Problem -->
+            <!-- 2. Problem + Tornado Case -->
             <div class="slide" data-slide="2">
                 <div class="slide-content">
                     <p class="slide-label">01 — PROBLEM</p>
                     <h2 class="slide-title">블록체인의 딜레마</h2>
 
-                    <div class="two-col">
-                        <div class="col">
-                            <div class="big-icon">👁</div>
-                            <h3>퍼블릭 체인</h3>
-                            <p class="desc">모든 거래가 영구 공개<br>프론트러닝 위험<br>기관 채택 어려움</p>
-                            <div class="tag negative">투명성 = 취약점</div>
+                    <div class="problem-visual">
+                        <!-- Solved Block -->
+                        <div class="problem-block solved">
+                            <div class="block-badge solved-badge">SOLVED</div>
+                            <h3>Privacy 기술</h3>
+                            <p class="block-desc">ZK Pool 기반 익명화 이미 구현됨</p>
+                            <div class="block-examples">
+                                <a href="https://zkbob.com" target="_blank" class="ex-chip">zkBob</a>
+                                <a href="https://tornado.cash" target="_blank" class="ex-chip">Tornado Cash</a>
+                                <a href="https://railgun.org" target="_blank" class="ex-chip">Railgun</a>
+                            </div>
                         </div>
-                        <div class="col">
-                            <div class="big-icon">🕳</div>
-                            <h3>완전 익명</h3>
-                            <p class="desc">규제 감사 불가<br>AML/CFT 미충족<br>OFAC 제재 대상</p>
-                            <div class="tag negative">익명 = 불법</div>
+
+                        <!-- VS -->
+                        <div class="problem-vs">
+                            <div class="vs-line"></div>
+                            <span class="vs-text">BUT</span>
+                            <div class="vs-line"></div>
+                        </div>
+
+                        <!-- Unsolved Block -->
+                        <div class="problem-block unsolved">
+                            <div class="block-badge unsolved-badge">UNSOLVED</div>
+                            <h3>KYC/AML 컴플라이언스</h3>
+                            <p class="block-desc">규제 감사 불가 → 제재 위험</p>
+                            <div class="block-consequences">
+                                <div class="cons-item">✕ OFAC 제재 주소 검증 불가</div>
+                                <div class="cons-item">✕ 자금세탁 추적 불가</div>
+                                <div class="cons-item">✕ 세금 감사 증거 제출 불가</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="insight-bar">
-                        <span class="insight-text">필요한 것: <strong>기본 프라이버시 + 조건부 감사</strong></span>
+                    <!-- Tornado Cash Case Study -->
+                    <div class="tornado-case">
+                        <div class="case-header">
+                            <span class="case-icon">⚠</span>
+                            <span class="case-title">Tornado Cash 사례</span>
+                        </div>
+                        <div class="case-timeline">
+                            <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank" class="case-event">
+                                <span class="event-year">2022</span>
+                                <span class="event-text">OFAC 제재</span>
+                            </a>
+                            <span class="timeline-arrow">→</span>
+                            <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank" class="case-event">
+                                <span class="event-year">2024</span>
+                                <span class="event-text">개발자 기소</span>
+                            </a>
+                            <span class="timeline-arrow">→</span>
+                            <span class="case-event">
+                                <span class="event-year">2025</span>
+                                <span class="event-text">유죄 판결</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        Sources: <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank">OFAC Tornado Cash Sanctions</a> ·
+                        <a href="https://www.justice.gov/usao-sdny/pr/tornado-cash-founders-charged-money-laundering" target="_blank">DoJ Indictment</a> ·
+                        <a href="https://www.fatf-gafi.org/en/publications/Methodsandtrends/Virtual-assets-red-flag-indicators.html" target="_blank">FATF AML Guidelines</a>
                     </div>
                 </div>
             </div>
@@ -69,34 +113,81 @@
                     <p class="slide-label">02 — SOLUTION</p>
                     <h2 class="slide-title">Auditable Dark Pool</h2>
 
-                    <div class="solution-visual">
-                        <div class="node user">
-                            <div class="node-icon">👤</div>
-                            <div class="node-label">유저</div>
-                            <p>익명 송금<br>상대방/금액 비공개</p>
-                        </div>
-
-                        <div class="flow-arrow">→</div>
-
-                        <div class="node pool">
-                            <div class="pool-inner">
-                                <span class="pool-icon">🛡</span>
-                                <span class="pool-text">ZK Pool</span>
+                    <div class="pool-visualization">
+                        <!-- Depositors -->
+                        <div class="pool-column depositors">
+                            <div class="col-label">Deposit</div>
+                            <div class="pool-node sender">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">5xAB...dEf</span>
+                            </div>
+                            <div class="pool-node sender">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">7kQ5...aB3</span>
                             </div>
                         </div>
 
-                        <div class="flow-arrow">→</div>
+                        <!-- Flow In -->
+                        <div class="flow-arrows">
+                            <div class="flow-line in"></div>
+                            <div class="flow-line in"></div>
+                        </div>
 
-                        <div class="node auditor">
-                            <div class="node-icon">🔍</div>
-                            <div class="node-label">감사자</div>
-                            <p>2-of-3 합의시 복호화<br>모든 시도 로깅</p>
+                        <!-- Central Pool -->
+                        <div class="pool-center">
+                            <div class="pool-orb">
+                                <div class="pool-glow"></div>
+                                <div class="pool-inner-circle">
+                                    <span class="pool-emoji">🛡</span>
+                                    <span class="pool-name">ZK Pool</span>
+                                    <span class="pool-address">DkPo...Pool</span>
+                                </div>
+                            </div>
+                            <div class="tracking-blocked">
+                                <span class="blocked-x">✕</span>
+                                <span class="blocked-text">Tracking Blocked</span>
+                            </div>
+                        </div>
+
+                        <!-- Flow Out -->
+                        <div class="flow-arrows">
+                            <div class="flow-line out"></div>
+                            <div class="flow-line out"></div>
+                            <div class="flow-line out"></div>
+                        </div>
+
+                        <!-- Recipients -->
+                        <div class="pool-column recipients">
+                            <div class="col-label">Withdraw</div>
+                            <div class="pool-node receiver">
+                                <span class="from-tag">from: Pool</span>
+                                <span class="node-addr">3pWz...x9Y</span>
+                            </div>
+                            <div class="pool-node receiver">
+                                <span class="from-tag">from: Pool</span>
+                                <span class="node-addr">9mR4...kL8</span>
+                            </div>
+                            <div class="pool-node receiver">
+                                <span class="from-tag">from: Pool</span>
+                                <span class="node-addr">2nT6...pQ1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audit Layer -->
+                    <div class="audit-layer">
+                        <div class="audit-box">
+                            <div class="audit-header">
+                                <span class="audit-icon">🔍</span>
+                                <span>2-of-3 Threshold Audit</span>
+                            </div>
+                            <div class="audit-desc">규제 요청 시 → 2명 이상 합의 → 복호화 가능</div>
                         </div>
                     </div>
 
                     <div class="key-point">
                         <span class="key-badge">핵심</span>
-                        <span class="key-text">단일 주체가 프라이버시를 깰 수 없음</span>
+                        <span class="key-text">기본 = Privacy / 요청 시 = Compliant Audit</span>
                     </div>
                 </div>
             </div>
@@ -143,6 +234,12 @@
                             <span>Audit Proof: 아이덴티티 암호화</span>
                         </div>
                     </div>
+
+                    <div class="slide-refs">
+                        Demo: <a href="https://zk-rlwe-pool-solana.vercel.app/" target="_blank">Live Demo</a> ·
+                        <a href="https://www.youtube.com/watch?v=N5k82fqNOAk" target="_blank">Demo Video</a> ·
+                        <a href="https://github.com/Ham3798/shielded-pool-pinocchio-solana/" target="_blank">GitHub Repo</a>
+                    </div>
                 </div>
             </div>
 
@@ -187,6 +284,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="slide-refs">
+                        Tech: <a href="https://noir-lang.org/" target="_blank">Noir Language</a> ·
+                        <a href="https://www.helius.dev/" target="_blank">Helius RPC</a> ·
+                        <a href="https://eprint.iacr.org/2012/230" target="_blank">RLWE Paper</a>
+                    </div>
                 </div>
             </div>
 
@@ -222,13 +325,73 @@
                             <div class="stack-desc">Solana RPC</div>
                         </div>
                     </div>
+
+                    <div class="achievement-bar">
+                        <span class="achievement-badge">성과</span>
+                        <span class="achievement-text">42x ZK Constraint 감소 (1.1M → 26K)</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- 7. Progress -->
+            <!-- 7. RWA + Stablecoin -->
             <div class="slide" data-slide="7">
                 <div class="slide-content">
-                    <p class="slide-label">06 — PROGRESS</p>
+                    <p class="slide-label">06 — RWA + STABLECOIN</p>
+                    <h2 class="slide-title">기관 채택 준비</h2>
+
+                    <div class="rwa-grid">
+                        <div class="rwa-card">
+                            <div class="rwa-header">
+                                <span class="rwa-icon">💵</span>
+                                <h3>Stablecoin</h3>
+                            </div>
+                            <ul class="rwa-list">
+                                <li>USDC/USDT 프라이빗 트랜스퍼</li>
+                                <li>급여 지급 시 금액 비공개</li>
+                                <li>규제 감사 시 증빙 가능</li>
+                            </ul>
+                            <div class="rwa-status ready">MiCA Ready</div>
+                        </div>
+
+                        <div class="rwa-card">
+                            <div class="rwa-header">
+                                <span class="rwa-icon">🏛</span>
+                                <h3>RWA (Real World Assets)</h3>
+                            </div>
+                            <ul class="rwa-list">
+                                <li>토큰화 채권/주식 거래</li>
+                                <li>기관 간 OTC 프라이버시</li>
+                                <li>AML 컴플라이언스 충족</li>
+                            </ul>
+                            <div class="rwa-status ready">GENIUS Act Ready</div>
+                        </div>
+
+                        <div class="rwa-card">
+                            <div class="rwa-header">
+                                <span class="rwa-icon">🔐</span>
+                                <h3>Token Extension</h3>
+                            </div>
+                            <ul class="rwa-list">
+                                <li>Solana Confidential Transfer</li>
+                                <li>Auditable 레이어 결합</li>
+                                <li>기관 수준 프라이버시</li>
+                            </ul>
+                            <div class="rwa-status pending">개발 예정</div>
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        Regulation: <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act S.394</a> ·
+                        <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank">EU MiCA</a> ·
+                        <a href="https://spl.solana.com/confidential-token" target="_blank">Solana Confidential Token</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Progress -->
+            <div class="slide" data-slide="8">
+                <div class="slide-content">
+                    <p class="slide-label">07 — PROGRESS</p>
                     <h2 class="slide-title">현재 진행 상황</h2>
 
                     <div class="progress-list">
@@ -255,15 +418,15 @@
                     </div>
 
                     <div class="demo-link">
-                        github.com/Ham3798/auditable-dark-pool
+                        <a href="https://github.com/Ham3798/auditable-dark-pool" target="_blank">github.com/Ham3798/auditable-dark-pool</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 8. Challenges -->
-            <div class="slide" data-slide="8">
+            <!-- 9. Challenges -->
+            <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">07 — CHALLENGES</p>
+                    <p class="slide-label">08 — CHALLENGES</p>
                     <h2 class="slide-title">우여곡절</h2>
 
                     <div class="challenge-list">
@@ -297,10 +460,10 @@
                 </div>
             </div>
 
-            <!-- 9. HE Stack -->
-            <div class="slide" data-slide="9">
+            <!-- 10. HE Stack -->
+            <div class="slide" data-slide="10">
                 <div class="slide-content">
-                    <p class="slide-label">08 — HE STACK</p>
+                    <p class="slide-label">09 — HE STACK</p>
                     <h2 class="slide-title">동형암호 스택</h2>
 
                     <div class="feature-grid">
@@ -330,36 +493,11 @@
                         <span class="next-label">NEXT</span>
                         <span class="next-text">Solana Token Extension + Auditable</span>
                     </div>
-                </div>
-            </div>
 
-            <!-- 10. Roadmap -->
-            <div class="slide" data-slide="10">
-                <div class="slide-content">
-                    <p class="slide-label">09 — ROADMAP</p>
-                    <h2 class="slide-title">다음 단계</h2>
-
-                    <div class="roadmap-cols">
-                        <div class="roadmap-col">
-                            <div class="roadmap-label">단기</div>
-                            <ul class="roadmap-list">
-                                <li>WASM Proof Generation</li>
-                                <li>Multi-Asset (SPL)</li>
-                                <li>Relayer Network</li>
-                            </ul>
-                        </div>
-                        <div class="roadmap-col">
-                            <div class="roadmap-label">중기</div>
-                            <ul class="roadmap-list">
-                                <li>Token Extension 결합</li>
-                                <li>Auditable Token Transfer</li>
-                                <li>Plonky3 검증 파이프라인</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="vision-text">
-                        Solana 생태계의 프라이버시 + 컴플라이언스 표준
+                    <div class="slide-refs">
+                        Papers: <a href="https://eprint.iacr.org/2025/810" target="_blank">CRYPTO 2025</a> ·
+                        <a href="https://eprint.iacr.org/2024/1916" target="_blank">FHE16 (ePrint)</a> ·
+                        <a href="https://github.com/Plonky3/Plonky3" target="_blank">Plonky3</a>
                     </div>
                 </div>
             </div>
@@ -379,6 +517,10 @@
                             <span class="contact-label">Team</span>
                             <span class="contact-value">waLLLnut</span>
                         </div>
+                    </div>
+
+                    <div class="final-slogan">
+                        Privacy by default, <span class="highlight">Compliance when needed</span>
                     </div>
                 </div>
             </div>
