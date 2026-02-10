@@ -14,7 +14,7 @@
 <body>
     <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">←</button>
-        <span id="slideCounter">1 / 12</span>
+        <span id="slideCounter">1 / 11</span>
         <button id="nextBtn" onclick="nextSlide()">→</button>
         <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
     </div>
@@ -78,7 +78,6 @@
                     <!-- Tornado Cash Case Study -->
                     <div class="tornado-case">
                         <div class="case-header">
-                            <span class="case-icon">⚠</span>
                             <span class="case-title">Tornado Cash 사례</span>
                         </div>
                         <div class="case-timeline">
@@ -111,18 +110,16 @@
             <div class="slide" data-slide="3">
                 <div class="slide-content">
                     <p class="slide-label">02 — EXISTING</p>
-                    <h2 class="slide-title">기존 방식: ZK Pool Only</h2>
+                    <h2 class="slide-title">기존 Dark pool : 송수신간 링크를 끊는 unlinkability</h2>
 
                     <div class="pool-visualization compact">
                         <!-- Depositors -->
                         <div class="pool-column depositors">
                             <div class="col-label">Deposit</div>
                             <div class="pool-node sender">
-                                <span class="node-icon">👤</span>
                                 <span class="node-addr">5xAB...dEf</span>
                             </div>
                             <div class="pool-node sender">
-                                <span class="node-icon">👤</span>
                                 <span class="node-addr">7kQ5...aB3</span>
                             </div>
                         </div>
@@ -138,7 +135,6 @@
                             <div class="pool-orb small">
                                 <div class="pool-glow"></div>
                                 <div class="pool-inner-circle">
-                                    <span class="pool-emoji">🛡</span>
                                     <span class="pool-name">ZK Pool</span>
                                 </div>
                             </div>
@@ -166,7 +162,6 @@
 
                     <!-- Problem Callout -->
                     <div class="problem-callout">
-                        <div class="callout-icon">⚠</div>
                         <div class="callout-content">
                             <div class="callout-title">문제점: 로깅 없음</div>
                             <div class="callout-items">
@@ -195,11 +190,9 @@
                         <div class="pool-column depositors">
                             <div class="col-label">Deposit</div>
                             <div class="pool-node sender">
-                                <span class="node-icon">👤</span>
                                 <span class="node-addr">5xAB...dEf</span>
                             </div>
                             <div class="pool-node sender">
-                                <span class="node-icon">👤</span>
                                 <span class="node-addr">7kQ5...aB3</span>
                             </div>
                         </div>
@@ -215,13 +208,11 @@
                             <div class="pool-orb small">
                                 <div class="pool-glow green"></div>
                                 <div class="pool-inner-circle">
-                                    <span class="pool-emoji">🛡</span>
                                     <span class="pool-name">ZK Pool</span>
                                 </div>
                             </div>
                             <!-- Encrypted Log Storage -->
                             <div class="log-storage">
-                                <span class="log-icon">📋</span>
                                 <span class="log-text">Encrypted Log</span>
                             </div>
                         </div>
@@ -249,13 +240,12 @@
                     <!-- Logging System Explanation -->
                     <div class="logging-system">
                         <div class="log-header">
-                            <span class="log-header-icon">🔐</span>
                             <span class="log-header-title">로깅 시스템</span>
                         </div>
                         <div class="log-flow">
                             <div class="log-step">
                                 <div class="log-step-num">1</div>
-                                <div class="log-step-text">출금 시 Witness 암호화<br><small>RLWE 기반</small></div>
+                                <div class="log-step-text">출금시 witness 강제 로깅<br><small>RLWE 기반</small></div>
                             </div>
                             <span class="log-arrow">→</span>
                             <div class="log-step">
@@ -328,46 +318,49 @@
                 </div>
             </div>
 
-            <!-- 6. Architecture -->
+            <!-- 6. Architecture + Tech Stack -->
             <div class="slide" data-slide="6">
                 <div class="slide-content">
-                    <p class="slide-label">05 — ARCHITECTURE</p>
-                    <h2 class="slide-title">ZK + RLWE</h2>
+                    <p class="slide-label">05 — ARCHITECTURE & STACK</p>
+                    <h2 class="slide-title">ZK + RLWE 아키텍처</h2>
 
-                    <div class="arch-layout">
-                        <div class="layer privacy">
-                            <div class="layer-title">Privacy Layer</div>
-                            <div class="layer-items">
-                                <div class="layer-item">
-                                    <strong>Noir</strong>
-                                    <span>ZK 회로</span>
+                    <div class="combined-arch">
+                        <div class="arch-layers">
+                            <div class="layer-compact privacy">
+                                <div class="layer-title-sm">Privacy Layer</div>
+                                <div class="layer-chips">
+                                    <span class="chip">Noir</span>
+                                    <span class="chip">Sunspot</span>
+                                    <span class="chip">Honk</span>
                                 </div>
-                                <div class="layer-item">
-                                    <strong>Sunspot</strong>
-                                    <span>Solana 검증</span>
+                            </div>
+
+                            <div class="bridge-compact">
+                                <span class="bridge-arrow">⛓</span>
+                                <span class="bridge-label">wa_commitment</span>
+                            </div>
+
+                            <div class="layer-compact compliance">
+                                <div class="layer-title-sm">Compliance Layer</div>
+                                <div class="layer-chips">
+                                    <span class="chip">RLWE</span>
+                                    <span class="chip">2-of-3 Threshold</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bridge">
-                            <div class="bridge-icon">⛓</div>
-                            <div class="bridge-text">wa_commitment</div>
-                            <div class="bridge-sub">Poseidon(owner_x, owner_y)</div>
-                        </div>
-
-                        <div class="layer compliance">
-                            <div class="layer-title">Compliance Layer</div>
-                            <div class="layer-items">
-                                <div class="layer-item">
-                                    <strong>RLWE</strong>
-                                    <span>암호화</span>
-                                </div>
-                                <div class="layer-item">
-                                    <strong>2-of-3</strong>
-                                    <span>Threshold</span>
-                                </div>
+                        <div class="stack-compact">
+                            <div class="stack-row">
+                                <span class="stack-chip">Pinocchio</span>
+                                <span class="stack-chip">Poseidon</span>
+                                <span class="stack-chip">Helius RPC</span>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="achievement-bar">
+                        <span class="achievement-badge">성과</span>
+                        <span class="achievement-text">42x ZK Constraint 감소 (1.1M → 26K)</span>
                     </div>
 
                     <div class="slide-refs">
@@ -378,79 +371,67 @@
                 </div>
             </div>
 
-            <!-- 7. Tech Stack -->
+            <!-- 7. RWA + Trace 통합 -->
             <div class="slide" data-slide="7">
                 <div class="slide-content">
-                    <p class="slide-label">06 — TECH STACK</p>
-                    <h2 class="slide-title">구현 스택</h2>
-
-                    <div class="stack-grid">
-                        <div class="stack-item">
-                            <div class="stack-name">Noir</div>
-                            <div class="stack-desc">ZK Circuit (Aztec)</div>
-                        </div>
-                        <div class="stack-item">
-                            <div class="stack-name">Sunspot</div>
-                            <div class="stack-desc">Noir → Solana</div>
-                        </div>
-                        <div class="stack-item">
-                            <div class="stack-name">Pinocchio</div>
-                            <div class="stack-desc">Proof Pipeline</div>
-                        </div>
-                        <div class="stack-item">
-                            <div class="stack-name">Honk</div>
-                            <div class="stack-desc">Proof System</div>
-                        </div>
-                        <div class="stack-item">
-                            <div class="stack-name">Poseidon</div>
-                            <div class="stack-desc">Hash Function</div>
-                        </div>
-                        <div class="stack-item">
-                            <div class="stack-name">Helius</div>
-                            <div class="stack-desc">Solana RPC</div>
-                        </div>
-                    </div>
-
-                    <div class="achievement-bar">
-                        <span class="achievement-badge">성과</span>
-                        <span class="achievement-text">42x ZK Constraint 감소 (1.1M → 26K)</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8. RWA + Trace 통합 -->
-            <div class="slide" data-slide="8">
-                <div class="slide-content">
-                    <p class="slide-label">07 — ROADMAP & TRACE</p>
+                    <p class="slide-label">06 — ROADMAP & TRACE</p>
                     <h2 class="slide-title">RWA & Stablecoin 프라이버시 솔루션 준비 중</h2>
 
-                    <div class="combined-layout-tight">
-                        <!-- 왼쪽: RWA/Stablecoin -->
-                        <div class="rwa-tight">
-                            <div class="rwa-row-text">
-                                <strong>이더리움 PSE 컨택</strong>
-                                <span class="rwa-arrow">→</span>
-                                <span>암호 기술 공인 인증 진행 중</span>
+                    <div class="roadmap-grid">
+                        <!-- 왼쪽: Collaboration -->
+                        <div class="collab-section">
+                            <div class="collab-card">
+                                <div class="collab-header">
+                                    <span class="collab-badge pse">PSE</span>
+                                    <span class="collab-title">이더리움 PSE 컨택</span>
+                                </div>
+                                <div class="collab-desc">암호 기술 공인 인증 진행 중</div>
                             </div>
-                            <div class="rwa-row-text">
-                                <strong>국내 STO & 스테이블 코인</strong>
-                                <span class="rwa-arrow">→</span>
-                                <span>협력 준비 중</span>
+                            <div class="collab-card">
+                                <div class="collab-header">
+                                    <span class="collab-badge sto">STO</span>
+                                    <span class="collab-title">국내 STO & 스테이블 코인</span>
+                                </div>
+                                <div class="collab-desc">협력 준비 중</div>
                             </div>
                         </div>
 
                         <!-- 오른쪽: Timeline -->
-                        <div class="trace-tight">
-                            <div class="trace-section">
-                                <span class="trace-year-sm">2025</span>
-                                <div class="trace-row">Solana Startup Village <span class="trace-badge done">3등</span></div>
-                                <div class="trace-row dim">Colosseum 인터뷰 <span class="trace-badge fail">실패</span></div>
+                        <div class="trace-section-v2">
+                            <div class="trace-year-block">
+                                <span class="trace-year-tag">2025</span>
+                                <div class="trace-items">
+                                    <div class="trace-item done">
+                                        <span class="trace-dot"></span>
+                                        <span class="trace-name">Solana Startup Village</span>
+                                        <span class="trace-result done">3등</span>
+                                    </div>
+                                    <div class="trace-item fail">
+                                        <span class="trace-dot"></span>
+                                        <span class="trace-name">Colosseum 인터뷰</span>
+                                        <span class="trace-result fail">실패</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="trace-section">
-                                <span class="trace-year-sm">2026</span>
-                                <div class="trace-row current">Solana Privacy Hack <span class="trace-badge now">진행중</span></div>
-                                <div class="trace-row">Mantle ZK & Privacy <span class="trace-badge now">최종선정 대기중</span></div>
-                                <div class="trace-row dim">Startup Village & Colosseum <span class="trace-badge upcoming">예정</span></div>
+                            <div class="trace-year-block">
+                                <span class="trace-year-tag current">2026</span>
+                                <div class="trace-items">
+                                    <div class="trace-item current">
+                                        <span class="trace-dot"></span>
+                                        <span class="trace-name">Solana Privacy Hack</span>
+                                        <span class="trace-result now">진행중</span>
+                                    </div>
+                                    <div class="trace-item pending">
+                                        <span class="trace-dot"></span>
+                                        <span class="trace-name">Mantle ZK & Privacy</span>
+                                        <span class="trace-result now">최종선정 대기중</span>
+                                    </div>
+                                    <div class="trace-item upcoming">
+                                        <span class="trace-dot"></span>
+                                        <span class="trace-name">Startup Village & Colosseum</span>
+                                        <span class="trace-result upcoming">예정</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -463,10 +444,10 @@
                 </div>
             </div>
 
-            <!-- 9. Solana Token Extension -->
-            <div class="slide" data-slide="9">
+            <!-- 8. Solana Token Extension -->
+            <div class="slide" data-slide="8">
                 <div class="slide-content">
-                    <p class="slide-label">08 — TOKEN EXTENSION</p>
+                    <p class="slide-label">07 — TOKEN EXTENSION</p>
                     <h2 class="slide-title">Solana Confidential Transfer</h2>
 
                     <!-- ElGamal PK = Address 다이어그램 -->
@@ -557,10 +538,10 @@
                 </div>
             </div>
 
-            <!-- 10. Challenges -->
-            <div class="slide" data-slide="10">
+            <!-- 9. Challenges -->
+            <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">09 — CHALLENGES</p>
+                    <p class="slide-label">08 — CHALLENGES</p>
                     <h2 class="slide-title">우여곡절</h2>
 
                     <div class="challenge-list">
@@ -580,9 +561,9 @@
                         </div>
                         <div class="challenge-item">
                             <div class="challenge-letter">C</div>
-                            <div class="challenge-text">
+                            <div class="challenge-text inline-ratio">
                                 <strong>시간 분배</strong>
-                                <span class="time-ratio">기술 개발 <span class="ratio-num">(3)</span> : X(트위터) 마케팅 <span class="ratio-num">(7)</span></span>
+                                <span class="ratio-inline">기술 개발 <span class="ratio-num">(3)</span> : X(트위터) 마케팅 <span class="ratio-num">(7)</span></span>
                             </div>
                         </div>
                         <div class="challenge-item">
@@ -595,10 +576,10 @@
                 </div>
             </div>
 
-            <!-- 11. HE Stack -->
-            <div class="slide" data-slide="11">
+            <!-- 10. HE Stack -->
+            <div class="slide" data-slide="10">
                 <div class="slide-content">
-                    <p class="slide-label">10 — HE STACK</p>
+                    <p class="slide-label">09 — HE STACK</p>
                     <h2 class="slide-title">동형암호 스택</h2>
 
                     <div class="feature-grid">
@@ -636,8 +617,8 @@
                 </div>
             </div>
 
-            <!-- 12. Q&A -->
-            <div class="slide" data-slide="12">
+            <!-- 11. Q&A -->
+            <div class="slide" data-slide="11">
                 <div class="slide-content center">
                     <h1 class="qa-title">Q&A</h1>
                     <p class="qa-sub">프라이버시와 컴플라이언스,<br>둘 다 가능합니다</p>
