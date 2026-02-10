@@ -1473,183 +1473,256 @@ html, body {
 }
 
 /* ============================================
-   Token Extension / ElGamal Slide (Visual)
+   Slide 8 - Tight Combined Layout
    ============================================ */
 
-.elgamal-diagram {
+.combined-layout-tight {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    flex: 1;
+    align-items: start;
+}
+
+.rwa-tight {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rwa-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 32px;
-    flex: 1;
-}
-
-.wallet-box {
-    width: 200px;
-    padding: 24px;
+    justify-content: space-between;
+    padding: 14px 20px;
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: 16px;
-    text-align: center;
+    border-radius: 12px;
+    border: 1px solid var(--border);
 }
 
-.wallet-label {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--purple);
-    margin-bottom: 16px;
+.rwa-row strong {
+    font-size: 17px;
 }
 
-.wallet-balance {
+.trace-tight {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.trace-section {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.balance-label {
+.trace-year-sm {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.trace-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--surface);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.trace-row.current {
+    background: rgba(153, 69, 255, 0.1);
+    border: 1px solid var(--purple);
+}
+
+.trace-row.dim {
+    opacity: 0.6;
+}
+
+.trace-badge {
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.trace-badge.done { background: rgba(20, 241, 149, 0.15); color: var(--green); }
+.trace-badge.fail { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+.trace-badge.now { background: rgba(153, 69, 255, 0.15); color: var(--purple); }
+.trace-badge.upcoming { background: var(--border); color: var(--text-muted); }
+
+/* ============================================
+   Slide 9 - Confidential Transfer Diagram
+   ============================================ */
+
+.ct-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex: 1;
+    margin-bottom: 24px;
+}
+
+.ct-user {
+    width: 240px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.ct-user-header {
+    padding: 12px;
+    background: linear-gradient(135deg, var(--purple), var(--green));
+    color: var(--bg);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ct-keypair {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ct-key {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+}
+
+.ct-key.sk {
+    background: rgba(229, 72, 77, 0.1);
+    border: 1px solid rgba(229, 72, 77, 0.3);
+}
+
+.ct-key.pk {
+    background: rgba(20, 241, 149, 0.1);
+    border: 1px solid rgba(20, 241, 149, 0.3);
+}
+
+.key-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 80px;
+}
+
+.key-value {
+    font-family: monospace;
     font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.ct-balance {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+}
+
+.bal-label {
+    font-size: 13px;
     color: var(--text-muted);
 }
 
-.balance-encrypted {
-    font-size: 20px;
+.bal-value {
+    font-family: monospace;
+    font-size: 16px;
     font-weight: 700;
     color: var(--green);
-    font-family: monospace;
 }
 
-.transfer-flow {
+.bal-value sub {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.ct-transfer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    min-width: 140px;
 }
 
-.transfer-arrow {
-    display: flex;
-    align-items: center;
-    width: 120px;
+.ct-arrow {
+    width: 100px;
 }
 
-.arrow-line {
-    flex: 1;
-    height: 3px;
-    background: linear-gradient(90deg, var(--purple), var(--green));
+.arrow-svg {
+    width: 100%;
+    height: 40px;
 }
 
-.arrow-head {
-    width: 0;
-    height: 0;
-    border-left: 12px solid var(--green);
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-}
-
-.transfer-info {
+.ct-transfer-label {
     text-align: center;
 }
 
-.transfer-label {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-.transfer-value {
-    font-size: 18px;
+.transfer-amt {
+    display: block;
+    font-family: monospace;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text);
-    font-family: monospace;
 }
 
-.elgamal-badge {
-    padding: 6px 14px;
-    background: rgba(153, 69, 255, 0.15);
-    border: 1px solid var(--purple);
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--purple);
+.transfer-amt sub {
+    font-size: 10px;
+    color: var(--text-muted);
 }
 
-.he-property {
-    text-align: center;
-    margin-bottom: 24px;
-    padding: 20px;
-    background: var(--surface);
-    border-radius: 16px;
-}
-
-.he-equation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 12px;
-}
-
-.eq-part {
-    font-size: 22px;
-    font-weight: 600;
-    font-family: monospace;
-    color: var(--text);
-}
-
-.eq-part.highlight {
+.transfer-note {
+    display: block;
+    font-size: 12px;
     color: var(--green);
+    margin-top: 4px;
 }
 
-.eq-arrow {
-    font-size: 24px;
-    color: var(--text-muted);
-}
-
-.he-desc {
-    font-size: 15px;
-    color: var(--text-muted);
-}
-
-.audit-flow-visual {
+.ct-keypoints {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 24px;
-    margin-bottom: 20px;
+    gap: 32px;
+    margin-bottom: 16px;
 }
 
-.audit-step {
+.ct-point {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 16px 24px;
+    gap: 12px;
+    padding: 12px 20px;
     background: var(--surface);
-    border: 1px solid var(--border);
     border-radius: 12px;
 }
 
-.audit-step.highlight {
-    background: rgba(20, 241, 149, 0.1);
-    border-color: var(--green);
-}
-
-.audit-icon {
-    font-size: 24px;
-    color: var(--purple);
-}
-
-.audit-step.highlight .audit-icon {
-    color: var(--green);
-}
-
-.audit-text {
+.point-num {
+    width: 28px;
+    height: 28px;
+    background: var(--purple);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
-.audit-arrow {
-    font-size: 24px;
-    color: var(--text-muted);
+.point-text {
+    font-size: 15px;
+    font-weight: 500;
 }
 
 /* ============================================

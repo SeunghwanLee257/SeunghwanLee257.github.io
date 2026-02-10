@@ -424,57 +424,35 @@
                     <p class="slide-label">07 — ROADMAP & TRACE</p>
                     <h2 class="slide-title">기관 채택 준비 & 여정</h2>
 
-                    <div class="combined-layout">
+                    <div class="combined-layout-tight">
                         <!-- 왼쪽: RWA/Stablecoin -->
-                        <div class="rwa-compact">
-                            <div class="rwa-item">
-                                <div class="rwa-text">
-                                    <strong>Stablecoin</strong>
-                                    <span>USDC/USDT 프라이빗 트랜스퍼</span>
-                                </div>
+                        <div class="rwa-tight">
+                            <div class="rwa-row">
+                                <strong>Stablecoin</strong>
                                 <span class="rwa-badge ready">MiCA</span>
                             </div>
-                            <div class="rwa-item">
-                                <div class="rwa-text">
-                                    <strong>RWA</strong>
-                                    <span>토큰화 채권/주식 OTC</span>
-                                </div>
+                            <div class="rwa-row">
+                                <strong>RWA</strong>
                                 <span class="rwa-badge ready">GENIUS</span>
                             </div>
-                            <div class="rwa-item">
-                                <div class="rwa-text">
-                                    <strong>Token Extension</strong>
-                                    <span>Solana Confidential Transfer</span>
-                                </div>
+                            <div class="rwa-row">
+                                <strong>Token Extension</strong>
                                 <span class="rwa-badge pending">예정</span>
                             </div>
                         </div>
 
                         <!-- 오른쪽: Timeline -->
-                        <div class="rwa-compact">
-                            <div class="rwa-item trace-year">
-                                <span class="trace-year-label">2025</span>
+                        <div class="trace-tight">
+                            <div class="trace-section">
+                                <span class="trace-year-sm">2025</span>
+                                <div class="trace-row">Solana Startup Village <span class="trace-badge done">3등</span></div>
+                                <div class="trace-row dim">Colosseum 인터뷰 <span class="trace-badge fail">실패</span></div>
                             </div>
-                            <div class="rwa-item">
-                                <div class="rwa-text">
-                                    <strong>Solana Startup Village</strong>
-                                </div>
-                                <span class="rwa-badge ready">3등</span>
-                            </div>
-                            <div class="rwa-item trace-year">
-                                <span class="trace-year-label">2026</span>
-                            </div>
-                            <div class="rwa-item current-item">
-                                <div class="rwa-text">
-                                    <strong>Solana Privacy Hack</strong>
-                                </div>
-                                <span class="rwa-badge current">진행중</span>
-                            </div>
-                            <div class="rwa-item">
-                                <div class="rwa-text">
-                                    <strong>Mantle ZK Hack</strong>
-                                </div>
-                                <span class="rwa-badge ready">Top 5</span>
+                            <div class="trace-section">
+                                <span class="trace-year-sm">2026</span>
+                                <div class="trace-row current">Solana Privacy Hack <span class="trace-badge now">진행중</span></div>
+                                <div class="trace-row">Mantle ZK & Privacy <span class="trace-badge now">최종선정 대기중</span></div>
+                                <div class="trace-row dim">Startup Village & Colosseum <span class="trace-badge upcoming">예정</span></div>
                             </div>
                         </div>
                     </div>
@@ -493,64 +471,80 @@
                     <p class="slide-label">08 — TOKEN EXTENSION</p>
                     <h2 class="slide-title">Solana Confidential Transfer</h2>
 
-                    <div class="elgamal-diagram">
-                        <!-- 왼쪽: 지갑 A -->
-                        <div class="wallet-box">
-                            <div class="wallet-label">Wallet A</div>
-                            <div class="wallet-balance">
-                                <span class="balance-label">Balance</span>
-                                <span class="balance-encrypted">Enc(100)</span>
+                    <!-- ElGamal PK = Address 다이어그램 -->
+                    <div class="ct-diagram">
+                        <!-- User A -->
+                        <div class="ct-user">
+                            <div class="ct-user-header">User A</div>
+                            <div class="ct-keypair">
+                                <div class="ct-key sk">
+                                    <span class="key-label">SK</span>
+                                    <span class="key-value">sk_A</span>
+                                </div>
+                                <div class="ct-key pk">
+                                    <span class="key-label">PK = Address</span>
+                                    <span class="key-value">pk_A</span>
+                                </div>
+                            </div>
+                            <div class="ct-balance">
+                                <span class="bal-label">Balance</span>
+                                <span class="bal-value">Enc<sub>pk_A</sub>(100)</span>
                             </div>
                         </div>
 
-                        <!-- 중앙: 전송 플로우 -->
-                        <div class="transfer-flow">
-                            <div class="transfer-arrow">
-                                <div class="arrow-line"></div>
-                                <div class="arrow-head"></div>
+                        <!-- Transfer Arrow -->
+                        <div class="ct-transfer">
+                            <div class="ct-arrow">
+                                <svg viewBox="0 0 100 40" class="arrow-svg">
+                                    <defs>
+                                        <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#9945FF"/>
+                                            <stop offset="100%" style="stop-color:#14F195"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <line x1="0" y1="20" x2="85" y2="20" stroke="url(#arrowGrad)" stroke-width="3"/>
+                                    <polygon points="85,12 100,20 85,28" fill="#14F195"/>
+                                </svg>
                             </div>
-                            <div class="transfer-info">
-                                <div class="transfer-label">Transfer</div>
-                                <div class="transfer-value">Enc(10)</div>
+                            <div class="ct-transfer-label">
+                                <span class="transfer-amt">Enc<sub>pk_B</sub>(10)</span>
+                                <span class="transfer-note">B의 PK로 암호화</span>
                             </div>
-                            <div class="elgamal-badge">ElGamal HE</div>
                         </div>
 
-                        <!-- 오른쪽: 지갑 B -->
-                        <div class="wallet-box">
-                            <div class="wallet-label">Wallet B</div>
-                            <div class="wallet-balance">
-                                <span class="balance-label">Balance</span>
-                                <span class="balance-encrypted">Enc(50)</span>
+                        <!-- User B -->
+                        <div class="ct-user">
+                            <div class="ct-user-header">User B</div>
+                            <div class="ct-keypair">
+                                <div class="ct-key sk">
+                                    <span class="key-label">SK</span>
+                                    <span class="key-value">sk_B</span>
+                                </div>
+                                <div class="ct-key pk">
+                                    <span class="key-label">PK = Address</span>
+                                    <span class="key-value">pk_B</span>
+                                </div>
+                            </div>
+                            <div class="ct-balance">
+                                <span class="bal-label">Balance</span>
+                                <span class="bal-value">Enc<sub>pk_B</sub>(50)</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- HE 특성 설명 -->
-                    <div class="he-property">
-                        <div class="he-equation">
-                            <span class="eq-part">Enc(100) - Enc(10)</span>
-                            <span class="eq-arrow">=</span>
-                            <span class="eq-part highlight">Enc(90)</span>
+                    <!-- 핵심 포인트 -->
+                    <div class="ct-keypoints">
+                        <div class="ct-point">
+                            <span class="point-num">1</span>
+                            <span class="point-text">ElGamal PK를 주소로 사용</span>
                         </div>
-                        <div class="he-desc">복호화 없이 잔액 업데이트 (Additively Homomorphic)</div>
-                    </div>
-
-                    <!-- 감사 플로우 -->
-                    <div class="audit-flow-visual">
-                        <div class="audit-step">
-                            <div class="audit-icon">◇</div>
-                            <div class="audit-text">암호화 로깅</div>
+                        <div class="ct-point">
+                            <span class="point-num">2</span>
+                            <span class="point-text">잔액은 각자 PK로 암호화</span>
                         </div>
-                        <div class="audit-arrow">→</div>
-                        <div class="audit-step">
-                            <div class="audit-icon">◈</div>
-                            <div class="audit-text">온체인 저장</div>
-                        </div>
-                        <div class="audit-arrow">→</div>
-                        <div class="audit-step highlight">
-                            <div class="audit-icon">◆</div>
-                            <div class="audit-text">2-of-3 복호화</div>
+                        <div class="ct-point">
+                            <span class="point-num">3</span>
+                            <span class="point-text">SK 보유자만 잔액 확인 가능</span>
                         </div>
                     </div>
 
