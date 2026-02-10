@@ -14,7 +14,7 @@
 <body>
     <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">←</button>
-        <span id="slideCounter">1 / 11</span>
+        <span id="slideCounter">1 / 12</span>
         <button id="nextBtn" onclick="nextSlide()">→</button>
         <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
     </div>
@@ -512,10 +512,83 @@
                 </div>
             </div>
 
-            <!-- 9. Challenges -->
+            <!-- 9. Solana Token Extension -->
             <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">08 — CHALLENGES</p>
+                    <p class="slide-label">08 — TOKEN EXTENSION</p>
+                    <h2 class="slide-title">Solana Confidential Transfer</h2>
+
+                    <div class="token-ext-layout">
+                        <!-- ElGamal 암호화 설명 -->
+                        <div class="elgamal-section">
+                            <div class="section-header">
+                                <span class="section-icon">🔐</span>
+                                <span class="section-title">ElGamal Encryption</span>
+                            </div>
+                            <div class="elgamal-details">
+                                <div class="elgamal-item">
+                                    <span class="elgamal-label">기반</span>
+                                    <span class="elgamal-value">Elliptic Curve (Curve25519)</span>
+                                </div>
+                                <div class="elgamal-item">
+                                    <span class="elgamal-label">특성</span>
+                                    <span class="elgamal-value">Additively Homomorphic</span>
+                                </div>
+                                <div class="elgamal-item">
+                                    <span class="elgamal-label">지갑</span>
+                                    <span class="elgamal-value">Private Balance 숨김</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flow: HE 로깅 → 선택적 감사 -->
+                        <div class="he-audit-flow">
+                            <div class="flow-header">동형암호 기반 감사</div>
+                            <div class="flow-steps-compact">
+                                <div class="flow-step-item">
+                                    <div class="step-circle">1</div>
+                                    <div class="step-content">
+                                        <strong>Enc(balance)</strong>
+                                        <span>암호화된 잔액</span>
+                                    </div>
+                                </div>
+                                <span class="flow-arrow-sm">→</span>
+                                <div class="flow-step-item">
+                                    <div class="step-circle">2</div>
+                                    <div class="step-content">
+                                        <strong>HE 로깅</strong>
+                                        <span>복호화 없이 기록</span>
+                                    </div>
+                                </div>
+                                <span class="flow-arrow-sm">→</span>
+                                <div class="flow-step-item highlight-step">
+                                    <div class="step-circle">3</div>
+                                    <div class="step-content">
+                                        <strong>선택적 감사</strong>
+                                        <span>2-of-3 복호화</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">핵심</span>
+                        <span class="key-text">ElGamal HE → 프라이빗 잔액 + 선택적 감사 가능</span>
+                    </div>
+
+                    <div class="slide-refs">
+                        <a href="https://spl.solana.com/confidential-token" target="_blank">Solana Confidential Token</a> ·
+                        <a href="https://docs.solana.com/developing/programming-model/token-extensions" target="_blank">Token Extension Docs</a> ·
+                        <a href="https://en.wikipedia.org/wiki/ElGamal_encryption" target="_blank">ElGamal Encryption</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Challenges -->
+            <div class="slide" data-slide="10">
+                <div class="slide-content">
+                    <p class="slide-label">09 — CHALLENGES</p>
                     <h2 class="slide-title">우여곡절</h2>
 
                     <div class="challenge-list">
@@ -549,10 +622,10 @@
                 </div>
             </div>
 
-            <!-- 10. HE Stack -->
-            <div class="slide" data-slide="10">
+            <!-- 11. HE Stack -->
+            <div class="slide" data-slide="11">
                 <div class="slide-content">
-                    <p class="slide-label">09 — HE STACK</p>
+                    <p class="slide-label">10 — HE STACK</p>
                     <h2 class="slide-title">동형암호 스택</h2>
 
                     <div class="feature-grid">
@@ -591,8 +664,8 @@
                 </div>
             </div>
 
-            <!-- 11. Q&A -->
-            <div class="slide" data-slide="11">
+            <!-- 12. Q&A -->
+            <div class="slide" data-slide="12">
                 <div class="slide-content center">
                     <h1 class="qa-title">Q&A</h1>
                     <p class="qa-sub">프라이버시와 컴플라이언스,<br>둘 다 가능합니다</p>
