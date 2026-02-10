@@ -1340,6 +1340,29 @@ html, body {
     color: var(--text-muted);
 }
 
+.interest-drop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drop-arrow {
+    color: var(--negative);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.time-ratio {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ratio-num {
+    color: var(--purple);
+    font-weight: 700;
+}
+
 /* ============================================
    Features
    ============================================ */
