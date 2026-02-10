@@ -14,7 +14,7 @@
 <body>
     <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">←</button>
-        <span id="slideCounter">1 / 11</span>
+        <span id="slideCounter">1 / 12</span>
         <button id="nextBtn" onclick="nextSlide()">→</button>
         <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
     </div>
@@ -107,13 +107,13 @@
                 </div>
             </div>
 
-            <!-- 3. Solution -->
+            <!-- 3. 기존 방식 (ZK Pool Only) -->
             <div class="slide" data-slide="3">
                 <div class="slide-content">
-                    <p class="slide-label">02 — SOLUTION</p>
-                    <h2 class="slide-title">Auditable Dark Pool</h2>
+                    <p class="slide-label">02 — EXISTING</p>
+                    <h2 class="slide-title">기존 방식: ZK Pool Only</h2>
 
-                    <div class="pool-visualization">
+                    <div class="pool-visualization compact">
                         <!-- Depositors -->
                         <div class="pool-column depositors">
                             <div class="col-label">Deposit</div>
@@ -135,23 +135,17 @@
 
                         <!-- Central Pool -->
                         <div class="pool-center">
-                            <div class="pool-orb">
+                            <div class="pool-orb small">
                                 <div class="pool-glow"></div>
                                 <div class="pool-inner-circle">
                                     <span class="pool-emoji">🛡</span>
                                     <span class="pool-name">ZK Pool</span>
-                                    <span class="pool-address">DkPo...Pool</span>
                                 </div>
-                            </div>
-                            <div class="tracking-blocked">
-                                <span class="blocked-x">✕</span>
-                                <span class="blocked-text">Tracking Blocked</span>
                             </div>
                         </div>
 
                         <!-- Flow Out -->
                         <div class="flow-arrows">
-                            <div class="flow-line out"></div>
                             <div class="flow-line out"></div>
                             <div class="flow-line out"></div>
                         </div>
@@ -167,35 +161,126 @@
                                 <span class="from-tag">from: Pool</span>
                                 <span class="node-addr">9mR4...kL8</span>
                             </div>
-                            <div class="pool-node receiver">
-                                <span class="from-tag">from: Pool</span>
-                                <span class="node-addr">2nT6...pQ1</span>
+                        </div>
+                    </div>
+
+                    <!-- Problem Callout -->
+                    <div class="problem-callout">
+                        <div class="callout-icon">⚠</div>
+                        <div class="callout-content">
+                            <div class="callout-title">문제점: 로깅 없음</div>
+                            <div class="callout-items">
+                                <span class="callout-item bad">✕ 누가 입금했는지 추적 불가</span>
+                                <span class="callout-item bad">✕ 규제 요청 시 증빙 불가</span>
+                                <span class="callout-item bad">✕ AML/KYC 미충족 → 제재 위험</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Audit Layer -->
-                    <div class="audit-layer">
-                        <div class="audit-box">
-                            <div class="audit-header">
-                                <span class="audit-icon">🔍</span>
-                                <span>2-of-3 Threshold Audit</span>
-                            </div>
-                            <div class="audit-desc">규제 요청 시 → 2명 이상 합의 → 복호화 가능</div>
-                        </div>
-                    </div>
-
-                    <div class="key-point">
-                        <span class="key-badge">핵심</span>
-                        <span class="key-text">기본 = Privacy / 요청 시 = Compliant Audit</span>
+                    <div class="key-point danger">
+                        <span class="key-badge danger">결과</span>
+                        <span class="key-text">Tornado Cash → OFAC 제재</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. Demo Flow -->
+            <!-- 4. 제안 방식 (Auditable Dark Pool) -->
             <div class="slide" data-slide="4">
                 <div class="slide-content">
-                    <p class="slide-label">03 — DEMO FLOW</p>
+                    <p class="slide-label">03 — OUR SOLUTION</p>
+                    <h2 class="slide-title">제안: Auditable Dark Pool</h2>
+
+                    <div class="pool-visualization compact">
+                        <!-- Depositors -->
+                        <div class="pool-column depositors">
+                            <div class="col-label">Deposit</div>
+                            <div class="pool-node sender">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">5xAB...dEf</span>
+                            </div>
+                            <div class="pool-node sender">
+                                <span class="node-icon">👤</span>
+                                <span class="node-addr">7kQ5...aB3</span>
+                            </div>
+                        </div>
+
+                        <!-- Flow In -->
+                        <div class="flow-arrows">
+                            <div class="flow-line in"></div>
+                            <div class="flow-line in"></div>
+                        </div>
+
+                        <!-- Central Pool with Logging -->
+                        <div class="pool-center with-logging">
+                            <div class="pool-orb small">
+                                <div class="pool-glow green"></div>
+                                <div class="pool-inner-circle">
+                                    <span class="pool-emoji">🛡</span>
+                                    <span class="pool-name">ZK Pool</span>
+                                </div>
+                            </div>
+                            <!-- Encrypted Log Storage -->
+                            <div class="log-storage">
+                                <span class="log-icon">📋</span>
+                                <span class="log-text">Encrypted Log</span>
+                            </div>
+                        </div>
+
+                        <!-- Flow Out -->
+                        <div class="flow-arrows">
+                            <div class="flow-line out"></div>
+                            <div class="flow-line out"></div>
+                        </div>
+
+                        <!-- Recipients -->
+                        <div class="pool-column recipients">
+                            <div class="col-label">Withdraw</div>
+                            <div class="pool-node receiver">
+                                <span class="from-tag">from: Pool</span>
+                                <span class="node-addr">3pWz...x9Y</span>
+                            </div>
+                            <div class="pool-node receiver">
+                                <span class="from-tag">from: Pool</span>
+                                <span class="node-addr">9mR4...kL8</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logging System Explanation -->
+                    <div class="logging-system">
+                        <div class="log-header">
+                            <span class="log-header-icon">🔐</span>
+                            <span class="log-header-title">로깅 시스템</span>
+                        </div>
+                        <div class="log-flow">
+                            <div class="log-step">
+                                <div class="log-step-num">1</div>
+                                <div class="log-step-text">출금 시 Witness 암호화<br><small>RLWE 기반</small></div>
+                            </div>
+                            <span class="log-arrow">→</span>
+                            <div class="log-step">
+                                <div class="log-step-num">2</div>
+                                <div class="log-step-text">온체인 저장<br><small>Solana Account</small></div>
+                            </div>
+                            <span class="log-arrow">→</span>
+                            <div class="log-step">
+                                <div class="log-step-num">3</div>
+                                <div class="log-step-text">2-of-3 복호화<br><small>규제 요청 시만</small></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">핵심</span>
+                        <span class="key-text">Privacy by Default + Audit When Needed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Demo Flow -->
+            <div class="slide" data-slide="5">
+                <div class="slide-content">
+                    <p class="slide-label">04 — DEMO FLOW</p>
                     <h2 class="slide-title">유저 플로우</h2>
 
                     <div class="flow-steps">
@@ -243,10 +328,10 @@
                 </div>
             </div>
 
-            <!-- 5. Architecture -->
-            <div class="slide" data-slide="5">
+            <!-- 6. Architecture -->
+            <div class="slide" data-slide="6">
                 <div class="slide-content">
-                    <p class="slide-label">04 — ARCHITECTURE</p>
+                    <p class="slide-label">05 — ARCHITECTURE</p>
                     <h2 class="slide-title">ZK + RLWE</h2>
 
                     <div class="arch-layout">
@@ -293,10 +378,10 @@
                 </div>
             </div>
 
-            <!-- 6. Tech Stack -->
-            <div class="slide" data-slide="6">
+            <!-- 7. Tech Stack -->
+            <div class="slide" data-slide="7">
                 <div class="slide-content">
-                    <p class="slide-label">05 — TECH STACK</p>
+                    <p class="slide-label">06 — TECH STACK</p>
                     <h2 class="slide-title">구현 스택</h2>
 
                     <div class="stack-grid">
@@ -333,10 +418,10 @@
                 </div>
             </div>
 
-            <!-- 7. RWA + Stablecoin -->
-            <div class="slide" data-slide="7">
+            <!-- 8. RWA + Stablecoin -->
+            <div class="slide" data-slide="8">
                 <div class="slide-content">
-                    <p class="slide-label">06 — RWA + STABLECOIN</p>
+                    <p class="slide-label">07 — RWA + STABLECOIN</p>
                     <h2 class="slide-title">기관 채택 준비</h2>
 
                     <div class="rwa-grid">
@@ -388,10 +473,10 @@
                 </div>
             </div>
 
-            <!-- 8. Progress -->
-            <div class="slide" data-slide="8">
+            <!-- 9. Progress -->
+            <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">07 — PROGRESS</p>
+                    <p class="slide-label">08 — PROGRESS</p>
                     <h2 class="slide-title">현재 진행 상황</h2>
 
                     <div class="progress-list">
@@ -423,10 +508,10 @@
                 </div>
             </div>
 
-            <!-- 9. Challenges -->
-            <div class="slide" data-slide="9">
+            <!-- 10. Challenges -->
+            <div class="slide" data-slide="10">
                 <div class="slide-content">
-                    <p class="slide-label">08 — CHALLENGES</p>
+                    <p class="slide-label">09 — CHALLENGES</p>
                     <h2 class="slide-title">우여곡절</h2>
 
                     <div class="challenge-list">
@@ -460,10 +545,10 @@
                 </div>
             </div>
 
-            <!-- 10. HE Stack -->
-            <div class="slide" data-slide="10">
+            <!-- 11. HE Stack -->
+            <div class="slide" data-slide="11">
                 <div class="slide-content">
-                    <p class="slide-label">09 — HE STACK</p>
+                    <p class="slide-label">10 — HE STACK</p>
                     <h2 class="slide-title">동형암호 스택</h2>
 
                     <div class="feature-grid">
@@ -502,8 +587,8 @@
                 </div>
             </div>
 
-            <!-- 11. Q&A -->
-            <div class="slide" data-slide="11">
+            <!-- 12. Q&A -->
+            <div class="slide" data-slide="12">
                 <div class="slide-content center">
                     <h1 class="qa-title">Q&A</h1>
                     <p class="qa-sub">프라이버시와 컴플라이언스,<br>둘 다 가능합니다</p>
