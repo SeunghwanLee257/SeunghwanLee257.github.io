@@ -1504,6 +1504,28 @@ html, body {
     font-size: 17px;
 }
 
+.rwa-row-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.rwa-row-text strong {
+    color: var(--accent);
+}
+
+.rwa-arrow {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 20px;
+}
+
 .trace-tight {
     display: flex;
     flex-direction: column;
