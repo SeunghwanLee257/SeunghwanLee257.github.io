@@ -1747,6 +1747,10 @@ html, body {
     font-weight: 500;
 }
 
+.ct-point.plus .point-num {
+    background: var(--green);
+}
+
 /* ============================================
    Responsive
    ============================================ */
