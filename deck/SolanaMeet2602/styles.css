@@ -1300,27 +1300,27 @@ html, body {
 .challenge-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .challenge-item {
     display: flex;
-    align-items: flex-start;
-    gap: 28px;
-    padding: 28px 36px;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
     background: var(--surface);
-    border-radius: 20px;
+    border-radius: 14px;
 }
 
 .challenge-letter {
-    width: 52px;
-    height: 52px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, var(--purple), var(--green));
-    border-radius: 16px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 800;
     flex-shrink: 0;
 }
@@ -1328,15 +1328,15 @@ html, body {
 .challenge-text {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 .challenge-text strong {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .challenge-text span {
-    font-size: 20px;
+    font-size: 15px;
     color: var(--text-muted);
 }
 
@@ -1344,18 +1344,20 @@ html, body {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 15px;
 }
 
 .drop-arrow {
     color: var(--negative);
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .time-ratio {
     display: flex;
     align-items: center;
     gap: 6px;
+    font-size: 15px;
 }
 
 .ratio-num {
