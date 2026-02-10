@@ -14,7 +14,7 @@
 <body>
     <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">←</button>
-        <span id="slideCounter">1 / 12</span>
+        <span id="slideCounter">1 / 11</span>
         <button id="nextBtn" onclick="nextSlide()">→</button>
         <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
     </div>
@@ -418,120 +418,89 @@
                 </div>
             </div>
 
-            <!-- 8. RWA + Stablecoin -->
+            <!-- 8. RWA + Trace 통합 -->
             <div class="slide" data-slide="8">
                 <div class="slide-content">
-                    <p class="slide-label">07 — RWA + STABLECOIN</p>
-                    <h2 class="slide-title">기관 채택 준비</h2>
+                    <p class="slide-label">07 — ROADMAP & TRACE</p>
+                    <h2 class="slide-title">기관 채택 준비 & 여정</h2>
 
-                    <div class="rwa-grid">
-                        <div class="rwa-card">
-                            <div class="rwa-header">
-                                <span class="rwa-icon">💵</span>
-                                <h3>Stablecoin</h3>
+                    <div class="combined-layout">
+                        <!-- 왼쪽: RWA/Stablecoin -->
+                        <div class="rwa-compact">
+                            <div class="rwa-item">
+                                <span class="rwa-icon-sm">💵</span>
+                                <div class="rwa-text">
+                                    <strong>Stablecoin</strong>
+                                    <span>USDC/USDT 프라이빗 트랜스퍼</span>
+                                </div>
+                                <span class="rwa-badge ready">MiCA</span>
                             </div>
-                            <ul class="rwa-list">
-                                <li>USDC/USDT 프라이빗 트랜스퍼</li>
-                                <li>급여 지급 시 금액 비공개</li>
-                                <li>규제 감사 시 증빙 가능</li>
-                            </ul>
-                            <div class="rwa-status ready">MiCA Ready</div>
+                            <div class="rwa-item">
+                                <span class="rwa-icon-sm">🏛</span>
+                                <div class="rwa-text">
+                                    <strong>RWA</strong>
+                                    <span>토큰화 채권/주식 OTC</span>
+                                </div>
+                                <span class="rwa-badge ready">GENIUS</span>
+                            </div>
+                            <div class="rwa-item">
+                                <span class="rwa-icon-sm">🔐</span>
+                                <div class="rwa-text">
+                                    <strong>Token Extension</strong>
+                                    <span>Solana Confidential Transfer</span>
+                                </div>
+                                <span class="rwa-badge pending">예정</span>
+                            </div>
                         </div>
 
-                        <div class="rwa-card">
-                            <div class="rwa-header">
-                                <span class="rwa-icon">🏛</span>
-                                <h3>RWA (Real World Assets)</h3>
+                        <!-- 오른쪽: Timeline -->
+                        <div class="timeline-compact">
+                            <div class="tl-group">
+                                <span class="tl-year">2025</span>
+                                <div class="tl-item done">
+                                    <span class="tl-dot done"></span>
+                                    <span class="tl-name">Solana Startup Village</span>
+                                    <span class="tl-result success">3등</span>
+                                </div>
+                                <div class="tl-item">
+                                    <span class="tl-dot partial"></span>
+                                    <span class="tl-name">Colosseum 인터뷰</span>
+                                    <span class="tl-result partial">실패</span>
+                                </div>
                             </div>
-                            <ul class="rwa-list">
-                                <li>토큰화 채권/주식 거래</li>
-                                <li>기관 간 OTC 프라이버시</li>
-                                <li>AML 컴플라이언스 충족</li>
-                            </ul>
-                            <div class="rwa-status ready">GENIUS Act Ready</div>
-                        </div>
-
-                        <div class="rwa-card">
-                            <div class="rwa-header">
-                                <span class="rwa-icon">🔐</span>
-                                <h3>Token Extension</h3>
+                            <div class="tl-group">
+                                <span class="tl-year">2026</span>
+                                <div class="tl-item current">
+                                    <span class="tl-dot current"></span>
+                                    <span class="tl-name">Solana Privacy Hack</span>
+                                    <span class="tl-result current">금요일</span>
+                                </div>
+                                <div class="tl-item done">
+                                    <span class="tl-dot done"></span>
+                                    <span class="tl-name">Mantle ZK Hack</span>
+                                    <span class="tl-result success">Top 5</span>
+                                </div>
+                                <div class="tl-item">
+                                    <span class="tl-dot upcoming"></span>
+                                    <span class="tl-name">Startup Village</span>
+                                    <span class="tl-result upcoming">예정</span>
+                                </div>
                             </div>
-                            <ul class="rwa-list">
-                                <li>Solana Confidential Transfer</li>
-                                <li>Auditable 레이어 결합</li>
-                                <li>기관 수준 프라이버시</li>
-                            </ul>
-                            <div class="rwa-status pending">개발 예정</div>
                         </div>
                     </div>
 
                     <div class="slide-refs">
-                        Regulation: <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act S.394</a> ·
+                        <a href="https://www.congress.gov/bill/119th-congress/senate-bill/394" target="_blank">GENIUS Act</a> ·
                         <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica" target="_blank">EU MiCA</a> ·
                         <a href="https://spl.solana.com/confidential-token" target="_blank">Solana Confidential Token</a>
                     </div>
                 </div>
             </div>
 
-            <!-- 9. Progress / Trace -->
+            <!-- 9. Challenges -->
             <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">08 — TRACE</p>
-                    <h2 class="slide-title">여정</h2>
-
-                    <div class="timeline">
-                        <!-- 2025 -->
-                        <div class="timeline-year">
-                            <span class="year-label">2025</span>
-                        </div>
-                        <div class="timeline-item done">
-                            <div class="timeline-marker done"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">Solana Startup Village</div>
-                                <div class="timeline-result success">3등 수상</div>
-                            </div>
-                        </div>
-                        <div class="timeline-item done">
-                            <div class="timeline-marker partial"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">Colosseum 내부 인터뷰</div>
-                                <div class="timeline-result partial">수상 실패</div>
-                            </div>
-                        </div>
-
-                        <!-- 2026 -->
-                        <div class="timeline-year">
-                            <span class="year-label">2026</span>
-                        </div>
-                        <div class="timeline-item current">
-                            <div class="timeline-marker current"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">Solana Privacy Hackathon</div>
-                                <div class="timeline-result current">진행 중 · 금요일 발표</div>
-                            </div>
-                        </div>
-                        <div class="timeline-item done">
-                            <div class="timeline-marker done"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">Mantle ZK & Privacy Hackathon</div>
-                                <div class="timeline-result success">Top 5 · 데모데이 완료</div>
-                            </div>
-                        </div>
-                        <div class="timeline-item upcoming">
-                            <div class="timeline-marker upcoming"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-title">Startup Village & Colosseum</div>
-                                <div class="timeline-result upcoming">상반기 예정</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10. Challenges -->
-            <div class="slide" data-slide="10">
-                <div class="slide-content">
-                    <p class="slide-label">09 — CHALLENGES</p>
+                    <p class="slide-label">08 — CHALLENGES</p>
                     <h2 class="slide-title">우여곡절</h2>
 
                     <div class="challenge-list">
@@ -565,10 +534,10 @@
                 </div>
             </div>
 
-            <!-- 11. HE Stack -->
-            <div class="slide" data-slide="11">
+            <!-- 10. HE Stack -->
+            <div class="slide" data-slide="10">
                 <div class="slide-content">
-                    <p class="slide-label">10 — HE STACK</p>
+                    <p class="slide-label">09 — HE STACK</p>
                     <h2 class="slide-title">동형암호 스택</h2>
 
                     <div class="feature-grid">
@@ -607,8 +576,8 @@
                 </div>
             </div>
 
-            <!-- 12. Q&A -->
-            <div class="slide" data-slide="12">
+            <!-- 11. Q&A -->
+            <div class="slide" data-slide="11">
                 <div class="slide-content center">
                     <h1 class="qa-title">Q&A</h1>
                     <p class="qa-sub">프라이버시와 컴플라이언스,<br>둘 다 가능합니다</p>

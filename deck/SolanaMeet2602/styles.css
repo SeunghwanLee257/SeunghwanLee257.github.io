@@ -996,84 +996,144 @@ html, body {
 }
 
 /* ============================================
-   RWA + Stablecoin Grid
+   Combined RWA + Timeline Layout
    ============================================ */
 
-.rwa-grid {
+.combined-layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
     flex: 1;
     align-content: center;
 }
 
-.rwa-card {
-    padding: 28px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+/* RWA Compact */
+.rwa-compact {
     display: flex;
     flex-direction: column;
+    gap: 12px;
 }
 
-.rwa-header {
+.rwa-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--border);
 }
 
-.rwa-icon {
-    font-size: 32px;
+.rwa-icon-sm {
+    font-size: 24px;
 }
 
-.rwa-header h3 {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.rwa-list {
-    list-style: none;
+.rwa-text {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    flex: 1;
+    gap: 2px;
 }
 
-.rwa-list li {
-    font-size: 18px;
-    color: var(--text-secondary);
-    padding-left: 20px;
-    position: relative;
-}
-
-.rwa-list li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--purple);
-}
-
-.rwa-status {
-    margin-top: 20px;
-    padding: 10px 16px;
-    border-radius: 12px;
+.rwa-text strong {
     font-size: 16px;
     font-weight: 700;
-    text-align: center;
 }
 
-.rwa-status.ready {
-    background: rgba(43, 196, 132, 0.1);
-    color: var(--positive);
-    border: 1px solid rgba(43, 196, 132, 0.3);
+.rwa-text span {
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
-.rwa-status.pending {
-    background: rgba(245, 158, 11, 0.1);
+.rwa-badge {
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.rwa-badge.ready {
+    background: rgba(20, 241, 149, 0.15);
+    color: var(--green);
+}
+
+.rwa-badge.pending {
+    background: rgba(245, 158, 11, 0.15);
     color: var(--warning);
-    border: 1px solid rgba(245, 158, 11, 0.3);
 }
+
+/* Timeline Compact */
+.timeline-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tl-year {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    background: var(--surface);
+    border-radius: 6px;
+    width: fit-content;
+}
+
+.tl-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-radius: 10px;
+    border-left: 3px solid var(--border);
+}
+
+.tl-item.done {
+    border-left-color: var(--green);
+}
+
+.tl-item.current {
+    border-left-color: var(--purple);
+    background: rgba(153, 69, 255, 0.08);
+}
+
+.tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.tl-dot.done { background: var(--green); }
+.tl-dot.partial { background: var(--warning); }
+.tl-dot.current { background: var(--purple); box-shadow: 0 0 8px rgba(153, 69, 255, 0.5); }
+.tl-dot.upcoming { background: var(--text-muted); }
+
+.tl-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tl-result {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+}
+
+.tl-result.success { background: rgba(20, 241, 149, 0.15); color: var(--green); }
+.tl-result.partial { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+.tl-result.current { background: rgba(153, 69, 255, 0.15); color: var(--purple); }
+.tl-result.upcoming { background: var(--border); color: var(--text-muted); }
 
 /* ============================================
    Timeline / Trace
