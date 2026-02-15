@@ -1,0 +1,189 @@
+// Slide Navigation
+let currentSlide = 1;
+const totalSlides = 15;
+
+function updateSlide() {
+    document.querySelectorAll('.slide').forEach(slide => {
+        slide.classList.remove('active');
+    });
+
+    const activeSlide = document.querySelector(`[data-slide="${currentSlide}"]`);
+    if (activeSlide) {
+        activeSlide.classList.add('active');
+    }
+
+    document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+
+    document.getElementById('prevBtn').style.opacity = currentSlide === 1 ? '0.5' : '1';
+    document.getElementById('nextBtn').style.opacity = currentSlide === totalSlides ? '0.5' : '1';
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+    }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+    } else if (e.key === 'Home') {
+        e.preventDefault();
+        currentSlide = 1;
+        updateSlide();
+    } else if (e.key === 'End') {
+        e.preventDefault();
+        currentSlide = totalSlides;
+        updateSlide();
+    }
+});
+
+// PDF Download
+async function downloadPDF() {
+    const downloadBtn = document.getElementById('downloadBtn');
+    const originalHTML = downloadBtn.innerHTML;
+
+    downloadBtn.innerHTML = `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin">
+            <circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"></circle>
+        </svg>
+        PDF 생성 중...
+    `;
+    downloadBtn.disabled = true;
+
+    const style = document.createElement('style');
+    style.id = 'pdf-capture-style';
+    style.textContent = `
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spin { animation: spin 1s linear infinite; }
+        .pdf-capture-mode .slide {
+            position: static !important;
+            border-radius: 0 !important;
+            border: none !important;
+            margin: 0 !important;
+        }
+        .pdf-capture-mode .deck-wrapper {
+            padding: 0 !important;
+            height: auto !important;
+        }
+        .pdf-capture-mode .deck-container {
+            max-width: none !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [1280, 720],
+        hotfixes: ['px_scaling']
+    });
+
+    const slides = document.querySelectorAll('.slide');
+    const originalSlide = currentSlide;
+
+    // PDF 캡처 모드 활성화
+    document.body.classList.add('pdf-capture-mode');
+
+    try {
+        for (let i = 0; i < slides.length; i++) {
+            const slide = slides[i];
+
+            slides.forEach(s => s.style.display = 'none');
+            slide.style.display = 'block';
+            slide.style.width = '1280px';
+            slide.style.height = '720px';
+
+            await new Promise(resolve => setTimeout(resolve, 150));
+
+            const canvas = await html2canvas(slide, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#0B0B0F',
+                logging: false,
+                width: 1280,
+                height: 720,
+                windowWidth: 1280,
+                windowHeight: 720,
+                x: 0,
+                y: 0
+            });
+
+            if (i > 0) {
+                pdf.addPage([1280, 720], 'landscape');
+            }
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+            pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720, undefined, 'FAST');
+        }
+
+        pdf.save('HE_Resume_Vault_Deck.pdf');
+
+    } catch (error) {
+        console.error('PDF generation error:', error);
+        alert('PDF 생성 중 오류가 발생했습니다.');
+    } finally {
+        // PDF 캡처 모드 해제
+        document.body.classList.remove('pdf-capture-mode');
+
+        slides.forEach(s => {
+            s.style.display = '';
+            s.style.width = '';
+            s.style.height = '';
+        });
+        currentSlide = originalSlide;
+        updateSlide();
+
+        document.getElementById('pdf-capture-style')?.remove();
+        downloadBtn.innerHTML = originalHTML;
+        downloadBtn.disabled = false;
+    }
+}
+
+// Touch/Swipe support
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+    }
+}, { passive: true });
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    updateSlide();
+});
+
+// Fullscreen toggle (press F)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+});

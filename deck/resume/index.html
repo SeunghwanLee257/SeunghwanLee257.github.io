@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HE Resume Vault - 동형암호 기반 이력서 플랫폼</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/niceplugin/Paperlogy@1.0.0/dist/css/all.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="controls">
+        <button id="prevBtn" onclick="prevSlide()">←</button>
+        <span id="slideCounter">1 / 15</span>
+        <button id="nextBtn" onclick="nextSlide()">→</button>
+        <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
+    </div>
+
+    <div class="deck-wrapper">
+        <div class="deck-container">
+
+            <!-- 1. Title -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-content center">
+                    <p class="label">HOMOMORPHIC ENCRYPTION × CAREER DATA</p>
+                    <h1 class="hero-title">HE Resume<br>Vault</h1>
+                    <p class="subtitle">내 데이터, 내가 정한 가격으로<br>원하는 만큼만 공개하고 수익을 받는다</p>
+                    <div class="footer-meta">
+                        <span>동형암호 기반 이력서 플랫폼</span>
+                        <span class="dot">·</span>
+                        <span>2026.02</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Problem: 현재 이력서 시장의 문제 -->
+            <div class="slide" data-slide="2">
+                <div class="slide-content">
+                    <p class="slide-label">01 — PROBLEM</p>
+                    <h2 class="slide-title">이력서 시장의 문제점</h2>
+
+                    <div class="problem-visual">
+                        <!-- 문제 1: 데이터 주도권 없음 -->
+                        <div class="problem-block unsolved">
+                            <div class="block-badge unsolved-badge">문제</div>
+                            <h3>데이터 주도권 부재</h3>
+                            <p class="block-desc">내 커리어 데이터의 통제권이 없다</p>
+                            <div class="block-consequences">
+                                <div class="cons-item">✕ 누가 내 정보를 봤는지 모름</div>
+                                <div class="cons-item">✕ 원치 않는 곳에 정보 노출</div>
+                                <div class="cons-item">✕ 데이터 삭제/수정 불가</div>
+                            </div>
+                        </div>
+
+                        <!-- VS -->
+                        <div class="problem-vs">
+                            <div class="vs-line"></div>
+                            <span class="vs-text">BUT</span>
+                            <div class="vs-line"></div>
+                        </div>
+
+                        <!-- 문제 2: 수익 구조 -->
+                        <div class="problem-block unsolved">
+                            <div class="block-badge unsolved-badge">문제</div>
+                            <h3>비대칭 수익 구조</h3>
+                            <p class="block-desc">플랫폼만 돈 벌고, 데이터 주인은 0원</p>
+                            <div class="block-consequences">
+                                <div class="cons-item">✕ 열람료 → 100% 플랫폼</div>
+                                <div class="cons-item">✕ 인재풀 구독 → 플랫폼</div>
+                                <div class="cons-item">✕ 데이터 주인 몫 = 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn 사례 -->
+                    <div class="tornado-case">
+                        <div class="case-header">
+                            <span class="case-title">LinkedIn Recruiter 현황</span>
+                        </div>
+                        <div class="case-timeline">
+                            <div class="case-event">
+                                <span class="event-year">$8,999/년</span>
+                                <span class="event-text">기업 열람 비용</span>
+                            </div>
+                            <span class="timeline-arrow">→</span>
+                            <div class="case-event">
+                                <span class="event-year">$0</span>
+                                <span class="event-text">유저 수익</span>
+                            </div>
+                            <span class="timeline-arrow">→</span>
+                            <div class="case-event negative">
+                                <span class="event-year">스팸</span>
+                                <span class="event-text">원치 않는 InMail</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-refs">
+                        참고: LinkedIn Recruiter 요금제, 사람인/원티드 인재검색 서비스
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Solution: 우리의 제안 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <p class="slide-label">02 — SOLUTION</p>
+                    <h2 class="slide-title">HE Resume Vault: 데이터 주도권 + 수익 배분</h2>
+
+                    <div class="solution-grid">
+                        <div class="solution-item">
+                            <div class="solution-icon">🔐</div>
+                            <div class="solution-title">동형암호 저장</div>
+                            <div class="solution-desc">이력 데이터를 암호화 상태로 보관<br>서버도 내용을 볼 수 없음</div>
+                        </div>
+                        <div class="solution-item highlight">
+                            <div class="solution-icon">👁️</div>
+                            <div class="solution-title">열람 요청 시스템</div>
+                            <div class="solution-desc">누가/왜/얼마에 요청했는지<br>투명하게 확인 후 승인</div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-icon">💰</div>
+                            <div class="solution-title">수익 배분</div>
+                            <div class="solution-desc">열람 대가를 유저와 플랫폼이<br>나누어 가짐 (70:30)</div>
+                        </div>
+                        <div class="solution-item">
+                            <div class="solution-icon">🎭</div>
+                            <div class="solution-title">익명 요청 프리미엄</div>
+                            <div class="solution-desc">신원 비공개 = 더 높은 금액<br>데이터 주인에게 선택권</div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">핵심</span>
+                        <span class="key-text">LinkedIn의 "누가 나를 봤는지" + 승인권 + 수익 = 완전한 데이터 주도권</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 핵심 UX: 요청/승인 플로우 -->
+            <div class="slide" data-slide="4">
+                <div class="slide-content">
+                    <p class="slide-label">03 — CORE UX</p>
+                    <h2 class="slide-title">열람 요청 플로우</h2>
+
+                    <div class="flow-diagram">
+                        <!-- 후보자 -->
+                        <div class="flow-actor candidate">
+                            <div class="actor-header">후보자 (데이터 소유자)</div>
+                            <div class="actor-items">
+                                <div class="actor-item">📋 이력서 암호화 저장</div>
+                                <div class="actor-item">💵 항목별 가격 설정</div>
+                                <div class="actor-item">🚫 차단 기업 설정</div>
+                            </div>
+                        </div>
+
+                        <!-- Flow -->
+                        <div class="flow-center">
+                            <div class="flow-step">
+                                <span class="flow-num">1</span>
+                                <span class="flow-text">요청</span>
+                            </div>
+                            <div class="flow-arrow-down"></div>
+                            <div class="flow-step highlight">
+                                <span class="flow-num">2</span>
+                                <span class="flow-text">승인/거절</span>
+                            </div>
+                            <div class="flow-arrow-down"></div>
+                            <div class="flow-step">
+                                <span class="flow-num">3</span>
+                                <span class="flow-text">전달 & 정산</span>
+                            </div>
+                        </div>
+
+                        <!-- 요청자 -->
+                        <div class="flow-actor requester">
+                            <div class="actor-header">요청자 (기업/리크루터)</div>
+                            <div class="actor-items">
+                                <div class="actor-item">🔍 익명 카드 검색</div>
+                                <div class="actor-item">📝 열람 요청 + 결제</div>
+                                <div class="actor-item">✅ 승인된 데이터 수신</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="request-card-preview">
+                        <div class="preview-header">요청 카드 예시</div>
+                        <div class="preview-content">
+                            <div class="preview-row">
+                                <span class="preview-label">요청자</span>
+                                <span class="preview-value">OO테크 TA 매니저 (검증됨)</span>
+                            </div>
+                            <div class="preview-row">
+                                <span class="preview-label">목적</span>
+                                <span class="preview-value">시니어 백엔드 포지션 제안</span>
+                            </div>
+                            <div class="preview-row">
+                                <span class="preview-label">요청 범위</span>
+                                <span class="preview-value">연락처 + 최근 경력 2개</span>
+                            </div>
+                            <div class="preview-row highlight">
+                                <span class="preview-label">제안 금액</span>
+                                <span class="preview-value money">₩85,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 익명 요청 프리미엄 시스템 -->
+            <div class="slide" data-slide="5">
+                <div class="slide-content">
+                    <p class="slide-label">04 — ANONYMOUS PREMIUM</p>
+                    <h2 class="slide-title">익명 요청: 가격으로 선택권을 산다</h2>
+
+                    <div class="anon-comparison">
+                        <!-- 실명 요청 -->
+                        <div class="anon-card named">
+                            <div class="anon-badge named">실명 요청</div>
+                            <div class="anon-price">기본가 × 1.0</div>
+                            <div class="anon-details">
+                                <div class="anon-detail good">○ 회사명/담당자 공개</div>
+                                <div class="anon-detail good">○ 높은 승인율</div>
+                                <div class="anon-detail">예치금: 기본</div>
+                            </div>
+                        </div>
+
+                        <!-- 준익명 -->
+                        <div class="anon-card semi">
+                            <div class="anon-badge semi">준익명</div>
+                            <div class="anon-price">기본가 × 1.7</div>
+                            <div class="anon-details">
+                                <div class="anon-detail">△ 산업/규모만 공개</div>
+                                <div class="anon-detail">△ 회사명 숨김</div>
+                                <div class="anon-detail">예치금: 중</div>
+                            </div>
+                        </div>
+
+                        <!-- 완전 익명 -->
+                        <div class="anon-card full">
+                            <div class="anon-badge full">완전 익명</div>
+                            <div class="anon-price">기본가 × 3.0</div>
+                            <div class="anon-details">
+                                <div class="anon-detail caution">✕ 최소 정보만 공개</div>
+                                <div class="anon-detail caution">✕ 높은 등급 필요</div>
+                                <div class="anon-detail">예치금: 고</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="anon-principle">
+                        <div class="principle-item">
+                            <span class="principle-badge">원칙 1</span>
+                            <span class="principle-text">플랫폼은 항상 요청자 실체를 알고 있음 (분쟁/법적 대응)</span>
+                        </div>
+                        <div class="principle-item">
+                            <span class="principle-badge">원칙 2</span>
+                            <span class="principle-text">후보자에게만 익명, 악용 방지는 예치금+등급제로</span>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">핵심</span>
+                        <span class="key-text">익명은 "권리"가 아닌 "프리미엄 서비스"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 수익 모델 -->
+            <div class="slide" data-slide="6">
+                <div class="slide-content">
+                    <p class="slide-label">05 — REVENUE MODEL</p>
+                    <h2 class="slide-title">수익 구조: 거래 기반 + 구독 + 검증</h2>
+
+                    <div class="revenue-grid">
+                        <div class="revenue-card primary">
+                            <div class="revenue-header">
+                                <span class="revenue-icon">💳</span>
+                                <span class="revenue-title">1차: 요청당 과금</span>
+                            </div>
+                            <div class="revenue-body">
+                                <div class="revenue-formula">
+                                    <span class="formula-line">요청자 결제 = 데이터비 + 수수료</span>
+                                    <span class="formula-line highlight">→ 70% 유저 / 30% 플랫폼</span>
+                                </div>
+                                <div class="revenue-example">
+                                    예) ₩100,000 요청 → 유저 ₩70,000
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="revenue-card">
+                            <div class="revenue-header">
+                                <span class="revenue-icon">🔄</span>
+                                <span class="revenue-title">2차: 요청자 구독</span>
+                            </div>
+                            <div class="revenue-body">
+                                <div class="revenue-list">
+                                    <span>• 월 구독 (좌석당)</span>
+                                    <span>• 기본 크레딧 포함</span>
+                                    <span>• 추가 요청 = Pay-as-you-go</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="revenue-card">
+                            <div class="revenue-header">
+                                <span class="revenue-icon">✅</span>
+                                <span class="revenue-title">3차: 검증/증빙</span>
+                            </div>
+                            <div class="revenue-body">
+                                <div class="revenue-list">
+                                    <span>• VC(재직/학력) 발급 수수료</span>
+                                    <span>• 검증 API 사용료</span>
+                                    <span>• 커리어 신뢰 레이어</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="market-ref">
+                        <span class="ref-label">시장 참조</span>
+                        <span class="ref-text">사람인 열람 상품 / LinkedIn Recruiter 크레딧 / Indeed Smart Sourcing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 정산 시스템: Web2 + Web3 -->
+            <div class="slide" data-slide="7">
+                <div class="slide-content">
+                    <p class="slide-label">06 — PAYOUT SYSTEM</p>
+                    <h2 class="slide-title">정산: Web2 기본 + Web3 옵션</h2>
+
+                    <div class="payout-comparison">
+                        <!-- Web2 -->
+                        <div class="payout-card web2">
+                            <div class="payout-header">
+                                <span class="payout-badge web2">Web2 정산</span>
+                                <span class="payout-label">MVP 기본</span>
+                            </div>
+                            <div class="payout-body">
+                                <div class="payout-item">
+                                    <span class="payout-key">주기</span>
+                                    <span class="payout-value">월 1회 정산</span>
+                                </div>
+                                <div class="payout-item">
+                                    <span class="payout-key">수단</span>
+                                    <span class="payout-value">국내 계좌 이체</span>
+                                </div>
+                                <div class="payout-item">
+                                    <span class="payout-key">대행</span>
+                                    <span class="payout-value">토스/KCP 지급대행</span>
+                                </div>
+                                <div class="payout-pros">
+                                    <span class="pro good">✓ 진입장벽 낮음</span>
+                                    <span class="pro good">✓ 전환율 높음</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Web3 -->
+                        <div class="payout-card web3">
+                            <div class="payout-header">
+                                <span class="payout-badge web3">Web3 정산</span>
+                                <span class="payout-label">옵션</span>
+                            </div>
+                            <div class="payout-body">
+                                <div class="payout-item">
+                                    <span class="payout-key">주기</span>
+                                    <span class="payout-value">실시간 / 즉시</span>
+                                </div>
+                                <div class="payout-item">
+                                    <span class="payout-key">수단</span>
+                                    <span class="payout-value">USDC (Solana)</span>
+                                </div>
+                                <div class="payout-item">
+                                    <span class="payout-key">수수료</span>
+                                    <span class="payout-value">~0.00025 SOL/tx</span>
+                                </div>
+                                <div class="payout-pros">
+                                    <span class="pro good">✓ 초저비용 마이크로페이</span>
+                                    <span class="pro good">✓ 온체인 투명성</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payout-note">
+                        <div class="note-header">Solana Pay 전략</div>
+                        <div class="note-content">
+                            <span>• 수수료는 플랫폼이 부담 (유저는 SOL 불필요)</span>
+                            <span>• Non-custodial: 플랫폼이 키를 보관하지 않음</span>
+                            <span>• 원화↔코인 환전은 직접 제공하지 않음 (규제 회피)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. 기술 아키텍처 -->
+            <div class="slide" data-slide="8">
+                <div class="slide-content">
+                    <p class="slide-label">07 — ARCHITECTURE</p>
+                    <h2 class="slide-title">기술 스택: FHE + TEE + VC/ZK</h2>
+
+                    <div class="arch-visual">
+                        <div class="arch-layer client">
+                            <div class="layer-name">Client</div>
+                            <div class="layer-chips">
+                                <span class="chip">Client-side Encrypt</span>
+                                <span class="chip">Key Management</span>
+                                <span class="chip">Passkey</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-arrow">↓</div>
+
+                        <div class="arch-layer-group">
+                            <div class="arch-layer tee">
+                                <div class="layer-name">TEE (Confidential Computing)</div>
+                                <div class="layer-chips">
+                                    <span class="chip">AWS Nitro</span>
+                                    <span class="chip">GCP Conf VM</span>
+                                    <span class="chip">Azure CC</span>
+                                </div>
+                                <div class="layer-desc">데이터 가공/패키징/워터마킹</div>
+                            </div>
+
+                            <div class="arch-layer fhe">
+                                <div class="layer-name">FHE (제한적 적용)</div>
+                                <div class="layer-chips">
+                                    <span class="chip">Microsoft SEAL</span>
+                                    <span class="chip">Concrete</span>
+                                </div>
+                                <div class="layer-desc">매칭 스코어 / 민감 통계만</div>
+                            </div>
+                        </div>
+
+                        <div class="arch-arrow">↓</div>
+
+                        <div class="arch-layer vc">
+                            <div class="layer-name">VC / ZK</div>
+                            <div class="layer-chips">
+                                <span class="chip">W3C VC</span>
+                                <span class="chip">DIDKit</span>
+                                <span class="chip">zkPass</span>
+                                <span class="chip">Polygon ID</span>
+                            </div>
+                            <div class="layer-desc">검증 가능한 커리어 증명 + 선택적 공개</div>
+                        </div>
+                    </div>
+
+                    <div class="arch-principle">
+                        <span class="principle-badge">설계 원칙</span>
+                        <span class="principle-text">MVP는 TEE + 제한적 FHE, 증빙은 VC/ZK로 확장</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. ZK-DID 오라클 비전 -->
+            <div class="slide" data-slide="9">
+                <div class="slide-content">
+                    <p class="slide-label">08 — VISION</p>
+                    <h2 class="slide-title">장기 비전: 커리어 데이터 오라클</h2>
+
+                    <div class="vision-flow">
+                        <div class="vision-stage current">
+                            <div class="stage-badge current">NOW</div>
+                            <div class="stage-title">이력서 Vault</div>
+                            <div class="stage-desc">암호화 저장 + 승인형 공개</div>
+                        </div>
+                        <div class="vision-arrow">→</div>
+                        <div class="vision-stage">
+                            <div class="stage-badge">NEXT</div>
+                            <div class="stage-title">검증 가능한 커리어</div>
+                            <div class="stage-desc">VC 기반 재직/학력/자격 증빙</div>
+                        </div>
+                        <div class="vision-arrow">→</div>
+                        <div class="vision-stage future">
+                            <div class="stage-badge future">FUTURE</div>
+                            <div class="stage-title">ZK-DID 오라클</div>
+                            <div class="stage-desc">Web3 신원 레이어로 확장</div>
+                        </div>
+                    </div>
+
+                    <div class="oracle-details">
+                        <div class="oracle-card">
+                            <div class="oracle-title">오프체인</div>
+                            <div class="oracle-items">
+                                <span>• VC (커리어 증명서) 유저 지갑 보관</span>
+                                <span>• 원본 데이터는 온체인 불가</span>
+                            </div>
+                        </div>
+                        <div class="oracle-card">
+                            <div class="oracle-title">온체인</div>
+                            <div class="oracle-items">
+                                <span>• VC 상태 레지스트리 (폐기/정지)</span>
+                                <span>• ZK proof 검증만</span>
+                                <span>• 정산 로그 (Solana)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">가치</span>
+                        <span class="key-text">"경력 5년 이상" 증명 (회사명/연봉 숨김) → Web3 신뢰 인프라</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. 경쟁사 분석 -->
+            <div class="slide" data-slide="10">
+                <div class="slide-content">
+                    <p class="slide-label">09 — COMPETITION</p>
+                    <h2 class="slide-title">경쟁/관련 업체 맵</h2>
+
+                    <div class="competitor-grid">
+                        <div class="competitor-section">
+                            <div class="section-title">직접 경쟁 (채용 플랫폼)</div>
+                            <div class="competitor-list">
+                                <div class="competitor-item">
+                                    <span class="comp-name">LinkedIn Recruiter</span>
+                                    <span class="comp-gap">유저 수익 0, 스팸 이슈</span>
+                                </div>
+                                <div class="competitor-item">
+                                    <span class="comp-name">사람인/원티드</span>
+                                    <span class="comp-gap">열람 상품 ≠ 유저 수익</span>
+                                </div>
+                                <div class="competitor-item">
+                                    <span class="comp-name">Indeed Smart Sourcing</span>
+                                    <span class="comp-gap">데이터 주도권 부재</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competitor-section">
+                            <div class="section-title">인접 경쟁 (VC/SSI)</div>
+                            <div class="competitor-list">
+                                <div class="competitor-item partner">
+                                    <span class="comp-name">Velocity Network</span>
+                                    <span class="comp-gap">커리어 VC 발급 네트워크</span>
+                                </div>
+                                <div class="competitor-item partner">
+                                    <span class="comp-name">Microsoft Entra ID</span>
+                                    <span class="comp-gap">DID/VC 기반 검증</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="competitor-section">
+                            <div class="section-title">기술 파트너</div>
+                            <div class="competitor-list">
+                                <div class="competitor-item tech">
+                                    <span class="comp-name">CryptoLab (HEaaN)</span>
+                                    <span class="comp-gap">한국 FHE 라이브러리</span>
+                                </div>
+                                <div class="competitor-item tech">
+                                    <span class="comp-name">zkPass / Reclaim</span>
+                                    <span class="comp-gap">Web2 데이터 ZK 증명</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="differentiation">
+                        <span class="diff-badge">우리의 차별점</span>
+                        <span class="diff-text">투명한 열람 → 승인권 → 수익배분 → 암호학 기반 최소 공개</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. GTM 전략 -->
+            <div class="slide" data-slide="11">
+                <div class="slide-content">
+                    <p class="slide-label">10 — GO-TO-MARKET</p>
+                    <h2 class="slide-title">초기 GTM: 양면시장을 깨는 웨지</h2>
+
+                    <div class="gtm-strategy">
+                        <div class="gtm-card primary">
+                            <div class="gtm-header">
+                                <span class="gtm-badge">전략 A</span>
+                                <span class="gtm-title">고가치 직군 커뮤니티</span>
+                            </div>
+                            <div class="gtm-body">
+                                <div class="gtm-step">
+                                    <span class="step-num">1</span>
+                                    <span class="step-text">타깃: AI/보안/데이터/퀀트</span>
+                                </div>
+                                <div class="gtm-step">
+                                    <span class="step-num">2</span>
+                                    <span class="step-text">"열람요청 수익" 인센티브로 공급 확보</span>
+                                </div>
+                                <div class="gtm-step">
+                                    <span class="step-num">3</span>
+                                    <span class="step-text">헤드헌터/TA에 "응답률 높은 풀"로 영업</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="gtm-card">
+                            <div class="gtm-header">
+                                <span class="gtm-badge secondary">전략 B</span>
+                                <span class="gtm-title">B2B 플러그인</span>
+                            </div>
+                            <div class="gtm-body">
+                                <div class="gtm-list">
+                                    <span>• ATS/CRM에 "승인형 데이터 요청" 모듈</span>
+                                    <span>• 기존 채용 플랫폼에 프라이버시 레이어</span>
+                                    <span>• 네트워크 효과를 빌리는 전략</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gtm-targets">
+                        <div class="target-header">초기 타깃</div>
+                        <div class="target-list">
+                            <div class="target-item">
+                                <span class="target-name">헤드헌터/리크루팅 에이전시</span>
+                                <span class="target-why">비용 지불 익숙, 후보 1명 가치 큼</span>
+                            </div>
+                            <div class="target-item">
+                                <span class="target-name">스타트업/스케일업 TA팀</span>
+                                <span class="target-why">스팸/응답률 문제에 민감</span>
+                            </div>
+                            <div class="target-item">
+                                <span class="target-name">교육기관/부트캠프</span>
+                                <span class="target-why">VC 발급 파트너 (수료증 검증)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. 리스크 & 대응 -->
+            <div class="slide" data-slide="12">
+                <div class="slide-content">
+                    <p class="slide-label">11 — RISKS</p>
+                    <h2 class="slide-title">리스크 & 대응 전략</h2>
+
+                    <div class="risk-grid">
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-letter">A</span>
+                                <span class="risk-title">양면시장 콜드스타트</span>
+                            </div>
+                            <div class="risk-solution">
+                                <span class="sol-label">대응</span>
+                                <span class="sol-text">고가치 직군 1개에 집중 → 공급 먼저 확보</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-letter">B</span>
+                                <span class="risk-title">익명 요청 악용</span>
+                            </div>
+                            <div class="risk-solution">
+                                <span class="sol-label">대응</span>
+                                <span class="sol-text">예치금 + 등급제 + 일일 한도</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-letter">C</span>
+                                <span class="risk-title">개인정보 규제</span>
+                            </div>
+                            <div class="risk-solution">
+                                <span class="sol-label">대응</span>
+                                <span class="sol-text">동의 자발성 설계 + 철회권 보장 + 법무 검토</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-letter">D</span>
+                                <span class="risk-title">FHE 비용/성능</span>
+                            </div>
+                            <div class="risk-solution">
+                                <span class="sol-label">대응</span>
+                                <span class="sol-text">MVP는 TEE, FHE는 핵심 연산 1~2개만</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-card">
+                            <div class="risk-header">
+                                <span class="risk-letter">E</span>
+                                <span class="risk-title">블록체인 규제 (VASP)</span>
+                            </div>
+                            <div class="risk-solution">
+                                <span class="sol-label">대응</span>
+                                <span class="sol-text">Non-custodial + 환전 미제공 + 옵션 기능</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. 투자 포지셔닝 -->
+            <div class="slide" data-slide="13">
+                <div class="slide-content">
+                    <p class="slide-label">12 — INVESTMENT</p>
+                    <h2 class="slide-title">투자 포지셔닝: HR Tech로 시작</h2>
+
+                    <div class="invest-positioning">
+                        <div class="invest-option primary">
+                            <div class="invest-badge primary">추천</div>
+                            <div class="invest-title">HR Tech / Recruiting SaaS</div>
+                            <div class="invest-desc">
+                                "응답률/검증/프라이버시로 더 나은 소싱 채널"<br>
+                                <span class="invest-note">돈 버는 모델이 명확 → 초기 투자 설득력</span>
+                            </div>
+                        </div>
+
+                        <div class="invest-option">
+                            <div class="invest-badge">장기</div>
+                            <div class="invest-title">Privacy Tech / PET</div>
+                            <div class="invest-desc">Enveil/Duality 레퍼런스</div>
+                        </div>
+
+                        <div class="invest-option">
+                            <div class="invest-badge">확장</div>
+                            <div class="invest-title">Identity / VC / ZK</div>
+                            <div class="invest-desc">커리어 신뢰 레이어</div>
+                        </div>
+                    </div>
+
+                    <div class="key-metrics">
+                        <div class="metrics-header">투자자에게 보여줄 핵심 지표</div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-name">수요</span>
+                                <span class="metric-value">유료 요청 재구매율, 월 요청건수</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-name">공급</span>
+                                <span class="metric-value">승인율, 평균 응답 시간</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-name">경제성</span>
+                                <span class="metric-value">거래당 총마진 (결제/정산/CS 반영)</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-name">네트워크</span>
+                                <span class="metric-value">특정 직군 상위 % 커버리지</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. 로드맵 -->
+            <div class="slide" data-slide="14">
+                <div class="slide-content">
+                    <p class="slide-label">13 — ROADMAP</p>
+                    <h2 class="slide-title">실행 로드맵</h2>
+
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-phase current">
+                            <div class="phase-header">
+                                <span class="phase-badge current">Phase 1</span>
+                                <span class="phase-duration">4~8주</span>
+                            </div>
+                            <div class="phase-title">MVP</div>
+                            <div class="phase-items">
+                                <span>• 공개카드 + 요청/결제</span>
+                                <span>• 후보자 승인형 제공</span>
+                                <span>• Web2 월정산</span>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-connector"></div>
+
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 2</span>
+                                <span class="phase-duration">8~16주</span>
+                            </div>
+                            <div class="phase-title">TEE 도입</div>
+                            <div class="phase-items">
+                                <span>• 자동 패키징/워터마킹</span>
+                                <span>• 감사로그 강화</span>
+                                <span>• 익명요청 시스템</span>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-connector"></div>
+
+                        <div class="roadmap-phase">
+                            <div class="phase-header">
+                                <span class="phase-badge">Phase 3</span>
+                                <span class="phase-duration">16주+</span>
+                            </div>
+                            <div class="phase-title">VC/ZK</div>
+                            <div class="phase-items">
+                                <span>• 검증 가능한 커리어</span>
+                                <span>• 선택적 공개 (ZK)</span>
+                                <span>• Solana 정산 옵션</span>
+                            </div>
+                        </div>
+
+                        <div class="roadmap-connector"></div>
+
+                        <div class="roadmap-phase future">
+                            <div class="phase-header">
+                                <span class="phase-badge future">Phase 4</span>
+                                <span class="phase-duration">장기</span>
+                            </div>
+                            <div class="phase-title">FHE + 오라클</div>
+                            <div class="phase-items">
+                                <span>• 매칭 스코어 FHE</span>
+                                <span>• ZK-DID 오라클</span>
+                                <span>• 글로벌 확장</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. Q&A -->
+            <div class="slide" data-slide="15">
+                <div class="slide-content center">
+                    <h1 class="qa-title">Q&A</h1>
+                    <p class="qa-sub">내 데이터, 내 가격, 내 수익<br>커리어 데이터의 주도권을 되찾다</p>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-label">Deck</span>
+                            <span class="contact-value">HE Resume Vault</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">Telegram</span>
+                            <a href="https://t.me/scarrots" target="_blank" class="contact-link">@scarrots</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">X</span>
+                            <a href="https://x.com/LatticAwaLLLnut" target="_blank" class="contact-link">@LatticAwaLLLnut</a>
+                        </div>
+                    </div>
+
+                    <div class="final-slogan">
+                        Privacy by Default, <span class="highlight">Monetization by Consent</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
