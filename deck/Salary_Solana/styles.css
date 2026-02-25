@@ -1865,16 +1865,16 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: 20px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .tam-chart-large {
     width: 100%;
     height: 100%;
-    max-height: 420px;
     object-fit: contain;
 }
 
@@ -1888,16 +1888,17 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 12px;
-    padding: 12px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
+    overflow: hidden;
 }
 
 .fee-chart-sm {
     width: 100%;
-    max-height: 200px;
+    height: 100%;
     object-fit: contain;
 }
 
@@ -1905,20 +1906,20 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 12px;
-    padding: 14px 18px;
+    padding: 16px 20px;
 }
 
 .timeline-header-sm {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text-white);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .timeline-track-sm {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 12px;
 }
 
 .timeline-phase-sm {
@@ -1929,25 +1930,25 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     background: var(--primary);
     border-radius: 50%;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: white;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .phase-content-sm h4 {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text-white);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .phase-content-sm p {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.3;
 }
@@ -1970,30 +1971,30 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: 16px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .verification-chart-large {
     width: 100%;
     height: 100%;
-    max-height: 320px;
     object-fit: contain;
 }
 
 .slide6-right {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .stat-card-sm {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 14px 18px;
 }
 
 .stat-card-sm.highlight-green {
@@ -2002,21 +2003,21 @@ body {
 }
 
 .stat-number-sm {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
     color: var(--secondary);
     margin-bottom: 2px;
 }
 
 .stat-title-sm {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-white);
     margin-bottom: 2px;
 }
 
 .stat-desc-sm {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
     margin: 0;
 }
@@ -2025,39 +2026,39 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 10px;
-    padding: 12px 20px;
+    padding: 14px 24px;
 }
 
 .eco-header-sm {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-white);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .eco-stats-sm {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 16px;
 }
 
 .eco-stat-sm {
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     background: var(--dark-bg);
     border-radius: 6px;
 }
 
 .eco-value-sm {
     display: block;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 800;
     color: var(--secondary);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .eco-label-sm {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
 }
 
@@ -2079,68 +2080,68 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 14px;
-    padding: 16px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .perf-chart-large {
     width: 100%;
     height: 100%;
-    max-height: 320px;
     object-fit: contain;
 }
 
 .slide7-right {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .advantage-item-sm {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 14px 18px;
 }
 
 .adv-header-sm {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .adv-num-sm {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 900;
     color: var(--primary);
 }
 
 .adv-title-sm {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-white);
 }
 
 .adv-platforms-sm {
     display: flex;
-    gap: 6px;
-    margin-bottom: 4px;
+    gap: 8px;
+    margin-bottom: 6px;
 }
 
 .platform-badge-sm {
-    padding: 3px 10px;
+    padding: 4px 12px;
     background: rgba(20, 241, 149, 0.15);
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--secondary);
 }
 
 .adv-desc-sm {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
     margin: 0;
 }
@@ -2148,35 +2149,35 @@ body {
 .adv-checks-sm {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 .check-item-sm {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 12px;
+    gap: 5px;
+    font-size: 14px;
     color: var(--text-gray);
 }
 
 .check-item-sm::before {
     content: "";
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: var(--secondary);
     border-radius: 50%;
 }
 
 .adv-status-sm {
     display: flex;
-    gap: 6px;
+    gap: 8px;
 }
 
 .status-badge-sm {
-    padding: 3px 10px;
+    padding: 5px 12px;
     background: var(--dark-bg);
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text-muted);
 }
@@ -2190,23 +2191,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 12px 20px;
+    gap: 24px;
+    padding: 14px 24px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 10px;
 }
 
 .cta-text-sm {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text-gray);
 }
 
 .cta-button-sm {
-    padding: 10px 24px;
+    padding: 12px 28px;
     background: var(--solana-gradient);
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: white;
     text-decoration: none;
