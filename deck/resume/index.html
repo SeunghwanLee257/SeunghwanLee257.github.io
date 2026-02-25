@@ -14,7 +14,7 @@
 <body>
     <div class="controls">
         <button id="prevBtn" onclick="prevSlide()">←</button>
-        <span id="slideCounter">1 / 15</span>
+        <span id="slideCounter">1 / 18</span>
         <button id="nextBtn" onclick="nextSlide()">→</button>
         <button id="downloadBtn" onclick="downloadPDF()">PDF</button>
     </div>
@@ -104,10 +104,64 @@
                 </div>
             </div>
 
-            <!-- 3. Solution: 우리의 제안 -->
+            <!-- 3. Why Now: 지금이 적기인 이유 -->
             <div class="slide" data-slide="3">
                 <div class="slide-content">
-                    <p class="slide-label">02 — SOLUTION</p>
+                    <p class="slide-label">02 — WHY NOW</p>
+                    <h2 class="slide-title">지금이 적기인 이유</h2>
+
+                    <div class="whynow-grid">
+                        <div class="whynow-card">
+                            <div class="whynow-icon">📊</div>
+                            <div class="whynow-title">이력서 사기 $50B/년</div>
+                            <div class="whynow-desc">미국인 33%가 이력서 허위 기재 경험<br>검증 비용 증가 → 블록체인 솔루션 수요</div>
+                        </div>
+                        <div class="whynow-card highlight">
+                            <div class="whynow-icon">🔐</div>
+                            <div class="whynow-title">FHE/TEE 기술 성숙</div>
+                            <div class="whynow-desc">동형암호 시장 $1.2B→$8.4B (2026→2033)<br>AWS Nitro, Azure CC 등 TEE 상용화</div>
+                        </div>
+                        <div class="whynow-card">
+                            <div class="whynow-icon">🏛️</div>
+                            <div class="whynow-title">규제 환경 변화</div>
+                            <div class="whynow-desc">EU eIDAS 2.0: VC 법적 효력 인정<br>W3C VC 2.0 표준 확정 (2025.05)</div>
+                        </div>
+                        <div class="whynow-card">
+                            <div class="whynow-icon">💼</div>
+                            <div class="whynow-title">채용 시장 구조 변화</div>
+                            <div class="whynow-desc">대기업 수시채용 확대 (61.2% 헤드헌팅)<br>경력직 중심 → 검증 가능한 이력 니즈</div>
+                        </div>
+                    </div>
+
+                    <div class="whynow-timeline">
+                        <div class="timeline-header">글로벌 VC/DID 채택 가속</div>
+                        <div class="timeline-events">
+                            <div class="timeline-event">
+                                <span class="event-year">2022</span>
+                                <span class="event-text">Velocity Network 메인넷</span>
+                            </div>
+                            <div class="timeline-event">
+                                <span class="event-year">2025</span>
+                                <span class="event-text">W3C VC 2.0 표준</span>
+                            </div>
+                            <div class="timeline-event highlight">
+                                <span class="event-year">2026</span>
+                                <span class="event-text">87% 대기업 FHE 도입 예정</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">기회</span>
+                        <span class="key-text">기술 성숙 + 규제 정비 + 시장 니즈 = 지금이 진입 적기</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Solution: 우리의 제안 -->
+            <div class="slide" data-slide="4">
+                <div class="slide-content">
+                    <p class="slide-label">03 — SOLUTION</p>
                     <h2 class="slide-title">HE Resume Vault: 데이터 주도권 + 수익 배분</h2>
 
                     <div class="solution-grid">
@@ -140,10 +194,10 @@
                 </div>
             </div>
 
-            <!-- 4. 핵심 UX: 요청/승인 플로우 -->
-            <div class="slide" data-slide="4">
+            <!-- 5. 핵심 UX: 요청/승인 플로우 -->
+            <div class="slide" data-slide="5">
                 <div class="slide-content">
-                    <p class="slide-label">03 — CORE UX</p>
+                    <p class="slide-label">04 — CORE UX</p>
                     <h2 class="slide-title">열람 요청 플로우</h2>
 
                     <div class="flow-diagram">
@@ -210,10 +264,10 @@
                 </div>
             </div>
 
-            <!-- 5. 익명 요청 프리미엄 시스템 -->
-            <div class="slide" data-slide="5">
+            <!-- 6. 익명 요청 프리미엄 시스템 -->
+            <div class="slide" data-slide="6">
                 <div class="slide-content">
-                    <p class="slide-label">04 — ANONYMOUS PREMIUM</p>
+                    <p class="slide-label">05 — ANONYMOUS PREMIUM</p>
                     <h2 class="slide-title">익명 요청: 가격으로 선택권을 산다</h2>
 
                     <div class="anon-comparison">
@@ -269,10 +323,10 @@
                 </div>
             </div>
 
-            <!-- 6. 수익 모델 -->
-            <div class="slide" data-slide="6">
+            <!-- 7. 수익 모델 -->
+            <div class="slide" data-slide="7">
                 <div class="slide-content">
-                    <p class="slide-label">05 — REVENUE MODEL</p>
+                    <p class="slide-label">06 — REVENUE MODEL</p>
                     <h2 class="slide-title">수익 구조: 거래 기반 + 구독 + 검증</h2>
 
                     <div class="revenue-grid">
@@ -328,10 +382,10 @@
                 </div>
             </div>
 
-            <!-- 7. 정산 시스템: Web2 + Web3 -->
-            <div class="slide" data-slide="7">
+            <!-- 8. 정산 시스템: Web2 + Web3 -->
+            <div class="slide" data-slide="8">
                 <div class="slide-content">
-                    <p class="slide-label">06 — PAYOUT SYSTEM</p>
+                    <p class="slide-label">07 — PAYOUT SYSTEM</p>
                     <h2 class="slide-title">정산: Web2 기본 + Web3 옵션</h2>
 
                     <div class="payout-comparison">
@@ -399,10 +453,10 @@
                 </div>
             </div>
 
-            <!-- 8. 기술 아키텍처 -->
-            <div class="slide" data-slide="8">
+            <!-- 9. 기술 아키텍처 -->
+            <div class="slide" data-slide="9">
                 <div class="slide-content">
-                    <p class="slide-label">07 — ARCHITECTURE</p>
+                    <p class="slide-label">08 — ARCHITECTURE</p>
                     <h2 class="slide-title">기술 스택: FHE + TEE + VC/ZK</h2>
 
                     <div class="arch-visual">
@@ -459,10 +513,10 @@
                 </div>
             </div>
 
-            <!-- 9. ZK-DID 오라클 비전 -->
-            <div class="slide" data-slide="9">
+            <!-- 10. ZK-DID 오라클 비전 -->
+            <div class="slide" data-slide="10">
                 <div class="slide-content">
-                    <p class="slide-label">08 — VISION</p>
+                    <p class="slide-label">09 — VISION</p>
                     <h2 class="slide-title">장기 비전: 커리어 데이터 오라클</h2>
 
                     <div class="vision-flow">
@@ -510,51 +564,130 @@
                 </div>
             </div>
 
-            <!-- 10. 경쟁사 분석 -->
-            <div class="slide" data-slide="10">
+            <!-- 11. 시장 규모 -->
+            <div class="slide" data-slide="11">
                 <div class="slide-content">
-                    <p class="slide-label">09 — COMPETITION</p>
-                    <h2 class="slide-title">경쟁/관련 업체 맵</h2>
+                    <p class="slide-label">10 — MARKET SIZE</p>
+                    <h2 class="slide-title">시장 규모: 전문직 채용의 거대한 기회</h2>
+
+                    <div class="market-grid">
+                        <div class="market-card tam">
+                            <div class="market-header">
+                                <span class="market-badge tam">TAM</span>
+                                <span class="market-label">글로벌 헤드헌팅</span>
+                            </div>
+                            <div class="market-value">$58B → $104B</div>
+                            <div class="market-detail">2025 → 2031 (CAGR 10.1%)</div>
+                            <div class="market-source">Mordor Intelligence</div>
+                        </div>
+
+                        <div class="market-card sam">
+                            <div class="market-header">
+                                <span class="market-badge sam">SAM</span>
+                                <span class="market-label">한국 헤드헌팅</span>
+                            </div>
+                            <div class="market-value">₩1.2조</div>
+                            <div class="market-detail">2025년 (2020년 ₩3,500억 대비 3.4배)</div>
+                            <div class="market-source">한국경제</div>
+                        </div>
+
+                        <div class="market-card som">
+                            <div class="market-header">
+                                <span class="market-badge som">SOM</span>
+                                <span class="market-label">프리미엄 전문직</span>
+                            </div>
+                            <div class="market-value">₩2,400억+</div>
+                            <div class="market-detail">AI/보안/데이터/퀀트 (시장의 20%)</div>
+                            <div class="market-source">추정</div>
+                        </div>
+                    </div>
+
+                    <div class="market-insights">
+                        <div class="insight-row">
+                            <div class="insight-item">
+                                <span class="insight-value">61.2%</span>
+                                <span class="insight-label">500대 기업 헤드헌팅 활용률</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-value">20~30%</span>
+                                <span class="insight-label">연봉 대비 헤드헌팅 수수료</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-value">5~18년차</span>
+                                <span class="insight-label">가장 활발한 채용 타깃</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="adjacent-markets">
+                        <div class="adj-header">인접 시장</div>
+                        <div class="adj-grid">
+                            <div class="adj-item">
+                                <span class="adj-name">동형암호 시장</span>
+                                <span class="adj-value">$1.2B → $8.4B (2026→2033)</span>
+                            </div>
+                            <div class="adj-item">
+                                <span class="adj-name">디지털 자격증명</span>
+                                <span class="adj-value">$1.13B (2026, CAGR 21.7%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. 경쟁사 분석 -->
+            <div class="slide" data-slide="12">
+                <div class="slide-content">
+                    <p class="slide-label">11 — COMPETITION</p>
+                    <h2 class="slide-title">경쟁 환경: 블록체인 + 수익배분 = 공백</h2>
 
                     <div class="competitor-grid">
                         <div class="competitor-section">
-                            <div class="section-title">직접 경쟁 (채용 플랫폼)</div>
+                            <div class="section-title">국내 채용 플랫폼</div>
                             <div class="competitor-list">
                                 <div class="competitor-item">
-                                    <span class="comp-name">LinkedIn Recruiter</span>
-                                    <span class="comp-gap">유저 수익 0, 스팸 이슈</span>
+                                    <span class="comp-name">원티드</span>
+                                    <span class="comp-gap">합격 보상 50만원, 추천인만 / 열람 수익 無</span>
                                 </div>
                                 <div class="competitor-item">
-                                    <span class="comp-name">사람인/원티드</span>
-                                    <span class="comp-gap">열람 상품 ≠ 유저 수익</span>
+                                    <span class="comp-name">잡플래닛</span>
+                                    <span class="comp-gap">축하금 200만원 / 데이터 통제권 無</span>
                                 </div>
                                 <div class="competitor-item">
-                                    <span class="comp-name">Indeed Smart Sourcing</span>
-                                    <span class="comp-gap">데이터 주도권 부재</span>
+                                    <span class="comp-name">사람인 + ICONLOOP</span>
+                                    <span class="comp-gap">DID 검증 발표(2020) / 현재 서비스 불명확</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="competitor-section">
-                            <div class="section-title">인접 경쟁 (VC/SSI)</div>
+                            <div class="section-title">글로벌 블록체인 채용</div>
                             <div class="competitor-list">
                                 <div class="competitor-item partner">
                                     <span class="comp-name">Velocity Network</span>
-                                    <span class="comp-gap">커리어 VC 발급 네트워크</span>
+                                    <span class="comp-gap">커리어 VC + Velocity Credits / 메인넷 운영</span>
                                 </div>
                                 <div class="competitor-item partner">
-                                    <span class="comp-name">Microsoft Entra ID</span>
-                                    <span class="comp-gap">DID/VC 기반 검증</span>
+                                    <span class="comp-name">LaborX (TIME)</span>
+                                    <span class="comp-gap">프리랜서 5~10% 수수료 / 토큰 스테이킹 수익</span>
+                                </div>
+                                <div class="competitor-item partner">
+                                    <span class="comp-name">HireMatch (HIRE)</span>
+                                    <span class="comp-gap">탈중앙 채용, 추천 토큰 보상 / 초기 단계</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="competitor-section">
-                            <div class="section-title">기술 파트너</div>
+                            <div class="section-title">기술 인프라</div>
                             <div class="competitor-list">
                                 <div class="competitor-item tech">
                                     <span class="comp-name">CryptoLab (HEaaN)</span>
                                     <span class="comp-gap">한국 FHE 라이브러리</span>
+                                </div>
+                                <div class="competitor-item tech">
+                                    <span class="comp-name">Phala Network (TEE)</span>
+                                    <span class="comp-gap">Web3 TEE 인프라</span>
                                 </div>
                                 <div class="competitor-item tech">
                                     <span class="comp-name">zkPass / Reclaim</span>
@@ -566,35 +699,104 @@
 
                     <div class="differentiation">
                         <span class="diff-badge">우리의 차별점</span>
-                        <span class="diff-text">투명한 열람 → 승인권 → 수익배분 → 암호학 기반 최소 공개</span>
+                        <span class="diff-text">국내 유일: 동형암호/TEE + 블록체인 검증 + 열람 즉시 스마트컨트랙트 수익 배분</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 11. GTM 전략 -->
-            <div class="slide" data-slide="11">
+            <!-- 13. DID 검증 생태계 -->
+            <div class="slide" data-slide="13">
                 <div class="slide-content">
-                    <p class="slide-label">10 — GO-TO-MARKET</p>
-                    <h2 class="slide-title">초기 GTM: 양면시장을 깨는 웨지</h2>
+                    <p class="slide-label">12 — DID ECOSYSTEM</p>
+                    <h2 class="slide-title">DID 검증: 뚫어야 할 곳 & 파트너십</h2>
+
+                    <div class="did-ecosystem">
+                        <div class="did-section">
+                            <div class="did-header">Issuer (발급 기관) - 신뢰의 원천</div>
+                            <div class="did-list">
+                                <div class="did-item priority">
+                                    <span class="did-name">대학교 (학력 VC)</span>
+                                    <span class="did-status">메타디움/이니셜 연동 대학 존재</span>
+                                </div>
+                                <div class="did-item priority">
+                                    <span class="did-name">기업 HR (재직 VC)</span>
+                                    <span class="did-status">국민연금/4대보험 API 연동 필요</span>
+                                </div>
+                                <div class="did-item">
+                                    <span class="did-name">자격증 기관</span>
+                                    <span class="did-status">한국산업인력공단, 민간 자격증</span>
+                                </div>
+                                <div class="did-item">
+                                    <span class="did-name">부트캠프/교육기관</span>
+                                    <span class="did-status">수료증 발급 → 초기 파트너 후보</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="did-section">
+                            <div class="did-header">Trusted Registry (신뢰 레지스트리)</div>
+                            <div class="did-list">
+                                <div class="did-item partner">
+                                    <span class="did-name">국내 DID 연합체</span>
+                                    <span class="did-status">이니셜(코스콤+SKT) / MyID(ICONLOOP) / 마이키핀</span>
+                                </div>
+                                <div class="did-item partner">
+                                    <span class="did-name">글로벌 표준</span>
+                                    <span class="did-status">W3C VC 2.0, EBSI (EU), Velocity Network</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="did-section">
+                            <div class="did-header">우리의 전략</div>
+                            <div class="did-strategy">
+                                <div class="strategy-step">
+                                    <span class="step-num">1</span>
+                                    <span class="step-text">MVP: 자체 발급 (교육기관/부트캠프 파트너)</span>
+                                </div>
+                                <div class="strategy-step">
+                                    <span class="step-num">2</span>
+                                    <span class="step-text">확장: 기존 DID 연합체 연동 (이니셜/MyID)</span>
+                                </div>
+                                <div class="strategy-step">
+                                    <span class="step-num">3</span>
+                                    <span class="step-text">글로벌: Velocity Network 호환</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point success">
+                        <span class="key-badge success">핵심</span>
+                        <span class="key-text">Issuer 없이도 시작 가능 (자체 검증) → 점진적 신뢰 기관 연동</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. GTM 전략 -->
+            <div class="slide" data-slide="14">
+                <div class="slide-content">
+                    <p class="slide-label">13 — GO-TO-MARKET</p>
+                    <h2 class="slide-title">GTM: 전문직 → 스마트컨트랙트 수익 배분</h2>
 
                     <div class="gtm-strategy">
                         <div class="gtm-card primary">
                             <div class="gtm-header">
                                 <span class="gtm-badge">전략 A</span>
-                                <span class="gtm-title">고가치 직군 커뮤니티</span>
+                                <span class="gtm-title">프리미엄 전문직 타깃</span>
                             </div>
                             <div class="gtm-body">
                                 <div class="gtm-step">
                                     <span class="step-num">1</span>
-                                    <span class="step-text">타깃: AI/보안/데이터/퀀트</span>
+                                    <span class="step-text">타깃: AI/블록체인/보안/퀀트 (연봉 1억+)</span>
                                 </div>
                                 <div class="gtm-step">
                                     <span class="step-num">2</span>
-                                    <span class="step-text">"열람요청 수익" 인센티브로 공급 확보</span>
+                                    <span class="step-text">열람 즉시 USDC 수익 (스마트컨트랙트)</span>
                                 </div>
                                 <div class="gtm-step">
                                     <span class="step-num">3</span>
-                                    <span class="step-text">헤드헌터/TA에 "응답률 높은 풀"로 영업</span>
+                                    <span class="step-text">헤드헌터 수수료 20~30% → 일부 전문가에게</span>
                                 </div>
                             </div>
                         </div>
@@ -602,42 +804,46 @@
                         <div class="gtm-card">
                             <div class="gtm-header">
                                 <span class="gtm-badge secondary">전략 B</span>
-                                <span class="gtm-title">B2B 플러그인</span>
+                                <span class="gtm-title">검증 가능한 경력 증명</span>
                             </div>
                             <div class="gtm-body">
                                 <div class="gtm-list">
-                                    <span>• ATS/CRM에 "승인형 데이터 요청" 모듈</span>
-                                    <span>• 기존 채용 플랫폼에 프라이버시 레이어</span>
-                                    <span>• 네트워크 효과를 빌리는 전략</span>
+                                    <span>• 블록체인 불변 이력 기록 (위변조 불가)</span>
+                                    <span>• TEE + FHE: 데이터 열람 시에만 복호화</span>
+                                    <span>• 누구나 검증 가능, 데이터는 본인만 통제</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="gtm-targets">
-                        <div class="target-header">초기 타깃</div>
+                        <div class="target-header">잠재 고객 (Paying Customers)</div>
                         <div class="target-list">
                             <div class="target-item">
-                                <span class="target-name">헤드헌터/리크루팅 에이전시</span>
-                                <span class="target-why">비용 지불 익숙, 후보 1명 가치 큼</span>
+                                <span class="target-name">헤드헌터/서치펌 (₩1.2조 시장)</span>
+                                <span class="target-why">연봉 20~30% 수수료, 5~18년차 워킹레벨 집중</span>
                             </div>
                             <div class="target-item">
-                                <span class="target-name">스타트업/스케일업 TA팀</span>
-                                <span class="target-why">스팸/응답률 문제에 민감</span>
+                                <span class="target-name">대기업 TA팀 (61.2% 헤드헌팅 활용)</span>
+                                <span class="target-why">수시채용 확대, 검증된 인재풀 니즈</span>
                             </div>
                             <div class="target-item">
-                                <span class="target-name">교육기관/부트캠프</span>
-                                <span class="target-why">VC 발급 파트너 (수료증 검증)</span>
+                                <span class="target-name">Web3/AI 스타트업</span>
+                                <span class="target-why">토큰 보상 친숙, 글로벌 인재 확보 니즈</span>
+                            </div>
+                            <div class="target-item">
+                                <span class="target-name">컨설팅/법률/회계 (Flowcase 모델)</span>
+                                <span class="target-why">제안서용 CV 관리, 프로젝트별 버전 필요</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 12. 리스크 & 대응 -->
-            <div class="slide" data-slide="12">
+            <!-- 15. 리스크 & 대응 -->
+            <div class="slide" data-slide="15">
                 <div class="slide-content">
-                    <p class="slide-label">11 — RISKS</p>
+                    <p class="slide-label">14 — RISKS</p>
                     <h2 class="slide-title">리스크 & 대응 전략</h2>
 
                     <div class="risk-grid">
@@ -699,10 +905,10 @@
                 </div>
             </div>
 
-            <!-- 13. 투자 포지셔닝 -->
-            <div class="slide" data-slide="13">
+            <!-- 16. 투자 포지셔닝 -->
+            <div class="slide" data-slide="16">
                 <div class="slide-content">
-                    <p class="slide-label">12 — INVESTMENT</p>
+                    <p class="slide-label">15 — INVESTMENT</p>
                     <h2 class="slide-title">투자 포지셔닝: HR Tech로 시작</h2>
 
                     <div class="invest-positioning">
@@ -752,10 +958,10 @@
                 </div>
             </div>
 
-            <!-- 14. 로드맵 -->
-            <div class="slide" data-slide="14">
+            <!-- 17. 로드맵 -->
+            <div class="slide" data-slide="17">
                 <div class="slide-content">
-                    <p class="slide-label">13 — ROADMAP</p>
+                    <p class="slide-label">16 — ROADMAP</p>
                     <h2 class="slide-title">실행 로드맵</h2>
 
                     <div class="roadmap-timeline">
@@ -820,8 +1026,8 @@
                 </div>
             </div>
 
-            <!-- 15. Q&A -->
-            <div class="slide" data-slide="15">
+            <!-- 18. Q&A -->
+            <div class="slide" data-slide="18">
                 <div class="slide-content center">
                     <h1 class="qa-title">Q&A</h1>
                     <p class="qa-sub">내 데이터, 내 가격, 내 수익<br>커리어 데이터의 주도권을 되찾다</p>
