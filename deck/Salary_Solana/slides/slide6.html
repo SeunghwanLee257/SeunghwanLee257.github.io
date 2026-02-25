@@ -7,46 +7,46 @@
 
         <div class="platform-layout">
             <div class="cost-comparison">
-                <img src="assets/solana-vs-eth.svg" alt="Solana vs Ethereum Cost" class="comparison-chart">
+                <img src="assets/verification-cost.svg" alt="ZK Verification Cost Comparison" class="comparison-chart">
             </div>
 
             <div class="platform-stats">
+                <div class="stat-card highlight-green">
+                    <div class="stat-number">$0.03</div>
+                    <div class="stat-title">ZK Verification</div>
+                    <div class="stat-desc">Groth16 proof (128 bytes) - 200K CU</div>
+                </div>
                 <div class="stat-card">
                     <div class="stat-number">400ms</div>
                     <div class="stat-title">Block Time</div>
-                    <div class="stat-desc">Near-instant finality for real-time settlements</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">65K</div>
-                    <div class="stat-title">TPS Capacity</div>
-                    <div class="stat-desc">Theoretical max throughput for scale</div>
+                    <div class="stat-desc">Near-instant finality</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">Token-2022</div>
                     <div class="stat-title">Native Extension</div>
-                    <div class="stat-desc">Built-in confidential transfer support</div>
+                    <div class="stat-desc">Built-in confidential transfer</div>
                 </div>
             </div>
         </div>
 
         <div class="solana-ecosystem">
-            <div class="eco-header">Solana DeFi Ecosystem</div>
+            <div class="eco-header">Benchmark: Proving Time (M1 Mac)</div>
             <div class="eco-stats">
                 <div class="eco-stat">
-                    <span class="eco-value">$8.2B</span>
-                    <span class="eco-label">Total Value Locked</span>
+                    <span class="eco-value">4.0s</span>
+                    <span class="eco-label">amount_audit</span>
                 </div>
                 <div class="eco-stat">
-                    <span class="eco-value">2.1M</span>
-                    <span class="eco-label">Daily Active Users</span>
+                    <span class="eco-value">4.9s</span>
+                    <span class="eco-label">pool_identity</span>
                 </div>
                 <div class="eco-stat">
-                    <span class="eco-value">400+</span>
-                    <span class="eco-label">DeFi Protocols</span>
+                    <span class="eco-value">5.1s</span>
+                    <span class="eco-label">pool_transfer</span>
                 </div>
                 <div class="eco-stat">
-                    <span class="eco-value">$2.5B</span>
-                    <span class="eco-label">24h DEX Volume</span>
+                    <span class="eco-value">3.5GB</span>
+                    <span class="eco-label">Peak RAM</span>
                 </div>
             </div>
         </div>
@@ -56,9 +56,13 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 DeFiLlama
             </a>
+            <a href="https://crates.io/crates/groth16-solana" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                groth16-solana
+            </a>
             <a href="https://spl.solana.com/confidential-token" target="_blank" class="ref-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                Token-2022 Docs
+                Token-2022
             </a>
         </div>
     </div>

@@ -1615,6 +1615,11 @@ body {
     padding: 16px 20px;
 }
 
+.stat-card.highlight-green {
+    border-color: var(--secondary);
+    background: rgba(20, 241, 149, 0.08);
+}
+
 .stat-number {
     font-size: 36px;
     font-weight: 800;
