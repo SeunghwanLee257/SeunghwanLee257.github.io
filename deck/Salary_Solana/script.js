@@ -277,122 +277,50 @@ function exportHTML() {
     URL.revokeObjectURL(url);
 }
 
-// PDF Download
-async function downloadPDF() {
-    const downloadBtn = document.getElementById('downloadBtn');
-    const originalHTML = downloadBtn.innerHTML;
+// PDF Download - Uses browser print for reliable output
+function downloadPDF() {
+    // Show all slides for printing
+    const slides = document.querySelectorAll('.slide');
+    const controls = document.getElementById('controls');
+    const thumbnailPanel = document.getElementById('thumbnailPanel');
+    const editToolbar = document.getElementById('editToolbar');
+    const layerPanel = document.getElementById('layerPanel');
 
-    downloadBtn.innerHTML = `
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin">
-            <circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"></circle>
-        </svg>
-        Generating...
-    `;
-    downloadBtn.disabled = true;
+    // Hide UI elements
+    controls.style.display = 'none';
+    thumbnailPanel.style.display = 'none';
+    editToolbar.style.display = 'none';
+    layerPanel.style.display = 'none';
 
-    const style = document.createElement('style');
-    style.id = 'spin-style';
-    style.textContent = '@keyframes spin { to { transform: rotate(360deg); } } .spin { animation: spin 1s linear infinite; }';
-    document.head.appendChild(style);
-
-    // Add PDF export mode class
-    document.body.classList.add('pdf-export-mode');
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'px',
-        format: [1280, 720],
-        hotfixes: ['px_scaling']
+    // Show all slides
+    slides.forEach(s => {
+        s.style.display = 'block';
+        s.classList.add('active');
     });
 
-    const slides = document.querySelectorAll('.slide');
-    const originalSlide = currentSlide;
+    // Add print-ready class
+    document.body.classList.add('print-ready');
 
-    // Convert all SVG images to data URLs for better rendering
-    const svgImages = document.querySelectorAll('img[src$=".svg"]');
-    const originalSrcs = [];
+    // Trigger print
+    setTimeout(() => {
+        window.print();
 
-    for (const img of svgImages) {
-        originalSrcs.push(img.src);
-        try {
-            const response = await fetch(img.src);
-            const svgText = await response.text();
-            const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
-            const url = URL.createObjectURL(svgBlob);
-            img.src = url;
-        } catch (e) {
-            console.warn('Could not convert SVG:', img.src);
-        }
-    }
+        // Restore after print dialog closes
+        setTimeout(() => {
+            document.body.classList.remove('print-ready');
+            controls.style.display = '';
+            thumbnailPanel.style.display = '';
+            editToolbar.style.display = '';
+            layerPanel.style.display = '';
 
-    // Wait for images to load
-    await new Promise(resolve => setTimeout(resolve, 200));
-
-    try {
-        for (let i = 0; i < slides.length; i++) {
-            // Show only current slide
+            // Restore single active slide
             slides.forEach(s => {
-                s.style.display = 'none';
+                s.style.display = '';
                 s.classList.remove('active');
             });
-            slides[i].style.display = 'block';
-            slides[i].classList.add('active');
-
-            // Wait for render
-            await new Promise(resolve => setTimeout(resolve, 150));
-
-            const canvas = await html2canvas(slides[i], {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#0A0A0A',
-                logging: false,
-                width: 1280,
-                height: 720,
-                windowWidth: 1280,
-                windowHeight: 720,
-                x: 0,
-                y: 0,
-                scrollX: 0,
-                scrollY: 0,
-                foreignObjectRendering: true,
-                removeContainer: true
-            });
-
-            if (i > 0) {
-                pdf.addPage([1280, 720], 'landscape');
-            }
-
-            const imgData = canvas.toDataURL('image/png', 1.0);
-            pdf.addImage(imgData, 'PNG', 0, 0, 1280, 720);
-        }
-
-        pdf.save('LatticA_Confidential_Transfer.pdf');
-
-    } catch (error) {
-        console.error('PDF generation error:', error);
-        alert('Error generating PDF. Please try again.');
-    } finally {
-        // Restore original SVG sources
-        svgImages.forEach((img, index) => {
-            if (originalSrcs[index]) {
-                URL.revokeObjectURL(img.src);
-                img.src = originalSrcs[index];
-            }
-        });
-
-        // Remove PDF export mode
-        document.body.classList.remove('pdf-export-mode');
-
-        slides.forEach(s => s.style.display = '');
-        currentSlide = originalSlide;
-        updateSlide();
-
-        document.getElementById('spin-style')?.remove();
-        downloadBtn.innerHTML = originalHTML;
-        downloadBtn.disabled = false;
-    }
+            updateSlide();
+        }, 500);
+    }, 100);
 }
 
 // Touch/Swipe support

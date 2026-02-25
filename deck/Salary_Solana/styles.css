@@ -1812,46 +1812,110 @@ body {
     align-items: center;
 }
 
+/* Print Ready Mode */
+.print-ready {
+    background: #0A0A0A !important;
+}
+
+.print-ready .deck-wrapper {
+    padding: 0 !important;
+}
+
+.print-ready .deck-container {
+    width: 100% !important;
+}
+
+.print-ready .slide {
+    display: block !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
 /* Print / PDF */
 @media print {
+    @page {
+        size: 1280px 720px landscape;
+        margin: 0;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    html, body {
+        width: 1280px;
+        height: 720px;
+        margin: 0;
+        padding: 0;
+        background: #0A0A0A !important;
+    }
+
     .controls, .thumbnail-panel, .edit-toolbar, .layer-panel {
         display: none !important;
     }
+
     .deck-wrapper {
-        padding: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 1280px !important;
     }
+
+    .deck-container {
+        width: 1280px !important;
+    }
+
     .slide {
         display: block !important;
-        page-break-after: always;
-        page-break-inside: avoid;
-        box-shadow: none;
-        border-radius: 0;
         width: 1280px !important;
         height: 720px !important;
-        overflow: visible !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        break-after: page;
+        break-inside: avoid;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #0A0A0A !important;
+        overflow: hidden !important;
     }
+
+    .slide:last-child {
+        page-break-after: auto;
+    }
+
     .slide-inner {
-        overflow: visible !important;
+        width: 1280px !important;
+        height: 720px !important;
+        padding: 40px 56px !important;
+        overflow: hidden !important;
     }
-    body {
-        background: white;
+
+    /* Ensure colors print correctly */
+    .big-headline,
+    .main-title,
+    h1, h2, h3, h4 {
+        color: #FFFFFF !important;
     }
-    /* Ensure SVGs render properly */
+
+    .section-label {
+        color: #9945FF !important;
+    }
+
+    /* SVG images */
     img {
-        max-width: 100%;
-        height: auto;
+        max-width: 100% !important;
+        height: auto !important;
     }
-}
 
-/* PDF Export Mode - Applied via JS */
-.pdf-export-mode .slide {
-    overflow: visible !important;
-}
-
-.pdf-export-mode .slide-inner {
-    overflow: visible !important;
-}
-
-.pdf-export-mode img {
-    image-rendering: -webkit-optimize-contrast;
+    /* Hide gradient text fallback issues */
+    .gradient-text,
+    .big-headline .accent {
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
 }
