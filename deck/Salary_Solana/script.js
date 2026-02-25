@@ -295,6 +295,9 @@ async function downloadPDF() {
     style.textContent = '@keyframes spin { to { transform: rotate(360deg); } } .spin { animation: spin 1s linear infinite; }';
     document.head.appendChild(style);
 
+    // Add PDF export mode class
+    document.body.classList.add('pdf-export-mode');
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({
         orientation: 'landscape',
@@ -306,28 +309,63 @@ async function downloadPDF() {
     const slides = document.querySelectorAll('.slide');
     const originalSlide = currentSlide;
 
+    // Convert all SVG images to data URLs for better rendering
+    const svgImages = document.querySelectorAll('img[src$=".svg"]');
+    const originalSrcs = [];
+
+    for (const img of svgImages) {
+        originalSrcs.push(img.src);
+        try {
+            const response = await fetch(img.src);
+            const svgText = await response.text();
+            const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(svgBlob);
+            img.src = url;
+        } catch (e) {
+            console.warn('Could not convert SVG:', img.src);
+        }
+    }
+
+    // Wait for images to load
+    await new Promise(resolve => setTimeout(resolve, 200));
+
     try {
         for (let i = 0; i < slides.length; i++) {
-            slides.forEach(s => s.style.display = 'none');
+            // Show only current slide
+            slides.forEach(s => {
+                s.style.display = 'none';
+                s.classList.remove('active');
+            });
             slides[i].style.display = 'block';
+            slides[i].classList.add('active');
 
-            await new Promise(resolve => setTimeout(resolve, 100));
+            // Wait for render
+            await new Promise(resolve => setTimeout(resolve, 150));
 
             const canvas = await html2canvas(slides[i], {
                 scale: 2,
                 useCORS: true,
-                backgroundColor: '#0C0A09',
+                allowTaint: true,
+                backgroundColor: '#0A0A0A',
                 logging: false,
                 width: 1280,
-                height: 720
+                height: 720,
+                windowWidth: 1280,
+                windowHeight: 720,
+                x: 0,
+                y: 0,
+                scrollX: 0,
+                scrollY: 0,
+                foreignObjectRendering: true,
+                removeContainer: true
             });
 
             if (i > 0) {
                 pdf.addPage([1280, 720], 'landscape');
             }
 
-            const imgData = canvas.toDataURL('image/jpeg', 0.95);
-            pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720);
+            const imgData = canvas.toDataURL('image/png', 1.0);
+            pdf.addImage(imgData, 'PNG', 0, 0, 1280, 720);
         }
 
         pdf.save('LatticA_Confidential_Transfer.pdf');
@@ -336,6 +374,17 @@ async function downloadPDF() {
         console.error('PDF generation error:', error);
         alert('Error generating PDF. Please try again.');
     } finally {
+        // Restore original SVG sources
+        svgImages.forEach((img, index) => {
+            if (originalSrcs[index]) {
+                URL.revokeObjectURL(img.src);
+                img.src = originalSrcs[index];
+            }
+        });
+
+        // Remove PDF export mode
+        document.body.classList.remove('pdf-export-mode');
+
         slides.forEach(s => s.style.display = '');
         currentSlide = originalSlide;
         updateSlide();
