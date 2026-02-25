@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="somGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9945FF"/>
+      <stop offset="100%" style="stop-color:#14F195"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="400" fill="#0A0A0A"/>
+
+  <!-- TAM Circle -->
+  <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(153,69,255,0.2)" stroke-width="2"/>
+  <circle cx="200" cy="200" r="180" fill="rgba(153,69,255,0.05)"/>
+  <text x="200" y="50" text-anchor="middle" fill="#707070" font-family="Inter, sans-serif" font-size="11" font-weight="600">TAM</text>
+  <text x="200" y="70" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="18" font-weight="700">$850B</text>
+  <text x="200" y="88" text-anchor="middle" fill="#505050" font-family="Inter, sans-serif" font-size="9">Global Crypto Volume</text>
+
+  <!-- SAM Circle -->
+  <circle cx="200" cy="220" r="120" fill="none" stroke="rgba(153,69,255,0.3)" stroke-width="2"/>
+  <circle cx="200" cy="220" r="120" fill="rgba(153,69,255,0.08)"/>
+  <text x="200" y="130" text-anchor="middle" fill="#707070" font-family="Inter, sans-serif" font-size="11" font-weight="600">SAM</text>
+  <text x="200" y="150" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="16" font-weight="700">$25B</text>
+  <text x="200" y="166" text-anchor="middle" fill="#505050" font-family="Inter, sans-serif" font-size="9">Privacy-Sensitive Tx</text>
+
+  <!-- SOM Circle -->
+  <circle cx="200" cy="260" r="60" fill="url(#somGrad)"/>
+  <text x="200" y="250" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Inter, sans-serif" font-size="10" font-weight="600">SOM</text>
+  <text x="200" y="270" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="16" font-weight="800">$2.3B</text>
+  <text x="200" y="286" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Inter, sans-serif" font-size="8">Crypto Payroll + B2B</text>
+</svg>

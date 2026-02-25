@@ -5,67 +5,110 @@
         <div class="section-label">CURRENT LANDSCAPE</div>
         <h2 class="big-headline">Existing Solutions <span class="accent">Fall Short</span></h2>
 
-        <div class="solutions-compare">
-            <div class="solution-card partial">
-                <div class="solution-badge">PARTIAL PRIVACY</div>
-                <div class="solution-header">
-                    <img src="https://cryptologos.cc/logos/solana-sol-logo.svg" alt="Solana" class="solution-logo">
-                    <h3>Solana Token Extension</h3>
+        <div class="comparison-table">
+            <div class="table-header">
+                <div class="col-feature">Feature</div>
+                <div class="col-solution">Solana Confidential</div>
+                <div class="col-solution">Dark Pools</div>
+                <div class="col-solution highlight">LatticA</div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Amount Hidden</span>
                 </div>
-                <div class="solution-features">
-                    <div class="feature-item success">
-                        <span class="icon">✓</span>
-                        <span>Amount is hidden (encrypted)</span>
-                    </div>
-                    <div class="feature-item fail">
-                        <span class="icon">✗</span>
-                        <span>Address is PUBLIC</span>
-                    </div>
-                    <div class="feature-item fail">
-                        <span class="icon">✗</span>
-                        <span>Transaction graph visible</span>
-                    </div>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
                 </div>
-                <div class="solution-verdict">
-                    <p>Still reveals WHO you're paying</p>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
                 </div>
             </div>
 
-            <div class="solution-card dangerous">
-                <div class="solution-badge danger">COMPLIANCE RISK</div>
-                <div class="solution-header">
-                    <span class="solution-icon">🌀</span>
-                    <h3>Dark Pools (Tornado Cash)</h3>
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Address Hidden</span>
                 </div>
-                <div class="solution-features">
-                    <div class="feature-item success">
-                        <span class="icon">✓</span>
-                        <span>Breaks sender-receiver link</span>
-                    </div>
-                    <div class="feature-item success">
-                        <span class="icon">✓</span>
-                        <span>Maximum privacy</span>
-                    </div>
-                    <div class="feature-item fail">
-                        <span class="icon">✗</span>
-                        <span>NO compliance capability</span>
-                    </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
                 </div>
-                <div class="solution-verdict danger">
-                    <div class="verdict-case">
-                        <span class="case-icon">⚖️</span>
-                        <div class="case-detail">
-                            <strong>Tornado Cash Case</strong>
-                            <p>CEO sentenced to prison, $1B+ in fines</p>
-                        </div>
-                    </div>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Regulatory Compliance</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-partial">Partial</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Audit Capability</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-partial">Limited</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <div class="insight-bar">
-            <span class="insight-icon">💡</span>
-            <span>The market needs: <strong>Privacy WITH compliance</strong> — not privacy OR compliance</span>
+        <div class="case-study-bar">
+            <div class="case-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            </div>
+            <div class="case-content">
+                <span class="case-title">Tornado Cash Case Study</span>
+                <span class="case-detail">CEO sentenced to prison  |  $1B+ in regulatory fines  |  Protocol sanctioned</span>
+            </div>
+            <div class="case-lesson">
+                <span>Privacy without compliance = Legal risk</span>
+            </div>
         </div>
     </div>
 </div>

@@ -3,51 +3,97 @@
     <div class="slide-inner">
         <span class="slide-num">01</span>
         <div class="section-label">THE PROBLEM</div>
-        <h2 class="big-headline">Why <span class="accent">Confidential Transfer</span>?</h2>
+        <h2 class="big-headline">On-Chain Transparency <span class="accent">Breaks Privacy</span></h2>
 
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-header">
-                    <span class="problem-icon">🏢</span>
-                    <h3>Corporate Payroll Exposure</h3>
+        <div class="visual-split">
+            <div class="visual-card">
+                <div class="card-header">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </span>
+                    <h3>Corporate Payroll</h3>
                 </div>
-                <div class="problem-content">
-                    <p class="problem-desc">Companies paying salaries and bonuses on-chain expose:</p>
-                    <ul class="problem-list">
-                        <li><span class="highlight-red">Individual salary amounts</span> visible to everyone</li>
-                        <li><span class="highlight-red">Bonus structures</span> become public knowledge</li>
-                        <li><span class="highlight-red">Employee wallet addresses</span> linked to identity</li>
-                        <li><span class="highlight-red">Payment timing</span> reveals company cash flow</li>
-                    </ul>
+                <div class="exposure-diagram">
+                    <div class="diagram-flow">
+                        <div class="flow-node company">Company Wallet</div>
+                        <div class="flow-arrow">
+                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <div class="flow-node employee">Employee</div>
+                    </div>
+                    <div class="exposed-data">
+                        <div class="data-item exposed">
+                            <span class="data-label">Amount</span>
+                            <span class="data-value">$15,000</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Address</span>
+                            <span class="data-value">0x1a2b...9f</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Timing</span>
+                            <span class="data-value">Monthly</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="problem-example">
-                    <code>0x1234...abcd received <span class="red">$15,000</span> from 0xCompany</code>
-                </div>
+                <p class="card-impact">Salary, bonus structure, employee wallets all PUBLIC</p>
             </div>
 
-            <div class="problem-card">
-                <div class="problem-header">
-                    <span class="problem-icon">🏦</span>
-                    <h3>B2B Financial Data Leakage</h3>
+            <div class="visual-card">
+                <div class="card-header">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </span>
+                    <h3>B2B Settlements</h3>
                 </div>
-                <div class="problem-content">
-                    <p class="problem-desc">Inter-company transactions expose sensitive data:</p>
-                    <ul class="problem-list">
-                        <li><span class="highlight-red">Deal sizes</span> visible to competitors</li>
-                        <li><span class="highlight-red">Partnership details</span> become public</li>
-                        <li><span class="highlight-red">Trading volumes</span> reveal strategies</li>
-                        <li><span class="highlight-red">Financial institutions</span> lose client privacy</li>
-                    </ul>
+                <div class="exposure-diagram">
+                    <div class="diagram-flow">
+                        <div class="flow-node company">Firm A</div>
+                        <div class="flow-arrow">
+                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <div class="flow-node company">Firm B</div>
+                    </div>
+                    <div class="exposed-data">
+                        <div class="data-item exposed">
+                            <span class="data-label">Deal Size</span>
+                            <span class="data-value">$50M</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Partners</span>
+                            <span class="data-value">Visible</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Frequency</span>
+                            <span class="data-value">Trackable</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="problem-example">
-                    <code>Bank_A sent <span class="red">$50M</span> to HedgeFund_B</code>
-                </div>
+                <p class="card-impact">Deal sizes, partnerships, trading volumes EXPOSED</p>
             </div>
         </div>
 
-        <div class="insight-bar warning">
-            <span class="insight-icon">⚠️</span>
-            <span>On-chain transparency is great for verification, but catastrophic for business privacy</span>
+        <div class="stat-bar">
+            <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">of on-chain transactions are public</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value">$2.3B+</span>
+                <span class="stat-label">crypto payroll market exposed</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value">0</span>
+                <span class="stat-label">compliant privacy solutions</span>
+            </div>
         </div>
     </div>
 </div>
