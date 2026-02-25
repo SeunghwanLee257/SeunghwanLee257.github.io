@@ -1,0 +1,67 @@
+<!-- Slide 4: Our Solution -->
+<div class="slide" data-slide="4">
+    <div class="slide-inner">
+        <span class="slide-num">03</span>
+        <div class="section-label">OUR SOLUTION</div>
+        <h2 class="big-headline">Compliance-Ready <span class="accent">Confidential Transfer</span></h2>
+        <p class="sub-headline">The first useful case of <strong>ZK + FHE</strong> integration</p>
+
+        <div class="solution-flow">
+            <div class="flow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>User Sends Private Tx</h4>
+                    <p>Identity & amount hidden using ZK proofs</p>
+                    <div class="step-visual">
+                        <span class="hidden-badge">🔒 Hidden</span>
+                        <span class="hidden-badge">🔒 Hidden</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-step highlight">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>FHE Encrypted Audit Log</h4>
+                    <p>Transaction data encrypted homomorphically</p>
+                    <div class="step-visual">
+                        <code class="fhe-code">Enc(sender) + Enc(receiver) + Enc(amount)</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Secret Sharing</h4>
+                    <p>Decryption key split across multiple nodes</p>
+                    <div class="step-visual nodes">
+                        <span class="node">Node 1</span>
+                        <span class="node">Node 2</span>
+                        <span class="node">Node 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="compliance-section">
+            <h3>🔍 Compliance Query (Without Decryption)</h3>
+            <div class="query-example">
+                <div class="query-box">
+                    <span class="query-label">Query:</span>
+                    <code>"Total transfers > $10K from Address X?"</code>
+                </div>
+                <div class="query-arrow">→</div>
+                <div class="result-box">
+                    <span class="result-label">FHE Result:</span>
+                    <code>✓ Yes (computed on encrypted data)</code>
+                </div>
+            </div>
+            <p class="query-note">Regulators get answers without seeing individual transactions</p>
+        </div>
+    </div>
+</div>
