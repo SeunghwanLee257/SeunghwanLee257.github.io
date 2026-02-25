@@ -277,50 +277,10 @@ function exportHTML() {
     URL.revokeObjectURL(url);
 }
 
-// PDF Download - Uses browser print for reliable output
+// PDF Download - Opens print-ready page
 function downloadPDF() {
-    // Show all slides for printing
-    const slides = document.querySelectorAll('.slide');
-    const controls = document.getElementById('controls');
-    const thumbnailPanel = document.getElementById('thumbnailPanel');
-    const editToolbar = document.getElementById('editToolbar');
-    const layerPanel = document.getElementById('layerPanel');
-
-    // Hide UI elements
-    controls.style.display = 'none';
-    thumbnailPanel.style.display = 'none';
-    editToolbar.style.display = 'none';
-    layerPanel.style.display = 'none';
-
-    // Show all slides
-    slides.forEach(s => {
-        s.style.display = 'block';
-        s.classList.add('active');
-    });
-
-    // Add print-ready class
-    document.body.classList.add('print-ready');
-
-    // Trigger print
-    setTimeout(() => {
-        window.print();
-
-        // Restore after print dialog closes
-        setTimeout(() => {
-            document.body.classList.remove('print-ready');
-            controls.style.display = '';
-            thumbnailPanel.style.display = '';
-            editToolbar.style.display = '';
-            layerPanel.style.display = '';
-
-            // Restore single active slide
-            slides.forEach(s => {
-                s.style.display = '';
-                s.classList.remove('active');
-            });
-            updateSlide();
-        }, 500);
-    }, 100);
+    // Open the static print page in new window
+    window.open('print.html', '_blank');
 }
 
 // Touch/Swipe support

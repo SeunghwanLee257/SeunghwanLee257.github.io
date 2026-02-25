@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LatticA - Compliance-Ready Confidential Transfer (Print)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Print-specific overrides */
+        body {
+            background: #0A0A0A;
+        }
+        .controls, .thumbnail-panel, .edit-toolbar, .layer-panel {
+            display: none !important;
+        }
+        .deck-wrapper {
+            padding: 0;
+        }
+        .deck-container {
+            width: 1280px;
+        }
+        .slide {
+            display: block !important;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body class="print-ready">
+    <div class="deck-wrapper">
+        <div class="deck-container">
+<!-- Slide 1: Title -->
+<div class="slide" data-slide="1">
+    <div class="slide-inner title-slide">
+        <div class="title-bg">
+            <div class="grid-pattern"></div>
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+        <div class="title-content">
+            <div class="badge-row">
+                <span class="badge">SOLANA</span>
+                <span class="badge">ZK PROOF</span>
+                <span class="badge">FHE</span>
+            </div>
+            <h1 class="main-title">Compliance-Ready<br><span class="gradient-text">Confidential Transfer</span></h1>
+            <p class="subtitle">Privacy-preserving transactions with regulatory compliance</p>
+
+            <div class="title-diagram">
+                <div class="diagram-box">
+                    <div class="diagram-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <span class="diagram-label">Hide Amount</span>
+                </div>
+                <div class="diagram-connector">
+                    <svg viewBox="0 0 40 24"><path d="M0 12h40" stroke="currentColor" stroke-width="2" stroke-dasharray="4"/></svg>
+                </div>
+                <div class="diagram-box">
+                    <div class="diagram-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <span class="diagram-label">Hide Address</span>
+                </div>
+                <div class="diagram-connector">
+                    <svg viewBox="0 0 40 24"><path d="M0 12h40" stroke="currentColor" stroke-width="2" stroke-dasharray="4"/></svg>
+                </div>
+                <div class="diagram-box highlight">
+                    <div class="diagram-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <span class="diagram-label">Hide Both</span>
+                </div>
+            </div>
+
+            <div class="title-footer">
+                <span class="company-name">LatticA</span>
+                <span class="divider">|</span>
+                <span class="tagline">ZK + FHE Infrastructure</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 2: Why Confidential Transfer -->
+<div class="slide" data-slide="2">
+    <div class="slide-inner">
+        <span class="slide-num">01</span>
+        <div class="section-label">THE PROBLEM</div>
+        <h2 class="big-headline">On-Chain Transparency <span class="accent">Breaks Privacy</span></h2>
+
+        <div class="visual-split">
+            <div class="visual-card">
+                <div class="card-header">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </span>
+                    <h3>Corporate Payroll</h3>
+                </div>
+                <div class="exposure-diagram">
+                    <div class="diagram-flow">
+                        <div class="flow-node company">Company Wallet</div>
+                        <div class="flow-arrow">
+                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <div class="flow-node employee">Employee</div>
+                    </div>
+                    <div class="exposed-data">
+                        <div class="data-item exposed">
+                            <span class="data-label">Amount</span>
+                            <span class="data-value">$15,000</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Address</span>
+                            <span class="data-value">0x1a2b...9f</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Timing</span>
+                            <span class="data-value">Monthly</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-impact">Salary, bonus structure, employee wallets all PUBLIC</p>
+            </div>
+
+            <div class="visual-card">
+                <div class="card-header">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </span>
+                    <h3>B2B Settlements</h3>
+                </div>
+                <div class="exposure-diagram">
+                    <div class="diagram-flow">
+                        <div class="flow-node company">Firm A</div>
+                        <div class="flow-arrow">
+                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <div class="flow-node company">Firm B</div>
+                    </div>
+                    <div class="exposed-data">
+                        <div class="data-item exposed">
+                            <span class="data-label">Deal Size</span>
+                            <span class="data-value">$50M</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Partners</span>
+                            <span class="data-value">Visible</span>
+                        </div>
+                        <div class="data-item exposed">
+                            <span class="data-label">Frequency</span>
+                            <span class="data-value">Trackable</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-impact">Deal sizes, partnerships, trading volumes EXPOSED</p>
+            </div>
+        </div>
+
+        <div class="stat-bar">
+            <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">of on-chain transactions are public</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value">$2.3B+</span>
+                <span class="stat-label">crypto payroll market exposed</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value">0</span>
+                <span class="stat-label">compliant privacy solutions</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Existing Solutions -->
+<div class="slide" data-slide="3">
+    <div class="slide-inner">
+        <span class="slide-num">02</span>
+        <div class="section-label">CURRENT LANDSCAPE</div>
+        <h2 class="big-headline">Existing Solutions <span class="accent">Fall Short</span></h2>
+
+        <div class="comparison-table">
+            <div class="table-header">
+                <div class="col-feature">Feature</div>
+                <div class="col-solution">Solana Confidential</div>
+                <div class="col-solution">Dark Pools</div>
+                <div class="col-solution highlight">LatticA</div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Amount Hidden</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Address Hidden</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Regulatory Compliance</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-partial">Partial</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            <div class="table-row">
+                <div class="col-feature">
+                    <span class="feature-name">Audit Capability</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-partial">Limited</span>
+                </div>
+                <div class="col-solution">
+                    <span class="status-no">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </span>
+                </div>
+                <div class="col-solution highlight">
+                    <span class="status-yes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-study-bar">
+            <div class="case-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            </div>
+            <div class="case-content">
+                <span class="case-title">Tornado Cash Case Study</span>
+                <span class="case-detail">CEO sentenced to prison  |  $1B+ in regulatory fines  |  Protocol sanctioned</span>
+            </div>
+            <div class="case-lesson">
+                <span>Privacy without compliance = Legal risk</span>
+            </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://www.justice.gov/opa/pr/tornado-cash-founders-charged-money-laundering" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                DOJ Press Release
+            </a>
+            <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Treasury OFAC Sanctions
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Our Solution -->
+<div class="slide" data-slide="4">
+    <div class="slide-inner">
+        <span class="slide-num">03</span>
+        <div class="section-label">OUR SOLUTION</div>
+        <h2 class="big-headline">ZK + FHE <span class="accent">Architecture</span></h2>
+
+        <div class="architecture-visual">
+            <img src="assets/flow-diagram.svg" alt="Architecture Flow" class="full-width-diagram">
+        </div>
+
+        <div class="tech-specs">
+            <div class="spec-card">
+                <div class="spec-header">Zero-Knowledge Proof</div>
+                <div class="spec-content">
+                    <p>Validates transaction without revealing sender, receiver, or amount</p>
+                </div>
+            </div>
+            <div class="spec-card highlight">
+                <div class="spec-header">FHE Encrypted Audit</div>
+                <div class="spec-content">
+                    <p>Homomorphic encryption enables queries on encrypted logs</p>
+                    <code>SUM(Enc(amount)) where Enc(sender) = X</code>
+                </div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-header">MPC Threshold Decryption</div>
+                <div class="spec-content">
+                    <p>3-of-5 nodes required for audit decryption</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="query-demo">
+            <div class="query-box">
+                <span class="query-label">Compliance Query</span>
+                <code>"Sum of transfers from X > $10K?"</code>
+            </div>
+            <div class="query-arrow-img">
+                <svg viewBox="0 0 60 24" width="60" height="24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="#14F195" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="result-box">
+                <span class="result-label">FHE Result</span>
+                <code>TRUE (computed on encrypted data)</code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Market / GTM / Fees -->
+<div class="slide" data-slide="5">
+    <div class="slide-inner">
+        <span class="slide-num">04</span>
+        <div class="section-label">MARKET OPPORTUNITY</div>
+        <h2 class="big-headline">Market Size & <span class="accent">Go-To-Market</span></h2>
+
+        <div class="market-visual-row">
+            <div class="market-chart-container">
+                <img src="assets/market-tam.svg" alt="TAM SAM SOM" class="market-chart">
+            </div>
+            <div class="fee-chart-container">
+                <img src="assets/fee-chart.svg" alt="Fee Comparison" class="fee-chart">
+            </div>
+        </div>
+
+        <div class="gtm-timeline">
+            <div class="timeline-header">Go-To-Market Phases</div>
+            <div class="timeline-track">
+                <div class="timeline-phase">
+                    <div class="phase-marker">Q1</div>
+                    <div class="phase-content">
+                        <h4>Solana Payroll</h4>
+                        <p>Partner with crypto-native companies</p>
+                    </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-phase">
+                    <div class="phase-marker">Q2</div>
+                    <div class="phase-content">
+                        <h4>B2B Settlements</h4>
+                        <p>Trading firms, DAOs, treasuries</p>
+                    </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-phase">
+                    <div class="phase-marker">Q3</div>
+                    <div class="phase-content">
+                        <h4>DeFi SDK</h4>
+                        <p>DEX, lending, yield protocols</p>
+                    </div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-phase">
+                    <div class="phase-marker">Q4</div>
+                    <div class="phase-content">
+                        <h4>Multi-Chain</h4>
+                        <p>Ethereum, Polygon expansion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Why Solana -->
+<div class="slide" data-slide="6">
+    <div class="slide-inner">
+        <span class="slide-num">05</span>
+        <div class="section-label">PLATFORM</div>
+        <h2 class="big-headline">Why <span class="accent-solana">Solana</span></h2>
+
+        <div class="platform-layout">
+            <div class="cost-comparison">
+                <img src="assets/verification-cost.svg" alt="ZK Verification Cost Comparison" class="comparison-chart">
+            </div>
+
+            <div class="platform-stats">
+                <div class="stat-card highlight-green">
+                    <div class="stat-number">$0.03</div>
+                    <div class="stat-title">ZK Verification</div>
+                    <div class="stat-desc">Groth16 proof (128 bytes) - 200K CU</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">400ms</div>
+                    <div class="stat-title">Block Time</div>
+                    <div class="stat-desc">Near-instant finality</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Token-2022</div>
+                    <div class="stat-title">Native Extension</div>
+                    <div class="stat-desc">Built-in confidential transfer</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="solana-ecosystem">
+            <div class="eco-header">Benchmark: Proving Time (M1 Mac)</div>
+            <div class="eco-stats">
+                <div class="eco-stat">
+                    <span class="eco-value">4.0s</span>
+                    <span class="eco-label">amount_audit</span>
+                </div>
+                <div class="eco-stat">
+                    <span class="eco-value">4.9s</span>
+                    <span class="eco-label">pool_identity</span>
+                </div>
+                <div class="eco-stat">
+                    <span class="eco-value">5.1s</span>
+                    <span class="eco-label">pool_transfer</span>
+                </div>
+                <div class="eco-stat">
+                    <span class="eco-value">3.5GB</span>
+                    <span class="eco-label">Peak RAM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://defillama.com/chain/Solana" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                DeFiLlama
+            </a>
+            <a href="https://crates.io/crates/groth16-solana" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                groth16-solana
+            </a>
+            <a href="https://spl.solana.com/confidential-token" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Token-2022
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Why LatticA -->
+<div class="slide" data-slide="7">
+    <div class="slide-inner">
+        <span class="slide-num">06</span>
+        <div class="section-label">COMPETITIVE EDGE</div>
+        <h2 class="big-headline">Why <span class="accent">LatticA</span></h2>
+
+        <div class="advantage-layout">
+            <div class="perf-section">
+                <img src="assets/performance-chart.svg" alt="Performance Comparison" class="perf-chart-img">
+            </div>
+
+            <div class="advantages-right">
+                <div class="advantage-item">
+                    <div class="adv-header">
+                        <span class="adv-num">01</span>
+                        <span class="adv-title">Cross-Platform Determinism</span>
+                    </div>
+                    <div class="adv-platforms">
+                        <span class="platform-badge">CPU</span>
+                        <span class="platform-badge">GPU</span>
+                        <span class="platform-badge">FPGA</span>
+                    </div>
+                    <p class="adv-desc">NTT-based computation (no FFT rounding errors)</p>
+                </div>
+
+                <div class="advantage-item">
+                    <div class="adv-header">
+                        <span class="adv-num">02</span>
+                        <span class="adv-title">Compliance-First Design</span>
+                    </div>
+                    <div class="adv-checks">
+                        <span class="check-item">AML/KYC Compatible</span>
+                        <span class="check-item">Audit-Ready Logs</span>
+                        <span class="check-item">Threshold Decryption</span>
+                    </div>
+                </div>
+
+                <div class="advantage-item">
+                    <div class="adv-header">
+                        <span class="adv-num">03</span>
+                        <span class="adv-title">Production Ready</span>
+                    </div>
+                    <div class="adv-status">
+                        <span class="status-badge live">Solana Devnet Live</span>
+                        <span class="status-badge">Token-2022 Integration</span>
+                    </div>
+                    <a href="https://github.com/waLLLnut/LatticA-Auditable-Private-Transfer" target="_blank" class="repo-link">
+                        View Repository
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-bar">
+            <span class="cta-text">Ready to bring compliant privacy to your platform</span>
+            <a href="mailto:contact@lattica.io" class="cta-button">Contact Us</a>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://eprint.iacr.org/2016/260" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Groth16 Paper
+            </a>
+            <a href="https://explorer.solana.com" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Solana Explorer
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</body>
+</html>
