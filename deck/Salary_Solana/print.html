@@ -9,22 +9,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Print-specific overrides */
-        body {
-            background: #0A0A0A;
+        @page {
+            size: 1280px 720px;
+            margin: 0;
         }
+
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        html, body {
+            width: 1280px;
+            margin: 0;
+            padding: 0;
+            background: #0A0A0A !important;
+        }
+
         .controls, .thumbnail-panel, .edit-toolbar, .layer-panel {
             display: none !important;
         }
+
         .deck-wrapper {
             padding: 0;
+            margin: 0;
         }
+
         .deck-container {
             width: 1280px;
         }
+
         .slide {
             display: block !important;
-            margin-bottom: 0;
+            width: 1280px !important;
+            height: 720px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            page-break-after: always;
+            page-break-inside: avoid;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            background: #0A0A0A !important;
+        }
+
+        .slide:last-child {
+            page-break-after: auto;
+        }
+
+        .slide-inner {
+            width: 1280px !important;
+            height: 720px !important;
         }
     </style>
 </head>
