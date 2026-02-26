@@ -3,86 +3,89 @@
     <div class="slide-inner">
         <span class="slide-num">01</span>
         <div class="section-label">시장 현황</div>
-        <h2 class="big-headline">한국 STO 시장: <span class="accent">결제 인프라 공백</span></h2>
+        <h2 class="big-headline">STO + Stablecoin: <span class="accent">현재 진행 상황</span></h2>
 
-        <!-- Market Size Table -->
-        <div class="data-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>구분</th>
-                        <th>2024</th>
-                        <th>2025E</th>
-                        <th>2027E</th>
-                        <th>출처</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>국내 STO 발행 규모</td>
-                        <td>₩3,200억</td>
-                        <td>₩1.2조</td>
-                        <td class="highlight-cell">₩14.6조</td>
-                        <td><a href="https://www.hankyung.com/finance/article/2024010212141" target="_blank">한국투자증권</a></td>
-                    </tr>
-                    <tr>
-                        <td>글로벌 토큰화 자산</td>
-                        <td>$50B</td>
-                        <td>$100B</td>
-                        <td class="highlight-cell">$2T</td>
-                        <td><a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization" target="_blank">BCG + ADDX</a></td>
-                    </tr>
-                    <tr>
-                        <td>STO 발행 기업 수</td>
-                        <td>11개</td>
-                        <td>25개+</td>
-                        <td>100개+</td>
-                        <td><a href="https://www.fsc.go.kr" target="_blank">금융위원회</a></td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Two Column Layout: STO Status + Stablecoin Status -->
+        <div class="problem-columns">
+            <div class="problem-col" style="background: #F0F9FF;">
+                <div class="problem-header" style="color: var(--primary);">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18M9 21V9"/>
+                    </svg>
+                    STO (토큰증권) 현황
+                </div>
+                <div class="problem-content">
+                    <div class="problem-item">
+                        <div class="problem-title">2023.02 가이드라인 발표</div>
+                        <div class="problem-desc">금융위 "토큰증권 발행·유통 규율체계 정비방안"</div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">2024.02 첫 STO 발행</div>
+                        <div class="problem-desc">부동산 수익증권 중심 11건 발행 (총 3,200억원)</div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">현재: Security Leg만 운영</div>
+                        <div class="problem-desc">토큰 발행/유통은 가능, <strong style="color:#EF4444">결제(Payment Leg) 미구축</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-col" style="background: #F0FDFA;">
+                <div class="problem-header" style="color: var(--secondary);">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    Stablecoin (결제) 현황
+                </div>
+                <div class="problem-content">
+                    <div class="problem-item">
+                        <div class="problem-title">원화 스테이블코인 부재</div>
+                        <div class="problem-desc">국내 발행 원화 연동 스테이블코인 없음</div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">코스콤 검토 중 (2025.Q1)</div>
+                        <div class="problem-desc">STO 결제용 원화 스테이블코인 인프라 구축 논의</div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">핵심 이슈</div>
+                        <div class="problem-desc"><strong style="color:#EF4444">블록체인 = 모든 거래 공개</strong> → 기업 기밀 노출</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Timeline Strip -->
-        <div class="regulation-timeline">
-            <div class="timeline-event past">
-                <div class="event-date">2023.02</div>
-                <div class="event-title">토큰증권 가이드라인</div>
-                <div class="event-detail">금융위 "발행·유통 규율체계 정비방안"</div>
+        <!-- DVP Diagram -->
+        <div class="insight-box" style="background: #FEF3C7; border-color: #FCD34D;">
+            <div class="insight-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F59E0B" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
             </div>
-            <div class="timeline-connector-h"></div>
-            <div class="timeline-event past">
-                <div class="event-date">2024.02</div>
-                <div class="event-title">첫 STO 발행</div>
-                <div class="event-detail">부동산 수익증권 중심 11건 발행</div>
-            </div>
-            <div class="timeline-connector-h"></div>
-            <div class="timeline-event current">
-                <div class="event-date">2025.Q1</div>
-                <div class="event-title">Stablecoin 결제 논의</div>
-                <div class="event-detail">코스콤 원화 스테이블코인 검토</div>
-            </div>
-            <div class="timeline-connector-h"></div>
-            <div class="timeline-event future">
-                <div class="event-date">2025.H2</div>
-                <div class="event-title">결제 인프라 구축</div>
-                <div class="event-detail">Payment Leg 본격 가동</div>
+            <div class="insight-content">
+                <div class="insight-title" style="color: #92400E;">DVP (Delivery vs Payment) 구조</div>
+                <div class="insight-text">
+                    <strong>Security Leg</strong> (토큰증권 이전) + <strong>Payment Leg</strong> (스테이블코인 결제) = 동시 정산<br>
+                    → Payment Leg가 블록체인 기반일 경우, <strong style="color:#EF4444">거래 금액/상대방 전부 공개</strong> 문제 발생
+                </div>
             </div>
         </div>
 
         <!-- Key Insight Box -->
         <div class="insight-box">
             <div class="insight-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#0066FF" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#0066FF" stroke-width="2">
                     <circle cx="12" cy="12" r="10"/>
                     <path d="M12 8v8M8 12h8"/>
                 </svg>
             </div>
             <div class="insight-content">
-                <div class="insight-title">핵심 기회</div>
+                <div class="insight-title">LatticA 기회</div>
                 <div class="insight-text">
-                    Stablecoin 결제 도입 시 <strong>거래 프라이버시 문제</strong> 발생 필연적<br>
-                    → 코스콤이 Privacy Layer를 선제적으로 구축하면 <strong>시장 표준 선점</strong> 가능
+                    코스콤이 Payment Leg 구축 시 <strong>Privacy Layer 선제 도입</strong> → 시장 표준 선점 + 규제 리스크 회피
                 </div>
             </div>
         </div>

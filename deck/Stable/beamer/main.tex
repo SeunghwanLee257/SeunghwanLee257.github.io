@@ -110,49 +110,49 @@
 %------------------------------------------------
 % SLIDE 2: Market Status
 %------------------------------------------------
-\begin{frame}{한국 STO 시장: 결제 인프라 공백}
+\begin{frame}{STO + Stablecoin: 현재 진행 상황}
 \framesubtitle{01. 시장 현황}
 
 \begin{columns}[T]
-\begin{column}{0.55\textwidth}
-\textbf{시장 규모 전망}
-\vspace{0.3cm}
-
-\begin{tabular}{l|r|r|r|l}
-\toprule
-\textbf{구분} & \textbf{2024} & \textbf{2025E} & \textbf{2027E} & \textbf{출처} \\
-\midrule
-국내 STO 발행 & 3,200억 & 1.2조 & \cellcolor{secondary!20}\textbf{14.6조} & 한투 \\
-글로벌 토큰화 & \$50B & \$100B & \cellcolor{secondary!20}\textbf{\$2T} & BCG \\
-발행 기업 수 & 11개 & 25개+ & 100개+ & 금융위 \\
-\bottomrule
-\end{tabular}
+\begin{column}{0.48\textwidth}
+\begin{block}{STO (토큰증권) 현황}
+\textbf{2023.02} 금융위 가이드라인 발표\\
+{\scriptsize ``토큰증권 발행·유통 규율체계 정비방안''}\\[0.2cm]
+\textbf{2024.02} 첫 STO 발행 (11건, 3,200억원)\\
+{\scriptsize 부동산 수익증권 중심}\\[0.2cm]
+\textbf{현재:} Security Leg만 운영\\
+{\scriptsize\color{danger} 결제(Payment Leg) 미구축}
+\end{block}
 \end{column}
 
-\begin{column}{0.42\textwidth}
-\textbf{규제 타임라인}
-\vspace{0.3cm}
-
-\begin{tikzpicture}[scale=0.8]
-\node[draw=textgray,fill=lightbg,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t1) at (0,3) {\textbf{2023.02}\\토큰증권\\가이드라인};
-\node[draw=textgray,fill=lightbg,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t2) at (0,1.5) {\textbf{2024.02}\\첫 STO 발행\\11건};
-\node[draw=primary,fill=primary!10,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t3) at (0,0) {\textbf{2025.Q1}\\Stablecoin\\결제 논의};
-\node[draw=secondary,fill=secondary!10,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t4) at (0,-1.5) {\textbf{2025.H2}\\결제 인프라\\구축};
-\draw[->,thick,textgray] (t1) -- (t2);
-\draw[->,thick,textgray] (t2) -- (t3);
-\draw[->,thick,secondary] (t3) -- (t4);
-\end{tikzpicture}
+\begin{column}{0.48\textwidth}
+\begin{exampleblock}{Stablecoin (결제) 현황}
+\textbf{원화 스테이블코인 부재}\\
+{\scriptsize 국내 발행 원화 연동 스테이블코인 없음}\\[0.2cm]
+\textbf{코스콤 검토 중} (2025.Q1)\\
+{\scriptsize STO 결제용 원화 스테이블코인 논의}\\[0.2cm]
+\textbf{핵심 이슈:}\\
+{\scriptsize\color{danger} 블록체인 = 모든 거래 공개 → 기업 기밀 노출}
+\end{exampleblock}
 \end{column}
 \end{columns}
 
-\vspace{0.5cm}
-\begin{block}{핵심 기회}
-Stablecoin 결제 도입 시 \textbf{거래 프라이버시 문제} 발생 필연적\\
-$\rightarrow$ 코스콤이 Privacy Layer를 선제적으로 구축하면 \textcolor{secondary}{\textbf{시장 표준 선점}} 가능
-\end{block}
+\vspace{0.3cm}
+\begin{alertblock}{DVP (Delivery vs Payment) 구조}
+\textbf{Security Leg} (토큰증권 이전) + \textbf{Payment Leg} (스테이블코인 결제) = 동시 정산\\
+$\rightarrow$ Payment Leg가 블록체인 기반일 경우, \textcolor{danger}{\textbf{거래 금액/상대방 전부 공개}} 문제
+\end{alertblock}
 
 \vspace{0.2cm}
-{\scriptsize\color{textgray} 출처: 금융위 2023.02 보도자료 | 한국경제 2025.01 | BCG 2022 Report}
+\begin{center}
+\fcolorbox{primary}{primary!5}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{\color{primary} LatticA 기회:} 코스콤 Payment Leg 구축 시 Privacy Layer 선제 도입\\
+$\rightarrow$ 시장 표준 선점 + 규제 리스크 회피
+\end{minipage}
+}
+\end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -182,12 +182,14 @@ $\rightarrow$ 코스콤이 Privacy Layer를 선제적으로 구축하면 \textco
 
 \begin{column}{0.48\textwidth}
 \begin{exampleblock}{\color{success}$\checkmark$ 규제 요구사항}
-\textbf{자본시장법 제117조}\\
-{\small 투자자 정보 제3자 제공 금지}\\[0.2cm]
-\textbf{특정금융정보법 제5조의2}\\
-{\small AML/KYC 의무, 의심거래 보고}\\[0.2cm]
-\textbf{전자금융거래법 제21조}\\
-{\small 5년간 거래기록 보존 및 제출 의무}
+\textbf{자본시장법 제117조 (정보의 관리)}\\
+{\small STO = 토큰증권 = 금융투자상품}\\
+{\scriptsize\color{danger} $\rightarrow$ 블록체인 공개 = 117조 위반 소지}\\[0.15cm]
+\textbf{특정금융정보법 제5조의2 (AML/KYC)}\\
+{\small 감독기관 의심거래 조회 권한 필요}\\
+{\scriptsize $\rightarrow$ 완전 익명화 불가}\\[0.15cm]
+\textbf{전자금융거래법 제21조 (기록보존)}\\
+{\small 5년간 기록 보존 + 감독기관 제출}
 \end{exampleblock}
 \end{column}
 \end{columns}
