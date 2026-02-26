@@ -12,20 +12,24 @@
   <text x="260" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="700">B2B Deal Exposure</text>
 
   <!-- Company A (Alice - left) -->
-  <rect x="40" y="100" width="120" height="90" rx="8" fill="#1A1A1A" stroke="#9945FF" stroke-width="2"/>
-  <circle cx="100" cy="130" r="20" fill="#9945FF"/>
-  <circle cx="100" cy="123" r="8" fill="#1A1A1A"/>
-  <path d="M88 142 Q100 155 112 142" fill="none" stroke="#1A1A1A" stroke-width="2"/>
-  <text x="100" y="175" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="11" font-weight="600">Alice</text>
-  <text x="100" y="210" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="14" font-weight="700">Firm A</text>
+  <g transform="translate(40, 90)">
+    <rect width="120" height="110" rx="8" fill="#1A1A1A" stroke="#9945FF" stroke-width="2"/>
+    <g transform="translate(36, 10) scale(2)">
+      <path fill="#9945FF" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+    <text x="60" y="85" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="12" font-weight="600">Alice</text>
+  </g>
+  <text x="100" y="220" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="14" font-weight="700">Firm A</text>
 
   <!-- Company B (Bob - right) -->
-  <rect x="360" y="100" width="120" height="90" rx="8" fill="#1A1A1A" stroke="#14F195" stroke-width="2"/>
-  <circle cx="420" cy="130" r="20" fill="#14F195"/>
-  <circle cx="420" cy="123" r="8" fill="#1A1A1A"/>
-  <path d="M408 142 Q420 155 432 142" fill="none" stroke="#1A1A1A" stroke-width="2"/>
-  <text x="420" y="175" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="11" font-weight="600">Bob</text>
-  <text x="420" y="210" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="14" font-weight="700">Firm B</text>
+  <g transform="translate(360, 90)">
+    <rect width="120" height="110" rx="8" fill="#1A1A1A" stroke="#14F195" stroke-width="2"/>
+    <g transform="translate(36, 10) scale(2)">
+      <path fill="#14F195" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+    <text x="60" y="85" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="12" font-weight="600">Bob</text>
+  </g>
+  <text x="420" y="220" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="14" font-weight="700">Firm B</text>
 
   <!-- Money flow arrow (center) -->
   <rect x="180" y="125" width="160" height="40" rx="6" fill="#141414" stroke="#252525"/>
@@ -34,33 +38,30 @@
   <path d="M345 145 L355 140 L355 150 Z" fill="#14F195"/>
 
   <!-- Eve (Eavesdropper - bottom center) -->
-  <circle cx="260" cy="295" r="30" fill="#1A1A1A" stroke="#9945FF" stroke-width="2"/>
-  <circle cx="260" cy="283" r="10" fill="#9945FF"/>
-  <path d="M248 308 Q260 321 272 308" fill="none" stroke="#9945FF" stroke-width="2"/>
-  <text x="260" y="340" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="13" font-weight="700">Eve</text>
-  <text x="260" y="355" text-anchor="middle" fill="#707070" font-family="Inter, sans-serif" font-size="10">Eavesdropper</text>
-
-  <!-- Eve watching eyes -->
-  <ellipse cx="248" cy="283" rx="6" ry="4" fill="#0A0A0A"/>
-  <ellipse cx="272" cy="283" rx="6" ry="4" fill="#0A0A0A"/>
-  <circle cx="250" cy="283" r="2" fill="#9945FF"/>
-  <circle cx="274" cy="283" r="2" fill="#9945FF"/>
+  <g transform="translate(210, 250)">
+    <rect width="100" height="80" rx="8" fill="#1A1A1A" stroke="#9945FF" stroke-width="2"/>
+    <g transform="translate(26, 5) scale(2)">
+      <path fill="#9945FF" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+    <text x="50" y="70" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="11" font-weight="600">Eve</text>
+  </g>
+  <text x="260" y="350" text-anchor="middle" fill="#707070" font-family="Inter, sans-serif" font-size="10">Eavesdropper</text>
 
   <!-- Lines from Eve to money flow (spying) -->
-  <path d="M260 265 L260 170" stroke="#9945FF" stroke-width="2" stroke-dasharray="5"/>
-  <path d="M240 270 L170 195" stroke="#9945FF" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
-  <path d="M280 270 L350 195" stroke="#9945FF" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
+  <path d="M260 250 L260 170" stroke="#9945FF" stroke-width="2" stroke-dasharray="5"/>
+  <path d="M230 255 L175 180" stroke="#9945FF" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
+  <path d="M290 255 L345 180" stroke="#9945FF" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
 
   <!-- Visible data callouts -->
-  <rect x="60" y="50" width="100" height="40" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
+  <rect x="60" y="50" width="100" height="35" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
   <text x="110" y="68" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="10" font-weight="600">VISIBLE</text>
-  <text x="110" y="82" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Partners</text>
+  <text x="110" y="80" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Partners</text>
 
-  <rect x="360" y="50" width="100" height="40" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
+  <rect x="360" y="50" width="100" height="35" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
   <text x="410" y="68" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="10" font-weight="600">VISIBLE</text>
-  <text x="410" y="82" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Frequency</text>
+  <text x="410" y="80" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Frequency</text>
 
-  <rect x="205" y="45" width="110" height="45" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
-  <text x="260" y="63" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="10" font-weight="600">VISIBLE</text>
-  <text x="260" y="80" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Deal Size &amp; Terms</text>
+  <rect x="205" y="50" width="110" height="35" rx="4" fill="rgba(153,69,255,0.1)" stroke="rgba(153,69,255,0.3)"/>
+  <text x="260" y="68" text-anchor="middle" fill="#9945FF" font-family="Inter, sans-serif" font-size="10" font-weight="600">VISIBLE</text>
+  <text x="260" y="80" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="9">Deal Size</text>
 </svg>
