@@ -1,35 +1,110 @@
-<!-- Slide 3: Problem -->
+<!-- Slide 3: Problem Definition - Regulatory Context -->
 <div class="slide" data-slide="3">
     <div class="slide-inner">
         <span class="slide-num">02</span>
         <div class="section-label">문제 정의</div>
-        <h2 class="big-headline">STO 결제 시 <span class="accent">정보 노출 문제</span></h2>
+        <h2 class="big-headline">블록체인 투명성 vs <span class="accent">기업 기밀성</span></h2>
 
-        <div class="problem-grid">
-            <div class="problem-card">
-                <img src="assets/problem-sto.svg" alt="STO Transaction Exposure" class="problem-svg">
-                <div class="problem-title">거래 금액 노출</div>
-                <div class="problem-desc">블록체인 상 모든 결제 내역이 공개되어<br>경쟁사에 거래 규모 파악 가능</div>
+        <!-- Two Column Problem Statement -->
+        <div class="problem-columns">
+            <div class="problem-col">
+                <div class="problem-header negative">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#EF4444" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                    현재 문제
+                </div>
+                <div class="problem-content">
+                    <div class="problem-item">
+                        <div class="problem-title">거래 금액 완전 노출</div>
+                        <div class="problem-desc">
+                            모든 Stablecoin 이체 금액이 온체인 공개<br>
+                            <span class="evidence">→ Etherscan/Explorer에서 실시간 조회 가능</span>
+                        </div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">거래 상대방 추적</div>
+                        <div class="problem-desc">
+                            지갑 주소 기반 거래 네트워크 분석 가능<br>
+                            <span class="evidence">→ Chainalysis, Nansen 등 이미 상용화</span>
+                        </div>
+                    </div>
+                    <div class="problem-item">
+                        <div class="problem-title">기업 전략 정보 유출</div>
+                        <div class="problem-desc">
+                            M&A, 투자, 파트너십 정보 경쟁사에 노출<br>
+                            <span class="evidence">→ 대규모 거래 시 시장 교란 가능</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="problem-card">
-                <img src="assets/problem-competitor.svg" alt="Competitor Intelligence" class="problem-svg">
-                <div class="problem-title">거래 관계 노출</div>
-                <div class="problem-desc">누가 누구와 거래하는지 추적 가능<br>기업 전략 및 파트너십 유출 우려</div>
+
+            <div class="problem-col">
+                <div class="problem-header positive">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#22C55E" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    규제 요구사항
+                </div>
+                <div class="problem-content">
+                    <div class="regulation-item">
+                        <div class="reg-code">자본시장법 제117조</div>
+                        <div class="reg-desc">금융투자업자의 정보관리 의무<br>"투자자 정보를 정당한 사유 없이 제3자에게 제공 금지"</div>
+                    </div>
+                    <div class="regulation-item">
+                        <div class="reg-code">특정금융정보법 제5조의2</div>
+                        <div class="reg-desc">가상자산사업자 AML/KYC 의무<br>"의심거래 보고 및 고객확인 의무"</div>
+                    </div>
+                    <div class="regulation-item">
+                        <div class="reg-code">전자금융거래법 제21조</div>
+                        <div class="reg-desc">전자금융거래 기록 보존<br>"5년간 거래기록 보존 및 감독기관 제출 의무"</div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="highlight-box">
-            <div class="highlight-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF6B6B" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="8" x2="12" y2="12"/>
-                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+        <!-- Conflict Box -->
+        <div class="conflict-box">
+            <div class="conflict-title">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F59E0B" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
+                핵심 딜레마
             </div>
-            <div class="highlight-content">
-                <div class="highlight-title">현재 상황</div>
-                <div class="highlight-text">Stablecoin 결제가 시작되면 모든 거래 내역이 체인에 기록 → 경쟁사/제3자가 분석 가능</div>
+            <div class="conflict-content">
+                <div class="conflict-left">
+                    <span class="conflict-label">기업 요구</span>
+                    <span class="conflict-text">거래 정보 비공개</span>
+                </div>
+                <div class="conflict-vs">vs</div>
+                <div class="conflict-right">
+                    <span class="conflict-label">규제 요구</span>
+                    <span class="conflict-text">감사 접근권 보장</span>
+                </div>
+                <div class="conflict-solution">
+                    <span class="solution-arrow">→</span>
+                    <span class="solution-text"><strong>LatticA:</strong> 암호화 상태로 감사 수행 = 양립 가능</span>
+                </div>
             </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%9E%90%EB%B3%B8%EC%8B%9C%EC%9E%A5%EA%B3%BC%EA%B8%88%EC%9C%B5%ED%88%AC%EC%9E%90%EC%97%85%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                자본시장법 전문
+            </a>
+            <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%8A%B9%EC%A0%95%EA%B8%88%EC%9C%B5%EA%B1%B0%EB%9E%98%EC%A0%95%EB%B3%B4%EC%9D%98%EB%B3%B4%EA%B3%A0%EB%B0%8F%EC%9D%B4%EC%9A%A9%EB%93%B1%EC%97%90%EA%B4%80%ED%95%9C%EB%B2%95%EB%A5%A0" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                특정금융정보법
+            </a>
+            <a href="https://www.chainalysis.com/solutions/compliance/" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Chainalysis Compliance
+            </a>
         </div>
     </div>
 </div>

@@ -1,79 +1,123 @@
-<!-- Slide 7: Why LatticA -->
+<!-- Slide 7: Why LatticA - Research Credentials -->
 <div class="slide" data-slide="7">
-    <div class="slide-inner slide6-compact">
+    <div class="slide-inner">
         <span class="slide-num">06</span>
         <div class="section-label">기술 우위</div>
-        <h2 class="big-headline" style="margin-bottom: 16px;">Why <span class="accent">LatticA</span></h2>
+        <h2 class="big-headline">Why <span class="accent">LatticA</span></h2>
 
-        <div class="slide6-layout">
-            <div class="slide6-left">
-                <img src="assets/performance-chart.svg" alt="Performance Comparison" class="verification-chart-large">
+        <!-- Research Papers Grid -->
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="paper-badge">ePrint 2024/1916</div>
+                <div class="paper-title">FHE16: Fast, Compact and Hardware-Friendly Bootstrapping</div>
+                <div class="paper-authors">Seunghwan Lee, Dohyuk Kim, Dong-Joon Shin</div>
+                <div class="paper-highlight">
+                    <span class="metric">2.89ms</span>
+                    <span class="desc">Bootstrapping (n=512)</span>
+                </div>
+                <div class="paper-contribution">
+                    16-bit 정수 연산 기반 FHE, MIMC 병렬화로 기존 대비 1.9x 성능
+                </div>
+                <a href="https://eprint.iacr.org/2024/1916" target="_blank" class="paper-link">PDF →</a>
             </div>
 
-            <div class="slide6-right">
-                <div class="stat-card-sm highlight-green">
-                    <div class="stat-number-sm">1.9x</div>
-                    <div class="stat-title-sm">FHE 성능</div>
-                    <div class="stat-desc-sm">ZAMA 대비 부트스트래핑 속도</div>
+            <div class="research-card">
+                <div class="paper-badge">ePrint 2025/2150</div>
+                <div class="paper-title">Primitive Gate Bootstrapping: Low-Latency FHE Arithmetic</div>
+                <div class="paper-authors">Dohyuk Kim, Sin Kim, Seunghwan Lee, Dong-Joon Shin</div>
+                <div class="paper-highlight">
+                    <span class="metric">PGF</span>
+                    <span class="desc">Primitive Gate Family</span>
                 </div>
-                <div class="stat-card-sm">
-                    <div class="stat-number-sm">Cross-Platform</div>
-                    <div class="stat-title-sm">결정론적 연산</div>
-                    <div class="stat-desc-sm">CPU/GPU/FPGA 동일 결과</div>
+                <div class="paper-contribution">
+                    단일 Bootstrapping으로 다중 입력 게이트 (XOR, Majority, AND-XOR) 지원
                 </div>
-                <div class="stat-card-sm highlight-blue">
-                    <div class="stat-number-sm">Compliance</div>
-                    <div class="stat-title-sm">금융 규제 대응</div>
-                    <div class="stat-desc-sm">AML/KYC + 감사 로그 내장</div>
+                <a href="https://eprint.iacr.org/2025/2150" target="_blank" class="paper-link">PDF →</a>
+            </div>
+
+            <div class="research-card">
+                <div class="paper-badge">ePrint 2026/269</div>
+                <div class="paper-title">Exact Error Analysis for Blind Rotation in FHE</div>
+                <div class="paper-authors">Sin Kim, Seunghwan Lee, Dohyuk Kim, Dong-Joon Shin</div>
+                <div class="paper-highlight">
+                    <span class="metric">&lt;1%</span>
+                    <span class="desc">오차 예측 정확도</span>
                 </div>
+                <div class="paper-contribution">
+                    기존 휴리스틱 대비 50% 오차 감소, GINX/AP/AP+ 정확한 분석
+                </div>
+                <a href="https://eprint.iacr.org/2026/269" target="_blank" class="paper-link">PDF →</a>
+            </div>
+
+            <div class="research-card">
+                <div class="paper-badge conference">Crypto 2025</div>
+                <div class="paper-title">Actively Secure MPC: Constant Complexity FHE-based Protocol</div>
+                <div class="paper-authors">Seunghwan Lee et al.</div>
+                <div class="paper-highlight">
+                    <span class="metric">Active Security</span>
+                    <span class="desc">Dishonest Majority</span>
+                </div>
+                <div class="paper-contribution">
+                    Circuit-privacy 최초 도입, O(1) 라운드/연산 복잡도 달성
+                </div>
+                <a href="https://eprint.iacr.org/2025/810" target="_blank" class="paper-link">PDF →</a>
             </div>
         </div>
 
-        <div class="advantage-grid">
-            <div class="advantage-item">
-                <div class="adv-icon-sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#00D4AA" stroke-width="2">
+        <!-- Competitive Advantage -->
+        <div class="advantage-strip">
+            <div class="adv-item">
+                <div class="adv-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#00D4AA" stroke-width="2">
                         <rect x="3" y="3" width="7" height="7"/>
                         <rect x="14" y="3" width="7" height="7"/>
                         <rect x="3" y="14" width="7" height="7"/>
                         <rect x="14" y="14" width="7" height="7"/>
                     </svg>
                 </div>
-                <div class="adv-text">
-                    <strong>NTT 기반</strong><br>
-                    <span>FFT 오차 없는 정밀 연산</span>
+                <div class="adv-content">
+                    <strong>NTT 기반 정밀 연산</strong>
+                    <span>FFT 부동소수점 오차 완전 제거</span>
                 </div>
             </div>
-            <div class="advantage-item">
-                <div class="adv-icon-sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2">
+            <div class="adv-item">
+                <div class="adv-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#0066FF" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         <path d="M9 12l2 2 4-4"/>
                     </svg>
                 </div>
-                <div class="adv-text">
-                    <strong>Threshold 복호화</strong><br>
-                    <span>다자간 키 분산으로 단일 장애점 제거</span>
+                <div class="adv-content">
+                    <strong>Threshold 복호화</strong>
+                    <span>다자간 키 분산, 단일 장애점 제거</span>
                 </div>
             </div>
-            <div class="advantage-item">
-                <div class="adv-icon-sm">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#00D4AA" stroke-width="2">
+            <div class="adv-item">
+                <div class="adv-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#00D4AA" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M8 12l3 3 5-5"/>
                     </svg>
                 </div>
-                <div class="adv-text">
-                    <strong>Production Ready</strong><br>
+                <div class="adv-content">
+                    <strong>Production Ready</strong>
                     <span>PoC 즉시 진행 가능</span>
                 </div>
             </div>
         </div>
 
         <div class="slide-refs">
-            <a href="https://eprint.iacr.org/2025/2150" target="_blank" class="ref-link">
+            <a href="https://scholar.google.com/citations?user=lGZT8Y4AAAAJ" target="_blank" class="ref-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                ePrint 2025/2150
+                Google Scholar
+            </a>
+            <a href="https://eprint.iacr.org/" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                IACR ePrint Archive
+            </a>
+            <a href="https://iacr.org/conferences/crypto2025/" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Crypto 2025
             </a>
         </div>
     </div>

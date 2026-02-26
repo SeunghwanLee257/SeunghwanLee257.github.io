@@ -1,54 +1,104 @@
-<!-- Slide 2: Korea STO Market Status -->
+<!-- Slide 2: Korea STO Market - Executive Data -->
 <div class="slide" data-slide="2">
     <div class="slide-inner">
         <span class="slide-num">01</span>
         <div class="section-label">시장 현황</div>
-        <h2 class="big-headline">한국 STO <span class="accent">시장 동향</span></h2>
+        <h2 class="big-headline">한국 STO 시장: <span class="accent">결제 인프라 공백</span></h2>
 
-        <div class="market-visual">
-            <img src="assets/korea-sto-timeline.svg" alt="Korea STO Timeline" class="full-width-diagram">
+        <!-- Market Size Table -->
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>2024</th>
+                        <th>2025E</th>
+                        <th>2027E</th>
+                        <th>출처</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>국내 STO 발행 규모</td>
+                        <td>₩3,200억</td>
+                        <td>₩1.2조</td>
+                        <td class="highlight-cell">₩14.6조</td>
+                        <td><a href="https://www.hankyung.com/finance/article/2024010212141" target="_blank">한국투자증권</a></td>
+                    </tr>
+                    <tr>
+                        <td>글로벌 토큰화 자산</td>
+                        <td>$50B</td>
+                        <td>$100B</td>
+                        <td class="highlight-cell">$2T</td>
+                        <td><a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization" target="_blank">BCG + ADDX</a></td>
+                    </tr>
+                    <tr>
+                        <td>STO 발행 기업 수</td>
+                        <td>11개</td>
+                        <td>25개+</td>
+                        <td>100개+</td>
+                        <td><a href="https://www.fsc.go.kr" target="_blank">금융위원회</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div class="stat-row">
-            <div class="stat-box">
-                <div class="stat-value">2024.02</div>
-                <div class="stat-label">토큰증권 발행 시작</div>
+        <!-- Timeline Strip -->
+        <div class="regulation-timeline">
+            <div class="timeline-event past">
+                <div class="event-date">2023.02</div>
+                <div class="event-title">토큰증권 가이드라인</div>
+                <div class="event-detail">금융위 "발행·유통 규율체계 정비방안"</div>
             </div>
-            <div class="stat-box">
-                <div class="stat-value">11개</div>
-                <div class="stat-label">STO 발행 기업 (2025.01)</div>
+            <div class="timeline-connector-h"></div>
+            <div class="timeline-event past">
+                <div class="event-date">2024.02</div>
+                <div class="event-title">첫 STO 발행</div>
+                <div class="event-detail">부동산 수익증권 중심 11건 발행</div>
             </div>
-            <div class="stat-box highlight">
-                <div class="stat-value">결제 인프라</div>
-                <div class="stat-label">Stablecoin 도입 논의 중</div>
+            <div class="timeline-connector-h"></div>
+            <div class="timeline-event current">
+                <div class="event-date">2025.Q1</div>
+                <div class="event-title">Stablecoin 결제 논의</div>
+                <div class="event-detail">코스콤 원화 스테이블코인 검토</div>
+            </div>
+            <div class="timeline-connector-h"></div>
+            <div class="timeline-event future">
+                <div class="event-date">2025.H2</div>
+                <div class="event-title">결제 인프라 구축</div>
+                <div class="event-detail">Payment Leg 본격 가동</div>
             </div>
         </div>
 
-        <div class="news-cards">
-            <div class="news-card">
-                <div class="news-source">금융위원회</div>
-                <div class="news-title">"토큰증권 발행·유통 규율체계 정비방안" 발표</div>
-                <div class="news-date">2023.02</div>
+        <!-- Key Insight Box -->
+        <div class="insight-box">
+            <div class="insight-icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#0066FF" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v8M8 12h8"/>
+                </svg>
             </div>
-            <div class="news-card">
-                <div class="news-source">코스콤</div>
-                <div class="news-title">STO 플랫폼 구축 및 스테이블코인 결제 검토</div>
-                <div class="news-date">2024-2025</div>
+            <div class="insight-content">
+                <div class="insight-title">핵심 기회</div>
+                <div class="insight-text">
+                    Stablecoin 결제 도입 시 <strong>거래 프라이버시 문제</strong> 발생 필연적<br>
+                    → 코스콤이 Privacy Layer를 선제적으로 구축하면 <strong>시장 표준 선점</strong> 가능
+                </div>
             </div>
         </div>
 
         <div class="slide-refs">
             <a href="https://www.fsc.go.kr/no010101/79241" target="_blank" class="ref-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                금융위 보도자료
-            </a>
-            <a href="https://www.koscom.co.kr" target="_blank" class="ref-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                KOSCOM
+                금융위 2023.02 보도자료
             </a>
             <a href="https://www.hankyung.com/article/202501027181i" target="_blank" class="ref-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                한국경제
+                한국경제 2025.01
+            </a>
+            <a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                BCG 2022 Report
             </a>
         </div>
     </div>

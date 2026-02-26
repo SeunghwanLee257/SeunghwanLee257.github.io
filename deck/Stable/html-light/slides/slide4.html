@@ -1,110 +1,164 @@
-<!-- Slide 4: Existing Solutions -->
+<!-- Slide 4: Competitive Analysis - Technical Limitations -->
 <div class="slide" data-slide="4">
-    <div class="slide-inner slide3-centered">
+    <div class="slide-inner">
         <span class="slide-num">03</span>
-        <div class="section-label" style="text-align: center;">현행 솔루션</div>
-        <h2 class="big-headline" style="text-align: center;">기존 방식의 <span class="accent">한계</span></h2>
+        <div class="section-label">경쟁 분석</div>
+        <h2 class="big-headline">기존 솔루션의 <span class="accent">구조적 한계</span></h2>
 
-        <div class="comparison-table">
-            <div class="table-header">
-                <div class="col-feature">기능</div>
-                <div class="col-solution">일반 블록체인</div>
-                <div class="col-solution">프라이빗 체인</div>
-                <div class="col-solution highlight">LatticA</div>
+        <!-- Detailed Comparison Table -->
+        <div class="comparison-table-detailed">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="feature-col">기준</th>
+                        <th>Aztec (zkMoney)</th>
+                        <th>Penumbra</th>
+                        <th>Token Extension</th>
+                        <th class="highlight-col">LatticA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">
+                            <strong>프라이버시 범위</strong>
+                        </td>
+                        <td>
+                            <span class="rating partial">금액만</span>
+                            <div class="detail-text">Sender/Receiver 노출</div>
+                        </td>
+                        <td>
+                            <span class="rating good">금액+주소</span>
+                            <div class="detail-text">독자 체인 필요</div>
+                        </td>
+                        <td>
+                            <span class="rating partial">금액만</span>
+                            <div class="detail-text">Transfer Hook 제한</div>
+                        </td>
+                        <td class="highlight-col">
+                            <span class="rating excellent">완전 보호</span>
+                            <div class="detail-text">금액+주소+메타데이터</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">
+                            <strong>규제 감사</strong>
+                        </td>
+                        <td>
+                            <span class="rating bad">불가</span>
+                            <div class="detail-text">View Key 공유 시 전체 노출</div>
+                        </td>
+                        <td>
+                            <span class="rating bad">불가</span>
+                            <div class="detail-text">선택적 공개 불가</div>
+                        </td>
+                        <td>
+                            <span class="rating partial">제한적</span>
+                            <div class="detail-text">Auditor 지정 필요</div>
+                        </td>
+                        <td class="highlight-col">
+                            <span class="rating excellent">완전 지원</span>
+                            <div class="detail-text">암호화 상태 질의 가능</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">
+                            <strong>EVM 호환</strong>
+                        </td>
+                        <td>
+                            <span class="rating partial">부분</span>
+                            <div class="detail-text">Bridge 필요</div>
+                        </td>
+                        <td>
+                            <span class="rating bad">불가</span>
+                            <div class="detail-text">Cosmos 생태계</div>
+                        </td>
+                        <td>
+                            <span class="rating bad">불가</span>
+                            <div class="detail-text">Solana 전용</div>
+                        </td>
+                        <td class="highlight-col">
+                            <span class="rating excellent">완전</span>
+                            <div class="detail-text">Solidity 네이티브</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">
+                            <strong>연산 지원</strong>
+                        </td>
+                        <td>
+                            <span class="rating partial">이체만</span>
+                            <div class="detail-text">Transfer only</div>
+                        </td>
+                        <td>
+                            <span class="rating partial">이체+스왑</span>
+                            <div class="detail-text">DEX 내장</div>
+                        </td>
+                        <td>
+                            <span class="rating partial">이체만</span>
+                            <div class="detail-text">Confidential Transfer</div>
+                        </td>
+                        <td class="highlight-col">
+                            <span class="rating excellent">범용 연산</span>
+                            <div class="detail-text">FHE로 임의 로직</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">
+                            <strong>규제 리스크</strong>
+                        </td>
+                        <td>
+                            <span class="rating bad">높음</span>
+                            <div class="detail-text">Tornado Cash 판결 영향</div>
+                        </td>
+                        <td>
+                            <span class="rating partial">중간</span>
+                            <div class="detail-text">미국 규제 불확실</div>
+                        </td>
+                        <td>
+                            <span class="rating good">낮음</span>
+                            <div class="detail-text">플랫폼 내장 기능</div>
+                        </td>
+                        <td class="highlight-col">
+                            <span class="rating excellent">최소</span>
+                            <div class="detail-text">감사 기능 내장</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Case Study: Tornado Cash -->
+        <div class="case-study-box">
+            <div class="case-header">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#EF4444" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span class="case-title">선례: Tornado Cash 제재 (2022.08)</span>
             </div>
-
-            <div class="table-row">
-                <div class="col-feature">
-                    <span class="feature-name">금액 비공개</span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-no">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-partial">제한적</span>
-                </div>
-                <div class="col-solution highlight">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="col-feature">
-                    <span class="feature-name">주소 비공개</span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-no">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-partial">내부만</span>
-                </div>
-                <div class="col-solution highlight">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="col-feature">
-                    <span class="feature-name">규제 준수 (AML/KYC)</span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-                <div class="col-solution highlight">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-            </div>
-
-            <div class="table-row">
-                <div class="col-feature">
-                    <span class="feature-name">감독 기관 감사</span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
-                </div>
-                <div class="col-solution">
-                    <span class="status-partial">제한적</span>
-                </div>
-                <div class="col-solution highlight">
-                    <span class="status-yes">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </span>
+            <div class="case-content">
+                <div class="case-detail">
+                    <strong>OFAC 제재 근거:</strong> "불법 자금 세탁에 사용될 수 있는 인프라 제공"<br>
+                    <strong>핵심 쟁점:</strong> 감독 기관이 거래 내역 접근 불가 → 법 집행 불가능<br>
+                    <strong>교훈:</strong> <span class="case-highlight">프라이버시 솔루션은 규제 감사 기능 필수</span>
                 </div>
             </div>
         </div>
 
-        <div class="case-study-bar">
-            <div class="case-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-            </div>
-            <div class="case-content">
-                <span class="case-title">핵심 요구사항</span>
-                <span class="case-detail">프라이버시 + 규제준수 = 양립 가능해야 함</span>
-            </div>
-            <div class="case-lesson">
-                <span>LatticA는 둘 다 제공</span>
-            </div>
+        <div class="slide-refs">
+            <a href="https://home.treasury.gov/news/press-releases/jy0916" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                OFAC Tornado Cash 제재
+            </a>
+            <a href="https://aztec.network/" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Aztec Network
+            </a>
+            <a href="https://spl.solana.com/confidential-token" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Solana Token Extension
+            </a>
         </div>
     </div>
 </div>

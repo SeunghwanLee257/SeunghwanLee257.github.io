@@ -1,66 +1,148 @@
-<!-- Slide 5: Our Solution -->
+<!-- Slide 5: Technical Solution - Benchmarks with Paper Citations -->
 <div class="slide" data-slide="5">
-    <div class="slide-inner slide4-centered">
+    <div class="slide-inner">
         <span class="slide-num">04</span>
-        <div class="section-label" style="text-align: center;">기술 솔루션</div>
-        <h2 class="big-headline" style="text-align: center;">ZK + FHE <span class="accent">아키텍처</span></h2>
+        <div class="section-label">기술 아키텍처</div>
+        <h2 class="big-headline">ZK + FHE <span class="accent">하이브리드 아키텍처</span></h2>
 
-        <div class="architecture-visual">
-            <img src="assets/flow-diagram.svg" alt="Architecture Flow" class="full-width-diagram">
+        <!-- Architecture Diagram -->
+        <div class="architecture-detailed">
+            <div class="arch-layer client">
+                <div class="layer-label">Client Layer</div>
+                <div class="layer-content">
+                    <div class="arch-component">
+                        <span class="comp-icon">🏢</span>
+                        <span class="comp-name">STO 발행사</span>
+                        <span class="comp-desc">원문 데이터 보유</span>
+                    </div>
+                    <div class="arch-component">
+                        <span class="comp-icon">💼</span>
+                        <span class="comp-name">투자자</span>
+                        <span class="comp-desc">개인키 보유</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arch-connector-v">
+                <svg width="40" height="30" viewBox="0 0 40 30">
+                    <path d="M20 0 V25 L15 20 M20 25 L25 20" stroke="#94A3B8" fill="none" stroke-width="2"/>
+                </svg>
+                <span class="connector-label">암호화 요청</span>
+            </div>
+
+            <div class="arch-layer privacy">
+                <div class="layer-label">LatticA Privacy Layer</div>
+                <div class="layer-content">
+                    <div class="arch-component highlight">
+                        <span class="comp-icon">🔐</span>
+                        <span class="comp-name">FHE Engine</span>
+                        <span class="comp-desc">FHE16 / 2.89ms bootstrapping</span>
+                        <span class="comp-ref">ePrint 2024/1916</span>
+                    </div>
+                    <div class="arch-component highlight">
+                        <span class="comp-icon">✓</span>
+                        <span class="comp-name">ZK Prover</span>
+                        <span class="comp-desc">거래 유효성 증명</span>
+                        <span class="comp-ref">범위증명, 잔액증명</span>
+                    </div>
+                    <div class="arch-component highlight">
+                        <span class="comp-icon">🗝️</span>
+                        <span class="comp-name">Threshold Key</span>
+                        <span class="comp-desc">다자간 복호화</span>
+                        <span class="comp-ref">ePrint 2025/810</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arch-connector-v">
+                <svg width="40" height="30" viewBox="0 0 40 30">
+                    <path d="M20 0 V25 L15 20 M20 25 L25 20" stroke="#94A3B8" fill="none" stroke-width="2"/>
+                </svg>
+                <span class="connector-label">암호문 + 증명</span>
+            </div>
+
+            <div class="arch-layer blockchain">
+                <div class="layer-label">Blockchain Layer (EVM)</div>
+                <div class="layer-content">
+                    <div class="arch-component">
+                        <span class="comp-icon">⛓️</span>
+                        <span class="comp-name">Stablecoin Contract</span>
+                        <span class="comp-desc">암호화된 잔액 저장</span>
+                    </div>
+                    <div class="arch-component">
+                        <span class="comp-icon">📋</span>
+                        <span class="comp-name">Audit Contract</span>
+                        <span class="comp-desc">감사 질의 처리</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="tech-icons-row">
-            <div class="tech-icon-card">
-                <div class="tech-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
-                        <circle cx="24" cy="24" r="20"/>
-                        <path d="M24 14 L24 24 L32 28"/>
-                        <circle cx="24" cy="24" r="8" fill="rgba(0,102,255,0.2)"/>
-                    </svg>
-                </div>
-                <div class="tech-icon-label">영지식 증명 (ZKP)</div>
-                <div class="tech-icon-desc">데이터 공개 없이 유효성 검증</div>
+        <!-- Performance Metrics -->
+        <div class="performance-strip">
+            <div class="perf-item">
+                <span class="perf-value">2.89ms</span>
+                <span class="perf-label">Bootstrapping</span>
+                <span class="perf-detail">n=512, 16-bit</span>
             </div>
-            <div class="tech-icon-card highlight">
-                <div class="tech-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#00D4AA" stroke-width="2">
-                        <rect x="8" y="16" width="32" height="24" rx="4"/>
-                        <path d="M16 16 V12 A8 8 0 0 1 32 12 V16"/>
-                        <circle cx="24" cy="28" r="3" fill="#00D4AA"/>
-                        <line x1="24" y1="31" x2="24" y2="36"/>
-                    </svg>
-                </div>
-                <div class="tech-icon-label">동형암호 (FHE)</div>
-                <div class="tech-icon-desc">암호화 상태로 연산 수행</div>
+            <div class="perf-divider"></div>
+            <div class="perf-item">
+                <span class="perf-value">1.9x</span>
+                <span class="perf-label">vs ZAMA tfhe-rs</span>
+                <span class="perf-detail">동일 파라미터</span>
             </div>
-            <div class="tech-icon-card">
-                <div class="tech-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
-                        <circle cx="24" cy="12" r="8"/>
-                        <circle cx="10" cy="36" r="8"/>
-                        <circle cx="38" cy="36" r="8"/>
-                        <line x1="24" y1="20" x2="14" y2="30"/>
-                        <line x1="24" y1="20" x2="34" y2="30"/>
-                        <line x1="18" y1="36" x2="30" y2="36"/>
-                    </svg>
-                </div>
-                <div class="tech-icon-label">MPC Threshold</div>
-                <div class="tech-icon-desc">다자간 연산으로 복호화 분산</div>
+            <div class="perf-divider"></div>
+            <div class="perf-item">
+                <span class="perf-value">NTT 기반</span>
+                <span class="perf-label">결정론적 연산</span>
+                <span class="perf-detail">FFT 오차 제거</span>
+            </div>
+            <div class="perf-divider"></div>
+            <div class="perf-item">
+                <span class="perf-value">&lt;1%</span>
+                <span class="perf-label">오차 예측 정확도</span>
+                <span class="perf-detail">기존 대비 50% 개선</span>
             </div>
         </div>
 
-        <div class="query-demo">
-            <div class="query-box">
-                <span class="query-label">감독 기관 질의</span>
-                <code>"X 기업의 월간 거래 총액 > 10억?"</code>
+        <!-- Audit Query Demo -->
+        <div class="audit-demo">
+            <div class="demo-title">감사 질의 예시</div>
+            <div class="demo-flow">
+                <div class="demo-step query">
+                    <span class="step-label">감독기관 질의</span>
+                    <code>sum(tx.amount) > ₩1B<br>WHERE tx.entity = "X사"</code>
+                </div>
+                <div class="demo-arrow">
+                    <svg width="60" height="24"><path d="M0 12 H50 L45 7 M50 12 L45 17" stroke="#00D4AA" fill="none" stroke-width="2"/></svg>
+                </div>
+                <div class="demo-step process">
+                    <span class="step-label">FHE 연산</span>
+                    <code>Enc(sum) > Enc(1B)<br>→ ZK proof 생성</code>
+                </div>
+                <div class="demo-arrow">
+                    <svg width="60" height="24"><path d="M0 12 H50 L45 7 M50 12 L45 17" stroke="#00D4AA" fill="none" stroke-width="2"/></svg>
+                </div>
+                <div class="demo-step result">
+                    <span class="step-label">응답</span>
+                    <code>TRUE + proof<br>(금액 비공개)</code>
+                </div>
             </div>
-            <div class="query-arrow-img">
-                <svg viewBox="0 0 60 24" width="60" height="24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="#00D4AA" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="result-box">
-                <span class="result-label">FHE 응답</span>
-                <code>TRUE (암호화 상태로 계산됨)</code>
-            </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://eprint.iacr.org/2024/1916" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                FHE16 (ePrint 2024/1916)
+            </a>
+            <a href="https://eprint.iacr.org/2025/2150" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Primitive Gate (ePrint 2025/2150)
+            </a>
+            <a href="https://eprint.iacr.org/2026/269" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Error Analysis (ePrint 2026/269)
+            </a>
         </div>
     </div>
 </div>

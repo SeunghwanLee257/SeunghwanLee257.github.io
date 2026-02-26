@@ -1,81 +1,150 @@
-<!-- Slide 6: Use Case - KOSCOM STO -->
+<!-- Slide 6: Use Case - ROI Metrics -->
 <div class="slide" data-slide="6">
     <div class="slide-inner">
         <span class="slide-num">05</span>
-        <div class="section-label">활용 시나리오</div>
-        <h2 class="big-headline">코스콤 STO <span class="accent">적용 사례</span></h2>
+        <div class="section-label">적용 시나리오</div>
+        <h2 class="big-headline">코스콤 STO 플랫폼 <span class="accent">통합 시나리오</span></h2>
 
-        <div class="usecase-flow">
-            <div class="flow-step">
-                <div class="step-num">1</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
-                        <rect x="8" y="8" width="32" height="32" rx="4"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#0066FF" font-size="14" font-weight="bold">STO</text>
-                    </svg>
+        <!-- Integration Flow -->
+        <div class="integration-flow">
+            <div class="flow-stage">
+                <div class="stage-num">1</div>
+                <div class="stage-content">
+                    <div class="stage-icon">🏛️</div>
+                    <div class="stage-title">STO 발행</div>
+                    <div class="stage-detail">
+                        발행사가 토큰증권 생성<br>
+                        <span class="tech-tag">KYC 완료된 투자자 지갑</span>
+                    </div>
                 </div>
-                <div class="step-title">STO 발행</div>
-                <div class="step-desc">토큰증권 발행 및<br>투자자 배정</div>
             </div>
-            <div class="flow-arrow">
-                <svg viewBox="0 0 40 24"><path d="M0 12h35M35 12l-6-5M35 12l-6 5" stroke="#404040" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="flow-step">
-                <div class="step-num">2</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#00D4AA" stroke-width="2">
-                        <circle cx="24" cy="24" r="18"/>
-                        <text x="24" y="30" text-anchor="middle" fill="#00D4AA" font-size="12" font-weight="bold">₩</text>
-                    </svg>
+            <div class="flow-connector"></div>
+            <div class="flow-stage">
+                <div class="stage-num">2</div>
+                <div class="stage-content">
+                    <div class="stage-icon">💵</div>
+                    <div class="stage-title">Stablecoin 결제</div>
+                    <div class="stage-detail">
+                        원화 스테이블코인으로 Payment Leg<br>
+                        <span class="tech-tag">DVP 원자적 결제</span>
+                    </div>
                 </div>
-                <div class="step-title">Stablecoin 결제</div>
-                <div class="step-desc">원화 연동 스테이블코인으로<br>Payment Leg 처리</div>
             </div>
-            <div class="flow-arrow">
-                <svg viewBox="0 0 40 24"><path d="M0 12h35M35 12l-6-5M35 12l-6 5" stroke="#404040" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="flow-step highlight">
-                <div class="step-num">3</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#00D4AA" stroke-width="2">
-                        <rect x="8" y="14" width="32" height="24" rx="4"/>
-                        <path d="M16 14 V10 A8 8 0 0 1 32 10 V14"/>
-                    </svg>
+            <div class="flow-connector"></div>
+            <div class="flow-stage highlight">
+                <div class="stage-num">3</div>
+                <div class="stage-content">
+                    <div class="stage-icon">🔐</div>
+                    <div class="stage-title">Privacy Layer</div>
+                    <div class="stage-detail">
+                        거래 금액/상대방 암호화<br>
+                        <span class="tech-tag">LatticA FHE + ZK</span>
+                    </div>
                 </div>
-                <div class="step-title">LatticA Privacy Layer</div>
-                <div class="step-desc">거래 금액/상대방<br>정보 암호화</div>
             </div>
-            <div class="flow-arrow">
-                <svg viewBox="0 0 40 24"><path d="M0 12h35M35 12l-6-5M35 12l-6 5" stroke="#404040" stroke-width="2" fill="none"/></svg>
-            </div>
-            <div class="flow-step">
-                <div class="step-num">4</div>
-                <div class="step-icon">
-                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" transform="translate(12,12)"/>
-                    </svg>
+            <div class="flow-connector"></div>
+            <div class="flow-stage">
+                <div class="stage-num">4</div>
+                <div class="stage-content">
+                    <div class="stage-icon">📋</div>
+                    <div class="stage-title">규제 감사</div>
+                    <div class="stage-detail">
+                        암호화 상태로 AML 검증<br>
+                        <span class="tech-tag">선택적 공개</span>
+                    </div>
                 </div>
-                <div class="step-title">규제 준수</div>
-                <div class="step-desc">금융당국 요청 시<br>암호화 상태로 감사 가능</div>
             </div>
         </div>
 
-        <div class="benefit-cards">
-            <div class="benefit-card">
-                <div class="benefit-icon">🏢</div>
-                <div class="benefit-title">기업 고객</div>
-                <div class="benefit-text">경쟁사에 거래 정보 비공개<br>전략적 M&A, 투자 정보 보호</div>
+        <!-- Stakeholder Benefits -->
+        <div class="stakeholder-grid">
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <span class="stakeholder-icon">🏢</span>
+                    <span class="stakeholder-name">기업 고객 (발행사/투자자)</span>
+                </div>
+                <div class="stakeholder-benefits">
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">경쟁사에 거래 정보 비공개</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">M&A, 전략적 투자 정보 보호</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">자본시장법 117조 준수</span>
+                    </div>
+                </div>
             </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🏛️</div>
-                <div class="benefit-title">코스콤</div>
-                <div class="benefit-text">차별화된 STO 인프라 제공<br>프라이버시 기능으로 경쟁력 확보</div>
+            <div class="stakeholder-card highlight">
+                <div class="stakeholder-header">
+                    <span class="stakeholder-icon">🏦</span>
+                    <span class="stakeholder-name">코스콤</span>
+                </div>
+                <div class="stakeholder-benefits">
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">차별화된 STO 인프라 (시장 유일)</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">프리미엄 서비스 라인업</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">글로벌 시장 진출 기반</span>
+                    </div>
+                </div>
             </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">📋</div>
-                <div class="benefit-title">금융당국</div>
-                <div class="benefit-text">필요시 암호화 상태로 감사<br>AML/KYC 규정 완전 준수</div>
+            <div class="stakeholder-card">
+                <div class="stakeholder-header">
+                    <span class="stakeholder-icon">🏛️</span>
+                    <span class="stakeholder-name">금융감독원/금융위</span>
+                </div>
+                <div class="stakeholder-benefits">
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">암호화 상태 감사 가능</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">AML/KYC 규정 100% 준수</span>
+                    </div>
+                    <div class="benefit-row">
+                        <span class="benefit-check">✓</span>
+                        <span class="benefit-text">Tornado Cash 리스크 회피</span>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Value Proposition -->
+        <div class="value-proposition-box">
+            <div class="value-header">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0066FF" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                <span>코스콤 가치 제안</span>
+            </div>
+            <div class="value-content">
+                <strong>시장 최초 Privacy-Enabled STO 인프라</strong> 구축으로<br>
+                기업 고객 유치 경쟁력 확보 및 규제 선도 기관 포지셔닝
+            </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://www.koscom.co.kr" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                KOSCOM STO 플랫폼
+            </a>
+            <a href="https://www.fsc.go.kr/no010101/79241" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                금융위 STO 가이드라인
+            </a>
         </div>
     </div>
 </div>

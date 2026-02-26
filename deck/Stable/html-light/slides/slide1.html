@@ -1,60 +1,92 @@
-<!-- Slide 1: Title -->
+<!-- Slide 1: Title - Executive Level -->
 <div class="slide" data-slide="1">
     <div class="slide-inner title-slide">
-        <div class="title-bg">
-            <div class="grid-pattern"></div>
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-        </div>
         <div class="title-content">
-            <div class="badge-row">
-                <span class="badge">KOSCOM</span>
-                <span class="badge">STO</span>
-                <span class="badge">STABLECOIN</span>
+            <!-- Logo and Classification -->
+            <div class="title-header">
+                <div class="classification-badge">CONFIDENTIAL</div>
             </div>
-            <h1 class="main-title">STO Payment Leg을 위한<br><span class="gradient-text">프라이버시 인프라</span></h1>
-            <p class="subtitle">토큰증권(STO) 결제 시 거래 정보 보호 및 규제 준수를 동시에 달성</p>
 
-            <div class="title-diagram">
-                <div class="diagram-box">
-                    <div class="diagram-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <path d="M12 8v8M8 12h8"/>
-                        </svg>
-                    </div>
-                    <span class="diagram-label">STO 발행</span>
+            <!-- Core Value Proposition -->
+            <div class="title-main">
+                <div class="target-badge">코스콤 토큰증권 인프라 제안</div>
+                <h1 class="main-title">
+                    <span class="gradient-text">Stablecoin 결제의</span><br>
+                    프라이버시 레이어
+                </h1>
+                <p class="value-proposition">
+                    자본시장법 제117조 준수 하에 거래 정보 기밀성 확보<br>
+                    <span class="highlight-metric">FHE 기반 암호화 연산 — 감사 가능성 100% 유지</span>
+                </p>
+            </div>
+
+            <!-- Key Metrics Strip -->
+            <div class="executive-metrics">
+                <div class="metric-item">
+                    <span class="metric-value">1.9x</span>
+                    <span class="metric-label">FHE 성능<br>(ZAMA 대비)</span>
                 </div>
-                <div class="diagram-connector">
-                    <svg viewBox="0 0 40 24"><path d="M0 12h40" stroke="currentColor" stroke-width="2" stroke-dasharray="4"/></svg>
+                <div class="metric-divider"></div>
+                <div class="metric-item">
+                    <span class="metric-value">100%</span>
+                    <span class="metric-label">규제 감사<br>호환성</span>
                 </div>
-                <div class="diagram-box">
-                    <div class="diagram-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <span class="diagram-label">Stablecoin 결제</span>
-                </div>
-                <div class="diagram-connector">
-                    <svg viewBox="0 0 40 24"><path d="M0 12h40" stroke="currentColor" stroke-width="2" stroke-dasharray="4"/></svg>
-                </div>
-                <div class="diagram-box highlight">
-                    <div class="diagram-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
-                    </div>
-                    <span class="diagram-label">Privacy Layer</span>
+                <div class="metric-divider"></div>
+                <div class="metric-item">
+                    <span class="metric-value">₩14.6조</span>
+                    <span class="metric-label">STO 시장 규모<br>(2027E, 한투)</span>
                 </div>
             </div>
 
+            <!-- Architecture Summary -->
+            <div class="arch-summary">
+                <div class="arch-flow">
+                    <div class="arch-node">
+                        <span class="arch-icon">🏛️</span>
+                        <span class="arch-text">STO 발행사</span>
+                    </div>
+                    <div class="arch-arrow">
+                        <svg width="60" height="20" viewBox="0 0 60 20">
+                            <path d="M0 10 H50 L45 5 M50 10 L45 15" stroke="#94A3B8" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="arch-node highlight">
+                        <span class="arch-icon">🔐</span>
+                        <span class="arch-text">LatticA Layer</span>
+                        <span class="arch-badge">ZK + FHE</span>
+                    </div>
+                    <div class="arch-arrow">
+                        <svg width="60" height="20" viewBox="0 0 60 20">
+                            <path d="M0 10 H50 L45 5 M50 10 L45 15" stroke="#94A3B8" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="arch-node">
+                        <span class="arch-icon">💵</span>
+                        <span class="arch-text">Stablecoin 결제</span>
+                    </div>
+                    <div class="arch-arrow">
+                        <svg width="60" height="20" viewBox="0 0 60 20">
+                            <path d="M0 10 H50 L45 5 M50 10 L45 15" stroke="#94A3B8" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="arch-node">
+                        <span class="arch-icon">📋</span>
+                        <span class="arch-text">감독 기관</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
             <div class="title-footer">
-                <span class="company-name">LatticA</span>
-                <span class="divider">|</span>
-                <span class="tagline">ZK + FHE Infrastructure for KOSCOM</span>
+                <div class="company-info">
+                    <span class="company-name">LatticA</span>
+                    <span class="company-tagline">Cryptographic Privacy Infrastructure</span>
+                </div>
+                <div class="contact-info-mini">
+                    <span>contact@lattica.io</span>
+                    <span class="separator">|</span>
+                    <span>lattica.io</span>
+                </div>
             </div>
         </div>
     </div>
