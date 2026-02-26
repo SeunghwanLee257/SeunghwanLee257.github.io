@@ -1,0 +1,4 @@
+
+# Node modules in deck folders
+deck/*/node_modules/
+deck/*/*/node_modules/

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="280" fill="#1E293B"/>
+
+  <!-- Title -->
+  <text x="200" y="28" text-anchor="middle" fill="#1E293B" font-family="Inter, sans-serif" font-size="14" font-weight="700">거래 관계 노출</text>
+
+  <!-- Network of companies -->
+  <g transform="translate(60, 70)">
+    <rect width="70" height="60" rx="6" fill="#F1F5F9" stroke="#0066FF" stroke-width="2"/>
+    <g transform="translate(11, 8) scale(2)">
+      <path fill="#0066FF" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+  </g>
+  <text x="95" y="145" text-anchor="middle" fill="#0066FF" font-family="Inter, sans-serif" font-size="10">A사</text>
+
+  <g transform="translate(165, 55)">
+    <rect width="70" height="60" rx="6" fill="#F1F5F9" stroke="#00D4AA" stroke-width="2"/>
+    <g transform="translate(11, 8) scale(2)">
+      <path fill="#00D4AA" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+  </g>
+  <text x="200" y="130" text-anchor="middle" fill="#00D4AA" font-family="Inter, sans-serif" font-size="10">B사</text>
+
+  <g transform="translate(270, 70)">
+    <rect width="70" height="60" rx="6" fill="#F1F5F9" stroke="#0066FF" stroke-width="2"/>
+    <g transform="translate(11, 8) scale(2)">
+      <path fill="#0066FF" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+  </g>
+  <text x="305" y="145" text-anchor="middle" fill="#0066FF" font-family="Inter, sans-serif" font-size="10">C사</text>
+
+  <!-- Transaction lines -->
+  <path d="M130 95 L165 85" stroke="#94A3B8" stroke-width="2"/>
+  <path d="M235 85 L270 95" stroke="#94A3B8" stroke-width="2"/>
+  <path d="M130 100 L270 100" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4"/>
+
+  <!-- Eve (Competitor) watching -->
+  <g transform="translate(155, 165)">
+    <rect width="90" height="70" rx="8" fill="#F1F5F9" stroke="#FF6B6B" stroke-width="2"/>
+    <g transform="translate(21, 8) scale(2)">
+      <path fill="#FF6B6B" d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"/>
+    </g>
+    <text x="45" y="62" text-anchor="middle" fill="#FF6B6B" font-family="Inter, sans-serif" font-size="10" font-weight="600">경쟁사</text>
+  </g>
+
+  <!-- Spy lines -->
+  <path d="M200 165 L200 140" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4"/>
+  <path d="M175 175 L120 140" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
+  <path d="M225 175 L280 140" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4" opacity="0.5"/>
+
+  <!-- Warning message -->
+  <rect x="70" y="245" width="260" height="28" rx="6" fill="rgba(255,107,107,0.1)" stroke="rgba(255,107,107,0.3)"/>
+  <text x="200" y="264" text-anchor="middle" fill="#FF6B6B" font-family="Inter, sans-serif" font-size="11" font-weight="600">거래 패턴 분석으로 파트너십 파악</text>
+</svg>
