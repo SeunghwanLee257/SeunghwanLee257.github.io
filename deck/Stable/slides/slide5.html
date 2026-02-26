@@ -1,0 +1,66 @@
+<!-- Slide 5: Our Solution -->
+<div class="slide" data-slide="5">
+    <div class="slide-inner slide4-centered">
+        <span class="slide-num">04</span>
+        <div class="section-label" style="text-align: center;">기술 솔루션</div>
+        <h2 class="big-headline" style="text-align: center;">ZK + FHE <span class="accent">아키텍처</span></h2>
+
+        <div class="architecture-visual">
+            <img src="assets/flow-diagram.svg" alt="Architecture Flow" class="full-width-diagram">
+        </div>
+
+        <div class="tech-icons-row">
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
+                        <circle cx="24" cy="24" r="20"/>
+                        <path d="M24 14 L24 24 L32 28"/>
+                        <circle cx="24" cy="24" r="8" fill="rgba(0,102,255,0.2)"/>
+                    </svg>
+                </div>
+                <div class="tech-icon-label">영지식 증명 (ZKP)</div>
+                <div class="tech-icon-desc">데이터 공개 없이 유효성 검증</div>
+            </div>
+            <div class="tech-icon-card highlight">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#00D4AA" stroke-width="2">
+                        <rect x="8" y="16" width="32" height="24" rx="4"/>
+                        <path d="M16 16 V12 A8 8 0 0 1 32 12 V16"/>
+                        <circle cx="24" cy="28" r="3" fill="#00D4AA"/>
+                        <line x1="24" y1="31" x2="24" y2="36"/>
+                    </svg>
+                </div>
+                <div class="tech-icon-label">동형암호 (FHE)</div>
+                <div class="tech-icon-desc">암호화 상태로 연산 수행</div>
+            </div>
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#0066FF" stroke-width="2">
+                        <circle cx="24" cy="12" r="8"/>
+                        <circle cx="10" cy="36" r="8"/>
+                        <circle cx="38" cy="36" r="8"/>
+                        <line x1="24" y1="20" x2="14" y2="30"/>
+                        <line x1="24" y1="20" x2="34" y2="30"/>
+                        <line x1="18" y1="36" x2="30" y2="36"/>
+                    </svg>
+                </div>
+                <div class="tech-icon-label">MPC Threshold</div>
+                <div class="tech-icon-desc">다자간 연산으로 복호화 분산</div>
+            </div>
+        </div>
+
+        <div class="query-demo">
+            <div class="query-box">
+                <span class="query-label">감독 기관 질의</span>
+                <code>"X 기업의 월간 거래 총액 > 10억?"</code>
+            </div>
+            <div class="query-arrow-img">
+                <svg viewBox="0 0 60 24" width="60" height="24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="#00D4AA" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="result-box">
+                <span class="result-label">FHE 응답</span>
+                <code>TRUE (암호화 상태로 계산됨)</code>
+            </div>
+        </div>
+    </div>
+</div>
