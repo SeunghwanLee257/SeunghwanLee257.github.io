@@ -1,108 +1,124 @@
-<!-- Slide 2: Korea STO Market - Executive Data -->
+<!-- Slide 2: STO 생태계 구조 -->
 <div class="slide" data-slide="2">
     <div class="slide-inner">
         <span class="slide-num">01</span>
-        <div class="section-label">시장 현황</div>
-        <h2 class="big-headline">STO + Stablecoin: <span class="accent">현재 진행 상황</span></h2>
+        <div class="section-label">시장 구조</div>
+        <h2 class="big-headline">토큰증권 <span class="accent">생태계 구조</span></h2>
 
-        <!-- Two Column Layout: STO Status + Stablecoin Status -->
-        <div class="problem-columns">
-            <div class="problem-col" style="background: #F0F9FF;">
-                <div class="problem-header" style="color: var(--primary);">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <path d="M3 9h18M9 21V9"/>
-                    </svg>
-                    STO (토큰증권) 현황
-                </div>
-                <div class="problem-content">
-                    <div class="problem-item">
-                        <div class="problem-title">2023.02 가이드라인 발표</div>
-                        <div class="problem-desc">금융위 "토큰증권 발행·유통 규율체계 정비방안"</div>
+        <!-- 생태계 구조도 -->
+        <div style="display: flex; gap: 16px; margin-top: 20px;">
+
+            <!-- 왼쪽: 플레이어 구조 -->
+            <div style="flex: 1; background: #F8FAFC; border-radius: 12px; padding: 16px;">
+                <div style="font-weight: 700; font-size: 14px; color: #1E293B; margin-bottom: 12px; border-bottom: 2px solid #0066FF; padding-bottom: 6px;">주요 플레이어</div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <!-- 발행 -->
+                    <div style="background: white; border-radius: 8px; padding: 10px; border-left: 4px solid #0066FF;">
+                        <div style="font-weight: 600; font-size: 12px; color: #0066FF;">발행 (Security Leg)</div>
+                        <div style="font-size: 11px; color: #64748B; margin-top: 4px;">
+                            <strong>예탁결제원(KSD)</strong> - 총량관리, 발행심사<br>
+                            <span style="font-size: 9px;">(테스트베드 2025.06 개설 예정)</span><br>
+                            <strong>증권사 7개사</strong> - 코스콤 공동플랫폼 참여<br>
+                            <span style="font-size: 9px; color: #94A3B8;">(키움, 대신, IBK, 유안타, BNK, DB, iM증권)</span>
+                        </div>
+                        <a href="https://www.sedaily.com/NewsView/2GQ52JC1YU" target="_blank" style="font-size:8px;color:#0066FF;display:block;margin-top:4px;">sedaily.com - KSD 테스트베드</a>
+                        <a href="https://www.ebn.co.kr/news/articleView.html?idxno=1676286" target="_blank" style="font-size:8px;color:#0066FF;display:block;margin-top:2px;">ebn.co.kr - 코스콤 증권사 협력</a>
                     </div>
-                    <div class="problem-item">
-                        <div class="problem-title">2024.02 첫 STO 발행</div>
-                        <div class="problem-desc">부동산 수익증권 중심 11건 발행 (총 3,200억원)</div>
+
+                    <!-- 결제 -->
+                    <div style="background: white; border-radius: 8px; padding: 10px; border-left: 4px solid #00D4AA;">
+                        <div style="font-weight: 600; font-size: 12px; color: #00D4AA;">결제 (Payment Leg)</div>
+                        <div style="font-size: 11px; color: #64748B; margin-top: 4px;">
+                            <strong>스테이블코인 발행사</strong> - 은행 51% 컨소시엄<br>
+                            <span style="font-size: 10px;">(자본금 50억+, 정책협의체 인가)</span>
+                        </div>
+                        <a href="https://www.hankyung.com/article/2025120168311" target="_blank" style="font-size:8px;color:#0066FF;display:block;margin-top:4px;">hankyung.com - 은행 51% 컨소시엄</a>
                     </div>
-                    <div class="problem-item">
-                        <div class="problem-title">현재: Security Leg만 운영</div>
-                        <div class="problem-desc">토큰 발행/유통은 가능, <strong style="color:#EF4444">결제(Payment Leg) 미구축</strong></div>
+
+                    <!-- 인프라 -->
+                    <div style="background: #FEF3C7; border-radius: 8px; padding: 10px; border-left: 4px solid #F59E0B;">
+                        <div style="font-weight: 600; font-size: 12px; color: #92400E;">인프라 (코스콤)</div>
+                        <div style="font-size: 11px; color: #64748B; margin-top: 4px;">
+                            <strong>DVP 원자적 결제</strong> - 증권+대금 동시 정산<br>
+                            <strong>토큰증권 공동플랫폼</strong> - 발행/유통 인프라<br>
+                            <span style="font-size: 10px;">PoC 진행중 (2025.07~), 연말 검증 완료 목표</span>
+                        </div>
+                        <a href="https://www.etnews.com/20250718000229" target="_blank" style="font-size:8px;color:#0066FF;display:block;margin-top:4px;">etnews.com - 코스콤 DVP PoC</a>
                     </div>
                 </div>
             </div>
 
-            <div class="problem-col" style="background: #F0FDFA;">
-                <div class="problem-header" style="color: var(--secondary);">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                    </svg>
-                    Stablecoin (결제) 현황
-                </div>
-                <div class="problem-content">
-                    <div class="problem-item">
-                        <div class="problem-title">원화 스테이블코인 부재</div>
-                        <div class="problem-desc">국내 발행 원화 연동 스테이블코인 없음</div>
+            <!-- 오른쪽: DVP 흐름도 -->
+            <div style="flex: 1.2; background: #F0F9FF; border-radius: 12px; padding: 16px;">
+                <div style="font-weight: 700; font-size: 14px; color: #1E293B; margin-bottom: 12px; border-bottom: 2px solid #0066FF; padding-bottom: 6px;">DVP 거래 흐름 (Atomic Settlement)</div>
+
+                <!-- 거래 흐름 다이어그램 -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+
+                    <!-- 매수자/매도자 -->
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="background: white; padding: 8px 12px; border-radius: 6px; text-align: center; width: 45%;">
+                            <div style="font-size: 18px;">🏢</div>
+                            <div style="font-size: 11px; font-weight: 600;">매수 기업</div>
+                            <div style="font-size: 9px; color: #64748B;">스테이블코인 보유</div>
+                        </div>
+                        <div style="font-size: 20px; color: #94A3B8;">⟷</div>
+                        <div style="background: white; padding: 8px 12px; border-radius: 6px; text-align: center; width: 45%;">
+                            <div style="font-size: 18px;">🏛️</div>
+                            <div style="font-size: 11px; font-weight: 600;">매도 기업</div>
+                            <div style="font-size: 9px; color: #64748B;">토큰증권 보유</div>
+                        </div>
                     </div>
-                    <div class="problem-item">
-                        <div class="problem-title">코스콤 검토 중 (2025.Q1)</div>
-                        <div class="problem-desc">STO 결제용 원화 스테이블코인 인프라 구축 논의</div>
+
+                    <!-- 화살표 -->
+                    <div style="text-align: center; color: #94A3B8;">↓</div>
+
+                    <!-- 코스콤 DVP -->
+                    <div style="background: #FEF3C7; padding: 12px; border-radius: 8px; text-align: center; border: 2px solid #F59E0B;">
+                        <div style="font-weight: 700; font-size: 12px; color: #92400E;">코스콤 DVP 엔진</div>
+                        <div style="font-size: 10px; color: #64748B; margin-top: 4px;">
+                            Security Leg ↔ Payment Leg 동시 정산<br>
+                            "자금 없으면 증권 이전 불가"
+                        </div>
                     </div>
-                    <div class="problem-item">
-                        <div class="problem-title">핵심 이슈</div>
-                        <div class="problem-desc"><strong style="color:#EF4444">블록체인 = 모든 거래 공개</strong> → 기업 기밀 노출</div>
+
+                    <!-- 문제점 -->
+                    <div style="background: #FEE2E2; padding: 10px; border-radius: 8px; border: 1px solid #EF4444;">
+                        <div style="font-weight: 600; font-size: 11px; color: #DC2626;">⚠️ 현재 문제</div>
+                        <div style="font-size: 10px; color: #7F1D1D; margin-top: 4px;">
+                            • 거래 금액 온체인 공개 → 경쟁사 열람 가능<br>
+                            • 거래 상대방 추적 → M&A 전략 노출<br>
+                            • 기관 고객 이탈 위험
+                        </div>
+                    </div>
+
+                    <!-- LatticA 솔루션 -->
+                    <div style="background: linear-gradient(135deg, #0066FF 0%, #00D4AA 100%); padding: 10px; border-radius: 8px; color: white;">
+                        <div style="font-weight: 700; font-size: 11px;">✓ LatticA Privacy Layer</div>
+                        <div style="font-size: 10px; opacity: 0.9; margin-top: 4px;">
+                            <strong>① DVP 거래 프라이버시</strong>: 금액/상대방 암호화<br>
+                            <strong>② 준비금 증명 (PoR)</strong>: 제1/2/3금융권 비율 실시간 증명<br>
+                            → 감독기관만 선택적 열람<br>
+                            <a href="https://blog.chain.link/stablecoins-and-proof-of-reserve-kr/" target="_blank" style="font-size:8px;color:#FFF;opacity:0.8;">chainlink - PoR</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- DVP Diagram -->
-        <div class="insight-box" style="background: #FEF3C7; border-color: #FCD34D;">
-            <div class="insight-icon">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F59E0B" stroke-width="2">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                    <line x1="12" y1="9" x2="12" y2="13"/>
-                    <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-            </div>
-            <div class="insight-content">
-                <div class="insight-title" style="color: #92400E;">DVP (Delivery vs Payment) 구조</div>
-                <div class="insight-text">
-                    <strong>Security Leg</strong> (토큰증권 이전) + <strong>Payment Leg</strong> (스테이블코인 결제) = 동시 정산<br>
-                    → Payment Leg가 블록체인 기반일 경우, <strong style="color:#EF4444">거래 금액/상대방 전부 공개</strong> 문제 발생
+        <!-- 핵심 인사이트 -->
+        <div style="background: #F0FDFA; border: 1px solid #00D4AA; border-radius: 8px; padding: 12px; margin-top: 12px; display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 24px;">💡</div>
+            <div>
+                <div style="font-weight: 700; font-size: 12px; color: #0D9488;">시장 기회</div>
+                <div style="font-size: 11px; color: #64748B;">
+                    코스콤이 DVP 인프라를 구축 중이나 <strong style="color:#0066FF;">Privacy Layer는 미구축</strong> → LatticA가 선제적으로 포지셔닝 가능<br>
+                    <span style="font-size: 10px;">STO 시장 규모: 2024년 34조 → 2030년 367조 (BCG)</span>
+                    <a href="https://www.venturesquare.net/1033323" target="_blank" style="font-size:8px;color:#0066FF;margin-left:8px;">venturesquare.net - BCG 전망</a>
                 </div>
             </div>
         </div>
 
-        <!-- Key Insight Box -->
-        <div class="insight-box">
-            <div class="insight-icon">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#0066FF" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 8v8M8 12h8"/>
-                </svg>
-            </div>
-            <div class="insight-content">
-                <div class="insight-title">LatticA 기회</div>
-                <div class="insight-text">
-                    코스콤이 Payment Leg 구축 시 <strong>Privacy Layer 선제 도입</strong> → 시장 표준 선점 + 규제 리스크 회피
-                </div>
-            </div>
-        </div>
-
-        <div class="slide-refs">
-            <a href="https://www.fsc.go.kr/no010101/79241" target="_blank" class="ref-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                금융위 2023.02 보도자료
-            </a>
-            <a href="https://www.hankyung.com/article/202501027181i" target="_blank" class="ref-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                한국경제 2025.01
-            </a>
-            <a href="https://www.bcg.com/publications/2022/relevance-of-on-chain-asset-tokenization" target="_blank" class="ref-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                BCG 2022 Report
-            </a>
-        </div>
     </div>
 </div>

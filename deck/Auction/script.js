@@ -1,21 +1,61 @@
-// Slide Navigation
+// LatticA Blind Auction Deck
+// 경매 플랫폼용 비공개 입찰 솔루션
+
+const slideFiles = [
+    'slides/slide1.html',
+    'slides/slide2.html',
+    'slides/slide3.html',
+    'slides/slide4.html',
+    'slides/slide5.html',
+    'slides/slide6.html',
+    'slides/slide7.html',
+];
+
 let currentSlide = 1;
-const totalSlides = 18;
+let totalSlides = slideFiles.length;
+
+async function loadSlides() {
+    const container = document.getElementById('deckContainer');
+    container.innerHTML = '';
+
+    for (let i = 0; i < slideFiles.length; i++) {
+        try {
+            const response = await fetch(slideFiles[i]);
+            if (response.ok) {
+                const html = await response.text();
+                container.insertAdjacentHTML('beforeend', html);
+            } else {
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="slide" data-slide="${i + 1}">
+                        <div class="slide-inner">
+                            <h2>Slide ${i + 1}</h2>
+                            <p>Failed to load: ${slideFiles[i]}</p>
+                        </div>
+                    </div>
+                `);
+            }
+        } catch (error) {
+            console.error(`Error loading ${slideFiles[i]}:`, error);
+        }
+    }
+
+    updateSlide();
+    generateThumbnails();
+}
 
 function updateSlide() {
-    document.querySelectorAll('.slide').forEach(slide => {
+    document.querySelectorAll('.slide').forEach((slide, index) => {
         slide.classList.remove('active');
+        if (index + 1 === currentSlide) {
+            slide.classList.add('active');
+        }
     });
-
-    const activeSlide = document.querySelector(`[data-slide="${currentSlide}"]`);
-    if (activeSlide) {
-        activeSlide.classList.add('active');
-    }
 
     document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
 
-    document.getElementById('prevBtn').style.opacity = currentSlide === 1 ? '0.5' : '1';
-    document.getElementById('nextBtn').style.opacity = currentSlide === totalSlides ? '0.5' : '1';
+    document.querySelectorAll('.thumbnail-item').forEach((thumb, index) => {
+        thumb.classList.toggle('active', index + 1 === currentSlide);
+    });
 }
 
 function nextSlide() {
@@ -32,7 +72,13 @@ function prevSlide() {
     }
 }
 
-// Keyboard navigation
+function goToSlide(num) {
+    if (num >= 1 && num <= totalSlides) {
+        currentSlide = num;
+        updateSlide();
+    }
+}
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
         e.preventDefault();
@@ -51,94 +97,23 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// PDF Download - High Quality, One slide per page
-async function downloadPDF() {
-    const downloadBtn = document.getElementById('downloadBtn');
-    const originalHTML = downloadBtn.innerHTML;
+function generateThumbnails() {
+    const list = document.getElementById('thumbnailList');
+    list.innerHTML = '';
 
-    downloadBtn.innerHTML = `
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin">
-            <circle cx="12" cy="12" r="10" stroke-dasharray="30" stroke-dashoffset="10"></circle>
-        </svg>
-        PDF 생성 중...
-    `;
-    downloadBtn.disabled = true;
-
-    // Add spin animation
-    const style = document.createElement('style');
-    style.id = 'spin-style';
-    style.textContent = `
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .spin { animation: spin 1s linear infinite; }
-    `;
-    document.head.appendChild(style);
-
-    const { jsPDF } = window.jspdf;
-
-    // Create PDF with exact slide dimensions (1280x720 = 16:9)
-    const pdf = new jsPDF({
-        orientation: 'landscape',
-        unit: 'px',
-        format: [1280, 720],
-        hotfixes: ['px_scaling']
-    });
-
-    const slides = document.querySelectorAll('.slide');
-    const originalSlide = currentSlide;
-
-    try {
-        for (let i = 0; i < slides.length; i++) {
-            const slide = slides[i];
-
-            // Show this slide temporarily
-            slides.forEach(s => s.style.display = 'none');
-            slide.style.display = 'block';
-
-            // Wait for render
-            await new Promise(resolve => setTimeout(resolve, 100));
-
-            // Capture with html2canvas - high quality settings
-            const canvas = await html2canvas(slide, {
-                scale: 2, // 2x for better quality
-                useCORS: true,
-                backgroundColor: '#F8FAFC',
-                logging: false,
-                width: 1280,
-                height: 720,
-                windowWidth: 1280,
-                windowHeight: 720
-            });
-
-            // Add page (except for first slide)
-            if (i > 0) {
-                pdf.addPage([1280, 720], 'landscape');
-            }
-
-            // Add image to PDF
-            const imgData = canvas.toDataURL('image/jpeg', 0.95);
-            pdf.addImage(imgData, 'JPEG', 0, 0, 1280, 720, undefined, 'FAST');
-        }
-
-        // Save PDF
-        pdf.save('Confidential_Auction_Network_IR_Deck.pdf');
-
-    } catch (error) {
-        console.error('PDF generation error:', error);
-        alert('PDF 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
-    } finally {
-        // Restore original state
-        slides.forEach(s => s.style.display = '');
-        currentSlide = originalSlide;
-        updateSlide();
-
-        // Clean up
-        document.getElementById('spin-style')?.remove();
-        downloadBtn.innerHTML = originalHTML;
-        downloadBtn.disabled = false;
+    for (let i = 1; i <= totalSlides; i++) {
+        const thumb = document.createElement('div');
+        thumb.className = 'thumbnail-item' + (i === currentSlide ? ' active' : '');
+        thumb.innerHTML = `<span class="thumb-num">${i}</span>`;
+        thumb.onclick = () => goToSlide(i);
+        list.appendChild(thumb);
     }
 }
 
-// Touch/Swipe support
+function toggleThumbnailPanel() {
+    document.getElementById('thumbnailPanel').classList.toggle('active');
+}
+
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -155,12 +130,6 @@ document.addEventListener('touchend', (e) => {
     }
 }, { passive: true });
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    updateSlide();
-});
-
-// Fullscreen toggle (press F)
 document.addEventListener('keydown', (e) => {
     if (e.key === 'f' || e.key === 'F') {
         if (!document.fullscreenElement) {
@@ -169,4 +138,8 @@ document.addEventListener('keydown', (e) => {
             document.exitFullscreen();
         }
     }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadSlides();
 });
