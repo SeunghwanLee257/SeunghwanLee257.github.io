@@ -1,0 +1,472 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+% Theme and Colors
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Custom Colors - KOSCOM Blue/Teal
+\definecolor{primary}{RGB}{0,102,255}
+\definecolor{secondary}{RGB}{0,212,170}
+\definecolor{textdark}{RGB}{30,41,59}
+\definecolor{textgray}{RGB}{100,116,139}
+\definecolor{lightbg}{RGB}{248,250,252}
+\definecolor{danger}{RGB}{239,68,68}
+\definecolor{success}{RGB}{34,197,94}
+\definecolor{warning}{RGB}{245,158,11}
+
+\setbeamercolor{structure}{fg=primary}
+\setbeamercolor{title}{fg=textdark}
+\setbeamercolor{frametitle}{fg=textdark,bg=white}
+\setbeamercolor{normal text}{fg=textdark}
+\setbeamercolor{block title}{fg=white,bg=primary}
+\setbeamercolor{block body}{fg=textdark,bg=lightbg}
+\setbeamercolor{alerted text}{fg=secondary}
+\setbeamercolor{example text}{fg=secondary}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Custom footline
+\setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{author in head/foot}\insertshortauthor
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertshorttitle
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+        \end{beamercolorbox}}%
+    \vskip0pt%
+}
+
+% Packages
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usepackage{fontspec}
+
+% Font Settings
+\setmainfont{Noto Sans CJK KR}
+\setsansfont{Noto Sans CJK KR}
+
+% Metadata
+\title[KOSCOM STO Privacy Layer]{Stablecoin 결제의 프라이버시 레이어}
+\subtitle{코스콤 토큰증권 인프라 제안}
+\author[LatticA]{LatticA \\ \texttt{contact@lattica.io}}
+\date{2025}
+\institute{Cryptographic Privacy Infrastructure}
+
+\begin{document}
+
+%------------------------------------------------
+% SLIDE 1: Title
+%------------------------------------------------
+\begin{frame}[plain]
+\begin{center}
+\vspace{1cm}
+{\scriptsize\color{textgray} CONFIDENTIAL}
+
+\vspace{0.5cm}
+{\small\color{primary} 코스콤 토큰증권 인프라 제안}
+
+\vspace{0.3cm}
+{\Huge\bfseries\color{secondary} Stablecoin 결제의}\\[0.2cm]
+{\Huge\bfseries 프라이버시 레이어}
+
+\vspace{0.5cm}
+{\small\color{textgray} 자본시장법 제117조 준수 하에 거래 정보 기밀성 확보}\\
+{\small\color{secondary}\bfseries FHE 기반 암호화 연산 --- 감사 가능성 100\% 유지}
+
+\vspace{0.8cm}
+\begin{tikzpicture}
+\node[draw=primary,fill=lightbg,rounded corners,minimum height=1cm,minimum width=2.2cm] (a) {\small 발행사};
+\node[draw=secondary,fill=secondary!10,rounded corners,minimum height=1cm,minimum width=2.2cm,right=0.8cm of a] (b) {\small\color{secondary}\bfseries LatticA};
+\node[draw=primary,fill=lightbg,rounded corners,minimum height=1cm,minimum width=2.2cm,right=0.8cm of b] (c) {\small Stablecoin};
+\node[draw=primary,fill=lightbg,rounded corners,minimum height=1cm,minimum width=2.2cm,right=0.8cm of c] (d) {\small 감독기관};
+\draw[->,thick,primary] (a) -- (b);
+\draw[->,thick,primary] (b) -- (c);
+\draw[->,thick,primary] (c) -- (d);
+\end{tikzpicture}
+
+\vspace{0.8cm}
+\begin{tabular}{ccc}
+\textbf{\Large\color{primary} 1.9x} & \textbf{\Large\color{primary} 100\%} & \textbf{\Large\color{primary} ₩14.6조} \\
+{\scriptsize FHE 성능 (ZAMA 대비)} & {\scriptsize 규제 감사 호환성} & {\scriptsize STO 시장 (2027E)} \\
+\end{tabular}
+
+\vspace{0.5cm}
+{\color{primary}\bfseries LatticA} {\color{textgray} | lattica.io | contact@lattica.io}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 2: Market Status
+%------------------------------------------------
+\begin{frame}{한국 STO 시장: 결제 인프라 공백}
+\framesubtitle{01. 시장 현황}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{시장 규모 전망}
+\vspace{0.3cm}
+
+\begin{tabular}{l|r|r|r|l}
+\toprule
+\textbf{구분} & \textbf{2024} & \textbf{2025E} & \textbf{2027E} & \textbf{출처} \\
+\midrule
+국내 STO 발행 & 3,200억 & 1.2조 & \cellcolor{secondary!20}\textbf{14.6조} & 한투 \\
+글로벌 토큰화 & \$50B & \$100B & \cellcolor{secondary!20}\textbf{\$2T} & BCG \\
+발행 기업 수 & 11개 & 25개+ & 100개+ & 금융위 \\
+\bottomrule
+\end{tabular}
+\end{column}
+
+\begin{column}{0.42\textwidth}
+\textbf{규제 타임라인}
+\vspace{0.3cm}
+
+\begin{tikzpicture}[scale=0.8]
+\node[draw=textgray,fill=lightbg,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t1) at (0,3) {\textbf{2023.02}\\토큰증권\\가이드라인};
+\node[draw=textgray,fill=lightbg,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t2) at (0,1.5) {\textbf{2024.02}\\첫 STO 발행\\11건};
+\node[draw=primary,fill=primary!10,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t3) at (0,0) {\textbf{2025.Q1}\\Stablecoin\\결제 논의};
+\node[draw=secondary,fill=secondary!10,rounded corners,text width=2.5cm,align=center,font=\scriptsize] (t4) at (0,-1.5) {\textbf{2025.H2}\\결제 인프라\\구축};
+\draw[->,thick,textgray] (t1) -- (t2);
+\draw[->,thick,textgray] (t2) -- (t3);
+\draw[->,thick,secondary] (t3) -- (t4);
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{block}{핵심 기회}
+Stablecoin 결제 도입 시 \textbf{거래 프라이버시 문제} 발생 필연적\\
+$\rightarrow$ 코스콤이 Privacy Layer를 선제적으로 구축하면 \textcolor{secondary}{\textbf{시장 표준 선점}} 가능
+\end{block}
+
+\vspace{0.2cm}
+{\scriptsize\color{textgray} 출처: 금융위 2023.02 보도자료 | 한국경제 2025.01 | BCG 2022 Report}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 3: Problem Definition
+%------------------------------------------------
+\begin{frame}{블록체인 투명성 vs 기업 기밀성}
+\framesubtitle{02. 문제 정의}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{alertblock}{\color{danger}$\times$ 현재 문제}
+\textbf{거래 금액 완전 노출}\\
+{\small 모든 Stablecoin 이체 금액 온체인 공개}\\
+{\scriptsize\color{textgray} $\rightarrow$ Etherscan에서 실시간 조회 가능}
+
+\vspace{0.3cm}
+\textbf{거래 상대방 추적}\\
+{\small 지갑 주소 기반 네트워크 분석 가능}\\
+{\scriptsize\color{textgray} $\rightarrow$ Chainalysis, Nansen 이미 상용화}
+
+\vspace{0.3cm}
+\textbf{기업 전략 정보 유출}\\
+{\small M\&A, 투자, 파트너십 정보 노출}\\
+{\scriptsize\color{textgray} $\rightarrow$ 대규모 거래 시 시장 교란 가능}
+\end{alertblock}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{exampleblock}{\color{success}$\checkmark$ 규제 요구사항}
+\textbf{자본시장법 제117조}\\
+{\small 투자자 정보 제3자 제공 금지}\\[0.2cm]
+\textbf{특정금융정보법 제5조의2}\\
+{\small AML/KYC 의무, 의심거래 보고}\\[0.2cm]
+\textbf{전자금융거래법 제21조}\\
+{\small 5년간 거래기록 보존 및 제출 의무}
+\end{exampleblock}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\fcolorbox{warning}{warning!10}{
+\begin{minipage}{0.9\textwidth}
+\centering
+\textbf{\color{warning} 핵심 딜레마:} 기업 요구 (거래 정보 비공개) \textbf{vs} 규제 요구 (감사 접근권 보장)\\[0.1cm]
+$\rightarrow$ \textcolor{secondary}{\textbf{LatticA: 암호화 상태로 감사 수행 = 양립 가능}}
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 4: Competitive Analysis
+%------------------------------------------------
+\begin{frame}{기존 솔루션의 구조적 한계}
+\framesubtitle{03. 경쟁 분석}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{l|c|c|c|>{\columncolor{secondary!20}}c}
+\toprule
+\textbf{기준} & \textbf{Aztec} & \textbf{Penumbra} & \textbf{Token Ext.} & \textbf{LatticA} \\
+\midrule
+프라이버시 범위 & \cellcolor{warning!20}금액만 & \cellcolor{primary!10}금액+주소 & \cellcolor{warning!20}금액만 & \cellcolor{success!20}\textbf{완전 보호} \\
+규제 감사 & \cellcolor{danger!20}불가 & \cellcolor{danger!20}불가 & \cellcolor{warning!20}제한적 & \cellcolor{success!20}\textbf{완전 지원} \\
+EVM 호환 & \cellcolor{warning!20}부분 & \cellcolor{danger!20}불가 & \cellcolor{danger!20}불가 & \cellcolor{success!20}\textbf{완전} \\
+연산 지원 & \cellcolor{warning!20}이체만 & \cellcolor{warning!20}이체+스왑 & \cellcolor{warning!20}이체만 & \cellcolor{success!20}\textbf{범용 연산} \\
+규제 리스크 & \cellcolor{danger!20}높음 & \cellcolor{warning!20}중간 & \cellcolor{primary!10}낮음 & \cellcolor{success!20}\textbf{최소} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+\begin{alertblock}{선례: Tornado Cash 제재 (2022.08 OFAC)}
+\textbf{제재 근거:} ``불법 자금 세탁에 사용될 수 있는 인프라 제공''\\
+\textbf{핵심 쟁점:} 감독 기관이 거래 내역 접근 불가 $\rightarrow$ 법 집행 불가능\\
+\textbf{교훈:} \textcolor{secondary}{\textbf{프라이버시 솔루션은 규제 감사 기능 필수}}
+\end{alertblock}
+
+{\scriptsize\color{textgray} 출처: OFAC Tornado Cash 제재 | Aztec Network | Solana Token Extension}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 5: Technical Solution
+%------------------------------------------------
+\begin{frame}{ZK + FHE 하이브리드 아키텍처}
+\framesubtitle{04. 기술 아키텍처}
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{3-Layer Architecture}
+\vspace{0.3cm}
+
+\begin{tikzpicture}[scale=0.85]
+% Client Layer
+\node[draw=primary,fill=primary!5,rounded corners,minimum width=6cm,minimum height=1cm,align=center] (client) at (0,4) {\small\textbf{Client Layer}\\{\scriptsize STO 발행사 | 투자자}};
+
+% Privacy Layer
+\node[draw=secondary,fill=secondary!10,rounded corners,minimum width=6cm,minimum height=1.5cm,align=center,line width=2pt] (privacy) at (0,2) {\small\textbf{\color{secondary}LatticA Privacy Layer}\\{\scriptsize FHE Engine | ZK Prover | Threshold Key}};
+
+% Blockchain Layer
+\node[draw=warning,fill=warning!10,rounded corners,minimum width=6cm,minimum height=1cm,align=center] (chain) at (0,0) {\small\textbf{Blockchain Layer}\\{\scriptsize Stablecoin Contract | Audit Contract}};
+
+\draw[->,thick,primary] (client) -- node[right,font=\scriptsize] {암호화 요청} (privacy);
+\draw[->,thick,secondary] (privacy) -- node[right,font=\scriptsize] {암호문+증명} (chain);
+\end{tikzpicture}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{성능 벤치마크}
+\vspace{0.3cm}
+
+\begin{tabular}{l|r}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Bootstrapping & \textcolor{secondary}{\textbf{2.89ms}} \\
+vs ZAMA tfhe-rs & \textcolor{secondary}{\textbf{1.9x}} \\
+연산 방식 & NTT (결정론적) \\
+오차 예측 정확도 & \textcolor{secondary}{\textbf{<1\%}} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\textbf{감사 질의 데모}
+\vspace{0.2cm}
+
+\fcolorbox{textgray}{lightbg}{
+\begin{minipage}{0.95\columnwidth}
+\scriptsize
+\textbf{감독기관 질의:}\\
+\texttt{sum(tx.amount) > 1B WHERE entity=``X사''}\\[0.1cm]
+\textbf{FHE 응답:}\\
+\texttt{TRUE + ZK proof (금액 비공개)}
+\end{minipage}
+}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+{\scriptsize\color{textgray} 출처: FHE16 (ePrint 2024/1916) | Primitive Gate (ePrint 2025/2150) | Error Analysis (ePrint 2026/269)}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 6: Use Case
+%------------------------------------------------
+\begin{frame}{코스콤 STO 플랫폼 통합 시나리오}
+\framesubtitle{05. 적용 시나리오}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw=primary,fill=lightbg,rounded corners,minimum width=2.3cm,minimum height=1.8cm,align=center] (s1) at (0,0) {\small\textbf{1. STO 발행}\\{\scriptsize 토큰증권 생성}};
+\node[draw=primary,fill=lightbg,rounded corners,minimum width=2.3cm,minimum height=1.8cm,align=center] (s2) at (3.5,0) {\small\textbf{2. 결제}\\{\scriptsize Stablecoin}};
+\node[draw=secondary,fill=secondary!15,rounded corners,minimum width=2.3cm,minimum height=1.8cm,align=center,line width=1.5pt] (s3) at (7,0) {\small\textbf{\color{secondary}3. Privacy}\\{\scriptsize LatticA Layer}};
+\node[draw=primary,fill=lightbg,rounded corners,minimum width=2.3cm,minimum height=1.8cm,align=center] (s4) at (10.5,0) {\small\textbf{4. 감사}\\{\scriptsize 암호화 검증}};
+\draw[->,thick] (s1) -- (s2);
+\draw[->,thick] (s2) -- (s3);
+\draw[->,thick] (s3) -- (s4);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{block}{기업 고객}
+$\checkmark$ 경쟁사에 거래 정보 비공개\\
+$\checkmark$ M\&A, 전략적 투자 보호\\
+$\checkmark$ 자본시장법 117조 준수
+\end{block}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{exampleblock}{코스콤}
+$\checkmark$ 차별화된 STO 인프라\\
+$\checkmark$ 프리미엄 서비스 라인업\\
+$\checkmark$ 글로벌 시장 진출 기반
+\end{exampleblock}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{block}{금융당국}
+$\checkmark$ 암호화 상태 감사 가능\\
+$\checkmark$ AML/KYC 100\% 준수\\
+$\checkmark$ Tornado Cash 리스크 회피
+\end{block}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\fcolorbox{primary}{primary!5}{
+\begin{minipage}{0.85\textwidth}
+\centering
+\textbf{\color{primary} 코스콤 가치 제안:} 시장 최초 Privacy-Enabled STO 인프라 구축으로\\
+기업 고객 유치 경쟁력 확보 및 규제 선도 기관 포지셔닝
+\end{minipage}
+}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 7: Why LatticA (Research)
+%------------------------------------------------
+\begin{frame}{Why LatticA: 검증된 연구 역량}
+\framesubtitle{06. 기술 우위}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{block}{ePrint 2024/1916}
+\textbf{FHE16: Fast, Compact Bootstrapping}\\
+{\small Seunghwan Lee, Dohyuk Kim, Dong-Joon Shin}\\[0.2cm]
+{\Large\color{secondary}\textbf{2.89ms}} {\small Bootstrapping (n=512)}\\[0.1cm]
+{\scriptsize 16-bit 정수 연산 기반, MIMC 병렬화로 1.9x 성능}
+\end{block}
+
+\begin{block}{ePrint 2026/269}
+\textbf{Exact Error Analysis for Blind Rotation}\\
+{\small Sin Kim, Seunghwan Lee, et al.}\\[0.2cm]
+{\Large\color{secondary}\textbf{<1\%}} {\small 오차 예측 정확도}\\[0.1cm]
+{\scriptsize 기존 휴리스틱 대비 50\% 오차 감소}
+\end{block}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{block}{ePrint 2025/2150}
+\textbf{Primitive Gate Bootstrapping}\\
+{\small Dohyuk Kim, Sin Kim, Seunghwan Lee, et al.}\\[0.2cm]
+{\Large\color{secondary}\textbf{PGF}} {\small Primitive Gate Family}\\[0.1cm]
+{\scriptsize 단일 Bootstrapping으로 다중 입력 게이트 지원}
+\end{block}
+
+\begin{exampleblock}{Crypto 2025 --- ePrint 2025/810}
+\textbf{Actively Secure MPC}\\
+{\small Seunghwan Lee et al.}\\[0.2cm]
+{\Large\color{secondary}\textbf{Active Security}} {\small Dishonest Majority}\\[0.1cm]
+{\scriptsize Circuit-privacy 최초 도입, O(1) 복잡도}
+\end{exampleblock}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{ccc}
+\textbf{NTT 기반 정밀 연산} & \textbf{Threshold 복호화} & \textbf{Production Ready} \\
+{\scriptsize FFT 부동소수점 오차 제거} & {\scriptsize 다자간 키 분산} & {\scriptsize PoC 즉시 진행 가능} \\
+\end{tabular}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 8: CTA / Roadmap
+%------------------------------------------------
+\begin{frame}{코스콤과 함께}
+\framesubtitle{07. 협력 제안}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+% Phase 1
+\node[draw=primary,fill=lightbg,rounded corners,minimum width=3.5cm,minimum height=3cm,align=center] (p1) at (0,0) {
+\textbf{\color{primary}Phase 1}\\
+{\scriptsize 1-2개월}\\[0.2cm]
+\textbf{PoC 구축}\\[0.1cm]
+{\scriptsize$\square$ 테스트넷 배포}\\
+{\scriptsize$\square$ 암호화 이체 데모}\\
+{\scriptsize$\square$ 감사 API 프로토타입}\\[0.1cm]
+{\scriptsize\color{primary}KPI: 1,000 TPS}
+};
+
+% Phase 2
+\node[draw=primary,fill=lightbg,rounded corners,minimum width=3.5cm,minimum height=3cm,align=center] (p2) at (4.5,0) {
+\textbf{\color{primary}Phase 2}\\
+{\scriptsize 3-4개월}\\[0.2cm]
+\textbf{파일럿 운영}\\[0.1cm]
+{\scriptsize$\square$ 고객사 3-5개 실증}\\
+{\scriptsize$\square$ 금융위 사전 협의}\\
+{\scriptsize$\square$ 보안 감사}\\[0.1cm]
+{\scriptsize\color{primary}KPI: 실거래 100건+}
+};
+
+% Phase 3
+\node[draw=secondary,fill=secondary!15,rounded corners,minimum width=3.5cm,minimum height=3cm,align=center,line width=1.5pt] (p3) at (9,0) {
+\textbf{\color{secondary}Phase 3}\\
+{\scriptsize 6개월+}\\[0.2cm]
+\textbf{상용화}\\[0.1cm]
+{\scriptsize$\square$ STO 시스템 통합}\\
+{\scriptsize$\square$ 프리미엄 서비스}\\
+{\scriptsize$\square$ 글로벌 확장}\\[0.1cm]
+{\scriptsize\color{secondary}목표: 시장 표준 선점}
+};
+
+\draw[->,thick,primary] (p1) -- (p2);
+\draw[->,thick,secondary] (p2) -- (p3);
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
+\begin{center}
+\fcolorbox{secondary}{secondary!10}{
+\begin{minipage}{0.8\textwidth}
+\centering
+{\Large\bfseries\color{secondary} 코스콤 STO 플랫폼에 프라이버시 레이어 구축}\\[0.2cm]
+{\color{textgray} 시장 최초 규제 준수형 Privacy Infrastructure}
+\end{minipage}
+}
+\end{center}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{ccc}
+\textbf{Email} & \textbf{Website} & \textbf{LinkedIn} \\
+contact@lattica.io & lattica.io & linkedin.com/company/lattica \\
+\end{tabular}
+\end{center}
+\end{frame}
+
+\end{document}

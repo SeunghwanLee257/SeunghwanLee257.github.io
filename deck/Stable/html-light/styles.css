@@ -115,9 +115,10 @@ body {
 .slide-inner {
     width: 100%;
     height: 100%;
-    padding: 48px 64px;
+    padding: 32px 48px;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 /* Typography */
@@ -140,11 +141,11 @@ body {
 }
 
 .big-headline {
-    font-size: 42px;
+    font-size: 32px;
     font-weight: 800;
     color: var(--text-dark);
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .big-headline .accent {
