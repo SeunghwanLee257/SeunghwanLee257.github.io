@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 380">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="520" height="380" fill="#0A0A0A"/>
+
+  <!-- Title -->
+  <text x="260" y="35" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="700">Payroll Exposure</text>
+
+  <!-- Blockchain visual (center) -->
+  <rect x="160" y="60" width="200" height="120" rx="8" fill="#141414" stroke="#252525" stroke-width="2"/>
+  <text x="260" y="90" text-anchor="middle" fill="#707070" font-family="Inter, sans-serif" font-size="12" font-weight="600">BLOCKCHAIN</text>
+
+  <!-- Transaction records -->
+  <rect x="180" y="105" width="160" height="24" rx="4" fill="#1A1A1A"/>
+  <text x="195" y="121" fill="#FF4D4D" font-family="Monaco, monospace" font-size="10">0xCorp -> 0xAlice $8,500</text>
+
+  <rect x="180" y="135" width="160" height="24" rx="4" fill="#1A1A1A"/>
+  <text x="195" y="151" fill="#FF4D4D" font-family="Monaco, monospace" font-size="10">0xCorp -> 0xBob $12,000</text>
+
+  <!-- Employee on left searching -->
+  <circle cx="70" cy="260" r="35" fill="#1A1A1A" stroke="#252525" stroke-width="2"/>
+  <circle cx="70" cy="245" r="12" fill="#505050"/>
+  <path d="M55 275 Q70 290 85 275" fill="none" stroke="#505050" stroke-width="3"/>
+  <text x="70" y="310" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="12">Employee</text>
+
+  <!-- Search icon / magnifying glass -->
+  <circle cx="120" cy="200" r="18" fill="none" stroke="#FF4D4D" stroke-width="2"/>
+  <line x1="132" y1="212" x2="145" y2="225" stroke="#FF4D4D" stroke-width="3"/>
+
+  <!-- Arrow from employee to blockchain -->
+  <path d="M100 230 Q 160 200 200 170" stroke="#FF4D4D" stroke-width="2" fill="none" stroke-dasharray="5"/>
+
+  <!-- Comparison thought bubble -->
+  <ellipse cx="70" cy="170" rx="55" ry="35" fill="#1A1A1A" stroke="#FF4D4D" stroke-width="1"/>
+  <text x="70" y="163" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="10">My: $8,500</text>
+  <text x="70" y="180" text-anchor="middle" fill="#FF4D4D" font-family="Inter, sans-serif" font-size="10" font-weight="600">Bob: $12,000 !?</text>
+
+  <!-- Coworker on right (being compared) -->
+  <circle cx="450" cy="260" r="35" fill="#1A1A1A" stroke="#252525" stroke-width="2"/>
+  <circle cx="450" cy="245" r="12" fill="#505050"/>
+  <path d="M435 275 Q450 290 465 275" fill="none" stroke="#505050" stroke-width="3"/>
+  <text x="450" y="310" text-anchor="middle" fill="#B0B0B0" font-family="Inter, sans-serif" font-size="12">Coworker</text>
+
+  <!-- Eye icon watching coworker -->
+  <ellipse cx="390" cy="200" rx="20" ry="12" fill="none" stroke="#FF4D4D" stroke-width="2"/>
+  <circle cx="390" cy="200" r="5" fill="#FF4D4D"/>
+
+  <!-- Arrow from blockchain to coworker -->
+  <path d="M320 170 Q 380 200 420 230" stroke="#FF4D4D" stroke-width="2" fill="none" stroke-dasharray="5"/>
+
+  <!-- Bottom warning -->
+  <rect x="110" y="340" width="300" height="32" rx="6" fill="rgba(255,77,77,0.1)" stroke="rgba(255,77,77,0.3)"/>
+  <text x="260" y="361" text-anchor="middle" fill="#FF4D4D" font-family="Inter, sans-serif" font-size="13" font-weight="600">Salary comparison visible to everyone</text>
+</svg>

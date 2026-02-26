@@ -9,25 +9,43 @@
             <img src="assets/flow-diagram.svg" alt="Architecture Flow" class="full-width-diagram">
         </div>
 
-        <div class="tech-specs">
-            <div class="spec-card">
-                <div class="spec-header">Zero-Knowledge Proof</div>
-                <div class="spec-content">
-                    <p>Validates transaction without revealing sender, receiver, or amount</p>
+        <div class="tech-icons-row">
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#9945FF" stroke-width="2">
+                        <circle cx="24" cy="24" r="20"/>
+                        <path d="M24 14 L24 24 L32 28"/>
+                        <circle cx="24" cy="24" r="8" fill="rgba(153,69,255,0.2)"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">Zero-Knowledge Proof</div>
+                <div class="tech-icon-desc">Validates without revealing data</div>
             </div>
-            <div class="spec-card highlight">
-                <div class="spec-header">FHE Encrypted Audit</div>
-                <div class="spec-content">
-                    <p>Homomorphic encryption enables queries on encrypted logs</p>
-                    <code>SUM(Enc(amount)) where Enc(sender) = X</code>
+            <div class="tech-icon-card highlight">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#14F195" stroke-width="2">
+                        <rect x="8" y="16" width="32" height="24" rx="4"/>
+                        <path d="M16 16 V12 A8 8 0 0 1 32 12 V16"/>
+                        <circle cx="24" cy="28" r="3" fill="#14F195"/>
+                        <line x1="24" y1="31" x2="24" y2="36"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">FHE Encrypted Audit</div>
+                <div class="tech-icon-desc">Compute on encrypted data</div>
             </div>
-            <div class="spec-card">
-                <div class="spec-header">MPC Threshold Decryption</div>
-                <div class="spec-content">
-                    <p>3-of-5 nodes required for audit decryption</p>
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#9945FF" stroke-width="2">
+                        <circle cx="24" cy="12" r="8"/>
+                        <circle cx="10" cy="36" r="8"/>
+                        <circle cx="38" cy="36" r="8"/>
+                        <line x1="24" y1="20" x2="14" y2="30"/>
+                        <line x1="24" y1="20" x2="34" y2="30"/>
+                        <line x1="18" y1="36" x2="30" y2="36"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">MPC Threshold</div>
+                <div class="tech-icon-desc">3-of-5 nodes for decryption</div>
             </div>
         </div>
 

@@ -26,10 +26,10 @@
   <rect x="120" y="130" width="166" height="28" rx="4" fill="url(#perfGrad)"/>
   <text x="296" y="149" fill="#14F195" font-family="Inter, sans-serif" font-size="12" font-weight="700">95ms</text>
 
-  <!-- Speedup Badge -->
-  <rect x="320" y="125" width="90" height="36" rx="6" fill="rgba(20,241,149,0.15)" stroke="rgba(20,241,149,0.4)" stroke-width="1"/>
-  <text x="365" y="140" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="16" font-weight="800">1.9x</text>
-  <text x="365" y="154" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="9">FASTER</text>
+  <!-- Speedup Badge - positioned to the right -->
+  <rect x="400" y="125" width="90" height="36" rx="6" fill="rgba(20,241,149,0.15)" stroke="rgba(20,241,149,0.4)" stroke-width="1"/>
+  <text x="445" y="140" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="16" font-weight="800">1.9x</text>
+  <text x="445" y="154" text-anchor="middle" fill="#14F195" font-family="Inter, sans-serif" font-size="9">FASTER</text>
 
   <!-- Source -->
   <text x="20" y="185" fill="#505050" font-family="Inter, sans-serif" font-size="9">Source: ePrint 2025/2150</text>

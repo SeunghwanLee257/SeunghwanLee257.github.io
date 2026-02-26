@@ -2219,6 +2219,290 @@ body {
     box-shadow: 0 4px 16px rgba(153, 69, 255, 0.4);
 }
 
+/* ===== SLIDE 2: Problem Visual Layout ===== */
+.problem-visual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.problem-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.problem-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ===== SLIDE 3: Centered Layout ===== */
+.slide3-centered {
+    align-items: center;
+}
+
+.slide3-centered .comparison-table {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.slide3-centered .case-study-bar {
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* ===== SLIDE 4: Tech Icons Row ===== */
+.tech-icons-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.tech-icon-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.tech-icon-card.highlight {
+    border-color: var(--secondary);
+    background: rgba(20, 241, 149, 0.08);
+}
+
+.tech-icon {
+    width: 56px;
+    height: 56px;
+}
+
+.tech-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tech-icon-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.tech-icon-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ===== SLIDE 5: Centered V2 Layout ===== */
+.slide5-centered {
+    align-items: center;
+}
+
+.slide5-layout-v2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    max-width: 1150px;
+}
+
+.tam-section {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gtm-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gtm-timeline-large {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 28px 32px;
+}
+
+.timeline-header-lg {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.timeline-track-lg {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.timeline-phase-lg {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    background: var(--dark-bg);
+    border-radius: 10px;
+}
+
+.phase-marker-lg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.phase-content-lg h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 6px;
+}
+
+.phase-content-lg p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ===== SLIDE 7: V2 Layout with Icons ===== */
+.slide7-layout-v2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1;
+    min-height: 0;
+    margin-bottom: 12px;
+}
+
+.slide7-left-v2 {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slide7-right-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.advantage-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    flex: 1;
+}
+
+.advantage-block.highlight {
+    border-color: var(--secondary);
+    background: rgba(20, 241, 149, 0.08);
+}
+
+.adv-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.adv-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.adv-content {
+    flex: 1;
+}
+
+.adv-title-v2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 10px;
+}
+
+.adv-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.badge-green {
+    padding: 5px 14px;
+    background: rgba(20, 241, 149, 0.15);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.badge-purple {
+    padding: 5px 14px;
+    background: rgba(153, 69, 255, 0.15);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-light);
+}
+
+.badge-live {
+    padding: 5px 14px;
+    background: var(--secondary);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0A0A0A;
+}
+
+.adv-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
 /* Print / PDF */
 @media print {
     @page {

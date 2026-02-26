@@ -134,77 +134,12 @@
         <div class="section-label">THE PROBLEM</div>
         <h2 class="big-headline">On-Chain Transparency <span class="accent">Breaks Privacy</span></h2>
 
-        <div class="visual-split">
-            <div class="visual-card">
-                <div class="card-header">
-                    <span class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
-                        </svg>
-                    </span>
-                    <h3>Corporate Payroll</h3>
-                </div>
-                <div class="exposure-diagram">
-                    <div class="diagram-flow">
-                        <div class="flow-node company">Company Wallet</div>
-                        <div class="flow-arrow">
-                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-                        </div>
-                        <div class="flow-node employee">Employee</div>
-                    </div>
-                    <div class="exposed-data">
-                        <div class="data-item exposed">
-                            <span class="data-label">Amount</span>
-                            <span class="data-value">$15,000</span>
-                        </div>
-                        <div class="data-item exposed">
-                            <span class="data-label">Address</span>
-                            <span class="data-value">0x1a2b...9f</span>
-                        </div>
-                        <div class="data-item exposed">
-                            <span class="data-label">Timing</span>
-                            <span class="data-value">Monthly</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="card-impact">Salary, bonus structure, employee wallets all PUBLIC</p>
+        <div class="problem-visual-row">
+            <div class="problem-card">
+                <img src="assets/problem-payroll.svg" alt="Payroll Exposure" class="problem-svg">
             </div>
-
-            <div class="visual-card">
-                <div class="card-header">
-                    <span class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                    </span>
-                    <h3>B2B Settlements</h3>
-                </div>
-                <div class="exposure-diagram">
-                    <div class="diagram-flow">
-                        <div class="flow-node company">Firm A</div>
-                        <div class="flow-arrow">
-                            <svg viewBox="0 0 60 24"><path d="M0 12h50M50 12l-8-6M50 12l-8 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-                        </div>
-                        <div class="flow-node company">Firm B</div>
-                    </div>
-                    <div class="exposed-data">
-                        <div class="data-item exposed">
-                            <span class="data-label">Deal Size</span>
-                            <span class="data-value">$50M</span>
-                        </div>
-                        <div class="data-item exposed">
-                            <span class="data-label">Partners</span>
-                            <span class="data-value">Visible</span>
-                        </div>
-                        <div class="data-item exposed">
-                            <span class="data-label">Frequency</span>
-                            <span class="data-value">Trackable</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="card-impact">Deal sizes, partnerships, trading volumes EXPOSED</p>
+            <div class="problem-card">
+                <img src="assets/problem-b2b.svg" alt="B2B Deal Exposure" class="problem-svg">
             </div>
         </div>
 
@@ -229,10 +164,10 @@
 
 <!-- Slide 3: Existing Solutions -->
 <div class="slide" data-slide="3">
-    <div class="slide-inner">
+    <div class="slide-inner slide3-centered">
         <span class="slide-num">02</span>
-        <div class="section-label">CURRENT LANDSCAPE</div>
-        <h2 class="big-headline">Existing Solutions <span class="accent">Fall Short</span></h2>
+        <div class="section-label" style="text-align: center;">CURRENT LANDSCAPE</div>
+        <h2 class="big-headline" style="text-align: center;">Existing Solutions <span class="accent">Fall Short</span></h2>
 
         <div class="comparison-table">
             <div class="table-header">
@@ -364,25 +299,43 @@
             <img src="assets/flow-diagram.svg" alt="Architecture Flow" class="full-width-diagram">
         </div>
 
-        <div class="tech-specs">
-            <div class="spec-card">
-                <div class="spec-header">Zero-Knowledge Proof</div>
-                <div class="spec-content">
-                    <p>Validates transaction without revealing sender, receiver, or amount</p>
+        <div class="tech-icons-row">
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#9945FF" stroke-width="2">
+                        <circle cx="24" cy="24" r="20"/>
+                        <path d="M24 14 L24 24 L32 28"/>
+                        <circle cx="24" cy="24" r="8" fill="rgba(153,69,255,0.2)"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">Zero-Knowledge Proof</div>
+                <div class="tech-icon-desc">Validates without revealing data</div>
             </div>
-            <div class="spec-card highlight">
-                <div class="spec-header">FHE Encrypted Audit</div>
-                <div class="spec-content">
-                    <p>Homomorphic encryption enables queries on encrypted logs</p>
-                    <code>SUM(Enc(amount)) where Enc(sender) = X</code>
+            <div class="tech-icon-card highlight">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#14F195" stroke-width="2">
+                        <rect x="8" y="16" width="32" height="24" rx="4"/>
+                        <path d="M16 16 V12 A8 8 0 0 1 32 12 V16"/>
+                        <circle cx="24" cy="28" r="3" fill="#14F195"/>
+                        <line x1="24" y1="31" x2="24" y2="36"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">FHE Encrypted Audit</div>
+                <div class="tech-icon-desc">Compute on encrypted data</div>
             </div>
-            <div class="spec-card">
-                <div class="spec-header">MPC Threshold Decryption</div>
-                <div class="spec-content">
-                    <p>3-of-5 nodes required for audit decryption</p>
+            <div class="tech-icon-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="#9945FF" stroke-width="2">
+                        <circle cx="24" cy="12" r="8"/>
+                        <circle cx="10" cy="36" r="8"/>
+                        <circle cx="38" cy="36" r="8"/>
+                        <line x1="24" y1="20" x2="14" y2="30"/>
+                        <line x1="24" y1="20" x2="34" y2="30"/>
+                        <line x1="18" y1="36" x2="30" y2="36"/>
+                    </svg>
                 </div>
+                <div class="tech-icon-label">MPC Threshold</div>
+                <div class="tech-icon-desc">3-of-5 nodes for decryption</div>
             </div>
         </div>
 
@@ -402,48 +355,45 @@
     </div>
 </div>
 
-<!-- Slide 5: Market / GTM / Fees -->
+<!-- Slide 5: Market / GTM -->
 <div class="slide" data-slide="5">
-    <div class="slide-inner">
+    <div class="slide-inner slide5-centered">
         <span class="slide-num">04</span>
-        <div class="section-label">MARKET OPPORTUNITY</div>
-        <h2 class="big-headline">Market Size & <span class="accent">Go-To-Market</span></h2>
+        <div class="section-label" style="text-align: center;">MARKET OPPORTUNITY</div>
+        <h2 class="big-headline" style="text-align: center;">Market Size & <span class="accent">Go-To-Market</span></h2>
 
-        <div class="slide5-layout">
-            <div class="slide5-left">
+        <div class="slide5-layout-v2">
+            <div class="tam-section">
                 <img src="assets/market-tam.svg" alt="TAM SAM SOM" class="tam-chart-large">
             </div>
-            <div class="slide5-right">
-                <div class="fee-chart-container-sm">
-                    <img src="assets/fee-chart.svg" alt="Fee Comparison" class="fee-chart-sm">
-                </div>
-                <div class="gtm-timeline-compact">
-                    <div class="timeline-header-sm">Go-To-Market Phases</div>
-                    <div class="timeline-track-sm">
-                        <div class="timeline-phase-sm">
-                            <div class="phase-marker-sm">Q1</div>
-                            <div class="phase-content-sm">
+            <div class="gtm-section">
+                <div class="gtm-timeline-large">
+                    <div class="timeline-header-lg">Go-To-Market Phases</div>
+                    <div class="timeline-track-lg">
+                        <div class="timeline-phase-lg">
+                            <div class="phase-marker-lg">Q1</div>
+                            <div class="phase-content-lg">
                                 <h4>Solana Payroll</h4>
                                 <p>Crypto-native companies</p>
                             </div>
                         </div>
-                        <div class="timeline-phase-sm">
-                            <div class="phase-marker-sm">Q2</div>
-                            <div class="phase-content-sm">
+                        <div class="timeline-phase-lg">
+                            <div class="phase-marker-lg">Q2</div>
+                            <div class="phase-content-lg">
                                 <h4>B2B Settlements</h4>
                                 <p>Trading firms, DAOs</p>
                             </div>
                         </div>
-                        <div class="timeline-phase-sm">
-                            <div class="phase-marker-sm">Q3</div>
-                            <div class="phase-content-sm">
+                        <div class="timeline-phase-lg">
+                            <div class="phase-marker-lg">Q3</div>
+                            <div class="phase-content-lg">
                                 <h4>DeFi SDK</h4>
                                 <p>DEX, lending protocols</p>
                             </div>
                         </div>
-                        <div class="timeline-phase-sm">
-                            <div class="phase-marker-sm">Q4</div>
-                            <div class="phase-content-sm">
+                        <div class="timeline-phase-lg">
+                            <div class="phase-marker-lg">Q4</div>
+                            <div class="phase-content-lg">
                                 <h4>Multi-Chain</h4>
                                 <p>ETH, Polygon expansion</p>
                             </div>
@@ -451,6 +401,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="slide-refs">
+            <a href="https://www.grandviewresearch.com/industry-analysis/blockchain-technology-market" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Grand View Research
+            </a>
+            <a href="https://www.chainalysis.com/blog/defi-adoption-indexes/" target="_blank" class="ref-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Chainalysis DeFi
+            </a>
         </div>
     </div>
 </div>
@@ -532,45 +493,63 @@
         <div class="section-label">COMPETITIVE EDGE</div>
         <h2 class="big-headline" style="margin-bottom: 16px;">Why <span class="accent">LatticA</span></h2>
 
-        <div class="slide7-layout">
-            <div class="slide7-left">
+        <div class="slide7-layout-v2">
+            <div class="slide7-left-v2">
                 <img src="assets/performance-chart.svg" alt="Performance Comparison" class="perf-chart-large">
             </div>
 
-            <div class="slide7-right">
-                <div class="advantage-item-sm">
-                    <div class="adv-header-sm">
-                        <span class="adv-num-sm">01</span>
-                        <span class="adv-title-sm">Cross-Platform Determinism</span>
+            <div class="slide7-right-v2">
+                <div class="advantage-block">
+                    <div class="adv-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#14F195" stroke-width="2">
+                            <rect x="8" y="8" width="14" height="14" rx="2"/>
+                            <rect x="26" y="8" width="14" height="14" rx="2"/>
+                            <rect x="8" y="26" width="14" height="14" rx="2"/>
+                            <rect x="26" y="26" width="14" height="14" rx="2"/>
+                        </svg>
                     </div>
-                    <div class="adv-platforms-sm">
-                        <span class="platform-badge-sm">CPU</span>
-                        <span class="platform-badge-sm">GPU</span>
-                        <span class="platform-badge-sm">FPGA</span>
-                    </div>
-                    <p class="adv-desc-sm">NTT-based (no FFT errors)</p>
-                </div>
-
-                <div class="advantage-item-sm">
-                    <div class="adv-header-sm">
-                        <span class="adv-num-sm">02</span>
-                        <span class="adv-title-sm">Compliance-First Design</span>
-                    </div>
-                    <div class="adv-checks-sm">
-                        <span class="check-item-sm">AML/KYC</span>
-                        <span class="check-item-sm">Audit Logs</span>
-                        <span class="check-item-sm">Threshold Dec</span>
+                    <div class="adv-content">
+                        <div class="adv-title-v2">Cross-Platform Determinism</div>
+                        <div class="adv-badges">
+                            <span class="badge-green">CPU</span>
+                            <span class="badge-green">GPU</span>
+                            <span class="badge-green">FPGA</span>
+                        </div>
+                        <div class="adv-note">NTT-based (no FFT errors)</div>
                     </div>
                 </div>
 
-                <div class="advantage-item-sm">
-                    <div class="adv-header-sm">
-                        <span class="adv-num-sm">03</span>
-                        <span class="adv-title-sm">Production Ready</span>
+                <div class="advantage-block">
+                    <div class="adv-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#9945FF" stroke-width="2">
+                            <path d="M24 4v8M24 36v8M4 24h8M36 24h8"/>
+                            <circle cx="24" cy="24" r="12"/>
+                            <path d="M20 24l3 3 6-6"/>
+                        </svg>
                     </div>
-                    <div class="adv-status-sm">
-                        <span class="status-badge-sm live">Devnet Live</span>
-                        <span class="status-badge-sm">Token-2022</span>
+                    <div class="adv-content">
+                        <div class="adv-title-v2">Compliance-First Design</div>
+                        <div class="adv-badges">
+                            <span class="badge-purple">AML/KYC</span>
+                            <span class="badge-purple">Audit Logs</span>
+                            <span class="badge-purple">Threshold Dec</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advantage-block highlight">
+                    <div class="adv-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#14F195" stroke-width="2">
+                            <circle cx="24" cy="24" r="18"/>
+                            <path d="M16 24l6 6 12-12"/>
+                        </svg>
+                    </div>
+                    <div class="adv-content">
+                        <div class="adv-title-v2">Production Ready</div>
+                        <div class="adv-badges">
+                            <span class="badge-live">Devnet Live</span>
+                            <span class="badge-green">Token-2022</span>
+                        </div>
                     </div>
                 </div>
             </div>
