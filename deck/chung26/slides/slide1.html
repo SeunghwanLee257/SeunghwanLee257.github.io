@@ -11,51 +11,82 @@
             <span class="gradient-text">Verify16</span>
         </h1>
 
-        <p class="subtitle">
+        <p class="subtitle" style="margin-bottom: 20px;">
             동형암호 기반 B2B 정산검증 SaaS 플랫폼
         </p>
 
-        <!-- 핵심 지표 카드 -->
-        <div style="background: white; border-radius: 16px; padding: 24px 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 32px;">
-            <div style="display: flex; gap: 40px; align-items: center; justify-content: center;">
-                <div style="text-align: center;">
-                    <div style="font-size: 12px; color: #64748B; margin-bottom: 4px;">연산 속도</div>
-                    <div style="font-size: 32px; font-weight: 800; color: #0066FF;">3ms</div>
-                    <div style="font-size: 10px; color: #0066FF; background: #EFF6FF; padding: 2px 8px; border-radius: 4px;">기존 대비 300배</div>
-                </div>
-                <div style="width: 1px; height: 50px; background: #E2E8F0;"></div>
-                <div style="text-align: center;">
-                    <div style="font-size: 12px; color: #64748B; margin-bottom: 4px;">데이터 노출</div>
-                    <div style="font-size: 32px; font-weight: 800; color: #22C55E;">0%</div>
-                    <div style="font-size: 10px; color: #22C55E; background: #F0FDF4; padding: 2px 8px; border-radius: 4px;">완전 비노출</div>
-                </div>
-                <div style="width: 1px; height: 50px; background: #E2E8F0;"></div>
-                <div style="text-align: center;">
-                    <div style="font-size: 12px; color: #64748B; margin-bottom: 4px;">리드타임 단축</div>
-                    <div style="font-size: 32px; font-weight: 800; color: #8B5CF6;">95%</div>
-                    <div style="font-size: 10px; color: #8B5CF6; background: #F3E8FF; padding: 2px 8px; border-radius: 4px;">7일 → 실시간</div>
-                </div>
-            </div>
+        <!-- 필수 테이블: 매출/투자/고용 (info.pdf 요구사항) -->
+        <div style="background: white; border-radius: 12px; padding: 16px 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 20px; width: 100%; max-width: 700px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                <thead>
+                    <tr style="background: #0066FF; color: white;">
+                        <th style="padding: 10px; text-align: left; border-radius: 6px 0 0 0;">구분</th>
+                        <th style="padding: 10px; text-align: center;">2025년 (작년)</th>
+                        <th style="padding: 10px; text-align: center;">'26년 1~2월<br><span style="font-size: 10px; font-weight: 400;">(증빙자료 근거)</span></th>
+                        <th style="padding: 10px; text-align: center; border-radius: 0 6px 0 0;">'26년 1~12월<br><span style="font-size: 10px; font-weight: 400;">(예상 총합)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border-bottom: 1px solid #E2E8F0; font-weight: 600;">매출</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0;">0원</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0;">0원</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0; font-weight: 700; color: #0066FF;">50,000,000원</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border-bottom: 1px solid #E2E8F0; font-weight: 600;">투자</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0;">0원</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0;">0원</td>
+                        <td style="padding: 10px; text-align: center; border-bottom: 1px solid #E2E8F0; font-weight: 700; color: #0066FF;">200,000,000원</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; font-weight: 600;">고용</td>
+                        <td style="padding: 10px; text-align: center;">2명</td>
+                        <td style="padding: 10px; text-align: center;">2명</td>
+                        <td style="padding: 10px; text-align: center; font-weight: 700; color: #0066FF;">3명</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div style="font-size: 14px; color: #64748B; margin-bottom: 24px;">
-            기업 간 정산 시 데이터 노출 없는 결과도출 보안 SaaS
+        <!-- 핵심 지표 카드 -->
+        <div style="display: flex; gap: 24px; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <div style="text-align: center; background: #EFF6FF; padding: 12px 20px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #64748B; margin-bottom: 2px;">연산 속도</div>
+                <div style="font-size: 24px; font-weight: 800; color: #0066FF;">3ms</div>
+                <div style="font-size: 9px; color: #0066FF;">기존 대비 300배</div>
+            </div>
+            <div style="text-align: center; background: #F0FDF4; padding: 12px 20px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #64748B; margin-bottom: 2px;">데이터 노출</div>
+                <div style="font-size: 24px; font-weight: 800; color: #22C55E;">0%</div>
+                <div style="font-size: 9px; color: #22C55E;">완전 비노출</div>
+            </div>
+            <div style="text-align: center; background: #F3E8FF; padding: 12px 20px; border-radius: 10px;">
+                <div style="font-size: 11px; color: #64748B; margin-bottom: 2px;">리드타임 단축</div>
+                <div style="font-size: 24px; font-weight: 800; color: #8B5CF6;">95%</div>
+                <div style="font-size: 9px; color: #8B5CF6;">7일 → 실시간</div>
+            </div>
         </div>
 
         <div style="display: flex; gap: 24px; align-items: center; justify-content: center;">
             <div style="text-align: center;">
                 <div style="font-size: 11px; color: #94A3B8;">기업명</div>
-                <div style="font-size: 16px; font-weight: 700; color: #1E293B;">월넛 주식회사</div>
+                <div style="font-size: 15px; font-weight: 700; color: #1E293B;">월넛 주식회사</div>
             </div>
-            <div style="width: 1px; height: 30px; background: #E2E8F0;"></div>
+            <div style="width: 1px; height: 24px; background: #E2E8F0;"></div>
             <div style="text-align: center;">
                 <div style="font-size: 11px; color: #94A3B8;">대표자</div>
-                <div style="font-size: 16px; font-weight: 700; color: #1E293B;">이승환</div>
+                <div style="font-size: 15px; font-weight: 700; color: #1E293B;">이승환</div>
             </div>
-            <div style="width: 1px; height: 30px; background: #E2E8F0;"></div>
+            <div style="width: 1px; height: 24px; background: #E2E8F0;"></div>
             <div style="text-align: center;">
                 <div style="font-size: 11px; color: #94A3B8;">설립일</div>
-                <div style="font-size: 16px; font-weight: 700; color: #1E293B;">2025.01.16</div>
+                <div style="font-size: 15px; font-weight: 700; color: #1E293B;">2025.01.16</div>
+            </div>
+            <div style="width: 1px; height: 24px; background: #E2E8F0;"></div>
+            <div style="text-align: center;">
+                <div style="font-size: 11px; color: #94A3B8;">정부지원금</div>
+                <div style="font-size: 15px; font-weight: 700; color: #1E293B;">100백만원</div>
             </div>
         </div>
     </div>
