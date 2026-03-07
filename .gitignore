@@ -2,3 +2,6 @@
 # Node modules in deck folders
 deck/*/node_modules/
 deck/*/*/node_modules/
+
+# Confidential demo files
+demo/chung26/

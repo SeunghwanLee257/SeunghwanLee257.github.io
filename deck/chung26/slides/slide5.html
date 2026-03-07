@@ -1,0 +1,123 @@
+<!-- Slide 5: 기술 차별성 -->
+<div class="slide" data-slide="5">
+    <div class="slide-inner">
+        <span class="slide-num">04</span>
+        <div class="section-label">Technology</div>
+        <h2 class="big-headline">4세대 동형암호 <span class="accent">FHE16</span> 원천기술</h2>
+
+        <!-- 성능 비교 -->
+        <div style="display: flex; gap: 20px; margin-top: 16px;">
+            <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 14px; color: #64748B; margin-bottom: 12px;">연산 속도 비교</div>
+                <div style="background: #F8FAFC; border-radius: 12px; padding: 20px; border: 1px solid #E2E8F0;">
+                    <!-- Zama -->
+                    <div style="margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-size: 12px; color: #64748B;">Zama (글로벌 선두)</span>
+                            <span style="font-size: 12px; font-weight: 700; color: #EF4444;">1초 이상</span>
+                        </div>
+                        <div style="background: #FEE2E2; height: 20px; border-radius: 4px; position: relative;">
+                            <div style="background: #EF4444; height: 100%; width: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <!-- 기타 FHE -->
+                    <div style="margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-size: 12px; color: #64748B;">기타 FHE 라이브러리</span>
+                            <span style="font-size: 12px; font-weight: 700; color: #F59E0B;">100~500ms</span>
+                        </div>
+                        <div style="background: #FEF3C7; height: 20px; border-radius: 4px; position: relative;">
+                            <div style="background: #F59E0B; height: 100%; width: 30%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <!-- FHE16 -->
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-size: 12px; font-weight: 700; color: #0066FF;">FHE16 (당사)</span>
+                            <span style="font-size: 12px; font-weight: 700; color: #22C55E;">3ms 이하</span>
+                        </div>
+                        <div style="background: #F0FDF4; height: 20px; border-radius: 4px; position: relative;">
+                            <div style="background: linear-gradient(90deg, #22C55E, #0066FF); height: 100%; width: 1%; border-radius: 4px; min-width: 8px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 14px; color: #64748B; margin-bottom: 12px;">핵심 기술 역량</div>
+                <div style="background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%); border-radius: 12px; padding: 20px; color: white;">
+                    <div style="font-size: 13px; line-height: 1.8;">
+                        <div style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-size: 11px;">1</span>
+                            <div>
+                                <strong>부트스트래핑 최적화</strong><br>
+                                <span style="opacity: 0.9; font-size: 11px;">저지연 연산 구조, 병렬화 가능 패턴</span>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-size: 11px;">2</span>
+                            <div>
+                                <strong>MPC/Threshold 키관리</strong><br>
+                                <span style="opacity: 0.9; font-size: 11px;">분산 키관리로 단독보유 리스크 제거</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 8px;">
+                            <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 4px; font-size: 11px;">3</span>
+                            <div>
+                                <strong>GPU 병렬 최적화</strong><br>
+                                <span style="opacity: 0.9; font-size: 11px;">기존 ERP/CRM과 API 연동</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 특허 현황 -->
+        <div style="background: #F8FAFC; border-radius: 12px; padding: 20px; margin-top: 16px; border: 1px solid #E2E8F0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div style="font-weight: 700; font-size: 14px; color: #1E293B;">지식재산권 현황 (7건)</div>
+                <div style="font-size: 11px; color: #64748B;">권리권자: 월넛 주식회사</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                <div style="background: white; border-left: 3px solid #0066FF; padding: 10px 12px; border-radius: 4px;">
+                    <div style="font-size: 10px; color: #64748B;">10-2023-0017554</div>
+                    <div style="font-size: 11px; font-weight: 600; color: #1E293B;">부동소수점 동형 연산</div>
+                </div>
+                <div style="background: white; border-left: 3px solid #0066FF; padding: 10px 12px; border-radius: 4px;">
+                    <div style="font-size: 10px; color: #64748B;">PCT/KR2024/012529</div>
+                    <div style="font-size: 11px; font-weight: 600; color: #1E293B;">향상된 동형 암호문 생성</div>
+                </div>
+                <div style="background: white; border-left: 3px solid #0066FF; padding: 10px 12px; border-radius: 4px;">
+                    <div style="font-size: 10px; color: #64748B;">10-2025-0182539</div>
+                    <div style="font-size: 11px; font-weight: 600; color: #1E293B;">Threshold decryption</div>
+                </div>
+                <div style="background: white; border-left: 3px solid #0066FF; padding: 10px 12px; border-radius: 4px;">
+                    <div style="font-size: 10px; color: #64748B;">10-2025-0182540</div>
+                    <div style="font-size: 11px; font-weight: 600; color: #1E293B;">Blind rotation 병렬화</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 학술 실적 -->
+        <div style="display: flex; gap: 16px; margin-top: 16px;">
+            <div style="flex: 1; background: #EFF6FF; border-radius: 8px; padding: 12px; border: 1px solid #93C5FD;">
+                <div style="font-size: 11px; color: #2563EB; font-weight: 600;">Crypto'25 학회</div>
+                <div style="font-size: 12px; color: #1E40AF;">동형암호/MPC 분야 최상위 학회 논문 보유</div>
+            </div>
+            <div style="flex: 1; background: #F0FDF4; border-radius: 8px; padding: 12px; border: 1px solid #86EFAC;">
+                <div style="font-size: 11px; color: #16A34A; font-weight: 600;">한양대 암호연구실</div>
+                <div style="font-size: 12px; color: #166534;">기술 실시권 계약을 통한 독점 사용</div>
+            </div>
+            <div style="flex: 1; background: #FFF7ED; border-radius: 8px; padding: 12px; border: 1px solid #FDBA74;">
+                <div style="font-size: 11px; color: #EA580C; font-weight: 600;">IRC 과제 수행</div>
+                <div style="font-size: 12px; color: #C2410C;">5G 동형암호 운용 연구 (2025.08~)</div>
+            </div>
+        </div>
+
+        <div class="company-footer">
+            <span>Verify16 | 월넛 주식회사</span>
+            <span>2026 청년창업사관학교</span>
+        </div>
+    </div>
+</div>
