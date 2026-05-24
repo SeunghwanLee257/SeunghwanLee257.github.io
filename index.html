@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="waLLLnut: For a secure and private world" />
+  <meta name="description" content="waLLLnut builds privacy-preserving intelligence across B2C demand, B2B risk, and blockchain confidential infrastructure." />
   <meta name="google" content="notranslate">
   <!-- 캐시 방지 -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -15,21 +15,21 @@
   <link rel="canonical" href="https://walllnut.com/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="waLLLnut: For a secure and private world">
-  <meta property="og:description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
+  <meta property="og:title" content="waLLLnut: Privacy-Preserving Intelligence">
+  <meta property="og:description" content="Privacy-preserving intelligence for consumer demand, enterprise risk, and blockchain confidential infrastructure.">
   <meta property="og:site_name" content="waLLLnut">
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://walllnut.com/">
-  <meta property="og:image" content="https://walllnut.com/asset/OGP-1200_630.png">
+  <meta property="og:image" content="https://walllnut.com/asset/generated/ogp-walllnut.svg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="waLLLnut: For a secure and private world">
+  <meta property="og:image:alt" content="waLLLnut PET portfolio across B2C, B2B, and blockchain tracks">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="waLLLnut: For a secure and private world">
-  <meta name="twitter:description" content="Build a private-by-default, publicly verifiable internet with FHE16.">
-  <meta name="twitter:image" content="https://walllnut.com/asset/OGP-1200_630.png">
-  <meta name="twitter:image:alt" content="waLLLnut: For a secure and private world">
+  <meta name="twitter:title" content="waLLLnut: Privacy-Preserving Intelligence">
+  <meta name="twitter:description" content="Privacy-preserving intelligence for consumer demand, enterprise risk, and blockchain confidential infrastructure.">
+  <meta name="twitter:image" content="https://walllnut.com/asset/generated/ogp-walllnut.svg">
+  <meta name="twitter:image:alt" content="waLLLnut PET portfolio across B2C, B2B, and blockchain tracks">
 
   <link rel="stylesheet" href="./css/00.tokens.css?v=20241220">
   <link rel="stylesheet" href="./css/01.base.css?v=20241220">
@@ -42,7 +42,58 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <script src="https://cdn.plot.ly/plotly-2.27.1.min.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+          'sm': '480px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1440px',
+        },
+        extend: {
+          colors: {
+            'wn': {
+              'ink': '#191919',
+              'paper': '#FFFFFF',
+              'muted': '#807F7F',
+              'accent': '#FF952D',
+              'accent-dark': '#D86B00',
+              'chip': '#DEDBD8',
+              'bg': '#F2F2F2',
+              'hover': '#FAFAF9',
+            }
+          },
+          fontFamily: {
+            'asap': ['"Asap Condensed"', 'Pretendard', 'sans-serif'],
+            'pretendard': ['Pretendard', 'sans-serif'],
+          },
+          borderRadius: {
+            'wn': '8px',
+            'wn-lg': '16px',
+            'wn-xl': '28px',
+            'wn-full': '999px',
+          },
+          boxShadow: {
+            'wn': '0 6px 24px rgba(0,0,0,0.16)',
+            'wn-btn': '0 8px 20px rgba(216,107,0,.4)',
+          },
+          zIndex: {
+            'header': '100',
+            'dropdown': '400',
+            'modal': '1000',
+            'toast': '1100',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Chart.js (Plotly 3.5MB -> Chart.js 65KB) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="icon" href="./asset/logo-filled-orange.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,12 +129,68 @@
 <body>
   <header class="header header-font" role="banner">
     <div class="header-left">
-      <nav class="nav" aria-label="주요 섹션">
-        <a href="#sec02" data-i18n="nav.vision">Vision</a>
-        <a href="#sec03" data-i18n="nav.solutions">Solutions</a>
-        <a href="#sec04" data-i18n="nav.tech">Technology</a>
-        <a href="#sec06" data-i18n="nav.team">Team</a>
-      </nav>
+      <!-- Benchmark Dropdown -->
+      <div class="nav-dropdown" data-dropdown="benchmark">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="nav.benchmark">Benchmark</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="./benchmark.html">Benchmark Lab</a>
+          <a href="./traction.html#papers" data-i18n="nav.papers">Papers</a>
+        </nav>
+      </div>
+
+      <!-- Vision Dropdown -->
+      <div class="nav-dropdown" data-dropdown="vision">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="nav.vision">Vision</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="#sec02" data-i18n="nav.petEngine">PET Engine</a>
+          <a href="#sec05" data-i18n="nav.abcTracks">A / B / C Tracks</a>
+        </nav>
+      </div>
+
+      <!-- Solutions Dropdown -->
+      <div class="nav-dropdown" data-dropdown="solutions">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="nav.solutions">Solutions</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="#sec03" data-i18n="nav.track.a">A. B2C</a>
+          <a href="#sec03" data-i18n="nav.track.b">B. B2B</a>
+          <a href="#sec03" data-i18n="nav.track.c">C. Blockchain</a>
+        </nav>
+      </div>
+
+      <!-- Team Dropdown -->
+      <div class="nav-dropdown" data-dropdown="team">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="nav.team">Team</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="#sec06" data-i18n="nav.current">Current</a>
+          <a href="#" data-open-modal="archive-modal" data-tab="alumni" data-i18n="nav.alumni">Alumni</a>
+        </nav>
+      </div>
+
+      <!-- Research Dropdown -->
+      <div class="nav-dropdown" data-dropdown="research">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-i18n="nav.research">Research</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="./traction.html#papers" data-i18n="nav.publications">Publications</a>
+          <a href="./traction.html#press" data-i18n="nav.press">Press</a>
+          <a href="./traction.html#traction" data-i18n="nav.traction">Traction</a>
+          <a href="http://ccrl.hanyang.ac.kr" target="_blank" rel="noopener noreferrer">HYU CCRL Lab</a>
+        </nav>
+      </div>
     </div>
 
     <div class="header-center">
@@ -97,8 +204,8 @@
       <div class="lang-dd header-floating" id="langDropdown">
       <div class="lang-controls">
         <div class="lang-toggle" role="group" aria-labelledby="langLabel">
-              <button type="button" class="lang-toggle-btn is-active" data-lang="en" aria-pressed="true">eng</button>
-              <button type="button" class="lang-toggle-btn" data-lang="ko" aria-pressed="false">ko</button>
+              <button type="button" class="lang-toggle-btn" data-lang="en" aria-pressed="false">eng</button>
+              <button type="button" class="lang-toggle-btn is-active" data-lang="ko" aria-pressed="true">ko</button>
             </div>
           </div>
         </div>
@@ -113,19 +220,22 @@
   <aside class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
     <div class="sidebar-menu-content">
       <nav class="sidebar-menu-nav sidebar-menu-nav--main" aria-label="주요 섹션">
+        <a href="./benchmark.html" data-i18n="nav.benchmark" class="sidebar-menu-link">Benchmark</a>
+        <a href="./traction.html" data-i18n="nav.traction" class="sidebar-menu-link">Traction</a>
         <a href="#sec02" data-i18n="nav.vision" class="sidebar-menu-link">Vision</a>
         <a href="#sec03" data-i18n="nav.solutions" class="sidebar-menu-link">Solutions</a>
         <a href="#sec04" data-i18n="nav.tech" class="sidebar-menu-link">Technology</a>
         <a href="#sec06" data-i18n="nav.team" class="sidebar-menu-link">Team</a>
+        <a href="#research" data-i18n="nav.research" class="sidebar-menu-link">Research</a>
       </nav>
       <div class="sidebar-menu-gap"></div>
-      <h2 class="sidebar-menu-title">Our Archive</h2>
+      <h2 class="sidebar-menu-title" data-i18n="sidebar.archive">Our Archive</h2>
       <nav class="sidebar-menu-nav" aria-label="Archive links">
-        <a href="#" class="sidebar-menu-link" data-modal="alumni-community">Alumni Community</a>
-        <a href="#" class="sidebar-menu-link" data-modal="ir">IR</a>
+        <a href="#" class="sidebar-menu-link" data-modal="alumni-community" data-i18n="sidebar.alumniCommunity">Alumni Community</a>
+        <a href="#" class="sidebar-menu-link" data-modal="ir" data-i18n="sidebar.ir">IR</a>
       </nav>
       <div class="sidebar-menu-gap"></div>
-      <h2 class="sidebar-menu-title">Our SNS</h2>
+      <h2 class="sidebar-menu-title" data-i18n="sidebar.sns">Our SNS</h2>
       <nav class="sidebar-menu-nav" aria-label="Social media links">
         <a href="https://x.com/waLLLnut_co_Inc" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">x</a>
         <a href="https://www.linkedin.com/company/108117808/admin/dashboard/" target="_blank" rel="noopener noreferrer" class="sidebar-menu-link">LinkedIn</a>
@@ -146,95 +256,80 @@
           <div class="hero-slider" data-hero-slider>
             <div class="hero-slides">
               <article class="hero-slide is-active" id="hero-slide-0" data-slide-index="0" aria-hidden="false">
-                <img class="hero-slide-media" src="./asset/sec01-bg.jpeg" alt="Confidential coprocessor overview">
+                <div class="hero-slide-media hero-slide-media--portfolio" aria-hidden="true"></div>
                 <div class="hero-slide-overlay"></div>
                 <div class="hero-slide-content hero-slide-content--split">
                   <div class="hero-heading-stack">
-                    <div id="hero-heading" class="hero-heading-row" data-i18n="hero.headline" role="heading" aria-level="3">
-                      <span class="hero-heading-text hero-heading-text--left"><strong>Confidential Coprocessor</strong></span>
-                      <span class="hero-heading-text hero-heading-text--right">for <strong>Fair</strong> and Verifiable RWA Markets <strong>FHE16</strong><br>+ MPC + Threshold Cryptography — <strong>Privacy</strong> that <strong>scales with performance.</strong></span>
-      </div>
+                    <div id="hero-heading" class="hero-heading-row" data-i18n="hero.headline" role="heading" aria-level="3">PET 기반 기밀 연산으로<br>B2C 수요, B2B 리스크, 블록체인 인프라를 연결합니다</div>
+                    <div class="hero-track-grid" aria-label="waLLLnut portfolio tracks">
+                      <div class="hero-track-card hero-track-card--a">
+                        <span class="hero-track-kicker">A</span>
+                        <strong data-i18n="hero.track.a.title">B2C Demand Forecasting</strong>
+                        <span data-i18n="hero.track.a.desc">비공개 수요 조사 · 물량/가격 리포트 · 2026 Coming Soon</span>
+                      </div>
+                      <div class="hero-track-card hero-track-card--b">
+                        <span class="hero-track-kicker">B</span>
+                        <strong data-i18n="hero.track.b.title">B2B PET Risk Intelligence</strong>
+                        <span data-i18n="hero.track.b.desc">신원 이상 · 보험/거래 리스크 · PET 기반 FDS</span>
+                      </div>
+                      <div class="hero-track-card hero-track-card--c">
+                        <span class="hero-track-kicker">C</span>
+                        <strong data-i18n="hero.track.c.title">Blockchain Confidential Infrastructure</strong>
+                        <span data-i18n="hero.track.c.desc">암호화 상태 · 검증 가능한 실행 · 개발자 인프라</span>
+                      </div>
+                    </div>
             </div>
                 </div>
               </article>
-              <article class="hero-slide" id="hero-slide-1" data-slide-index="1" aria-hidden="true">
-                <img class="hero-slide-media" src="./asset/sec01-bg.jpeg" alt="Benchmark chart background" style="z-index: 0;">
-                <div class="hero-slide-media hero-slide-media--chart" style="z-index: 1;"></div>
-                <div class="hero-slide-overlay hero-slide-overlay--graph"></div>
-                <div class="hero-slide-content hero-slide-content--graph">
-                  <div class="hero-slide-visual hero-slide-visual--graph">
-                    <div class="benchmark-chart" id="benchmarkChart">
-                      <div class="chart-header">
-                        <select id="benchmarkVersion" class="chart-version-select" aria-label="Select benchmark version" style="display: none;">
-                          <option value="version1" selected>Version 1</option>
-                        </select>
-                        <button class="chart-detail-btn" id="chartDetailBtn" aria-label="View detailed chart" style="display: none;">
-                          <span class="detail-btn-text" id="detailBtnText">View Details</span>
-                          <span class="material-icons" aria-hidden="true">open_in_new</span>
-                        </button>
-                      </div>
-                      <div class="chart-wrapper">
-                        <div id="benchmarkChartCanvas"></div>
-                      </div>
-                      <div class="chart-categories" id="chartCategories" role="tablist" aria-label="Benchmark categories">
-                        <button class="category-tab" data-category="ABS" role="tab" aria-selected="true" aria-controls="benchmarkChartCanvas">ABS</button>
-                        <button class="category-tab" data-category="ADD_TH" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD_TH</button>
-                        <button class="category-tab" data-category="ADD_VER2" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD_VER2</button>
-                        <button class="category-tab" data-category="ADD" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD</button>
-                        <button class="category-tab" data-category="ADD3" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">ADD3</button>
-                        <button class="category-tab" data-category="EQ" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">EQ</button>
-                        <button class="category-tab" data-category="GATE_VEC" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">GATE_VEC</button>
-                        <button class="category-tab" data-category="LT" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">LT</button>
-                        <button class="category-tab" data-category="MAX" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">MAX</button>
-                        <button class="category-tab" data-category="NEG" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">NEG</button>
-                        <button class="category-tab" data-category="SELECT" role="tab" aria-selected="false" aria-controls="benchmarkChartCanvas">SELECT</button>
-                      </div>
-                    </div>
-                    
-                    <!-- Chart Detail Modal -->
-                    <div class="chart-detail-modal" id="chartDetailModal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-                      <div class="modal-overlay" id="modalOverlay"></div>
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h3 class="modal-title" id="modalTitle">Benchmark Details</h3>
-                          <button class="modal-close" id="modalClose" aria-label="Close modal">
-                            <span class="material-icons" aria-hidden="true">close</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="modal-chart-wrapper">
-                            <div id="modalChartCanvas"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            </div>
           </div>
         </div>
-              </article>
-            </div>
-                <div class="hero-slider-controls">
-                  <button class="hero-nav hero-nav-prev" type="button" aria-label="Previous slide">
-                    <span class="material-icons" aria-hidden="true">chevron_left</span>
-                  </button>
-                  <button class="hero-nav hero-nav-next" type="button" aria-label="Next slide">
-                    <span class="material-icons" aria-hidden="true">chevron_right</span>
-                  </button>
-                </div>
+      </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section id="problem" class="problem-section" data-aos="fade-up">
+      <div class="problem-container">
+        <h2 class="problem-label" data-i18n="problem.label">01. Market Problem</h2>
+        <h3 class="problem-title" data-i18n="problem.title">원본 데이터를 공유해야 풀리는 문제들이지만, 원본 공유는 불가능합니다</h3>
+        <p class="problem-desc" data-i18n="problem.desc">
+          수요 예측, 보험·거래 리스크, 블록체인 상태 검증은 모두 민감한 신호에 의존합니다.<br>
+          waLLLnut은 PET 기술로 원본은 숨기고 필요한 계산 결과만 사업 의사결정에 연결합니다.
+        </p>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <span class="material-icons problem-icon">inventory_2</span>
+            <h4 data-i18n="problem.a.title">A. 출시 수요와 물량은 아직 감에 의존합니다</h4>
+            <p data-i18n="problem.a.desc">팬덤·한정판·수집재 시장은 지불 의향과 실제 수요가 숨겨져 있어 가격, 생산량, 재고 의사결정이 흔들립니다.</p>
           </div>
+          <div class="problem-card">
+            <span class="material-icons problem-icon">policy</span>
+            <h4 data-i18n="problem.b.title">B. 사기·이상 거래 데이터는 기관별로 끊겨 있습니다</h4>
+            <p data-i18n="problem.b.desc">보험 청구, 신원, 계좌, 거래 패턴은 교차 검증이 필요하지만 개인정보와 규제로 원본 이동이 어렵습니다.</p>
+          </div>
+          <div class="problem-card">
+            <span class="material-icons problem-icon">hub</span>
+            <h4 data-i18n="problem.c.title">C. 공개 원장은 민감 업무 확장을 막습니다</h4>
+            <p data-i18n="problem.c.desc">온체인 애플리케이션은 검증성은 필요하지만 입찰, 신용, 거래 조건, 상태 값까지 공개되면 실사용이 제한됩니다.</p>
+          </div>
+        </div>
+        <div class="problem-cta">
+          <a href="#sec03" class="btn-primary" data-i18n="cta.seeSolution">See Our Solution</a>
+          <a href="#contact" class="btn-secondary" data-i18n="cta.talkToUs">Talk to Us</a>
         </div>
       </div>
     </section>
 
     <!-- 02. Vision Narrative -->
     <section id="sec02" class="dot-bg" aria-labelledby="goal-label">
-      <h2 id="goal-label" class="section-label">01. Vision</h2>
+      <h2 id="goal-label" class="section-label" data-i18n="section.executive">02. Executive Summary</h2>
       <div class="vision-heading">
         <p class="vision-title" data-i18n="vision.title">
-          Confidential and Verifiable Computation
+          One PET Engine, Three Business Tracks
         </p>
         <p class="vision-subtitle" data-i18n="vision.subtitle">
-          This layer uses FHE, MPC, and Threshold Cryptography to perform verifiable<br>
-          computations on the blockchain while keeping sensitive data confidential.
+          waLLLnut applies FHE16, MPC, and threshold disclosure to build a staged business:<br>
+          consumer demand intelligence first, enterprise PET risk pilots next, and blockchain confidential infrastructure as the scalable layer.
         </p>
       </div>
       <div data-aos="fade-up" data-aos-duration="900" class="goal-wrap">
@@ -244,15 +339,12 @@
           <div class="goal-dropdown-card">
             <button class="goal-dropdown-header" id="goal-header-1" aria-expanded="false" aria-controls="goal-content-1">
               <span class="goal-dropdown-question">
-                What does waLLLnut actually do—and what are we confident about? 🫥💪
+                What business is waLLLnut building?
               </span>
                 <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
             <div class="goal-dropdown-content" id="goal-content-1" aria-labelledby="goal-header-1">
-              <p class="goal-dropdown-text"> We're a research-driven company building on quantum-resistant FHE (Fully Homomorphic Encryption)
-                and MPC (Multi-Party Computation) to make data security and privacy sustainable. Moreover, multi-
-                users’ data can be securely and privately processed — decrypting only when needed and extracting
-                statistical insights if necessary.📊📈
+              <p class="goal-dropdown-text" data-i18n="goal.a1">waLLLnut builds a PET business around markets where useful data cannot be exposed. The first wedge is B2C demand forecasting and allocation; the second is B2B identity, fraud, and anomalous transaction risk; the third is confidential blockchain infrastructure.
               </p>
             </div>
           </div>
@@ -260,51 +352,31 @@
           <div class="goal-dropdown-card card02">
             <button class="goal-dropdown-header" id="goal-header-2" aria-expanded="false" aria-controls="goal-content-2">
               <span class="goal-dropdown-question">
-                Hashes for waLLLnut's upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️
+                Why this strategy now?
               </span>
                 <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
             <div class="goal-dropdown-content" id="goal-content-2" aria-labelledby="goal-header-2">
-              <div class="item-drop">
-                <p class="dropItem-num02-subtitle" data-no-i18n><strong>(To be disclosed in Oct. 2025)</strong></p>
-                <div class="item-drop-content">
-                  <p data-i18n="goal.hash.disclose">f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139</p>
-                  <p>SHA256("Primitive Gate")</p>
-                </div>
-                <p><a href="https://x.com/LatticAwaLLLnut/status/1994684910401987064" target="_blank" rel="noopener noreferrer" class="lattice-link">Go LatticA <span class="material-icons" aria-hidden="true">arrow_forward</span> https://x.com/LatticAwaLLLnut/status/1994684910401987064</a></p>
-              </div>
-              <div class="item-drop">
-                <p class="dropItem-num02-subtitle" data-no-i18n><strong>(To be disclosed 1H 2026)</strong></p>
-                <p>e4462274db0498727f14b6ae254c32bbe0b1eda2f61c192ef71c896c88e7b7f5</p>
-              </div>
-              <div class="item-drop">
-                <p class="dropItem-num02-subtitle" data-no-i18n><strong>(To be disclosed 1H 2026)</strong></p>
-                <p>ffc2d4c64b8a683cc44cc98f910d2d9f7d7d873668f10b0bae14d025421016d8</p>
-              </div>
-              <div class="item-drop">
-
-                <p class="dropItem-num02-subtitle" data-no-i18n><strong>(To be disclosed 2H 2026)</strong></p>
-                <p>6c0214904ca1f25da77c4db533603d793f3c1cb335086e84f918ea10677c45d5</p>
-              </div>
+              <p class="goal-dropdown-text" data-i18n="goal.a2">Consumer teams need private demand signals before they commit inventory; financial and insurance teams need cross-organization risk checks without moving raw data; blockchain applications need confidentiality without giving up verification. One PET engine can serve all three with staged go-to-market risk.</p>
             </div>
           </div>
 
           <div class="goal-dropdown-card">
             <button class="goal-dropdown-header" id="goal-header-3" aria-expanded="false" aria-controls="goal-content-3">
               <span class="goal-dropdown-question">
-                So, what's in waLLLnut's product lineup? 🚀
+                What is the public A/B/C plan?
               </span>
                 <span class="material-icons goal-dropdown-icon" aria-hidden="true">add</span>
             </button>
             <div class="goal-dropdown-content" id="goal-content-3" aria-labelledby="goal-header-3">
               <p class="goal-dropdown-text">
-                Flagship Product — Deterministic Confidential Coprocessor 🏁
+                A. B2C Demand Forecasting & Allocation — private demand survey, pricing/allocation report, 2026 Coming Soon.
               </p>
               <p class="goal-dropdown-text">
-                Executes blockchain state data on FHE16, enabling public verification. 🔍
+                B. B2B PET Risk Intelligence — insurance claim cross-check, FDS, identity and anomalous transaction detection without raw data exposure.
               </p>
               <p class="goal-dropdown-text" data-i18n="goal.a3.3">
-                Unlike traditional ZK systems limited to fixed state verification, FHE16 keeps the entire state fully encrypted and enables true dynamic state verification without revealing any computation results.
+                C. Blockchain Confidential Infrastructure — encrypted state, confidential execution, threshold disclosure, and public verifiability.
               </p>
               </div>
             </div>
@@ -315,24 +387,23 @@
 
     <!-- 03. Solutions -->
     <section data-aos="fade-up" data-aos-duration="900" id="sec03" class="container" aria-labelledby="service-label">
-      <h2 id="service-label" class="section-label">03. Solutions</h2>
+      <h2 id="service-label" class="section-label" data-i18n="section.businessTracks">03. Business Tracks</h2>
       <div class="solutions-layout">
         <div class="solutions-card" data-solution-card>
           <div class="solutions-visual" data-solution-visual></div>
           <div class="solutions-content">
-            <p class="solutions-title" data-solution-title>Deterministic Confidential Coprocessor</p>
+            <p class="solutions-title" data-solution-title>B2C Demand Forecasting & Allocation</p>
             <p class="solutions-body" data-solution-body>
-              Normal transactions <strong>stay on-chain,</strong> while sensitive data/compute run in a <strong>confidential FHE coprocessor</strong>—keeping state public.
+              Convert private willingness-to-pay and demand signals into launch quantity, pricing, and allocation decisions. Product name undisclosed.
             </p>
-            <p class="solutions-sub" data-solution-sub>Encrypted data stays hidden</p>
+            <p class="solutions-sub" data-solution-sub>2026 Coming Soon</p>
           </div>
         </div>
         <nav class="solutions-tab-nav" aria-label="Solution categories">
           <ul>
-            <li><button type="button" class="solutions-tab is-active" data-solution="coprocessor" aria-selected="true">Coprocessor</button></li>
-            <li><button type="button" class="solutions-tab" data-solution="solana" aria-selected="false">Solana</button></li>
-            <li><button type="button" class="solutions-tab" data-solution="defi" aria-selected="false">DeFi</button></li>
-            <li><button type="button" class="solutions-tab" data-solution="voting" aria-selected="false">Voting</button></li>
+            <li><button type="button" class="solutions-tab is-active" data-solution="consumer" aria-selected="true">A. B2C</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="enterprise" aria-selected="false">B. B2B</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="blockchain" aria-selected="false">C. Blockchain</button></li>
           </ul>
         </nav>
       </div>
@@ -340,14 +411,14 @@
 
     <!-- 02. Technology -->
     <section data-aos="fade-up" data-aos-duration="900" id="sec04" class="container" aria-labelledby="tech-label">
-      <h2 id="tech-label" class="section-label">02. Technology</h2>
+      <h2 id="tech-label" class="section-label" data-i18n="section.techMoat">04. Technology Moat</h2>
 
       <div class="tech-split" role="group" aria-label="Technology Panels">
 
         <article class="tech-panel tech-panel--active" id="panel-a" aria-hidden="false">
           <button type="button" class="tech-panel-trigger" data-tech-target="panel-a" aria-label="View FHE16"></button>
           <div class="tech-panel-media">
-            <img src="./asset/bg/sec04-FHE16-bg.png" alt="Illustration of FHE16 chip architecture" loading="lazy">
+            <div class="tech-visual tech-visual--fhe" role="img" aria-label="FHE16 encrypted signal flow"></div>
             </div>
           <div class="tech-panel-content">
             <header class="tech-panel-header">
@@ -369,7 +440,7 @@
         <article class="tech-panel tech-panel--inactive" id="panel-b" aria-hidden="true">
           <button type="button" class="tech-panel-trigger" data-tech-target="panel-b" aria-label="View FHE16-based MPC"></button>
           <div class="tech-panel-media">
-            <img src="./asset/bg/sec04-SSFHE-bg.png" alt="Visual abstract of SSFHE secure circuit" loading="lazy">
+            <div class="tech-visual tech-visual--mpc" role="img" aria-label="MPC and threshold disclosure flow"></div>
           </div>
           <div class="tech-panel-content">
             <header class="tech-panel-header">
@@ -391,23 +462,95 @@
       </div>
     </section>
 
+    <!-- Comparison Table -->
+    <section id="compare" class="compare-section" data-aos="fade-up">
+      <div class="compare-container">
+        <h2 class="section-label" data-i18n="section.competitive">05. Competitive Position</h2>
+        <h3 class="compare-title" data-i18n="compare.title">Why FHE16 is the common engine behind A/B/C</h3>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th data-i18n="compare.feature">Feature</th>
+                <th class="highlight">FHE16</th>
+                <th data-i18n="compare.standard">Standard Analytics</th>
+                <th>MPC / PSI</th>
+                <th data-i18n="compare.zk">ZK Proofs</th>
+                <th>TEE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="compare.rawMin">Raw-data minimization</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.encryptedDesign">Encrypted by design</span></td>
+                <td><span class="cross">✗</span> <span data-i18n="compare.dataExposed">Data exposed</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.workflowSpecific">Strong, workflow-specific</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.provesStatements">Proves statements</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.hardwareTrust">Hardware trust</span></td>
+              </tr>
+              <tr>
+                <td data-i18n="compare.scoring">Encrypted comparison and scoring</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.coreFocus">Core focus</span></td>
+                <td><span class="cross">✗</span> <span data-i18n="compare.plaintextOnly">Plaintext only</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.coordination">Possible with coordination</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.heavyLive">Heavy for live scoring</span></td>
+                <td><span class="check">✓</span> <span data-i18n="compare.fastTrust">Fast, trust-dependent</span></td>
+              </tr>
+              <tr>
+                <td data-i18n="compare.browserPath">Browser / client execution path</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.wasmPath">FHE16-WASM path</span></td>
+                <td><span class="check">✓</span> <span data-i18n="compare.easy">Easy</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.dependsProtocol">Depends on protocol</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.proverCost">Prover cost</span></td>
+                <td><span class="cross">✗</span> <span data-i18n="compare.hardwareBound">Hardware-bound</span></td>
+              </tr>
+              <tr>
+                <td data-i18n="compare.enterprisePath">Enterprise pilot path</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.teePsiFhe">TEE -> PSI -> FHE path</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.privacyLimited">Easy but privacy-limited</span></td>
+                <td><span class="check">✓</span> <span data-i18n="compare.goodMatching">Good for matching</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.auditSpecific">Audit-specific</span></td>
+                <td><span class="check">✓</span> <span data-i18n="compare.shortBridge">Short-term bridge</span></td>
+              </tr>
+              <tr>
+                <td data-i18n="compare.blockchainFit">Blockchain confidentiality fit</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.confState">Confidential state and execution</span></td>
+                <td><span class="cross">✗</span> <span data-i18n="compare.publicDefault">Public by default</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.coordinationCost">Coordination cost</span></td>
+                <td><span class="check">✓</span> <span data-i18n="compare.verificationLayer">Verification layer</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.offchainTrust">Off-chain trust layer</span></td>
+              </tr>
+              <tr>
+                <td data-i18n="compare.crossMarket">Cross-market reuse</td>
+                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.sharedEngine">A/B/C shared engine</span></td>
+                <td><span class="cross">✗</span> <span data-i18n="compare.siloed">Siloed systems</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.usecaseSpecific">Use-case specific</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.proofCircuits">Proof circuits per use case</span></td>
+                <td><span class="partial">◐</span> <span data-i18n="compare.vendorSpecific">Vendor-specific</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <!-- 05. Property & Use Cases -->
     <section data-aos="fade-up" data-aos-duration="900" id="sec05" class="container">
 
       <div class="property-container">
         <div class="property-content">
-          <p class="property-title">waLLLnut's Property is,</p>
+          <p class="property-title" data-i18n="property.title">Portfolio Strategy</p>
         <ul class="property-features">
-            <li data-i18n="property.feature1">Each private state is deterministically encrypted under FHE16 and recorded on-chain.</li>
-            <li data-i18n="property.feature2">Any state change can be verified by all network participants.</li>
-            <li data-i18n="property.feature3">State disclosure is propagated via a Threshold Decryption protocol.</li>
+            <li data-i18n="property.feature1">A creates the first market wedge: privacy-preserving demand reports for consumer launches and allocation planning.</li>
+            <li data-i18n="property.feature2">B converts the same PET engine into enterprise pilots for insurance claim review, identity risk, FDS, and anomalous transaction workflows.</li>
+            <li data-i18n="property.feature3">C packages the engine as confidential blockchain infrastructure for encrypted state, threshold disclosure, and verifiable execution.</li>
         </ul>
         </div>
       </div>
 
-      <div class="use-cases-section">
+      <div class="use-cases-section use-cases-section--portfolio">
           <div class="use-cases-header">
-          <span class="use-cases-title" data-i18n="usecases.title">Use case</span>
+          <span class="use-cases-title" data-i18n="usecases.title">Business Model & GTM</span>
           <div class="use-case-controls">
             <button id="usecase-prev" class="slider-btn" type="button" aria-label="Previous use case">
                 <span class="material-icons" aria-hidden="true">chevron_left</span>
@@ -422,37 +565,28 @@
             <ul class="use-case-track">
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image" role="img" aria-label="Privacy preserving messaging illustration" style="background-image: url('./asset/graphic/sec06-usecase-01.png'); background-position:center; background-size:cover;"></div>
+                  <div class="use-case-image use-case-image--demand" role="img" aria-label="Masked demand forecasting graph"></div>
                     <div class="use-case-titleAndDesc">
-                    <h3 class="use-case-title" data-i18n="usecase.1.title">Protecting DeFi transaction data &amp; preventing MEV</h3>
-                    <p class="use-case-desc" data-i18n="usecase.1.desc">Keep your crypto trades private so others can't peek at your orders. Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).</p>
+                    <h3 class="use-case-title" data-i18n="usecase.1.title">A. Consumer Demand Intelligence</h3>
+                    <p class="use-case-desc" data-i18n="usecase.1.desc">Closed demand survey, private willingness-to-pay analysis, and launch quantity reports. Revenue path: report fee, transaction fee, premium seller tools, and later authenticity/fulfillment modules. 2026 Coming Soon.</p>
                     </div>
                 </article>
                 </li>
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image" role="img" aria-label="Protecting DeFi transaction illustration" style="background-image: url('./asset/graphic/sec06-usecase-02.png'); background-position:center; background-size:cover;"></div>
+                  <div class="use-case-image use-case-image--risk" role="img" aria-label="Enterprise risk graph and audit log"></div>
                     <div class="use-case-titleAndDesc">
-                    <h3 class="use-case-title" data-i18n="usecase.2.title">On-chain voting (selective anonymity + public verifiability)</h3>
-                    <p class="use-case-desc" data-i18n="usecase.2.desc">Vote on the blockchain while your identity and choice stay private. Anyone can still verify the overall results are real.</p>
+                    <h3 class="use-case-title" data-i18n="usecase.2.title">B. Enterprise Risk Intelligence</h3>
+                    <p class="use-case-desc" data-i18n="usecase.2.desc">Insurance claim cross-validation, FDS, identity mismatch, and anomalous transaction screening without moving raw customer data. GTM path: PoC, paid pilot, subscription or per-check pricing.</p>
                     </div>
                 </article>
                 </li>
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image" role="img" aria-label="On-chain voting illustration" style="background-image: url('./asset/graphic/sec06-usecase-03.png'); background-position:center; background-size:cover;"></div>
+                  <div class="use-case-image use-case-image--chain" role="img" aria-label="Encrypted blockchain state flow"></div>
                     <div class="use-case-titleAndDesc">
-                    <h3 class="use-case-title" data-i18n="usecase.3.title">Data marketplaces (perform computations without revealing raw data)</h3>
-                    <p class="use-case-desc" data-i18n="usecase.3.desc">Buy and sell insights without handing over your raw data. The marketplace runs computations on protected data, so the originals stay private.</p>
-                    </div>
-                </article>
-                </li>
-                <li class="use-case-item">
-                <article class="use-case">
-                  <div class="use-case-image" role="img" aria-label="Compliance analytics illustration" style="background-image: url('./asset/graphic/sec06-usecase-04.png'); background-position:center; background-size:cover;"></div>
-                    <div class="use-case-titleAndDesc">
-                    <h3 class="use-case-title" data-i18n="usecase.4.title">Privacy-preserving messaging/SNS</h3>
-                    <p class="use-case-desc" data-i18n="usecase.4.desc">Chat and share on social without giving up your privacy. Your content stays encrypted, and you decide who sees what.</p>
+                    <h3 class="use-case-title" data-i18n="usecase.3.title">C. Confidential Chain Infrastructure</h3>
+                    <p class="use-case-desc" data-i18n="usecase.3.desc">Developer-facing modules for confidential state, encrypted execution, and threshold disclosure. Revenue path: infrastructure integration, SDK support, and partner deployments.</p>
                     </div>
                 </article>
                 </li>
@@ -461,27 +595,27 @@
           </div>
       </div>
 
-      <div class="roadmap-section">
-        <img class="roadmap-title-img" src="./asset/graphic/sec06-Roadmap-title-img.png" alt="Roadmap title graphic" loading="lazy">
-        <div class="roadmap-timeline">
-          <article class="roadmap-item">
-            <div class="roadmap-date">
-              <span class="onDec">~Dec.2026</span>
+      <div class="portfolio-roadmap-section">
+        <h3 class="portfolio-roadmap-title" data-i18n="portfolio.title">Commercial Milestones</h3>
+        <div class="portfolio-roadmap-grid">
+          <article class="portfolio-roadmap-item">
+            <div class="portfolio-roadmap-date">
+              <span class="onDec">2026</span>
               <span class="status">Ongoing</span>
             </div>
-            <p class="roadmap-content">Launch of SVM-based Confidential Layer module</p>
+            <p class="portfolio-roadmap-content" data-i18n="portfolio.a">A. B2C demand forecasting and allocation launch<br><span>Closed survey, report MVP, creator/seller onboarding</span></p>
           </article>
-          <article class="roadmap-item">
-            <div class="roadmap-date">
-              <span class="date">~Nov.2026</span>
+          <article class="portfolio-roadmap-item">
+            <div class="portfolio-roadmap-date">
+              <span class="date">2026</span>
           </div>
-            <p class="roadmap-content">LatticA<br><span>The Solana-native confidential computing that makes encrypted data computable and verifiable anywhere.</span></p>
+            <p class="portfolio-roadmap-content" data-i18n="portfolio.b">B. PET risk intelligence PoC and pilots<br><span>Insurance claim cross-check, FDS, identity and anomaly workflows</span></p>
           </article>
-          <article class="roadmap-item">
-            <div class="roadmap-date">
-              <span class="date">~Dec.2027</span>
+          <article class="portfolio-roadmap-item">
+            <div class="portfolio-roadmap-date">
+              <span class="date">2027+</span>
           </div>
-            <p class="roadmap-content"><span>Launch of EVM-based Confidential Layer module</span></p>
+            <p class="portfolio-roadmap-content" data-i18n="portfolio.c">C. Confidential blockchain infrastructure expansion<br><span>SVM/EVM modules, threshold disclosure, developer docs, partner integration</span></p>
           </article>
         </div>
       </div>
@@ -489,12 +623,12 @@
 
     <!-- 06. Team -->
     <section data-aos="fade-up" data-aos-duration="900" id="sec06" class="container" aria-labelledby="team-label">
-      <h2 id="team-label" class="section-label">04. Team</h2>
+      <h2 id="team-label" class="section-label" data-i18n="section.team">07. Team</h2>
       <div class="team-intro">
-        <p class="team-intro-title">
-          We are pioneering<br>
-          Fully Homomorphic Encryption(FHE)<br>
-          for decentralized, secure, and verifiable computation.
+        <p class="team-intro-title" data-i18n="team.intro">
+          Research-grade PET execution team<br>
+          turning FHE16 into consumer, enterprise,<br>
+          and blockchain business tracks.
         </p>
         </div>
 
@@ -516,13 +650,13 @@
           </div>
             <div class="sns-link">
               <a href="https://www.instagram.com/seunghwan832?igsh=MXM3YTBoa2E3NmExcQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
-                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+                <span class="material-icons" aria-hidden="true">photo_camera</span>
               </a>
               <a href="https://www.linkedin.com/in/scarrots/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+                <span class="material-icons" aria-hidden="true">business_center</span>
               </a>
               <a href="https://x.com/Scarrots93" target="_blank" rel="noopener noreferrer" aria-label="X profile">
-                <img src="./asset/icon/sns-x.svg" alt="X icon">
+                <span class="material-icons" aria-hidden="true">alternate_email</span>
               </a>
           </div>
         </div>
@@ -544,13 +678,13 @@
           </div>
             <div class="sns-link">
               <a href="https://www.instagram.com/dohyuk1000?igsh=djBuYjNjaGNvYmIw" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
-                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+                <span class="material-icons" aria-hidden="true">photo_camera</span>
               </a>
               <a href="#" aria-label="LinkedIn profile" style="display: none;">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+                <span class="material-icons" aria-hidden="true">business_center</span>
               </a>
               <a href="https://x.com/Isley1249" target="_blank" rel="noopener noreferrer" aria-label="X profile">
-                <img src="./asset/icon/sns-x.svg" alt="X icon">
+                <span class="material-icons" aria-hidden="true">alternate_email</span>
               </a>
           </div>
         </div>
@@ -572,36 +706,10 @@
           </div>
             <div class="sns-link">
               <a href="https://www.linkedin.com/in/djshin73/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+                <span class="material-icons" aria-hidden="true">business_center</span>
               </a>
               <a href="https://x.com/DJShin73" target="_blank" rel="noopener noreferrer" aria-label="X profile">
-                <img src="./asset/icon/sns-x.svg" alt="X icon">
-              </a>
-          </div>
-        </div>
-        </article>
-              </li>
-              <li class="team-item">
-        <article class="team-card">
-          <img src="./asset/team/Alumni_Community01.JPG" alt="Yunsik Ham" class="team-card-photo" loading="lazy">
-          <div class="detail">
-            <div class="detail-text">
-              <h3 class="team-card-name">Yunsik Ham</h3>
-              <span class="team-card-name-kr">함윤식</span>
-              <p class="team-card-desc">
-                Lead Blockchain Developer<br>
-                Experience leading multiple ZK + blockchain projects
-              </p>
-          </div>
-            <div class="sns-link">
-              <a href="#" aria-label="Instagram profile" style="display: none;">
-                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
-              </a>
-              <a href="#" aria-label="LinkedIn profile" style="display: none;">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
-              </a>
-              <a href="#" aria-label="X profile" style="display: none;">
-                <img src="./asset/icon/sns-x.svg" alt="X icon">
+                <span class="material-icons" aria-hidden="true">alternate_email</span>
               </a>
           </div>
         </div>
@@ -621,13 +729,13 @@
           </div>
             <div class="sns-link">
               <a href="#" aria-label="Instagram profile" style="display: none;">
-                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+                <span class="material-icons" aria-hidden="true">photo_camera</span>
               </a>
               <a href="https://www.linkedin.com/in/kiin-shin-67096a378/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+                <span class="material-icons" aria-hidden="true">business_center</span>
               </a>
               <a href="https://x.com/Shinin60" target="_blank" rel="noopener noreferrer" aria-label="X profile">
-                <img src="./asset/icon/sns-x.svg" alt="X icon">
+                <span class="material-icons" aria-hidden="true">alternate_email</span>
               </a>
           </div>
         </div>
@@ -647,13 +755,13 @@
           </div>
             <div class="sns-link">
               <a href="https://www.instagram.com/_jiin880?igsh=MWE1cGcxdW52Ync3ag%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
-                <img src="./asset/icon/sns-instargram.svg" alt="Instagram icon">
+                <span class="material-icons" aria-hidden="true">photo_camera</span>
               </a>
               <a href="https://www.linkedin.com/in/ji-in-shin-6a896028b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                <img src="./asset/icon/sns-linkedin.svg" alt="LinkedIn icon">
+                <span class="material-icons" aria-hidden="true">business_center</span>
               </a>
               <a href="https://www.behance.net/sjji86192137" target="_blank" rel="noopener noreferrer" aria-label="Behance profile">
-                <img src="./asset/icon/sns-behance.svg" alt="Behance icon">
+                <span class="material-icons" aria-hidden="true">palette</span>
               </a>
           </div>
         </div>
@@ -665,16 +773,253 @@
       </div>
     </section>
 
+    <!-- Partners & Investors -->
+    <section id="partners" class="partners-section" data-aos="fade-up">
+      <div class="partners-container">
+        <h2 class="section-label" data-i18n="section.ecosystem">08. Ecosystem</h2>
+        <p class="partners-subtitle" data-i18n="ecosystem.subtitle">Research, pilots, and technical collaboration for PET commercialization</p>
+        <div class="partners-grid">
+          <div class="partner-logo">
+            <span>LatticA</span>
+          </div>
+          <div class="partner-logo">
+            <span>FHE16</span>
+          </div>
+          <div class="partner-logo">
+            <span>MPC / SSFHE</span>
+          </div>
+          <div class="partner-logo">
+            <span>Threshold Disclosure</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Developer Resources -->
+    <section id="developers" class="developers-section" data-aos="fade-up">
+      <div class="developers-container">
+        <h2 class="section-label" data-i18n="section.developers">09. Developer Infrastructure</h2>
+        <h3 class="developers-title" data-i18n="developers.title">Start building confidential workflows with FHE16</h3>
+        <div class="developers-grid">
+          <a href="https://github.com/WALLLNUT" target="_blank" class="dev-card">
+            <span class="material-icons dev-icon-material" aria-hidden="true">terminal</span>
+            <h4>GitHub</h4>
+            <p data-i18n="developers.github.desc">Explore implementation references and research code</p>
+          </a>
+          <a href="#" class="dev-card">
+            <span class="material-icons dev-icon-material" aria-hidden="true">menu_book</span>
+            <h4 data-i18n="developers.docs.title">Documentation</h4>
+            <p data-i18n="developers.docs.desc">Technical guides for PET and confidential computation pilots</p>
+          </a>
+          <a href="#" class="dev-card">
+            <span class="material-icons dev-icon-material">code</span>
+            <h4>SDK</h4>
+            <p data-i18n="developers.sdk.desc">Libraries and integration modules under staged release</p>
+          </a>
+          <a href="#" class="dev-card">
+            <span class="material-icons dev-icon-material">play_circle</span>
+            <h4 data-i18n="developers.playground.title">Playground</h4>
+            <p data-i18n="developers.playground.desc">Browser execution path for encrypted comparison and demos</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section id="roadmap" class="roadmap-section" data-aos="fade-up">
+      <div class="roadmap-container">
+        <h2 class="section-label" data-i18n="section.roadmap">10. Roadmap</h2>
+        <h3 class="roadmap-title" data-i18n="roadmap.title">Three-year path from market wedge to PET infrastructure</h3>
+        <div class="roadmap-timeline">
+          <div class="roadmap-item completed">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2024</span>
+              <h4 data-i18n="roadmap.2024.title">Research Foundation</h4>
+              <p data-i18n="roadmap.2024.desc">FHE16 research foundation and browser-executable encrypted computation path established</p>
+            </div>
+          </div>
+          <div class="roadmap-item completed">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2025</span>
+              <h4 data-i18n="roadmap.2025.title">Company and Product Architecture</h4>
+              <p data-i18n="roadmap.2025.desc">FHE16, SSFHE, and threshold disclosure unified into one product engine</p>
+            </div>
+          </div>
+          <div class="roadmap-item active">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2026</span>
+              <h4 data-i18n="roadmap.a.title">A. B2C Coming Soon</h4>
+              <p data-i18n="roadmap.a.desc">Demand forecasting, private survey, report MVP, and allocation workflow prepared for launch</p>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2026</span>
+              <h4 data-i18n="roadmap.b.title">B. Enterprise PET Pilots</h4>
+              <p data-i18n="roadmap.b.desc">Insurance claim cross-validation, FDS, identity, anomaly, and audit workflows</p>
+            </div>
+          </div>
+          <div class="roadmap-item upcoming">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2027</span>
+              <h4 data-i18n="roadmap.c.title">C. Blockchain Modules</h4>
+              <p data-i18n="roadmap.c.desc">Confidential state layers, threshold disclosure, SDKs, and developer-facing technical docs</p>
+            </div>
+          </div>
+          <div class="roadmap-item upcoming">
+            <div class="roadmap-marker"></div>
+            <div class="roadmap-content">
+              <span class="roadmap-date">2028</span>
+              <h4 data-i18n="roadmap.platform.title">Cross-market PET Platform</h4>
+              <p data-i18n="roadmap.platform.desc">Unified infrastructure spanning consumer launch intelligence, enterprise risk, and blockchain confidentiality</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research & Publications -->
+    <section id="research" class="research-section" data-aos="fade-up">
+      <div class="research-container">
+        <div class="research-header">
+          <div class="research-intro">
+            <h2 class="section-label" data-i18n="section.research">11. Research</h2>
+            <h3 class="research-title" data-i18n="research.title">Publications & Academic Collaboration</h3>
+            <p class="research-desc" data-i18n="research.desc">waLLLnut의 FHE16 기술은 한양대학교 Coding & Communication Research Lab(CCRL)와의 긴밀한 산학협력을 통해 개발되었습니다.</p>
+          </div>
+          <div class="research-collab">
+            <div class="collab-card">
+              <div class="collab-logo">
+                <span class="collab-logo-text">HYU</span>
+              </div>
+              <div class="collab-info">
+                <h4>Hanyang University</h4>
+                <p class="collab-lab">Coding & Communication Research Lab</p>
+                <p class="collab-prof">Prof. Dong-Joon Shin (신동준 교수님)</p>
+                <a href="http://ccrl.hanyang.ac.kr" target="_blank" rel="noopener noreferrer" class="collab-link"><span data-i18n="research.visitLab">Visit Lab</span> <span class="material-icons">open_in_new</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="research-papers">
+          <h4 class="papers-title" data-i18n="research.papers">IACR ePrint Archive Publications</h4>
+          <div class="papers-grid">
+            <a href="https://eprint.iacr.org/2026/269" target="_blank" rel="noopener noreferrer" class="paper-card">
+              <span class="paper-year">2026</span>
+              <h5 class="paper-title">Exact Error Analysis for Blind Rotation in Fully Homomorphic Encryption</h5>
+              <p class="paper-authors">Sin Kim, Seunghwan Lee, Dohyuk Kim, Dong-Joon Shin</p>
+              <span class="paper-venue">ePrint 2026/269</span>
+            </a>
+            <a href="https://eprint.iacr.org/2025/2150" target="_blank" rel="noopener noreferrer" class="paper-card">
+              <span class="paper-year">2025</span>
+              <h5 class="paper-title">Low-Latency Fully Homomorphic Arithmetic Using Parallel Prefix Group Circuit</h5>
+              <p class="paper-authors">Dohyuk Kim, Sin Kim, Seunghwan Lee, Dong-Joon Shin</p>
+              <span class="paper-venue">ePrint 2025/2150</span>
+            </a>
+            <a href="https://eprint.iacr.org/2025/810" target="_blank" rel="noopener noreferrer" class="paper-card featured">
+              <span class="paper-year">2025</span>
+              <span class="paper-badge">CRYPTO 2025</span>
+              <h5 class="paper-title">Actively Secure MPC in the Dishonest Majority Setting</h5>
+              <p class="paper-authors">Seunghwan Lee, Jaesang Noh, Taejeong Kim, Dohyuk Kim, Dong-Joon Shin</p>
+              <span class="paper-venue">ePrint 2025/810</span>
+            </a>
+            <a href="https://eprint.iacr.org/2024/1916" target="_blank" rel="noopener noreferrer" class="paper-card featured">
+              <span class="paper-year">2024</span>
+              <span class="paper-badge">FHE16</span>
+              <h5 class="paper-title">Fast, Compact and Hardware-Friendly Bootstrapping in less than 3ms</h5>
+              <p class="paper-authors">Seunghwan Lee, Dohyuk Kim, Dong-Joon Shin</p>
+              <span class="paper-venue">ePrint 2024/1916</span>
+            </a>
+            <a href="https://eprint.iacr.org/2022/186" target="_blank" rel="noopener noreferrer" class="paper-card">
+              <span class="paper-year">2022</span>
+              <h5 class="paper-title">Overflow-detectable Floating-point Fully Homomorphic Encryption</h5>
+              <p class="paper-authors">Seunghwan Lee, Dong-Joon Shin</p>
+              <span class="paper-venue">ePrint 2022/186</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Press & News -->
+    <section id="press" class="press-section" data-aos="fade-up">
+      <div class="press-container">
+        <h2 class="section-label" data-i18n="section.press">12. Press & Media</h2>
+        <h3 class="press-title" data-i18n="press.title">In the News</h3>
+        <div class="press-grid">
+          <a href="https://n.news.naver.com/mnews/article/008/0005345405" target="_blank" rel="noopener noreferrer" class="press-card">
+            <div class="press-card-source">
+              <span class="press-source-name">머니투데이</span>
+            </div>
+            <h4 class="press-card-title">waLLLnut, FHE16 기반 기밀 연산 기술 공개</h4>
+            <p class="press-card-excerpt">완전동형암호(FHE) 기술을 활용한 차세대 프라이버시 솔루션으로 블록체인 업계 주목...</p>
+            <span class="press-card-date">2024.12</span>
+          </a>
+          <a href="https://www.senews.kr/36303" target="_blank" rel="noopener noreferrer" class="press-card">
+            <div class="press-card-source">
+              <span class="press-source-name">사회적경제뉴스</span>
+            </div>
+            <h4 class="press-card-title">한양대 Beyond-G 글로벌 혁신센터, MWC 2026 참가</h4>
+            <p class="press-card-excerpt">AI 기반 무선 통신 혁신 기술 선보여... 디지털 트윈 기반 AI 빔 트래킹 기술 공개</p>
+            <span class="press-card-date">2026.03</span>
+          </a>
+          <a href="https://biz.newdaily.co.kr/site/data/html/2026/02/03/2026020300029.html" target="_blank" rel="noopener noreferrer" class="press-card">
+            <div class="press-card-source">
+              <span class="press-source-name">뉴데일리</span>
+            </div>
+            <h4 class="press-card-title">한양대 Beyond-G 센터, 6G 포럼과 공동연구 MOU</h4>
+            <p class="press-card-excerpt">차세대 통신 생태계 선도... 6G, ISAC, AI-RAN, 양자통신 핵심기술 공동 R&D</p>
+            <span class="press-card-date">2026.02</span>
+          </a>
+          <a href="https://eprint.iacr.org/2025/2150.pdf" target="_blank" rel="noopener noreferrer" class="press-card">
+            <div class="press-card-source">
+              <span class="press-source-name">IACR ePrint</span>
+            </div>
+            <h4 class="press-card-title">FHE16: Low-Latency Fully Homomorphic Arithmetic</h4>
+            <p class="press-card-excerpt">Parallel Prefix Group Circuit을 활용한 저지연 완전동형암호 연산 논문 공개</p>
+            <span class="press-card-date">2025.12</span>
+          </a>
+        </div>
+        <div class="press-more">
+          <a href="./traction.html#press" class="press-more-btn"><span data-i18n="press.more">View All News</span> <span class="material-icons">arrow_forward</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter & Contact -->
+    <section id="contact" class="contact-section" data-aos="fade-up">
+      <div class="contact-container">
+        <div class="contact-content">
+          <h2 class="contact-title" data-i18n="contact.title">Discuss a Pilot or Partnership</h2>
+          <p class="contact-desc" data-i18n="contact.desc">Get updates on waLLLnut's PET engine, enterprise pilots, and 2026 B2C launch path.</p>
+          <form class="newsletter-form" action="#" method="post">
+            <input type="email" placeholder="Enter your email" data-i18n-placeholder="newsletter.placeholder" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn" data-i18n="newsletter.subscribe">Subscribe</button>
+          </form>
+        </div>
+        <div class="contact-cta">
+          <h3 data-i18n="contact.cta.title">Discuss a pilot or partnership</h3>
+          <p data-i18n="contact.cta.desc">Talk to us about demand forecasting, PET risk intelligence, or blockchain confidentiality workflows.</p>
+          <a href="mailto:contact@walllnut.com" class="btn-primary" data-i18n="contact.button">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <nav class="side-link-stack" aria-label="Quick navigation">
     <a class="side-link-btn" href="https://x.com/latticawalllnut?s=11" target="_blank" rel="noopener noreferrer" aria-label="Follow LatticA on X">
-      <img src="./asset/icon/lattica.svg" alt="" aria-hidden="true">
+      <span class="material-icons" aria-hidden="true">public</span>
     </a>
     <a class="side-link-btn" href="#sec04" aria-label="Jump to Technology section">
-      <img src="./asset/icon/github.svg" alt="" aria-hidden="true">
+      <span class="material-icons" aria-hidden="true">memory</span>
     </a>
-    <a class="side-link-btn side-link-btn--image" href="https://walllnut.gitbook.io/walllnut-docs/deterministic-fhe16" target="_blank" rel="noopener noreferrer" aria-label="View Deterministic FHE16 Documentation"></a>
+    <a class="side-link-btn" href="https://walllnut.gitbook.io/walllnut-docs/deterministic-fhe16" target="_blank" rel="noopener noreferrer" aria-label="View Deterministic FHE16 Documentation"><span class="material-icons" aria-hidden="true">menu_book</span></a>
   </nav>
 
   <!-- Footer -->
@@ -730,22 +1075,22 @@
     <ul class="sns-menu-list">
       <li>
         <a href="https://x.com/waLLLnut_co_Inc" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on X">
-          <img src="./asset/icon/head-X.svg" alt="X icon">
+          <span class="material-icons" aria-hidden="true">alternate_email</span>
         </a>
       </li>
       <li>
         <a href="https://www.linkedin.com/company/108117808/admin/dashboard/" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on LinkedIn">
-          <img src="./asset/icon/head-linkedIn.svg" alt="LinkedIn icon">
+          <span class="material-icons" aria-hidden="true">business_center</span>
         </a>
       </li>
       <li>
         <a href="https://www.instagram.com/walllnut.co.inc/?igsh=MXA5cW9nam1hbnp5OA%3D%3D#" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on Instagram">
-          <img src="./asset/icon/head-instargram.svg" alt="Instagram icon">
+          <span class="material-icons" aria-hidden="true">photo_camera</span>
         </a>
       </li>
       <li>
         <a href="https://www.youtube.com/channel/UC-0wXSMaQti8Wp71CUlHsQw" target="_blank" rel="noopener noreferrer" class="sns-menu-link" aria-label="Follow on YouTube">
-          <img src="./asset/icon/head-youtube.svg" alt="YouTube icon">
+          <span class="material-icons" aria-hidden="true">play_circle</span>
         </a>
       </li>
     </ul>
@@ -772,12 +1117,23 @@
         <div class="archive-modal-panel is-active" id="alumni-panel" role="tabpanel" aria-labelledby="alumni-tab">
           <ul class="alumni-list">
             <li class="alumni-item">
+              <img src="./asset/team/Alumni_Community01.JPG" alt="Yunsik Ham" class="alumni-photo" loading="lazy">
+              <div class="txt-detail">
+                <h3 class="alumni-name">Yunsik Ham</h3>
+                <span class="alumni-name-kr">함윤식</span>
+                <p class="alumni-desc">
+                  Lead Blockchain Developer<br>
+                  Experience leading multiple ZK + blockchain projects
+                </p>
+              </div>
+            </li>
+            <li class="alumni-item">
               <img src="./asset/team/Alumni_Community02.jpg" alt="Youngjun Kim" class="alumni-photo" loading="lazy">
               <div class="txt-detail">
                 <h3 class="alumni-name">Youngjun Kim</h3>
                 <span class="alumni-name-kr">김영준</span>
                 <p class="alumni-desc">
-                  Cryptography & Server Developer;<br>
+                  Cryptography & Server Developer<br>
                   Experience in LWE coding and network implementation
                 </p>
               </div>

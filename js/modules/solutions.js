@@ -11,61 +11,49 @@ import { safeExecute } from '../utils/error-handler.js';
 function getSolutionData(key, lang = 'en') {
   const translations = {
     en: {
-      coprocessor: {
-        title: 'Deterministic Confidential Coprocessor',
-        body: 'Normal transactions stay on-chain, while sensitive data/compute run in a confidential FHE coprocessor—keeping state public.',
-        sub: 'Encrypted data stays hidden',
-        bg: "url('./asset/bg/sec03slide01.png')"
+      consumer: {
+        title: 'B2C Demand Forecasting & Allocation',
+        body: 'Convert private willingness-to-pay and launch demand into <strong>pricing, allocation, and restock decisions</strong>. Product name undisclosed. Launching in 2026.',
+        sub: '2026 Coming Soon',
+        visual: 'consumer'
       },
-      solana: {
-        title: 'Confidential Coprocessor for Solana',
-        body: 'Keep sensitive programs off-chain while preserving Solana\'s throughput. Deterministic FHE execution guarantees verifiable state updates.',
-        sub: 'Layered security for high-throughput chains',
-        bg: "url('./asset/bg/sec03slide02.png')"
+      enterprise: {
+        title: 'B2B PET Risk Intelligence',
+        body: 'Support insurance claim cross-check, FDS, identity mismatch, and anomalous transaction workflows <strong>without exposing raw business data</strong>.',
+        sub: 'PET-based identity, fraud, and transaction risk analysis',
+        visual: 'enterprise'
       },
-      defi: {
-        title: 'Fair DeFi Pipelines',
-        body: 'Encrypt bids, strategies, and liquidity routes so MEV bots cannot front-run while traders keep full custody of their assets.',
-        sub: 'Protect every trade, sustain fair markets',
-        bg: "url('./asset/bg/sec03slide03.png')"
-      },
-      voting: {
-        title: 'Confidential Governance Voting',
-        body: 'Collect votes privately, publish tallies publicly. Threshold decryption reveals aggregate outcomes without exposing individual choices.',
-        sub: 'Selective transparency for collective decisions',
-        bg: "url('./asset/bg/sec03slide04.png')"
+      blockchain: {
+        title: 'Blockchain Confidential Infrastructure',
+        body: 'Package confidential state, encrypted execution, and threshold disclosure into developer-facing blockchain infrastructure while preserving <strong>public verifiability</strong>.',
+        sub: 'Confidential modules for verifiable blockchain networks',
+        visual: 'blockchain'
       }
     },
     ko: {
-      coprocessor: {
-        title: 'Deterministic Confidential Coprocessor',
-        body: '일반 거래는 온체인에 그대로 남겨두고,<br>민감한 데이터·연산은 기밀 FHE 보조 프로세서에서 실행해 상태는 공개로 유지합니다.',
-        sub: '암호화된 데이터는 숨겨진 상태를 유지합니다',
-        bg: "url('./asset/bg/sec03slide01.png')"
+      consumer: {
+        title: 'B2C 수요 예측 및 물량 배분',
+        body: '비공개 지불 의향과 출시 수요를 <strong>가격, 물량 배분, 재입고 의사결정</strong>으로 전환합니다. 제품명은 비공개입니다.',
+        sub: '2026 Coming Soon',
+        visual: 'consumer'
       },
-      solana: {
-        title: 'Confidential Coprocessor for Solana',
-        body: 'Solana에서 민감한 상태와 코드에 FHE를 적용하여<br>외부 관찰자로부터 숨겨진 비공개 실행을 가능하게 합니다.',
-        sub: '암호화된 데이터는 숨겨진 상태를 유지합니다',
-        bg: "url('./asset/bg/sec03slide02.png')"
+      enterprise: {
+        title: 'B2B PET 리스크 인텔리전스',
+        body: '원본 데이터를 노출하지 않고 보험 청구 교차검증, FDS, 신원 불일치, 이상 거래 선별 워크플로를 지원합니다.',
+        sub: '신원, 사기, 거래 리스크를 위한 PET 기반 분석',
+        visual: 'enterprise'
       },
-      defi: {
-        title: 'Fair DeFi',
-        body: 'MEV 추출을 일으키는 트레이딩 봇을 차단하여<br>자산 성장과 수익을 향상합니다',
-        sub: '봇을 차단해 자산을 보호하고 수익을 높이세요',
-        bg: "url('./asset/bg/sec03slide03.png')"
-      },
-      voting: {
-        title: 'Confidential Voting',
-        body: '개인 선택·신원을 공개하지 않고<br>인구통계 기반 통계만 제공합니다.',
-        sub: '안전하고 프라이버시를 지키는 투표',
-        bg: "url('./asset/bg/sec03slide04.png')"
+      blockchain: {
+        title: '블록체인 기밀 연산 인프라',
+        body: '기밀 상태, 암호화 실행, 임계값 공개를 개발자용 블록체인 인프라로 패키징하면서 공개 검증성을 유지합니다.',
+        sub: '검증 가능한 블록체인 네트워크를 위한 기밀 모듈',
+        visual: 'blockchain'
       }
     }
   };
-  
+
   const langData = translations[lang] || translations.en;
-  return langData[key] || langData.coprocessor;
+  return langData[key] || langData.consumer;
 }
 
 function getCurrentLang() {
@@ -94,7 +82,8 @@ export function initSolutions() {
         solutionTitle.textContent = payload.title;
         solutionBody.innerHTML = payload.body; // Use innerHTML to support <br> tags
         solutionSub.textContent = payload.sub;
-        solutionVisual.style.backgroundImage = payload.bg;
+        solutionVisual.dataset.visual = payload.visual;
+        solutionVisual.style.backgroundImage = '';
         solutionCard.classList.remove('is-transitioning');
       });
     }, 'Solutions: setSolutionContent');
@@ -124,6 +113,6 @@ export function initSolutions() {
     });
   });
 
-  setSolutionContent('coprocessor');
+  setSolutionContent('consumer');
 }
 

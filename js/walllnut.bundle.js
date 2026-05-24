@@ -36,13 +36,19 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.goal': 'Goal',
       'nav.team': 'Team',
       'nav.advisors': 'Advisors',
-      'hero.headline': 'Confidential Coprocessor for Fair and Verifiable RWA Markets<br>FHE16 + MPC + Threshold Cryptography — Privacy that scales with performance.',
-      'sec02.slogan': 'Run encrypted computation verifiably on-chain<br> with FHE16 and MPC.<br>Only what\'s needed is revealed —<br> privacy preserved, fairness ensured.',
-      'slogan': 'waLLLnut\'s vision is to ensure both <strong>"transparency"</strong> and <strong>"confidentiality"</strong> of data in the next-generation internet infrastructure.',
-      'sec.tech': '03. Technology',
-      'sec.service': '02. Solutions',
-      'sec.goal': '01. Vision',
-      'sec.team': '04. Team',
+      'hero.headline': 'Privacy-preserving intelligence connecting B2C demand, B2B risk, and blockchain infrastructure<br>through confidential computation.',
+      'hero.track.a.title': 'B2C Demand Forecasting',
+      'hero.track.a.desc': 'Private demand survey, pricing/allocation report, 2026 Coming Soon',
+      'hero.track.b.title': 'B2B PET Risk Intelligence',
+      'hero.track.b.desc': 'Identity, insurance, transaction risk, and PET-based FDS',
+      'hero.track.c.title': 'Blockchain Confidential Infrastructure',
+      'hero.track.c.desc': 'Encrypted state, verifiable execution, developer infrastructure',
+      'sec02.slogan': 'Compute on sensitive signals without exposing raw data.<br>FHE16, MPC, and threshold disclosure support consumer demand, enterprise risk, and blockchain confidentiality.',
+      'slogan': 'waLLLnut builds PET infrastructure for consumer demand forecasting, enterprise risk intelligence, and blockchain confidentiality.',
+      'sec.tech': '04. Technology Moat',
+      'sec.service': '03. Business Tracks',
+      'sec.goal': '02. Executive Summary',
+      'sec.team': '07. Team',
       
       
       // Tech A
@@ -89,39 +95,40 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
 
       // Service / Goal / Use cases …
       'svc.meta.keyword': 'Keyword',
-      'svc.1.desc': 'Normal transactions stay on-chain, while sensitive data/compute run <strong>in a confidential FHE coprocessor—keeping state public.</strong>',
-      'svc.1.meta.title2': 'Hide',
-      'svc.1.meta.ref': 'Encrypted data stays hidden',
-      'svc.2.desc': 'On Solana, we apply <strong>FHE to sensitive state and code,</strong> enabling private execution <strong>hidden from external observers.</strong>',
-      'svc.2.meta.title2': 'Solana',
-      'svc.2.meta.ref': 'Encrypted data stays hidden',
-      'svc.3.desc': 'Block trading bots from doing <br>MEV extraction in order to <strong>boost asset growth and returns</strong>',
-      'svc.3.meta.title2': 'Fair asset growth',
-      'svc.3.meta.ref': 'Block trading bots to protect<br>your assets and boost returns',
-      'svc.4.desc': 'Demographic vote stats—<br><strong>no disclosure of individual choices or identities.</strong>',
-      'svc.4.meta.title2': 'Privately',
-      'svc.4.meta.ref': 'Safe and private voting',
-      'goal.caption': 'waLLLnut\'s Confidential Coprocessor locks data with FHE, MPC, and threshold cryptography while running verifiable on-chain compute. It opens only what\'s needed, with user consent—reducing MEV bots\' edge and keeping markets fair.',
-      'goal.q1': 'What does waLLLnut actually do—and what are we confident about? 🫥💪',
-      'goal.a1': 'We\'re a research-driven company building on quantum-resistant FHE (Fully Homomorphic Encryption) and MPC (Multi-Party Computation) to make data security and privacy sustainable. Moreover, multi-users\' data can be securely and privately processed — decrypting only when needed and extracting statistical insights if necessary.📊📈',
-      'goal.q2': 'Hashes for waLLLnut\'s upcoming pre-release research outcomes and keywords slated for public disclosure. 📊🔬🏗️',
+      'svc.1.desc': 'Convert private willingness-to-pay and launch demand into <strong>pricing, allocation, and restock decisions</strong>. Product name undisclosed. Launching in 2026.',
+      'svc.1.meta.title2': 'B2C',
+      'svc.1.meta.ref': '2026 Coming Soon',
+      'svc.2.desc': 'Support insurance claim cross-check, FDS, identity mismatch, and anomalous transaction workflows <strong>without exposing raw business data.</strong>',
+      'svc.2.meta.title2': 'B2B',
+      'svc.2.meta.ref': 'PET-based risk intelligence',
+      'svc.3.desc': 'Package confidential state, encrypted execution, and threshold disclosure into <strong>developer-facing blockchain infrastructure</strong>.',
+      'svc.3.meta.title2': 'Blockchain',
+      'svc.3.meta.ref': 'Confidential modules with public verification',
+      'svc.4.desc': 'Reveal only the minimum result needed for audit, compliance, or network verification.',
+      'svc.4.meta.title2': 'Threshold',
+      'svc.4.meta.ref': 'Disclosure by policy, not by default',
+      'goal.caption': 'waLLLnut applies FHE16, MPC, and threshold disclosure across consumer demand, enterprise risk, and blockchain confidential infrastructure.',
+      'goal.q1': 'What business is waLLLnut building?',
+      'goal.a1': 'waLLLnut builds a PET business around markets where useful data cannot be exposed. The first wedge is B2C demand forecasting and allocation; the second is B2B identity, fraud, and anomalous transaction risk; the third is confidential blockchain infrastructure.',
+      'goal.q2': 'Why this strategy now?',
+    'goal.a2': 'Consumer teams need private demand signals before they commit inventory; financial and insurance teams need cross-organization risk checks without moving raw data; blockchain applications need confidentiality without giving up verification. One PET engine can serve all three with staged go-to-market risk.',
       'goal.hash.disclose': 'f321ce2f5032c6d408f553606755b51378366c99adfa37337c95c1a330577139',
-      'goal.q3': 'So, what\'s in waLLLnut\'s product lineup? 🚀',
-      'goal.a3.1': 'Flagship Product — Deterministic Confidential Coprocessor 🏁',
-      'goal.a3.2': 'Executes blockchain state data on FHE16, enabling public verification. 🔍',
-      'goal.a3.3': 'Unlike traditional ZK systems limited to fixed state verification, FHE16 keeps the entire state fully encrypted and enables true dynamic state verification without revealing any computation results.',
-      'usecases.title': 'Use Cases',
-      'use1.title': 'Protecting DeFi transaction data and preventing MEV',
-      'use1.desc': 'Keep your crypto trades private so others can\'t peek at your orders.<br>Block unfair bot tactics that jump ahead to profit from your trade (often called MEV).',
-      'use2.title': 'On-chain voting (selective anonymity + public verifiability)',
-      'use2.desc': 'Vote on the blockchain while your identity and choice stay private.<br>Anyone can still verify the overall results are real.',
-      'use3.title': 'Data marketplaces (perform computations without revealing raw data)',
-      'use3.desc': 'Buy and sell insights without handing over your raw data.<br>The marketplace runs computations on protected data, so the originals stay private.',
-      'use4.title': 'Privacy-preserving messaging/SNS',
-      'use4.desc': 'Chat and share on social without giving up your privacy.<br>Your content stays encrypted, and you decide who sees what.',
-      'prop.f1': 'Each private state is deterministically encrypted under FHE16 and recorded on-chain',
-      'prop.f2': 'Any state change can be verified by all network participants',
-      'prop.f3': 'State disclosure is propagated across the network via a Threshold Decryption protocol',
+      'goal.q3': 'What is the public A/B/C plan?',
+      'goal.a3.1': 'A. B2C Demand Forecasting & Allocation - private demand survey, pricing/allocation report, 2026 Coming Soon.',
+      'goal.a3.2': 'B. B2B PET Risk Intelligence - insurance claim cross-check, FDS, identity and anomalous transaction detection without raw data exposure.',
+      'goal.a3.3': 'C. Blockchain Confidential Infrastructure - encrypted state, confidential execution, threshold disclosure, and public verifiability.',
+      'usecases.title': 'Business Model & GTM',
+      'use1.title': 'A. Consumer Demand Intelligence',
+      'use1.desc': 'Closed demand survey, private willingness-to-pay analysis, and launch quantity reports. Revenue path: report fee, transaction fee, premium seller tools, and later authenticity/fulfillment modules. 2026 Coming Soon.',
+      'use2.title': 'B. Enterprise Risk Intelligence',
+      'use2.desc': 'Insurance claim cross-validation, FDS, identity mismatch, and anomalous transaction screening without moving raw customer data. GTM path: PoC, paid pilot, subscription or per-check pricing.',
+      'use3.title': 'C. Confidential Chain Infrastructure',
+      'use3.desc': 'Developer-facing modules for confidential state, encrypted execution, and threshold disclosure. Revenue path: infrastructure integration, SDK support, and partner deployments.',
+      'use4.title': 'Threshold Disclosure',
+      'use4.desc': 'Reveal only the minimum result required for audit or verification.',
+      'prop.f1': 'A creates the first market wedge: privacy-preserving demand reports for consumer launches and allocation planning',
+      'prop.f2': 'B converts the same PET engine into enterprise pilots for insurance claim review, identity risk, FDS, and anomalous transaction workflows',
+      'prop.f3': 'C packages the engine as confidential blockchain infrastructure for encrypted state, threshold disclosure, and verifiable execution',
       'member1.role': 'Seunghwan Lee (CEO)',
       'member1.description': 'Leads FHE16 and MPC R&D <br> Hanyang University',
       'member2.role': 'Dohyuk Kim (CTO)',
@@ -146,7 +153,125 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'prof.4.affil': 'Professor of Inha University',
       'prof.5.name': 'Jong-Seon No:',
       'prof.5.affil': 'Emeritus Professor of Seoul National University',
-      'advisors.title': 'waLLLnut collaborates with distinguished professors from<br>leading universities in Korea for technical advisory and joint research.',
+      'nav.benchmark': 'Benchmark',
+    'nav.petEngine': 'PET Engine',
+    'nav.abcTracks': 'A / B / C Tracks',
+    'nav.current': 'Current',
+    'nav.alumni': 'Alumni',
+    'nav.research': 'Research',
+    'nav.publications': 'Publications',
+    'nav.papers': 'Papers',
+    'nav.press': 'Press',
+    'nav.traction': 'Traction',
+    'nav.track.a': 'A. B2C',
+    'nav.track.b': 'B. B2B',
+    'nav.track.c': 'C. Blockchain',
+    'sidebar.archive': 'Our Archive',
+    'sidebar.alumniCommunity': 'Alumni Community',
+    'sidebar.ir': 'IR',
+    'sidebar.sns': 'Our SNS',
+    'problem.label': '01. Market Problem',
+    'problem.title': 'Problems require shared data, but raw data cannot be shared',
+    'problem.desc': 'Demand forecasting, insurance and transaction risk, and blockchain state verification all depend on sensitive signals.<br>waLLLnut uses PET to keep raw data hidden while turning necessary computation results into business decisions.',
+    'problem.a.title': 'A. Launch demand and allocation still rely on guesswork',
+    'problem.a.desc': 'In fandom, limited-edition, and collectible markets, willingness-to-pay and real demand are hidden, making pricing, production, and inventory decisions unstable.',
+    'problem.b.title': 'B. Fraud and anomalous transaction data is split across institutions',
+    'problem.b.desc': 'Insurance claims, identity, accounts, and transaction patterns need cross-checking, but privacy and regulation make raw-data movement difficult.',
+    'problem.c.title': 'C. Public ledgers limit sensitive business workflows',
+    'problem.c.desc': 'On-chain applications need verifiability, but real adoption is constrained when bids, credit, terms, and state values are exposed by default.',
+    'cta.seeSolution': 'See Our Solution',
+    'cta.talkToUs': 'Talk to Us',
+    'section.executive': '02. Executive Summary',
+    'section.businessTracks': '03. Business Tracks',
+    'section.techMoat': '04. Technology Moat',
+    'section.competitive': '05. Competitive Position',
+    'section.team': '07. Team',
+    'section.ecosystem': '08. Ecosystem',
+    'section.developers': '09. Developer Infrastructure',
+    'section.roadmap': '10. Roadmap',
+    'section.research': '11. Research',
+    'section.press': '12. Press & Media',
+    'compare.title': 'Why FHE16 is the common engine behind A/B/C',
+    'compare.feature': 'Feature',
+    'compare.standard': 'Standard Analytics',
+    'compare.zk': 'ZK Proofs',
+    'compare.rawMin': 'Raw-data minimization',
+    'compare.encryptedDesign': 'Encrypted by design',
+    'compare.dataExposed': 'Data exposed',
+    'compare.workflowSpecific': 'Strong, workflow-specific',
+    'compare.provesStatements': 'Proves statements',
+    'compare.hardwareTrust': 'Hardware trust',
+    'compare.scoring': 'Encrypted comparison and scoring',
+    'compare.coreFocus': 'Core focus',
+    'compare.plaintextOnly': 'Plaintext only',
+    'compare.coordination': 'Possible with coordination',
+    'compare.heavyLive': 'Heavy for live scoring',
+    'compare.fastTrust': 'Fast, trust-dependent',
+    'compare.browserPath': 'Browser / client execution path',
+    'compare.wasmPath': 'FHE16-WASM path',
+    'compare.easy': 'Easy',
+    'compare.dependsProtocol': 'Depends on protocol',
+    'compare.proverCost': 'Prover cost',
+    'compare.hardwareBound': 'Hardware-bound',
+    'compare.enterprisePath': 'Enterprise pilot path',
+    'compare.teePsiFhe': 'TEE -> PSI -> FHE path',
+    'compare.privacyLimited': 'Easy but privacy-limited',
+    'compare.goodMatching': 'Good for matching',
+    'compare.auditSpecific': 'Audit-specific',
+    'compare.shortBridge': 'Short-term bridge',
+    'compare.blockchainFit': 'Blockchain confidentiality fit',
+    'compare.confState': 'Confidential state and execution',
+    'compare.publicDefault': 'Public by default',
+    'compare.coordinationCost': 'Coordination cost',
+    'compare.verificationLayer': 'Verification layer',
+    'compare.offchainTrust': 'Off-chain trust layer',
+    'compare.crossMarket': 'Cross-market reuse',
+    'compare.sharedEngine': 'A/B/C shared engine',
+    'compare.siloed': 'Siloed systems',
+    'compare.usecaseSpecific': 'Use-case specific',
+    'compare.proofCircuits': 'Proof circuits per use case',
+    'compare.vendorSpecific': 'Vendor-specific',
+    'property.title': 'Portfolio Strategy',
+    'portfolio.title': 'Commercial Milestones',
+    'portfolio.a': 'A. B2C demand forecasting and allocation launch<br><span>Closed survey, report MVP, creator/seller onboarding</span>',
+    'portfolio.b': 'B. PET risk intelligence PoC and pilots<br><span>Insurance claim cross-check, FDS, identity and anomaly workflows</span>',
+    'portfolio.c': 'C. Confidential blockchain infrastructure expansion<br><span>SVM/EVM modules, threshold disclosure, developer docs, partner integration</span>',
+    'team.intro': 'Research-grade PET execution team<br>turning FHE16 into consumer, enterprise,<br>and blockchain business tracks.',
+    'ecosystem.subtitle': 'Research, pilots, and technical collaboration for PET commercialization',
+    'developers.title': 'Start building confidential workflows with FHE16',
+    'developers.github.desc': 'Explore implementation references and research code',
+    'developers.docs.desc': 'Technical guides for PET and confidential computation pilots',
+    'developers.sdk.desc': 'Libraries and integration modules under staged release',
+    'developers.playground.desc': 'Browser execution path for encrypted comparison and demos',
+    'roadmap.title': 'Three-year path from market wedge to PET infrastructure',
+    'roadmap.2024.title': 'Research Foundation',
+    'roadmap.2024.desc': 'FHE16 research foundation and browser-executable encrypted computation path established',
+    'roadmap.2025.title': 'Company and Product Architecture',
+    'roadmap.2025.desc': 'FHE16, SSFHE, and threshold disclosure unified into one product engine',
+    'roadmap.a.title': 'A. B2C Coming Soon',
+    'roadmap.a.desc': 'Demand forecasting, private survey, report MVP, and allocation workflow prepared for launch',
+    'roadmap.b.title': 'B. Enterprise PET Pilots',
+    'roadmap.b.desc': 'Insurance claim cross-validation, FDS, identity, anomaly, and audit workflows',
+    'roadmap.c.title': 'C. Blockchain Modules',
+    'roadmap.c.desc': 'Confidential state layers, threshold disclosure, SDKs, and developer-facing technical docs',
+    'roadmap.platform.title': 'Cross-market PET Platform',
+    'roadmap.platform.desc': 'Unified infrastructure spanning consumer launch intelligence, enterprise risk, and blockchain confidentiality',
+    'research.title': 'Publications & Academic Collaboration',
+    'research.desc': "waLLLnut's FHE16 technology has been developed through close academic collaboration with Hanyang University Coding & Communication Research Lab (CCRL).",
+    'research.papers': 'IACR ePrint Archive Publications',
+    'press.title': 'In the News',
+    'contact.title': 'Discuss a Pilot or Partnership',
+    'contact.desc': "Get updates on waLLLnut's PET engine, enterprise pilots, and 2026 B2C launch path.",
+    'contact.cta.title': 'Discuss a pilot or partnership',
+    'contact.cta.desc': 'Talk to us about demand forecasting, PET risk intelligence, or blockchain confidentiality workflows.',
+    'contact.button': 'Contact Us',
+    'developers.docs.title': 'Documentation',
+    'developers.playground.title': 'Playground',
+    'research.visitLab': 'Visit Lab',
+    'press.more': 'View All News',
+    'newsletter.placeholder': 'Enter your email',
+    'newsletter.subscribe': 'Subscribe',
+    'advisors.title': 'waLLLnut collaborates with distinguished professors from<br>leading universities in Korea for technical advisory and joint research.',
       'footer.copy': '© 2025 waLLLnut · All rights reserved.'
     },
     ko: {
@@ -155,14 +280,20 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'nav.solutions': '솔루션',
       'nav.tech': '기술',
       'nav.team': '팀',
-      'hero.headline': '공정하고 신뢰할 수 있는 실물자산(RWA) 시장을 위한<br>비공개 연산 플랫폼 FHE16, MPC, 임계값 암호화를 결합해<br>성능 저하 없이 확장 가능한 프라이버시를 제공합니다.',
-      'sec02.slogan': 'FHE16과 MPC로 암호화된 연산을 온체인에서 검증 가능하게 실행합니다.<br>필요한 정보만 공개되어 — 프라이버시는 지켜지고,<br>공정성은 보장됩니다.',
-      'slogan': 'waLLLnut의 비전은 차세대 인터넷 인프라에서 데이터의 <strong>"투명성"</strong>과 <strong>"기밀성"</strong>을 모두 보장하는 것입니다.',
-      'sec.tech': '03. Technology',
-      'sec.service': '02. Solutions',
-      'sec.goal': '01. Vision',
-      'sec.exp': '04. Our Experience',
-      'sec.team': '04. Team',
+      'hero.headline': 'PET 기반 기밀 연산으로<br>B2C 수요, B2B 리스크, 블록체인 인프라를 연결합니다',
+      'hero.track.a.title': 'B2C 수요 예측',
+      'hero.track.a.desc': '비공개 수요 조사 · 물량/가격 리포트 · 2026 Coming Soon',
+      'hero.track.b.title': 'B2B PET 리스크 인텔리전스',
+      'hero.track.b.desc': '신원 이상 · 보험/거래 리스크 · PET 기반 FDS',
+      'hero.track.c.title': '블록체인 기밀 연산 인프라',
+      'hero.track.c.desc': '암호화 상태 · 검증 가능한 실행 · 개발자 인프라',
+      'sec02.slogan': '민감 신호는 노출하지 않고 연산합니다.<br>FHE16, MPC, 임계값 공개 기술로 B2C 수요, B2B 리스크, 블록체인 기밀성을 지원합니다.',
+      'slogan': 'waLLLnut은 B2C 수요 예측, B2B 리스크 인텔리전스, 블록체인 기밀 인프라를 위한 PET 기술을 만듭니다.',
+      'sec.tech': '04. Technology Moat',
+      'sec.service': '03. Business Tracks',
+      'sec.goal': '02. Executive Summary',
+      'sec.exp': '06. Business Model & GTM',
+      'sec.team': '07. Team',
       
 
       // Tech A
@@ -209,39 +340,40 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
 
       // Service / Goal / Use cases …
       'svc.meta.keyword': '키워드',
-      'svc.1.desc': '일반 거래는 온체인에 그대로 남겨두고, <br>민감한 데이터·연산은 <strong>기밀 FHE 보조 프로세서에서 실행해 상태는 공개로 유지합니다.</strong>',
-      'svc.1.meta.title2': '숨김',
-      'svc.1.meta.ref': '암호화된 데이터는 <br>숨겨진 상태를 유지합니다',
-      'svc.2.desc': 'Solana에서 <strong>민감한 상태와 코드에 FHE를 적용</strong>하여<br>외부 관찰자로부터 <strong>숨겨진 비공개 실행</strong>을 가능하게 합니다.',
-      'svc.2.meta.title2': 'Solana',
-      'svc.2.meta.ref': '암호화된 데이터는 <br>숨겨진 상태를 유지합니다',
-      'svc.3.desc': 'MEV 추출을 일으키는 트레이딩 봇을 차단하여 <br><strong>자산 성장과 수익을 향상</strong>합니다',
-      'svc.3.meta.title2': '공정한 자산 성장',
-      'svc.3.meta.ref': '봇을 차단해 자산을 보호하고<br>수익을 높이세요',
-      'svc.4.desc': '개인 선택·신원을 공개하지 않고<br>인구통계 기반 통계만 제공합니다.',
-      'svc.4.meta.title2': '비공개로',
-      'svc.4.meta.ref': '안전하고 프라이버시를 <br>지키는 투표',
-      'goal.caption': 'waLLLnut의 기밀 보조 프로세서는 FHE, MPC, 임계값 암호화를 활용해 데이터를 잠근 상태로 검증 가능한 온체인 연산을 수행합니다. 사용자가 동의한 필요한 정보만 잠깐 열어, MEV 봇의 이점을 줄이고 시장의 공정성을 지켜줍니다.',
-      'goal.q1': 'waLLLnut은 무엇을 하고, 어디에 자신이 있을까요? 🫥💪',
-      'goal.a1': '우리는 양자내성 FHE와 MPC를 바탕으로 보안·프라이버시의 지속가능성을 연구·구현합니다. 다수 사용자의 데이터도 필요한 경우에만 복호화하며, 필요 시 통계적 인사이트만 안전하게 추출할 수 있습니다.📊📈',
-      'goal.q2': '공개 예정인 사전 연구성과 및 키워드의 해시 목록입니다. 📊🔬🏗️',
+      'svc.1.desc': '비공개 지불 의향과 출시 수요를 <strong>가격, 물량 배분, 재입고 의사결정</strong>으로 전환합니다.',
+      'svc.1.meta.title2': 'B2C',
+      'svc.1.meta.ref': '2026 Coming Soon',
+      'svc.2.desc': '원본 데이터를 노출하지 않고 보험 청구 교차검증, FDS, 신원 불일치, 이상 거래 선별을 지원합니다.',
+      'svc.2.meta.title2': 'B2B',
+      'svc.2.meta.ref': 'PET 기반 리스크 인텔리전스',
+      'svc.3.desc': '기밀 상태, 암호화 실행, 임계값 공개를 <strong>개발자용 블록체인 인프라</strong>로 패키징합니다.',
+      'svc.3.meta.title2': 'Blockchain',
+      'svc.3.meta.ref': '공개 검증 가능한 기밀 모듈',
+      'svc.4.desc': '감사, 컴플라이언스, 검증에 필요한 최소 결과만 제한적으로 공개합니다.',
+      'svc.4.meta.title2': 'Threshold',
+      'svc.4.meta.ref': '기본 공개가 아니라 정책 기반 공개',
+      'goal.caption': 'waLLLnut은 FHE16, MPC, 임계값 공개 기술을 B2C 수요, B2B 리스크, 블록체인 기밀 인프라에 적용합니다.',
+      'goal.q1': 'waLLLnut은 어떤 사업을 만드나요?',
+      'goal.a1': 'waLLLnut은 노출할 수 없는 데이터를 활용해야 하는 시장을 대상으로 PET 사업을 만듭니다. 첫 진입점은 B2C 수요 예측 및 물량 배분, 두 번째는 B2B 신원·사기·이상 거래 리스크, 세 번째는 블록체인 기밀 인프라입니다.',
+      'goal.q2': '왜 지금 이 전략인가요?',
+    'goal.a2': '소비자 팀은 재고를 확정하기 전에 비공개 수요 신호가 필요하고, 금융·보험 팀은 원본 데이터를 이동하지 않는 기관 간 리스크 확인이 필요하며, 블록체인 앱은 검증성을 잃지 않는 기밀성이 필요합니다. 하나의 PET 엔진으로 세 시장을 단계적으로 공략합니다.',
       'goal.hash.disclose': '(2025년 10월 공개 예정)',
-      'goal.q3': 'waLLLnut 제품 라인업은 무엇인가요? 🚀',
-      'goal.a3.1': '플래그십 — 결정적 기밀 보조 프로세서 🏁',
-      'goal.a3.2': 'FHE16 기반으로 블록체인 상태 데이터를 실행하여, 누구나 검증 가능한 온체인 연산을 제공합니다. 🔍',
-      'goal.a3.3': '고정 상태만 검증 가능한 기존 ZK 시스템과 달리, FHE16 기술은 동적 상태 검증을 지원합니다. 🔄✅',
-      'usecases.title': '활용 사례',
-      'use1.title': 'DeFi 거래 데이터 보호 및 MEV 방지',
-      'use1.desc': '주문이 노출되지 않도록 거래를 비공개로 유지합니다.<br>선점 이익을 노리는(소위 MEV) 부정 봇 전술을 차단합니다.',
-      'use2.title': '온체인 투표(선택적 익명성 + 공개 검증)',
-      'use2.desc': '신원과 선택은 비공개로 지키면서 투표합니다.<br>동시에 누구나 결과의 진위를 검증할 수 있습니다.',
-      'use3.title': '데이터 마켓플레이스(원본 공개 없는 연산)',
-      'use3.desc': '원본 데이터를 넘기지 않고 인사이트만 사고팝니다.<br>보호된 데이터 위에서 연산이 수행되어 원본은 안전합니다.',
-      'use4.title': '프라이버시 보존 메신저/SNS',
-      'use4.desc': '프라이버시를 포기하지 않고 소통하세요.<br>콘텐츠는 암호화되며, 공개 범위는 사용자가 결정합니다.',
-      'prop.f1': '각 프라이빗 상태는 FHE16으로 결정론적으로 암호화되어 온체인에 기록',
-      'prop.f2': '모든 네트워크 참여자가 상태 변경을 검증 가능',
-      'prop.f3': '임계값 복호화 프로토콜로 상태 공개가 네트워크에 전파',
+      'goal.q3': '공개 가능한 A/B/C 계획은 무엇인가요?',
+      'goal.a3.1': 'A. B2C 수요 예측 및 물량 배분 - 비공개 수요 조사, 가격/물량 리포트, 2026 Coming Soon.',
+      'goal.a3.2': 'B. B2B PET 리스크 인텔리전스 - 보험 청구 교차검증, FDS, 신원 및 이상 거래 탐지',
+      'goal.a3.3': 'C. 블록체인 기밀 인프라 - 암호화 상태, 기밀 실행, 임계값 공개, 공개 검증성을 함께 제공합니다.',
+      'usecases.title': '비즈니스 모델 & GTM',
+      'use1.title': 'A. 소비자 수요 인텔리전스',
+      'use1.desc': '폐쇄형 수요 조사, 비공개 지불 의향 분석, 출시 물량 리포트로 시작합니다. 수익 경로는 리포트 비용, 거래 수수료, 프리미엄 판매자 도구, 이후 정품/물류 모듈입니다. 2026 Coming Soon.',
+      'use2.title': 'B. 기업 리스크 인텔리전스',
+      'use2.desc': '원본 고객 데이터를 이동하지 않고 보험 청구 교차검증, FDS, 신원 불일치, 이상 거래 선별을 수행합니다. GTM은 PoC, 유료 파일럿, 구독 또는 건당 과금으로 이어집니다.',
+      'use3.title': 'C. 블록체인 기밀 인프라',
+      'use3.desc': '기밀 상태, 암호화 실행, 임계값 공개를 위한 개발자 모듈입니다. 수익 경로는 인프라 통합, SDK 지원, 파트너 배포입니다.',
+      'use4.title': 'Threshold Disclosure',
+      'use4.desc': '감사 또는 검증에 필요한 최소 결과만 제한적으로 공개합니다.',
+      'prop.f1': 'A는 B2C 출시와 물량 계획에 필요한 프라이버시 보존 수요 리포트로 첫 시장 진입점을 만듭니다',
+      'prop.f2': 'B는 같은 PET 엔진을 보험 청구 검토, 신원 리스크, FDS, 이상 거래 업무를 위한 기업 파일럿으로 전환합니다',
+      'prop.f3': 'C는 암호화 상태, 임계값 공개, 검증 가능한 실행을 위한 블록체인 기밀 인프라로 엔진을 패키징합니다',
       'member1.role': '이승환(CEO)',
       'member1.description': '한양대 전자공학 박사, <br>FHE16 연구·개발 총괄',
       'member2.role': '김도혁(CTO)',
@@ -266,7 +398,125 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'prof.4.affil': '인하대학교 교수',
       'prof.5.name': '노종선 교수님',
       'prof.5.affil': '서울대학교 명예교수',
-      'advisors.title': 'waLLLnut는 한국 주요 대학의 저명한 교수진과 함께<br>기술 자문 및 공동 연구를 진행합니다.',
+      'nav.benchmark': '벤치마크',
+    'nav.petEngine': 'PET 엔진',
+    'nav.abcTracks': 'A / B / C 사업 트랙',
+    'nav.current': '현재 팀',
+    'nav.alumni': '알럼나이',
+    'nav.research': '연구',
+    'nav.publications': '논문 및 연구 성과',
+    'nav.papers': '논문',
+    'nav.press': '언론',
+    'nav.traction': '트랙션',
+    'nav.track.a': 'A. B2C',
+    'nav.track.b': 'B. B2B',
+    'nav.track.c': 'C. 블록체인',
+    'sidebar.archive': '아카이브',
+    'sidebar.alumniCommunity': '알럼나이 커뮤니티',
+    'sidebar.ir': 'IR',
+    'sidebar.sns': 'SNS',
+    'problem.label': '01. 시장 문제',
+    'problem.title': '원본 데이터를 공유해야 풀리는 문제들이지만, 원본 공유는 불가능합니다',
+    'problem.desc': '수요 예측, 보험·거래 리스크, 블록체인 상태 검증은 모두 민감한 신호에 의존합니다.<br>waLLLnut은 PET 기술로 원본은 숨기고 필요한 계산 결과만 사업 의사결정에 연결합니다.',
+    'problem.a.title': 'A. 출시 수요와 물량은 아직 감에 의존합니다',
+    'problem.a.desc': '팬덤·한정판·수집재 시장은 지불 의향과 실제 수요가 숨겨져 있어 가격, 생산량, 재고 의사결정이 흔들립니다.',
+    'problem.b.title': 'B. 사기·이상 거래 데이터는 기관별로 끊겨 있습니다',
+    'problem.b.desc': '보험 청구, 신원, 계좌, 거래 패턴은 교차 검증이 필요하지만 개인정보와 규제로 원본 이동이 어렵습니다.',
+    'problem.c.title': 'C. 공개 원장은 민감 업무 확장을 막습니다',
+    'problem.c.desc': '온체인 애플리케이션은 검증성은 필요하지만 입찰, 신용, 거래 조건, 상태 값까지 공개되면 실사용이 제한됩니다.',
+    'cta.seeSolution': '솔루션 보기',
+    'cta.talkToUs': '문의하기',
+    'section.executive': '02. 사업 요약',
+    'section.businessTracks': '03. 사업 트랙',
+    'section.techMoat': '04. 기술 차별성',
+    'section.competitive': '05. 경쟁 포지션',
+    'section.team': '07. 팀',
+    'section.ecosystem': '08. 생태계',
+    'section.developers': '09. 개발자 인프라',
+    'section.roadmap': '10. 로드맵',
+    'section.research': '11. 연구',
+    'section.press': '12. 언론 및 미디어',
+    'compare.title': 'FHE16이 A/B/C를 관통하는 공통 엔진인 이유',
+    'compare.feature': '항목',
+    'compare.standard': '일반 분석',
+    'compare.zk': 'ZK 증명',
+    'compare.rawMin': '원본 데이터 최소화',
+    'compare.encryptedDesign': '설계 단계부터 암호화',
+    'compare.dataExposed': '데이터 노출',
+    'compare.workflowSpecific': '강력하지만 업무별 구현 필요',
+    'compare.provesStatements': '명제 증명 중심',
+    'compare.hardwareTrust': '하드웨어 신뢰 필요',
+    'compare.scoring': '암호화 비교 및 스코어링',
+    'compare.coreFocus': '핵심 적용 영역',
+    'compare.plaintextOnly': '평문 처리 중심',
+    'compare.coordination': '참여자 조율 필요',
+    'compare.heavyLive': '실시간 스코어링에는 무거움',
+    'compare.fastTrust': '빠르지만 신뢰 의존',
+    'compare.browserPath': '브라우저 / 클라이언트 실행 경로',
+    'compare.wasmPath': 'FHE16-WASM 경로',
+    'compare.easy': '쉬움',
+    'compare.dependsProtocol': '프로토콜 의존',
+    'compare.proverCost': '증명 생성 비용',
+    'compare.hardwareBound': '하드웨어 종속',
+    'compare.enterprisePath': '기업 파일럿 경로',
+    'compare.teePsiFhe': 'TEE -> PSI -> FHE 경로',
+    'compare.privacyLimited': '쉽지만 프라이버시 제한',
+    'compare.goodMatching': '매칭에 적합',
+    'compare.auditSpecific': '감사 목적 중심',
+    'compare.shortBridge': '단기 브리지',
+    'compare.blockchainFit': '블록체인 기밀성 적합도',
+    'compare.confState': '기밀 상태와 실행',
+    'compare.publicDefault': '기본 공개 구조',
+    'compare.coordinationCost': '조율 비용',
+    'compare.verificationLayer': '검증 레이어',
+    'compare.offchainTrust': '오프체인 신뢰 레이어',
+    'compare.crossMarket': '시장 간 재사용성',
+    'compare.sharedEngine': 'A/B/C 공통 엔진',
+    'compare.siloed': '분리된 시스템',
+    'compare.usecaseSpecific': '유스케이스별 구현',
+    'compare.proofCircuits': '유스케이스별 증명 회로',
+    'compare.vendorSpecific': '벤더 종속',
+    'property.title': '포트폴리오 전략',
+    'portfolio.title': '사업화 마일스톤',
+    'portfolio.a': 'A. B2C 수요 예측 및 물량 배분 출시<br><span>폐쇄형 수요 조사, 리포트 MVP, 크리에이터/판매자 온보딩</span>',
+    'portfolio.b': 'B. PET 리스크 인텔리전스 PoC 및 파일럿<br><span>보험 청구 교차검증, FDS, 신원 및 이상 거래 워크플로</span>',
+    'portfolio.c': 'C. 블록체인 기밀 인프라 확장<br><span>SVM/EVM 모듈, 임계값 공개, 개발자 문서, 파트너 통합</span>',
+    'team.intro': '연구 기반 PET 실행팀<br>FHE16을 소비자, 기업,<br>블록체인 사업 트랙으로 전환합니다.',
+    'ecosystem.subtitle': 'PET 상용화를 위한 연구, 파일럿, 기술 협력',
+    'developers.title': 'FHE16으로 기밀 워크플로를 구축하세요',
+    'developers.github.desc': '구현 레퍼런스와 연구 코드를 확인하세요',
+    'developers.docs.desc': 'PET 및 기밀 연산 파일럿을 위한 기술 가이드',
+    'developers.sdk.desc': '단계적으로 공개되는 라이브러리와 통합 모듈',
+    'developers.playground.desc': '암호화 비교와 데모를 위한 브라우저 실행 경로',
+    'roadmap.title': '시장 진입점에서 PET 인프라까지의 3개년 경로',
+    'roadmap.2024.title': '연구 기반 확립',
+    'roadmap.2024.desc': 'FHE16 연구 기반과 브라우저 실행 가능한 암호화 연산 경로 확립',
+    'roadmap.2025.title': '회사 및 제품 아키텍처',
+    'roadmap.2025.desc': 'FHE16, SSFHE, 임계값 공개를 하나의 제품 엔진으로 통합',
+    'roadmap.a.title': 'A. B2C Coming Soon',
+    'roadmap.a.desc': '수요 예측, 비공개 조사, 리포트 MVP, 물량 배분 워크플로 출시 준비',
+    'roadmap.b.title': 'B. 기업 PET 파일럿',
+    'roadmap.b.desc': '보험 청구 교차검증, FDS, 신원, 이상 거래, 감사 워크플로',
+    'roadmap.c.title': 'C. 블록체인 모듈',
+    'roadmap.c.desc': '기밀 상태 레이어, 임계값 공개, SDK, 개발자용 기술 문서',
+    'roadmap.platform.title': '크로스마켓 PET 플랫폼',
+    'roadmap.platform.desc': '소비자 출시 인텔리전스, 기업 리스크, 블록체인 기밀성을 잇는 통합 인프라',
+    'research.title': '논문 및 산학협력',
+    'research.desc': 'waLLLnut의 FHE16 기술은 한양대학교 Coding & Communication Research Lab(CCRL)와의 긴밀한 산학협력을 통해 개발되었습니다.',
+    'research.papers': 'IACR ePrint Archive 논문',
+    'press.title': '언론 보도',
+    'contact.title': '파일럿·파트너십 문의',
+    'contact.desc': 'waLLLnut의 PET 엔진, 기업 파일럿, 2026 B2C 출시 경로에 대한 업데이트를 받아보세요.',
+    'contact.cta.title': '파일럿 또는 파트너십 논의',
+    'contact.cta.desc': '수요 예측, PET 리스크 인텔리전스, 블록체인 기밀성 워크플로를 논의하세요.',
+    'contact.button': '문의하기',
+    'developers.docs.title': '문서',
+    'developers.playground.title': '플레이그라운드',
+    'research.visitLab': '연구실 방문',
+    'press.more': '뉴스 더보기',
+    'newsletter.placeholder': '이메일을 입력하세요',
+    'newsletter.subscribe': '구독하기',
+    'advisors.title': 'waLLLnut는 한국 주요 대학의 저명한 교수진과 함께<br>기술 자문 및 공동 연구를 진행합니다.',
       'footer.copy': '© 2025 waLLLnut · All rights reserved.'
     }
   };
@@ -300,10 +550,31 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       var key = el.getAttribute('data-i18n');
       var val = (I18N[lang] && I18N[lang][key]) || (I18N[fb] && I18N[fb][key]) || '';
       if (val) el.innerHTML = val;
+      var phKey = el.getAttribute('data-i18n-placeholder');
+      var phVal = phKey ? ((I18N[lang] && I18N[lang][phKey]) || (I18N[fb] && I18N[fb][phKey]) || '') : '';
+      if (phVal) el.setAttribute('placeholder', phVal);
+    });
+    $$('[data-i18n-placeholder]').forEach(function(el){
+      var phKey = el.getAttribute('data-i18n-placeholder');
+      var phVal = phKey ? ((I18N[lang] && I18N[lang][phKey]) || (I18N[fb] && I18N[fb][phKey]) || '') : '';
+      if (phVal) el.setAttribute('placeholder', phVal);
     });
   }
-  function getSavedLang(){ try{ return localStorage.getItem('lang'); }catch(e){ return null; } }
+  function getSavedLang(){ try{ var v=localStorage.getItem('lang'); return (v==='ko'||v==='en') ? v : null; }catch(e){ return null; } }
   function saveLang(v){ try{ localStorage.setItem('lang', v); }catch(e){} }
+  function getUrlLang(){ var v=new URLSearchParams(location.search).get('lang'); return (v==='ko'||v==='en') ? v : null; }
+  function inferRegionalLang(){
+    var list=[];
+    if(navigator.language) list.push(navigator.language);
+    if(navigator.languages && navigator.languages.length) list=list.concat(Array.prototype.slice.call(navigator.languages));
+    if(list.some(function(v){ return /^ko\b/i.test(v || ''); })) return 'ko';
+    try{
+      var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if(tz==='Asia/Seoul') return 'ko';
+    }catch(e){}
+    return 'en';
+  }
+  function getInitialLang(){ return getUrlLang() || getSavedLang() || inferRegionalLang(); }
 
   /* === pre/strong/tail 3분할 바인더 === */
 /* === pre/strong/tail 3분할 바인더 — 안전판 버전 === */
@@ -508,6 +779,7 @@ function layoutHighlight(item){
     setKeyBySel('.goal-dropdown-card:nth-of-type(1) .goal-dropdown-content .goal-dropdown-text', 'goal.a1');
 
     setKeyBySel('.goal-dropdown-card:nth-of-type(2) .goal-dropdown-question', 'goal.q2');
+    setKeyBySel('.goal-dropdown-card:nth-of-type(2) .goal-dropdown-content .goal-dropdown-text', 'goal.a2');
     $$('.goal-dropdown-card:nth-of-type(2) .item-drop p:first-child').forEach(function(p){ setKey(p,'goal.hash.disclose'); });
 
     setKeyBySel('.goal-dropdown-card:nth-of-type(3) .goal-dropdown-question', 'goal.q3');
@@ -556,7 +828,7 @@ function layoutHighlight(item){
   // 텍스트 매칭 자동 바인딩 (인터랙티브 영역 보호)
   function autowireByTextMatch() {
     var map = new Map(), en = I18N.en || {};
-    Object.keys(en).forEach(function(k){ map.set(norm(stripTags(en[k])), k); });
+    Object.keys(en).forEach(function(k){ var text=norm(stripTags(en[k])); if(text) map.set(text, k); });
 
     var roots = $$('main, header, footer');
     var nodes = [];
@@ -570,7 +842,7 @@ function layoutHighlight(item){
              && !el.hasAttribute('data-no-i18n');
     });
     nodes.forEach(function(el){
-      var key = map.get(norm(el.innerHTML || el.textContent || '')); if (key) el.setAttribute('data-i18n', key);
+      var text=norm(el.innerHTML || el.textContent || ''); if(!text) return; var key = map.get(text); if (key) el.setAttribute('data-i18n', key);
     });
   }
 
@@ -940,17 +1212,11 @@ function initNavHighlightOnly() {
     // 모든 조건을 만족하면 Hero가 전체 뷰포트를 차지하는 것으로 간주
     const isHeroFullViewport = isAtTop && isHeroTopNearZero && isHeroFullHeight;
     
-    // Hero가 전체 뷰포트를 차지할 때만 헤더 전체(배경 포함) 숨김
-    // 그 외에는 헤더 전체(배경 포함) 표시
-    if (isHeroFullViewport) {
-      setVisible(false);
-    } else {
-      // Hero가 전체 뷰포트를 차지하지 않으면 헤더 전체 표시
-      setVisible(true);
-      // 스크롤 위치에 따라 배경 스타일 제어
-      const isAtTopForBg = scrollY <= 5;
-      header.classList.toggle('has-scrolled', !isAtTopForBg);
-    }
+    // 헤더 항상 표시
+    setVisible(true);
+    // 스크롤 위치에 따라 배경 스타일만 제어
+    const isAtTopForBg = scrollY <= 5;
+    header.classList.toggle('has-scrolled', !isAtTopForBg);
     
     ticking = false;
   }
@@ -1024,13 +1290,13 @@ function initNavHighlightOnly() {
     }
   }
 
-  // 초기 상태: 헤더 즉시 숨김
-  header.classList.remove('is-visible');
-  header.style.setProperty('transform', 'translateY(-100%)', 'important');
-  header.style.setProperty('opacity', '0', 'important');
-  header.style.setProperty('pointer-events', 'none', 'important');
-  header.style.setProperty('visibility', 'hidden', 'important');
-  isVisible = false;
+  // 초기 상태: 헤더 항상 표시
+  header.classList.add('is-visible');
+  header.style.removeProperty('transform');
+  header.style.removeProperty('opacity');
+  header.style.removeProperty('pointer-events');
+  header.style.removeProperty('visibility');
+  isVisible = true;
   
   // 초기 상태 확인 (Hero 섹션 위치 기반)
   evaluate();
@@ -1378,13 +1644,13 @@ function initUseCaseSlider(){
     });
   }
 
-  /* ================= Benchmark Chart ================= */
+  /* ================= Benchmark Chart (Chart.js) ================= */
   function initBenchmarkChart(){
     var chartContainer = $('#benchmarkChart');
     if(!chartContainer) return;
 
-    var chartDiv = document.getElementById('benchmarkChartCanvas');
-    if(!chartDiv) return;
+    var chartCanvas = document.getElementById('benchmarkChartCanvas');
+    if(!chartCanvas) return;
 
     var categoryTabs = document.querySelectorAll('.category-tab');
     if(!categoryTabs || categoryTabs.length === 0) return;
@@ -1406,15 +1672,16 @@ function initUseCaseSlider(){
 
     var currentCategory = 'ABS';
     var chartData = null;
+    var mainChartInstance = null;
     var modalChartInstance = null;
-    var clickedPoint = null; // 클릭한 포인트 정보 저장
-    
+    var clickedPoint = null;
+
     var detailBtn = document.getElementById('chartDetailBtn');
     var detailBtnText = document.getElementById('detailBtnText');
     var modal = document.getElementById('chartDetailModal');
     var modalOverlay = document.getElementById('modalOverlay');
     var modalClose = document.getElementById('modalClose');
-    var modalChartDiv = document.getElementById('modalChartCanvas');
+    var modalChartCanvas = document.getElementById('modalChartCanvas');
 
     // 데이터 로드 함수
     function loadCategoryData(category, callback){
@@ -1432,7 +1699,7 @@ function initUseCaseSlider(){
         });
     }
 
-    // Plotly 차트 생성 함수
+    // Chart.js 차트 생성 함수
     function createChart(data){
       if(!data) return;
 
@@ -1441,100 +1708,121 @@ function initUseCaseSlider(){
       var xValues = keys;
       var yValues = keys.map(function(k){ return data[String(k)]; });
 
-      var trace = {
-        x: xValues,
-        y: yValues,
-        type: 'scatter',
-        mode: 'lines+markers',  // 마커 추가하여 클릭 가능하게
-        name: currentCategory,
-        line: {
-          color: categoryColors[currentCategory] || '#FFFFFF',
-          width: 2
+      var lineColor = categoryColors[currentCategory] || '#FFFFFF';
+
+      // 기존 차트 삭제
+      if(mainChartInstance){
+        mainChartInstance.destroy();
+        mainChartInstance = null;
+      }
+
+      var ctx = chartCanvas.getContext('2d');
+
+      mainChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xValues,
+          datasets: [{
+            label: currentCategory,
+            data: yValues,
+            borderColor: lineColor,
+            backgroundColor: lineColor.replace(')', ', 0.1)').replace('rgb', 'rgba'),
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 8,
+            pointBackgroundColor: lineColor,
+            pointBorderColor: lineColor,
+            pointHoverBackgroundColor: '#FFFFFF',
+            pointHoverBorderColor: lineColor,
+            pointHoverBorderWidth: 2,
+            tension: 0.1,
+            fill: true
+          }]
         },
-        marker: {
-          size: 8,  // 클릭 가능하도록 마커 크기 설정
-          color: categoryColors[currentCategory] || '#FFFFFF',
-          opacity: 0,  // 투명하게 하여 보이지 않게
-          line: {
-            width: 0
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          onClick: function(event, elements){
+            if(elements && elements.length > 0){
+              var element = elements[0];
+              var index = element.index;
+              clickedPoint = {
+                x: xValues[index],
+                y: yValues[index],
+                pointNumber: index
+              };
+              openModal();
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(25, 25, 25, 0.9)',
+              titleColor: '#FFFFFF',
+              bodyColor: '#FFFFFF',
+              borderColor: lineColor,
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 12,
+              displayColors: false,
+              callbacks: {
+                title: function(tooltipItems){
+                  return currentCategory;
+                },
+                label: function(context){
+                  return 'X: ' + context.label + '  Y: ' + context.parsed.y.toFixed(2) + ' ms';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Bit Depth / Parameter',
+                color: '#FFFFFF',
+                font: { size: 14, family: 'Pretendard, sans-serif' }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                drawBorder: false
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: { size: 12 }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Performance (ms)',
+                color: '#FFFFFF',
+                font: { size: 14, family: 'Pretendard, sans-serif' }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                drawBorder: false
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: { size: 12 }
+              },
+              beginAtZero: true
+            }
+          },
+          animation: {
+            duration: 800,
+            easing: 'easeOutQuart'
           }
-        },
-        hovertemplate: '<b>%{fullData.name}</b><br>X: %{x}<br>Y: %{y:.2f} ms<extra></extra>'
-      };
-
-      var layout = {
-        autosize: true,
-        margin: {
-          l: 60,
-          r: 20,
-          t: 20,
-          b: 60,
-          pad: 4
-        },
-        paper_bgcolor: 'transparent',
-        plot_bgcolor: 'transparent',
-        font: {
-          family: 'Pretendard, sans-serif',
-          size: 12,
-          color: '#FFFFFF'
-        },
-        xaxis: {
-          title: {
-            text: 'Bit Depth / Parameter',
-            font: {
-              size: 14,
-              color: '#FFFFFF'
-            }
-          },
-          gridcolor: 'rgba(255, 255, 255, 0.1)',
-          gridwidth: 1,
-          tickfont: {
-            color: '#FFFFFF',
-            size: 12
-          },
-          showline: false
-        },
-        yaxis: {
-          title: {
-            text: 'Performance (ms)',
-            font: {
-              size: 14,
-              color: '#FFFFFF'
-            }
-          },
-          gridcolor: 'rgba(255, 255, 255, 0.1)',
-          gridwidth: 1,
-          tickfont: {
-            color: '#FFFFFF',
-            size: 12
-          },
-          showline: false
-        },
-        showlegend: false,
-        hovermode: 'x unified'
-      };
-
-      var config = {
-        displayModeBar: false,
-        responsive: true
-      };
-
-      Plotly.newPlot(chartDiv, [trace], layout, config);
-      
-      // 차트 클릭 이벤트 추가
-      chartDiv.on('plotly_click', function(data){
-        if(data && data.points && data.points.length > 0){
-          var point = data.points[0];
-          clickedPoint = {
-            x: point.x,
-            y: point.y,
-            pointNumber: point.pointNumber
-          };
-          // 모달 열기
-          openModal();
         }
       });
-      
+
       // 디테일 버튼 표시 및 텍스트 업데이트
       if(detailBtn){
         detailBtn.style.display = 'inline-flex';
@@ -1543,49 +1831,35 @@ function initUseCaseSlider(){
         }
       }
     }
-    
+
     // 뷰포트 리사이즈 시 차트 크기 재조정
     var resizeTimeout;
     function handleResize(){
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(function(){
-        if(chartDiv && chartData){
-          try{
-            Plotly.Plots.resize(chartDiv);
-          } catch(e){
-            console.warn('Chart resize error:', e);
-          }
+        if(mainChartInstance){
+          mainChartInstance.resize();
         }
-        if(modalChartDiv && modal && modal.classList.contains('is-open')){
-          try{
-            Plotly.Plots.resize(modalChartDiv);
-          } catch(e){
-            console.warn('Modal chart resize error:', e);
-          }
+        if(modalChartInstance && modal && modal.classList.contains('is-open')){
+          modalChartInstance.resize();
         }
       }, 150);
     }
-    
+
     window.addEventListener('resize', handleResize);
-    
-    // 슬라이드 활성화 시 차트 리사이즈 (Plotly는 숨겨진 요소에서 제대로 렌더링되지 않음)
+
+    // 슬라이드 활성화 시 차트 리사이즈
     function handleSlideActivation(){
-      // 그래프 슬라이드가 활성화되었는지 확인
       var graphSlide = chartContainer.closest('.hero-slide');
       if(graphSlide && graphSlide.classList.contains('is-active')){
-        // 슬라이드가 활성화된 후 차트 리사이즈
         setTimeout(function(){
-          if(chartDiv && chartData){
-            try{
-              Plotly.Plots.resize(chartDiv);
-            } catch(e){
-              console.warn('Chart resize on slide activation error:', e);
-            }
+          if(mainChartInstance){
+            mainChartInstance.resize();
           }
         }, 100);
       }
     }
-    
+
     // 슬라이드 전환 감지를 위한 MutationObserver
     var slideObserver = new MutationObserver(function(mutations){
       mutations.forEach(function(mutation){
@@ -1597,7 +1871,7 @@ function initUseCaseSlider(){
         }
       });
     });
-    
+
     // 그래프 슬라이드 관찰 시작
     var graphSlide = chartContainer.closest('.hero-slide');
     if(graphSlide){
@@ -1606,223 +1880,199 @@ function initUseCaseSlider(){
         attributeFilter: ['class']
       });
     }
-    
+
     // hero:request-slide 및 hero:slide-changed 이벤트 리스너 추가
     document.addEventListener('hero:request-slide', function(event){
       var requestedIndex = event.detail ? event.detail.index : 1;
       if(requestedIndex === 1){
-        // 그래프 슬라이드로 이동할 때
         setTimeout(handleSlideActivation, 200);
       }
     });
-    
+
     document.addEventListener('hero:slide-changed', function(event){
       var slideIndex = event.detail ? event.detail.index : 0;
       if(slideIndex === 1){
-        // 그래프 슬라이드가 활성화되었을 때
         setTimeout(handleSlideActivation, 200);
       }
     });
-    
+
     // 모달 내부 상세 차트 생성 함수
     function createModalChart(data){
-      if(!data || !modalChartDiv) return;
+      if(!data || !modalChartCanvas) return;
 
-      // 데이터를 배열로 변환 (키 순서대로)
       var keys = Object.keys(data).map(function(k){ return parseInt(k); }).sort(function(a, b){ return a - b; });
       var xValues = keys;
       var yValues = keys.map(function(k){ return data[String(k)]; });
+      var lineColor = categoryColors[currentCategory] || '#FFFFFF';
 
-      var trace = {
-        x: xValues,
-        y: yValues,
-        type: 'scatter',
-        mode: 'lines+markers',
-        name: currentCategory,
-        line: {
-          color: categoryColors[currentCategory] || '#FFFFFF',
-          width: 3
-        },
-        marker: {
-          size: 6,
-          color: categoryColors[currentCategory] || '#FFFFFF',
-          line: {
-            color: '#FFFFFF',
-            width: 1
-          }
-        },
-        hovertemplate: '<b>%{fullData.name}</b><br>X: %{x}<br>Y: %{y:.2f} ms<extra></extra>'
-      };
-      
-      // 클릭한 포인트 강조 표시를 위한 annotation
-      var annotations = [];
-      if(clickedPoint){
-        annotations.push({
-          x: clickedPoint.x,
-          y: clickedPoint.y,
-          text: '<b>Selected Point</b><br>X: ' + clickedPoint.x + '<br>Y: ' + clickedPoint.y.toFixed(2) + ' ms',
-          showarrow: true,
-          arrowhead: 2,
-          arrowsize: 1.5,
-          arrowwidth: 2,
-          arrowcolor: '#FF7300',
-          ax: 0,
-          ay: -40,
-          bgcolor: 'rgba(255, 115, 0, 0.8)',
-          bordercolor: '#FFFFFF',
-          borderwidth: 1,
-          font: {
-            color: '#FFFFFF',
-            size: 12,
-            family: 'Pretendard, sans-serif'
-          }
-        });
-      }
-
-      var layout = {
-        autosize: true,
-        margin: {
-          l: 80,
-          r: 40,
-          t: 40,
-          b: 80,
-          pad: 4
-        },
-        paper_bgcolor: 'transparent',
-        plot_bgcolor: 'transparent',
-        font: {
-          family: 'Pretendard, sans-serif',
-          size: 14,
-          color: '#FFFFFF'
-        },
-        xaxis: {
-          title: {
-            text: 'Bit Depth / Parameter',
-            font: {
-              size: 16,
-              color: '#FFFFFF'
-            }
-          },
-          gridcolor: 'rgba(255, 255, 255, 0.15)',
-          gridwidth: 1,
-          tickfont: {
-            color: '#FFFFFF',
-            size: 13
-          },
-          showline: true,
-          linecolor: 'rgba(255, 255, 255, 0.3)'
-        },
-        yaxis: {
-          title: {
-            text: 'Performance (ms)',
-            font: {
-              size: 16,
-              color: '#FFFFFF'
-            }
-          },
-          gridcolor: 'rgba(255, 255, 255, 0.15)',
-          gridwidth: 1,
-          tickfont: {
-            color: '#FFFFFF',
-            size: 13
-          },
-          showline: true,
-          linecolor: 'rgba(255, 255, 255, 0.3)'
-        },
-        showlegend: false,
-        hovermode: 'x unified',
-        annotations: annotations
-      };
-      
-      // 클릭한 포인트로 줌 (선택적)
-      if(clickedPoint){
-        layout.xaxis.range = [Math.max(0, clickedPoint.x - 10), clickedPoint.x + 10];
-        layout.yaxis.range = [Math.max(0, clickedPoint.y - 20), clickedPoint.y + 20];
-      }
-
-      var config = {
-        displayModeBar: true,
-        responsive: true,
-        modeBarButtonsToRemove: ['pan2d', 'lasso2d']
-      };
-
+      // 기존 모달 차트 삭제
       if(modalChartInstance){
-        Plotly.purge(modalChartDiv);
+        modalChartInstance.destroy();
+        modalChartInstance = null;
       }
-      
-      Plotly.newPlot(modalChartDiv, [trace], layout, config);
-      modalChartInstance = modalChartDiv;
-      
-      // 클릭한 포인트로 스크롤 (선택적)
-      if(clickedPoint){
-        setTimeout(function(){
-          try{
-            Plotly.relayout(modalChartDiv, {
-              'xaxis.range': [Math.max(0, clickedPoint.x - 10), clickedPoint.x + 10],
-              'yaxis.range': [Math.max(0, clickedPoint.y - 20), clickedPoint.y + 20]
-            });
-          } catch(e){
-            console.warn('Modal chart zoom error:', e);
+
+      var ctx = modalChartCanvas.getContext('2d');
+
+      // 클릭한 포인트 강조를 위한 포인트 색상 배열
+      var pointColors = yValues.map(function(_, i){
+        if(clickedPoint && xValues[i] === clickedPoint.x){
+          return '#FF7300';
+        }
+        return lineColor;
+      });
+
+      var pointSizes = yValues.map(function(_, i){
+        if(clickedPoint && xValues[i] === clickedPoint.x){
+          return 12;
+        }
+        return 6;
+      });
+
+      modalChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xValues,
+          datasets: [{
+            label: currentCategory,
+            data: yValues,
+            borderColor: lineColor,
+            backgroundColor: lineColor.replace(')', ', 0.15)').replace('rgb', 'rgba'),
+            borderWidth: 3,
+            pointRadius: pointSizes,
+            pointHoverRadius: 10,
+            pointBackgroundColor: pointColors,
+            pointBorderColor: pointColors,
+            pointBorderWidth: 2,
+            tension: 0.1,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: 'rgba(25, 25, 25, 0.95)',
+              titleColor: '#FFFFFF',
+              bodyColor: '#FFFFFF',
+              borderColor: lineColor,
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 14,
+              displayColors: false,
+              titleFont: { size: 14, weight: 'bold' },
+              bodyFont: { size: 13 },
+              callbacks: {
+                title: function(tooltipItems){
+                  return currentCategory;
+                },
+                label: function(context){
+                  var isSelected = clickedPoint && xValues[context.dataIndex] === clickedPoint.x;
+                  var prefix = isSelected ? '* Selected * ' : '';
+                  return prefix + 'X: ' + context.label + '  Y: ' + context.parsed.y.toFixed(2) + ' ms';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Bit Depth / Parameter',
+                color: '#FFFFFF',
+                font: { size: 16, family: 'Pretendard, sans-serif' }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.15)',
+                drawBorder: true,
+                borderColor: 'rgba(255, 255, 255, 0.3)'
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: { size: 13 }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Performance (ms)',
+                color: '#FFFFFF',
+                font: { size: 16, family: 'Pretendard, sans-serif' }
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.15)',
+                drawBorder: true,
+                borderColor: 'rgba(255, 255, 255, 0.3)'
+              },
+              ticks: {
+                color: '#FFFFFF',
+                font: { size: 13 }
+              },
+              beginAtZero: true
+            }
+          },
+          animation: {
+            duration: 600,
+            easing: 'easeOutQuart'
           }
-        }, 100);
-      }
-      
+        }
+      });
+
       // 모달이 열린 후 차트 크기 재조정
       setTimeout(function(){
-        try{
-          Plotly.Plots.resize(modalChartDiv);
-        } catch(e){
-          console.warn('Modal chart resize error:', e);
+        if(modalChartInstance){
+          modalChartInstance.resize();
         }
       }, 100);
     }
-    
+
     // 모달 열기 함수
     function openModal(){
       if(!modal || !chartData) return;
-      
-      // 모달 제목 업데이트
+
       var modalTitle = document.getElementById('modalTitle');
       if(modalTitle){
         modalTitle.textContent = currentCategory + ' - Detailed Benchmark';
       }
-      
-      // 모달 내부 차트 생성
+
       createModalChart(chartData);
-      
-      // hero 컨트롤 숨기기
+
       var heroControls = document.querySelector('.hero-slider-controls');
       if(heroControls){
         heroControls.style.display = 'none';
       }
-      
-      // 모달 표시
+
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
-    
+
     // 모달 닫기 함수
     function closeModal(){
       if(!modal) return;
-      
+
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      
-      // hero 컨트롤 다시 보이기
+
       var heroControls = document.querySelector('.hero-slider-controls');
       if(heroControls){
         heroControls.style.display = '';
       }
-      
+
       // 모달 차트 정리
-      if(modalChartDiv){
-        Plotly.purge(modalChartDiv);
+      if(modalChartInstance){
+        modalChartInstance.destroy();
         modalChartInstance = null;
       }
-      
-      // 클릭한 포인트 정보 초기화
+
       clickedPoint = null;
     }
 
@@ -1832,7 +2082,6 @@ function initUseCaseSlider(){
         var category = this.getAttribute('data-category');
         if(category === currentCategory) return;
 
-        // 탭 상태 업데이트
         categoryTabs.forEach(function(t){
           t.classList.remove('is-active');
           t.setAttribute('aria-selected', 'false');
@@ -1842,7 +2091,6 @@ function initUseCaseSlider(){
 
         currentCategory = category;
 
-        // 데이터 로드 및 차트 업데이트
         loadCategoryData(category, function(data){
           createChart(data);
         });
@@ -1855,31 +2103,30 @@ function initUseCaseSlider(){
         openModal();
       });
     }
-    
+
     // 모달 닫기 이벤트
     if(modalClose){
       modalClose.addEventListener('click', function(){
         closeModal();
       });
     }
-    
+
     if(modalOverlay){
       modalOverlay.addEventListener('click', function(){
         closeModal();
       });
     }
-    
+
     // ESC 키로 모달 닫기
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape' && modal && modal.classList.contains('is-open')){
         closeModal();
       }
     });
-    
+
     // 초기 차트 생성 (ABS)
     loadCategoryData('ABS', function(data){
       createChart(data);
-      // 첫 번째 탭 활성화
       if(categoryTabs[0]){
         categoryTabs[0].classList.add('is-active');
         categoryTabs[0].setAttribute('aria-selected', 'true');
@@ -1921,9 +2168,7 @@ function initUseCaseSlider(){
     autowireBySelectors();
     autowireByTextMatch();
 
-    var initial = 'en';
-    var urlLang = new URLSearchParams(location.search).get('lang');
-    if (urlLang === 'ko' || urlLang === 'en') initial = urlLang;
+    var initial = getInitialLang();
     setLanguage(initial);
 
     // 메뉴/언어

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="FHE16 benchmark lab for waLLLnut confidential computation performance." />
+  <meta name="google" content="notranslate">
+  <title>waLLLnut Benchmark Lab</title>
+  <link rel="canonical" href="https://walllnut.com/benchmark.html">
+  <link rel="stylesheet" href="./css/00.tokens.css?v=20241221">
+  <link rel="stylesheet" href="./css/01.base.css?v=20241221">
+  <link rel="stylesheet" href="./css/02.layout.css?v=20241221">
+  <link rel="stylesheet" href="./css/03.components.css?v=20241221">
+  <link rel="stylesheet" href="./css/04.sections.css?v=20241221">
+  <link rel="stylesheet" href="./css/05.i18n.css?v=20241221">
+  <link rel="stylesheet" href="./css/06.utilities.css?v=20241221">
+  <link rel="stylesheet" href="./css/99.overrides.css?v=20241221">
+  <link rel="stylesheet" href="./css/pages.css?v=20241221">
+  <link rel="icon" href="./asset/logo-filled-orange.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="./js/page-ui.js?v=20241221" defer></script>
+  <script src="./js/benchmark-page.js?v=20241221" defer></script>
+</head>
+<body class="page-body">
+  <header class="header header-font page-header" role="banner">
+    <div class="header-left">
+      <div class="nav-dropdown" data-dropdown="plan">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-copy-ko="회사" data-copy-en="Company">Company</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="./index.html" data-copy-ko="메인" data-copy-en="Overview">Overview</a>
+          <a href="./index.html#sec03" data-copy-ko="A / B / C 사업 트랙" data-copy-en="A / B / C Tracks">A / B / C Tracks</a>
+          <a href="./index.html#contact" data-copy-ko="문의" data-copy-en="Contact">Contact</a>
+        </nav>
+      </div>
+      <div class="nav-dropdown" data-dropdown="benchmark">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-copy-ko="벤치마크" data-copy-en="Benchmark">Benchmark</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="#benchmark-lab" data-copy-ko="차트" data-copy-en="Chart">Chart</a>
+          <a href="#benchmark-data" data-copy-ko="데이터 테이블" data-copy-en="Data Table">Data Table</a>
+        </nav>
+      </div>
+      <div class="nav-dropdown" data-dropdown="evidence">
+        <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">
+          <span data-copy-ko="근거 자료" data-copy-en="Evidence">Evidence</span>
+          <span class="material-icons nav-dropdown-icon">expand_more</span>
+        </button>
+        <nav class="nav-dropdown-menu">
+          <a href="./traction.html#traction" data-copy-ko="트랙션" data-copy-en="Traction">Traction</a>
+          <a href="./traction.html#papers" data-copy-ko="논문" data-copy-en="Papers">Papers</a>
+          <a href="./traction.html#press" data-copy-ko="언론" data-copy-en="Press">Press</a>
+        </nav>
+      </div>
+    </div>
+    <div class="header-center">
+      <div class="logo-menus">
+        <a class="page-logo-link" href="./index.html" aria-label="waLLLnut home"><img src="./asset/head-logo.svg" alt="WaLLLnut Logo"></a>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="lang-dd header-floating" id="langDropdown">
+        <div class="lang-controls">
+          <div class="lang-toggle" role="group" aria-label="Language">
+            <button type="button" class="lang-toggle-btn" data-lang="en" aria-pressed="false">eng</button>
+            <button type="button" class="lang-toggle-btn is-active" data-lang="ko" aria-pressed="true">ko</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="header-menu-btn" data-aria-ko="사이드 내비게이션 열기" data-aria-en="Open sidebar navigation" aria-label="Open sidebar navigation" aria-expanded="false">
+        <span class="material-icons" aria-hidden="true">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="sidebar-menu" id="sidebarMenu" aria-hidden="true">
+    <div class="sidebar-menu-content">
+      <nav class="sidebar-menu-nav sidebar-menu-nav--main" aria-label="Page navigation">
+        <a href="./index.html" class="sidebar-menu-link" data-copy-ko="회사 메인" data-copy-en="Company">Company</a>
+        <a href="./benchmark.html" class="sidebar-menu-link" data-copy-ko="벤치마크" data-copy-en="Benchmark">Benchmark</a>
+        <a href="./traction.html" class="sidebar-menu-link" data-copy-ko="트랙션 / 논문 / 언론" data-copy-en="Traction / Papers / Press">Traction / Papers / Press</a>
+        <a href="./index.html#contact" class="sidebar-menu-link" data-copy-ko="문의" data-copy-en="Contact">Contact</a>
+      </nav>
+      <div class="sidebar-menu-gap"></div>
+      <p class="sidebar-menu-copyright">© 2025 waLLLnut · All rights reserved.</p>
+    </div>
+  </aside>
+
+  <main class="page-main">
+    <section class="page-hero page-hero--benchmark" aria-labelledby="benchmark-title">
+      <div class="page-container page-hero__grid">
+        <div>
+          <p class="page-eyebrow" data-copy-ko="FHE16 성능 검증" data-copy-en="FHE16 Performance Validation">FHE16 Performance Validation</p>
+          <h1 id="benchmark-title" data-copy-ko="FHE16 연산 성능을 카테고리별로 검증합니다" data-copy-en="Operation-level benchmark validation for FHE16">Operation-level benchmark validation for FHE16</h1>
+          <p class="page-hero__lead" data-copy-ko="FHE16의 연산별 지연 시간과 입력 범위별 성능 흐름을 공개 데이터 기반 차트와 요약 지표로 확인할 수 있습니다." data-copy-en="Explore FHE16 operation latency and input-range performance through public benchmark charts, category controls, and summary metrics.">Explore FHE16 operation latency and input-range performance through public benchmark charts, category controls, and summary metrics.</p>
+          <div class="page-hero__actions">
+            <a class="page-btn page-btn--primary" href="#benchmark-lab"><span class="material-icons" aria-hidden="true">show_chart</span><span data-copy-ko="차트 보기" data-copy-en="Open Chart">Open Chart</span></a>
+            <a class="page-btn page-btn--ghost" href="./traction.html#papers"><span class="material-icons" aria-hidden="true">article</span><span data-copy-ko="관련 논문 보기" data-copy-en="View Papers">View Papers</span></a>
+          </div>
+        </div>
+        <aside class="page-hero__panel" aria-label="Benchmark summary">
+          <p class="page-hero__panel-title" data-copy-ko="현재 공개 데이터" data-copy-en="Available Data">Available Data</p>
+          <div class="page-kpi-grid">
+            <div class="page-kpi"><strong>11</strong><span data-copy-ko="연산 카테고리" data-copy-en="operation categories">operation categories</span></div>
+            <div class="page-kpi"><strong>2-120</strong><span data-copy-ko="입력 범위 샘플" data-copy-en="input range samples">input range samples</span></div>
+            <div class="page-kpi"><strong>FHE16</strong><span data-copy-ko="회사 보유 기술 성능 근거" data-copy-en="company-owned technical evidence">company-owned technical evidence</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="benchmark-lab" class="page-section page-section--tight">
+      <div class="page-container">
+        <div class="page-section-header">
+          <div>
+            <p class="page-section-kicker" data-copy-ko="Interactive Benchmark" data-copy-en="Interactive Benchmark">Interactive Benchmark</p>
+            <h2 class="page-section-title" data-copy-ko="연산별 지연 시간을 바로 비교" data-copy-en="Compare latency by operation category">Compare latency by operation category</h2>
+            <p class="page-section-desc" data-copy-ko="카테고리를 선택하면 JSON 데이터에서 차트와 대표 샘플 테이블을 즉시 갱신합니다. 단위는 밀리초 기준입니다." data-copy-en="Select a category to update the chart and representative sample table from the local JSON benchmark files. Values are shown in milliseconds.">Select a category to update the chart and representative sample table from the local JSON benchmark files. Values are shown in milliseconds.</p>
+          </div>
+          <nav class="page-anchor-nav" aria-label="Benchmark anchors">
+            <a href="#benchmark-lab" data-copy-ko="차트" data-copy-en="Chart">Chart</a>
+            <a href="#benchmark-data" data-copy-ko="요약" data-copy-en="Summary">Summary</a>
+          </nav>
+        </div>
+
+        <div class="benchmark-layout">
+          <section class="benchmark-page-card" aria-labelledby="benchmark-chart-heading">
+            <h3 id="benchmark-chart-heading" class="sr-only">FHE16 benchmark chart</h3>
+            <div class="benchmark-toolbar" role="tablist" aria-label="Benchmark categories">
+              <button class="benchmark-tab is-active" type="button" role="tab" aria-selected="true" data-benchmark-category="ABS">ABS</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="ADD_TH">ADD_TH</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="ADD_VER2">ADD_VER2</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="ADD">ADD</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="ADD3">ADD3</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="EQ">EQ</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="GATE_VEC">GATE_VEC</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="LT">LT</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="MAX">MAX</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="NEG">NEG</button>
+              <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="SELECT">SELECT</button>
+            </div>
+            <div class="benchmark-canvas-wrap">
+              <canvas id="benchmarkChartCanvas"></canvas>
+            </div>
+            <p id="benchmarkStatus" class="benchmark-note" aria-live="polite">Loading benchmark data...</p>
+          </section>
+
+          <aside id="benchmark-data" class="benchmark-side">
+            <section class="benchmark-page-card">
+              <p class="page-section-kicker" data-copy-ko="Selected Category" data-copy-en="Selected Category">Selected Category</p>
+              <div class="benchmark-metrics">
+                <div class="metric-row"><span data-copy-ko="카테고리" data-copy-en="Category">Category</span><strong id="benchmarkMetricCategory">ABS</strong></div>
+                <div class="metric-row"><span data-copy-ko="입력 범위" data-copy-en="Input Range">Input Range</span><strong id="benchmarkMetricRange">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="시작값" data-copy-en="First Value">First Value</span><strong id="benchmarkMetricStart">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="끝값" data-copy-en="Last Value">Last Value</span><strong id="benchmarkMetricEnd">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="최소" data-copy-en="Minimum">Minimum</span><strong id="benchmarkMetricMin">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="최대" data-copy-en="Maximum">Maximum</span><strong id="benchmarkMetricMax">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="평균" data-copy-en="Average">Average</span><strong id="benchmarkMetricAvg">-</strong></div>
+                <div class="metric-row"><span data-copy-ko="샘플 수" data-copy-en="Samples">Samples</span><strong id="benchmarkMetricPoints">-</strong></div>
+              </div>
+            </section>
+
+            <section class="benchmark-page-card">
+              <p class="page-section-kicker" data-copy-ko="Representative Samples" data-copy-en="Representative Samples">Representative Samples</p>
+              <div class="benchmark-table-wrap">
+                <table class="benchmark-table">
+                  <thead>
+                    <tr><th data-copy-ko="입력" data-copy-en="Input">Input</th><th data-copy-ko="지연 시간" data-copy-en="Latency">Latency</th></tr>
+                  </thead>
+                  <tbody id="benchmarkTableBody"></tbody>
+                </table>
+              </div>
+              <p class="benchmark-note" data-copy-ko="전체 원천 데이터는 data/*.json 파일에 보존되어 있습니다." data-copy-en="The full source data remains in the local data/*.json files.">The full source data remains in the local data/*.json files.</p>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="page-container">
+      <span>© 2025 waLLLnut</span>
+      <span data-copy-ko="FHE16 benchmark data supports waLLLnut’s confidential computation engine." data-copy-en="FHE16 benchmark data supports waLLLnut’s confidential computation engine.">FHE16 benchmark data supports waLLLnut’s confidential computation engine.</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -31,7 +31,6 @@ section.container{
 main{
   box-sizing: border-box;
   width: 100%;
-  overflow-x: hidden !important;
 }
 
 /* Section rhythm - 최소한의 기본 스타일만 */
@@ -45,10 +44,12 @@ section{
 }
 
 #sec01{
-  width: 100vw;
-  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 /* AOS가 작동하지 않아도 섹션들이 보이도록 */
@@ -483,17 +484,12 @@ section.container{
     /* 웹처럼 처음에는 숨김 */
   }
   
-  /* 웹처럼 처음에는 헤더 숨김 */
-  .header:not(.is-visible){
-    transform: translateY(-100%) !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  
-  .header.is-visible{
+  /* 헤더 항상 표시 */
+  .header{
     transform: translateY(0) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    visibility: visible !important;
   }
 
   .header-left{
@@ -671,17 +667,12 @@ section.container{
     /* 웹처럼 처음에는 숨김 */
   }
   
-  /* 웹처럼 처음에는 헤더 숨김 */
-  .header:not(.is-visible){
-    transform: translateY(-100%) !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  
-  .header.is-visible{
+  /* 헤더 항상 표시 */
+  .header{
     transform: translateY(0) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    visibility: visible !important;
   }
 
   .header-left{
@@ -1321,17 +1312,12 @@ footer > div{
     /* 웹처럼 처음에는 숨김 */
   }
   
-  /* 웹처럼 처음에는 헤더 숨김 */
-  .header:not(.is-visible){
-    transform: translateY(-100%) !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  
-  .header.is-visible{
+  /* 헤더 항상 표시 */
+  .header{
     transform: translateY(0) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
+    visibility: visible !important;
   }
 
   /* 모바일과 동일한 레이아웃 */
@@ -1461,5 +1447,136 @@ footer > div{
   .header-right{
     order: 0 !important;
     /* 모바일의 order: 1 제거 */
+  }
+}
+
+
+/* ========== Header Collision Fix ========== */
+.header{
+  min-height: 84px;
+  overflow: visible !important;
+}
+
+.header-left{
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  max-width: calc(50vw - 96px);
+  overflow: visible;
+}
+
+.header-center{
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+.header-right{
+  flex: 0 1 auto;
+  min-width: max-content;
+}
+
+.logo-menus img{
+  max-height: 42px;
+  width: auto;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1240px){
+  .header{
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .header-left{
+    gap: 8px !important;
+  }
+
+  .nav-dropdown-btn{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+  }
+
+  .logo-menus img{
+    max-height: 34px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .header{
+    min-height: 64px;
+  }
+}
+
+
+/* ========== Fixed Header Separation ========== */
+:root{
+  --wn-fixed-header-height: 88px;
+}
+
+body{
+  padding-top: var(--wn-fixed-header-height);
+}
+
+.header,
+.header:not(.has-scrolled),
+.header.has-scrolled{
+  min-height: var(--wn-fixed-header-height) !important;
+  padding: 18px 30px 12px !important;
+  background: rgba(255,255,255,0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  color: #111111 !important;
+  box-shadow: 0 8px 28px rgba(15,15,16,0.08) !important;
+}
+
+.header a,
+.header button,
+.header span,
+.header .nav a,
+.header:not(.has-scrolled) a,
+.header:not(.has-scrolled) button,
+.header:not(.has-scrolled) span,
+.header:not(.has-scrolled) .nav a{
+  color: #111111 !important;
+}
+
+.header .nav-dropdown-btn,
+.header:not(.has-scrolled) .nav-dropdown-btn,
+.header.has-scrolled .nav-dropdown-btn{
+  background: rgba(15,15,16,0.05) !important;
+  color: #111111 !important;
+}
+
+.header .nav-dropdown-btn:hover,
+.header:not(.has-scrolled) .nav-dropdown-btn:hover,
+.header.has-scrolled .nav-dropdown-btn:hover{
+  background: rgba(15,15,16,0.10) !important;
+}
+
+.header .header-menu-btn,
+.header:not(.has-scrolled) .header-menu-btn{
+  background: rgba(15,15,16,0.06) !important;
+}
+
+@media screen and (max-width: 1023px){
+  :root{
+    --wn-fixed-header-height: 68px;
+  }
+
+  .header,
+  .header:not(.has-scrolled),
+  .header.has-scrolled{
+    min-height: var(--wn-fixed-header-height) !important;
+    padding: 10px 10px !important;
+  }
+}
+
+@media screen and (max-width: 480px){
+  :root{
+    --wn-fixed-header-height: 60px;
+  }
+
+  .header,
+  .header:not(.has-scrolled),
+  .header.has-scrolled{
+    padding: 8px 8px !important;
   }
 }

@@ -4,6 +4,130 @@
    - Micro-interactions & utility components
    ========================================================= */
 
+/* ========== Nav Dropdown ========== */
+.nav-dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: inherit;
+  font-family: Pretendard, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-dropdown-btn:hover{
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.nav-dropdown-icon{
+  font-size: 18px !important;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown.is-open .nav-dropdown-icon{
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu{
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 160px;
+  padding: 8px 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 100;
+}
+
+.nav-dropdown.is-open .nav-dropdown-menu{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown-menu a{
+  display: block;
+  padding: 12px 20px;
+  color: #333 !important;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-dropdown-menu a:hover{
+  background: rgba(255, 149, 45, 0.1);
+  color: #D86B00 !important;
+}
+
+/* 스크롤 전 (Hero 위) - 밝은 스타일 */
+.header:not(.has-scrolled) .nav-dropdown-btn{
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.header:not(.has-scrolled) .nav-dropdown-btn:hover{
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 스크롤 후 - 어두운 스타일 */
+.header.has-scrolled .nav-dropdown-btn{
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.header.has-scrolled .nav-dropdown-btn:hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Nav Link (Team 등 단일 링크) */
+.nav-link{
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.header:not(.has-scrolled) .nav-link{
+  color: white;
+}
+
+.header:not(.has-scrolled) .nav-link:hover{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header.has-scrolled .nav-link{
+  color: #333;
+}
+
+.header.has-scrolled .nav-link:hover{
+  background: rgba(0, 0, 0, 0.05);
+}
+
 /* Language toggle & ecosystem chip */
 .lang-controls{
   display: flex;
@@ -142,7 +266,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100vw;
+  width: 100%;
   height: 42px;
   background-color: white;
   z-index: var(--z-header);
@@ -345,9 +469,11 @@
   transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   box-sizing: border-box;
+  display: none;
 }
 
 .sidebar-menu.is-open{
+  display: block;
   transform: translateX(0);
   pointer-events: auto;
 }
@@ -501,7 +627,7 @@
 
 .side-link-btn--image:hover,
 .side-link-btn--image:focus-visible{
-  background: url('../asset/icon/gitbook.png') center/cover no-repeat;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .side-link-btn:focus-visible{
@@ -522,7 +648,7 @@
 }
 
 .side-link-btn--image{
-  background: url('../asset/icon/gitbook.png') center/cover no-repeat;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 
@@ -686,4 +812,32 @@ body.menu-locked{
     min-height: 48px;
     min-width: 48px;
   }
+}
+
+/* Nav Dropdown 모바일 수정 */
+@media screen and (max-width: 1023px){
+  .nav-dropdown{
+    position: relative !important;
+    display: inline-flex !important;
+  }
+
+  .nav-dropdown-btn{
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .nav-dropdown-menu{
+    position: fixed !important;
+    top: 70px !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    min-width: unset !important;
+    z-index: 9999 !important;
+  }
+}
+
+/* 헤더가 스크롤되지 않았을 때 드롭다운 z-index 확보 */
+.header .nav-dropdown-menu{
+  z-index: 9999;
 }
