@@ -47,7 +47,7 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'slogan': 'waLLLnut builds PET infrastructure for consumer demand forecasting, enterprise risk intelligence, and blockchain confidentiality.',
       'sec.tech': '04. Technology Moat',
       'sec.service': '03. Business Tracks',
-      'sec.team': '07. Team',
+      'sec.team': '06. Team',
       
       
       // Tech A
@@ -213,11 +213,11 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'section.businessTracks': '03. Business Tracks',
     'section.techMoat': '04. Technology Moat',
     'section.competitive': '05. Competitive Position',
-    'section.team': '07. Team',
-    'section.ecosystem': '08. Ecosystem',
-    'section.developers': '09. Developer Infrastructure',
-    'section.research': '11. Research',
-    'section.press': '12. Press & Media',
+    'section.team': '06. Team',
+    'section.ecosystem': '07. Ecosystem',
+    'section.developers': '08. Developer Infrastructure',
+    'section.research': '09. Research',
+    'section.press': '10. Press & Media',
     'compare.title': 'Why FHE16 is the common engine behind A/B/C',
     'compare.feature': 'Feature',
     'compare.standard': 'Standard Analytics',
@@ -305,8 +305,8 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'slogan': 'waLLLnut은 B2C 수요 예측, B2B 리스크 인텔리전스, 블록체인 기밀 인프라를 위한 PET 기술을 만듭니다.',
       'sec.tech': '04. Technology Moat',
       'sec.service': '03. Business Tracks',
-      'sec.exp': '06. Business Model & GTM',
-      'sec.team': '07. Team',
+      'sec.exp': 'Business Model & GTM',
+      'sec.team': '06. Team',
       
 
       // Tech A
@@ -472,11 +472,11 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'section.businessTracks': '03. 사업 트랙',
     'section.techMoat': '04. 기술 차별성',
     'section.competitive': '05. 경쟁 포지션',
-    'section.team': '07. 팀',
-    'section.ecosystem': '08. 생태계',
-    'section.developers': '09. 개발자 인프라',
-    'section.research': '11. 연구',
-    'section.press': '12. 언론 및 미디어',
+    'section.team': '06. 팀',
+    'section.ecosystem': '07. 생태계',
+    'section.developers': '08. 개발자 인프라',
+    'section.research': '09. 연구',
+    'section.press': '10. 언론 및 미디어',
     'compare.title': 'FHE16이 A/B/C를 관통하는 공통 엔진인 이유',
     'compare.feature': '항목',
     'compare.standard': '일반 분석',
