@@ -260,18 +260,17 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'research.desc': "waLLLnut's FHE16 technology has been developed through close academic collaboration with Hanyang University Coding & Communication Research Lab (CCRL).",
     'research.papers': 'IACR ePrint Archive Publications',
     'press.title': 'In the News',
-    'contact.title': 'Discuss a Pilot or Partnership',
-    'contact.desc': "Get updates on waLLLnut's PET engine, enterprise pilots, and 2026 B2C launch path.",
-    'contact.cta.title': 'Discuss a pilot or partnership',
-    'contact.cta.desc': 'Talk to us about demand forecasting, PET risk intelligence, or blockchain confidentiality workflows.',
-    'contact.button': 'Contact Us',
+    'contact.title': 'Contact',
+    'contact.desc': 'For waLLLnut inquiries, contact us directly.',
+    'contact.cta.title': 'Email',
+    'contact.cta.desc': 'shlee@walllnut.com',
+    'contact.button': 'shlee@walllnut.com',
+    'contact.email': 'shlee@walllnut.com',
     'developers.docs.title': 'Documentation',
     'developers.playground.title': 'Playground',
     'research.visitLab': 'Visit Lab',
     'press.more': 'View All News',
-    'newsletter.placeholder': 'Enter your email',
-    'newsletter.subscribe': 'Subscribe',
-    'advisors.title': 'waLLLnut collaborates with distinguished professors from<br>leading universities in Korea for technical advisory and joint research.',
+    'advisors.title': '<strong>waLLLnut</strong>',
       'footer.copy': '© 2025 waLLLnut · All rights reserved.'
     },
     ko: {
@@ -505,18 +504,17 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'research.desc': 'waLLLnut의 FHE16 기술은 한양대학교 Coding & Communication Research Lab(CCRL)와의 긴밀한 산학협력을 통해 개발되었습니다.',
     'research.papers': 'IACR ePrint Archive 논문',
     'press.title': '언론 보도',
-    'contact.title': '파일럿·파트너십 문의',
-    'contact.desc': 'waLLLnut의 PET 엔진, 기업 파일럿, 2026 B2C 출시 경로에 대한 업데이트를 받아보세요.',
-    'contact.cta.title': '파일럿 또는 파트너십 논의',
-    'contact.cta.desc': '수요 예측, PET 리스크 인텔리전스, 블록체인 기밀성 워크플로를 논의하세요.',
-    'contact.button': '문의하기',
+    'contact.title': '문의',
+    'contact.desc': 'waLLLnut 관련 문의는 아래 이메일로 연락해 주세요.',
+    'contact.cta.title': '이메일',
+    'contact.cta.desc': 'shlee@walllnut.com',
+    'contact.button': 'shlee@walllnut.com',
+    'contact.email': 'shlee@walllnut.com',
     'developers.docs.title': '문서',
     'developers.playground.title': '플레이그라운드',
     'research.visitLab': '연구실 방문',
     'press.more': '뉴스 더보기',
-    'newsletter.placeholder': '이메일을 입력하세요',
-    'newsletter.subscribe': '구독하기',
-    'advisors.title': 'waLLLnut는 한국 주요 대학의 저명한 교수진과 함께<br>기술 자문 및 공동 연구를 진행합니다.',
+    'advisors.title': '<strong>waLLLnut</strong>',
       'footer.copy': '© 2025 waLLLnut · All rights reserved.'
     }
   };
@@ -809,19 +807,7 @@ function layoutHighlight(item){
       });
     })();
 
-    // Advisors
-    (function bindAdvisors(){
-      function P(n,s){ return '.professor-list .list-item:nth-of-type('+n+') '+s; }
-      setKeyBySel(P(1,'.pro-name strong'),'prof.1.name');  setKeyBySel(P(1,'.pro-list-link'),'prof.1.affil');
-      setKeyBySel(P(2,'.pro-name strong'),'prof.2.name');  setKeyBySel(P(2,'.pro-list-link'),'prof.2.affil');
-      setKeyBySel(P(3,'.pro-name strong'),'prof.3.name');  setKeyBySel(P(3,'.pro-list-link'),'prof.3.affil');
-      setKeyBySel(P(4,'.pro-name strong'),'prof.4.name');  setKeyBySel(P(4,'.pro-list-link'),'prof.4.affil');
-      setKeyBySel(P(5,'.pro-name strong'),'prof.5.name');  setKeyBySel(P(5,'.pro-list-link'),'prof.5.affil');
-    })();
-
-    // Footer / label
-    setKeyBySel('#sec08 .s08-comt-inner .s08-title','advisors.title');
-    var footerCopy=$('footer .container span'); if(footerCopy && !footerCopy.hasAttribute('data-i18n')) footerCopy.setAttribute('data-i18n','footer.copy');
+    // Footer
     var label=$('#langLabel'); if(label && !label.hasAttribute('data-i18n')) label.setAttribute('data-i18n','lang.label');
   }
 
