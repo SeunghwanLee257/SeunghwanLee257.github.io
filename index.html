@@ -298,17 +298,17 @@
         </p>
         <div class="problem-grid">
           <div class="problem-card">
-            <span class="material-icons problem-icon">inventory_2</span>
+            <img class="problem-card-image" src="./asset/graphic/sec06-usecase-01.png" alt="B2C demand forecasting visual" loading="lazy">
             <h4 data-i18n="problem.a.title">A. 출시 수요와 물량은 아직 감에 의존합니다</h4>
             <p data-i18n="problem.a.desc">팬덤·한정판·수집재 시장은 지불 의향과 실제 수요가 숨겨져 있어 가격, 생산량, 재고 의사결정이 흔들립니다.</p>
           </div>
           <div class="problem-card">
-            <span class="material-icons problem-icon">policy</span>
+            <img class="problem-card-image" src="./asset/graphic/sec06-usecase-02.png" alt="B2B risk intelligence visual" loading="lazy">
             <h4 data-i18n="problem.b.title">B. 사기·이상 거래 데이터는 기관별로 끊겨 있습니다</h4>
             <p data-i18n="problem.b.desc">보험 청구, 신원, 계좌, 거래 패턴은 교차 검증이 필요하지만 개인정보와 규제로 원본 이동이 어렵습니다.</p>
           </div>
           <div class="problem-card">
-            <span class="material-icons problem-icon">hub</span>
+            <img class="problem-card-image" src="./asset/graphic/sec06-usecase-03.png" alt="Blockchain confidential infrastructure visual" loading="lazy">
             <h4 data-i18n="problem.c.title">C. 공개 원장은 민감 업무 확장을 막습니다</h4>
             <p data-i18n="problem.c.desc">온체인 애플리케이션은 검증성은 필요하지만 입찰, 신용, 거래 조건, 상태 값까지 공개되면 실사용이 제한됩니다.</p>
           </div>
@@ -441,7 +441,7 @@
       <h2 id="service-label" class="section-label" data-i18n="section.businessTracks">03. Business Tracks</h2>
       <div class="solutions-layout">
         <div class="solutions-card" data-solution-card>
-          <div class="solutions-visual" data-solution-visual></div>
+          <div class="solutions-visual" data-solution-visual><img src="./asset/bg/sec03slide01.png" alt="B2C demand forecasting visual" data-solution-image loading="lazy"></div>
           <div class="solutions-content">
             <p class="solutions-title" data-solution-title>B2C Demand Forecasting & Allocation</p>
             <p class="solutions-body" data-solution-body>
@@ -469,7 +469,7 @@
         <article class="tech-panel tech-panel--active" id="panel-a" aria-hidden="false">
           <button type="button" class="tech-panel-trigger" data-tech-target="panel-a" aria-label="View FHE16"></button>
           <div class="tech-panel-media">
-            <div class="tech-visual tech-visual--fhe" role="img" aria-label="FHE16 encrypted signal flow"></div>
+            <div class="tech-visual tech-visual--fhe" role="img" aria-label="FHE16 encrypted signal flow"><img class="tech-visual-image" src="./asset/bg/sec04-FHE16-bg.png" alt="FHE16 encrypted computation visual" loading="lazy"></div>
             </div>
           <div class="tech-panel-content">
             <header class="tech-panel-header">
@@ -491,7 +491,7 @@
         <article class="tech-panel tech-panel--inactive" id="panel-b" aria-hidden="true">
           <button type="button" class="tech-panel-trigger" data-tech-target="panel-b" aria-label="View FHE16-based MPC"></button>
           <div class="tech-panel-media">
-            <div class="tech-visual tech-visual--mpc" role="img" aria-label="MPC and threshold disclosure flow"></div>
+            <div class="tech-visual tech-visual--mpc" role="img" aria-label="MPC and threshold disclosure flow"><img class="tech-visual-image" src="./asset/bg/sec04-SSFHE-bg.png" alt="SSFHE threshold disclosure visual" loading="lazy"></div>
           </div>
           <div class="tech-panel-content">
             <header class="tech-panel-header">
@@ -536,51 +536,51 @@
             <tbody>
               <tr>
                 <td data-i18n="compare.rawMin">Raw-data minimization</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.encryptedDesign">Encrypted by design</span></td>
-                <td><span class="cross">✗</span> <span data-i18n="compare.dataExposed">Data exposed</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.workflowSpecific">Strong, workflow-specific</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.provesStatements">Proves statements</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.hardwareTrust">Hardware trust</span></td>
+                <td class="highlight"><span data-i18n="compare.encryptedDesign">Encrypted by design</span></td>
+                <td><span data-i18n="compare.dataExposed">Data exposed</span></td>
+                <td><span data-i18n="compare.workflowSpecific">Strong, workflow-specific</span></td>
+                <td><span data-i18n="compare.provesStatements">Proves statements</span></td>
+                <td><span data-i18n="compare.hardwareTrust">Hardware trust</span></td>
               </tr>
               <tr>
                 <td data-i18n="compare.scoring">Encrypted comparison and scoring</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.coreFocus">Core focus</span></td>
-                <td><span class="cross">✗</span> <span data-i18n="compare.plaintextOnly">Plaintext only</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.coordination">Possible with coordination</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.heavyLive">Heavy for live scoring</span></td>
-                <td><span class="check">✓</span> <span data-i18n="compare.fastTrust">Fast, trust-dependent</span></td>
+                <td class="highlight"><span data-i18n="compare.coreFocus">Core focus</span></td>
+                <td><span data-i18n="compare.plaintextOnly">Plaintext only</span></td>
+                <td><span data-i18n="compare.coordination">Possible with coordination</span></td>
+                <td><span data-i18n="compare.heavyLive">Heavy for live scoring</span></td>
+                <td><span data-i18n="compare.fastTrust">Fast, trust-dependent</span></td>
               </tr>
               <tr>
                 <td data-i18n="compare.browserPath">Browser / client execution path</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.wasmPath">FHE16-WASM path</span></td>
-                <td><span class="check">✓</span> <span data-i18n="compare.easy">Easy</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.dependsProtocol">Depends on protocol</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.proverCost">Prover cost</span></td>
-                <td><span class="cross">✗</span> <span data-i18n="compare.hardwareBound">Hardware-bound</span></td>
+                <td class="highlight"><span data-i18n="compare.wasmPath">FHE16-WASM path</span></td>
+                <td><span data-i18n="compare.easy">Easy</span></td>
+                <td><span data-i18n="compare.dependsProtocol">Depends on protocol</span></td>
+                <td><span data-i18n="compare.proverCost">Prover cost</span></td>
+                <td><span data-i18n="compare.hardwareBound">Hardware-bound</span></td>
               </tr>
               <tr>
                 <td data-i18n="compare.enterprisePath">Enterprise validation path</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.teePsiFhe">TEE -> PSI -> FHE path</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.privacyLimited">Easy but privacy-limited</span></td>
-                <td><span class="check">✓</span> <span data-i18n="compare.goodMatching">Good for matching</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.auditSpecific">Audit-specific</span></td>
-                <td><span class="check">✓</span> <span data-i18n="compare.shortBridge">Short-term bridge</span></td>
+                <td class="highlight"><span data-i18n="compare.teePsiFhe">TEE -> PSI -> FHE path</span></td>
+                <td><span data-i18n="compare.privacyLimited">Easy but privacy-limited</span></td>
+                <td><span data-i18n="compare.goodMatching">Good for matching</span></td>
+                <td><span data-i18n="compare.auditSpecific">Audit-specific</span></td>
+                <td><span data-i18n="compare.shortBridge">Short-term bridge</span></td>
               </tr>
               <tr>
                 <td data-i18n="compare.blockchainFit">Blockchain confidentiality fit</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.confState">Confidential state and execution</span></td>
-                <td><span class="cross">✗</span> <span data-i18n="compare.publicDefault">Public by default</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.coordinationCost">Coordination cost</span></td>
-                <td><span class="check">✓</span> <span data-i18n="compare.verificationLayer">Verification layer</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.offchainTrust">Off-chain trust layer</span></td>
+                <td class="highlight"><span data-i18n="compare.confState">Confidential state and execution</span></td>
+                <td><span data-i18n="compare.publicDefault">Public by default</span></td>
+                <td><span data-i18n="compare.coordinationCost">Coordination cost</span></td>
+                <td><span data-i18n="compare.verificationLayer">Verification layer</span></td>
+                <td><span data-i18n="compare.offchainTrust">Off-chain trust layer</span></td>
               </tr>
               <tr>
                 <td data-i18n="compare.crossMarket">Cross-market reuse</td>
-                <td class="highlight"><span class="check">✓</span> <span data-i18n="compare.sharedEngine">A/B/C shared engine</span></td>
-                <td><span class="cross">✗</span> <span data-i18n="compare.siloed">Siloed systems</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.usecaseSpecific">Use-case specific</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.proofCircuits">Proof circuits per use case</span></td>
-                <td><span class="partial">◐</span> <span data-i18n="compare.vendorSpecific">Vendor-specific</span></td>
+                <td class="highlight"><span data-i18n="compare.sharedEngine">A/B/C shared engine</span></td>
+                <td><span data-i18n="compare.siloed">Siloed systems</span></td>
+                <td><span data-i18n="compare.usecaseSpecific">Use-case specific</span></td>
+                <td><span data-i18n="compare.proofCircuits">Proof circuits per use case</span></td>
+                <td><span data-i18n="compare.vendorSpecific">Vendor-specific</span></td>
               </tr>
             </tbody>
           </table>
@@ -622,7 +622,7 @@
             <ul class="use-case-track">
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image use-case-image--demand" role="img" aria-label="Masked demand forecasting graph"></div>
+                  <div class="use-case-image use-case-image--demand" role="img" aria-label="Masked demand forecasting graph"><img src="./asset/graphic/sec06-usecase-01.png" alt="Masked demand forecasting graph" loading="lazy"></div>
                     <div class="use-case-titleAndDesc">
                     <h3 class="use-case-title" data-i18n="usecase.1.title">A. Consumer Demand Intelligence</h3>
                     <p class="use-case-desc" data-i18n="usecase.1.desc">Closed demand survey, private willingness-to-pay analysis, and launch quantity reports. Revenue path: report fee, transaction fee, premium seller tools, and later authenticity/fulfillment modules. 2026 Coming Soon.</p>
@@ -631,7 +631,7 @@
                 </li>
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image use-case-image--risk" role="img" aria-label="Enterprise risk graph and audit log"></div>
+                  <div class="use-case-image use-case-image--risk" role="img" aria-label="Enterprise risk graph and audit log"><img src="./asset/graphic/sec06-usecase-02.png" alt="Enterprise risk graph and audit log" loading="lazy"></div>
                     <div class="use-case-titleAndDesc">
                     <h3 class="use-case-title" data-i18n="usecase.2.title">B. Enterprise Risk Intelligence</h3>
                     <p class="use-case-desc" data-i18n="usecase.2.desc">Insurance claim cross-validation, FDS, identity mismatch, and anomalous transaction screening without moving raw customer data. GTM path: PoC design, validation, then subscription or per-check pricing.</p>
@@ -640,7 +640,7 @@
                 </li>
                 <li class="use-case-item">
                 <article class="use-case">
-                  <div class="use-case-image use-case-image--chain" role="img" aria-label="Encrypted blockchain state flow"></div>
+                  <div class="use-case-image use-case-image--chain" role="img" aria-label="Encrypted blockchain state flow"><img src="./asset/graphic/sec06-usecase-03.png" alt="Encrypted blockchain state flow" loading="lazy"></div>
                     <div class="use-case-titleAndDesc">
                     <h3 class="use-case-title" data-i18n="usecase.3.title">C. Confidential Chain Infrastructure</h3>
                     <p class="use-case-desc" data-i18n="usecase.3.desc">Developer-facing modules for confidential state, encrypted execution, and threshold disclosure. Revenue path: infrastructure integration, SDK support, and partner deployments.</p>

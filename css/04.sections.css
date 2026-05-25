@@ -5692,3 +5692,64 @@
     gap: 6px;
   }
 }
+
+/* Image-led business plan visuals */
+.problem-card{
+  padding: 18px 18px 26px;
+  text-align: left;
+}
+.problem-card-image{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  background: rgba(255,255,255,0.08);
+}
+.problem-icon{ display:none; }
+.solutions-visual,
+.tech-visual,
+.use-case-image{
+  background: #111111;
+}
+.solutions-visual::before,
+.solutions-visual::after,
+.tech-visual::before,
+.tech-visual::after,
+.use-case-image::before,
+.use-case-image::after{
+  content: none !important;
+}
+.solutions-visual{
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+.solutions-visual img,
+.tech-visual-image,
+.use-case-image img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tech-visual{
+  display: flex;
+  min-height: 100%;
+}
+.use-case-image{
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
+}
+.compare-table .check,
+.compare-table .cross,
+.compare-table .partial{
+  display: none;
+}
+@media (max-width: 767px){
+  .problem-card-image{ margin-bottom: 18px; }
+}

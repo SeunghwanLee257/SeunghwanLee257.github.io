@@ -712,3 +712,31 @@ body.page-body{
     border-color:rgba(255,255,255,.22);
   }
 }
+
+/* Image-led evidence cards */
+.evidence-card{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.evidence-card__media{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #181716;
+}
+.evidence-card__media img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.evidence-card__tag{
+  margin: 20px 22px 0;
+}
+.evidence-card h3{
+  margin: 12px 22px 10px;
+}
+.evidence-card p{
+  margin: 0 22px 22px;
+}
