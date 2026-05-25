@@ -78,12 +78,12 @@ body.page-body{
 }
 
 .page-hero--benchmark::before{
-  background:url("../asset/bg/sec04-FHE16-bg.png") center/cover no-repeat;
+  background:url("../asset/generated/tech-fhe16-photo.jpg") center/cover no-repeat;
   transform:scale(1.02);
 }
 
 .page-hero--traction::before{
-  background:url("../asset/bg/sec02-bg.png") center/cover no-repeat;
+  background:url("../asset/generated/business-risk-photo.jpg") center/cover no-repeat;
   transform:scale(1.02);
 }
 

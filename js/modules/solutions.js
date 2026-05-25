@@ -16,7 +16,7 @@ function getSolutionData(key, lang = 'en') {
         body: 'Convert private willingness-to-pay and launch demand into <strong>pricing, allocation, and restock decisions</strong>. Product name undisclosed. Launching in 2026.',
         sub: '2026 Coming Soon',
         visual: 'consumer',
-        image: './asset/bg/sec03slide01.png',
+        image: './asset/generated/business-demand-photo.jpg',
         alt: 'B2C demand forecasting visual'
       },
       enterprise: {
@@ -24,7 +24,7 @@ function getSolutionData(key, lang = 'en') {
         body: 'Support insurance claim cross-check, FDS, identity mismatch, and anomalous transaction workflows <strong>without exposing raw business data</strong>.',
         sub: 'PET-based identity, fraud, and transaction risk analysis',
         visual: 'enterprise',
-        image: './asset/bg/sec03slide02.png',
+        image: './asset/generated/business-risk-photo.jpg',
         alt: 'B2B PET risk intelligence visual'
       },
       blockchain: {
@@ -32,7 +32,7 @@ function getSolutionData(key, lang = 'en') {
         body: 'Package confidential state, encrypted execution, and threshold disclosure into developer-facing blockchain infrastructure while preserving <strong>public verifiability</strong>.',
         sub: 'Confidential modules for verifiable blockchain networks',
         visual: 'blockchain',
-        image: './asset/bg/sec03slide03.png',
+        image: './asset/generated/business-chain-photo.jpg',
         alt: 'Blockchain confidential infrastructure visual'
       }
     },
@@ -42,7 +42,7 @@ function getSolutionData(key, lang = 'en') {
         body: '비공개 지불 의향과 출시 수요를 <strong>가격, 물량 배분, 재입고 의사결정</strong>으로 전환합니다. 제품명은 비공개입니다.',
         sub: '2026 Coming Soon',
         visual: 'consumer',
-        image: './asset/bg/sec03slide01.png',
+        image: './asset/generated/business-demand-photo.jpg',
         alt: 'B2C demand forecasting visual'
       },
       enterprise: {
@@ -50,7 +50,7 @@ function getSolutionData(key, lang = 'en') {
         body: '원본 데이터를 노출하지 않고 보험 청구 교차검증, FDS, 신원 불일치, 이상 거래 선별 워크플로를 지원합니다.',
         sub: '신원, 사기, 거래 리스크를 위한 PET 기반 분석',
         visual: 'enterprise',
-        image: './asset/bg/sec03slide02.png',
+        image: './asset/generated/business-risk-photo.jpg',
         alt: 'B2B PET risk intelligence visual'
       },
       blockchain: {
@@ -58,7 +58,7 @@ function getSolutionData(key, lang = 'en') {
         body: '기밀 상태, 암호화 실행, 임계값 공개를 개발자용 블록체인 인프라로 패키징하면서 공개 검증성을 유지합니다.',
         sub: '검증 가능한 블록체인 네트워크를 위한 기밀 모듈',
         visual: 'blockchain',
-        image: './asset/bg/sec03slide03.png',
+        image: './asset/generated/business-chain-photo.jpg',
         alt: 'Blockchain confidential infrastructure visual'
       }
     }
