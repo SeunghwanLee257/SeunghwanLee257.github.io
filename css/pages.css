@@ -384,23 +384,22 @@ body.page-body{
 
 .evidence-card__tag{
   display:inline-flex;
-  min-height:28px;
   align-items:center;
-  padding:0 10px;
-  border-radius:8px;
-  background:rgba(255,122,26,.12);
+  padding:0;
+  border-radius:0;
+  background:transparent;
   color:#b94d00;
   font-size:12px;
   font-weight:900;
 }
 
 .evidence-card:nth-child(2) .evidence-card__tag{
-  background:rgba(14,159,143,.12);
+  background:transparent;
   color:#087567;
 }
 
 .evidence-card:nth-child(3) .evidence-card__tag{
-  background:rgba(49,87,213,.12);
+  background:transparent;
   color:#2442a2;
 }
 
@@ -479,18 +478,17 @@ body.page-body{
 
 .card-chip{
   display:inline-flex;
-  min-height:26px;
   align-items:center;
-  padding:0 9px;
-  border-radius:8px;
-  background:#f0ebe4;
+  padding:0;
+  border-radius:0;
+  background:transparent;
   color:var(--page-muted);
   font-size:12px;
   font-weight:900;
 }
 
 .card-chip--hot{
-  background:rgba(255,122,26,.13);
+  background:transparent;
   color:#b94d00;
 }
 
@@ -641,7 +639,7 @@ body.page-body{
   right:0;
   top:42px;
   height:1px;
-  background:linear-gradient(90deg, rgba(255,122,26,.72), rgba(255,255,255,.18), rgba(255,255,255,0));
+  background:rgba(255,255,255,.22);
 }
 
 .page-hero h1{
@@ -654,7 +652,7 @@ body.page-body{
 }
 
 .page-hero__panel{
-  border-left:4px solid var(--page-accent);
+  border-color:rgba(255,255,255,.22);
   box-shadow:0 24px 70px rgba(0,0,0,.22);
 }
 
@@ -674,19 +672,6 @@ body.page-body{
 .benchmark-page-card{
   position:relative;
   overflow:hidden;
-}
-
-.evidence-card::before,
-.timeline-item::before,
-.paper-evidence-card::before,
-.press-evidence-card::before,
-.benchmark-page-card::before{
-  content:"";
-  position:absolute;
-  inset:0 0 auto 0;
-  height:3px;
-  background:linear-gradient(90deg, var(--page-accent), var(--page-teal), var(--page-blue));
-  opacity:.75;
 }
 
 .evidence-card:hover,
@@ -724,7 +709,6 @@ body.page-body{
   }
 
   .page-hero__panel{
-    border-left:0;
-    border-top:4px solid var(--page-accent);
+    border-color:rgba(255,255,255,.22);
   }
 }

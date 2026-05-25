@@ -1777,9 +1777,9 @@
   display: inline;
   width: auto;
   font-weight: 600;
-  background-color: #FF7300;
-  color: inherit;
-  padding: 0 4px;
+  background-color: transparent;
+  color: var(--accent-dark);
+  padding: 0;
   margin: 0;
 }
 .tech-split{
@@ -1893,7 +1893,7 @@
   padding-top: 12px;
 }
 
-.tech-chip{width: fit-content; background-color: #FF7300; border-radius: 99px; color: white; padding: 8px 12px;}
+.tech-chip{width: fit-content; background-color: transparent; border-radius: 0; color: var(--accent-dark); padding: 0; font-weight: 700;}
 
 .tech-ref{
   font-size:14px;
@@ -2719,7 +2719,7 @@
     padding: 10px;
     background: #f8f8f8;
     border-radius: 6px;
-    border-left: 3px solid #667eea;
+    border: 1px solid #e0e0e0;
   }
 }
 
@@ -2780,7 +2780,7 @@
     padding: 12px;
     background: #f8f8f8;
     border-radius: 8px;
-    border-left: 3px solid #667eea;
+    border: 1px solid #e0e0e0;
   }
 
   .item-drop p {
@@ -4170,7 +4170,8 @@
 }
 
 .compare-table th.highlight{
-  background: #FF952D;
+  background: #333;
+  color: #FF952D;
 }
 
 .compare-table td:first-child{
@@ -4180,7 +4181,8 @@
 }
 
 .compare-table td.highlight{
-  background: rgba(255,149,45,0.1);
+  background: transparent;
+  color: #D86B00;
   font-weight: 600;
 }
 
@@ -4887,21 +4889,21 @@
 }
 
 .hero-track-kicker{
-  width: 30px;
-  height: 30px;
+  width: auto;
+  height: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  background: #ffffff;
+  border-radius: 0;
+  background: transparent;
   color: #0f0f10;
   font-family: "Asap Condensed", Pretendard, sans-serif;
   font-weight: 800;
 }
 
-.hero-track-card--a .hero-track-kicker{ background: #ff952d; color: #ffffff; }
-.hero-track-card--b .hero-track-kicker{ background: #14b8a6; color: #ffffff; }
-.hero-track-card--c .hero-track-kicker{ background: #252525; color: #ffffff; border: 1px solid rgba(255,255,255,0.28); }
+.hero-track-card--a .hero-track-kicker{ color: #ff952d; }
+.hero-track-card--b .hero-track-kicker{ color: #14b8a6; }
+.hero-track-card--c .hero-track-kicker{ color: #ffffff; border: 0; }
 
 .solutions-visual{
   position: relative;
@@ -5402,8 +5404,7 @@
   min-width: 0;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(15,118,110,0.14);
-  border-left: 4px solid #0f766e;
+  border: 1px solid rgba(32, 26, 21, 0.12);
   background: rgba(255,255,255,0.88);
 }
 
@@ -5482,14 +5483,14 @@
 
 .summary-track-id span{
   display: inline-flex;
-  width: 30px;
-  height: 30px;
-  flex: 0 0 30px;
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: #ff952d;
-  color: #171412;
+  border-radius: 0;
+  background: transparent;
+  color: #d86b00;
   font-size: 15px;
   font-weight: 900;
   line-height: 1;
