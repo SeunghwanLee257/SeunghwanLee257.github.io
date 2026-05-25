@@ -47,7 +47,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'slogan': 'waLLLnut builds PET infrastructure for consumer demand forecasting, enterprise risk intelligence, and blockchain confidentiality.',
       'sec.tech': '04. Technology Moat',
       'sec.service': '03. Business Tracks',
-      'sec.goal': '02. Executive Summary',
       'sec.team': '07. Team',
       
       
@@ -117,7 +116,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'goal.a3.1': 'A. B2C Demand Forecasting & Allocation - private demand survey, pricing/allocation report, 2026 Coming Soon.',
       'goal.a3.2': 'B. B2B PET Risk Intelligence - insurance claim cross-check, FDS, identity and anomalous transaction detection without raw data exposure.',
       'goal.a3.3': 'C. Blockchain Confidential Infrastructure - encrypted state, confidential execution, threshold disclosure, and public verifiability.',
-    'summary.eyebrow': 'Business Summary',
     'summary.headline': 'One PET engine is being packaged into three commercial tracks.',
     'summary.body': 'The company starts with a consumer demand-intelligence wedge, expands into enterprise risk workflows where raw data cannot move, and turns the same encrypted computation core into blockchain confidentiality infrastructure.',
     'summary.status.entry.label': 'Entry wedge',
@@ -212,7 +210,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'problem.c.desc': 'On-chain applications need verifiability, but real adoption is constrained when bids, credit, terms, and state values are exposed by default.',
     'cta.seeSolution': 'See Our Solution',
     'cta.talkToUs': 'Talk to Us',
-    'section.executive': '02. Executive Summary',
     'section.businessTracks': '03. Business Tracks',
     'section.techMoat': '04. Technology Moat',
     'section.competitive': '05. Competitive Position',
@@ -307,7 +304,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'slogan': 'waLLLnut은 B2C 수요 예측, B2B 리스크 인텔리전스, 블록체인 기밀 인프라를 위한 PET 기술을 만듭니다.',
       'sec.tech': '04. Technology Moat',
       'sec.service': '03. Business Tracks',
-      'sec.goal': '02. Executive Summary',
       'sec.exp': '06. Business Model & GTM',
       'sec.team': '07. Team',
       
@@ -378,7 +374,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       'goal.a3.1': 'A. B2C 수요 예측 및 물량 배분 - 비공개 수요 조사, 가격/물량 리포트, 2026 Coming Soon.',
       'goal.a3.2': 'B. B2B PET 리스크 인텔리전스 - 보험 청구 교차검증, FDS, 신원 및 이상 거래 탐지',
       'goal.a3.3': 'C. 블록체인 기밀 인프라 - 암호화 상태, 기밀 실행, 임계값 공개, 공개 검증성을 함께 제공합니다.',
-    'summary.eyebrow': '사업 요약',
     'summary.headline': '하나의 PET 엔진을 세 개의 상업 트랙으로 제품화합니다.',
     'summary.body': '초기 진입점은 B2C 수요 예측과 물량 배분입니다. 이후 원본 데이터를 이동할 수 없는 기업 리스크 업무와 블록체인 기밀 인프라로 확장합니다.',
     'summary.status.entry.label': '초기 진입점',
@@ -473,7 +468,6 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
     'problem.c.desc': '온체인 애플리케이션은 검증성은 필요하지만 입찰, 신용, 거래 조건, 상태 값까지 공개되면 실사용이 제한됩니다.',
     'cta.seeSolution': '솔루션 보기',
     'cta.talkToUs': '문의하기',
-    'section.executive': '02. 사업 요약',
     'section.businessTracks': '03. 사업 트랙',
     'section.techMoat': '04. 기술 차별성',
     'section.competitive': '05. 경쟁 포지션',
@@ -766,7 +760,6 @@ function layoutHighlight(item){
     setKeyList('.nav a', ['nav.tech','nav.service','nav.goal','nav.team','nav.advisors']);
     setKeyBySel('#tech-label','sec.tech');
     setKeyBySel('#service-label','sec.service');
-    setKeyBySel('#goal-label','sec.goal');
     setKeyBySel('#exp-label','sec.exp');
     setKeyBySel('#team-label','sec.team');
     setKeyBySel('#sec02 .strip p', 'slogan');
