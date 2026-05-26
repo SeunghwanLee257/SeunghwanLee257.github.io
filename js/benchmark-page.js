@@ -21,6 +21,21 @@
     }
   };
 
+  var versions = {
+    "fhe16-0-10": {
+      label: { ko: "FHE16 version 0.10", en: "FHE16 version 0.10" },
+      body: { ko: "현재 공개 벤치마크 버전입니다. 수치 데이터는 Latency-first / CPU 조합만 제공합니다.", en: "Current public benchmark version. Numeric data is available only for Latency-first / CPU." }
+    },
+    "fhe16-next": {
+      label: { ko: "FHE16 다음 버전", en: "FHE16 next version" },
+      body: { ko: "T.B.D", en: "T.B.D" }
+    },
+    "fhe16-hardware": {
+      label: { ko: "FHE16 하드웨어 버전", en: "FHE16 hardware version" },
+      body: { ko: "T.B.D", en: "T.B.D" }
+    }
+  };
+
   var modes = {
     latency: {
       label: { ko: "Latency-first", en: "Latency-first" },
@@ -68,12 +83,17 @@
   var chart;
   var activeCategory = "ABS";
   var activeMachine = "ccrl-xeon-6240r";
+  var activeVersion = "fhe16-0-10";
   var activeMode = "latency";
   var activeTarget = "cpu";
   var lastPoints = [];
 
   function currentMachine(){
     return machines[activeMachine] || machines["ccrl-xeon-6240r"];
+  }
+
+  function currentVersion(){
+    return versions[activeVersion] || versions["fhe16-0-10"];
   }
 
   function currentLang(){
@@ -92,13 +112,13 @@
   }
 
   function hasPublishedDataset(){
-    return activeMode === "latency" && activeTarget === "cpu";
+    return activeVersion === "fhe16-0-10" && activeMode === "latency" && activeTarget === "cpu";
   }
 
   function datasetLabel(){
     return hasPublishedDataset()
-      ? { ko: "공개 CPU latency", en: "Published CPU latency" }
-      : { ko: "CPU latency baseline 표시", en: "CPU latency baseline shown" };
+      ? { ko: "FHE16 v0.10 CPU latency", en: "FHE16 v0.10 CPU latency" }
+      : { ko: "T.B.D", en: "T.B.D" };
   }
 
   function formatMs(value){
@@ -123,20 +143,30 @@
   }
 
   function updateExecutionProfile(){
+    var version = currentVersion();
     var mode = modes[activeMode] || modes.latency;
     var target = targets[activeTarget] || targets.cpu;
+    setText("benchmarkVersionBody", hasPublishedDataset() ? {
+      ko: "FHE16 version 0.10 · Current CPU dataset",
+      en: "FHE16 version 0.10 · Current CPU dataset"
+    } : copy(version.label) + " · T.B.D");
     setText("benchmarkModeBody", mode.body);
     setText("benchmarkModeFocus", mode.focus);
     setText("benchmarkModeParallelism", mode.parallelism);
     setText("benchmarkTargetBody", target.body);
-    setText("benchmarkModeStatus", hasPublishedDataset() ? target.pending : {
-      ko: copy(target.pending) + " · 공개 수치 추가 전",
-      en: copy(target.pending) + " · numeric data pending"
-    });
+    setText("benchmarkModeStatus", hasPublishedDataset() ? {
+      ko: "FHE16 version 0.10 / Latency-first / CPU 공개 데이터셋",
+      en: "FHE16 version 0.10 / Latency-first / CPU published dataset"
+    } : { ko: "T.B.D", en: "T.B.D" });
     setText("benchmarkDatasetNote", hasPublishedDataset()
-      ? { ko: "전체 원천 데이터는 data/*.json 파일에 보존되어 있습니다.", en: "The full source data remains in the local data/*.json files." }
-      : { ko: "선택한 실행 트랙의 수치 데이터가 공개되기 전까지 차트는 CPU latency baseline을 유지합니다.", en: "Until numeric data is published for the selected execution track, the chart keeps the CPU latency baseline." });
+      ? { ko: "FHE16 version 0.10 / Latency-first / CPU 원천 데이터는 data/*.json 파일에 보존되어 있습니다.", en: "The FHE16 version 0.10 / Latency-first / CPU source data remains in the local data/*.json files." }
+      : { ko: "선택한 조합의 공개 벤치마크는 T.B.D입니다.", en: "Public benchmark data for the selected combination is T.B.D." });
 
+    document.querySelectorAll("[data-benchmark-version]").forEach(function(btn){
+      var active = btn.getAttribute("data-benchmark-version") === activeVersion;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", active ? "true" : "false");
+    });
     document.querySelectorAll("[data-benchmark-mode]").forEach(function(btn){
       var active = btn.getAttribute("data-benchmark-mode") === activeMode;
       btn.classList.toggle("is-active", active);
@@ -156,10 +186,12 @@
     var min = Math.min.apply(null, values);
     var max = Math.max.apply(null, values);
     var avg = values.reduce(function(sum, value){ return sum + value; }, 0) / values.length;
+    var version = currentVersion();
     var mode = modes[activeMode] || modes.latency;
     var target = targets[activeTarget] || targets.cpu;
 
     var fields = {
+      benchmarkMetricVersion: copy(version.label),
       benchmarkMetricMode: copy(mode.label),
       benchmarkMetricTarget: copy(target.label),
       benchmarkMetricCategory: activeCategory,
@@ -246,25 +278,74 @@
     if(status) status.textContent = copy(message);
   }
 
+  function setCanvasTbd(open){
+    var wrap = document.getElementById("benchmarkCanvasWrap");
+    var tbd = document.getElementById("benchmarkTbdState");
+    if(wrap) wrap.classList.toggle("is-tbd", open);
+    if(tbd) tbd.hidden = !open;
+  }
+
+  function updateTbdMetrics(){
+    var version = currentVersion();
+    var mode = modes[activeMode] || modes.latency;
+    var target = targets[activeTarget] || targets.cpu;
+    var fields = {
+      benchmarkMetricVersion: copy(version.label),
+      benchmarkMetricMode: copy(mode.label),
+      benchmarkMetricTarget: copy(target.label),
+      benchmarkMetricCategory: activeCategory,
+      benchmarkMetricDataset: "T.B.D",
+      benchmarkMetricRange: "T.B.D",
+      benchmarkMetricStart: "T.B.D",
+      benchmarkMetricEnd: "T.B.D",
+      benchmarkMetricMin: "T.B.D",
+      benchmarkMetricMax: "T.B.D",
+      benchmarkMetricAvg: "T.B.D",
+      benchmarkMetricPoints: "T.B.D"
+    };
+    Object.keys(fields).forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.textContent = fields[id];
+    });
+  }
+
+  function updateTbdTable(){
+    var tbody = document.getElementById("benchmarkTableBody");
+    if(tbody) tbody.innerHTML = '<tr><td colspan="2">T.B.D</td></tr>';
+  }
+
+  function updateTbdView(){
+    if(chart){
+      chart.destroy();
+      chart = null;
+    }
+    updateExecutionProfile();
+    updateTbdMetrics();
+    updateTbdTable();
+    setCanvasTbd(true);
+    setStatus({
+      ko: copy(currentVersion().label) + " / " + copy(modes[activeMode].label) + " / " + copy(targets[activeTarget].label) + " · T.B.D",
+      en: copy(currentVersion().label) + " / " + copy(modes[activeMode].label) + " / " + copy(targets[activeTarget].label) + " · T.B.D"
+    });
+  }
+
   function updateRenderedData(points){
     if(!points.length) return;
     lastPoints = points;
+    if(!hasPublishedDataset()){
+      updateTbdView();
+      return;
+    }
+    setCanvasTbd(false);
     updateExecutionProfile();
     updateMetrics(points);
     updateTable(points);
     updateChart(points);
     var machine = currentMachine();
-    if(hasPublishedDataset()){
-      setStatus({
-        ko: activeCategory + " 로드 완료 · " + copy(machine.label) + " · Latency-first / CPU",
-        en: activeCategory + " loaded · " + copy(machine.label) + " · Latency-first / CPU"
-      });
-    }else{
-      setStatus({
-        ko: copy(modes[activeMode].label) + " / " + copy(targets[activeTarget].label) + " 선택됨 · 공개 수치 추가 전, CPU latency baseline 표시",
-        en: copy(modes[activeMode].label) + " / " + copy(targets[activeTarget].label) + " selected · numeric data pending, showing CPU latency baseline"
-      });
-    }
+    setStatus({
+      ko: activeCategory + " 로드 완료 · FHE16 version 0.10 · " + copy(machine.label) + " · Latency-first / CPU",
+      en: activeCategory + " loaded · FHE16 version 0.10 · " + copy(machine.label) + " · Latency-first / CPU"
+    });
   }
 
   function loadCategory(category){
@@ -310,6 +391,13 @@
   }
 
   function initExecutionControls(){
+    document.querySelectorAll("[data-benchmark-version]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        activeVersion = btn.getAttribute("data-benchmark-version") || "fhe16-0-10";
+        updateExecutionProfile();
+        if(lastPoints.length) updateRenderedData(lastPoints);
+      });
+    });
     document.querySelectorAll("[data-benchmark-mode]").forEach(function(btn){
       btn.addEventListener("click", function(){
         activeMode = btn.getAttribute("data-benchmark-mode") || "latency";

@@ -85,7 +85,7 @@
           <div>
             <p class="page-section-kicker" data-copy-ko="Interactive Benchmark" data-copy-en="Interactive Benchmark">Interactive Benchmark</p>
             <h2 class="page-section-title" data-copy-ko="연산별 지연 시간을 바로 비교" data-copy-en="Compare latency by operation category">Compare latency by operation category</h2>
-            <p class="page-section-desc" data-copy-ko="실행 전략, 실행 타깃, 카테고리를 선택하면 공개된 벤치마크 데이터와 실행 경로 설명을 함께 확인할 수 있습니다. 단위는 밀리초 기준입니다." data-copy-en="Select an execution strategy, runtime target, and operation category to review the public benchmark dataset with execution-path context. Values are shown in milliseconds.">Select an execution strategy, runtime target, and operation category to review the public benchmark dataset with execution-path context. Values are shown in milliseconds.</p>
+            <p class="page-section-desc" data-copy-ko="버전, 실행 전략, 실행 타깃, 카테고리를 선택해 공개 벤치마크를 확인합니다. 현재 수치 데이터는 FHE16 version 0.10 / Latency-first / CPU 조합만 공개되어 있습니다." data-copy-en="Select a version, execution strategy, runtime target, and operation category. Current numeric data is published only for FHE16 version 0.10 / Latency-first / CPU.">Select a version, execution strategy, runtime target, and operation category. Current numeric data is published only for FHE16 version 0.10 / Latency-first / CPU.</p>
           </div>
         </div>
 
@@ -141,10 +141,18 @@
             </div>
             <div class="benchmark-control-groups">
               <div class="benchmark-control-group">
+                <span data-copy-ko="버전" data-copy-en="Version">Version</span>
+                <div class="benchmark-version-grid" role="tablist" aria-label="FHE16 version">
+                  <button class="benchmark-version is-active" type="button" role="tab" aria-selected="true" data-benchmark-version="fhe16-0-10"><strong>FHE16 version 0.10</strong><small data-copy-ko="현재 CPU 데이터셋" data-copy-en="Current CPU dataset">Current CPU dataset</small></button>
+                  <button class="benchmark-version" type="button" role="tab" aria-selected="false" data-benchmark-version="fhe16-next"><strong data-copy-ko="FHE16 다음 버전" data-copy-en="FHE16 next version">FHE16 next version</strong><small>T.B.D</small></button>
+                  <button class="benchmark-version" type="button" role="tab" aria-selected="false" data-benchmark-version="fhe16-hardware"><strong data-copy-ko="FHE16 하드웨어 버전" data-copy-en="FHE16 hardware version">FHE16 hardware version</strong><small>T.B.D</small></button>
+                </div>
+              </div>
+              <div class="benchmark-control-group">
                 <span data-copy-ko="전략" data-copy-en="Strategy">Strategy</span>
                 <div class="benchmark-segmented" role="tablist" aria-label="Optimization strategy">
                   <button class="benchmark-choice is-active" type="button" role="tab" aria-selected="true" data-benchmark-mode="latency"><strong>Latency-first</strong><small data-copy-ko="Depth 최소화" data-copy-en="Depth minimized">Depth minimized</small></button>
-                  <button class="benchmark-choice" type="button" role="tab" aria-selected="false" data-benchmark-mode="throughput"><strong>Throughput-first</strong><small data-copy-ko="Vectorized lanes" data-copy-en="Vectorized lanes">Vectorized lanes</small></button>
+                  <button class="benchmark-choice" type="button" role="tab" aria-selected="false" data-benchmark-mode="throughput"><strong>Throughput-first</strong><small data-copy-ko="T.B.D" data-copy-en="T.B.D">T.B.D</small></button>
                 </div>
               </div>
               <div class="benchmark-control-group">
@@ -159,6 +167,10 @@
             </div>
           </div>
           <dl class="benchmark-mode-grid" aria-label="Execution profile summary">
+            <div class="benchmark-mode-item">
+              <dt data-copy-ko="버전" data-copy-en="Version">Version</dt>
+              <dd id="benchmarkVersionBody">FHE16 version 0.10</dd>
+            </div>
             <div class="benchmark-mode-item">
               <dt data-copy-ko="최적화 기준" data-copy-en="Optimization Focus">Optimization Focus</dt>
               <dd id="benchmarkModeFocus">Circuit depth and critical path</dd>
@@ -194,8 +206,9 @@
               <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="NEG">NEG</button>
               <button class="benchmark-tab" type="button" role="tab" aria-selected="false" data-benchmark-category="SELECT">SELECT</button>
             </div>
-            <div class="benchmark-canvas-wrap">
+            <div class="benchmark-canvas-wrap" id="benchmarkCanvasWrap">
               <canvas id="benchmarkChartCanvas"></canvas>
+              <div class="benchmark-tbd-state" id="benchmarkTbdState" hidden><strong>T.B.D</strong><span data-copy-ko="선택한 조합의 공개 벤치마크는 아직 준비 중입니다." data-copy-en="Public benchmark data for the selected combination is not published yet.">Public benchmark data for the selected combination is not published yet.</span></div>
             </div>
             <p id="benchmarkStatus" class="benchmark-note" aria-live="polite">Loading benchmark data...</p>
           </section>
@@ -204,6 +217,7 @@
             <section class="benchmark-page-card">
               <p class="page-section-kicker" data-copy-ko="Selected Category" data-copy-en="Selected Category">Selected Category</p>
               <div class="benchmark-metrics">
+                <div class="metric-row"><span data-copy-ko="버전" data-copy-en="Version">Version</span><strong id="benchmarkMetricVersion">FHE16 version 0.10</strong></div>
                 <div class="metric-row"><span data-copy-ko="전략" data-copy-en="Strategy">Strategy</span><strong id="benchmarkMetricMode">Latency-first</strong></div>
                 <div class="metric-row"><span data-copy-ko="타깃" data-copy-en="Target">Target</span><strong id="benchmarkMetricTarget">CPU</strong></div>
                 <div class="metric-row"><span data-copy-ko="카테고리" data-copy-en="Category">Category</span><strong id="benchmarkMetricCategory">ABS</strong></div>

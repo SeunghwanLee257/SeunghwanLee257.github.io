@@ -13,6 +13,11 @@ The benchmark page reads one JSON file per operation category from this folder. 
 - ISA: AVX2 / AVX-512
 
 
+## Version Scope
+
+- Current public numeric benchmark: FHE16 version 0.10 / Latency-first / CPU.
+- Any other FHE16 version, runtime target, or unpublished strategy should be displayed as `T.B.D` on the site until a measured dataset is added.
+
 ## Execution Modes
 
 - Latency-first: all available threads cooperate on one operation, focusing on minimum circuit depth and critical-path latency.
