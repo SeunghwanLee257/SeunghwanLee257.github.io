@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FHE16Ver6 API documentation for C ABI, Web Browser, Rust, and Python bindings." />
+  <title>FHE16 API - waLLLnut Docs</title>
+  <link rel="icon" href="../asset/logo-filled-orange.ico" />
+  <link rel="canonical" href="https://walllnut.com/docs/api.html" />
+  <style>
+    :root{--bg:#fff;--surface:#f8fafc;--surface-2:#fff7ed;--line:#e5e7eb;--line-strong:#d1d5db;--text:#101828;--muted:#667085;--soft:#475467;--primary:#ff952d;--primary-dark:#c2410c;--code:#0f172a;--code-line:#1e293b;--radius:8px;--shadow:0 18px 50px rgba(15,23,42,.08)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.93em}.shell{min-height:100vh;display:grid;grid-template-columns:280px minmax(0,1fr) 250px;grid-template-rows:64px 1fr;grid-template-areas:"top top top" "side main toc"}.top{grid-area:top;position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;gap:18px;padding:0 24px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.9);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:10px;min-width:230px;font-weight:800}.brand img{height:28px}.search{flex:1;max-width:520px;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--surface);display:flex;align-items:center;padding:0 12px;color:var(--muted);font-size:14px}.topnav{display:flex;gap:14px;margin-left:auto;font-size:14px;color:var(--soft)}.topnav a.active{color:var(--primary-dark);font-weight:750}.side{grid-area:side;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;border-right:1px solid var(--line);padding:22px 18px 36px;background:#fff}.group{margin-bottom:24px}.group-title{margin:0 0 8px;padding:0 10px;color:#344054;font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase}.nav{display:grid;gap:2px}.nav a{display:flex;align-items:center;gap:9px;min-height:34px;border-radius:7px;padding:7px 10px;color:#475467;font-size:14px;font-weight:520}.nav a:hover{background:var(--surface)}.nav a.active{background:var(--surface-2);color:var(--primary-dark);font-weight:760}.dot{width:6px;height:6px;border-radius:999px;background:#cbd5e1;flex:0 0 auto}.active .dot{background:var(--primary)}.main{grid-area:main;width:min(100%,920px);justify-self:center;padding:54px 56px 100px}.breadcrumbs{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center;margin-bottom:16px}.hero{padding-bottom:34px;border-bottom:1px solid var(--line);margin-bottom:40px}.eyebrow{margin:0 0 12px;color:var(--primary-dark);font-size:13px;font-weight:780}.eyebrow:before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 5px var(--surface-2);vertical-align:1px}h1,h2,h3{letter-spacing:0;color:var(--text)}h1{margin:0 0 16px;max-width:780px;font-size:52px;line-height:1.04;font-weight:800}h2{margin:42px 0 12px;font-size:26px;line-height:1.25}h3{margin:0 0 8px;font-size:17px}.lead{max-width:760px;margin:0;color:#475467;font-size:18px;line-height:1.75}.section-desc{max-width:760px;margin:0 0 18px;color:#475467}.callout{border:1px solid #fed7aa;background:var(--surface-2);color:#7c2d12;border-radius:var(--radius);padding:16px 18px;margin:20px 0}.callout strong{display:block;margin-bottom:4px;color:#9a3412}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0 28px}.card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;background:#fff;box-shadow:0 1px 0 rgba(15,23,42,.03)}.card p{margin:0;color:#475467;font-size:14px}.tag{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;background:var(--surface-2);color:var(--primary-dark);font-size:12px;font-weight:760;margin-bottom:12px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:var(--radius);margin:18px 0 28px;background:#fff}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}th{background:var(--surface);color:#344054;font-weight:760;white-space:nowrap}tr:last-child td{border-bottom:0}td code{color:#0f172a;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:5px;padding:2px 5px}.code{background:var(--code);color:#e2e8f0;border-radius:var(--radius);padding:18px;overflow:auto;box-shadow:var(--shadow);font-size:13px;line-height:1.65}.code .comment{color:#94a3b8}.code .fn{color:#93c5fd}.code .str{color:#fdba74}.toc{grid-area:toc;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;border-left:1px solid var(--line);padding:28px 22px;background:#fff}.toc-title{margin:0 0 12px;color:#344054;font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase}.toc nav{display:grid;gap:8px}.toc a{border-left:2px solid transparent;padding-left:10px;color:var(--muted);font-size:13px;line-height:1.35}.toc a:hover{border-left-color:var(--primary);color:var(--text)}.footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    @media (max-width:1180px){.shell{grid-template-columns:260px minmax(0,1fr);grid-template-areas:"top top" "side main"}.toc{display:none}.main{padding-right:36px}}@media (max-width:860px){.shell{display:block}.top{height:auto;min-height:64px;flex-wrap:wrap;padding:12px 16px}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.topnav{margin-left:0}.topnav a:not(.active){display:none}.side{position:static;height:auto;display:flex;gap:12px;overflow:auto;padding:12px 16px;border-right:0;border-bottom:1px solid var(--line)}.group{min-width:220px;margin-bottom:0}.main{width:100%;padding:36px 20px 64px}h1{font-size:38px}.lead{font-size:16px}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <a class="brand" href="./"><img src="../asset/head-logo.svg" alt="waLLLnut" /><span>FHE16 Docs</span></a>
+      <div class="search">Search documentation</div>
+      <nav class="topnav"><a href="../">Home</a><a href="./" class="active">Docs</a><a href="../benchmark.html">Benchmark</a></nav>
+    </header>
+    <aside class="side" aria-label="Documentation navigation">
+      <section class="group"><p class="group-title">Start Here</p><nav class="nav"><a href="./"><span class="dot"></span>Overview</a><a href="./#architecture"><span class="dot"></span>Architecture</a></nav></section>
+      <section class="group"><p class="group-title">C. FHE16 API</p><nav class="nav"><a class="active" href="./api.html"><span class="dot"></span>API overview</a><a href="#lifecycle"><span class="dot"></span>Lifecycle</a><a href="#operations"><span class="dot"></span>Operations</a><a href="#bindings"><span class="dot"></span>Bindings</a></nav></section>
+      <section class="group"><p class="group-title">Migration</p><nav class="nav"><a href="./#migration"><span class="dot"></span>Mintlify migration</a></nav></section>
+    </aside>
+    <main class="main">
+      <div class="breadcrumbs"><a href="./">Docs</a><span>/</span><span>FHE16 API</span></div>
+      <section class="hero" id="overview">
+        <p class="eyebrow">FHE16Ver6 API surface</p>
+        <h1>One FHE16 method contract across C, Web Browser, Rust, and Python.</h1>
+        <p class="lead">This page starts from the current <code>FHE16Ver6</code> C ABI and turns it into the public SDK map. The raw source of truth is <code>include/soAPI/soAPI.hpp</code>; wrappers should keep one-to-one semantics while owning memory safely.</p>
+      </section>
+      <div class="callout"><strong>Docs structure</strong><code>/docs/</code> is now an overview route. API details should live on a separate page like this, and the later Mintlify version should render the MDX pages from the sidebar instead of one continuous scroll.</div>
+
+      <section id="source"><h2>Current Source Baseline</h2><p class="section-desc">The current implementation exposes FHE16 through C symbols with <code>int32_t*</code> ciphertext handles. The browser demo calls the same runtime through Emscripten exports.</p><div class="grid"><article class="card"><span class="tag">C ABI</span><h3><code>soAPI.hpp</code></h3><p>Initialization, encryption, arithmetic, comparison, bitwise operations, serialization, packing, compression, and CT metadata helpers.</p></article><article class="card"><span class="tag">Browser</span><h3><code>fhe16_wrapper.ts</code></h3><p>TypeScript wrapper around WASM exports with <code>Ciphertext.free()</code> and worker-oriented usage.</p></article></div></section>
+
+      <section id="lifecycle"><h2>Lifecycle</h2><p class="section-desc">Public SDKs should hide the global runtime state behind a context object, but the raw ABI currently owns that lifecycle.</p><div class="table-wrap"><table><thead><tr><th>Step</th><th>Raw symbols</th><th>Wrapper behavior</th></tr></thead><tbody><tr><td>Thread setup</td><td><code>FHE16_SetThreadCount</code>, <code>FHE16_GetThreadCount</code></td><td>Set before key generation or memory allocation.</td></tr><tr><td>Initialize</td><td><code>FHE16_GenEval</code>, <code>FHE16_LoadEval</code>, <code>FHE16_MemoryAlloc</code></td><td>Create context and evaluation material.</td></tr><tr><td>Keys</td><td><code>FHE16_GetLWESK</code>, <code>FHE16_GetDecSK</code></td><td>Expose only in local/debug flows unless a product explicitly needs key export.</td></tr><tr><td>Release</td><td><code>FHE16_Free</code>, <code>FHE16_DeleteEval</code></td><td>Free returned ciphertexts and close the runtime context.</td></tr></tbody></table></div></section>
+
+      <section id="data-model"><h2>Data Model</h2><p class="section-desc">Ciphertexts are currently raw <code>int32_t*</code> buffers with metadata at the front. Wrappers should treat them as opaque handles.</p><div class="table-wrap"><table><thead><tr><th>Header word</th><th>Meaning</th></tr></thead><tbody><tr><td><code>CT[0]</code></td><td>Encrypted bit width. Boolean ciphertexts use <code>1</code>.</td></tr><tr><td><code>CT[1]</code></td><td>Per-bit ciphertext length.</td></tr><tr><td><code>CT[2]</code></td><td>Log-style bit-width metadata used by arithmetic routines.</td></tr></tbody></table></div><div class="callout"><strong>Ownership rule</strong>Returned ciphertext pointers from encryption, compute, deserialize, or load functions are caller-owned and must be released with <code>FHE16_Free</code>. Secret-key pointers returned by generation/accessor functions are runtime-owned.</div></section>
+
+      <section id="operations"><h2>Operations</h2><div class="table-wrap"><table><thead><tr><th>Family</th><th>Raw symbols</th><th>Public wrapper names</th></tr></thead><tbody><tr><td>Encrypt/decrypt</td><td><code>FHE16_ENCInt</code>, <code>FHE16_ENCInt32</code>, <code>FHE16_ENCInt_Arr</code>, <code>FHE16_DECInt</code>, <code>FHE16_DECIntVec</code></td><td><code>encrypt_int</code>, <code>encrypt_bits</code>, <code>decrypt_int</code>, <code>decrypt_bits</code></td></tr><tr><td>Arithmetic</td><td><code>FHE16_ADD</code>, <code>FHE16_ADD3</code>, <code>FHE16_SUB</code>, <code>FHE16_SMULL</code>, <code>FHE16_FMULL</code>, <code>FHE16_NEG</code>, <code>FHE16_ABS</code></td><td><code>add</code>, <code>add3</code>, <code>sub</code>, <code>mul</code>, <code>full_mul</code>, <code>neg</code>, <code>abs</code></td></tr><tr><td>Comparison</td><td><code>FHE16_LT</code>, <code>FHE16_LE</code>, <code>FHE16_GT</code>, <code>FHE16_GE</code>, <code>FHE16_EQ</code>, <code>FHE16_NEQ</code></td><td><code>lt</code>, <code>le</code>, <code>gt</code>, <code>ge</code>, <code>eq</code>, <code>neq</code></td></tr><tr><td>Selection</td><td><code>FHE16_MAX</code>, <code>FHE16_MIN</code>, <code>FHE16_SELECT</code>, <code>FHE16_RELU</code></td><td><code>max</code>, <code>min</code>, <code>select</code>, <code>relu</code></td></tr><tr><td>Bitwise</td><td><code>FHE16_AND</code>, <code>FHE16_OR</code>, <code>FHE16_XOR</code>, <code>FHE16_ANDVEC</code>, <code>FHE16_ORVEC</code>, <code>FHE16_XORVEC</code></td><td><code>and_bool</code>, <code>or_bool</code>, <code>xor_bool</code>, <code>and_bits</code>, <code>or_bits</code>, <code>xor_bits</code></td></tr><tr><td>Constants</td><td><code>FHE16_ADD_CONSTANT_*</code>, <code>FHE16_SUB_CONSTANT_*</code>, <code>FHE16_SMULL_CONSTANT_*</code>, <code>FHE16_FMULL_CONSTANT_*</code>, compare constant families</td><td><code>add_const</code>, <code>sub_const</code>, <code>mul_const</code>, <code>full_mul_const</code>, <code>lt_const</code></td></tr></tbody></table></div></section>
+
+      <section id="browser"><h2>Web Browser</h2><p class="section-desc">The browser wrapper should use the existing WASM exports and keep compute-heavy calls in a worker.</p><pre class="code"><code><span class="comment">// Current wrapper direction</span>
+await FHE16.init(<span class="str">"./test_wasm.js"</span>);
+const sk = FHE16.genEval();
+
+const a = FHE16.encrypt(42, 8);
+const b = FHE16.encrypt(100, 8);
+const less = FHE16.lt(a, b);
+const opened = FHE16.decrypt(less);
+
+less.free();
+a.free();
+b.free();
+FHE16.cleanup();</code></pre></section>
+
+      <section id="c"><h2>C ABI</h2><pre class="code"><code>#include &lt;stdint.h&gt;
+#include <span class="str">"soAPI/soAPI.hpp"</span>
+
+int32_t* sk = FHE16_GenEval();
+int32_t* a = FHE16_ENCInt(42, 8);
+int32_t* b = FHE16_ENCInt(100, 8);
+int32_t* out = FHE16_LT(a, b);
+int64_t opened = FHE16_DECInt(out, sk);
+
+FHE16_Free(out);
+FHE16_Free(a);
+FHE16_Free(b);
+FHE16_DeleteEval();</code></pre></section>
+
+      <section id="bindings"><h2>Binding Direction</h2><div class="grid"><article class="card"><span class="tag">Rust</span><h3>Owned ciphertexts</h3><p><code>Ciphertext</code> should be move-only and call <code>FHE16_Free</code> from <code>Drop</code>. Low-level raw calls stay inside an unsafe module.</p></article><article class="card"><span class="tag">Python</span><h3>Context-managed runtime</h3><p><code>with fhe16.Context()</code> should release runtime state and all ciphertext objects should support explicit <code>close()</code>.</p></article></div></section>
+
+      <section id="serialization"><h2>Serialization</h2><p class="section-desc">Use serialization for local files, browser transfers, and service boundaries. Keep secret-key serialization clearly marked as local debug or owner-only.</p><div class="table-wrap"><table><thead><tr><th>Area</th><th>Raw symbols</th></tr></thead><tbody><tr><td>Ciphertext</td><td><code>FHE16_LweToBytes</code>, <code>FHE16_LweFromBytes</code>, <code>FHE16_CTSave</code>, <code>FHE16_CTLoad</code></td></tr><tr><td>Params</td><td><code>FHE16_ParamsSave</code>, <code>FHE16_ParamsLoad</code>, <code>FHE16_GetParamHash</code>, <code>FHE16_VerifyCTParam</code></td></tr><tr><td>Keys</td><td><code>FHE16_EvalKeySave/Load</code>, <code>FHE16_PKSave/Load</code>, <code>FHE16_SKSave/Load</code>, <code>FHE16_ChainKSKSave/Load</code></td></tr></tbody></table></div></section>
+
+      <footer class="footer"><span>waLLLnut FHE16 documentation</span><span>No external commercial web fonts used.</span></footer>
+    </main>
+    <aside class="toc" aria-label="On this page"><p class="toc-title">On This Page</p><nav><a href="#overview">Overview</a><a href="#source">Source baseline</a><a href="#lifecycle">Lifecycle</a><a href="#data-model">Data model</a><a href="#operations">Operations</a><a href="#browser">Web Browser</a><a href="#c">C ABI</a><a href="#bindings">Bindings</a><a href="#serialization">Serialization</a></nav></aside>
+  </div>
+</body>
+</html>

@@ -1,54 +1,73 @@
 ---
 title: C API
-description: Draft C ABI surface for FHE16.
+description: Current raw C ABI surface for FHE16Ver6.
 icon: code
 ---
 
-C should be the stable FFI boundary for FHE16.
+C is the current FFI boundary. The active reference is `FHE16Ver6/include/soAPI/soAPI.hpp`; it exports `extern "C"` symbols with platform-specific visibility through `FHE16_API`.
 
-## Draft Usage
+## Minimal Native Usage
 
 ```c
-#include "fhe16.h"
+#include <stdint.h>
+#include "soAPI/soAPI.hpp"
 
 int main(void) {
-  fhe16_context_t* ctx = NULL;
-  fhe16_key_t* key = NULL;
-  fhe16_ciphertext_t* a = NULL;
-  fhe16_ciphertext_t* b = NULL;
-  fhe16_ciphertext_t* out = NULL;
-  bool opened = false;
+  FHE16_SetThreadCount(0);       // 0 = runtime auto-detect
+  int32_t* sk = FHE16_GenEval(); // runtime-owned pointer
 
-  fhe16_context_create("latency-first", &ctx);
-  fhe16_keygen(ctx, &key);
+  int32_t* a = FHE16_ENCInt(42, 8);
+  int32_t* b = FHE16_ENCInt(100, 8);
+  int32_t* out = FHE16_LT(a, b);
 
-  fhe16_encrypt_u16(ctx, key, 42, &a);
-  fhe16_encrypt_u16(ctx, key, 100, &b);
-  fhe16_lt(ctx, a, b, &out);
-  fhe16_decrypt_bool(ctx, key, out, &opened);
+  int64_t opened = FHE16_DECInt(out, sk);
 
-  fhe16_ciphertext_free(a);
-  fhe16_ciphertext_free(b);
-  fhe16_ciphertext_free(out);
-  fhe16_key_free(key);
-  fhe16_context_free(ctx);
+  FHE16_Free(out);
+  FHE16_Free(a);
+  FHE16_Free(b);
+  FHE16_DeleteEval();
 
-  return opened ? 0 : 1;
+  return opened == 1 ? 0 : 1;
 }
 ```
 
-## C Design Rules
+## Ownership Rules
 
-- Return explicit status codes.
-- Use opaque handles for context, key, and ciphertext.
-- Require explicit cleanup functions.
-- Keep ABI stable before adding product helpers.
+| Pointer source | Owner | Cleanup |
+| --- | --- | --- |
+| `FHE16_GenEval` return | Runtime | Do not call `FHE16_Free`; release through `FHE16_DeleteEval`. |
+| `FHE16_GetLWESK`, `FHE16_GetDecSK` return | Runtime | Do not call `FHE16_Free`. |
+| `FHE16_ENC*`, compute ops, `FHE16_DECIntVec` | Caller | Call `FHE16_Free`. |
+| `FHE16_LweToBytes`, `FHE16_LweLoadFile`, `FHE16_CTLoad` | Caller | Call `FHE16_Free`. |
+| `FHE16_SecretKeyLoadFile` output | Caller | Call `FHE16_Free` unless the implementation documents a different allocator. |
 
-## Core Handle Types
+## Raw ABI Groups
+
+| Group | Functions |
+| --- | --- |
+| Runtime | `FHE16_SetThreadCount`, `FHE16_GetThreadCount`, `FHE16_MemoryAlloc`, `FHE16_GenEval`, `FHE16_LoadEval`, `FHE16_SaveEval`, `FHE16_DeleteEval`, `FHE16_Version` |
+| Keys | `FHE16_GetLWESK`, `FHE16_GetLWESKLen`, `FHE16_GetDecSK`, `FHE16_GetDecSKLen` |
+| Encrypt/decrypt | `FHE16_ENC`, `FHE16_ENC_BIT`, `FHE16_ENCInt`, `FHE16_ENCInt32`, `FHE16_ENCInt_Arr`, `FHE16_DECInt`, `FHE16_DECIntVec` |
+| Arithmetic | `FHE16_ADD`, `FHE16_ADD3`, `FHE16_SUB`, `FHE16_SMULL`, `FHE16_FMULL`, `FHE16_NEG`, `FHE16_ABS`, `FHE16_RELU` |
+| Compare/select | `FHE16_LT`, `FHE16_LE`, `FHE16_GT`, `FHE16_GE`, `FHE16_EQ`, `FHE16_NEQ`, `FHE16_MAX`, `FHE16_MIN`, `FHE16_SELECT` |
+| Bitwise | `FHE16_AND`, `FHE16_OR`, `FHE16_XOR`, `FHE16_ANDVEC`, `FHE16_ORVEC`, `FHE16_XORVEC` |
+| Constants | `FHE16_*_CONSTANT_Arr`, `FHE16_*_CONSTANT_I64`, `FHE16_*_CONSTANT_I32` for add/sub/mul/full-mul/compare families |
+| Shift/division | `FHE16_SHL`, `FHE16_SHR`, shift/rotate variants, power-of-two division, constant division, ciphertext division |
+| Serialization | LWE bytes/files, params, eval key, public key, packing key, secret key, chain KSK, CT save/load |
+
+## Public C Facade Direction
+
+The raw ABI is usable now, but the public C package can still expose a smaller facade later:
 
 ```c
 typedef struct fhe16_context fhe16_context_t;
-typedef struct fhe16_key fhe16_key_t;
 typedef struct fhe16_ciphertext fhe16_ciphertext_t;
-typedef enum fhe16_status fhe16_status_t;
+
+typedef enum fhe16_status {
+  FHE16_STATUS_OK = 0,
+  FHE16_STATUS_INVALID_ARGUMENT = 1,
+  FHE16_STATUS_RUNTIME_ERROR = 2
+} fhe16_status_t;
 ```
+
+That facade should wrap raw pointers, return status codes instead of aborting, and keep raw `FHE16_*` symbols available in a low-level namespace for benchmarks.

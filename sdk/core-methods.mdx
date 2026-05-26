@@ -1,72 +1,117 @@
 ---
 title: Core Methods
-description: Draft common method surface for all FHE16 bindings.
+description: Current FHE16Ver6 method surface grouped for public SDK design.
 icon: list-tree
 ---
 
-The core method surface should stay small and stable. Product-specific helpers should compose these methods rather than expanding the cryptographic API too early.
+The common method surface should be derived from `FHE16Ver6/include/soAPI/soAPI.hpp`. Language wrappers can use idiomatic names, but they should map directly to these raw operations so tests and benchmarks stay reusable.
 
-## Context Lifecycle
+<Warning>
+  `FHE16_API.hpp` contains older double-underscore wrapper names. Use `soAPI.hpp` as the current public C ABI baseline unless the build target explicitly requires the older wrapper.
+</Warning>
 
-| Method family | Purpose |
-| --- | --- |
-| `fhe16_context_create` | Create a context with a profile and parameter set. |
-| `fhe16_context_free` | Release context resources. |
-| `fhe16_context_info` | Read version, profile, target, and parameter metadata. |
+## Context and Keys
 
-## Key Lifecycle
-
-| Method family | Purpose |
-| --- | --- |
-| `fhe16_keygen` | Generate key material for a context. |
-| `fhe16_public_key_export` | Export public/evaluation material when allowed. |
-| `fhe16_secret_key_import` | Import secret key material in local or test settings. |
+| Raw C symbol | Purpose | Public wrapper direction |
+| --- | --- | --- |
+| `FHE16_SetThreadCount` | Set worker thread count before initialization. | `ContextOptions.threads` or equivalent. |
+| `FHE16_GetThreadCount` | Read current thread setting. | `ctx.thread_count()`. |
+| `FHE16_GenEval` | Generate evaluation material and return runtime-owned secret key pointer. | `ctx.keygen()` returning an owned key reference. |
+| `FHE16_LoadEval` | Load evaluation key material from files. | `ctx.load_eval_key(...)`. |
+| `FHE16_SaveEval` | Save generated evaluation material. | Local/admin-only export. |
+| `FHE16_MemoryAlloc` | Allocate runtime buffers before loading keys. | Hidden by wrapper initialization. |
+| `FHE16_DeleteEval` | Release global evaluation resources. | `ctx.close()` / `Drop` / context manager. |
+| `FHE16_GetLWESK`, `FHE16_GetLWESKLen` | Read LWE key pointer and length. | Low-level/debug surface only. |
+| `FHE16_GetDecSK`, `FHE16_GetDecSKLen` | Read decryption key pointer and length. | Local decrypt key handle. |
 
 ## Encryption and Decryption
 
-| Method family | Purpose |
-| --- | --- |
-| `fhe16_encrypt_u16` | Encrypt a 16-bit unsigned integer. |
-| `fhe16_encrypt_i16` | Encrypt a 16-bit signed integer. |
-| `fhe16_encrypt_bool` | Encrypt a boolean value. |
-| `fhe16_decrypt_u16` | Decrypt an unsigned integer result when permitted. |
-| `fhe16_decrypt_i16` | Decrypt a signed integer result when permitted. |
-| `fhe16_decrypt_bool` | Decrypt a boolean result when permitted. |
-
-## Homomorphic Operations
-
-| Method family | Benchmark category | Output |
+| Raw C symbol | Input | Output |
 | --- | --- | --- |
-| `fhe16_add` | `ADD` | ciphertext integer |
-| `fhe16_add3` | `ADD3` | ciphertext integer |
-| `fhe16_eq` | `EQ` | ciphertext boolean |
-| `fhe16_lt` | `LT` | ciphertext boolean |
-| `fhe16_max` | `MAX` | ciphertext integer |
-| `fhe16_neg` | `NEG` | ciphertext integer |
-| `fhe16_abs` | `ABS` | ciphertext integer |
-| `fhe16_select` | `SELECT` | ciphertext value |
+| `FHE16_ENCInt` | `int64_t msg`, `int32_t bit` | Encrypted integer ciphertext. |
+| `FHE16_ENCInt32` | `int32_t msg`, `int32_t bit` | WASM-friendly encrypted integer ciphertext. |
+| `FHE16_ENCInt_Arr` | LSB-first bit array and width | Encrypted integer ciphertext. |
+| `FHE16_ENC` | Single-bit message with explicit bit argument | Ciphertext pointer. |
+| `FHE16_ENC_BIT` | Boolean bit using gate encoding | Boolean ciphertext pointer. |
+| `FHE16_DECInt` | Ciphertext and secret key | `int64_t` plaintext. |
+| `FHE16_DECIntVec` | Ciphertext and secret key | Allocated bit vector. |
 
-## Serialization
+## Arithmetic
 
-| Method family | Purpose |
+| Raw C symbol | Public method | Notes |
+| --- | --- | --- |
+| `FHE16_ADD` | `add(a, b)` | Same-width integer addition. |
+| `FHE16_ADD3` | `add3(a, b, c)` | Three-input addition. |
+| `FHE16_SUB` | `sub(a, b)` | Same-width subtraction. |
+| `FHE16_SMULL` | `mul(a, b)` | Signed n-bit product truncated to n bits. |
+| `FHE16_FMULL` | `full_mul(a, b)` | Full n-by-n product returning 2n bits. |
+| `FHE16_NEG` | `neg(a)` | Two's-complement negation. |
+| `FHE16_ABS` | `abs(a)` | Signed absolute value. |
+| `FHE16_RELU` | `relu(a)` | Selects zero for negative signed inputs. |
+| `FHE16_ADD_POWTWO`, `FHE16_SUB_POWTWO` | `add_pow2`, `sub_pow2` | Optimized power-of-two adjustment. |
+
+`FHE16_ADD_INTERLEAVED`, `FHE16_SUB_INTERLEAVED`, and `FHE16_SMULL_INTERLEAVED` are performance variants. Keep them out of the default high-level SDK until benchmark and scheduling behavior are documented.
+
+## Comparison
+
+| Raw C symbol | Public method | Output |
+| --- | --- | --- |
+| `FHE16_LT` | `lt(a, b)` | Boolean ciphertext. |
+| `FHE16_LE` | `le(a, b)` | Boolean ciphertext. |
+| `FHE16_GT` | `gt(a, b)` | Boolean ciphertext. |
+| `FHE16_GE` | `ge(a, b)` | Boolean ciphertext. |
+| `FHE16_EQ` | `eq(a, b)` | Boolean ciphertext. |
+| `FHE16_NEQ` | `neq(a, b)` | Boolean ciphertext. |
+| `FHE16_MAX` | `max(a, b)` | Integer ciphertext. |
+| `FHE16_MIN` | `min(a, b)` | Integer ciphertext. |
+
+## Bitwise and Selection
+
+| Raw C symbol | Use |
 | --- | --- |
-| `fhe16_ciphertext_serialize` | Export ciphertext bytes. |
-| `fhe16_ciphertext_deserialize` | Import ciphertext bytes. |
-| `fhe16_key_serialize` | Export key bytes when allowed. |
-| `fhe16_key_deserialize` | Import key bytes. |
+| `FHE16_AND`, `FHE16_OR`, `FHE16_XOR` | Single-bit boolean ciphertext gates. |
+| `FHE16_ANDVEC`, `FHE16_ORVEC`, `FHE16_XORVEC` | Integer/vector bitwise gates across ciphertext bits. |
+| `FHE16_SELECT` | `selector ? a : b`; selector can be one bit or same-width vector. |
 
-## Error Handling
+The browser worker currently uses `FHE16_ANDVEC`, `FHE16_ORVEC`, and `FHE16_XORVEC` for integer bitwise operations. High-level wrappers should expose that distinction instead of routing all bitwise calls through single-bit gates.
 
-Every binding should preserve the same error categories:
+## Constant Operations
 
-- Invalid context.
-- Invalid encoding.
-- Parameter mismatch.
-- Operation mismatch.
-- Serialization failure.
-- Decryption not authorized.
-- Internal computation failure.
+| Family | Raw C symbols |
+| --- | --- |
+| Constant multiply | `FHE16_SMULL_CONSTANT_Arr`, `_I64`, `_I32` |
+| Full constant multiply | `FHE16_FMULL_CONSTANT_Arr`, `_I64`, `_I32` |
+| Constant add | `FHE16_ADD_CONSTANT_Arr`, `_I64`, `_I32` |
+| Constant subtract | `FHE16_SUB_CONSTANT_Arr`, `_I64`, `_I32` |
+| Constant compare | `FHE16_LT_CONSTANT_*`, `FHE16_LE_CONSTANT_*`, `FHE16_GT_CONSTANT_*`, `FHE16_GE_CONSTANT_*` |
 
-## Design Rule
+The `_Arr` form expects an LSB-first plaintext bit array. The `_I32` form is the first browser-friendly target; `_I64` should be used by native bindings when 64-bit FFI is reliable.
 
-The C ABI owns exact exported names. Rust, Python, and Web Browser wrappers may use idiomatic naming, but they should map one-to-one to this method surface.
+## Division and Shifts
+
+| Raw C symbol | Purpose |
+| --- | --- |
+| `FHE16_SHL`, `FHE16_SHR` | Logical left/right shifts. |
+| `FHE16_LSHIFTL`, `FHE16_LSHIFTR`, `FHE16_ASHIFTR` | Logical/arithmetic shift variants. |
+| `FHE16_ROTATEL`, `FHE16_ROTATER` | Rotate encrypted bit vectors. |
+| `FHE16_DIV_POW2`, `FHE16_MOD_POW2` | Unsigned power-of-two division/modulo. |
+| `FHE16_SDIV_POW2`, `FHE16_SMOD_POW2` | Signed power-of-two division/modulo. |
+| `FHE16_DIV_CONST`, `FHE16_MOD_CONST` | Unsigned constant division/modulo. |
+| `FHE16_SDIV_CONST`, `FHE16_SMOD_CONST` | Signed constant division/modulo. |
+| `FHE16_UDIV`, `FHE16_UMOD`, `FHE16_SDIV`, `FHE16_SMOD` | Variable ciphertext division/modulo. |
+
+These should be documented after add/compare/multiply because they have larger cost and more edge cases.
+
+## Serialization and Metadata
+
+| Family | Raw C symbols |
+| --- | --- |
+| Ciphertext bytes/files | `FHE16_LweToBytes`, `FHE16_LweFromBytes`, `FHE16_LweSaveFile`, `FHE16_LweLoadFile`, `FHE16_CTSave`, `FHE16_CTLoad` |
+| Params and hashes | `FHE16_ParamsSave`, `FHE16_ParamsLoad`, `FHE16_ParamsGet`, `FHE16_GetParamHash`, `FHE16_VerifyCTParam` |
+| Keys | `FHE16_EvalKeySave/Load`, `FHE16_PKSave/Load`, `FHE16_PackKeySave/Load`, `FHE16_SKSave/Load`, `FHE16_ChainKSKSave/Load` |
+| CT graph metadata | `FHE16_SetOpType`, `FHE16_GetOpType`, ID/hash/slot helpers, `FHE16_InitResultMetadata` |
+| Memory/version | `FHE16_Free`, `FHE16_Version` |
+
+## First Release Boundary
+
+For the first public docs, treat context/key/encrypt/decrypt/add/sub/mul/compare/bitwise/select/constant ops/serialization as the supported surface. Keep debug methods, graph metadata, packing, compression, and interleaved variants in an advanced section until examples and tests are stable.

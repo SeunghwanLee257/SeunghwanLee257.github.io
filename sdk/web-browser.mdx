@@ -1,10 +1,14 @@
 ---
 title: Web Browser API
-description: Draft WASM wrapper for FHE16 browser usage.
+description: Current WASM wrapper direction for FHE16Ver6 browser usage.
 icon: globe
 ---
 
-The Web Browser API should wrap the same core methods through WASM.
+The browser API should wrap the current Emscripten exports from FHE16Ver6 and run long operations in a worker. The existing reference files are `experiment_html/fhe16_wrapper.ts`, `experiment_html/fhe_worker.js`, and the browser demo page.
+
+<Warning>
+  The package name below is the intended public package direction. The current checked-in browser code is a local wrapper over generated WASM exports, not a published npm package.
+</Warning>
 
 ## Package Direction
 
@@ -12,37 +16,75 @@ The Web Browser API should wrap the same core methods through WASM.
 npm install @walllnut/fhe16-wasm
 ```
 
-## Draft Usage
+## Current Wrapper Shape
 
 ```ts
-import init, { Fhe16Context } from "@walllnut/fhe16-wasm";
+import { FHE16 } from "./fhe16_wrapper";
 
-await init();
+await FHE16.init("./test_wasm.js");
+const sk = FHE16.genEval();
 
-const ctx = await Fhe16Context.create({
-  profile: "latency-first",
-});
+const a = FHE16.encrypt(42, 8);
+const b = FHE16.encrypt(100, 8);
 
-const a = ctx.encryptU16(42);
-const b = ctx.encryptU16(100);
+const isLess = FHE16.lt(a, b);
+const opened = FHE16.decrypt(isLess);
 
-const isLess = ctx.lt(a, b);
-const opened = ctx.decryptBool(isLess);
+isLess.free();
+a.free();
+b.free();
+FHE16.cleanup();
 ```
 
-## Browser Constraints
+## Raw Emscripten Exports
 
-- WASM bundle size matters.
-- Key and ciphertext serialization must be explicit.
-- Long computations should not block the main UI thread.
-- Web Worker support should be part of the browser story.
-
-## Method Mapping
-
-| Browser method | Core method |
+| Export | Purpose |
 | --- | --- |
-| `Fhe16Context.create` | `fhe16_context_create` |
-| `ctx.encryptU16` | `fhe16_encrypt_u16` |
-| `ctx.lt` | `fhe16_lt` |
-| `ctx.select` | `fhe16_select` |
-| `ctx.decryptBool` | `fhe16_decrypt_bool` |
+| `_FHE16_GenEval` | Initialize evaluation material and return secret key pointer. |
+| `_FHE16_DeleteEval` | Release runtime evaluation resources. |
+| `_FHE16_LoadEval`, `_FHE16_MemoryAlloc` | Load prebuilt evaluation material. |
+| `_FHE16_GetLWESK`, `_FHE16_GetLWESKLen` | Read LWE secret key pointer and length. |
+| `_FHE16_GetDecSK`, `_FHE16_GetDecSKLen` | Read decryption key pointer and length. |
+| `_FHE16_ENCInt`, `_FHE16_ENCInt_Array` | Encrypt integer or bit-array inputs. |
+| `_FHE16_DECInt`, `_FHE16_DECIntVec` | Decrypt integer or bit-vector results. |
+| `_FHE16_ADD`, `_FHE16_SUB`, `_FHE16_SMULL` | Arithmetic operations. |
+| `_FHE16_ADD_CONSTANT_I32`, `_FHE16_SUB_CONSTANT_I32`, `_FHE16_SMULL_CONSTANT_I32` | Browser-friendly constant operations. |
+| `_FHE16_LT`, `_FHE16_LE`, `_FHE16_GT`, `_FHE16_GE`, `_FHE16_EQ` | Ciphertext comparisons. |
+| `_FHE16_LT_CONSTANT_I32`, `_FHE16_LE_CONSTANT_I32`, `_FHE16_GT_CONSTANT_I32`, `_FHE16_GE_CONSTANT_I32` | Constant comparisons used by the demo worker. |
+| `_FHE16_ANDVEC`, `_FHE16_ORVEC`, `_FHE16_XORVEC` | Integer/vector bitwise gates used by the demo worker. |
+| `_FHE16_NEG` | Signed negation used by the demo worker. |
+| `_FHE16_Free`, `_malloc`, `_free` | Memory ownership and temporary heap allocation. |
+
+## Worker Workflow
+
+The browser UI should call a worker for compute-heavy paths:
+
+```ts
+worker.postMessage({ type: "init" });
+worker.postMessage({ type: "encrypt", value: 42, bits: 8 });
+worker.postMessage({ type: "compute", op: "lt", ctA, ctB });
+worker.postMessage({ type: "decrypt", ctPtr, skPtr });
+```
+
+The worker should own temporary pointers and call `_FHE16_Free` for ciphertexts returned by FHE16 functions when they are no longer needed.
+
+## Public Class Direction
+
+| Browser method | Raw export |
+| --- | --- |
+| `FHE16.init(wasmUrl)` | Emscripten module factory. |
+| `FHE16.genEval()` | `_FHE16_GenEval`. |
+| `FHE16.encrypt(value, bits)` | `_FHE16_ENCInt`. |
+| `FHE16.encryptArray(bits, bitWidth)` | `_FHE16_ENCInt_Array`. |
+| `FHE16.decrypt(ciphertext)` | `_FHE16_DECInt`. |
+| `FHE16.add/sub/mul` | `_FHE16_ADD`, `_FHE16_SUB`, `_FHE16_SMULL`. |
+| `FHE16.lt/le/gt/ge/eq` | comparison exports. |
+| `FHE16.addConst/subConst/mulConst` | constant arithmetic exports. |
+| `Ciphertext.free()` | `_FHE16_Free`. |
+
+## Binding Notes
+
+- Integer bitwise operations should call the `*VEC` exports. Single-bit `FHE16_AND`, `FHE16_OR`, and `FHE16_XOR` are boolean-gate level operations.
+- `BigInt` should be used for JS decryption results because native `DECInt` returns `int64_t`.
+- Public examples should default to a worker-backed API so the main thread stays responsive.
+- The wrapper should expose `max`, `min`, `select`, and `relu` after those exports are wired into the browser package.

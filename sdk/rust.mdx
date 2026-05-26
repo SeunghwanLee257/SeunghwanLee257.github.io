@@ -1,10 +1,14 @@
 ---
 title: Rust API
-description: Draft Rust wrapper over the FHE16 core API.
+description: Planned Rust wrapper over the FHE16Ver6 C ABI.
 icon: crab
 ---
 
-Rust should provide a safe wrapper over the core FFI or a native crate that preserves the same method semantics.
+Rust should provide safe ownership over the current C ABI. The raw functions return `int32_t*` ciphertexts, so the Rust wrapper should make ownership explicit and call `FHE16_Free` from `Drop`.
+
+<Warning>
+  The crate shown here is the intended public shape. It should be implemented after the C ABI names and ownership rules are locked.
+</Warning>
 
 ## Package Direction
 
@@ -13,39 +17,55 @@ Rust should provide a safe wrapper over the core FFI or a native crate that pres
 fhe16 = "0.1"
 ```
 
-## Draft Usage
+## Planned Usage
 
 ```rust
-use fhe16::{Fhe16Context, Profile};
+use fhe16::{Context, ContextOptions};
 
 fn main() -> fhe16::Result<()> {
-    let ctx = Fhe16Context::new(Profile::LatencyFirst)?;
+    let ctx = Context::new(ContextOptions::default().threads(0))?;
     let key = ctx.keygen()?;
 
-    let a = ctx.encrypt_u16(&key, 42)?;
-    let b = ctx.encrypt_u16(&key, 100)?;
+    let a = ctx.encrypt_i64(&key, 42, 8)?;
+    let b = ctx.encrypt_i64(&key, 100, 8)?;
 
     let is_less = ctx.lt(&a, &b)?;
-    let opened = ctx.decrypt_bool(&key, &is_less)?;
+    let opened = ctx.decrypt_i64(&key, &is_less)?;
 
-    assert!(opened);
+    assert_eq!(opened, 1);
     Ok(())
 }
 ```
 
-## Rust Design Rules
+## Type Model
 
-- Use `Result<T, Fhe16Error>`.
-- Manage cleanup through ownership and `Drop`.
-- Keep operation names aligned with benchmark/API vocabulary.
-- Avoid exposing unsafe FFI unless users opt into a low-level module.
+| Rust type | Raw ABI backing |
+| --- | --- |
+| `Context` | Owns runtime initialization and calls `FHE16_DeleteEval` on drop. |
+| `SecretKey` | Runtime-owned key reference from `FHE16_GenEval` or loaded key material. |
+| `Ciphertext` | Non-null `*mut i32` freed with `FHE16_Free`. |
+| `Bits` | Wrapper for decrypted bit vectors from `FHE16_DECIntVec`. |
+| `Fhe16Error` | Maps null returns, invalid arguments, param mismatch, and runtime failures. |
 
 ## Method Mapping
 
-| Rust method | Core method |
+| Rust method | Raw symbol |
 | --- | --- |
-| `Fhe16Context::new` | `fhe16_context_create` |
-| `ctx.keygen` | `fhe16_keygen` |
-| `ctx.encrypt_u16` | `fhe16_encrypt_u16` |
-| `ctx.lt` | `fhe16_lt` |
-| `ctx.decrypt_bool` | `fhe16_decrypt_bool` |
+| `Context::new` | `FHE16_SetThreadCount`, `FHE16_MemoryAlloc` or lazy init. |
+| `ctx.keygen()` | `FHE16_GenEval`. |
+| `ctx.load_eval_key(path)` | `FHE16_LoadEval` or `FHE16_EvalKeyLoad`. |
+| `ctx.encrypt_i64(key, value, bits)` | `FHE16_ENCInt`. |
+| `ctx.encrypt_bits(key, bits)` | `FHE16_ENCInt_Arr`. |
+| `ctx.decrypt_i64(key, ct)` | `FHE16_DECInt`. |
+| `ctx.add/sub/mul/full_mul` | arithmetic symbols. |
+| `ctx.lt/le/gt/ge/eq/neq` | comparison symbols. |
+| `ctx.and_bool/or_bool/xor_bool` | `FHE16_AND`, `FHE16_OR`, `FHE16_XOR`. |
+| `ctx.and_bits/or_bits/xor_bits` | `FHE16_ANDVEC`, `FHE16_ORVEC`, `FHE16_XORVEC`. |
+| `ct.save(path)` / `Ciphertext::load(path)` | `FHE16_CTSave`, `FHE16_CTLoad`. |
+
+## Design Rules
+
+- Low-level FFI calls stay in an `unsafe` module.
+- Public `Ciphertext` is move-only and never clone-copies raw pointers.
+- Constant operations should accept Rust primitives and choose `_I32` or `_I64` depending on value range.
+- Native division and packing APIs should remain feature-gated until tests and examples are stable.

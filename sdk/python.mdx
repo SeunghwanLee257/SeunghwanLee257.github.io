@@ -1,10 +1,14 @@
 ---
 title: Python API
-description: Draft Python wrapper over the FHE16 core API.
+description: Planned Python wrapper over the FHE16Ver6 C ABI.
 icon: python
 ---
 
-Python should expose the same FHE16 method semantics with a lightweight object model for experiments, demos, and partner notebooks.
+Python should expose the same method semantics with a small object model for experiments, demos, and partner notebooks. The first implementation can use `ctypes` against the C ABI, then move to a native extension if packaging or performance requires it.
+
+<Warning>
+  The package shown here is the intended public shape. The current implementation source of truth is still the FHE16Ver6 C ABI.
+</Warning>
 
 ## Package Direction
 
@@ -12,36 +16,51 @@ Python should expose the same FHE16 method semantics with a lightweight object m
 pip install fhe16
 ```
 
-## Draft Usage
+## Planned Usage
 
 ```python
 import fhe16
 
-ctx = fhe16.Context(profile="latency-first")
-key = ctx.keygen()
+with fhe16.Context(threads=0) as ctx:
+    key = ctx.keygen()
 
-a = ctx.encrypt_u16(key, 42)
-b = ctx.encrypt_u16(key, 100)
+    a = ctx.encrypt_int(key, 42, bits=8)
+    b = ctx.encrypt_int(key, 100, bits=8)
 
-is_less = ctx.lt(a, b)
-opened = ctx.decrypt_bool(key, is_less)
+    is_less = ctx.lt(a, b)
+    opened = ctx.decrypt_int(key, is_less)
 
-assert opened is True
+assert opened == 1
 ```
 
-## Python Design Rules
+## Object Model
 
-- Keep names close to Rust/C method names.
-- Raise typed exceptions for core error categories.
-- Make serialization explicit.
-- Keep notebook examples small and reproducible.
-
-## Method Mapping
-
-| Python method | Core method |
+| Python object | Responsibility |
 | --- | --- |
-| `fhe16.Context` | `fhe16_context_create` |
-| `ctx.keygen` | `fhe16_keygen` |
-| `ctx.encrypt_u16` | `fhe16_encrypt_u16` |
-| `ctx.lt` | `fhe16_lt` |
-| `ctx.decrypt_bool` | `fhe16_decrypt_bool` |
+| `Context` | Initializes runtime, manages evaluation material, releases with `FHE16_DeleteEval`. |
+| `SecretKey` | Wraps decryption key pointer or loaded key bytes. |
+| `Ciphertext` | Owns a raw `int32_t*` and calls `FHE16_Free` in `close()`/`__del__`. |
+| `BitVector` | Owns decrypted bit vectors from `FHE16_DECIntVec`. |
+| `Fhe16Error` | Raised for null returns, invalid widths, mismatched params, and runtime failures. |
+
+## ctypes Mapping
+
+| Python method | Raw C symbol |
+| --- | --- |
+| `ctx.keygen()` | `FHE16_GenEval`. |
+| `ctx.encrypt_int(key, value, bits)` | `FHE16_ENCInt`. |
+| `ctx.encrypt_bits(key, values)` | `FHE16_ENCInt_Arr`. |
+| `ctx.decrypt_int(key, ct)` | `FHE16_DECInt`. |
+| `ctx.decrypt_bits(key, ct)` | `FHE16_DECIntVec`. |
+| `ctx.add/sub/mul/full_mul` | arithmetic symbols. |
+| `ctx.lt/le/gt/ge/eq/neq` | comparison symbols. |
+| `ctx.max/min/select/relu` | high-level selection symbols. |
+| `ctx.add_const/sub_const/mul_const` | `_CONSTANT_I32` or `_CONSTANT_I64` symbols. |
+| `ct.save(path)` / `Ciphertext.load(path)` | `FHE16_CTSave`, `FHE16_CTLoad`. |
+
+## Notebook Defaults
+
+- Default examples should use small bit widths such as 8 or 16 bits.
+- Every example should close ciphertexts or use context-managed objects.
+- Secret-key save/load should be marked local debug only.
+- Benchmark notebooks should call `FHE16_SetThreadCount` explicitly for reproducibility.

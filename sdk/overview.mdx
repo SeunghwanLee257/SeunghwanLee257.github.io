@@ -1,37 +1,70 @@
 ---
 title: FHE16 API Overview
-description: FFI-first API plan shared by Web Browser, C, Rust, and Python bindings.
+description: FHE16Ver6-based API map for Web Browser, C, Rust, and Python bindings.
 icon: square-terminal
 ---
 
-The first FHE16 developer API should be **FFI-first**. C provides the stable ABI boundary, and Web Browser, Rust, and Python bindings wrap the same core method set.
+The current API baseline is `FHE16Ver6/include/soAPI/soAPI.hpp`, with the browser demo and wrapper using the same exported runtime through Emscripten. The first public SDK should keep that ABI as the source of truth, then add safer language wrappers on top.
 
-<Warning>
-  The method names below are a draft naming convention. They are meant to stabilize documentation and SDK planning before the implementation is finalized.
-</Warning>
+<Info>
+  This page documents the current FHE16Ver6 surface and the intended public SDK shape. It is not a production remote API availability statement.
+</Info>
 
-## Target Bindings
+## Documentation Shape
 
-| Binding | Packaging direction | Method semantics |
-| --- | --- | --- |
-| Web Browser | WASM package | Same core context, encrypt, compute, decrypt, serialize methods. |
-| C | FFI ABI | Source of truth for low-level exported symbols. |
-| Rust | Safe wrapper over FFI or native crate | Same method semantics with Rust ownership and `Result`. |
-| Python | Extension module over FFI | Same method semantics with Python objects. |
-
-## Why FFI First
-
-- Keeps method names and behavior consistent.
-- Makes C, Rust, Python, and WASM wrappers easier to test against the same fixtures.
-- Avoids designing four different SDKs before the engine API is stable.
-- Makes benchmark and correctness tests reusable across languages.
+`/docs/` should be an overview page. The final Mintlify version should not be one long all-in-one scroll; each sidebar item should become its own MDX page. API pages should be split by common method surface and binding-specific usage.
 
 ## API Layers
 
-1. **Core FFI**: context, key, ciphertext, operation, serialization, cleanup.
-2. **Language wrappers**: ergonomic classes and error handling.
-3. **Product helpers**: auction, risk scoring, blockchain adapters.
+| Layer | Current source | Public role |
+| --- | --- | --- |
+| Raw C ABI | `soAPI.hpp` | Exported functions, pointer ownership, key lifecycle, serialization. |
+| Web Browser | `experiment_html/fhe16_wrapper.ts` and worker demo | WASM wrapper over the same exported symbols. |
+| Rust | Planned wrapper | Typed ownership, `Result`, and `Drop` around the C ABI. |
+| Python | Planned wrapper | `ctypes`/extension object model for notebooks, tests, and demos. |
+| Remote service | Draft OpenAPI | Optional service mode for hosted compute or partner integrations. |
 
-## Next Step
+## Runtime Lifecycle
 
-Read [Core Methods](/sdk/core-methods) before looking at a specific language binding.
+| Step | Raw symbol family | Wrapper responsibility |
+| --- | --- | --- |
+| Configure threads | `FHE16_SetThreadCount`, `FHE16_GetThreadCount` | Must be called before `FHE16_GenEval` or `FHE16_MemoryAlloc` when fixed thread count is needed. |
+| Initialize keys | `FHE16_GenEval`, `FHE16_LoadEval`, `FHE16_MemoryAlloc` | Hide global runtime state behind a context object. |
+| Access keys | `FHE16_GetLWESK`, `FHE16_GetDecSK` and length helpers | Keep secret-key export local/test-only by default. |
+| Encrypt | `FHE16_ENCInt`, `FHE16_ENCInt32`, `FHE16_ENCInt_Arr`, `FHE16_ENC_BIT` | Validate bit width and signed/unsigned encoding. |
+| Compute | `FHE16_ADD`, `FHE16_LT`, `FHE16_SELECT`, and related ops | Preserve one-to-one operation semantics across bindings. |
+| Decrypt | `FHE16_DECInt`, `FHE16_DECIntVec` | Require the matching decryption secret key. |
+| Release | `FHE16_Free`, `FHE16_DeleteEval` | Own every returned pointer and free it exactly once. |
+
+## Core Data Model
+
+The current ABI passes ciphertexts as `int32_t*`. The first header words carry metadata used by the runtime and browser demo:
+
+| Header word | Meaning in current code |
+| --- | --- |
+| `CT[0]` | Bit width. Boolean ciphertexts use `1`. |
+| `CT[1]` | Per-bit ciphertext length. |
+| `CT[2]` | Log-style bit-width metadata used by arithmetic routines. |
+
+Returned ciphertexts and decrypted bit arrays are caller-owned and must be released with `FHE16_Free`. Secret-key pointers returned from `FHE16_GenEval`, `FHE16_GetLWESK`, or `FHE16_GetDecSK` are owned by the runtime unless a load API explicitly allocates an output key.
+
+## First Stable Public Surface
+
+The public SDK should start with these method groups:
+
+- Context and key lifecycle.
+- Integer and boolean encryption/decryption.
+- Arithmetic: add, subtract, signed multiply, full multiply, negation, absolute value.
+- Comparison: less/less-equal/greater/greater-equal/equal/not-equal.
+- Bitwise and selection: boolean gates, vector bitwise gates, `select`, `min`, `max`, `relu`.
+- Constant operations: add/subtract/multiply/compare against plaintext constants.
+- Serialization: params, eval key, public key, ciphertext, and secret key for local debug flows.
+
+## Binding Priority
+
+| Binding | First goal |
+| --- | --- |
+| Web Browser | Use the existing WASM wrapper and worker path without blocking the UI thread. |
+| C | Publish the raw ABI and then add a thinner stable C facade if naming needs cleanup. |
+| Rust | Wrap raw pointers in owned types and map failures to `Result`. |
+| Python | Expose the same owned objects for demos, tests, and partner notebooks. |
