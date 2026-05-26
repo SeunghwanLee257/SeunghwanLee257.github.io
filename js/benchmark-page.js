@@ -14,8 +14,20 @@
     SELECT: "#555f70"
   };
 
+  var machines = {
+    "ccrl-xeon-6240r": {
+      label: "CCRL dual Xeon 6240R workstation",
+      dataPath: "./data/"
+    }
+  };
+
   var chart;
   var activeCategory = "ABS";
+  var activeMachine = "ccrl-xeon-6240r";
+
+  function currentMachine(){
+    return machines[activeMachine] || machines["ccrl-xeon-6240r"];
+  }
 
   function formatMs(value){
     if(!Number.isFinite(value)) return "-";
@@ -134,9 +146,10 @@
       btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-selected", active ? "true" : "false");
     });
-    setStatus("Loading " + category + " data...");
+    var machine = currentMachine();
+    setStatus("Loading " + category + " data on " + machine.label + "...");
 
-    fetch("./data/" + encodeURIComponent(category) + ".json")
+    fetch(machine.dataPath + encodeURIComponent(category) + ".json")
       .then(function(response){
         if(!response.ok) throw new Error("HTTP " + response.status);
         return response.json();
@@ -147,7 +160,7 @@
         updateMetrics(points);
         updateTable(points);
         updateChart(points);
-        setStatus(category + " loaded");
+        setStatus(category + " loaded · " + machine.label);
       })
       .catch(function(error){
         console.error(error);
@@ -160,7 +173,19 @@
     return categories.indexOf(category) >= 0 ? category : "ABS";
   }
 
+  function initMachineSelector(){
+    var select = document.getElementById("benchmarkMachineSelect");
+    if(!select) return;
+    select.value = activeMachine;
+    select.addEventListener("change", function(){
+      if(!machines[select.value]) return;
+      activeMachine = select.value;
+      loadCategory(activeCategory);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function(){
+    initMachineSelector();
     document.querySelectorAll("[data-benchmark-category]").forEach(function(btn){
       btn.addEventListener("click", function(){
         loadCategory(btn.getAttribute("data-benchmark-category"));

@@ -124,9 +124,52 @@
           <div>
             <p class="page-section-kicker" data-copy-ko="Interactive Benchmark" data-copy-en="Interactive Benchmark">Interactive Benchmark</p>
             <h2 class="page-section-title" data-copy-ko="연산별 지연 시간을 바로 비교" data-copy-en="Compare latency by operation category">Compare latency by operation category</h2>
-            <p class="page-section-desc" data-copy-ko="카테고리를 선택하면 JSON 데이터에서 차트와 대표 샘플 테이블을 즉시 갱신합니다. 단위는 밀리초 기준입니다." data-copy-en="Select a category to update the chart and representative sample table from the local JSON benchmark files. Values are shown in milliseconds.">Select a category to update the chart and representative sample table from the local JSON benchmark files. Values are shown in milliseconds.</p>
+            <p class="page-section-desc" data-copy-ko="카테고리와 실험 컴퓨터를 선택하면 해당 머신의 JSON 데이터에서 차트와 대표 샘플 테이블을 즉시 갱신합니다. 단위는 밀리초 기준입니다." data-copy-en="Select an operation category and experiment computer to update the chart and representative sample table from the matching JSON benchmark files. Values are shown in milliseconds.">Select an operation category and experiment computer to update the chart and representative sample table from the matching JSON benchmark files. Values are shown in milliseconds.</p>
           </div>
         </div>
+
+        <section class="benchmark-machine-panel" aria-labelledby="benchmark-machine-heading">
+          <div class="benchmark-machine-head">
+            <div>
+              <p class="page-section-kicker" data-copy-ko="Experiment Computer" data-copy-en="Experiment Computer">Experiment Computer</p>
+              <h3 id="benchmark-machine-heading" data-copy-ko="현재 공개 결과는 이 컴퓨터에서 측정했습니다" data-copy-en="Current public results were measured on this computer">Current public results were measured on this computer</h3>
+              <p data-copy-ko="머신별 반복 실험이 추가되면 같은 선택 메뉴에서 데이터셋을 전환할 수 있습니다." data-copy-en="When additional machine runs are added, the same selector can switch the chart dataset.">When additional machine runs are added, the same selector can switch the chart dataset.</p>
+            </div>
+            <label class="benchmark-machine-select-wrap" for="benchmarkMachineSelect">
+              <span data-copy-ko="컴퓨터 선택" data-copy-en="Computer">Computer</span>
+              <select id="benchmarkMachineSelect" aria-label="Benchmark computer">
+                <option value="ccrl-xeon-6240r" data-copy-ko="CCRL 듀얼 Xeon 6240R 워크스테이션" data-copy-en="CCRL dual Xeon 6240R workstation">CCRL dual Xeon 6240R workstation</option>
+              </select>
+            </label>
+          </div>
+          <dl class="benchmark-spec-grid" aria-label="Selected computer specification">
+            <div class="benchmark-spec-item">
+              <dt>CPU</dt>
+              <dd>2 x Intel Xeon Gold 6240R @ 2.40GHz</dd>
+            </div>
+            <div class="benchmark-spec-item">
+              <dt data-copy-ko="코어 / 스레드" data-copy-en="Cores / Threads">Cores / Threads</dt>
+              <dd>48 cores / 96 threads</dd>
+            </div>
+            <div class="benchmark-spec-item">
+              <dt data-copy-ko="메모리" data-copy-en="Memory">Memory</dt>
+              <dd>251 GiB RAM</dd>
+            </div>
+            <div class="benchmark-spec-item">
+              <dt>GPU</dt>
+              <dd>NVIDIA RTX A5000</dd>
+            </div>
+            <div class="benchmark-spec-item">
+              <dt>ISA</dt>
+              <dd>AVX2 / AVX-512</dd>
+            </div>
+            <div class="benchmark-spec-item">
+              <dt>OS</dt>
+              <dd>Ubuntu 24.04 · Linux 6.17</dd>
+            </div>
+          </dl>
+          <p class="benchmark-machine-note" id="benchmarkMachineNote" data-copy-ko="데이터셋: data/*.json · 현재 실험 컴퓨터 기준 측정값" data-copy-en="Dataset: data/*.json · Current experiment computer run">Dataset: data/*.json · Current experiment computer run</p>
+        </section>
 
         <div class="benchmark-layout">
           <section class="benchmark-page-card" aria-labelledby="benchmark-chart-heading">
