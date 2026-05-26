@@ -3,108 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="FHE16 technical documentation roadmap for paper reviews, products, and API bindings." />
+  <meta name="description" content="FHE16 technical documentation for paper reviews, products, and API bindings." />
   <meta name="google" content="notranslate">
   <title>FHE16 Docs | waLLLnut</title>
   <link rel="canonical" href="https://walllnut.com/docs/">
-  <link rel="stylesheet" href="../css/00.tokens.css?v=20241221">
-  <link rel="stylesheet" href="../css/01.base.css?v=20241221">
-  <link rel="stylesheet" href="../css/02.layout.css?v=20241221">
-  <link rel="stylesheet" href="../css/03.components.css?v=20241221">
-  <link rel="stylesheet" href="../css/04.sections.css?v=20241221">
-  <link rel="stylesheet" href="../css/06.utilities.css?v=20241221">
-  <link rel="stylesheet" href="../css/pages.css?v=20241221">
   <link rel="icon" href="../asset/logo-filled-orange.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
   <style>
-    .docs-hero{background:#181716;color:#fff;padding:120px 0 72px;}
-    .docs-hero h1{font-size:clamp(44px,7vw,92px);line-height:.96;margin:16px 0 24px;letter-spacing:0;}
-    .docs-hero p{max-width:760px;color:rgba(255,255,255,.76);font-size:18px;line-height:1.7;}
-    .docs-topbar{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);border-bottom:1px solid rgba(24,23,22,.12);backdrop-filter:blur(14px);}
-    .docs-topbar-inner{width:min(1180px,calc(100% - 40px));height:72px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
-    .docs-logo{display:inline-flex;align-items:center;gap:10px;color:#181716;text-decoration:none;font-weight:800;}
-    .docs-logo img{height:30px;width:auto;}
-    .docs-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
-    .docs-nav a{padding:8px 12px;border-radius:8px;color:#181716;text-decoration:none;font-size:14px;font-weight:700;background:rgba(15,15,16,.05);}
-    .docs-section{padding:72px 0;background:#f4f0ea;}
-    .docs-section:nth-of-type(even){background:#fffdf9;}
-    .docs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
-    .docs-card{background:#fff;border:1px solid rgba(24,23,22,.14);border-radius:8px;padding:24px;min-height:220px;box-shadow:0 8px 24px rgba(24,23,22,.06);}
-    .docs-card h3{font-size:22px;margin:12px 0;color:#181716;}
-    .docs-card p,.docs-card li{color:#6f6b66;line-height:1.6;}
-    .docs-chip{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;background:rgba(255,122,26,.12);color:#c85f00;font-size:12px;font-weight:800;}
-    .docs-list{margin:14px 0 0;padding-left:18px;}
-    .docs-note{border-left:4px solid #ff7a1a;background:rgba(255,122,26,.08);padding:18px 20px;border-radius:8px;color:#4a4038;line-height:1.7;}
-    .docs-section h2{font-size:clamp(32px,4vw,54px);line-height:1;margin:0 0 18px;color:#181716;letter-spacing:0;}
-    .docs-section-desc{max-width:760px;color:#6f6b66;font-size:17px;line-height:1.7;margin:0 0 28px;}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(24,23,22,.08);padding:2px 5px;border-radius:5px;}
-    @media (max-width:900px){.docs-grid{grid-template-columns:1fr}.docs-topbar-inner{height:auto;min-height:72px;padding:12px 0;align-items:flex-start;flex-direction:column}.docs-hero{padding-top:150px}.docs-nav{justify-content:flex-start}}
+    :root{color-scheme:light;--bg:#ffffff;--surface:#ffffff;--surface-muted:#f6f8fb;--line:#e5e7eb;--line-strong:#d1d5db;--text:#111827;--text-muted:#6b7280;--text-soft:#9ca3af;--primary:#ff7a1a;--primary-dark:#c95b00;--primary-soft:#fff4eb;--code-bg:#0f172a;--shadow:0 18px 48px rgba(15,23,42,.08);--radius:8px;--font-sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;--font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.65;letter-spacing:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}code,kbd,pre{font-family:var(--font-mono)}code{border:1px solid var(--line);border-radius:6px;background:var(--surface-muted);padding:2px 5px;color:#334155;font-size:.92em}
+    .docs-shell{min-height:100vh;display:grid;grid-template-columns:280px minmax(0,1fr) 240px;grid-template-rows:64px 1fr;grid-template-areas:"topbar topbar topbar" "sidebar main toc"}.docs-topbar{grid-area:topbar;position:sticky;top:0;z-index:40;height:64px;display:flex;align-items:center;gap:18px;padding:0 24px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.88);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:10px;min-width:232px;font-weight:700;color:var(--text)}.brand img{height:28px;width:auto}.brand span{white-space:nowrap}
+    .search{flex:1;max-width:560px;height:38px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface-muted);color:var(--text-muted);padding:0 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}.search-mark{width:16px;height:16px;border:2px solid var(--text-soft);border-radius:50%;position:relative;flex:0 0 auto}.search-mark:after{content:"";position:absolute;width:7px;height:2px;right:-6px;bottom:-3px;background:var(--text-soft);transform:rotate(45deg);border-radius:2px}.search kbd{margin-left:auto;border:1px solid var(--line-strong);border-bottom-color:#b8c0cc;border-radius:5px;background:#fff;color:var(--text-soft);font-size:11px;line-height:1;padding:4px 6px}.top-links{display:flex;align-items:center;gap:6px;margin-left:auto}.top-links a{padding:8px 10px;border-radius:7px;color:#4b5563;font-size:14px;font-weight:600}.top-links a:hover{background:var(--surface-muted);color:var(--text)}.top-links .primary-link{background:var(--text);color:#fff}.top-links .primary-link:hover{background:#000;color:#fff}
+    .docs-sidebar{grid-area:sidebar;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;border-right:1px solid var(--line);background:#fff;padding:22px 18px 32px}.nav-section{margin-bottom:24px}.nav-title{margin:0 0 8px;padding:0 10px;color:#374151;font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase}.nav-list{display:grid;gap:2px}.nav-item{display:flex;align-items:center;gap:9px;min-height:34px;border-radius:7px;padding:7px 10px;color:#4b5563;font-size:14px;font-weight:500}.nav-item:hover{background:var(--surface-muted);color:var(--text)}.nav-item.is-active{background:var(--primary-soft);color:var(--primary-dark);font-weight:700}.nav-dot{width:6px;height:6px;border-radius:50%;background:#cbd5e1;flex:0 0 auto}.nav-item.is-active .nav-dot{background:var(--primary)}
+    .docs-main{grid-area:main;width:min(100%,900px);padding:56px 56px 96px;justify-self:center}.breadcrumbs{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:13px;margin-bottom:18px}.breadcrumbs span:last-child{color:var(--text)}.hero{padding-bottom:34px;border-bottom:1px solid var(--line);margin-bottom:42px}.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 12px;color:var(--primary-dark);font-size:13px;font-weight:750}.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 5px var(--primary-soft)}h1,h2,h3{letter-spacing:0;color:var(--text)}h1{margin:0 0 16px;max-width:760px;font-size:52px;line-height:1.04;font-weight:780}.lead{margin:0;max-width:720px;color:#4b5563;font-size:18px;line-height:1.75}
+    .quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}.quick-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:18px;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}.quick-card:hover{transform:translateY(-2px);border-color:#f3b174;box-shadow:var(--shadow)}.quick-card small{display:block;margin-bottom:8px;color:var(--primary-dark);font-size:12px;font-weight:800}.quick-card strong{display:block;margin-bottom:8px;color:var(--text);font-size:16px;line-height:1.35}.quick-card span{color:var(--text-muted);font-size:14px;line-height:1.5}
+    .content-section{scroll-margin-top:92px;margin:0 0 54px}h2{margin:0 0 12px;font-size:30px;line-height:1.2;font-weight:760}.section-desc{margin:0 0 20px;max-width:720px;color:#4b5563;font-size:16px}.doc-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.doc-card{position:relative;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:20px;overflow:hidden}.doc-card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),rgba(255,122,26,0));opacity:.85}.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.tag{display:inline-flex;align-items:center;border:1px solid #fed7aa;border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);padding:3px 8px;font-size:12px;font-weight:700;line-height:1.2}.tag.neutral{border-color:var(--line);background:var(--surface-muted);color:#64748b}.doc-card h3{margin:0 0 8px;font-size:18px;line-height:1.35;font-weight:730}.doc-card p{margin:0;color:var(--text-muted);font-size:14px;line-height:1.6}
+    .api-panel{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.04)}.api-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);background:var(--surface-muted);padding:14px 16px}.api-title{display:flex;align-items:center;gap:8px;min-width:0;font-weight:760}.method{border-radius:5px;background:#dcfce7;color:#166534;padding:3px 7px;font-family:var(--font-mono);font-size:12px;font-weight:800}.api-path{color:#475569;font-family:var(--font-mono);font-size:13px;overflow-wrap:anywhere}.api-panel-body{display:grid;grid-template-columns:1fr 1.1fr;gap:0}.api-copy{padding:22px;border-right:1px solid var(--line)}.api-copy p{margin:0 0 16px;color:#4b5563}.method-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}.method-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:7px;padding:9px 10px;color:#475569;font-size:14px}.method-list code{border:0;background:transparent;padding:0;color:#0f172a;font-weight:700}pre{margin:0;min-height:100%;overflow:auto;background:var(--code-bg);color:#dbeafe;font-size:13px;line-height:1.65;padding:22px}pre code{display:block;border:0;background:transparent;padding:0;color:inherit;font-size:inherit}.code-comment{color:#94a3b8}.code-string{color:#fdba74}.code-keyword{color:#93c5fd}.code-fn{color:#86efac}
+    .callout{border:1px solid #fed7aa;border-radius:var(--radius);background:var(--primary-soft);padding:16px 18px;color:#7c2d12}.callout strong{display:block;margin-bottom:4px;color:#9a3412}.docs-toc{grid-area:toc;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;border-left:1px solid var(--line);background:#fff;padding:28px 22px}.toc-title{margin:0 0 12px;color:#374151;font-size:12px;font-weight:800;letter-spacing:.03em;text-transform:uppercase}.toc-list{display:grid;gap:8px}.toc-list a{border-left:2px solid transparent;padding-left:10px;color:var(--text-muted);font-size:13px;line-height:1.35}.toc-list a:hover{border-left-color:var(--primary);color:var(--text)}.docs-footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line);color:var(--text-muted);font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    @media (max-width:1180px){.docs-shell{grid-template-columns:260px minmax(0,1fr);grid-template-areas:"topbar topbar" "sidebar main"}.docs-toc{display:none}.docs-main{padding-right:36px}}@media (max-width:860px){.docs-shell{display:block}.docs-topbar{position:sticky;height:auto;min-height:64px;flex-wrap:wrap;padding:12px 16px}.brand{min-width:0}.search{order:3;flex-basis:100%;max-width:none}.top-links{margin-left:0}.top-links a:not(.primary-link){display:none}.docs-sidebar{position:static;height:auto;display:flex;gap:12px;overflow:auto;padding:12px 16px;border-right:0;border-bottom:1px solid var(--line)}.nav-section{min-width:220px;margin-bottom:0}.docs-main{width:100%;padding:36px 20px 64px}h1{font-size:38px}.lead{font-size:16px}.quick-grid,.doc-card-grid,.api-panel-body{grid-template-columns:1fr}.api-copy{border-right:0;border-bottom:1px solid var(--line)}}
   </style>
 </head>
-<body class="page-body">
-  <header class="docs-topbar">
-    <div class="docs-topbar-inner">
-      <a class="docs-logo" href="../index.html" aria-label="waLLLnut home"><img src="../asset/head-logo.svg" alt="waLLLnut"><span>FHE16 Docs</span></a>
-      <nav class="docs-nav" aria-label="Docs sections">
-        <a href="#papers">A. Papers</a>
-        <a href="#products">B. Products</a>
-        <a href="#api">C. API</a>
-        <a href="../benchmark.html">Benchmark</a>
-        <a href="../research.html">Research</a>
-      </nav>
-    </div>
-  </header>
+<body>
+  <div class="docs-shell">
+    <header class="docs-topbar">
+      <a class="brand" href="../index.html" aria-label="waLLLnut home"><img src="../asset/head-logo.svg" alt="waLLLnut"><span>FHE16 Docs</span></a>
+      <div class="search" role="search" aria-label="Search placeholder"><span class="search-mark" aria-hidden="true"></span><span>Search documentation...</span><kbd>/</kbd></div>
+      <nav class="top-links" aria-label="Global links"><a href="../benchmark.html">Benchmark</a><a href="../research.html">Research</a><a class="primary-link" href="../index.html">waLLLnut</a></nav>
+    </header>
+    <aside class="docs-sidebar" aria-label="Documentation navigation">
+      <section class="nav-section"><p class="nav-title">Start Here</p><nav class="nav-list"><a class="nav-item is-active" href="#overview"><span class="nav-dot"></span>Overview</a><a class="nav-item" href="#architecture"><span class="nav-dot"></span>Architecture</a></nav></section>
+      <section class="nav-section"><p class="nav-title">A. Paper Reviews</p><nav class="nav-list"><a class="nav-item" href="#papers"><span class="nav-dot"></span>Paper map</a><a class="nav-item" href="#paper-fhe16-bootstrapping"><span class="nav-dot"></span>FHE16 bootstrapping</a><a class="nav-item" href="#paper-arithmetic"><span class="nav-dot"></span>Prefix arithmetic</a></nav></section>
+      <section class="nav-section"><p class="nav-title">B. Products</p><nav class="nav-list"><a class="nav-item" href="#products"><span class="nav-dot"></span>Product map</a><a class="nav-item" href="#blockchain"><span class="nav-dot"></span>Blockchain</a><a class="nav-item" href="#enterprise"><span class="nav-dot"></span>Enterprise PET</a></nav></section>
+      <section class="nav-section"><p class="nav-title">C. API</p><nav class="nav-list"><a class="nav-item" href="#api"><span class="nav-dot"></span>API overview</a><a class="nav-item" href="#bindings"><span class="nav-dot"></span>Bindings</a><a class="nav-item" href="#migration"><span class="nav-dot"></span>Mintlify migration</a></nav></section>
+    </aside>
+    <main class="docs-main">
+      <div class="breadcrumbs" id="overview"><span>Documentation</span><span>/</span><span>FHE16</span></div>
+      <section class="hero"><p class="eyebrow">Developer documentation</p><h1>FHE16 paper reviews, product paths, and API surface.</h1><p class="lead">This static page mirrors the docs experience we will later move into Mintlify. The source MDX files and <code>docs.json</code> are already in the repository, while this page gives <code>walllnut.com/docs/</code> a polished docs layout today.</p><div class="quick-grid" aria-label="Docs quick links"><a class="quick-card" href="#papers"><small>A. Papers</small><strong>Review the FHE16 research base</strong><span>Bootstrapping, arithmetic, correctness, and MPC context.</span></a><a class="quick-card" href="#products"><small>B. Products</small><strong>Map research to product workflows</strong><span>Blockchain confidential state, auctions, and private scoring.</span></a><a class="quick-card" href="#api"><small>C. API</small><strong>Define one method surface</strong><span>C ABI first, then Web Browser, Rust, and Python bindings.</span></a></div></section>
+      <section id="architecture" class="content-section"><h2>Documentation model</h2><p class="section-desc">The docs should read like technical product infrastructure, not a publication list. Each page ties research evidence to the methods, parameters, and trust boundaries a developer needs.</p><div class="doc-card-grid"><article class="doc-card"><div class="tag-row"><span class="tag">Concept</span><span class="tag neutral">Engine</span></div><h3>FHE16 as the engine layer</h3><p>Explain the role of encrypted integer operations, bootstrapping, parameters, and benchmark profiles before exposing product APIs.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">Contract</span><span class="tag neutral">FFI</span></div><h3>One API contract across languages</h3><p>Keep method semantics stable across C, Web Browser/WASM, Rust, and Python. Language wrappers can be idiomatic without changing behavior.</p></article></div></section>
+      <section id="papers" class="content-section"><h2>A. FHE16 paper reviews</h2><p class="section-desc">Each paper gets a structured review: what the paper proves, what it means for the engine, what API behavior it supports, and what still needs implementation evidence.</p><div class="doc-card-grid"><article id="paper-fhe16-bootstrapping" class="doc-card"><div class="tag-row"><span class="tag">FHE16</span><span class="tag neutral">Bootstrapping</span></div><h3>Fast, Compact and Hardware-Friendly Bootstrapping</h3><p>Anchor paper for the low-latency FHE16 narrative and the benchmark claim that encrypted computation can be practical for product workloads.</p></article><article id="paper-arithmetic" class="doc-card"><div class="tag-row"><span class="tag">Arithmetic</span><span class="tag neutral">Methods</span></div><h3>Parallel prefix FHE arithmetic</h3><p>Connects arithmetic circuits to API methods such as <code>add</code>, <code>lt</code>, <code>max</code>, and <code>select</code>.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">Correctness</span><span class="tag neutral">Parameters</span></div><h3>Blind rotation error analysis</h3><p>Supports correctness, noise budget, and parameter documentation for reliable FHE16 execution profiles.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">MPC</span><span class="tag neutral">Threshold</span></div><h3>Actively secure MPC</h3><p>Frames SSFHE, threshold disclosure, and multi-party workflows beyond a single-party encrypted compute setup.</p></article></div></section>
+      <section id="products" class="content-section"><h2>B. Products built with FHE16</h2><p class="section-desc">Product docs should show which encrypted operations are used, what data stays private, and where a user or verifier sees the result.</p><div class="doc-card-grid"><article id="blockchain" class="doc-card"><div class="tag-row"><span class="tag">Blockchain</span><span class="tag neutral">Confidential state</span></div><h3>Encrypted state and selective disclosure</h3><p>Compute or verify over encrypted state while allowing threshold or policy-based disclosure when a protocol requires a result.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">Auction</span><span class="tag neutral">Comparison</span></div><h3>Confidential auction workflows</h3><p>Keep bids hidden while computing winner selection with encrypted comparison, max, and conditional selection methods.</p></article><article id="enterprise" class="doc-card"><div class="tag-row"><span class="tag">Enterprise</span><span class="tag neutral">Risk scoring</span></div><h3>Private risk scoring</h3><p>Score sensitive insurance, identity, account, or transaction data without exposing raw records to the compute operator.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">B2C</span><span class="tag neutral">Demand</span></div><h3>Private demand intelligence</h3><p>Aggregate or compare encrypted preference signals while limiting raw customer data movement across the product stack.</p></article></div></section>
+      <section id="api" class="content-section"><h2>C. FHE16 API</h2><p class="section-desc">The first public API should be FFI-first. C defines the ABI boundary, then Web Browser/WASM, Rust, and Python wrap the same core methods.</p><div class="api-panel"><div class="api-panel-head"><div class="api-title"><span class="method">POST</span><span class="api-path">/v1/fhe16/evaluate</span></div><span class="tag neutral">Draft OpenAPI included</span></div><div class="api-panel-body"><div class="api-copy"><p>Core methods stay consistent across language bindings. The final API can expose these as local SDK calls or remote service operations.</p><ul class="method-list"><li><code>context_create</code><span>profile setup</span></li><li><code>keygen</code><span>keys</span></li><li><code>encrypt_u16</code><span>plaintext to ciphertext</span></li><li><code>decrypt_u16</code><span>ciphertext to plaintext</span></li><li><code>add / lt / eq</code><span>compute</span></li><li><code>max / select</code><span>compose</span></li></ul></div><pre aria-label="Example API code"><code><span class="code-comment">// Same semantics across wrappers.</span>
+<span class="code-keyword">const</span> ctx = <span class="code-fn">createContext</span>({
+  profile: <span class="code-string">"fhe16.dev"</span>
+});
 
-  <main>
-    <section class="docs-hero">
-      <div class="page-container">
-        <p class="page-eyebrow">FHE16 Documentation</p>
-        <h1>Paper reviews, products, and API surface.</h1>
-        <p>This page is the static documentation entry while Mintlify is not connected yet. The same content is already structured as Mintlify-compatible MDX in this repository for a later move to <code>docs.walllnut.com</code>.</p>
-      </div>
-    </section>
+<span class="code-keyword">const</span> a = <span class="code-fn">encryptU16</span>(ctx, 42);
+<span class="code-keyword">const</span> b = <span class="code-fn">encryptU16</span>(ctx, 7);
 
-    <section id="papers" class="docs-section">
-      <div class="page-container">
-        <h2>A. FHE16 Paper Reviews</h2>
-        <p class="docs-section-desc">Each paper should be reviewed as technical evidence for the engine, not just listed as a publication.</p>
-        <div class="docs-grid">
-          <article id="paper-fhe16-bootstrapping" class="docs-card"><span class="docs-chip">FHE16</span><h3>Fast, Compact and Hardware-Friendly Bootstrapping</h3><p>Anchor paper for the low-latency FHE16 engine and the benchmark narrative around practical encrypted computation.</p></article>
-          <article class="docs-card"><span class="docs-chip">Arithmetic</span><h3>Parallel Prefix FHE Arithmetic</h3><p>Explains operation-level arithmetic design. This informs API methods such as <code>add</code>, <code>lt</code>, <code>max</code>, and <code>select</code>.</p></article>
-          <article class="docs-card"><span class="docs-chip">Correctness</span><h3>Blind Rotation Error Analysis</h3><p>Supports correctness, parameter, and reliability documentation for FHE16 profiles.</p></article>
-          <article class="docs-card"><span class="docs-chip">MPC</span><h3>Actively Secure MPC</h3><p>Supports SSFHE, threshold disclosure, and multi-party workflows beyond single-party encrypted computation.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="products" class="docs-section">
-      <div class="page-container">
-        <h2>B. Products Built With FHE16</h2>
-        <p class="docs-section-desc">Product docs should connect the paper basis, the API methods needed, and the trust boundary of each workflow.</p>
-        <div class="docs-grid">
-          <article class="docs-card"><span class="docs-chip">Blockchain</span><h3>Confidential State</h3><p>Compute or verify over encrypted state and support selective disclosure for chain and app developers.</p></article>
-          <article class="docs-card"><span class="docs-chip">Auction</span><h3>Confidential Auction</h3><p>Keep bids hidden while computing valid auction outcomes with encrypted comparison and selection.</p></article>
-          <article class="docs-card"><span class="docs-chip">Enterprise</span><h3>Private Risk Scoring</h3><p>Score or compare sensitive records without moving raw insurance, identity, account, or transaction data.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="api" class="docs-section">
-      <div class="page-container">
-        <h2>C. FHE16 API</h2>
-        <p class="docs-section-desc">The first API direction is FFI-first: C is the ABI boundary, then Web Browser/WASM, Rust, and Python wrap the same method semantics.</p>
-        <div class="docs-grid">
-          <article class="docs-card"><span class="docs-chip">Core</span><h3>Common Methods</h3><ul class="docs-list"><li><code>context_create</code>, <code>context_free</code></li><li><code>keygen</code>, key import/export</li><li><code>encrypt_u16</code>, <code>decrypt_u16</code></li><li><code>add</code>, <code>lt</code>, <code>eq</code>, <code>max</code>, <code>select</code></li></ul></article>
-          <article class="docs-card"><span class="docs-chip">Bindings</span><h3>Web Browser, C, Rust, Python</h3><p>The method names can be idiomatic per language, but behavior should map one-to-one to the same FFI method surface.</p></article>
-          <article class="docs-card"><span class="docs-chip">Later</span><h3>Mintlify Migration</h3><p>The MDX source and <code>docs.json</code> are already prepared. When ready, point <code>docs.walllnut.com</code> to Mintlify and switch public links.</p></article>
-        </div>
-        <p class="docs-note">For now, use <code>walllnut.com/docs/</code>. Do not point public navigation to <code>docs.walllnut.com</code> until a separate host or Mintlify custom domain is connected.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="page-footer"><div class="page-container"><span>© 2025 waLLLnut</span><span>FHE16 documentation roadmap</span></div></footer>
+<span class="code-keyword">const</span> winner = <span class="code-fn">max</span>(ctx, a, b);
+<span class="code-keyword">const</span> result = <span class="code-fn">decryptU16</span>(ctx, winner);</code></pre></div></div></section>
+      <section id="bindings" class="content-section"><h2>Language bindings</h2><p class="section-desc">The docs source already separates the binding pages so Mintlify can render them as independent SDK sections later.</p><div class="doc-card-grid"><article class="doc-card"><div class="tag-row"><span class="tag">Browser</span><span class="tag neutral">WASM</span></div><h3>Web Browser</h3><p>Client-side demos and browser-native encrypted computation experiments using a WASM wrapper.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">C</span><span class="tag neutral">ABI</span></div><h3>C</h3><p>The lowest stable boundary for FFI, integration tests, and wrappers in other languages.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">Rust</span><span class="tag neutral">Safe wrapper</span></div><h3>Rust</h3><p>Typed resource management over the C ABI with explicit ownership and error handling.</p></article><article class="doc-card"><div class="tag-row"><span class="tag">Python</span><span class="tag neutral">Prototype</span></div><h3>Python</h3><p>Research notebooks, product prototypes, and benchmark orchestration against the same method semantics.</p></article></div></section>
+      <section id="migration" class="content-section"><h2>Mintlify migration</h2><div class="callout"><strong>Current public URL: walllnut.com/docs/</strong>Keep this static route live until <code>docs.walllnut.com</code> is connected to Mintlify or another docs host. The repo already includes the Mintlify-compatible MDX structure and <code>docs.json</code>.</div></section>
+      <footer class="docs-footer"><span>waLLLnut FHE16 documentation</span><span>No external commercial web fonts used on this page.</span></footer>
+    </main>
+    <aside class="docs-toc" aria-label="On this page"><p class="toc-title">On This Page</p><nav class="toc-list"><a href="#overview">Overview</a><a href="#architecture">Documentation model</a><a href="#papers">A. Paper reviews</a><a href="#products">B. Products</a><a href="#api">C. FHE16 API</a><a href="#bindings">Language bindings</a><a href="#migration">Mintlify migration</a></nav></aside>
+  </div>
 </body>
 </html>
