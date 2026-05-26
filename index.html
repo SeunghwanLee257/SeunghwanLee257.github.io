@@ -444,23 +444,24 @@
 
     <!-- 03. Solutions -->
     <section data-aos="fade-up" data-aos-duration="900" id="sec03" class="container" aria-labelledby="service-label">
-      <h2 id="service-label" class="section-label" data-i18n="section.businessTracks">03. Business Tracks</h2>
-      <div class="solutions-layout">
+      <h2 id="service-label" class="section-label" data-i18n="section.businessTracks">03. FHE16 Solutions</h2>
+      <div class="solutions-layout solutions-layout--fhe16">
         <div class="solutions-card" data-solution-card>
-          <div class="solutions-visual" data-solution-visual><img src="./asset/generated/business-demand-photo-v2.jpg" alt="B2C demand forecasting visual" data-solution-image loading="lazy"></div>
+          <div class="solutions-visual" data-solution-visual data-visual="fhe16"><img src="./asset/generated/tech-fhe16-photo-v2.jpg" alt="FHE16 deterministic homomorphic encryption visual" data-solution-image loading="lazy"></div>
           <div class="solutions-content">
-            <p class="solutions-title" data-solution-title>B2C Demand Forecasting & Allocation</p>
-            <p class="solutions-body" data-solution-body>
-              Convert private willingness-to-pay and demand signals into launch quantity, pricing, and allocation decisions. Product name undisclosed.
-            </p>
-            <p class="solutions-sub" data-solution-sub>2026 Coming Soon</p>
+            <p class="solutions-title" data-solution-title>FHE16 Deterministic Homomorphic Runtime</p>
+            <div class="solutions-body" data-solution-body>
+              Fully homomorphic encryption lets software compute on encrypted values while plaintext stays hidden. FHE16 defines a deterministic 16-bit integer execution spec so compatible implementations return the same result across browser, server, GPU, FPGA, and Python bindings.
+            </div>
+            <p class="solutions-sub" data-solution-sub>LibFHE16Python-compatible · Device-free deterministic output</p>
           </div>
         </div>
         <nav class="solutions-tab-nav" aria-label="Solution categories">
           <ul>
-            <li><button type="button" class="solutions-tab is-active" data-solution="consumer" aria-selected="true">A. B2C</button></li>
-            <li><button type="button" class="solutions-tab" data-solution="enterprise" aria-selected="false">B. B2B</button></li>
-            <li><button type="button" class="solutions-tab" data-solution="blockchain" aria-selected="false">C. Blockchain</button></li>
+            <li><button type="button" class="solutions-tab is-active" data-solution="fhe16" data-i18n="solution.tab.fhe16" aria-selected="true">FHE16</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="browser" data-i18n="solution.tab.browser" aria-selected="false">A. Browser Runtime</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="sdk" data-i18n="solution.tab.sdk" aria-selected="false">B. Device SDK</button></li>
+            <li><button type="button" class="solutions-tab" data-solution="mpc" data-i18n="solution.tab.mpc" aria-selected="false">C. KeyMesh MPC</button></li>
           </ul>
         </nav>
       </div>

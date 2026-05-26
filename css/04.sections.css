@@ -3865,6 +3865,130 @@
   outline-offset: 2px;
 }
 
+
+.solutions-layout--fhe16 .solutions-card{
+  gap: 36px;
+}
+
+.solutions-layout--fhe16 .solutions-visual{
+  max-width: 360px;
+  height: 240px;
+}
+
+.solutions-layout--fhe16 .solutions-title{
+  margin-bottom: 4px;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.solutions-layout--fhe16 .solutions-body{
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.solutions-layout--fhe16 .solutions-body p{
+  margin: 0;
+}
+
+.solution-detail-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.solution-detail-grid article{
+  min-height: 116px;
+  padding: 14px;
+  border: 1px solid #e8e2dc;
+  border-radius: 8px;
+  background: #fffdfa;
+}
+
+.solution-detail-grid strong{
+  display: block;
+  margin-bottom: 8px;
+  color: #0f0f10;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.solution-detail-grid span{
+  display: block;
+  color: #625d58;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.solution-bullet-list{
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solution-bullet-list li{
+  position: relative;
+  padding-left: 18px;
+  color: #403e3c;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.solution-bullet-list li::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d86b00;
+  transform: translateY(-50%);
+}
+
+.solutions-layout--fhe16 .solutions-sub{
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  padding-top: 12px;
+  border-top: 1px solid #e8e2dc;
+  color: #0f0f10;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.solutions-layout--fhe16 .solutions-tab-nav ul{
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+
+@media screen and (max-width: 1023px){
+  .solutions-layout--fhe16 .solutions-visual{
+    max-width: 100%;
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .solution-detail-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-layout--fhe16 .solutions-title{
+    font-size: 24px;
+  }
+
+  .solutions-layout--fhe16 .solutions-body{
+    font-size: 15px;
+  }
+}
+
 /* 모바일 작은 (max-width: 480px) - Solutions */
 @media screen and (max-width: 480px){
   .solutions-layout{
