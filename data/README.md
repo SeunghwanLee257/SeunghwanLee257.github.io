@@ -12,6 +12,19 @@ The benchmark page reads one JSON file per operation category from this folder. 
 - OS: Ubuntu 24.04, Linux 6.17
 - ISA: AVX2 / AVX-512
 
+
+## Execution Modes
+
+- Latency-first: all available threads cooperate on one operation, focusing on minimum circuit depth and critical-path latency.
+- Throughput-first: vectorized inputs let independent threads or lanes evaluate separate gates or samples directly, reducing total gate count per batch and improving aggregate throughput.
+
+## Runtime Targets
+
+- CPU: current public numeric dataset, measured on the active experiment computer above.
+- GPU / Metal: CUDA, Metal, and shader-lane backend track; public numeric dataset is pending.
+- FPGA: DSP-slice and fixed-pipeline hardware track; public numeric dataset is pending.
+- WebBrowser: WASM / WebGPU client execution track; public numeric dataset is pending.
+
 ## Data Correction Log
 
 - 2026-05-26: Corrected one isolated `ADD_VER2` sample at input `65` from `316.796` ms to `81.076` ms. The value was a single-point logging typo; adjacent samples are `64: 81.394` ms and `66: 80.758` ms.

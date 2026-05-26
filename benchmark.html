@@ -124,7 +124,7 @@
           <div>
             <p class="page-section-kicker" data-copy-ko="Interactive Benchmark" data-copy-en="Interactive Benchmark">Interactive Benchmark</p>
             <h2 class="page-section-title" data-copy-ko="연산별 지연 시간을 바로 비교" data-copy-en="Compare latency by operation category">Compare latency by operation category</h2>
-            <p class="page-section-desc" data-copy-ko="카테고리와 실험 컴퓨터를 선택하면 해당 머신의 JSON 데이터에서 차트와 대표 샘플 테이블을 즉시 갱신합니다. 단위는 밀리초 기준입니다." data-copy-en="Select an operation category and experiment computer to update the chart and representative sample table from the matching JSON benchmark files. Values are shown in milliseconds.">Select an operation category and experiment computer to update the chart and representative sample table from the matching JSON benchmark files. Values are shown in milliseconds.</p>
+            <p class="page-section-desc" data-copy-ko="실행 전략, 실행 타깃, 카테고리를 선택하면 공개된 벤치마크 데이터와 실행 경로 설명을 함께 확인할 수 있습니다. 단위는 밀리초 기준입니다." data-copy-en="Select an execution strategy, runtime target, and operation category to review the public benchmark dataset with execution-path context. Values are shown in milliseconds.">Select an execution strategy, runtime target, and operation category to review the public benchmark dataset with execution-path context. Values are shown in milliseconds.</p>
           </div>
         </div>
 
@@ -171,6 +171,52 @@
           <p class="benchmark-machine-note" id="benchmarkMachineNote" data-copy-ko="데이터셋: data/*.json · 현재 실험 컴퓨터 기준 측정값" data-copy-en="Dataset: data/*.json · Current experiment computer run">Dataset: data/*.json · Current experiment computer run</p>
         </section>
 
+        <section class="benchmark-execution-panel" aria-labelledby="benchmark-execution-heading">
+          <div class="benchmark-execution-head">
+            <div>
+              <p class="page-section-kicker" data-copy-ko="Execution Profile" data-copy-en="Execution Profile">Execution Profile</p>
+              <h3 id="benchmark-execution-heading" data-copy-ko="실행 전략과 타깃을 분리해서 봅니다" data-copy-en="Split the benchmark by strategy and runtime target">Split the benchmark by strategy and runtime target</h3>
+              <p id="benchmarkModeBody">Latency-first assigns the full thread pool to one operation and focuses on minimizing circuit depth and critical path latency.</p>
+            </div>
+            <div class="benchmark-control-groups">
+              <div class="benchmark-control-group">
+                <span data-copy-ko="전략" data-copy-en="Strategy">Strategy</span>
+                <div class="benchmark-segmented" role="tablist" aria-label="Optimization strategy">
+                  <button class="benchmark-choice is-active" type="button" role="tab" aria-selected="true" data-benchmark-mode="latency"><strong>Latency-first</strong><small data-copy-ko="Depth 최소화" data-copy-en="Depth minimized">Depth minimized</small></button>
+                  <button class="benchmark-choice" type="button" role="tab" aria-selected="false" data-benchmark-mode="throughput"><strong>Throughput-first</strong><small data-copy-ko="Vectorized lanes" data-copy-en="Vectorized lanes">Vectorized lanes</small></button>
+                </div>
+              </div>
+              <div class="benchmark-control-group">
+                <span data-copy-ko="타깃" data-copy-en="Target">Target</span>
+                <div class="benchmark-target-grid" role="tablist" aria-label="Runtime target">
+                  <button class="benchmark-target is-active" type="button" role="tab" aria-selected="true" data-benchmark-target="cpu"><strong>CPU</strong><small>AVX2 / AVX-512</small></button>
+                  <button class="benchmark-target" type="button" role="tab" aria-selected="false" data-benchmark-target="gpu"><strong>GPU / Metal</strong><small>CUDA · Metal</small></button>
+                  <button class="benchmark-target" type="button" role="tab" aria-selected="false" data-benchmark-target="fpga"><strong>FPGA</strong><small>DSP pipeline</small></button>
+                  <button class="benchmark-target" type="button" role="tab" aria-selected="false" data-benchmark-target="browser"><strong>WebBrowser</strong><small>WASM / WebGPU</small></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <dl class="benchmark-mode-grid" aria-label="Execution profile summary">
+            <div class="benchmark-mode-item">
+              <dt data-copy-ko="최적화 기준" data-copy-en="Optimization Focus">Optimization Focus</dt>
+              <dd id="benchmarkModeFocus">Circuit depth and critical path</dd>
+            </div>
+            <div class="benchmark-mode-item">
+              <dt data-copy-ko="병렬 스케줄" data-copy-en="Parallel Schedule">Parallel Schedule</dt>
+              <dd id="benchmarkModeParallelism">All threads cooperate on one operation</dd>
+            </div>
+            <div class="benchmark-mode-item">
+              <dt data-copy-ko="실행 타깃" data-copy-en="Runtime Target">Runtime Target</dt>
+              <dd id="benchmarkTargetBody">CPU baseline using AVX2 / AVX-512 capable workstation execution</dd>
+            </div>
+            <div class="benchmark-mode-item">
+              <dt data-copy-ko="데이터 상태" data-copy-en="Data Status">Data Status</dt>
+              <dd id="benchmarkModeStatus">Published CPU latency dataset</dd>
+            </div>
+          </dl>
+        </section>
+
         <div class="benchmark-layout">
           <section class="benchmark-page-card" aria-labelledby="benchmark-chart-heading">
             <h3 id="benchmark-chart-heading" class="sr-only">FHE16 benchmark chart</h3>
@@ -197,7 +243,10 @@
             <section class="benchmark-page-card">
               <p class="page-section-kicker" data-copy-ko="Selected Category" data-copy-en="Selected Category">Selected Category</p>
               <div class="benchmark-metrics">
+                <div class="metric-row"><span data-copy-ko="전략" data-copy-en="Strategy">Strategy</span><strong id="benchmarkMetricMode">Latency-first</strong></div>
+                <div class="metric-row"><span data-copy-ko="타깃" data-copy-en="Target">Target</span><strong id="benchmarkMetricTarget">CPU</strong></div>
                 <div class="metric-row"><span data-copy-ko="카테고리" data-copy-en="Category">Category</span><strong id="benchmarkMetricCategory">ABS</strong></div>
+                <div class="metric-row"><span data-copy-ko="데이터" data-copy-en="Dataset">Dataset</span><strong id="benchmarkMetricDataset">Published CPU latency</strong></div>
                 <div class="metric-row"><span data-copy-ko="입력 범위" data-copy-en="Input Range">Input Range</span><strong id="benchmarkMetricRange">-</strong></div>
                 <div class="metric-row"><span data-copy-ko="시작값" data-copy-en="First Value">First Value</span><strong id="benchmarkMetricStart">-</strong></div>
                 <div class="metric-row"><span data-copy-ko="끝값" data-copy-en="Last Value">Last Value</span><strong id="benchmarkMetricEnd">-</strong></div>
@@ -218,7 +267,7 @@
                   <tbody id="benchmarkTableBody"></tbody>
                 </table>
               </div>
-              <p class="benchmark-note" data-copy-ko="전체 원천 데이터는 data/*.json 파일에 보존되어 있습니다." data-copy-en="The full source data remains in the local data/*.json files.">The full source data remains in the local data/*.json files.</p>
+              <p id="benchmarkDatasetNote" class="benchmark-note" data-copy-ko="전체 원천 데이터는 data/*.json 파일에 보존되어 있습니다." data-copy-en="The full source data remains in the local data/*.json files.">The full source data remains in the local data/*.json files.</p>
             </section>
           </aside>
         </div>
