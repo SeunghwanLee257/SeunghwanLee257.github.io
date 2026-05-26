@@ -12,6 +12,7 @@ const translations = {
   en: {
     'nav.vision': 'Vision',
     'nav.solutions': 'Solutions',
+      'nav.solution.fhe16': 'FHE16',
     'nav.tech': 'Technology',
     'nav.team': 'Team',
     'hero.headline': 'Privacy-preserving intelligence connecting B2C demand, B2B risk, and blockchain infrastructure<br>through confidential computation.',
@@ -246,6 +247,7 @@ const translations = {
   ko: {
     'nav.vision': '비전',
     'nav.solutions': '솔루션',
+      'nav.solution.fhe16': 'FHE16',
     'nav.tech': '기술',
     'nav.team': '팀',
     'hero.headline': 'PET 기반 기밀 연산으로<br>B2C 수요, B2B 리스크, 블록체인 인프라를 연결합니다',
