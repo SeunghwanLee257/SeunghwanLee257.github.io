@@ -4,11 +4,11 @@
  */
 
 import { initHeroSlider } from './modules/hero-slider.js';
-import { initSolutions } from './modules/solutions.js';
+import { initSolutions } from './modules/solutions.js?v=20260530';
 import { initTechPanels } from './modules/tech-panels.js';
 import { initUseCaseSlider, initTeamSlider } from './modules/sliders.js';
 import { initGoalDropdowns } from './modules/goal-dropdowns.js';
-import { initLanguage } from './modules/language.js';
+import { initLanguage } from './modules/language.js?v=20260530';
 import { initNavigation } from './modules/navigation.js';
 import { initSNSToggle } from './modules/sns-toggle.js';
 import { initSidebarMenu } from './modules/sidebar-menu.js';
