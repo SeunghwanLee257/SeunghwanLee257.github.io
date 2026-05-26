@@ -470,6 +470,44 @@
     <section data-aos="fade-up" data-aos-duration="900" id="sec04" class="container" aria-labelledby="tech-label">
       <h2 id="tech-label" class="section-label" data-i18n="section.techMoat">04. Technology Moat</h2>
 
+      <div class="pet-primer" aria-label="PET technology explainer">
+        <div class="pet-primer-intro">
+          <p class="pet-primer-kicker" data-i18n="pet.kicker">PET Primer</p>
+          <h3 data-i18n="pet.title">PET keeps sensitive data useful without making it visible.</h3>
+          <p data-i18n="pet.desc">TEE is the easiest entry point because teams can move familiar code into secure hardware. Cryptographic PET asks harder engineering questions, but it reduces the need to trust a machine operator or hardware boundary.</p>
+        </div>
+        <div class="pet-primer-grid">
+          <article class="pet-lane">
+            <div class="pet-lane-head"><span class="material-icons" aria-hidden="true">memory</span><div><strong>TEE</strong><small data-i18n="pet.tee.kicker">fast entry, hardware trust</small></div></div>
+            <div class="pet-flow"><span data-i18n="pet.tee.step1">Raw data enters enclave</span><span data-i18n="pet.tee.step2">Normal code computes</span><span data-i18n="pet.tee.step3">Result exits</span></div>
+            <p data-i18n="pet.tee.body">Low barrier and fast to prototype. Because many teams can adopt it, long-term differentiation comes from policy, deployment, and trust management rather than the primitive itself.</p>
+          </article>
+          <article class="pet-lane">
+            <div class="pet-lane-head"><span class="material-icons" aria-hidden="true">encrypted</span><div><strong>PET</strong><small data-i18n="pet.crypto.kicker">cryptographic privacy</small></div></div>
+            <div class="pet-flow pet-flow--crypto"><span data-i18n="pet.crypto.step1">Data stays private</span><span data-i18n="pet.crypto.step2">Protocol computes or proves</span><span data-i18n="pet.crypto.step3">Only allowed output is revealed</span></div>
+            <p data-i18n="pet.crypto.body">MPC, PSI, PIR, ZK, FHE, and iO sit in this family. They are harder to build, but the security story is closer to math and protocol design than to a trusted box.</p>
+          </article>
+        </div>
+        <div class="pet-method-grid" aria-label="PET primitive map">
+          <article><span>MPC</span><h4 data-i18n="pet.mpc.title">Joint computation</h4><p data-i18n="pet.mpc.body">Several parties compute one result without exposing each party's input.</p></article>
+          <article><span>PSI</span><h4 data-i18n="pet.psi.title">Private matching</h4><p data-i18n="pet.psi.body">Find overlap between datasets without revealing non-matching records.</p></article>
+          <article><span>PIR</span><h4 data-i18n="pet.pir.title">Private retrieval</h4><p data-i18n="pet.pir.body">A user reads one item without revealing which item was requested.</p></article>
+          <article><span>ZK</span><h4 data-i18n="pet.zk.title">Proof without disclosure</h4><p data-i18n="pet.zk.body">Prove a statement is true without revealing the underlying secret data.</p></article>
+          <article><span>FHE</span><h4 data-i18n="pet.fhe.title">Compute while encrypted</h4><p data-i18n="pet.fhe.body">Hard to implement, but optimized systems can move parts of FHE into practical latency and throughput ranges.</p></article>
+          <article><span>iO</span><h4 data-i18n="pet.io.title">Hide the program</h4><p data-i18n="pet.io.body">The most powerful idea conceptually, but still not practical for product workloads.</p></article>
+        </div>
+        <div class="pet-runway" aria-label="Practicality map">
+          <div class="pet-runway-head"><span data-i18n="pet.runway.left">Low implementation barrier</span><span data-i18n="pet.runway.right">Harder cryptographic engineering</span></div>
+          <div class="pet-runway-grid">
+            <article><strong>TEE</strong><span data-i18n="pet.runway.tee">easy to start</span></article>
+            <article><strong>PSI / PIR</strong><span data-i18n="pet.runway.psi">narrow, usable protocols</span></article>
+            <article><strong>MPC / ZK</strong><span data-i18n="pet.runway.mpc">powerful, workflow-specific</span></article>
+            <article><strong>FHE</strong><span data-i18n="pet.runway.fhe">practical when engineered down</span></article>
+            <article><strong>iO</strong><span data-i18n="pet.runway.io">research-stage</span></article>
+          </div>
+        </div>
+      </div>
+
       <div class="tech-split" role="group" aria-label="Technology Panels">
 
         <article class="tech-panel tech-panel--active" id="panel-a" aria-hidden="false">
