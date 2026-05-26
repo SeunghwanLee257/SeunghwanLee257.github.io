@@ -1,0 +1,38 @@
+---
+title: SHR
+description: Caller, circuit path, and ownership notes for SHR.
+icon: route
+---
+
+## Caller
+
+Unsigned right shift and division-by-power-of-two workflows.
+
+## Raw Symbols
+
+- `FHE16_SHR`
+- `FHE16_LSHIFTR`
+
+## Circuit Path
+
+Metadata/data copy; no bootstrap-heavy evaluation for normal logical shift.
+
+## Output
+
+Shifted ciphertext with reduced bit width.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SHR(a, 2);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

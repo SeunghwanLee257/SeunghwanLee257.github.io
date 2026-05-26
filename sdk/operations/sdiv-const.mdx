@@ -1,0 +1,37 @@
+---
+title: SDIV_CONST
+description: Caller, circuit path, and ownership notes for SDIV_CONST.
+icon: route
+---
+
+## Caller
+
+Signed division by fixed plaintext divisor.
+
+## Raw Symbols
+
+- `FHE16_SDIV_CONST`
+
+## Circuit Path
+
+ABS, unsigned constant division, NEG, and SELECT by sign.
+
+## Output
+
+Signed quotient ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SDIV_CONST(a, -10);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

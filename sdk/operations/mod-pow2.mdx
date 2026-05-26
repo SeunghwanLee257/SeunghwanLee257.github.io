@@ -1,0 +1,37 @@
+---
+title: MOD_POW2
+description: Caller, circuit path, and ownership notes for MOD_POW2.
+icon: route
+---
+
+## Caller
+
+Unsigned modulo by powers of two.
+
+## Raw Symbols
+
+- `FHE16_MOD_POW2`
+
+## Circuit Path
+
+Copies lower k encrypted bits.
+
+## Output
+
+Unsigned remainder ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_MOD_POW2(a, 3);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

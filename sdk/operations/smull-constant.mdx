@@ -1,0 +1,39 @@
+---
+title: SMULL_CONSTANT
+description: Caller, circuit path, and ownership notes for SMULL_CONSTANT.
+icon: route
+---
+
+## Caller
+
+Scoring weights, fixed coefficients, browser scalar multiply.
+
+## Raw Symbols
+
+- `FHE16_SMULL_CONSTANT_Arr`
+- `FHE16_SMULL_CONSTANT_I64`
+- `FHE16_SMULL_CONSTANT_I32`
+
+## Circuit Path
+
+NAF-aware shifted partial products plus DADDA reduction; zero and power-of-two constants use fast paths.
+
+## Output
+
+n-bit signed product ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SMULL_CONSTANT_I32(a, 13);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

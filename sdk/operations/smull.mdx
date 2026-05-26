@@ -1,0 +1,37 @@
+---
+title: SMULL
+description: Caller, circuit path, and ownership notes for SMULL.
+icon: route
+---
+
+## Caller
+
+Signed multiplication in scoring, ranking, and fixed-width arithmetic flows.
+
+## Raw Symbols
+
+- `FHE16_SMULL`
+
+## Circuit Path
+
+DADDA partial-product multiplier. A 1-bit input delegates to FHE16_ANDVEC.
+
+## Output
+
+n-bit signed product ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SMULL(a, b);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

@@ -1,0 +1,37 @@
+---
+title: MIN
+description: Caller, circuit path, and ownership notes for MIN.
+icon: route
+---
+
+## Caller
+
+Bounds checks, ranking, scoring, and private selection.
+
+## Raw Symbols
+
+- `FHE16_MIN`
+
+## Circuit Path
+
+MAXorMIN with min flag, combining compare and encrypted selection.
+
+## Output
+
+n-bit integer ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_MIN(a, b);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

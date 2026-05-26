@@ -1,0 +1,38 @@
+---
+title: SHL
+description: Caller, circuit path, and ownership notes for SHL.
+icon: route
+---
+
+## Caller
+
+Fixed scaling and low-cost left shift workflows.
+
+## Raw Symbols
+
+- `FHE16_SHL`
+- `FHE16_LSHIFTL`
+
+## Circuit Path
+
+Data copy plus encrypted zero fill for introduced lower bits.
+
+## Output
+
+Shifted ciphertext, usually wider than input.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SHL(a, 2);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

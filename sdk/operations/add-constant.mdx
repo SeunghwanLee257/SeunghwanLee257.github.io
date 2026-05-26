@@ -1,0 +1,39 @@
+---
+title: ADD_CONSTANT
+description: Caller, circuit path, and ownership notes for ADD_CONSTANT.
+icon: route
+---
+
+## Caller
+
+Browser constants, SDK scalar arithmetic, fixed offset workflows.
+
+## Raw Symbols
+
+- `FHE16_ADD_CONSTANT_Arr`
+- `FHE16_ADD_CONSTANT_I64`
+- `FHE16_ADD_CONSTANT_I32`
+
+## Circuit Path
+
+Plaintext constant bits are folded into encrypted prefix-add path.
+
+## Output
+
+n-bit integer ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_ADD_CONSTANT_I32(a, 7);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

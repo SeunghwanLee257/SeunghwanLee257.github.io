@@ -1,0 +1,39 @@
+---
+title: LT_CONSTANT
+description: Caller, circuit path, and ownership notes for LT_CONSTANT.
+icon: route
+---
+
+## Caller
+
+Browser worker constant compare, SDK threshold filters.
+
+## Raw Symbols
+
+- `FHE16_LT_CONSTANT_Arr`
+- `FHE16_LT_CONSTANT_I64`
+- `FHE16_LT_CONSTANT_I32`
+
+## Circuit Path
+
+FHE16_COMPARE_CONSTANT with LT mode against plaintext bit array.
+
+## Output
+
+1-bit boolean ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_LT_CONSTANT_I32(a, 100);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

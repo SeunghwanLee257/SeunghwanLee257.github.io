@@ -1,0 +1,37 @@
+---
+title: NEQ
+description: Caller, circuit path, and ownership notes for NEQ.
+icon: route
+---
+
+## Caller
+
+Private inequality checks and branch guards.
+
+## Raw Symbols
+
+- `FHE16_NEQ`
+
+## Circuit Path
+
+FHE16_EQ followed by encrypted NOT.
+
+## Output
+
+1-bit boolean ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_NEQ(a, b);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

@@ -1,0 +1,37 @@
+---
+title: SDIV_POW2
+description: Caller, circuit path, and ownership notes for SDIV_POW2.
+icon: route
+---
+
+## Caller
+
+Signed division by powers of two with C-style rounding.
+
+## Raw Symbols
+
+- `FHE16_SDIV_POW2`
+
+## Circuit Path
+
+Sign-derived bias plus FHE16_ADD, then shift toward zero.
+
+## Output
+
+Signed quotient ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SDIV_POW2(a, 3);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

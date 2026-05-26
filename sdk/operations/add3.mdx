@@ -1,0 +1,37 @@
+---
+title: ADD3
+description: Caller, circuit path, and ownership notes for ADD3.
+icon: route
+---
+
+## Caller
+
+Advanced arithmetic composition and benchmark harnesses.
+
+## Raw Symbols
+
+- `FHE16_ADD3`
+
+## Circuit Path
+
+Three-input encrypted adder path; document as advanced until depth and test fixtures are finalized.
+
+## Output
+
+n-bit integer ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_ADD3(a, b, c);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

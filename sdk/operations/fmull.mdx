@@ -1,0 +1,37 @@
+---
+title: FMULL
+description: Caller, circuit path, and ownership notes for FMULL.
+icon: route
+---
+
+## Caller
+
+SDK callers that need full product width instead of truncation.
+
+## Raw Symbols
+
+- `FHE16_FMULL`
+
+## Circuit Path
+
+Full DADDA partial-product multiplier with 2n output bits.
+
+## Output
+
+2n-bit product ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_FMULL(a, b);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

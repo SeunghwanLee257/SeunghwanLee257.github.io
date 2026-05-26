@@ -1,0 +1,37 @@
+---
+title: OR
+description: Caller, circuit path, and ownership notes for OR.
+icon: route
+---
+
+## Caller
+
+Boolean SDK methods and single-bit gate calls.
+
+## Raw Symbols
+
+- `FHE16_OR`
+
+## Circuit Path
+
+Single-bit C_FHE16_OR gate.
+
+## Output
+
+1-bit boolean ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_OR(a_bit, b_bit);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

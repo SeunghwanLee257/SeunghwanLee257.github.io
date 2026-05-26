@@ -1,0 +1,37 @@
+---
+title: SMOD_POW2
+description: Caller, circuit path, and ownership notes for SMOD_POW2.
+icon: route
+---
+
+## Caller
+
+Signed modulo by powers of two.
+
+## Raw Symbols
+
+- `FHE16_SMOD_POW2`
+
+## Circuit Path
+
+Signed pow2 division, shift back, then FHE16_SUB.
+
+## Output
+
+Signed remainder ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_SMOD_POW2(a, 3);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

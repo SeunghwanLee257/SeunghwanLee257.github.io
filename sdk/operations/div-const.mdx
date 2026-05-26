@@ -1,0 +1,37 @@
+---
+title: DIV_CONST
+description: Caller, circuit path, and ownership notes for DIV_CONST.
+icon: route
+---
+
+## Caller
+
+Unsigned division by fixed plaintext divisor.
+
+## Raw Symbols
+
+- `FHE16_DIV_CONST`
+
+## Circuit Path
+
+Magic multiplier, constant multiply, then shift.
+
+## Output
+
+Unsigned quotient ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_DIV_CONST(a, 10);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

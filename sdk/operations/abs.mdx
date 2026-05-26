@@ -1,0 +1,37 @@
+---
+title: ABS
+description: Caller, circuit path, and ownership notes for ABS.
+icon: route
+---
+
+## Caller
+
+Signed division, signed modulo, scoring, and range normalization.
+
+## Raw Symbols
+
+- `FHE16_ABS`
+
+## Circuit Path
+
+PrefixABS path over encrypted sign and magnitude bits.
+
+## Output
+
+n-bit absolute-value ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_ABS(a);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`

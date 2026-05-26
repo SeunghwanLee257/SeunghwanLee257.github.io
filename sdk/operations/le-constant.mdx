@@ -1,0 +1,39 @@
+---
+title: LE_CONSTANT
+description: Caller, circuit path, and ownership notes for LE_CONSTANT.
+icon: route
+---
+
+## Caller
+
+SDK threshold filters and less-or-equal constants.
+
+## Raw Symbols
+
+- `FHE16_LE_CONSTANT_Arr`
+- `FHE16_LE_CONSTANT_I64`
+- `FHE16_LE_CONSTANT_I32`
+
+## Circuit Path
+
+Constant GT path followed by encrypted NOT.
+
+## Output
+
+1-bit boolean ciphertext.
+
+## Ownership
+
+Returned ciphertext is caller-owned.
+
+## C Example
+
+```c
+int32_t* out = FHE16_LE_CONSTANT_I32(a, 100);
+FHE16_Free(out);
+```
+
+## Implementation Baseline
+
+- `FHE16Ver6/include/soAPI/soAPI.hpp`
+- `FHE16Ver6/src/soAPI/soAPI.cpp`
