@@ -1,0 +1,51 @@
+---
+title: Parallel Prefix Arithmetic
+description: Notes for low-latency FHE arithmetic and operation-level API planning.
+icon: workflow
+---
+
+Paper: [Low-Latency Fully Homomorphic Arithmetic Using Parallel Prefix Group Circuit](https://eprint.iacr.org/2025/2150)
+
+## Core Message
+
+This paper supports the operation-level story for low-latency FHE arithmetic. It is especially important for explaining why FHE16 docs should be organized by operations and execution profiles, not only by cryptographic primitives.
+
+## Why It Matters
+
+Most developers will first understand FHE16 through operations:
+
+- Addition.
+- Comparison.
+- Equality.
+- Maximum.
+- Selection.
+- Negation and absolute value.
+
+Those operation categories already appear in the benchmark data, so the API vocabulary should align with them where possible.
+
+## Product Translation
+
+This paper should inform:
+
+- Operation reference pages.
+- Benchmark category naming.
+- Circuit-depth explanations.
+- Latency-first versus throughput-first documentation.
+
+## API Translation
+
+The API should represent operations explicitly:
+
+```json
+{
+  "operation": "LT",
+  "inputs": ["ct_left", "ct_right"],
+  "profile": "latency-first"
+}
+```
+
+The operation name should be stable even if the underlying implementation changes.
+
+## Documentation Boundary
+
+Do not force all users to read circuit construction details before they can call an API. Put circuit and arithmetic details in advanced concept pages and keep the API focused on inputs, operation semantics, output type, and performance expectations.

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="FHE16 technical documentation roadmap for paper reviews, products, and API bindings." />
+  <meta name="google" content="notranslate">
+  <title>FHE16 Docs | waLLLnut</title>
+  <link rel="canonical" href="https://walllnut.com/docs/">
+  <link rel="stylesheet" href="../css/00.tokens.css?v=20241221">
+  <link rel="stylesheet" href="../css/01.base.css?v=20241221">
+  <link rel="stylesheet" href="../css/02.layout.css?v=20241221">
+  <link rel="stylesheet" href="../css/03.components.css?v=20241221">
+  <link rel="stylesheet" href="../css/04.sections.css?v=20241221">
+  <link rel="stylesheet" href="../css/06.utilities.css?v=20241221">
+  <link rel="stylesheet" href="../css/pages.css?v=20241221">
+  <link rel="icon" href="../asset/logo-filled-orange.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css">
+  <style>
+    .docs-hero{background:#181716;color:#fff;padding:120px 0 72px;}
+    .docs-hero h1{font-size:clamp(44px,7vw,92px);line-height:.96;margin:16px 0 24px;letter-spacing:0;}
+    .docs-hero p{max-width:760px;color:rgba(255,255,255,.76);font-size:18px;line-height:1.7;}
+    .docs-topbar{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);border-bottom:1px solid rgba(24,23,22,.12);backdrop-filter:blur(14px);}
+    .docs-topbar-inner{width:min(1180px,calc(100% - 40px));height:72px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+    .docs-logo{display:inline-flex;align-items:center;gap:10px;color:#181716;text-decoration:none;font-weight:800;}
+    .docs-logo img{height:30px;width:auto;}
+    .docs-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+    .docs-nav a{padding:8px 12px;border-radius:8px;color:#181716;text-decoration:none;font-size:14px;font-weight:700;background:rgba(15,15,16,.05);}
+    .docs-section{padding:72px 0;background:#f4f0ea;}
+    .docs-section:nth-of-type(even){background:#fffdf9;}
+    .docs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+    .docs-card{background:#fff;border:1px solid rgba(24,23,22,.14);border-radius:8px;padding:24px;min-height:220px;box-shadow:0 8px 24px rgba(24,23,22,.06);}
+    .docs-card h3{font-size:22px;margin:12px 0;color:#181716;}
+    .docs-card p,.docs-card li{color:#6f6b66;line-height:1.6;}
+    .docs-chip{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;background:rgba(255,122,26,.12);color:#c85f00;font-size:12px;font-weight:800;}
+    .docs-list{margin:14px 0 0;padding-left:18px;}
+    .docs-note{border-left:4px solid #ff7a1a;background:rgba(255,122,26,.08);padding:18px 20px;border-radius:8px;color:#4a4038;line-height:1.7;}
+    .docs-section h2{font-size:clamp(32px,4vw,54px);line-height:1;margin:0 0 18px;color:#181716;letter-spacing:0;}
+    .docs-section-desc{max-width:760px;color:#6f6b66;font-size:17px;line-height:1.7;margin:0 0 28px;}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:rgba(24,23,22,.08);padding:2px 5px;border-radius:5px;}
+    @media (max-width:900px){.docs-grid{grid-template-columns:1fr}.docs-topbar-inner{height:auto;min-height:72px;padding:12px 0;align-items:flex-start;flex-direction:column}.docs-hero{padding-top:150px}.docs-nav{justify-content:flex-start}}
+  </style>
+</head>
+<body class="page-body">
+  <header class="docs-topbar">
+    <div class="docs-topbar-inner">
+      <a class="docs-logo" href="../index.html" aria-label="waLLLnut home"><img src="../asset/head-logo.svg" alt="waLLLnut"><span>FHE16 Docs</span></a>
+      <nav class="docs-nav" aria-label="Docs sections">
+        <a href="#papers">A. Papers</a>
+        <a href="#products">B. Products</a>
+        <a href="#api">C. API</a>
+        <a href="../benchmark.html">Benchmark</a>
+        <a href="../research.html">Research</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <div class="page-container">
+        <p class="page-eyebrow">FHE16 Documentation</p>
+        <h1>Paper reviews, products, and API surface.</h1>
+        <p>This page is the static documentation entry while Mintlify is not connected yet. The same content is already structured as Mintlify-compatible MDX in this repository for a later move to <code>docs.walllnut.com</code>.</p>
+      </div>
+    </section>
+
+    <section id="papers" class="docs-section">
+      <div class="page-container">
+        <h2>A. FHE16 Paper Reviews</h2>
+        <p class="docs-section-desc">Each paper should be reviewed as technical evidence for the engine, not just listed as a publication.</p>
+        <div class="docs-grid">
+          <article id="paper-fhe16-bootstrapping" class="docs-card"><span class="docs-chip">FHE16</span><h3>Fast, Compact and Hardware-Friendly Bootstrapping</h3><p>Anchor paper for the low-latency FHE16 engine and the benchmark narrative around practical encrypted computation.</p></article>
+          <article class="docs-card"><span class="docs-chip">Arithmetic</span><h3>Parallel Prefix FHE Arithmetic</h3><p>Explains operation-level arithmetic design. This informs API methods such as <code>add</code>, <code>lt</code>, <code>max</code>, and <code>select</code>.</p></article>
+          <article class="docs-card"><span class="docs-chip">Correctness</span><h3>Blind Rotation Error Analysis</h3><p>Supports correctness, parameter, and reliability documentation for FHE16 profiles.</p></article>
+          <article class="docs-card"><span class="docs-chip">MPC</span><h3>Actively Secure MPC</h3><p>Supports SSFHE, threshold disclosure, and multi-party workflows beyond single-party encrypted computation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="docs-section">
+      <div class="page-container">
+        <h2>B. Products Built With FHE16</h2>
+        <p class="docs-section-desc">Product docs should connect the paper basis, the API methods needed, and the trust boundary of each workflow.</p>
+        <div class="docs-grid">
+          <article class="docs-card"><span class="docs-chip">Blockchain</span><h3>Confidential State</h3><p>Compute or verify over encrypted state and support selective disclosure for chain and app developers.</p></article>
+          <article class="docs-card"><span class="docs-chip">Auction</span><h3>Confidential Auction</h3><p>Keep bids hidden while computing valid auction outcomes with encrypted comparison and selection.</p></article>
+          <article class="docs-card"><span class="docs-chip">Enterprise</span><h3>Private Risk Scoring</h3><p>Score or compare sensitive records without moving raw insurance, identity, account, or transaction data.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="api" class="docs-section">
+      <div class="page-container">
+        <h2>C. FHE16 API</h2>
+        <p class="docs-section-desc">The first API direction is FFI-first: C is the ABI boundary, then Web Browser/WASM, Rust, and Python wrap the same method semantics.</p>
+        <div class="docs-grid">
+          <article class="docs-card"><span class="docs-chip">Core</span><h3>Common Methods</h3><ul class="docs-list"><li><code>context_create</code>, <code>context_free</code></li><li><code>keygen</code>, key import/export</li><li><code>encrypt_u16</code>, <code>decrypt_u16</code></li><li><code>add</code>, <code>lt</code>, <code>eq</code>, <code>max</code>, <code>select</code></li></ul></article>
+          <article class="docs-card"><span class="docs-chip">Bindings</span><h3>Web Browser, C, Rust, Python</h3><p>The method names can be idiomatic per language, but behavior should map one-to-one to the same FFI method surface.</p></article>
+          <article class="docs-card"><span class="docs-chip">Later</span><h3>Mintlify Migration</h3><p>The MDX source and <code>docs.json</code> are already prepared. When ready, point <code>docs.walllnut.com</code> to Mintlify and switch public links.</p></article>
+        </div>
+        <p class="docs-note">For now, use <code>walllnut.com/docs/</code>. Do not point public navigation to <code>docs.walllnut.com</code> until a separate host or Mintlify custom domain is connected.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer"><div class="page-container"><span>© 2025 waLLLnut</span><span>FHE16 documentation roadmap</span></div></footer>
+</body>
+</html>

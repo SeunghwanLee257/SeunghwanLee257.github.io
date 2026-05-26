@@ -1,0 +1,37 @@
+---
+title: Benchmark Methodology
+description: How public FHE16 benchmark data should be documented and interpreted.
+icon: chart-line
+---
+
+The public benchmark page currently presents operation-level latency data for FHE16.
+
+## Current Public Dataset
+
+The website benchmark lab currently identifies:
+
+- FHE16 version 0.10.
+- Latency-first execution strategy.
+- CPU runtime target.
+- A CCRL dual Intel Xeon Gold 6240R workstation.
+- Operation categories such as `ABS`, `ADD`, `EQ`, `LT`, `MAX`, `NEG`, and `SELECT`.
+
+## What the Benchmark Should Answer
+
+- Which operation category is being measured?
+- What input range or parameter profile is used?
+- Which machine produced the result?
+- Is the run latency-first or throughput-first?
+- Is the target CPU, GPU, FPGA, browser, or another runtime?
+
+## API Link
+
+The API should eventually expose public benchmark metadata in a machine-readable form:
+
+```http
+GET /benchmarks/operations?version=fhe16-0.10&target=cpu&profile=latency-first
+```
+
+## Documentation Rule
+
+Benchmark pages should separate measured public data from roadmap placeholders. If a runtime target is not yet published, it should remain marked as planned or T.B.D.

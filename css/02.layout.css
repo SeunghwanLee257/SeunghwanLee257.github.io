@@ -1495,6 +1495,10 @@ footer > div{
     font-size: 13px;
   }
 
+  .nav-dropdown[data-dropdown="docs"]{
+    display: none !important;
+  }
+
   .logo-menus img{
     max-height: 34px;
   }

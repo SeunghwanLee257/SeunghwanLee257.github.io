@@ -1,0 +1,86 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "FHE16 Docs",
+  "favicon": "/asset/logo-filled-orange.ico",
+  "logo": {
+    "light": "/asset/head-logo.svg",
+    "dark": "/asset/head-logo.svg"
+  },
+  "colors": {
+    "primary": "#FF952D",
+    "light": "#FFFFFF",
+    "dark": "#191919"
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Start Here",
+        "pages": [
+          "index",
+          "concepts/architecture"
+        ]
+      },
+      {
+        "group": "A. FHE16 Paper Reviews",
+        "pages": [
+          "papers/overview",
+          "papers/fhe16-bootstrapping",
+          "papers/parallel-prefix-arithmetic",
+          "papers/blind-rotation-error-analysis",
+          "papers/actively-secure-mpc"
+        ]
+      },
+      {
+        "group": "B. Products",
+        "pages": [
+          "products/overview",
+          "products/blockchain",
+          "products/confidential-auction",
+          "products/private-risk-scoring"
+        ]
+      },
+      {
+        "group": "C. FHE16 API",
+        "pages": [
+          "sdk/overview",
+          "sdk/core-methods",
+          "sdk/web-browser",
+          "sdk/c",
+          "sdk/rust",
+          "sdk/python"
+        ]
+      },
+      {
+        "group": "Benchmarks",
+        "pages": [
+          "benchmarks/methodology"
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "waLLLnut",
+          "href": "https://walllnut.com",
+          "icon": "house"
+        },
+        {
+          "anchor": "Benchmark",
+          "href": "https://walllnut.com/benchmark.html",
+          "icon": "chart-line"
+        },
+        {
+          "anchor": "Research",
+          "href": "https://walllnut.com/research.html",
+          "icon": "file-text"
+        }
+      ]
+    }
+  },
+  "seo": {
+    "metatags": {
+      "og:site_name": "FHE16 Docs",
+      "twitter:card": "summary_large_image"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+---
+title: Blind Rotation Error Analysis
+description: Notes for correctness, error bounds, and parameter documentation.
+icon: shield-check
+---
+
+Paper: [Exact Error Analysis for Blind Rotation in Fully Homomorphic Encryption](https://eprint.iacr.org/2026/269)
+
+## Core Message
+
+This paper supports the correctness and reliability side of FHE16 documentation. It is a technical basis for explaining error behavior around blind rotation.
+
+## Why It Matters
+
+For an API, developers need to know when an encrypted computation is expected to be correct, which parameter profile is being used, and what assumptions sit underneath a result.
+
+The user-facing API should not surface internal error analysis as an obstacle. The documentation should surface it as a confidence layer.
+
+## Product Translation
+
+This paper should inform:
+
+- Parameter profile documentation.
+- Correctness notes.
+- Result validity and failure-mode explanations.
+- Technical due diligence material for partners.
+
+## API Translation
+
+The API can expose correctness metadata without exposing every internal detail:
+
+```json
+{
+  "result_id": "ct_result",
+  "profile": "fhe16-default",
+  "status": "completed",
+  "correctness_model": "documented-profile"
+}
+```
+
+## Documentation Boundary
+
+Keep exact derivations in paper references and advanced pages. Product docs should explain what a developer needs to know to choose a profile and interpret a result.

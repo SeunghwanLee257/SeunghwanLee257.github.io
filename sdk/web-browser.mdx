@@ -1,0 +1,48 @@
+---
+title: Web Browser API
+description: Draft WASM wrapper for FHE16 browser usage.
+icon: globe
+---
+
+The Web Browser API should wrap the same core methods through WASM.
+
+## Package Direction
+
+```bash
+npm install @walllnut/fhe16-wasm
+```
+
+## Draft Usage
+
+```ts
+import init, { Fhe16Context } from "@walllnut/fhe16-wasm";
+
+await init();
+
+const ctx = await Fhe16Context.create({
+  profile: "latency-first",
+});
+
+const a = ctx.encryptU16(42);
+const b = ctx.encryptU16(100);
+
+const isLess = ctx.lt(a, b);
+const opened = ctx.decryptBool(isLess);
+```
+
+## Browser Constraints
+
+- WASM bundle size matters.
+- Key and ciphertext serialization must be explicit.
+- Long computations should not block the main UI thread.
+- Web Worker support should be part of the browser story.
+
+## Method Mapping
+
+| Browser method | Core method |
+| --- | --- |
+| `Fhe16Context.create` | `fhe16_context_create` |
+| `ctx.encryptU16` | `fhe16_encrypt_u16` |
+| `ctx.lt` | `fhe16_lt` |
+| `ctx.select` | `fhe16_select` |
+| `ctx.decryptBool` | `fhe16_decrypt_bool` |

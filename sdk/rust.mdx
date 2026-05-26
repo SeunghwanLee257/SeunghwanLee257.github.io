@@ -1,0 +1,51 @@
+---
+title: Rust API
+description: Draft Rust wrapper over the FHE16 core API.
+icon: crab
+---
+
+Rust should provide a safe wrapper over the core FFI or a native crate that preserves the same method semantics.
+
+## Package Direction
+
+```toml
+[dependencies]
+fhe16 = "0.1"
+```
+
+## Draft Usage
+
+```rust
+use fhe16::{Fhe16Context, Profile};
+
+fn main() -> fhe16::Result<()> {
+    let ctx = Fhe16Context::new(Profile::LatencyFirst)?;
+    let key = ctx.keygen()?;
+
+    let a = ctx.encrypt_u16(&key, 42)?;
+    let b = ctx.encrypt_u16(&key, 100)?;
+
+    let is_less = ctx.lt(&a, &b)?;
+    let opened = ctx.decrypt_bool(&key, &is_less)?;
+
+    assert!(opened);
+    Ok(())
+}
+```
+
+## Rust Design Rules
+
+- Use `Result<T, Fhe16Error>`.
+- Manage cleanup through ownership and `Drop`.
+- Keep operation names aligned with benchmark/API vocabulary.
+- Avoid exposing unsafe FFI unless users opt into a low-level module.
+
+## Method Mapping
+
+| Rust method | Core method |
+| --- | --- |
+| `Fhe16Context::new` | `fhe16_context_create` |
+| `ctx.keygen` | `fhe16_keygen` |
+| `ctx.encrypt_u16` | `fhe16_encrypt_u16` |
+| `ctx.lt` | `fhe16_lt` |
+| `ctx.decrypt_bool` | `fhe16_decrypt_bool` |

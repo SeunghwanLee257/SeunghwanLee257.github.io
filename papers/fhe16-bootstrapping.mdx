@@ -1,0 +1,37 @@
+---
+title: FHE16 Bootstrapping
+description: Product-facing notes for the FHE16 bootstrapping paper.
+icon: gauge
+---
+
+Paper: [Fast, Compact and Hardware-Friendly Bootstrapping in less than 3ms](https://eprint.iacr.org/2024/1916)
+
+## Core Message
+
+This paper is the anchor for FHE16's low-latency confidential computation story. The title-level claim is fast and compact bootstrapping with a hardware-friendly design direction.
+
+## Why It Matters
+
+Bootstrapping is the operation that refreshes ciphertext noise and allows continued encrypted computation. For developer-facing products, bootstrapping cost strongly affects whether encrypted workflows feel interactive or batch-only.
+
+## Product Translation
+
+This paper should support:
+
+- The FHE16 engine overview.
+- Benchmark methodology.
+- Hardware and browser deployment discussions.
+- Developer expectations around latency profiles.
+
+## API Translation
+
+The API should avoid exposing "bootstrap now" as the default user-level abstraction. Instead, it should expose:
+
+- Computation profiles such as `latency-first`.
+- Operation categories.
+- Job status and timing metadata.
+- Benchmark references for comparable operation classes.
+
+## Documentation Boundary
+
+Keep raw cryptographic parameter decisions in reference documentation. Keep the landing page focused on why low-latency bootstrapping changes developer and business workflows.

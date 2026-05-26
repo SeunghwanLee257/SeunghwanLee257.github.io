@@ -1,0 +1,47 @@
+---
+title: Python API
+description: Draft Python wrapper over the FHE16 core API.
+icon: python
+---
+
+Python should expose the same FHE16 method semantics with a lightweight object model for experiments, demos, and partner notebooks.
+
+## Package Direction
+
+```bash
+pip install fhe16
+```
+
+## Draft Usage
+
+```python
+import fhe16
+
+ctx = fhe16.Context(profile="latency-first")
+key = ctx.keygen()
+
+a = ctx.encrypt_u16(key, 42)
+b = ctx.encrypt_u16(key, 100)
+
+is_less = ctx.lt(a, b)
+opened = ctx.decrypt_bool(key, is_less)
+
+assert opened is True
+```
+
+## Python Design Rules
+
+- Keep names close to Rust/C method names.
+- Raise typed exceptions for core error categories.
+- Make serialization explicit.
+- Keep notebook examples small and reproducible.
+
+## Method Mapping
+
+| Python method | Core method |
+| --- | --- |
+| `fhe16.Context` | `fhe16_context_create` |
+| `ctx.keygen` | `fhe16_keygen` |
+| `ctx.encrypt_u16` | `fhe16_encrypt_u16` |
+| `ctx.lt` | `fhe16_lt` |
+| `ctx.decrypt_bool` | `fhe16_decrypt_bool` |

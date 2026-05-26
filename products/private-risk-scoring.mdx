@@ -1,0 +1,43 @@
+---
+title: Private Risk Scoring
+description: Applying FHE16 to private scoring and cross-party risk workflows.
+icon: shield-alert
+---
+
+Private risk scoring is the enterprise product path: compute risk signals without moving or exposing raw records.
+
+## Product Problem
+
+Institutions often need to compare sensitive values across boundaries:
+
+- Insurance claims.
+- Identity attributes.
+- Account or transaction patterns.
+- Fraud signals.
+- Eligibility checks.
+
+The raw data cannot always be shared, copied, or centralized.
+
+## FHE16 Role
+
+FHE16 can help expose limited computation over private values:
+
+- Equality checks.
+- Range checks.
+- Max or threshold selection.
+- Rule-based score components.
+
+## API Methods Needed
+
+- `encrypt_u16`
+- `encrypt_bool`
+- `eq`
+- `lt`
+- `add`
+- `select`
+- `decrypt_bool`
+- `decrypt_u16`
+
+## Multi-Party Direction
+
+For cross-institution workflows, this product track will eventually connect to SSFHE or threshold disclosure documentation. Keep the single-party FHE16 API and multi-party policy layer separate.

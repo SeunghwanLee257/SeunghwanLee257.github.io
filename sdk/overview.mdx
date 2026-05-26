@@ -1,0 +1,37 @@
+---
+title: FHE16 API Overview
+description: FFI-first API plan shared by Web Browser, C, Rust, and Python bindings.
+icon: square-terminal
+---
+
+The first FHE16 developer API should be **FFI-first**. C provides the stable ABI boundary, and Web Browser, Rust, and Python bindings wrap the same core method set.
+
+<Warning>
+  The method names below are a draft naming convention. They are meant to stabilize documentation and SDK planning before the implementation is finalized.
+</Warning>
+
+## Target Bindings
+
+| Binding | Packaging direction | Method semantics |
+| --- | --- | --- |
+| Web Browser | WASM package | Same core context, encrypt, compute, decrypt, serialize methods. |
+| C | FFI ABI | Source of truth for low-level exported symbols. |
+| Rust | Safe wrapper over FFI or native crate | Same method semantics with Rust ownership and `Result`. |
+| Python | Extension module over FFI | Same method semantics with Python objects. |
+
+## Why FFI First
+
+- Keeps method names and behavior consistent.
+- Makes C, Rust, Python, and WASM wrappers easier to test against the same fixtures.
+- Avoids designing four different SDKs before the engine API is stable.
+- Makes benchmark and correctness tests reusable across languages.
+
+## API Layers
+
+1. **Core FFI**: context, key, ciphertext, operation, serialization, cleanup.
+2. **Language wrappers**: ergonomic classes and error handling.
+3. **Product helpers**: auction, risk scoring, blockchain adapters.
+
+## Next Step
+
+Read [Core Methods](/sdk/core-methods) before looking at a specific language binding.

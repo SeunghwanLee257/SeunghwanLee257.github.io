@@ -1,0 +1,492 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FHE16 API",
+    "version": "0.1.0-draft",
+    "description": "Draft OpenAPI specification for the planned FHE16 developer API. This specification is for documentation and partner review; it is not a production availability statement."
+  },
+  "servers": [
+    {
+      "url": "https://api.walllnut.com/v1",
+      "description": "Planned production API"
+    },
+    {
+      "url": "https://sandbox.api.walllnut.com/v1",
+      "description": "Planned sandbox API"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/sessions": {
+      "post": {
+        "summary": "Create a computation session",
+        "description": "Creates a computation context for FHE16 encrypted operations.",
+        "operationId": "createSession",
+        "tags": ["Sessions"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Session created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/keys": {
+      "post": {
+        "summary": "Register key material",
+        "description": "Registers or references key material for a computation session. Exact key lifecycle depends on deployment mode.",
+        "operationId": "registerKey",
+        "tags": ["Keys"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterKeyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Key registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeyReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ciphertexts": {
+      "post": {
+        "summary": "Create ciphertext",
+        "description": "Creates or imports an encrypted input value for a session.",
+        "operationId": "createCiphertext",
+        "tags": ["Ciphertexts"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCiphertextRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ciphertext created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CiphertextReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compute": {
+      "post": {
+        "summary": "Submit encrypted computation",
+        "description": "Submits an FHE16 operation over ciphertext references.",
+        "operationId": "submitComputation",
+        "tags": ["Compute"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComputeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Computation accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "summary": "Get computation job",
+        "description": "Reads job status and output references for an encrypted computation.",
+        "operationId": "getJob",
+        "tags": ["Jobs"],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/decrypt": {
+      "post": {
+        "summary": "Request permitted disclosure",
+        "description": "Requests decryption or selective disclosure of an allowed result.",
+        "operationId": "requestDisclosure",
+        "tags": ["Disclosure"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisclosureRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Disclosure result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisclosureResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/benchmarks/operations": {
+      "get": {
+        "summary": "List operation benchmarks",
+        "description": "Returns public operation-level benchmark metadata for documented FHE16 profiles.",
+        "operationId": "listOperationBenchmarks",
+        "tags": ["Benchmarks"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "fhe16-0.10"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["cpu", "gpu", "fpga", "browser"]
+            }
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["latency-first", "throughput-first"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Benchmark entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/BenchmarkEntry"
+                      }
+                    }
+                  },
+                  "required": ["items"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "CreateSessionRequest": {
+        "type": "object",
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "enum": ["fhe16"]
+          },
+          "profile": {
+            "type": "string",
+            "enum": ["latency-first", "throughput-first"]
+          },
+          "target": {
+            "type": "string",
+            "enum": ["cpu", "gpu", "fpga", "browser"],
+            "default": "cpu"
+          }
+        },
+        "required": ["scheme", "profile"]
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "example": "sess_123"
+          },
+          "scheme": {
+            "type": "string",
+            "example": "fhe16"
+          },
+          "profile": {
+            "type": "string",
+            "example": "latency-first"
+          },
+          "status": {
+            "type": "string",
+            "example": "ready"
+          }
+        },
+        "required": ["session_id", "scheme", "profile", "status"]
+      },
+      "RegisterKeyRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          },
+          "key_type": {
+            "type": "string",
+            "enum": ["public", "evaluation", "threshold-share"]
+          },
+          "key_ref": {
+            "type": "string",
+            "description": "External key reference or uploaded key handle."
+          }
+        },
+        "required": ["session_id", "key_type"]
+      },
+      "KeyReference": {
+        "type": "object",
+        "properties": {
+          "key_id": {
+            "type": "string",
+            "example": "key_123"
+          },
+          "key_type": {
+            "type": "string",
+            "example": "evaluation"
+          }
+        },
+        "required": ["key_id", "key_type"]
+      },
+      "CreateCiphertextRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          },
+          "encoding": {
+            "type": "string",
+            "enum": ["uint16", "int16", "boolean"]
+          },
+          "value": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "description": "Serialized ciphertext import."
+              }
+            ]
+          }
+        },
+        "required": ["session_id", "encoding", "value"]
+      },
+      "CiphertextReference": {
+        "type": "object",
+        "properties": {
+          "ciphertext_id": {
+            "type": "string",
+            "example": "ct_123"
+          },
+          "encoding": {
+            "type": "string",
+            "example": "uint16"
+          }
+        },
+        "required": ["ciphertext_id", "encoding"]
+      },
+      "ComputeRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string",
+            "enum": ["ABS", "ADD", "ADD3", "ADD_TH", "ADD_VER2", "EQ", "GATE_VEC", "LT", "MAX", "NEG", "SELECT"]
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Ciphertext identifiers."
+          }
+        },
+        "required": ["session_id", "operation", "inputs"]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "example": "job_123"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["queued", "running", "completed", "failed"]
+          },
+          "result_ciphertext_id": {
+            "type": "string",
+            "nullable": true,
+            "example": "ct_result"
+          }
+        },
+        "required": ["job_id", "status"]
+      },
+      "DisclosureRequest": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string"
+          },
+          "ciphertext_id": {
+            "type": "string"
+          },
+          "policy": {
+            "type": "string",
+            "example": "owner-only"
+          }
+        },
+        "required": ["session_id", "ciphertext_id", "policy"]
+      },
+      "DisclosureResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "disclosed"
+          },
+          "value": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": ["status", "value"]
+      },
+      "BenchmarkEntry": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "example": "fhe16-0.10"
+          },
+          "target": {
+            "type": "string",
+            "example": "cpu"
+          },
+          "profile": {
+            "type": "string",
+            "example": "latency-first"
+          },
+          "operation": {
+            "type": "string",
+            "example": "LT"
+          },
+          "input_size": {
+            "type": "integer",
+            "example": 16
+          },
+          "latency_ms": {
+            "type": "number",
+            "example": 2.89
+          }
+        },
+        "required": ["version", "target", "profile", "operation"]
+      }
+    }
+  }
+}

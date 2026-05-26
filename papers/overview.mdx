@@ -1,0 +1,35 @@
+---
+title: Paper Map
+description: A guided map of the FHE16-related papers and how each paper supports the product and API roadmap.
+icon: files
+---
+
+This section turns the core publications into a product-facing technical narrative.
+
+## Paper Sequence
+
+| Paper | Role in the FHE16 story | Product impact |
+| --- | --- | --- |
+| Fast, Compact and Hardware-Friendly Bootstrapping in less than 3ms | Establishes the FHE16 bootstrapping direction and low-latency positioning. | Supports the confidential computation engine and benchmark narrative. |
+| Low-Latency Fully Homomorphic Arithmetic Using Parallel Prefix Group Circuit | Explains operation-level arithmetic design for latency-sensitive FHE. | Guides API operation categories such as compare, select, add, and max. |
+| Exact Error Analysis for Blind Rotation in Fully Homomorphic Encryption | Gives a correctness and reliability lens for blind rotation. | Supports parameter documentation, safety margins, and correctness claims. |
+| Actively Secure MPC in the Dishonest Majority Setting | Extends the research base from standalone FHE into active-security MPC. | Supports SSFHE, threshold workflows, and multi-party product tracks. |
+
+## How to Read These Pages
+
+Each paper page follows the same structure:
+
+- What the paper contributes.
+- Why it matters for FHE16.
+- What should become API or SDK documentation.
+- What should remain research evidence instead of product promise.
+
+## API Implication
+
+The API should not expose paper titles as features. It should expose stable developer primitives that are traceable back to the papers:
+
+- Operation categories.
+- Encodings and parameter profiles.
+- Benchmark metadata.
+- Job lifecycle.
+- Result disclosure rules.

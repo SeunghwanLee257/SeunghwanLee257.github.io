@@ -1,0 +1,36 @@
+---
+title: Product Map
+description: Product directions built on top of FHE16.
+icon: boxes-stacked
+---
+
+FHE16 should be documented as an engine that can support multiple products, not as one isolated demo.
+
+## Initial Product Tracks
+
+| Product track | Main FHE16 role | Primary user |
+| --- | --- | --- |
+| Blockchain confidential state | Compute or verify over encrypted state and support selective disclosure. | Chain teams, app developers, infrastructure partners. |
+| Confidential auction | Keep bids hidden while computing valid auction outcomes. | Marketplaces, token launches, procurement teams. |
+| Private risk scoring | Score or compare sensitive records without moving raw data. | Financial, insurance, identity, and enterprise risk teams. |
+
+## Product Documentation Rule
+
+Each product page should connect three things:
+
+1. Which paper or engine capability supports the product.
+2. Which API methods the product needs.
+3. Which trust boundary or disclosure model the product assumes.
+
+## API Implication
+
+The API should stay common across products. Product-specific SDK helpers can be added later, but the base methods should remain stable:
+
+- `encrypt_*`
+- `decrypt_*`
+- `add`
+- `lt`
+- `eq`
+- `max`
+- `select`
+- serialization and context management

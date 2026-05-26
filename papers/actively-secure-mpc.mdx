@@ -1,0 +1,55 @@
+---
+title: Actively Secure MPC
+description: Notes for SSFHE, threshold workflows, and multi-party API planning.
+icon: users
+---
+
+Paper: [Actively Secure MPC in the Dishonest Majority Setting](https://eprint.iacr.org/2025/810)
+
+## Core Message
+
+This paper extends the documentation story beyond a single FHE engine. It supports the path toward FHE-based MPC, SSFHE, threshold disclosure, and multi-party workflows.
+
+## Why It Matters
+
+Many commercial use cases are not just "compute on my encrypted value." They involve multiple institutions, reviewers, auditors, or validators.
+
+Examples:
+
+- Cross-organization risk scoring.
+- Insurance or identity checks without moving raw records.
+- Threshold result disclosure.
+- Blockchain confidential-state workflows.
+
+## Product Translation
+
+This paper should support:
+
+- SSFHE concept pages.
+- Multi-party trust model documentation.
+- Threshold disclosure workflows.
+- Enterprise and blockchain integration notes.
+
+## API Translation
+
+The API will likely need a separate multi-party layer:
+
+- Participant registration.
+- Policy definition.
+- Threshold or quorum configuration.
+- Multi-party job lifecycle.
+- Disclosure authorization.
+
+Draft example:
+
+```json
+{
+  "policy": "threshold-disclosure",
+  "participants": ["org_a", "org_b", "auditor"],
+  "threshold": 2
+}
+```
+
+## Documentation Boundary
+
+Do not mix single-party FHE API calls and multi-party MPC protocol documentation too early. Keep them connected conceptually, but separate in the API and sidebar structure.

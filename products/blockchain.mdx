@@ -1,0 +1,42 @@
+---
+title: Blockchain
+description: How FHE16 can support blockchain confidential computation and selective disclosure.
+icon: blocks
+---
+
+Blockchain is the most natural long-term product surface for FHE16 because encrypted state, public verification, and selective disclosure need a fast confidential computation engine.
+
+## Product Problem
+
+Most blockchain applications expose state too early:
+
+- Bids.
+- Scores.
+- Balances.
+- Identity or eligibility attributes.
+- Strategy parameters.
+
+FHE16 can support workflows where values remain encrypted while specific computations are still possible.
+
+## FHE16 Role
+
+- Encrypt user or protocol inputs.
+- Compute comparisons or selections over encrypted values.
+- Return encrypted outputs or selectively disclosed results.
+- Support deterministic, auditable workflows where applicable.
+
+## API Methods Needed
+
+- `context_create`
+- `encrypt_u16`
+- `lt`
+- `eq`
+- `max`
+- `select`
+- `serialize_ciphertext`
+- `deserialize_ciphertext`
+- `decrypt_u16` or threshold disclosure wrapper
+
+## Documentation Boundary
+
+Blockchain pages should explain trust models carefully. A chain integration may require additional proof, verification, threshold, or oracle layers beyond the core FHE16 local API.

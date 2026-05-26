@@ -1,0 +1,72 @@
+---
+title: Core Methods
+description: Draft common method surface for all FHE16 bindings.
+icon: list-tree
+---
+
+The core method surface should stay small and stable. Product-specific helpers should compose these methods rather than expanding the cryptographic API too early.
+
+## Context Lifecycle
+
+| Method family | Purpose |
+| --- | --- |
+| `fhe16_context_create` | Create a context with a profile and parameter set. |
+| `fhe16_context_free` | Release context resources. |
+| `fhe16_context_info` | Read version, profile, target, and parameter metadata. |
+
+## Key Lifecycle
+
+| Method family | Purpose |
+| --- | --- |
+| `fhe16_keygen` | Generate key material for a context. |
+| `fhe16_public_key_export` | Export public/evaluation material when allowed. |
+| `fhe16_secret_key_import` | Import secret key material in local or test settings. |
+
+## Encryption and Decryption
+
+| Method family | Purpose |
+| --- | --- |
+| `fhe16_encrypt_u16` | Encrypt a 16-bit unsigned integer. |
+| `fhe16_encrypt_i16` | Encrypt a 16-bit signed integer. |
+| `fhe16_encrypt_bool` | Encrypt a boolean value. |
+| `fhe16_decrypt_u16` | Decrypt an unsigned integer result when permitted. |
+| `fhe16_decrypt_i16` | Decrypt a signed integer result when permitted. |
+| `fhe16_decrypt_bool` | Decrypt a boolean result when permitted. |
+
+## Homomorphic Operations
+
+| Method family | Benchmark category | Output |
+| --- | --- | --- |
+| `fhe16_add` | `ADD` | ciphertext integer |
+| `fhe16_add3` | `ADD3` | ciphertext integer |
+| `fhe16_eq` | `EQ` | ciphertext boolean |
+| `fhe16_lt` | `LT` | ciphertext boolean |
+| `fhe16_max` | `MAX` | ciphertext integer |
+| `fhe16_neg` | `NEG` | ciphertext integer |
+| `fhe16_abs` | `ABS` | ciphertext integer |
+| `fhe16_select` | `SELECT` | ciphertext value |
+
+## Serialization
+
+| Method family | Purpose |
+| --- | --- |
+| `fhe16_ciphertext_serialize` | Export ciphertext bytes. |
+| `fhe16_ciphertext_deserialize` | Import ciphertext bytes. |
+| `fhe16_key_serialize` | Export key bytes when allowed. |
+| `fhe16_key_deserialize` | Import key bytes. |
+
+## Error Handling
+
+Every binding should preserve the same error categories:
+
+- Invalid context.
+- Invalid encoding.
+- Parameter mismatch.
+- Operation mismatch.
+- Serialization failure.
+- Decryption not authorized.
+- Internal computation failure.
+
+## Design Rule
+
+The C ABI owns exact exported names. Rust, Python, and Web Browser wrappers may use idiomatic naming, but they should map one-to-one to this method surface.

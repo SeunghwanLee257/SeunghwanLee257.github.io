@@ -1,0 +1,43 @@
+---
+title: Confidential Auction
+description: Applying FHE16 to private bids and encrypted winner selection.
+icon: gavel
+---
+
+Confidential auctions are a focused product case for FHE16 because the user story is simple: bids should stay hidden, but the auction outcome must still be computed.
+
+## Product Problem
+
+Auction systems often need:
+
+- Hidden bids before close.
+- Fair winner selection.
+- Limited result disclosure.
+- Auditability after the auction.
+
+## FHE16 Role
+
+FHE16 can support encrypted comparison and selection operations that preserve bid confidentiality during computation.
+
+## Minimal Operation Set
+
+- `encrypt_u16` for bid encoding.
+- `lt` or `max` for ranking.
+- `select` for winner-state selection.
+- `decrypt_u16` or policy-based disclosure for final result.
+
+## API Shape
+
+The base API should not hard-code "auction" into the cryptographic layer. Instead, an auction SDK should compose common methods:
+
+```python
+winner = fhe16.select(
+    condition=fhe16.lt(current_best, new_bid),
+    if_true=new_bid,
+    if_false=current_best,
+)
+```
+
+## Documentation Boundary
+
+Auction docs should separate cryptographic computation from auction policy. Reserve price, tie-breaking, reveal schedule, and audit rules belong to product logic.

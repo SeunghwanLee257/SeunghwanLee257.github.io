@@ -1,0 +1,47 @@
+---
+title: FHE16 Documentation
+description: Technical documentation for FHE16 paper reviews, product applications, and the planned multi-language API.
+icon: book-open
+---
+
+FHE16 is waLLLnut's low-latency confidential computation engine. This documentation is organized around three tracks:
+
+- **A. FHE16 paper reviews**: explain each paper and how it supports the engine.
+- **B. Products**: show how FHE16 becomes blockchain, auction, risk, and other confidential workflows.
+- **C. FHE16 API**: define one shared method surface across Web Browser, C, Rust, and Python bindings.
+
+<CardGroup cols={2}>
+  <Card title="A. Paper reviews" icon="file-text" href="/papers/overview">
+    Start with the research sequence behind FHE16, low-latency arithmetic, blind rotation analysis, and MPC.
+  </Card>
+  <Card title="B. Products" icon="boxes-stacked" href="/products/overview">
+    Map the engine into blockchain confidential state, confidential auctions, and private risk scoring.
+  </Card>
+  <Card title="C. FHE16 API" icon="square-terminal" href="/sdk/overview">
+    Review the shared FFI-centered method set for browser, C, Rust, and Python.
+  </Card>
+  <Card title="Benchmark methodology" icon="chart-line" href="/benchmarks/methodology">
+    Understand what is measured, which machine is used, and how public latency data should be interpreted.
+  </Card>
+</CardGroup>
+
+## Current Status
+
+This documentation is an MVP source tree for `docs.walllnut.com`. It is written in Mintlify-compatible MDX so it can be connected directly to a Mintlify project.
+
+The API pages are a design draft. They describe the shared language-binding surface we plan to expose; they are not a production availability statement.
+
+## Documentation Goals
+
+- Explain each core paper in product-facing technical language.
+- Connect papers to product surfaces such as blockchain, auction, and risk workflows.
+- Define a stable FFI-first API vocabulary before SDKs and partner integrations harden.
+- Keep public links stable as FHE16 grows into a developer platform.
+
+## Suggested Reading Path
+
+1. Read [Paper Map](/papers/overview).
+2. Read [FHE16 Bootstrapping](/papers/fhe16-bootstrapping).
+3. Read [Product Map](/products/overview).
+4. Review [FHE16 API Overview](/sdk/overview).
+5. Check [Benchmark Methodology](/benchmarks/methodology).

@@ -1,0 +1,51 @@
+---
+title: Architecture
+description: How FHE16 papers, products, benchmark data, and language bindings fit together.
+icon: network
+---
+
+FHE16 documentation should separate four layers.
+
+## Research Layer
+
+The papers define the technical basis:
+
+- FHE16 bootstrapping and implementation direction.
+- Low-latency arithmetic through parallel-prefix group circuits.
+- Blind rotation error analysis.
+- FHE-based actively secure MPC in the dishonest majority setting.
+
+## Engine Layer
+
+The engine turns research ideas into executable primitives:
+
+- Parameter selection.
+- Encoding rules.
+- Key and ciphertext lifecycle.
+- Operation scheduling.
+- Benchmark measurement.
+
+## Product Layer
+
+The product layer packages engine capability for business use cases:
+
+- Blockchain confidential state.
+- Confidential auction.
+- Private risk scoring.
+- Enterprise and partner integrations.
+
+## API Layer
+
+The first API layer should be FFI-centered so Web Browser, C, Rust, and Python wrappers share the same conceptual method set:
+
+- Context lifecycle.
+- Key lifecycle.
+- Encryption and decryption.
+- Homomorphic operations.
+- Serialization.
+- Memory/resource cleanup.
+- Benchmark metadata.
+
+## Design Rule
+
+The API should reveal enough structure for developers to build correctly, but not force external users to understand every cryptographic implementation detail before they can run a safe workflow.

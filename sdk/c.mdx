@@ -1,0 +1,54 @@
+---
+title: C API
+description: Draft C ABI surface for FHE16.
+icon: code
+---
+
+C should be the stable FFI boundary for FHE16.
+
+## Draft Usage
+
+```c
+#include "fhe16.h"
+
+int main(void) {
+  fhe16_context_t* ctx = NULL;
+  fhe16_key_t* key = NULL;
+  fhe16_ciphertext_t* a = NULL;
+  fhe16_ciphertext_t* b = NULL;
+  fhe16_ciphertext_t* out = NULL;
+  bool opened = false;
+
+  fhe16_context_create("latency-first", &ctx);
+  fhe16_keygen(ctx, &key);
+
+  fhe16_encrypt_u16(ctx, key, 42, &a);
+  fhe16_encrypt_u16(ctx, key, 100, &b);
+  fhe16_lt(ctx, a, b, &out);
+  fhe16_decrypt_bool(ctx, key, out, &opened);
+
+  fhe16_ciphertext_free(a);
+  fhe16_ciphertext_free(b);
+  fhe16_ciphertext_free(out);
+  fhe16_key_free(key);
+  fhe16_context_free(ctx);
+
+  return opened ? 0 : 1;
+}
+```
+
+## C Design Rules
+
+- Return explicit status codes.
+- Use opaque handles for context, key, and ciphertext.
+- Require explicit cleanup functions.
+- Keep ABI stable before adding product helpers.
+
+## Core Handle Types
+
+```c
+typedef struct fhe16_context fhe16_context_t;
+typedef struct fhe16_key fhe16_key_t;
+typedef struct fhe16_ciphertext fhe16_ciphertext_t;
+typedef enum fhe16_status fhe16_status_t;
+```
