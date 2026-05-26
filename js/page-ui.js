@@ -76,6 +76,9 @@
       var btn = dropdown.querySelector(".nav-dropdown-btn");
       var menu = dropdown.querySelector(".nav-dropdown-menu");
       if(!btn || !menu) return;
+      if(dropdown.getAttribute("data-nav-dropdown-bound") === "true" || btn.getAttribute("data-nav-dropdown-bound") === "true") return;
+      dropdown.setAttribute("data-nav-dropdown-bound", "true");
+      btn.setAttribute("data-nav-dropdown-bound", "true");
       btn.addEventListener("click", function(event){
         event.stopPropagation();
         dropdowns.forEach(function(other){

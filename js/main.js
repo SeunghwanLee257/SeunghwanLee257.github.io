@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const menu = dropdown.querySelector('.nav-dropdown-menu');
 
       if (btn && menu) {
+        if (dropdown.getAttribute('data-nav-dropdown-bound') === 'true' || btn.getAttribute('data-nav-dropdown-bound') === 'true') return;
+        dropdown.setAttribute('data-nav-dropdown-bound', 'true');
+        btn.setAttribute('data-nav-dropdown-bound', 'true');
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
 

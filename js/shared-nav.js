@@ -45,9 +45,63 @@
     });
   }
 
+
+  function closeDropdown(dropdown){
+    var btn = dropdown.querySelector(".nav-dropdown-btn");
+    dropdown.classList.remove("is-open");
+    if(btn) btn.setAttribute("aria-expanded", "false");
+  }
+
+  function initNavDropdowns(){
+    var dropdowns = Array.prototype.slice.call(document.querySelectorAll(".nav-dropdown"));
+
+    dropdowns.forEach(function(dropdown){
+      var btn = dropdown.querySelector(".nav-dropdown-btn");
+      var menu = dropdown.querySelector(".nav-dropdown-menu");
+      if(!btn || !menu) return;
+      if(dropdown.getAttribute("data-nav-dropdown-bound") === "true") return;
+
+      dropdown.setAttribute("data-nav-dropdown-bound", "true");
+      btn.setAttribute("data-nav-dropdown-bound", "true");
+
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+
+        dropdowns.forEach(function(other){
+          if(other !== dropdown) closeDropdown(other);
+        });
+
+        var open = !dropdown.classList.contains("is-open");
+        dropdown.classList.toggle("is-open", open);
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      menu.querySelectorAll("a").forEach(function(link){
+        link.addEventListener("click", function(){
+          closeDropdown(dropdown);
+        });
+      });
+    });
+
+    if(!document.documentElement.getAttribute("data-nav-dropdown-document-bound")){
+      document.documentElement.setAttribute("data-nav-dropdown-document-bound", "true");
+      document.addEventListener("click", function(event){
+        document.querySelectorAll(".nav-dropdown.is-open").forEach(function(dropdown){
+          if(!dropdown.contains(event.target)) closeDropdown(dropdown);
+        });
+      });
+      document.addEventListener("keydown", function(event){
+        if(event.key !== "Escape") return;
+        document.querySelectorAll(".nav-dropdown.is-open").forEach(closeDropdown);
+      });
+    }
+  }
+
   function applySharedNavigation(){
     renderTeamDropdowns();
     renderSidebarTeamLinks();
+    initNavDropdowns();
   }
 
   if(document.readyState === "loading"){
