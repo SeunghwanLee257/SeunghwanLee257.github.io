@@ -12,7 +12,7 @@ The current API baseline is `FHE16Ver6/include/soAPI/soAPI.hpp`, with the browse
 
 ## Documentation Shape
 
-`/docs/` should be an overview page. The final Mintlify version should not be one long all-in-one scroll; each sidebar item should become its own MDX page. API pages should be split by common method surface and binding-specific usage.
+`/docs/` should be an overview page, not one long all-in-one scroll. Each major topic should have its own page, and API pages should be split by common method surface and binding-specific usage.
 
 ## API Layers
 
@@ -68,3 +68,7 @@ The public SDK should start with these method groups:
 | C | Publish the raw ABI and then add a thinner stable C facade if naming needs cleanup. |
 | Rust | Wrap raw pointers in owned types and map failures to `Result`. |
 | Python | Expose the same owned objects for demos, tests, and partner notebooks. |
+
+## Method-Level Detail
+
+For each exported function, document the caller layer, circuit path, and ownership rule in [Method Reference](/sdk/method-reference).

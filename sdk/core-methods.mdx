@@ -112,6 +112,21 @@ These should be documented after add/compare/multiply because they have larger c
 | CT graph metadata | `FHE16_SetOpType`, `FHE16_GetOpType`, ID/hash/slot helpers, `FHE16_InitResultMetadata` |
 | Memory/version | `FHE16_Free`, `FHE16_Version` |
 
+## Caller and Circuit Contract
+
+Every method should be documented at method level, not only by family. The reference page tracks the caller, circuit path, and ownership rule for each exported symbol: [Method Reference](/sdk/method-reference).
+
+| Method group | Primary caller | Circuit path to document |
+| --- | --- | --- |
+| Runtime/key methods | SDK context setup, browser worker init, benchmark harness | No homomorphic circuit; runtime allocation, key generation, or key loading. |
+| Encryption/decryption | Key owner, local demo, authorized disclosure path | LWE encryption/decryption and bit encoding, not a homomorphic evaluation circuit. |
+| Add/subtract | Product compute, SDK arithmetic | Parallel prefix adder through `FHE16_PREFIX_Templete` and `PrefixAdder_V2`. |
+| Compare/select | Auctions, ranking, private conditionals | Prefix compare, equality reduction, NOT wrappers, and compare-select circuits. |
+| Multiplication | Fixed-width arithmetic, scoring, product logic | DADDA partial-product reduction; full multiply returns 2n-bit output. |
+| Bitwise | Boolean gates and integer bitwise operations | Single-bit `C_FHE16_*` gates or vector `GATE_VEC` path. |
+| Constant operations | Browser worker constants, scoring weights, threshold filters | Plaintext bit-array path plus prefix, compare, or DADDA multiplier circuits. |
+| Division/modulo | Advanced arithmetic | Shift-only fast paths, magic-multiplier constant division, or non-restoring encrypted division. |
+
 ## First Release Boundary
 
 For the first public docs, treat context/key/encrypt/decrypt/add/sub/mul/compare/bitwise/select/constant ops/serialization as the supported surface. Keep debug methods, graph metadata, packing, compression, and interleaved variants in an advanced section until examples and tests are stable.

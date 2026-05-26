@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
   "name": "FHE16 Docs",
   "favicon": "/asset/logo-filled-orange.ico",
   "logo": {
@@ -44,6 +43,7 @@
         "pages": [
           "sdk/overview",
           "sdk/core-methods",
+          "sdk/method-reference",
           "sdk/web-browser",
           "sdk/c",
           "sdk/rust",

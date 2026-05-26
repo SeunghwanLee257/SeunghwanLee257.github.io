@@ -1,0 +1,138 @@
+---
+title: Method Reference
+description: Per-method caller, circuit path, and ownership notes for the current FHE16Ver6 API.
+icon: route
+---
+
+Every public method entry should answer three questions:
+
+- **Caller**: which layer should call it directly.
+- **Circuit path**: what homomorphic circuit or runtime path it enters.
+- **Ownership**: who owns the returned pointer or object.
+
+The current source baseline is `FHE16Ver6/include/soAPI/soAPI.hpp` and `FHE16Ver6/src/soAPI/soAPI.cpp`.
+
+## Context and Key Methods
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_SetThreadCount` | Native SDK setup, benchmark harness, server worker bootstrap. | No FHE circuit. Runtime scheduling configuration before allocation/keygen. | No returned pointer. |
+| `FHE16_GetThreadCount` | Diagnostics, benchmark metadata, SDK context introspection. | No FHE circuit. Reads runtime scheduling state. | No returned pointer. |
+| `FHE16_MemoryAlloc` | Low-level C loader path before `FHE16_LoadEval`. | No FHE circuit. Allocates NTT tables, bootstrapping/key-switch buffers, and evaluation memory. | Runtime-owned global memory. |
+| `FHE16_GenEval` | Local developer setup, browser demo init, native test harness, SDK `keygen`. | No user FHE circuit. Generates evaluation material and secret key state. | Returned secret-key pointer is runtime-owned. Do not free directly. |
+| `FHE16_LoadEval` | Runtime boot from saved eval material. | No FHE circuit. Loads BK/KS/rotation/ACC material. | Runtime-owned global memory. |
+| `FHE16_SaveEval` | Admin/local setup after key generation. | No FHE circuit. Serializes eval material. | File output only. |
+| `FHE16_DeleteEval` | Context shutdown, worker cleanup, test teardown. | No FHE circuit. Frees global runtime resources. | Invalidates runtime-owned key/eval pointers. |
+| `FHE16_GetLWESK` | Low-level debug, key export, benchmark interop. | No FHE circuit. Returns pointer to LWE secret key. | Runtime-owned pointer. |
+| `FHE16_GetDecSK` | Local decrypt-capable SDK context. | No FHE circuit. Returns pointer to decryption secret key. | Runtime-owned pointer. |
+
+## Encryption and Decryption
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_ENC` | Low-level boolean/int bit tests. | Encryption path, not a homomorphic evaluation circuit. | Returned ciphertext is caller-owned; free with `FHE16_Free`. |
+| `FHE16_ENC_BIT` | Boolean-gate API and bitwise test fixtures. | TFHE-style bit encoding for gate inputs. | Returned ciphertext is caller-owned. |
+| `FHE16_ENCInt` | C SDK, Rust/Python wrappers, browser wrapper when i64 is available. | Integer-to-bit encryption path; creates one encrypted bit per requested width. | Returned ciphertext is caller-owned. |
+| `FHE16_ENCInt32` | Browser/WASM wrapper and JS worker path. | 32-bit-friendly integer encryption path. | Returned ciphertext is caller-owned. |
+| `FHE16_ENCInt_Arr` | Browser bit-array encryption, wide integer wrappers, tests. | LSB-first bit-array encryption. | Returned ciphertext is caller-owned. |
+| `FHE16_DECInt` | Secret-key holder, local demo, authorized disclosure path. | LWE phase/decode path, not a homomorphic circuit. | Returns scalar value. |
+| `FHE16_DECIntVec` | Secret-key holder needing raw bits. | Per-bit LWE phase/decode path. | Returned bit array is caller-owned. |
+
+## Arithmetic Methods
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_ADD` | All SDK compute layers for same-width encrypted integers. | `FHE16_PREFIX_Templete(..., subtract=false)` and `PrefixAdder_V2`; parallel prefix adder over encrypted bits. | Returned ciphertext is caller-owned. |
+| `FHE16_SUB` | All SDK compute layers for same-width encrypted integers. | Same prefix circuit as add with subtract flag enabled. | Returned ciphertext is caller-owned. |
+| `FHE16_ADD3` | Advanced arithmetic composition and benchmarks. | Three-input adder variant; keep as advanced until tests document exact depth/cost. | Returned ciphertext is caller-owned. |
+| `FHE16_ADD_INTERLEAVED` | Benchmark/performance experiments. | Interleaved prefix adder scheduling once dependencies are ready. | Returned ciphertext is caller-owned. |
+| `FHE16_SUB_INTERLEAVED` | Benchmark/performance experiments. | Interleaved prefix subtract scheduling. | Returned ciphertext is caller-owned. |
+| `FHE16_SMULL` | Default encrypted signed multiplication. | DADDA partial-product multiplier; 1-bit case delegates to `FHE16_ANDVEC`; output is n-bit signed product. | Returned ciphertext is caller-owned. |
+| `FHE16_SMULL_INTERLEAVED` | Large-width performance experiments. | Interleaved partial-product/DADDA scheduling. | Returned ciphertext is caller-owned. |
+| `FHE16_FMULL` | SDK callers needing full product width. | Full DADDA multiplier with 2n output bits. | Returned ciphertext is caller-owned. |
+| `FHE16_NEG` | Signed arithmetic, division, product helpers. | Two's-complement negation through `FHE16_ADD_POWTWO_TEMPLETE`. | Returned ciphertext is caller-owned. |
+| `FHE16_ABS` | Signed division/modulo and application helpers. | `PrefixABS` path; sign-aware prefix circuit. | Returned ciphertext is caller-owned. |
+| `FHE16_RELU` | ML-style activation, signed thresholding helpers. | Sign-bit gated circuit: negative values map to zero, non-negative values pass through. | Returned ciphertext is caller-owned. |
+| `FHE16_ADD_POWTWO` | Optimized arithmetic helper. | Add-one-at-position prefix template. | Returned ciphertext is caller-owned. |
+| `FHE16_SUB_POWTWO` | Optimized arithmetic helper. | Subtract-one-at-position prefix template. | Returned ciphertext is caller-owned. |
+
+## Comparison and Selection Methods
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_LT` | SDK comparison, auction winner logic, ranking. | `FHE16_COMPARE(..., true)` using `Compare` thread function over prefix compare state. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_GT` | SDK comparison and ordering. | `FHE16_COMPARE(..., false)` with operands swapped by compare mode. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_LE` | SDK comparison. | `GT` followed by encrypted NOT. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_GE` | SDK comparison. | `LT` followed by encrypted NOT. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_EQ` | Equality checks, guard conditions, private matching. | `EQ` reduction circuit over all encrypted bits. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_NEQ` | Inequality checks. | `EQ` followed by encrypted NOT. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_MAX` | Auction, ranking, scoring, private selection. | `MAXorMIN(..., true)` compare-and-select circuit. | Returned integer ciphertext is caller-owned. |
+| `FHE16_MIN` | Ranking, bounds, private selection. | `MAXorMIN(..., false)` compare-and-select circuit. | Returned integer ciphertext is caller-owned. |
+| `FHE16_SELECT` | Ternary selection and product workflow composition. | `SELECT` circuit; selector can be one bit or same-width vector. | Returned ciphertext is caller-owned. |
+
+## Bitwise Methods
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_AND` | Boolean SDK methods and single-bit gates. | Single-bit `C_FHE16_AND` gate. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_OR` | Boolean SDK methods and single-bit gates. | Single-bit `C_FHE16_OR` gate. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_XOR` | Boolean SDK methods and single-bit gates. | Single-bit `C_FHE16_XOR` gate. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_ANDVEC` | Integer bitwise API, browser worker bitwise compute. | `FHE16_GATE_TEMPLETE(..., type=0)` and `GATE_VEC` across bits. | Returned vector ciphertext is caller-owned. |
+| `FHE16_ORVEC` | Integer bitwise API. | `FHE16_GATE_TEMPLETE(..., type=1)` and `GATE_VEC` across bits. | Returned vector ciphertext is caller-owned. |
+| `FHE16_XORVEC` | Integer bitwise API. | `FHE16_GATE_TEMPLETE(..., type=2)` and `GATE_VEC` across bits. | Returned vector ciphertext is caller-owned. |
+
+## Constant Methods
+
+| Method family | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_ADD_CONSTANT_Arr/I64/I32` | SDK constant arithmetic, browser `_I32` path. | Plaintext bits are folded into the encrypted prefix-add path. | Returned ciphertext is caller-owned. |
+| `FHE16_SUB_CONSTANT_Arr/I64/I32` | SDK constant subtraction. | Converts constant into two's-complement-style add input, then uses constant add path. | Returned ciphertext is caller-owned. |
+| `FHE16_SMULL_CONSTANT_Arr/I64/I32` | Constant multiplier, scoring weights, fixed coefficients. | NAF-aware shifted partial products plus DADDA reduction; 0 and power-of-two constants use fast paths. | Returned ciphertext is caller-owned. |
+| `FHE16_FMULL_CONSTANT_Arr/I64/I32` | Full-width fixed coefficient multiplication. | Full product partial-product matrix with DADDA reduction; output is 2n bits. | Returned ciphertext is caller-owned. |
+| `FHE16_LT_CONSTANT_*` | Browser worker constant compare, SDK filters. | `FHE16_COMPARE_CONSTANT(..., LT)` using plaintext bit array against ciphertext bits. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_LE_CONSTANT_*` | SDK constant compare. | Constant `GT` path followed by encrypted NOT. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_GT_CONSTANT_*` | SDK constant compare. | `FHE16_COMPARE_CONSTANT(..., GT)`. | Returned 1-bit ciphertext is caller-owned. |
+| `FHE16_GE_CONSTANT_*` | SDK constant compare. | Constant `LT` path followed by encrypted NOT. | Returned 1-bit ciphertext is caller-owned. |
+
+## Shift, Division, and Modulo Methods
+
+| Method | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_SHR` / `FHE16_LSHIFTR` | Low-cost unsigned shift and division by powers of two. | Metadata/data copy; no bootstrap-heavy circuit for normal shift. | Returned ciphertext is caller-owned. |
+| `FHE16_SHL` / `FHE16_LSHIFTL` | Left shift and fixed scaling. | Data copy plus encrypted zero fill for new lower bits. | Returned ciphertext is caller-owned. |
+| `FHE16_ASHIFTR` | Signed right shift. | Sign-aware shift path. | Returned ciphertext is caller-owned. |
+| `FHE16_ROTATEL` / `FHE16_ROTATER` | Bit-vector rotate helpers. | Slot/bit reorder path. | Returned ciphertext is caller-owned. |
+| `FHE16_DIV_POW2` | Unsigned division by `2^k`. | Alias of logical right shift. | Returned ciphertext is caller-owned. |
+| `FHE16_MOD_POW2` | Unsigned modulo by `2^k`. | Copies lower `k` encrypted bits. | Returned ciphertext is caller-owned. |
+| `FHE16_SDIV_POW2` | Signed division by `2^k`. | Sign-derived bias plus `FHE16_ADD`, then shift toward zero. | Returned ciphertext is caller-owned. |
+| `FHE16_SMOD_POW2` | Signed modulo by `2^k`. | Signed pow2 division, shift back, then `FHE16_SUB`. | Returned ciphertext is caller-owned. |
+| `FHE16_DIV_CONST` | Unsigned division by fixed constant. | Magic multiplier, constant multiply, then shift. | Returned ciphertext is caller-owned. |
+| `FHE16_MOD_CONST` | Unsigned modulo by fixed constant. | Constant division, multiply quotient by divisor, then subtract. | Returned ciphertext is caller-owned. |
+| `FHE16_SDIV_CONST` | Signed division by fixed constant. | `ABS`, unsigned constant division, `NEG`, and `SELECT` by sign. | Returned ciphertext is caller-owned. |
+| `FHE16_SMOD_CONST` | Signed modulo by fixed constant. | Signed quotient path plus multiply/subtract remainder path. | Returned ciphertext is caller-owned. |
+| `FHE16_UDIV` / `FHE16_UMOD` | Variable divisor workflows. | Non-restoring division over encrypted operands. | Quotient/remainder ciphertexts are caller-owned. |
+| `FHE16_SDIV` / `FHE16_SMOD` | Signed variable divisor workflows. | Sign extraction, absolute-value division, sign correction, and optional zero flag. | Quotient, remainder, and zero flag are caller-owned when returned. |
+
+## Serialization, Packing, and Metadata
+
+| Method family | Caller | Circuit path | Ownership notes |
+| --- | --- | --- | --- |
+| `FHE16_LweToBytes`, `FHE16_LweFromBytes` | SDK serialization, browser transfer, service boundary. | No FHE circuit. Byte serialization/deserialization. | Returned bytes/ciphertext are caller-owned. |
+| `FHE16_CTSave`, `FHE16_CTLoad` | Native SDK file persistence. | No FHE circuit. Uses CT header to compute data size. | Loaded CT is caller-owned. |
+| `FHE16_ParamsSave/Load/Get`, `FHE16_GetParamHash`, `FHE16_VerifyCTParam` | Compatibility checks and deployment setup. | No FHE circuit. Parameter metadata and hash verification. | Returned param pointer is read-only/runtime-owned. |
+| `FHE16_EvalKeySave/Load`, `FHE16_PKSave/Load`, `FHE16_SKSave/Load` | Admin/local key lifecycle. | No FHE circuit. Key serialization. | Loaded key ownership depends on the specific API; document per wrapper. |
+| `FHE16_Pack`, `FHE16_Unpack`, `FHE16_RotateSlots` | Packed RLWE workflows and batching. | Packing/slot extraction/rotation path, not the scalar integer circuit path. | Returned packed/extracted CT is caller-owned. |
+| `FHE16_PackVars`, `FHE16_ExtractVar`, `FHE16_MergeVars` | Multi-variable packed workflows. | Slot table and packed CT manipulation. | Returned CT is caller-owned. |
+| `FHE16_Compress` | Post-bootstrap storage/transport optimization. | Key-switch compression to smaller LWE dimension. | Returned CT is caller-owned. |
+| CT metadata helpers | Graph tracking, audit metadata, packed slot metadata. | No FHE circuit unless paired with compute operation metadata init. | Mutates or reads existing CT header. |
+
+## Documentation Rule
+
+Every new API page should include a per-method block with:
+
+1. Caller layer.
+2. Input and output types.
+3. Circuit path.
+4. Complexity or latency class when known.
+5. Ownership and cleanup rule.
+6. Current implementation source file.
