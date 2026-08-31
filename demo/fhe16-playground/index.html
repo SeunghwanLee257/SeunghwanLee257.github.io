@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FHE16 Playground</title>
+  <link rel="icon" href="data:,">
+  <script src="./coi-serviceworker.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./i18n.js"></script>
+  <style>
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      margin: 16px 0 0;
+      border-bottom: 2px solid var(--line);
+    }
+    .tab-btn {
+      min-height: 36px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      font-weight: 700;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active {
+      border-color: var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-bottom: 2px solid var(--panel);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .op-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .op-row .field select { min-width: 110px; }
+    .num-input {
+      width: 90px;
+      min-height: 40px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .result-box {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .result-box.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rcard {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcff;
+    }
+    .rcard span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .rcard strong { display: block; margin-top: 6px; font-size: 22px; line-height: 1.15;
+      word-break: break-word; overflow-wrap: anywhere; }
+    /* Float results are long (e.g. 3.1400001049041748) → wider cards + smaller font so they don't overflow. */
+    #fpResult { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #fpResult .rcard strong { font-size: 18px; }
+    @media (max-width: 640px) { #fpResult { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .rcard.pass-card { border-color: var(--good); }
+    .rcard.fail-card { border-color: var(--bad); }
+    .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+    nav.breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 12px; display:flex; align-items:center; }
+    nav.breadcrumb a { color: var(--accent); text-decoration: none; }
+    .ct-section { margin-top: 16px; }
+    .ct-section h3 { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px; }
+    .ct-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .ct-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #f8f9ff;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ct-card .ct-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .ct-card .ct-value { font-size: 20px; font-weight: 700; line-height: 1.15; word-break: break-word; overflow-wrap: anywhere; }
+    .ct-card .ct-meta { font-size: 11px; color: var(--muted); }
+    .ct-card .ct-hex {
+      font-family: monospace;
+      font-size: 10px;
+      color: #555;
+      background: #eef0f8;
+      border-radius: 4px;
+      padding: 4px 6px;
+      white-space: pre;
+      line-height: 1.5;
+      max-height: 140px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .ct-card .ct-dl {
+      margin-top: 4px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--accent);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .ct-card .ct-dl:hover { background: var(--accent); color: #fff; }
+    .eval-key-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="toolbar" style="gap:8px;margin-bottom:16px">
+      <a href="../../fhe16.html" style="text-decoration:none"><button type="button"><span class="en-only">← FHE16</span><span class="ko-only">← FHE16</span></button></a>
+      <a href="../../index.html" style="text-decoration:none"><button type="button"><span class="en-only">walllnut.com</span><span class="ko-only">walllnut.com</span></button></a>
+      <button class="lang-toggle" type="button" style="margin-left:auto">한국어</button>
+    </nav>
+
+    <section class="hero" style="min-height:200px">
+      <div class="hero-copy">
+        <p class="eyebrow">FHE16 WASM</p>
+        <h1>Gate &amp; Arithmetic Playground</h1>
+        <p class="summary">Run boolean gates, integer arithmetic, and floating-point operations on <strong>encrypted data</strong> — directly in your browser, powered by FHE16 WebAssembly.</p>
+        <p class="summary"><strong>UNSAFE demo artifact:</strong> the public builds intentionally use zero-error test parameters and provide no cryptographic security. Do not use sensitive data.</p>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-bottom:0;border-bottom:none;border-radius:8px 8px 0 0">
+      <h2 style="font-size:14px;font-weight:700;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)">How It Works</h2>
+      <p style="margin:0 0 10px;font-size:14px;line-height:1.6">
+        <strong>Fully Homomorphic Encryption (FHE)</strong> lets you compute on encrypted integers and floats without ever decrypting them.
+        In a secure production build, the compute party operates on ciphertexts without the plaintext inputs.
+        This public demo is not such a security build and decrypts results locally for verification.
+        Results are bit-exact to ordinary plaintext arithmetic.
+      </p>
+      <ol style="margin:0 0 10px;padding-left:1.4em;font-size:14px;line-height:2">
+        <li><strong>Load Module</strong> — select a build and click <em>Load Module</em> to fetch the WASM binary (~10 MB). Wait for "Module ready".</li>
+        <li><strong>Generate Keys</strong> — click <em>Generate Keys</em> to create the bootstrapping key set. This takes <strong>10–30 seconds</strong> and only needs to be done once per session.</li>
+        <li><strong>Pick a tab</strong> — <em>Boolean Gates</em> for single-bit ops, <em>Arithmetic</em> for 32-bit integers, <em>Float</em> for IEEE-754 f32.</li>
+        <li><strong>Enter values and Run</strong> — inputs are encrypted on the fly, the operation runs over ciphertexts, and the decrypted result is shown alongside the expected plaintext value.</li>
+      </ol>
+      <p style="margin:0;font-size:13px;color:var(--muted)">
+        The <em>Runtime Log</em> below shows per-operation timings and any diagnostics.
+      </p>
+    </section>
+
+    <section class="toolbar" aria-label="Module controls">
+      <div class="field">
+        <label for="buildSelect">Build</label>
+        <select id="buildSelect"></select>
+      </div>
+      <div class="field">
+        <label for="threadSelect">FHE workers</label>
+        <select id="threadSelect">
+          <option value="auto">Auto (device)</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="16">16</option>
+        </select>
+      </div>
+      <button id="loadButton" type="button">Load Module</button>
+      <button id="keygenButton" type="button" disabled>Generate Keys</button>
+      <button id="evalKeyDlButton" type="button" disabled>⬇ Eval Key</button>
+      <div class="status" id="statusText">Idle</div>
+    </section>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="gate">Boolean Gates</button>
+      <button class="tab-btn" data-tab="arith">Arithmetic</button>
+      <button class="tab-btn" data-tab="float">Float (f32)</button>
+    </div>
+
+    <!-- Boolean Gates Tab -->
+    <div class="tab-panel active panel" id="tab-gate" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
+      <div class="op-row">
+        <div class="field">
+          <label for="gateOp">Gate</label>
+          <select id="gateOp">
+            <option value="AND">AND</option>
+            <option value="OR">OR</option>
+            <option value="XOR">XOR</option>
+            <option value="NEG">NEG (A only)</option>
+          </select>
+        </div>
+        <label class="bit-toggle">
+          <input id="gateA" type="checkbox" checked>
+          <span>A</span>
+        </label>
+        <label class="bit-toggle">
+          <input id="gateB" type="checkbox">
+          <span>B</span>
+        </label>
+        <button id="runGateBtn" type="button" disabled>Run Gate</button>
+      </div>
+      <div id="gateResult" class="result-box" style="display:none"></div>
+    </div>
+
+    <!-- 32-bit Integer Ops Tab -->
+    <div class="tab-panel panel" id="tab-arith" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
+      <div class="op-row" style="flex-wrap:wrap;gap:8px">
+        <div class="field">
+          <label for="arithOp">Operation (signed 32-bit)</label>
+          <select id="arithOp">
+            <optgroup label="Arithmetic (enc, enc)">
+              <option value="add">ADD</option>
+              <option value="sub">SUB</option>
+              <option value="smull">SMULL (×)</option>
+              <option value="fmull">FMULL (full ×)</option>
+              <option value="sdiv">SDIV (÷ signed)</option>
+              <option value="smod">SMOD (% signed)</option>
+              <option value="udiv">UDIV (÷ unsigned)</option>
+              <option value="umod">UMOD (% unsigned)</option>
+              <option value="min">MIN</option>
+              <option value="max">MAX</option>
+              <option value="add3">ADD3 (a+b+c)</option>
+            </optgroup>
+            <optgroup label="Comparison (enc, enc) → 0/1">
+              <option value="ge">GE (a≥b)</option>
+              <option value="gt">GT (a&gt;b)</option>
+              <option value="le">LE (a≤b)</option>
+              <option value="lt">LT (a&lt;b)</option>
+              <option value="eq">EQ (a=b)</option>
+              <option value="neq">NEQ (a≠b)</option>
+            </optgroup>
+            <optgroup label="Bitwise (enc, enc)">
+              <option value="and">AND</option>
+              <option value="or">OR</option>
+              <option value="xor">XOR</option>
+            </optgroup>
+            <optgroup label="Unary (enc)">
+              <option value="neg">NEG (−a)</option>
+              <option value="abs">ABS (|a|)</option>
+            </optgroup>
+            <optgroup label="Shift/Rotate (enc, k)">
+              <option value="shl">SHL (a&lt;&lt;k)</option>
+              <option value="shr">SHR (a&gt;&gt;k logical)</option>
+              <option value="ashiftr">ASHIFTR (a&gt;&gt;k arith)</option>
+              <option value="rotatel">ROTATEL (rotl k)</option>
+              <option value="rotater">ROTATER (rotr k)</option>
+            </optgroup>
+            <optgroup label="Const Arithmetic (enc ÷ imm)">
+              <option value="add_const">ADD_CONST</option>
+              <option value="sub_const">SUB_CONST</option>
+              <option value="smull_const">SMULL_CONST (×imm)</option>
+              <option value="sdiv_const">SDIV_CONST (enc÷imm signed)</option>
+              <option value="smod_const">SMOD_CONST (enc%imm signed)</option>
+              <option value="div_const">DIV_CONST (enc÷imm unsigned)</option>
+              <option value="mod_const">MOD_CONST (enc%imm unsigned)</option>
+            </optgroup>
+            <optgroup label="Const Arithmetic (imm ÷ enc)">
+              <option value="const_sdiv">CONST_SDIV (imm÷enc signed)</option>
+              <option value="const_smod">CONST_SMOD (imm%enc signed)</option>
+              <option value="const_udiv">CONST_UDIV (imm÷enc unsigned)</option>
+              <option value="const_umod">CONST_UMOD (imm%enc unsigned)</option>
+            </optgroup>
+            <optgroup label="Const Comparison (enc, imm) → 0/1">
+              <option value="ge_const">GE_CONST (a≥imm)</option>
+              <option value="gt_const">GT_CONST (a&gt;imm)</option>
+              <option value="le_const">LE_CONST (a≤imm)</option>
+              <option value="lt_const">LT_CONST (a&lt;imm)</option>
+            </optgroup>
+            <optgroup label="Power-of-2 (enc, k)">
+              <option value="sdiv_pow2">SDIV_POW2 (a÷2ᵏ signed)</option>
+              <option value="smod_pow2">SMOD_POW2 (a%2ᵏ signed)</option>
+              <option value="div_pow2">DIV_POW2 (a÷2ᵏ unsigned)</option>
+              <option value="mod_pow2">MOD_POW2 (a%2ᵏ unsigned)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="arithA">A (enc)</label>
+          <input id="arithA" type="number" class="num-input" value="42">
+        </div>
+        <div class="field" id="arithBField">
+          <label for="arithB" id="arithBLabel">B (enc)</label>
+          <input id="arithB" type="number" class="num-input" value="13">
+        </div>
+        <div class="field" id="arithCField" style="display:none">
+          <label for="arithC">C (enc)</label>
+          <input id="arithC" type="number" class="num-input" value="5">
+        </div>
+        <button id="runArithBtn" type="button" disabled>Run</button>
+      </div>
+      <p class="note">Signed 32-bit FHE integer (−2,147,483,648 … 2,147,483,647). <strong>enc</strong> = encrypted input, <strong>imm</strong> = plaintext constant, <strong>k</strong> = plaintext shift amount.</p>
+      <div id="arithResult" class="result-box" style="display:none"></div>
+      <div id="ctSection" class="ct-section" style="display:none">
+        <h3>Ciphertexts</h3>
+        <div id="ctGrid" class="ct-grid"></div>
+      </div>
+    </div>
+
+    <!-- Float / Double Tab -->
+    <div class="tab-panel panel" id="tab-float" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
+      <div class="op-row" style="flex-wrap:wrap;gap:8px">
+        <div class="field">
+          <label for="fpOp">Operation</label>
+          <select id="fpOp">
+            <optgroup label="Arithmetic (a, b)">
+              <option value="fadd">FADD (a+b)</option>
+              <option value="fsub">FSUB (a−b)</option>
+              <option value="fmul">FMUL (a×b)</option>
+              <option value="fdiv">FDIV (a÷b)</option>
+              <option value="fmin">FMIN (min)</option>
+              <option value="fmax">FMAX (max)</option>
+              <option value="fcopysign">FCOPYSIGN (|a|·sign b)</option>
+            </optgroup>
+            <optgroup label="Unary (a only)">
+              <option value="fabs">FABS (|a|)</option>
+              <option value="fneg">FNEG (−a)</option>
+              <option value="ffloor">FFLOOR (⌊a⌋)</option>
+              <option value="fceil">FCEIL (⌈a⌉)</option>
+              <option value="fround">FROUND (round a)</option>
+              <option value="ftrunc">FTRUNC (trunc a)</option>
+            </optgroup>
+            <optgroup label="Compare (a, b) → 0/1">
+              <option value="flt">FLT (a&lt;b)</option>
+              <option value="fgt">FGT (a&gt;b)</option>
+              <option value="fle">FLE (a≤b)</option>
+              <option value="fge">FGE (a≥b)</option>
+              <option value="feq">FEQ (a=b)</option>
+              <option value="fne">FNE (a≠b)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fpA">A</label>
+          <input id="fpA" type="number" class="num-input" value="3.14" step="any">
+        </div>
+        <div class="field">
+          <label for="fpB">B</label>
+          <input id="fpB" type="number" class="num-input" value="2.0" step="any">
+        </div>
+        <button id="runFpBtn" type="button" disabled>Run</button>
+      </div>
+      <p class="note">FHE16 bit-decomposed IEEE-754 single-precision (f32) over encrypted values: arithmetic (+ − × ÷, min/max/copysign), unary (abs/neg/floor/ceil/round/trunc), and compares (&lt; &gt; ≤ ≥ = ≠ → 0/1). Bit-exact to CPU float.</p>
+      <div id="fpResult" class="result-box" style="display:none"></div>
+      <div id="fpCtSection" class="ct-section" style="display:none">
+        <h3>Ciphertexts</h3>
+        <div id="fpCtGrid" class="ct-grid"></div>
+      </div>
+    </div>
+
+    <section class="log-panel">
+      <div class="panel-head">
+        <h2>Runtime Log</h2>
+        <button id="clearLogButton" type="button">Clear</button>
+      </div>
+      <pre id="logOutput"></pre>
+    </section>
+  </main>
+  <script type="module" src="./playground.js"></script>
+</body>
+</html>
