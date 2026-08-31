@@ -3,7 +3,7 @@
 
 // Modification counter — incremented each time this file is changed.
 // Check the startup log to confirm a new version is loaded in the browser.
-const FHE16_JS_MOD_CNT = 56;
+const FHE16_JS_MOD_CNT = 57;
 
 // avx8 (pure JS) is appended as final fallback. Auto mode keeps browser-specific
 // ordering so Chrome/Edge, Safari, and Firefox can each use the best known path.
