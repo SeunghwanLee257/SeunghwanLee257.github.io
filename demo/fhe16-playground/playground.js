@@ -1,4 +1,4 @@
-import { availableFHE16Builds, loadFHE16Worker } from './dist/fhe16-web.mjs?v=54';
+import { availableFHE16Builds, loadFHE16Worker } from './dist/fhe16-web.mjs?v=55';
 
 // op metadata: inputs = 'c'(unary) | 'cc'(binary enc,enc) | 'ci'/'ck'(enc,plaintext) | 'ccc'(ternary)
 const OP_META = {
