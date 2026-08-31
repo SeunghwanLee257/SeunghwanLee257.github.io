@@ -3,7 +3,7 @@
 
 // Modification counter — incremented each time this file is changed.
 // Check the startup log to confirm a new version is loaded in the browser.
-const FHE16_JS_MOD_CNT = 55;
+const FHE16_JS_MOD_CNT = 56;
 
 // avx8 (pure JS) is appended as final fallback. Auto mode keeps browser-specific
 // ordering so Chrome/Edge, Safari, and Firefox can each use the best known path.
@@ -17,7 +17,7 @@ const SAFARI_FASTEST_BUILD_ORDER = ['avx7', 'avx6', 'avx9', 'avx8'];
 const FIREFOX_BUILD_ORDER = ['avx7', 'avx6', 'avx9', 'avx8'];
 const SINGLE_THREAD_WASM_BUILD_ORDER = ['avx6st', 'avx9st', 'avx8'];
 
-const FHE16_MAX_WASM_THREADS = 256;
+const FHE16_MAX_WASM_THREADS = 16;
 const FHE16_DEFAULT_WASM_THREADS = 8;
 
 function resolveThreadPolicy(requested = 'auto', pthreads = true) {
