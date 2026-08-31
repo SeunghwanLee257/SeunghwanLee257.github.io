@@ -1,7 +1,7 @@
 // Bump together with FHE16_JS_MOD_CNT in fhe16-worker.js whenever loader or
 // deployed artifacts change. It versions the classic Workers and sidecars so
 // production can use normal HTTP caching without mixing releases.
-const FHE16_ASSET_VERSION = '53';
+const FHE16_ASSET_VERSION = '54';
 
 // avx8 (pure JS, no WebAssembly) is always the final fallback. Auto mode keeps
 // browser-specific ordering so Chrome/Edge, Safari, and Firefox can each pick
