@@ -392,3 +392,8 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* block-level language toggle (paragraphs, lists) */
+.ko-only-b { display: none !important; }
+.lang-ko .ko-only-b { display: revert !important; }
+.lang-ko .en-only-b { display: none !important; }

@@ -6,8 +6,8 @@
   <title>FHE16 Playground</title>
   <link rel="icon" href="data:,">
   <script src="./coi-serviceworker.js"></script>
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./i18n.js"></script>
+  <link rel="stylesheet" href="./styles.css?v=53">
+  <script src="./i18n.js?v=53"></script>
   <style>
     .tab-bar {
       display: flex;
@@ -129,38 +129,53 @@
     <section class="hero" style="min-height:200px">
       <div class="hero-copy">
         <p class="eyebrow">FHE16 WASM</p>
-        <h1>Gate &amp; Arithmetic Playground</h1>
-        <p class="summary">Run boolean gates, integer arithmetic, and floating-point operations on <strong>encrypted data</strong> — directly in your browser, powered by FHE16 WebAssembly.</p>
-        <p class="summary"><strong>UNSAFE demo artifact:</strong> the public builds intentionally use zero-error test parameters and provide no cryptographic security. Do not use sensitive data.</p>
+        <h1 data-en="Gate &amp; Arithmetic Playground" data-ko="게이트 · 산술 플레이그라운드">Gate &amp; Arithmetic Playground</h1>
+        <p class="summary en-only-b">Run boolean gates, integer arithmetic, and floating-point operations on <strong>encrypted data</strong> — directly in your browser, powered by FHE16 WebAssembly.</p><p class="summary ko-only-b">불리언 게이트, 정수 산술, 부동소수 연산을 <strong>암호화된 데이터</strong> 위에서 — 브라우저에서 바로, FHE16 WebAssembly로 실행합니다.</p>
+        <p class="summary en-only-b"><strong>UNSAFE demo artifact:</strong> the public builds intentionally use zero-error test parameters and provide no cryptographic security. Do not use sensitive data.</p><p class="summary ko-only-b"><strong>UNSAFE 데모 아티팩트:</strong> 공개 빌드는 의도적으로 오류 0 테스트 파라미터를 사용해 암호학적 보안이 전혀 없습니다. 민감한 데이터는 넣지 마세요.</p>
       </div>
     </section>
 
     <section class="panel" style="margin-bottom:0;border-bottom:none;border-radius:8px 8px 0 0">
-      <h2 style="font-size:14px;font-weight:700;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)">How It Works</h2>
-      <p style="margin:0 0 10px;font-size:14px;line-height:1.6">
+      <h2 style="font-size:14px;font-weight:700;margin:0 0 12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)" data-en="How It Works" data-ko="작동 방식">How It Works</h2>
+      <p class="en-only-b" style="margin:0 0 10px;font-size:14px;line-height:1.6">
         <strong>Fully Homomorphic Encryption (FHE)</strong> lets you compute on encrypted integers and floats without ever decrypting them.
         In a secure production build, the compute party operates on ciphertexts without the plaintext inputs.
         This public demo is not such a security build and decrypts results locally for verification.
         Results are bit-exact to ordinary plaintext arithmetic.
       </p>
-      <ol style="margin:0 0 10px;padding-left:1.4em;font-size:14px;line-height:2">
+      <p class="ko-only-b" style="margin:0 0 10px;font-size:14px;line-height:1.6">
+        <strong>완전동형암호(FHE)</strong>는 암호화된 정수·실수를 한 번도 복호화하지 않고 그대로 계산하게 해줍니다.
+        실제 보안 빌드에서는 연산 주체가 평문 입력 없이 암호문만으로 계산합니다.
+        이 공개 데모는 그런 보안 빌드가 아니며, 검증을 위해 결과를 로컬에서 복호화해 보여줍니다.
+        결과는 일반 평문 산술과 bit-exact로 일치합니다.
+      </p>
+      <ol class="en-only-b" style="margin:0 0 10px;padding-left:1.4em;font-size:14px;line-height:2">
         <li><strong>Load Module</strong> — select a build and click <em>Load Module</em> to fetch the WASM binary (~10 MB). Wait for "Module ready".</li>
         <li><strong>Generate Keys</strong> — click <em>Generate Keys</em> to create the bootstrapping key set. This takes <strong>10–30 seconds</strong> and only needs to be done once per session.</li>
         <li><strong>Pick a tab</strong> — <em>Boolean Gates</em> for single-bit ops, <em>Arithmetic</em> for 32-bit integers, <em>Float</em> for IEEE-754 f32.</li>
         <li><strong>Enter values and Run</strong> — inputs are encrypted on the fly, the operation runs over ciphertexts, and the decrypted result is shown alongside the expected plaintext value.</li>
       </ol>
-      <p style="margin:0;font-size:13px;color:var(--muted)">
+      <ol class="ko-only-b" style="margin:0 0 10px;padding-left:1.4em;font-size:14px;line-height:2">
+        <li><strong>모듈 로드</strong> — 빌드를 고르고 <em>모듈 로드</em>를 눌러 WASM 바이너리(~10 MB)를 받으세요. "Module ready"가 뜰 때까지 기다립니다.</li>
+        <li><strong>키 생성</strong> — <em>키 생성</em>을 눌러 부트스트래핑 키셋을 만듭니다. <strong>10~30초</strong> 걸리며 세션당 한 번만 하면 됩니다.</li>
+        <li><strong>탭 선택</strong> — <em>불리언 게이트</em>는 단일 비트, <em>정수 산술</em>은 32-bit 정수, <em>실수</em>는 IEEE-754 f32.</li>
+        <li><strong>값 입력 후 실행</strong> — 입력은 즉석에서 암호화되고, 연산은 암호문 위에서 수행되며, 복호화된 결과가 기대 평문값과 함께 표시됩니다.</li>
+      </ol>
+      <p class="en-only-b" style="margin:0;font-size:13px;color:var(--muted)">
         The <em>Runtime Log</em> below shows per-operation timings and any diagnostics.
+      </p>
+      <p class="ko-only-b" style="margin:0;font-size:13px;color:var(--muted)">
+        아래 <em>런타임 로그</em>에 연산별 시간과 진단이 표시됩니다.
       </p>
     </section>
 
     <section class="toolbar" aria-label="Module controls">
       <div class="field">
-        <label for="buildSelect">Build</label>
+        <label for="buildSelect" data-en="Build" data-ko="빌드">Build</label>
         <select id="buildSelect"></select>
       </div>
       <div class="field">
-        <label for="threadSelect">FHE workers</label>
+        <label for="threadSelect" data-en="FHE workers" data-ko="FHE 워커">FHE workers</label>
         <select id="threadSelect">
           <option value="auto">Auto (device)</option>
           <option value="1">1</option>
@@ -170,23 +185,23 @@
           <option value="16">16</option>
         </select>
       </div>
-      <button id="loadButton" type="button">Load Module</button>
-      <button id="keygenButton" type="button" disabled>Generate Keys</button>
-      <button id="evalKeyDlButton" type="button" disabled>⬇ Eval Key</button>
-      <div class="status" id="statusText">Idle</div>
+      <button id="loadButton" type="button" data-en="Load Module" data-ko="모듈 로드">Load Module</button>
+      <button id="keygenButton" type="button" disabled data-en="Generate Keys" data-ko="키 생성">Generate Keys</button>
+      <button id="evalKeyDlButton" type="button" disabled data-en="⬇ Eval Key" data-ko="⬇ 평가키">⬇ Eval Key</button>
+      <div class="status" id="statusText" data-en="Idle" data-ko="대기">Idle</div>
     </section>
 
     <div class="tab-bar">
-      <button class="tab-btn active" data-tab="gate">Boolean Gates</button>
-      <button class="tab-btn" data-tab="arith">Arithmetic</button>
-      <button class="tab-btn" data-tab="float">Float (f32)</button>
+      <button class="tab-btn active" data-tab="gate" data-en="Boolean Gates" data-ko="불리언 게이트">Boolean Gates</button>
+      <button class="tab-btn" data-tab="arith" data-en="Arithmetic" data-ko="정수 산술">Arithmetic</button>
+      <button class="tab-btn" data-tab="float" data-en="Float (f32)" data-ko="실수 (f32)">Float (f32)</button>
     </div>
 
     <!-- Boolean Gates Tab -->
     <div class="tab-panel active panel" id="tab-gate" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
       <div class="op-row">
         <div class="field">
-          <label for="gateOp">Gate</label>
+          <label for="gateOp" data-en="Gate" data-ko="게이트">Gate</label>
           <select id="gateOp">
             <option value="AND">AND</option>
             <option value="OR">OR</option>
@@ -202,7 +217,7 @@
           <input id="gateB" type="checkbox">
           <span>B</span>
         </label>
-        <button id="runGateBtn" type="button" disabled>Run Gate</button>
+        <button id="runGateBtn" type="button" disabled data-en="Run Gate" data-ko="게이트 실행">Run Gate</button>
       </div>
       <div id="gateResult" class="result-box" style="display:none"></div>
     </div>
@@ -211,7 +226,7 @@
     <div class="tab-panel panel" id="tab-arith" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
       <div class="op-row" style="flex-wrap:wrap;gap:8px">
         <div class="field">
-          <label for="arithOp">Operation (signed 32-bit)</label>
+          <label for="arithOp" data-en="Operation (signed 32-bit)" data-ko="연산 (부호 있는 32-bit)">Operation (signed 32-bit)</label>
           <select id="arithOp">
             <optgroup label="Arithmetic (enc, enc)">
               <option value="add">ADD</option>
@@ -280,23 +295,23 @@
           </select>
         </div>
         <div class="field">
-          <label for="arithA">A (enc)</label>
+          <label for="arithA" data-en="A (enc)" data-ko="A (암호)">A (enc)</label>
           <input id="arithA" type="number" class="num-input" value="42">
         </div>
         <div class="field" id="arithBField">
-          <label for="arithB" id="arithBLabel">B (enc)</label>
+          <label for="arithB" id="arithBLabel" data-en="B (enc)" data-ko="B (암호)">B (enc)</label>
           <input id="arithB" type="number" class="num-input" value="13">
         </div>
         <div class="field" id="arithCField" style="display:none">
-          <label for="arithC">C (enc)</label>
+          <label for="arithC" data-en="C (enc)" data-ko="C (암호)">C (enc)</label>
           <input id="arithC" type="number" class="num-input" value="5">
         </div>
-        <button id="runArithBtn" type="button" disabled>Run</button>
+        <button id="runArithBtn" type="button" disabled data-en="Run" data-ko="실행">Run</button>
       </div>
-      <p class="note">Signed 32-bit FHE integer (−2,147,483,648 … 2,147,483,647). <strong>enc</strong> = encrypted input, <strong>imm</strong> = plaintext constant, <strong>k</strong> = plaintext shift amount.</p>
+      <p class="note en-only-b">Signed 32-bit FHE integer (−2,147,483,648 … 2,147,483,647). <strong>enc</strong> = encrypted input, <strong>imm</strong> = plaintext constant, <strong>k</strong> = plaintext shift amount.</p><p class="note ko-only-b">부호 있는 32-bit FHE 정수 (−2,147,483,648 … 2,147,483,647). <strong>enc</strong> = 암호화된 입력, <strong>imm</strong> = 평문 상수, <strong>k</strong> = 평문 시프트 양.</p>
       <div id="arithResult" class="result-box" style="display:none"></div>
       <div id="ctSection" class="ct-section" style="display:none">
-        <h3>Ciphertexts</h3>
+        <h3 data-en="Ciphertexts" data-ko="암호문">Ciphertexts</h3>
         <div id="ctGrid" class="ct-grid"></div>
       </div>
     </div>
@@ -305,7 +320,7 @@
     <div class="tab-panel panel" id="tab-float" style="margin-top:0;border-top:none;border-radius:0 8px 8px 8px">
       <div class="op-row" style="flex-wrap:wrap;gap:8px">
         <div class="field">
-          <label for="fpOp">Operation</label>
+          <label for="fpOp" data-en="Operation" data-ko="연산">Operation</label>
           <select id="fpOp">
             <optgroup label="Arithmetic (a, b)">
               <option value="fadd">FADD (a+b)</option>
@@ -342,20 +357,20 @@
           <label for="fpB">B</label>
           <input id="fpB" type="number" class="num-input" value="2.0" step="any">
         </div>
-        <button id="runFpBtn" type="button" disabled>Run</button>
+        <button id="runFpBtn" type="button" disabled data-en="Run" data-ko="실행">Run</button>
       </div>
-      <p class="note">FHE16 bit-decomposed IEEE-754 single-precision (f32) over encrypted values: arithmetic (+ − × ÷, min/max/copysign), unary (abs/neg/floor/ceil/round/trunc), and compares (&lt; &gt; ≤ ≥ = ≠ → 0/1). Bit-exact to CPU float.</p>
+      <p class="note en-only-b">FHE16 bit-decomposed IEEE-754 single-precision (f32) over encrypted values: arithmetic (+ − × ÷, min/max/copysign), unary (abs/neg/floor/ceil/round/trunc), and compares (&lt; &gt; ≤ ≥ = ≠ → 0/1). Bit-exact to CPU float.</p><p class="note ko-only-b">FHE16 비트분해 IEEE-754 단정밀도(f32) 암호문 연산: 산술(+ − × ÷, min/max/copysign), 단항(abs/neg/floor/ceil/round/trunc), 비교(&lt; &gt; ≤ ≥ = ≠ → 0/1). CPU float와 bit-exact.</p>
       <div id="fpResult" class="result-box" style="display:none"></div>
       <div id="fpCtSection" class="ct-section" style="display:none">
-        <h3>Ciphertexts</h3>
+        <h3 data-en="Ciphertexts" data-ko="암호문">Ciphertexts</h3>
         <div id="fpCtGrid" class="ct-grid"></div>
       </div>
     </div>
 
     <section class="log-panel">
       <div class="panel-head">
-        <h2>Runtime Log</h2>
-        <button id="clearLogButton" type="button">Clear</button>
+        <h2 data-en="Runtime Log" data-ko="런타임 로그">Runtime Log</h2>
+        <button id="clearLogButton" type="button" data-en="Clear" data-ko="지우기">Clear</button>
       </div>
       <pre id="logOutput"></pre>
     </section>

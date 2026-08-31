@@ -43,7 +43,7 @@
 
   // Apply stored preference immediately (before DOMContentLoaded) to avoid flash
   var stored = localStorage.getItem(LANG_KEY);
-  if (stored === 'ko') {
+  if (stored !== 'en') {  // ko-first: default Korean unless user explicitly chose English
     document.documentElement.classList.add('lang-ko');
   }
 }());
