@@ -1,7 +1,7 @@
 // Bump together with FHE16_JS_MOD_CNT in fhe16-worker.js whenever loader or
 // deployed artifacts change. It versions the classic Workers and sidecars so
 // production can use normal HTTP caching without mixing releases.
-const FHE16_ASSET_VERSION = '52';
+const FHE16_ASSET_VERSION = '53';
 
 // avx8 (pure JS, no WebAssembly) is always the final fallback. Auto mode keeps
 // browser-specific ordering so Chrome/Edge, Safari, and Firefox can each pick
@@ -39,7 +39,7 @@ function resolveThreadPolicy(requested = 'auto', pthreads = true) {
   // high-core servers. Low-memory devices get a smaller automatic default.
   const capacity = Math.max(1, Math.min(
     FHE16_MAX_WASM_THREADS,
-    hardwareConcurrency > 1 ? hardwareConcurrency - 1 : 1,
+    hardwareConcurrency,
   ));
   const engine = browserEngine();
   const highEndChromium = (engine === 'chromium' || engine === 'edge')
@@ -54,7 +54,7 @@ function resolveThreadPolicy(requested = 'auto', pthreads = true) {
     ? 2 : deviceMemoryGiB !== null && deviceMemoryGiB <= 4
       ? 4 : highEndChromium || highEndFirefox
         ? FHE16_MAX_WASM_THREADS : FHE16_DEFAULT_WASM_THREADS;
-  const automatic = Math.max(1, Math.min(capacity, memoryCeiling));
+  const automatic = capacity; // use all logical cores (build-capped); no -1, no memory reduction
 
   if (requested === undefined || requested === null || requested === 'auto') {
     return {
