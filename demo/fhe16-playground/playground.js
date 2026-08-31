@@ -123,6 +123,10 @@ function log(msg) {
 
 function setStatus(text) { els.statusText.textContent = text; }
 
+// Runtime log/status follow the KOR/EN toggle (i18n.js sets .lang-ko).
+const isKo = () => document.documentElement.classList.contains('lang-ko');
+const L = (ko, en) => (isKo() ? ko : en);
+
 function setBusy(b) {
   busy = b;
   els.loadButton.disabled = b || Boolean(fhe);
@@ -218,7 +222,7 @@ function rcard(label, value, extra = '') {
 async function loadModule() {
   if (fhe || busy) return;
   setBusy(true);
-  setStatus('Loading…');
+  setStatus(L('로딩 중…','Loading…'));
   try {
     const build = els.buildSelect.value;
     const selectedThreads = els.threadSelect.value;
@@ -231,8 +235,8 @@ async function loadModule() {
       onLog: log,
       onStatus: (t) => log(`status: ${t}`),
     });
-    setStatus('Module loaded');
-    log(`Loaded ${fhe.version} / ${fhe.metadata.label}`);
+    setStatus(L('모듈 로드 완료','Module loaded'));
+    log(`${L('로드됨','Loaded')} ${fhe.version} / ${fhe.metadata.label}`);
     // For Auto Stable/Fastest, show the build that actually resolved instead of "Auto…".
     if ((build === 'auto' || build === 'auto-fastest') && fhe.metadata?.build) {
       const opt = [...els.buildSelect.options].find((o) => o.value === fhe.metadata.build);
@@ -243,7 +247,7 @@ async function loadModule() {
     }
   } catch (e) {
     fhe = null;
-    setStatus('Load failed');
+    setStatus(L('로드 실패','Load failed'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
@@ -253,14 +257,14 @@ async function loadModule() {
 async function generateKeys() {
   if (!fhe || fhe.keysReady || busy) return;
   setBusy(true);
-  setStatus('Generating keys…');
-  log('FHE16_GenEval started');
+  setStatus(L('키 생성 중…','Generating keys…'));
+  log(L('FHE16_GenEval 시작','FHE16_GenEval started'));
   await yieldFrame();
   try {
     const ms = await fhe.generateKeys();
     const threadInfo = await fhe.getThreadInfo();
-    setStatus('Keys ready');
-    log(`Keys generated in ${ms.toFixed(0)} ms`);
+    setStatus(L('키 준비 완료','Keys ready'));
+    log(`${L('키 생성 완료','Keys generated in')} ${ms.toFixed(0)} ms`);
     const mode = threadInfo.pthreads ? 'pthreads' : 'single-thread fallback';
     log(`Threads: ${threadInfo.threadCount} worker(s) / ${threadInfo.hardwareConcurrency} logical core(s) (${mode})`);
     log(`Emscripten pthread pool: ${threadInfo.pthreadPoolSize ?? 0} slot(s)`);
@@ -268,7 +272,7 @@ async function generateKeys() {
     if (p) log(`Thread policy: ${p.mode}, requested=${p.requested}, capacity=${p.capacity}, deviceMemory=${p.deviceMemoryGiB ?? 'unknown'} GiB`);
     if (threadInfo.linearMemoryBytes) log(`Linear memory: ${fmtBytes(threadInfo.linearMemoryBytes)}`);
   } catch (e) {
-    setStatus('Keygen failed');
+    setStatus(L('키 생성 실패','Keygen failed'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
@@ -281,7 +285,7 @@ async function runGate() {
   const op = els.gateOp.value;
   const a = els.gateA.checked ? 1 : 0;
   const b = els.gateB.checked ? 1 : 0;
-  setStatus(`Running ${op}…`);
+  setStatus(`${L('실행 중','Running')} ${op}…`);
   await yieldFrame();
   try {
     const r = await fhe.runGate(op, a, b);
@@ -297,7 +301,7 @@ async function runGate() {
       rcard('Result', r.pass ? 'PASS' : 'FAIL', r.pass ? 'pass-card' : 'fail-card');
     setStatus(r.pass ? 'PASS' : 'FAIL');
   } catch (e) {
-    setStatus('Error');
+    setStatus(L('오류','Error'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
@@ -312,10 +316,10 @@ async function runArith() {
   const b = meta !== 'c' ? (Number(els.arithB.value) | 0) : 0;
   const c = meta === 'ccc' ? (Number(els.arithC.value) | 0) : 0;
   if (op === 'sdiv' || op === 'udiv' || op === 'const_sdiv' || op === 'const_smod' || op === 'const_udiv' || op === 'const_umod') {
-    log(`WARNING: ${op} (32-bit FHE division) takes several minutes — browser may appear frozen.`);
+    log(`${L('경고','WARNING')}: ${op} ${L('(32-bit FHE 나눗셈)은 수 분이 걸립니다 — 브라우저가 멈춘 것처럼 보일 수 있습니다.','(32-bit FHE division) takes several minutes — browser may appear frozen.')}`);
   }
   setBusy(true);
-  setStatus(`Running ${op}…`);
+  setStatus(`${L('실행 중','Running')} ${op}…`);
   await yieldFrame();
   try {
     const r = await fhe.runOp(op, a, b, c);
@@ -354,7 +358,7 @@ async function runArith() {
 
     setStatus(pass === null ? 'Done' : pass ? 'PASS' : 'FAIL');
   } catch (e) {
-    setStatus('Error');
+    setStatus(L('오류','Error'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
@@ -407,7 +411,7 @@ async function runFp() {
   const a = Number(els.fpA.value);
   const b = arity === 2 ? Number(els.fpB.value) : 0;
   setBusy(true);
-  setStatus(`Running ${op} (${fptype})…`);
+  setStatus(`${L('실행 중','Running')} ${op} (${fptype})…`);
   await yieldFrame();
   try {
     const r = await fhe.runFpOp(op, a, b, fptype);
@@ -445,7 +449,7 @@ async function runFp() {
     }
     setStatus(pass ? 'PASS' : 'FAIL');
   } catch (e) {
-    setStatus('Error');
+    setStatus(L('오류','Error'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
@@ -519,19 +523,19 @@ els.fpCtGrid.addEventListener('click', handleCtDlClick);
 els.evalKeyDlButton.addEventListener('click', async () => {
   if (!fhe?.keysReady || busy) return;
   setBusy(true);
-  setStatus('Serializing eval key…');
-  log('Eval key 직렬화 시작…');
+  setStatus(L('평가키 직렬화 중…','Serializing eval key…'));
+  log(L('평가키 직렬화 시작…','Serializing eval key started…'));
   try {
     const bytes = await fhe.saveEvalKey();
-    log(`Eval key ${fmtBytes(bytes.length)} — 다운로드 시작`);
+    log(`${L('평가키','Eval key')} ${fmtBytes(bytes.length)} — ${L('다운로드 시작','download started')}`);
     downloadBytes(bytes, 'fhe16_evalkey.bin');
-    setStatus('Keys ready');
+    setStatus(L('키 준비 완료','Keys ready'));
   } catch (e) {
-    setStatus('Error');
+    setStatus(L('오류','Error'));
     log(`ERROR: ${e.message}`);
   } finally {
     setBusy(false);
   }
 });
 
-log('Ready. Load the FHE16 module and generate keys to start.');
+log(L('준비 완료. FHE16 모듈을 로드하고 키를 생성해 시작하세요.','Ready. Load the FHE16 module and generate keys to start.'));
