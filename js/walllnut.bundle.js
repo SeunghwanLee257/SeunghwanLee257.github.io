@@ -684,7 +684,7 @@ if (location.hash) history.replaceState(null, '', location.pathname + location.s
       var tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
       if(tz==='Asia/Seoul') return 'ko';
     }catch(e){}
-    return 'en';
+    return 'ko';
   }
   function getInitialLang(){ return getUrlLang() || getSavedLang() || inferRegionalLang(); }
 

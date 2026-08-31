@@ -22,7 +22,7 @@
     try{
       if(Intl.DateTimeFormat().resolvedOptions().timeZone === "Asia/Seoul") return "ko";
     }catch(e){}
-    return "en";
+    return "ko";
   }
 
   function setAttrCopy(selector, attrName, setter){

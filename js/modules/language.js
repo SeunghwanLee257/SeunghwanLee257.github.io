@@ -568,7 +568,7 @@ function inferRegionalLanguage() {
     // Ignore timezone detection failures.
   }
 
-  return 'en';
+  return 'ko';
 }
 
 function getInitialLanguage() {
