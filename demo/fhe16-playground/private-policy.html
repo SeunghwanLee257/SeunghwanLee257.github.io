@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Private Policy Evaluation SDK | waLLLnut</title>
+  <link rel="stylesheet" href="./styles.css?v=58">
+  <script src="./i18n.js?v=58"></script>
+  <style>
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 12px; display:flex; align-items:center; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    .hero.private-hero { grid-template-columns: minmax(0, 1fr); min-height: 260px; border-bottom: 1px solid var(--line); padding-bottom: 26px; }
+    .hero.private-hero .summary { max-width: 860px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .hero-actions a { text-decoration: none; }
+    .primary-cta { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .primary-cta:hover { background: var(--accent-strong); color: #fff !important; }
+    .section { margin-top: 18px; }
+    .band { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 18px; }
+    .band h2, .band h3 { margin: 0; }
+    .band-sub { margin: 6px 0 0; color: var(--muted); line-height: 1.5; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .fit-card, .proof-card, .price-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 14px; }
+    .fit-card strong, .proof-card strong, .price-card strong { display: block; font-size: 15px; margin-bottom: 6px; }
+    .score { display: inline-flex; align-items: center; justify-content: center; min-width: 64px; min-height: 32px; border-radius: 999px; background: #e7f4f2; color: var(--accent-strong); font-weight: 900; margin-bottom: 10px; }
+    .score.warn { background: #fef3d6; color: #99640a; }
+    .score.bad { background: #f8e5e5; color: var(--bad); }
+    .flow { display: grid; grid-template-columns: 1fr 72px 1fr 72px 1fr; gap: 10px; align-items: stretch; margin-top: 14px; }
+    .flow-box { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcff; min-height: 132px; }
+    .flow-box h3 { font-size: 15px; margin: 0 0 8px; }
+    .flow-box ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 900; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; color: var(--muted); background: #fff; font-weight: 700; }
+    .pill.good { color: var(--accent-strong); border-color: #b8e0db; background: #e7f4f2; }
+    .pill.warn { color: #8f5d10; border-color: #f2d694; background: #fff8e5; }
+    .demo-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr); gap: 14px; align-items: start; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+    .tab { flex: 1; min-height: 44px; border-radius: 8px; font-weight: 800; }
+    .tab.active { background: #e7f4f2; border-color: var(--accent); color: var(--accent-strong); }
+    .demo-panel { display: none; }
+    .demo-panel.active { display: block; }
+    .input-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .input-field label { display: block; color: var(--muted); font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+    .input-field select { width: 100%; min-height: 42px; }
+    .switch-list { display: grid; gap: 8px; margin-top: 14px; }
+    .switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; }
+    .switch span { font-weight: 700; }
+    .switch small { color: var(--muted); display: block; margin-top: 2px; }
+    .switch input { width: 20px; height: 20px; accent-color: var(--accent); }
+    .run-btn { width: 100%; min-height: 48px; margin-top: 14px; background: var(--accent); color: #fff; border-color: var(--accent); }
+    .run-btn:hover:not(:disabled) { background: var(--accent-strong); color: #fff; }
+    .run-btn:disabled { background: #edf1f7; color: #8a94a6; border-color: var(--line); }
+    .steps { display: grid; gap: 8px; margin-top: 12px; }
+    .step { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; background: #fbfcff; }
+    .step-num { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border: 2px solid var(--line); border-radius: 50%; color: var(--muted); font-size: 11px; font-weight: 900; flex-shrink: 0; }
+    .step.active .step-num { border-color: #e8a020; color: #a86900; background: #fff8e8; }
+    .step.done .step-num { border-color: var(--good); background: var(--good); color: #fff; }
+    .step-label { font-size: 13px; font-weight: 700; line-height: 1.35; }
+    .result-box { margin-top: 12px; border: 2px solid var(--line); border-radius: 8px; padding: 18px; background: #fff; }
+    .result-box.pass { border-color: var(--good); background: #f0fbf4; }
+    .result-box.fail { border-color: var(--bad); background: #fef0f0; }
+    .result-title { font-size: 28px; font-weight: 900; line-height: 1; }
+    .result-detail { color: var(--muted); margin-top: 8px; line-height: 1.5; }
+    .learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .learn-grid div { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 10px; }
+    .learn-grid strong { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    #runtimeLog { overflow: auto; min-height: 140px; max-height: 280px; white-space: pre-wrap; background: #101820; color: #d7f7ef; border-radius: 8px; padding: 12px; font-size: 12px; line-height: 1.45; }
+    .small-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .small-table th, .small-table td { border-bottom: 1px solid var(--line); padding: 9px 8px; text-align: left; font-size: 13px; }
+    .small-table th { color: var(--muted); font-size: 12px; }
+    .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .verdict-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 14px; }
+    .verdict-card h3 { font-size: 15px; margin: 0 0 8px; }
+    .verdict-card ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.6; font-size: 13px; }
+    .deal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .deal-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 14px; }
+    .deal-card h3 { font-size: 15px; margin: 0 0 8px; }
+    .deal-card dl { margin: 0; display: grid; gap: 8px; }
+    .deal-card dt { font-size: 11px; color: var(--muted); font-weight: 900; text-transform: uppercase; }
+    .deal-card dd { margin: 2px 0 0; font-size: 13px; line-height: 1.45; }
+    .runtime-note { border-left: 4px solid #e8a020; background: #fff8e5; border-radius: 8px; padding: 12px 14px; margin-top: 12px; color: #604000; font-size: 13px; line-height: 1.55; }
+    @media (max-width: 900px) { .grid-3, .grid-2, .demo-layout, .flow, .input-grid, .verdict-grid, .deal-grid { grid-template-columns: 1fr; } .flow-arrow { min-height: 28px; } }
+    .result-box.cipher-pending { background: #0e1822; border-color: #2a4a6b; }
+    .cipher-hex-label { font-size: 12px; font-weight: 700; color: #7ec8e3; margin-bottom: 8px; }
+    .cipher-hex-dump { font-family: monospace; font-size: 11px; color: #a0d4f0; background: #060d14; border-radius: 6px; padding: 10px 12px; white-space: pre; line-height: 1.6; max-height: 160px; overflow-y: auto; margin: 0 0 12px; }
+    .decrypt-reveal-btn { padding: 7px 16px; font-size: 13px; font-weight: 700; border: 1px solid #3b82f6; border-radius: 6px; background: transparent; color: #3b82f6; cursor: pointer; }
+    .decrypt-reveal-btn:hover { background: #3b82f6; color: #fff; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="toolbar" style="gap:8px;margin-bottom:16px">
+      <a href="./index.html" style="text-decoration:none"><button type="button"><span class="en-only">← Main</span><span class="ko-only">← 메인</span></button></a>
+      <a href="./walllnut-hr.html" style="text-decoration:none"><button type="button">waLLLnut HR</button></a>
+      <a href="./index.html" style="text-decoration:none"><button type="button">Playground</button></a>
+      <button class="lang-toggle" type="button" style="margin-left:auto">한국어</button>
+    </nav>
+
+    <section class="hero private-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">waLLLnut Private Policy Evaluation</p>
+        <h1><span class="en-only">Pre-decision SDK that hides both user data and server screening criteria</span><span class="ko-only">사용자 데이터와 서버 심사 기준을 둘 다 숨기는 사전결정 SDK</span></h1>
+        <p class="summary"><span class="en-only">FHE16 apps split into server-side FHE (the server computes on ciphertext) and browser-side FHE (the browser computes on ciphertext and sends only the result to the server). This page is a browser-side private policy demo, but location search and ad/offer matching fit server-side FHE better.</span><span class="ko-only">FHE16 앱은 서버가 암호문을 계산하는 server-side FHE와 브라우저가 암호문을 계산한 뒤 결과를 서버에 보내는 browser-side FHE로 나뉩니다. 이 페이지는 browser-side private policy demo지만, 위치 검색과 광고/offer matching은 server-side FHE가 더 맞습니다.</span></p>
+      </div>
+    </section>
+
+    <section class="section grid-3">
+      <div class="fit-card"><span class="score">35%</span><strong><span class="en-only">Finance/insurance prequalification</span><span class="ko-only">금융/보험 prequalification</span></strong><p class="band-sub"><span class="en-only">The first market to sell. A clear two-party secret problem: receive less raw financial data and hide the lender threshold.</span><span class="ko-only">가장 먼저 팔 시장. raw 금융 데이터를 덜 받고, lender threshold도 숨기는 명확한 양쪽 비밀 문제가 있습니다.</span></p></div>
+      <div class="fit-card"><span class="score warn">30%</span><strong>EDR private rule evaluation</strong><p class="band-sub"><span class="en-only">Strong revenue signal but agent integration is heavy. Start with security vendors who have regulated-customer blockers.</span><span class="ko-only">돈 냄새는 강하지만 agent 통합이 무겁습니다. regulated customer blocker가 있는 보안 벤더부터 접근해야 합니다.</span></p></div>
+      <div class="fit-card"><span class="score bad">20%</span><strong><span class="en-only">Clinical trial private matching</span><span class="ko-only">임상시험 private matching</span></strong><p class="band-sub"><span class="en-only">The problem is real but CRO, IRB, and legal cycles are long — too slow for a first revenue market.</span><span class="ko-only">문제는 진짜지만 CRO, IRB, 법무 사이클이 길어 첫 매출 시장으로는 느립니다.</span></p></div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">FHE16 app mode classification</span><span class="ko-only">FHE16 앱 모드 분류</span></h2>
+      <p class="band-sub"><span class="en-only">The product story becomes clearest when you categorize apps by where computation happens. If the server holds the catalog/model/ranking, use server-side FHE. If the browser evaluates policy and sends only the result, use browser-side FHE.</span><span class="ko-only">앱을 계산 위치로 나눠야 제품 이야기가 선명해집니다. 서버가 catalog/model/ranking을 갖고 있으면 server-side FHE, 사용자의 브라우저에서 policy를 평가하고 결과만 서버가 받아야 하면 browser-side FHE입니다.</span></p>
+      <div class="deal-grid">
+        <div class="deal-card"><h3>Server-side FHE</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Server, GPU/FPGA, cloud worker, or FHE coprocessor computes on ciphertext.</span><span class="ko-only">서버, GPU/FPGA, cloud worker, FHE coprocessor가 암호문을 계산합니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Nearby restaurant/shop search without location sharing, privacy-preserving ads, offer eligibility, private ranking/recommendation.</span><span class="ko-only">위치 공유 없이 주변 음식점/매장 찾기, privacy-preserving ads, offer eligibility, private ranking/recommendation.</span></dd></div><div><dt>Why</dt><dd><span class="en-only">The server holds catalog, campaign, inventory, and ranking rules, so the browser only needs to encrypt and send location/query/profile.</span><span class="ko-only">서버가 catalog, campaign, inventory, ranking rule을 갖고 있으므로 브라우저는 위치/query/profile만 암호화해 보내면 됩니다.</span></dd></div></dl></div>
+        <div class="deal-card"><h3>Browser-side FHE</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Browser worker combines encrypted policy and user predicate.</span><span class="ko-only">브라우저 worker가 encrypted policy와 user predicate를 조합합니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Finance/insurance prequalification, clinical trial/HR self-check, consent-gated eligibility, endpoint local rule evaluation.</span><span class="ko-only">금융/보험 사전심사, 임상시험/HR self-check, consent-gated eligibility, endpoint local rule evaluation.</span></dd></div><div><dt>Why</dt><dd><span class="en-only">Server receives no raw user data, browser never sees server thresholds in plaintext, server receives only enc_result for decrypt/sign.</span><span class="ko-only">서버는 raw user data를 받지 않고, 브라우저는 서버 threshold를 평문으로 보지 않으며, 서버는 enc_result만 받아 decrypt/sign합니다.</span></dd></div></dl></div>
+        <div class="deal-card"><h3>Outsourced FHE / MPC hybrid</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Baseline is FHE outsourcing: external pool computes on ciphertext and public/template circuit without SK.</span><span class="ko-only">기본형은 외부 pool이 SK 없이 ciphertext와 공개/템플릿 circuit을 계산하는 FHE outsourcing입니다.</span></dd></div><div><dt>MPC line</dt><dd><span class="en-only">When the circuit itself or both inputs need stronger hiding, escalate to MPC, 2PC, PFE, or FHE+MPC hybrid.</span><span class="ko-only">회로 자체나 양쪽 입력을 더 강하게 숨겨야 하면 MPC, 2PC, PFE 또는 FHE+MPC hybrid로 넘어갑니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Heavy EDR/private rule evaluation, batch risk scoring, blockchain confidential execution, third-party audit compute.</span><span class="ko-only">무거운 EDR/private rule evaluation, batch risk scoring, blockchain confidential execution, third-party audit compute.</span></dd></div></dl></div>
+      </div>
+    </section>
+
+
+    <section class="section band">
+      <h2><span class="en-only">Honest sellability verdict</span><span class="ko-only">솔직한 sellability 판정</span></h2>
+      <p class="band-sub"><span class="en-only">Positioning this as a general-purpose browser FHE platform will not sell. The winning positioning is "private decisioning SDK" with computation limited to small predicate circuits.</span><span class="ko-only">이건 범용 브라우저 FHE 플랫폼으로 팔면 안 팔립니다. 팔리는 포장은 "private decisioning SDK"이고, 계산은 작은 predicate circuit으로 제한해야 합니다.</span></p>
+      <div class="verdict-grid">
+        <div class="verdict-card"><h3><span class="en-only">Sellable conditions</span><span class="ko-only">팔리는 조건</span></h3><ul><li><span class="en-only">The customer's actual revenue/approval is blocked due to data minimization requirements or model IP exposure</span><span class="ko-only">고객이 데이터 최소수집이나 모델 IP 노출 때문에 실제 매출/심사가 막혀 있음</span></li><li><span class="en-only">Result is small: yes/no, risk bucket, limit bucket</span><span class="ko-only">결과가 yes/no, risk bucket, limit bucket처럼 작음</span></li><li><span class="en-only">Policy fits within 10–50 predicates</span><span class="ko-only">정책이 10-50개 predicate 안에 들어옴</span></li><li><span class="en-only">Inputs can be received as signed claims or telemetry bits from issuer/API/device</span><span class="ko-only">입력은 issuer/API/device가 만든 signed claim 또는 telemetry bit로 받을 수 있음</span></li></ul></div>
+        <div class="verdict-card"><h3><span class="en-only">Unsellable conditions</span><span class="ko-only">안 팔리는 조건</span></h3><ul><li><span class="en-only">Trying to run 32-bit multiplication, division, or full model inference in browser</span><span class="ko-only">32-bit 곱셈, 나눗셈, full model inference를 브라우저에서 돌리려 함</span></li><li><span class="en-only">Requiring Level 3 PFE (server must fully hide the whole circuit) as MVP</span><span class="ko-only">서버가 회로 전체를 완전히 숨겨야 하는 Level 3 PFE를 MVP로 요구함</span></li><li><span class="en-only">Architecture requires trusting user-entered values directly</span><span class="ko-only">사용자가 직접 입력한 값을 믿어야 하는 구조임</span></li><li><span class="en-only">Approaching as a free PoC or research demo only</span><span class="ko-only">무료 PoC 또는 연구 데모로만 접근함</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Concrete sales scenarios</span><span class="ko-only">구체적 판매 시나리오</span></h2>
+      <div class="deal-grid">
+        <div class="deal-card"><h3><span class="en-only">Lender / Insurer</span><span class="ko-only">Lender / 보험사</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Receiving raw financial data at pre-screen creates consent, retention, and breach liability.</span><span class="ko-only">pre-screen 단계에서 raw 금융 데이터를 받으면 동의, 보관, 유출 책임이 커짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Return only a pre-approval bit and limit bucket using signed income/debt predicates + private lender policy.</span><span class="ko-only">signed income/debt predicate + private lender policy로 사전승인 bit와 한도 bucket만 반환.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">8–12 week PoC ₩30M–₩100M; production ₩150M–₩500M/year.</span><span class="ko-only">8-12주 PoC 3천만-1억원, production 1.5억-5억원/year.</span></dd></div></dl></div>
+        <div class="deal-card"><h3><span class="en-only">EDR / MDR vendor</span><span class="ko-only">EDR / MDR 벤더</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Deploying detection rules to customer endpoints makes rule reverse-engineering and bypass easier.</span><span class="ko-only">탐지 룰을 고객 endpoint에 배포하면 rule reverse engineering과 우회가 쉬워짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Hide endpoint telemetry bits; evaluate vendor rule pack as private policy; return only alert bucket.</span><span class="ko-only">endpoint telemetry bit는 숨기고, 벤더 rule pack은 private policy로 평가해 alert bucket만 반환.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">Regulated customer pilot ₩70M–₩200M; OEM SDK ₩200M–₩700M/year.</span><span class="ko-only">regulated customer pilot 7천만-2억원, OEM SDK 2억-7억원/year.</span></dd></div></dl></div>
+        <div class="deal-card"><h3><span class="en-only">CRO / Hospital network</span><span class="ko-only">CRO / 병원 네트워크</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Collecting PHI first for trial matching lengthens IRB, HIPAA, and DUA review.</span><span class="ko-only">trial matching에 PHI를 먼저 모으면 IRB, HIPAA, DUA 검토가 길어짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Compute only a match bit using lab/diagnosis predicate bits and private inclusion criteria.</span><span class="ko-only">lab/diagnosis predicate bit와 private inclusion criteria로 match bit만 계산.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">Research-funded pilot is possible but too slow for first revenue.</span><span class="ko-only">연구비 기반 pilot은 가능하지만 첫 매출 시장으로는 느림.</span></dd></div></dl></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Information only the server knows in production</span><span class="ko-only">운영 시 서버만 아는 정보</span></h2>
+      <p class="band-sub"><span class="en-only">This page is a demo — the worker simulates the server role. In actual production, this information never leaves the server process and HSM/secret store.</span><span class="ko-only">현재 페이지는 데모라 worker 안에서 서버 역할을 흉내냅니다. 실제 운영에서는 이 정보가 서버 프로세스와 HSM/secret store 밖으로 나가지 않습니다.</span></p>
+      <div class="verdict-grid">
+        <div class="verdict-card"><h3>Server-only</h3><ul><li>FHE secret key</li><li><span class="en-only">plaintext threshold, weight, detection rule</span><span class="ko-only">평문 threshold, weight, detection rule</span></li><li><span class="en-only">policy compiler source and versioned rule pack</span><span class="ko-only">policy compiler source와 versioned rule pack</span></li><li>decrypt API result, query budget, audit log</li></ul></div>
+        <div class="verdict-card"><h3>Browser-visible</h3><ul><li>public/evaluation key</li><li>encrypted policy blob</li><li>encrypted user predicate labels</li><li><span class="en-only">final result bit/bucket and server-signed receipt</span><span class="ko-only">최종 result bit/bucket과 서버 서명 receipt</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Why it sells technically</span><span class="ko-only">기술적으로 팔리는 이유</span></h2>
+      <p class="band-sub"><span class="en-only">Plain local JS exposes server rules. The FHE16 server-key structure treats both user input and server thresholds as ciphertext while keeping the secret key and plaintext policy on the server. Full circuit hiding is deferred to 2PC/PFE phase 2.</span><span class="ko-only">단순 local JS는 서버 rule을 노출합니다. FHE16 server-key 구조는 사용자 입력과 서버 threshold를 모두 암호문으로 다루면서, 서버가 secret key와 평문 policy를 계속 보관하게 해줍니다. full circuit hiding은 2PC/PFE phase 2로 미룹니다.</span></p>
+      <div class="flow">
+        <div class="flow-box"><h3>User private input</h3><ul><li>income/debt buckets</li><li>endpoint telemetry bits</li><li>PHI/lab result buckets</li></ul><div class="pill-row"><span class="pill good">not sent raw</span><span class="pill">bucketized</span></div></div>
+        <div class="flow-arrow">to</div>
+        <div class="flow-box"><h3>FHE16 server-key runtime</h3><ul><li>public/evaluation key in browser</li><li>encrypted policy blob</li><li>server-only SK and plaintext rules</li></ul><div class="pill-row"><span class="pill warn">Level 1-2 hiding</span><span class="pill">no 32-bit multiply</span></div></div>
+        <div class="flow-arrow">to</div>
+        <div class="flow-box"><h3>Minimum result</h3><ul><li>prequalified yes/no</li><li>limit or severity bucket</li><li>policy version receipt</li></ul><div class="pill-row"><span class="pill good">workflow ready</span><span class="pill">auditable</span></div></div>
+      </div>
+    </section>
+
+    <section class="section band" id="demo">
+      <div class="panel-head">
+        <div>
+          <h2>Technical Demo</h2>
+          <p class="band-sub"><span class="en-only">The current WASM runtime demonstrates that encrypted predicate bit combinations run stably in the browser. In the production product the server holds the SK, plaintext thresholds, and policy compiler, and deploys only the encrypted policy blob and evaluation key to the browser. 2PC/PFE is added as phase 2 when circuit topology also needs to be hidden.</span><span class="ko-only">현재 WASM runtime은 encrypted predicate bit 조합이 브라우저에서 안정적으로 실행되는지를 시연합니다. production 제품은 서버가 SK, 평문 threshold, policy compiler를 보관하고 브라우저에는 encrypted policy blob과 evaluation key만 배포합니다. 2PC/PFE는 circuit topology까지 숨겨야 할 때 phase 2로 붙입니다.</span></p>
+        </div>
+        <div class="status" id="statusText">Idle</div>
+      </div>
+      <section class="toolbar" style="margin-top:12px">
+        <div class="field"><label for="buildSelect">Build</label><select id="buildSelect"></select></div>
+        <button id="loadButton" type="button">Load Module</button>
+        <button id="keygenButton" type="button" disabled>Generate Keys</button>
+      </section>
+
+      <div class="tabs" style="margin-top:14px">
+        <button class="tab active" type="button" data-demo="finance">Finance prequalification</button>
+        <button class="tab" type="button" data-demo="edr">EDR rule evaluation</button>
+      </div>
+
+      <div class="demo-layout">
+        <div>
+          <div class="demo-panel active" id="panel-finance">
+            <h3>Private financial buckets</h3>
+            <p class="band-sub"><span class="en-only">The user selects a bucket; the demo runtime normalizes it to a browser-safe predicate bit and encrypts it. In a real product an issuer/API would issue signed predicates, or 2PC/PFE would handle threshold comparison.</span><span class="ko-only">사용자는 bucket을 고르고, 데모 runtime은 이를 browser-safe predicate bit로 정규화해 암호화합니다. 실제 제품에서는 issuer/API가 signed predicate를 발급하거나 2PC/PFE가 threshold 비교까지 처리합니다.</span></p>
+            <form id="financeForm">
+              <div class="input-grid">
+                <div class="input-field"><label for="incomeBucket"><span class="en-only">Monthly income bracket</span><span class="ko-only">월 소득 구간</span></label><select id="incomeBucket"><option value="0" data-en="None" data-ko="없음">None</option><option value="1" data-en="&lt; 1M KRW" data-ko="100만원 미만">&lt; 1M KRW</option><option value="2" data-en="1–2M KRW" data-ko="100-200만원">1–2M KRW</option><option value="3" data-en="2–3M KRW" data-ko="200-300만원">2–3M KRW</option><option value="4" selected data-en="3–4M KRW" data-ko="300-400만원">3–4M KRW</option><option value="5" data-en="4–5M KRW" data-ko="400-500만원">4–5M KRW</option><option value="6" data-en="5M+ KRW" data-ko="500만원 이상">5M+ KRW</option></select></div>
+                <div class="input-field"><label for="debtBucket"><span class="en-only">Monthly debt repayment</span><span class="ko-only">월 부채상환 구간</span></label><select id="debtBucket"><option value="0" data-en="None" data-ko="없음">None</option><option value="1" selected data-en="&lt; 400K KRW" data-ko="40만원 미만">&lt; 400K KRW</option><option value="2" data-en="400K–800K" data-ko="40-80만원">400K–800K</option><option value="3" data-en="800K–1M" data-ko="80-100만원">800K–1M</option><option value="4" data-en="1M–1.5M" data-ko="100-150만원">1M–1.5M</option><option value="5" data-en="1.5M+ KRW" data-ko="150만원 이상">1.5M+ KRW</option></select></div>
+                <div class="input-field"><label for="employmentBucket"><span class="en-only">Employment duration</span><span class="ko-only">재직기간 구간</span></label><select id="employmentBucket"><option value="0" data-en="&lt; 6 months" data-ko="6개월 미만">&lt; 6 months</option><option value="1" data-en="6 mo–1 yr" data-ko="6개월-1년">6 mo–1 yr</option><option value="2" selected data-en="1–3 years" data-ko="1-3년">1–3 years</option><option value="3" data-en="3–5 years" data-ko="3-5년">3–5 years</option><option value="4" data-en="5+ years" data-ko="5년 이상">5+ years</option></select></div>
+                <div class="input-field"><label for="productType"><span class="en-only">Product policy template</span><span class="ko-only">상품 policy template</span></label><select id="productType"><option>Prime unsecured loan</option><option>Thin-file starter loan</option><option>Insurance premium discount</option></select></div>
+              </div>
+              <button class="run-btn" id="runFinanceBtn" type="submit" disabled>Run private prequalification</button>
+            </form>
+          </div>
+
+          <div class="demo-panel" id="panel-edr">
+            <h3>Private endpoint telemetry</h3>
+            <p class="band-sub"><span class="en-only">The endpoint provides telemetry bits as private input; the security vendor supplies a rule pack as private policy. The demo encrypts count predicate bits instead of integer counter comparisons, leaving only alert and severity buckets.</span><span class="ko-only">endpoint는 telemetry bits를 private input으로 넣고, 보안 벤더는 rule pack을 private policy로 제공합니다. 데모는 integer counter comparison 대신 count predicate bit를 암호화해 alert와 severity bucket만 남깁니다.</span></p>
+            <form id="edrForm">
+              <div class="switch-list">
+                <label class="switch"><span>Unsigned binary<small><span class="en-only">unsigned executable</span><span class="ko-only">서명되지 않은 실행 파일</span></small></span><input name="unsignedBinary" type="checkbox" checked></label>
+                <label class="switch"><span>Rare parent process<small><span class="en-only">unusual parent process chain</span><span class="ko-only">드문 부모 프로세스 체인</span></small></span><input name="rareParent" type="checkbox" checked></label>
+                <label class="switch"><span>Suspicious outbound<small><span class="en-only">abnormal external connection</span><span class="ko-only">비정상 외부 연결</span></small></span><input name="suspiciousOutbound" type="checkbox" checked></label>
+                <label class="switch"><span>Privilege escalation<small><span class="en-only">privilege escalation attempt</span><span class="ko-only">권한 상승 시도</span></small></span><input name="privilegeEscalation" type="checkbox" checked></label>
+                <label class="switch"><span>Script engine spawn<small><span class="en-only">script engine execution</span><span class="ko-only">스크립트 엔진 실행</span></small></span><input name="scriptSpawn" type="checkbox"></label>
+                <label class="switch"><span>Sensitive path<small><span class="en-only">sensitive path access</span><span class="ko-only">민감 경로 접근</span></small></span><input name="sensitivePath" type="checkbox"></label>
+              </div>
+              <div class="input-grid"><div class="input-field"><label for="eventCountBucket"><span class="en-only">Event count bracket</span><span class="ko-only">이벤트 카운트 구간</span></label><select id="eventCountBucket"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3" selected>3-4</option><option value="4">5+</option></select></div></div>
+              <button class="run-btn" id="runEdrBtn" type="submit" disabled>Run private rule evaluation</button>
+            </form>
+          </div>
+        </div>
+
+        <aside>
+          <div class="proof-card">
+            <strong>Protocol progress</strong>
+            <div class="runtime-note">Runtime guardrail: this demo intentionally avoids encrypted integer comparison and 32-bit multiplication. Those paths are too slow or unstable for a sellable browser demo; production should compile them into signed predicate bits or 2PC/PFE labels.</div>
+            <div class="steps" id="steps">
+              <div class="step" id="step-1"><div class="step-num">1</div><div class="step-label">Collect private user buckets</div></div>
+              <div class="step" id="step-2"><div class="step-num">2</div><div class="step-label">Load server private policy material</div></div>
+              <div class="step" id="step-3"><div class="step-num">3</div><div class="step-label">Evaluate private predicate circuit</div></div>
+              <div class="step" id="step-4"><div class="step-num">4</div><div class="step-label">Combine hidden rule branches</div></div>
+              <div class="step" id="step-5"><div class="step-num">5</div><div class="step-label">Release minimum result only</div></div>
+            </div>
+            <div class="result-box" id="resultBox"><div class="result-title">Not run</div><div class="result-detail">Load the module and run either scenario.</div></div>
+            <div class="learn-grid">
+              <div><strong>Server learns</strong><span id="serverLearns">Only approved output schema.</span></div>
+              <div><strong>User learns</strong><span id="userLearns">No plaintext threshold or rule details.</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section grid-2">
+      <div class="price-card"><strong>Recommended first offer</strong><table class="small-table"><tr><th>Package</th><th>Price</th></tr><tr><td>8-12 week PoC</td><td><span class="en-only">₩30M–₩100M</span><span class="ko-only">3천만-1억원</span></td></tr><tr><td>Regulated pilot</td><td><span class="en-only">₩70M–₩200M</span><span class="ko-only">7천만-2억원</span></td></tr><tr><td>Production SDK</td><td><span class="en-only">₩150M–₩700M/year</span><span class="ko-only">1.5억-7억원/year</span></td></tr></table></div>
+      <div class="price-card"><strong>Technical sellability verdict</strong><p class="band-sub"><span class="en-only">It can sell — but you must lead with FHE16 server-key-based private thresholds plus encrypted predicate composition, not full PFE or general-purpose FHE. Requirements: p95 ≤ 5 s demo, 10–50 predicates, no encrypted integer comparison, no 32-bit multiplication.</span><span class="ko-only">팔릴 수 있습니다. 단, full PFE나 범용 FHE가 아니라 FHE16 server-key 기반 private thresholds plus encrypted predicate composition부터 팔아야 합니다. p95 5초 이하 데모, 10-50 predicate, no encrypted integer compare, no 32-bit multiplication 조건을 지켜야 합니다.</span></p><div class="pill-row"><span class="pill good">finance first</span><span class="pill warn">EDR second</span><span class="pill">paid PoC only</span></div></div>
+    </section>
+
+    <section class="section band">
+      <div class="panel-head"><h2>Runtime Log</h2><button id="clearLogButton" type="button">Clear</button></div>
+      <pre id="runtimeLog"></pre>
+    </section>
+  </main>
+  <script type="module" src="./private-policy.js"></script>
+</body>
+</html>

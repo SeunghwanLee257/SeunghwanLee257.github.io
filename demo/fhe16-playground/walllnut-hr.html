@@ -1,0 +1,1363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="FHE16 Private Screening | waLLLnut" data-ko="FHE16 개인정보 보호 심사 | waLLLnut">FHE16 Private Screening | waLLLnut</title>
+  <link rel="stylesheet" href="./styles.css?v=58">
+  <script src="./i18n.js?v=58"></script>
+  <style>
+    nav.breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    nav.breadcrumb a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    /* ── Scenario bar ── */
+    .scenario-bar {
+      display: flex;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .scenario-btn {
+      flex: 1;
+      min-height: 52px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: 1.5px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+    }
+    .scenario-btn.active {
+      border-color: var(--accent);
+      background: #e7f4f2;
+      color: var(--accent-strong);
+    }
+    .scenario-panel { display: none; }
+    .scenario-panel.active { display: block; }
+
+    /* ── Company panel ── */
+    .company-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .company-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .company-header h3 { margin: 0; font-size: 14px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .badge-done {
+      background: #e7f4f2;
+      color: var(--accent-strong);
+      border: 1px solid #b8e0db;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .criteria-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .crit-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #f5f7fb;
+      color: var(--ink);
+    }
+    .crit-chip .wb {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .crit-chip.enc { color: var(--muted); border-style: dashed; }
+    .company-note { margin: 0; font-size: 12px; color: var(--muted); }
+
+    /* ── Form panel ── */
+    .form-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .form-panel h2 { margin: 0 0 4px; font-size: 18px; }
+    .form-intro { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+    .privacy-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .pbadge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: #f9fbfe;
+    }
+    .pbadge.enc { border-color: #b8e0db; color: var(--accent-strong); background: #e7f4f2; }
+
+    /* ── HR: radio questions ── */
+    .question-block {
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .question-block:last-of-type { border-bottom: none; margin-bottom: 0; }
+    .question-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .q-num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-text { font-weight: 700; font-size: 15px; color: var(--ink); }
+    .q-weight {
+      margin-left: auto;
+      font-size: 12px; font-weight: 700;
+      color: var(--accent);
+      background: #e7f4f2;
+      border-radius: 10px;
+      padding: 2px 8px;
+    }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .radio-option { position: relative; }
+    .radio-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .radio-option span {
+      display: inline-block;
+      padding: 7px 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted);
+      background: #f9fbfe;
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s, color 0.12s;
+      user-select: none;
+    }
+    .radio-option input[type="radio"]:checked + span {
+      border-color: var(--accent);
+      background: #e7f4f2;
+      color: var(--accent-strong);
+    }
+    .radio-option span:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+    /* ── Credit: number inputs ── */
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .input-field label {
+      display: block;
+      font-size: 12px; font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .input-field label .enc-tag {
+      color: var(--accent);
+      font-size: 11px;
+      margin-left: 4px;
+    }
+    .num-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      font-size: 16px; font-weight: 700;
+      color: var(--ink);
+      background: #f9fbfe;
+      box-sizing: border-box;
+      transition: border-color 0.12s;
+    }
+    .num-input:focus { outline: none; border-color: var(--accent); background: #fff; }
+    .input-unit {
+      font-size: 12px; color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── Submit button ── */
+    .submit-btn {
+      width: 100%;
+      margin-top: 20px;
+      min-height: 52px;
+      font-size: 16px; font-weight: 800;
+      border-radius: 8px;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      transition: background 0.12s;
+    }
+    .submit-btn:hover:not(:disabled) { background: var(--accent-strong); }
+    .submit-btn:disabled { background: #c8d5d4; cursor: not-allowed; }
+
+    /* ── Progress section ── */
+    .progress-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .progress-panel h2 { margin: 0 0 16px; font-size: 18px; }
+    .step-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid #f0f3f8;
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-circle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .step-circle.active { border-color: #e8a020; color: #e8a020; background: #fef8ee; }
+    .step-circle.done   { border-color: var(--good); color: #fff; background: var(--good); }
+    .step-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .step-status {
+      font-size: 12px; font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 10px;
+      min-width: 68px;
+      text-align: center;
+    }
+    .step-status.waiting { background: #f0f3f8; color: var(--muted); }
+    .step-status.active  { background: #fef3d6; color: #a86900; animation: pulse 1.2s ease-in-out infinite; }
+    .step-status.done    { background: #e7f4f2; color: var(--accent-strong); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+    /* ── Result section ── */
+    .result-panel {
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      padding: 36px 24px;
+      margin-bottom: 16px;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .result-panel.pass { border-color: var(--good); background: #f0fbf4; }
+    .result-panel.fail { border-color: var(--bad);  background: #fef0f0; }
+    .r-emoji  { font-size: 64px; margin-bottom: 10px; line-height: 1; }
+    .r-verdict { font-size: 36px; font-weight: 900; }
+    .result-panel.pass .r-verdict { color: var(--good); }
+    .result-panel.fail .r-verdict { color: var(--bad); }
+    .r-detail { margin-top: 8px; font-size: 14px; color: var(--muted); }
+    .r-time {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 5px 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* ── Log ── */
+    .log-toggle {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 13px; font-weight: 700;
+      padding: 0; min-height: auto;
+    }
+    .log-toggle:hover { color: var(--accent); }
+    #logOutput {
+      overflow: auto; min-height: 120px; max-height: 240px;
+      margin: 10px 0 0; border-radius: 8px;
+      background: #101820; color: #d7f7ef;
+      padding: 12px 14px; font-size: 12px; line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    /* ── Elapsed timer badge ── */
+    .elapsed-badge {
+      font-size: 13px; font-weight: 700;
+      padding: 4px 12px;
+      background: #fef3d6;
+      color: #a86900;
+      border-radius: 20px;
+      border: 1px solid #f7d87e;
+      min-width: 70px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .elapsed-badge.done { background: #e7f4f2; color: var(--accent-strong); border-color: #b8e0db; }
+
+    /* ── Time hint under submit ── */
+    .time-hint {
+      font-size: 12px; color: var(--muted);
+      margin: 12px 0 0; text-align: center;
+    }
+    .time-hint strong { color: var(--ink); }
+
+    /* ── Demo mode chip ── */
+    .demo-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 600;
+      color: #7a5c00;
+      background: #fffbea;
+      border: 1px solid #e8d080;
+      border-radius: 20px;
+      padding: 3px 10px;
+    }
+
+    /* ── Tech label (FHE detail badge, de-emphasized) ── */
+    .tech-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #9aacb5;
+      background: #f0f5f8;
+      border-radius: 8px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+
+    /* ── Result limit bucket ── */
+    .r-limit {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .r-limit strong {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--accent-strong);
+    }
+
+    /* ── Severity badge ── */
+    .severity-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .severity-badge.critical { background: #fde8e8; color: #c0392b; border: 1px solid #f5b7b1; }
+    .severity-badge.high     { background: #fef3cd; color: #a84300; border: 1px solid #f9d47e; }
+    .severity-badge.medium   { background: #fff8e7; color: #7a5c00; border: 1px solid #e8d080; }
+
+    /* ── EDR feature toggles ── */
+    .edr-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .edr-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      background: #f9fbfe;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: border-color 0.12s, background 0.12s;
+      user-select: none;
+    }
+    .edr-toggle input[type="checkbox"] {
+      width: 16px; height: 16px;
+      cursor: pointer;
+      accent-color: var(--accent);
+      flex-shrink: 0;
+    }
+    .edr-toggle.checked { border-color: var(--accent); background: #e7f4f2; color: var(--accent-strong); }
+    @media (max-width: 480px) { .edr-features { grid-template-columns: 1fr; } }
+
+    /* ── Select input (reuse num-input sizing) ── */
+    .sel-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px; font-weight: 600;
+      color: var(--ink);
+      background: #f9fbfe;
+      box-sizing: border-box;
+      transition: border-color 0.12s;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23888' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+    .sel-input:focus { outline: none; border-color: var(--accent); background-color: #fff; }
+
+    @media (max-width: 600px) {
+      .scenario-btn { font-size: 13px; min-height: 44px; }
+      .form-panel { padding: 16px; }
+      .radio-group { gap: 6px; }
+      .radio-option span { padding: 6px 11px; font-size: 12px; }
+    }
+
+    /* ── Architecture strip ── */
+    .arch-strip {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .arch-side {
+      padding: 14px 18px;
+    }
+    .arch-side.browser { background: #f0fbf4; }
+    .arch-side.server  { background: #f5f7fb; }
+    .arch-mid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-left: 1px dashed #d0dce8;
+      border-right: 1px dashed #d0dce8;
+      gap: 2px;
+    }
+    .arch-mid-arrow { font-size: 22px; color: var(--accent); line-height: 1; }
+    .arch-mid-label { font-size: 9px; font-weight: 800; color: var(--muted); text-align: center; letter-spacing: 0.03em; }
+    .arch-side h4 {
+      margin: 0 0 8px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .arch-side.browser h4 { color: var(--accent-strong); }
+    .arch-side.server  h4 { color: #4a5568; }
+    .arch-item {
+      font-size: 12px;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 3px;
+      display: flex;
+      gap: 5px;
+    }
+    .arch-item .dot { flex-shrink: 0; margin-top: 1px; }
+    .arch-no  { color: #c0392b; font-weight: 800; }
+    .arch-yes { color: var(--accent-strong); font-weight: 800; }
+    @media (max-width: 520px) {
+      .arch-strip { grid-template-columns: 1fr; }
+      .arch-mid { flex-direction: row; padding: 6px 14px; border: none; border-top: 1px dashed #d0dce8; border-bottom: 1px dashed #d0dce8; }
+    }
+
+    /* ── Ciphertext preview card ── */
+    .cipher-card {
+      margin-top: 18px;
+      border: 1px dashed #a0b8c8;
+      border-radius: 8px;
+      background: #f3f7fb;
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .cipher-card-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #5a6270;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    /* 4-column flow: [user secret] → [FHE in browser] → [server decrypt] → [result + proof] */
+    .cipher-flow {
+      display: grid;
+      grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr;
+      align-items: stretch;
+      gap: 0;
+    }
+    @media (max-width: 640px) {
+      .cipher-flow { grid-template-columns: 1fr; gap: 8px; }
+      .cipher-flow-arrow { display: none; }
+    }
+    .cipher-col { display: flex; flex-direction: column; }
+    .cipher-col-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 5px;
+    }
+    .cipher-box {
+      flex: 1;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-family: monospace;
+      line-height: 1.6;
+      min-height: 62px;
+    }
+    .cipher-box.user-secret {
+      background: #fff3f3;
+      border: 1px solid #f5c0c0;
+      color: #b03030;
+    }
+    .cipher-box.fhe-compute {
+      background: #101820;
+      color: #7ecfb8;
+      word-break: break-all;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .cipher-box.server-out {
+      background: #f0fbf4;
+      border: 1px solid #b8e0db;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 4px;
+    }
+    .cipher-box.server-out .so-label { font-size: 10px; color: var(--muted); font-family: inherit; }
+    .cipher-box.server-out .so-bit {
+      font-size: 22px;
+      font-weight: 900;
+      font-family: inherit;
+    }
+    .cipher-box.server-out .so-bit.pass { color: var(--accent-strong); }
+    .cipher-box.server-out .so-bit.fail { color: #c0392b; }
+    .cipher-box.server-out .so-bit.locked { color: var(--muted); }
+    .cipher-box.server-out .so-note { font-size: 10px; color: var(--muted); font-family: inherit; }
+    .sr-result-bit.locked { color: var(--muted); }
+    .decrypt-btn {
+      margin-top: 8px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--accent);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      display: block;
+    }
+    .decrypt-btn:hover { background: var(--accent); color: #fff; }
+
+    /* 4th column: server response (result + proof) */
+    .cipher-box.server-resp {
+      background: #fff;
+      border: 1px solid #d0dce8;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 10px;
+    }
+    .sr-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--muted);
+      font-family: inherit;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .sr-result-bit {
+      font-size: 18px;
+      font-weight: 900;
+      font-family: monospace;
+      padding: 2px 0;
+    }
+    .sr-result-bit.pass { color: var(--accent-strong); }
+    .sr-result-bit.fail { color: #c0392b; }
+    .sr-proof-box {
+      background: #f3f7fb;
+      border-radius: 4px;
+      padding: 4px 6px;
+      font-size: 10px;
+      font-family: monospace;
+      color: #4a5568;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+    .sr-verify {
+      font-size: 10px;
+      color: var(--accent-strong);
+      font-weight: 700;
+      font-family: inherit;
+    }
+    .cipher-flow-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #9aacb5;
+      padding: 0 2px;
+    }
+    .cipher-flow-arrow .fa-label {
+      font-size: 9px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 2px;
+      font-family: inherit;
+      line-height: 1.3;
+    }
+    .cipher-hidden-note {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .cipher-hidden-note span { font-weight: 700; }
+
+    /* ── Ciphertext inspector ── */
+    .ct-inspector {
+      margin-top: 16px;
+      border-top: 1px solid #d0dce8;
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .ct-sk-note {
+      background: #eaf4fb;
+      border: 1px solid #b3d4ec;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #1a4a6e;
+    }
+    .ct-ek-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .ct-dl-btn {
+      padding: 5px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--accent);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      font-family: monospace;
+    }
+    .ct-dl-btn:hover { background: var(--accent); color: #fff; }
+    .ct-dl-btn:disabled { opacity: 0.5; cursor: default; }
+    .ct-ek-btn { font-family: inherit; font-size: 13px; }
+    .ct-insp-section { display: flex; flex-direction: column; gap: 8px; }
+    .ct-insp-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .ct-insp-card {
+      background: #101820;
+      border-radius: 6px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .ct-insp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ct-insp-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: #7ecfb8;
+      font-family: monospace;
+    }
+    .ct-insp-size {
+      font-size: 10px;
+      color: #5a8a78;
+      font-family: monospace;
+    }
+    .ct-hex-dump {
+      font-size: 10px;
+      font-family: monospace;
+      color: #a8d8c8;
+      line-height: 1.5;
+      margin: 0;
+      max-height: 140px;
+      overflow-y: auto;
+      word-break: break-all;
+    }
+
+    /* ── Demo vs production boundary ── */
+    .prod-boundary {
+      border: 1px solid #d0dce8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 16px 18px;
+      margin: 0 0 20px;
+    }
+    .prod-boundary h3 { margin: 0 0 8px; font-size: 16px; }
+    .prod-boundary p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .prod-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f9fbfe;
+      padding: 12px 14px;
+    }
+    .prod-card strong { display: block; font-size: 13px; margin-bottom: 8px; }
+    .prod-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .prod-card.server-only { background: #fff8e7; border-color: #e8d080; }
+    .prod-card.browser-visible { background: #f0fbf4; border-color: #b8e0db; }
+    .prod-card.demo-sim { background: #f3f7fb; }
+    @media (max-width: 760px) { .prod-grid { grid-template-columns: 1fr; } }
+    /* ===== merged from Private Policy: product/market section styles ===== */
+    .section { margin-top: 18px; }
+    .band { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 18px; }
+    .band h2, .band h3 { margin: 0; }
+    .band-sub { margin: 6px 0 0; color: var(--muted); line-height: 1.5; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .fit-card, .proof-card, .price-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 14px; }
+    .fit-card strong, .proof-card strong, .price-card strong { display: block; font-size: 15px; margin-bottom: 6px; }
+    .score { display: inline-flex; align-items: center; justify-content: center; min-width: 64px; min-height: 32px; border-radius: 999px; background: #e7f4f2; color: var(--accent-strong); font-weight: 900; margin-bottom: 10px; }
+    .score.warn { background: #fef3d6; color: #99640a; }
+    .score.bad { background: #f8e5e5; color: var(--bad); }
+    .flow { display: grid; grid-template-columns: 1fr 72px 1fr 72px 1fr; gap: 10px; align-items: stretch; margin-top: 14px; }
+    .flow-box { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fbfcff; min-height: 132px; }
+    .flow-box h3 { font-size: 15px; margin: 0 0 8px; }
+    .flow-box ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 900; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; font-size: 12px; color: var(--muted); background: #fff; font-weight: 700; }
+    .pill.good { color: var(--accent-strong); border-color: #b8e0db; background: #e7f4f2; }
+    .pill.warn { color: #8f5d10; border-color: #f2d694; background: #fff8e5; }
+    .small-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .small-table th, .small-table td { border-bottom: 1px solid var(--line); padding: 9px 8px; text-align: left; font-size: 13px; }
+    .small-table th { color: var(--muted); font-size: 12px; }
+    .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .verdict-card { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 14px; }
+    .verdict-card h3 { font-size: 15px; margin: 0 0 8px; }
+    .verdict-card ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.6; font-size: 13px; }
+    .deal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .deal-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 14px; }
+    .deal-card h3 { font-size: 15px; margin: 0 0 8px; }
+    .deal-card dl { margin: 0; display: grid; gap: 8px; }
+    .deal-card dt { font-size: 11px; color: var(--muted); font-weight: 900; text-transform: uppercase; }
+    .deal-card dd { margin: 2px 0 0; font-size: 13px; line-height: 1.45; }
+    @media (max-width: 900px) { .grid-3, .grid-2, .flow, .verdict-grid, .deal-grid { grid-template-columns: 1fr; } .flow-arrow { min-height: 28px; } }
+    /* Company weights stay hidden (blurred); press-and-hold the reveal button to show briefly. */
+    .wb, .q-weight { filter: blur(5px); transition: filter .12s ease; user-select: none; }
+    body.weights-revealed .wb, body.weights-revealed .q-weight { filter: none; }
+    .reveal-wts-btn { margin-left: 8px; min-height: 26px; padding: 0 12px; font-size: 12px; font-weight: 700; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--muted); cursor: pointer; }
+    .reveal-wts-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+    .reveal-wts-btn:active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="toolbar" style="gap:8px;margin-bottom:16px">
+      <a href="./index.html" style="text-decoration:none"><button type="button"><span class="en-only">← Main</span><span class="ko-only">← 메인</span></button></a>
+      <a href="./index.html" style="text-decoration:none"><button type="button">Playground</button></a>
+      <button class="lang-toggle" type="button" style="margin-left:auto">한국어</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height:150px">
+      <div class="hero-copy">
+        <p class="eyebrow">waLLLnut — Private Decisioning Demo</p>
+        <h1><span class="en-only">Encrypted Screening Demo</span><span class="ko-only">암호화 심사 데모</span></h1>
+        <p class="summary"><span class="en-only">My data never leaves the browser — it's computed entirely in encrypted form. The company's screening criteria are never revealed to me. <strong>Only the result is returned.</strong></span><span class="ko-only">내 정보는 서버에 보내지 않고, 브라우저 안에서만 암호화된 채로 계산됩니다. 회사의 심사 기준도 나에게 공개되지 않습니다. <strong>결과만 알 수 있습니다.</strong></span></p>
+        <p class="summary"><strong><span class="en-only">UNSAFE demo artifact:</span><span class="ko-only">UNSAFE 데모 artifact:</span></strong> <span class="en-only">the public WASM build intentionally removes cryptographic error and provides no security. Use only non-sensitive sample data.</span><span class="ko-only">공개 WASM 빌드는 의도적으로 암호 오차를 제거한 보안성 없는 테스트 빌드입니다. 민감하지 않은 예시 데이터만 사용하세요.</span></p>
+      </div>
+    </section>
+
+    <!-- System setup toolbar -->
+    <section class="toolbar">
+      <div class="field">
+        <label for="buildSelect">Build</label>
+        <select id="buildSelect"></select>
+      </div>
+      <button id="loadButton" type="button">Load Module</button>
+      <button id="keygenButton" type="button" disabled>Generate Keys</button>
+      <div class="status" id="statusText">Initializing…</div>
+    </section>
+
+    <!-- Architecture strip -->
+    <div class="arch-strip">
+      <div class="arch-side browser">
+        <h4>🖥 <span class="en-only">Browser (User)</span><span class="ko-only">브라우저 (사용자)</span></h4>
+        <div class="arch-item"><span class="dot arch-yes">✓</span><span class="en-only">Encrypt my inputs</span><span class="ko-only">내 입력값을 암호화</span></div>
+        <div class="arch-item"><span class="dot arch-yes">✓</span><span class="en-only">Compute in-browser against encrypted server criteria</span><span class="ko-only">서버의 암호화된 기준과 함께 브라우저 안에서 연산</span></div>
+        <div class="arch-item"><span class="dot arch-no">✗</span><span class="en-only">Cannot see server criteria — result only</span><span class="ko-only">서버 기준값을 볼 수 없음 — 결과만 알 수 있음</span></div>
+      </div>
+      <div class="arch-mid">
+        <div class="arch-mid-arrow">→</div>
+        <div class="arch-mid-label"><span class="en-only">Encrypted<br>result</span><span class="ko-only">암호화된<br>결과 전달</span></div>
+      </div>
+      <div class="arch-side server">
+        <h4><span class="en-only">Server (Operator)</span><span class="ko-only">서버 (운영자)</span></h4>
+        <div class="arch-item"><span class="dot arch-yes">✓</span><span class="en-only">Stores &amp; distributes encrypted criteria, holds secret key</span><span class="ko-only">암호화된 기준 보관·배포, 비밀키 보유</span></div>
+        <div class="arch-item"><span class="dot arch-yes">✓</span><span class="en-only">Decrypts browser ciphertext → 0 or 1</span><span class="ko-only">브라우저가 보낸 암호문을 복호화 → 0 또는 1</span></div>
+        <div class="arch-item"><span class="dot arch-no">✗</span><span class="en-only">Cannot see user's original inputs</span><span class="ko-only">사용자의 원본 입력값을 볼 수 없음</span></div>
+      </div>
+    </div>
+
+    <section class="prod-boundary">
+      <h3><span class="en-only">Demo vs. Production</span><span class="ko-only">데모와 실제 운영의 경계</span></h3>
+      <p><span class="en-only">This page simulates the server role inside a single browser worker. In production, the server runs as a separate process and the information below never leaves it.</span><span class="ko-only">이 페이지는 하나의 브라우저 worker 안에서 서버 역할을 시뮬레이션합니다. 실제 운영에서는 서버가 별도 프로세스로 분리되고, 아래 정보는 서버 밖으로 나가지 않습니다.</span></p>
+      <div class="prod-grid">
+        <div class="prod-card server-only"><strong><span class="en-only">Server-only information</span><span class="ko-only">실제 운영에서 서버만 아는 정보</span></strong><ul><li>FHE secret key</li><li><span class="en-only">Plaintext threshold, rule, weight</span><span class="ko-only">평문 threshold, rule, weight</span></li><li><span class="en-only">Policy compiler source &amp; version-specific rule pack</span><span class="ko-only">policy compiler source와 버전별 rule pack</span></li><li><span class="en-only">Decryption results &amp; query budget/audit log</span><span class="ko-only">복호화 결과와 query budget/audit log</span></li></ul></div>
+        <div class="prod-card browser-visible"><strong><span class="en-only">What the browser receives</span><span class="ko-only">브라우저가 받는 정보</span></strong><ul><li>public/evaluation key</li><li>encrypted policy blob</li><li><span class="en-only">policy version &amp; consent receipt</span><span class="ko-only">policy version과 consent receipt</span></li><li><span class="en-only">Final bit/bucket &amp; server-signed receipt</span><span class="ko-only">최종 bit/bucket과 서버 서명 영수증</span></li></ul></div>
+        <div class="prod-card demo-sim"><strong><span class="en-only">Simplified in this demo</span><span class="ko-only">현재 데모에서 단순화한 것</span></strong><ul><li><span class="en-only">Server simulated as in-worker sandbox</span><span class="ko-only">서버를 worker 내부 sandbox로 시뮬레이션</span></li><li><span class="en-only">Predicate bit combination instead of integer comparison</span><span class="ko-only">integer comparison 대신 predicate bit 조합 사용</span></li><li><span class="en-only">Proof is a demo receipt; production uses server signature</span><span class="ko-only">proof는 데모 영수증이며 production에서는 서버 서명으로 대체</span></li></ul></div>
+      </div>
+    </section>
+
+    <!-- Scenario switcher -->
+    <div class="scenario-bar">
+      <button class="scenario-btn active" data-scenario="hr"><span class="en-only">HR Hiring Review</span><span class="ko-only">HR 채용 심사</span></button>
+      <button class="scenario-btn" data-scenario="credit"><span class="en-only">Loan Prequalification</span><span class="ko-only">대출 사전 자격 확인</span></button>
+      <button class="scenario-btn" data-scenario="edr"><span class="en-only">EDR Threat Detection</span><span class="ko-only">EDR 위협 탐지</span></button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ HR SCENARIO -->
+    <div class="scenario-panel active" id="panel-hr">
+      <!-- Company criteria -->
+      <div class="company-panel">
+        <div class="company-header">
+          <h3><span class="en-only">Company Settings</span><span class="ko-only">회사 설정</span></h3>
+          <span class="badge-done"><span class="en-only">Pre-encrypted ✓</span><span class="ko-only">사전 암호화 완료 ✓</span></span>
+        </div>
+        <div class="criteria-bar">
+          <span class="crit-chip"><span class="en-only">Education</span><span class="ko-only">최종학력</span> <span class="wb">×2</span></span>
+          <span class="crit-chip"><span class="en-only">Experience</span><span class="ko-only">관련경력</span> <span class="wb">×5</span></span>
+          <span class="crit-chip"><span class="en-only">Tech Skills</span><span class="ko-only">기술역량</span> <span class="wb">×4</span></span>
+          <span class="crit-chip"><span class="en-only">Communication</span><span class="ko-only">의사소통</span> <span class="wb">×2</span></span>
+          <span class="crit-chip"><span class="en-only">Teamwork</span><span class="ko-only">팀워크</span> <span class="wb">×2</span></span>
+          <span class="crit-chip enc"><span class="en-only">Pass policy 🔐</span><span class="ko-only">합격 policy 🔐</span></span>
+        </div>
+        <p class="company-note"><span class="en-only">In production, criteria weights, passing policy, and policy version are stored server-side only. Applicants receive only the result.</span><span class="ko-only">실서비스에서는 항목별 기준, 가중치, 합격 policy, policy version은 서버만 보관합니다. 지원자는 결과만 확인합니다.</span></p>
+        <p class="company-note" style="margin-top:6px"><span class="demo-chip">⚠ <span class="en-only">Demo mode: criteria are preset for demonstration</span><span class="ko-only">데모 모드: 기준값이 시연용으로 사전 설정되어 있습니다</span></span></p>
+      </div>
+
+      <!-- HR form -->
+      <div class="form-panel">
+        <h2><span class="en-only">Application Form</span><span class="ko-only">지원서 작성</span></h2>
+        <p class="form-intro"><span class="en-only">Select values below. Your answers are encrypted in-browser the moment you submit.</span><span class="ko-only">아래 항목을 선택하세요. 제출 버튼을 누르는 순간 브라우저 안에서 암호화됩니다.</span></p>
+        <div class="privacy-strip">
+          <span class="pbadge enc">🔐 <span class="en-only">My answers are encrypted</span><span class="ko-only">내 답변은 암호화됩니다</span></span>
+          <span class="pbadge"><span class="en-only">Original answers not sent to server</span><span class="ko-only">원본 답변은 서버로 전달되지 않음</span></span>
+          <span class="pbadge"><span class="en-only">Only pass / fail is returned</span><span class="ko-only">합격/불합격만 알 수 있음</span></span>
+        </div>
+        <form id="hrForm">
+          <div class="question-block">
+            <div class="question-label">
+              <span class="q-num">1</span><span class="q-text"><span class="en-only">Education</span><span class="ko-only">최종 학력</span></span><span class="q-weight">×2</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="q0" value="0" required><span><span class="en-only">High school or below</span><span class="ko-only">고졸 이하</span></span></label>
+              <label class="radio-option"><input type="radio" name="q0" value="1"><span><span class="en-only">Associate degree</span><span class="ko-only">전문대졸</span></span></label>
+              <label class="radio-option"><input type="radio" name="q0" value="2"><span><span class="en-only">Bachelor's</span><span class="ko-only">대졸</span></span></label>
+              <label class="radio-option"><input type="radio" name="q0" value="3"><span><span class="en-only">Master's</span><span class="ko-only">석사</span></span></label>
+              <label class="radio-option"><input type="radio" name="q0" value="4"><span><span class="en-only">Ph.D.</span><span class="ko-only">박사</span></span></label>
+            </div>
+          </div>
+          <div class="question-block">
+            <div class="question-label">
+              <span class="q-num">2</span><span class="q-text"><span class="en-only">Experience</span><span class="ko-only">관련 경력</span></span><span class="q-weight">×5</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="q1" value="0" required><span><span class="en-only">None</span><span class="ko-only">없음</span></span></label>
+              <label class="radio-option"><input type="radio" name="q1" value="1"><span><span class="en-only">&lt;1 year</span><span class="ko-only">1년 미만</span></span></label>
+              <label class="radio-option"><input type="radio" name="q1" value="2"><span><span class="en-only">1–3 years</span><span class="ko-only">1~3년</span></span></label>
+              <label class="radio-option"><input type="radio" name="q1" value="3"><span><span class="en-only">3–5 years</span><span class="ko-only">3~5년</span></span></label>
+              <label class="radio-option"><input type="radio" name="q1" value="4"><span><span class="en-only">5+ years</span><span class="ko-only">5년 이상</span></span></label>
+            </div>
+          </div>
+          <div class="question-block">
+            <div class="question-label">
+              <span class="q-num">3</span><span class="q-text"><span class="en-only">Technical Skills</span><span class="ko-only">기술 역량</span></span><span class="q-weight">×4</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="q2" value="0" required><span><span class="en-only">None</span><span class="ko-only">없음</span></span></label>
+              <label class="radio-option"><input type="radio" name="q2" value="1"><span><span class="en-only">Basic</span><span class="ko-only">기초</span></span></label>
+              <label class="radio-option"><input type="radio" name="q2" value="2"><span><span class="en-only">Practical</span><span class="ko-only">실무 가능</span></span></label>
+              <label class="radio-option"><input type="radio" name="q2" value="3"><span><span class="en-only">Advanced</span><span class="ko-only">전문 수준</span></span></label>
+              <label class="radio-option"><input type="radio" name="q2" value="4"><span><span class="en-only">Expert</span><span class="ko-only">전문가</span></span></label>
+            </div>
+          </div>
+          <div class="question-block">
+            <div class="question-label">
+              <span class="q-num">4</span><span class="q-text"><span class="en-only">Communication</span><span class="ko-only">의사소통 능력</span></span><span class="q-weight">×2</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="q3" value="0" required><span><span class="en-only">Very poor</span><span class="ko-only">매우 미흡</span></span></label>
+              <label class="radio-option"><input type="radio" name="q3" value="1"><span><span class="en-only">Poor</span><span class="ko-only">미흡</span></span></label>
+              <label class="radio-option"><input type="radio" name="q3" value="2"><span><span class="en-only">Average</span><span class="ko-only">보통</span></span></label>
+              <label class="radio-option"><input type="radio" name="q3" value="3"><span><span class="en-only">Good</span><span class="ko-only">우수</span></span></label>
+              <label class="radio-option"><input type="radio" name="q3" value="4"><span><span class="en-only">Excellent</span><span class="ko-only">매우 우수</span></span></label>
+            </div>
+          </div>
+          <div class="question-block">
+            <div class="question-label">
+              <span class="q-num">5</span><span class="q-text"><span class="en-only">Teamwork</span><span class="ko-only">팀워크 / 협업</span></span><span class="q-weight">×2</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="q4" value="0" required><span><span class="en-only">Very poor</span><span class="ko-only">매우 미흡</span></span></label>
+              <label class="radio-option"><input type="radio" name="q4" value="1"><span><span class="en-only">Poor</span><span class="ko-only">미흡</span></span></label>
+              <label class="radio-option"><input type="radio" name="q4" value="2"><span><span class="en-only">Average</span><span class="ko-only">보통</span></span></label>
+              <label class="radio-option"><input type="radio" name="q4" value="3"><span><span class="en-only">Good</span><span class="ko-only">우수</span></span></label>
+              <label class="radio-option"><input type="radio" name="q4" value="4"><span><span class="en-only">Excellent</span><span class="ko-only">매우 우수</span></span></label>
+            </div>
+          </div>
+          <p class="time-hint"><span class="en-only">Estimated time: <strong>~0.1 s</strong> (encrypted predicate bit gates)</span><span class="ko-only">예상 소요 시간: <strong>약 0.1초</strong> (데모 runtime: encrypted predicate bit gates)</span></p>
+          <button type="submit" class="submit-btn" id="hrSubmitBtn" disabled>🔐 <span class="en-only">Encrypt &amp; Submit Screening</span><span class="ko-only">암호화하여 채용 심사 제출</span></button>
+        </form>
+      </div>
+
+      <!-- HR progress steps -->
+      <div class="progress-panel" id="hrProgress" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <h2 style="margin:0"><span class="en-only">FHE Computation Running</span><span class="ko-only">FHE 연산 진행 중</span></h2>
+          <span class="elapsed-badge" id="hrElapsed">0s</span>
+        </div>
+        <div class="step-row"><div class="step-circle" id="hrC-1">1</div><div class="step-label"><span class="en-only">Encrypt 5 answers</span><span class="ko-only">답변 5개 암호화</span></div><span class="step-status waiting" id="hrS-1"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-2">2</div><div class="step-label"><span class="en-only">Apply education score</span><span class="ko-only">학력 점수 반영</span></div><span class="step-status waiting" id="hrS-2"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-3">3</div><div class="step-label"><span class="en-only">Apply experience score</span><span class="ko-only">경력 점수 반영</span></div><span class="step-status waiting" id="hrS-3"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-4">4</div><div class="step-label"><span class="en-only">Apply tech skills score</span><span class="ko-only">기술역량 점수 반영</span></div><span class="step-status waiting" id="hrS-4"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-5">5</div><div class="step-label"><span class="en-only">Apply communication score</span><span class="ko-only">의사소통 점수 반영</span></div><span class="step-status waiting" id="hrS-5"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-6">6</div><div class="step-label"><span class="en-only">Apply teamwork score</span><span class="ko-only">팀워크 점수 반영</span></div><span class="step-status waiting" id="hrS-6"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-7">7</div><div class="step-label"><span class="en-only">Sum total score</span><span class="ko-only">총점 합산</span></div><span class="step-status waiting" id="hrS-7"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="hrC-8">8</div><div class="step-label"><span class="en-only">Combine final condition bits</span><span class="ko-only">최종 조건 bit 결합</span> <span class="tech-tag">AND gates</span></div><span class="step-status waiting" id="hrS-8"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+      </div>
+
+      <!-- HR result -->
+      <div class="result-panel" id="hrResult" style="display:none">
+        <div class="r-emoji"  id="hrEmoji"></div>
+        <div class="r-verdict" id="hrVerdict"></div>
+        <div class="r-detail"  id="hrDetail"></div>
+        <span class="r-time"   id="hrTime"></span>
+        <div class="cipher-card" id="hrCipherCard" style="display:none">
+          <div class="cipher-card-title"><span class="en-only">What Happened in the Browser</span><span class="ko-only">브라우저 안에서 일어난 일</span></div>
+          <div class="cipher-flow">
+            <div class="cipher-col">
+              <div class="cipher-col-label">🙈 <span class="en-only">Hidden from server</span><span class="ko-only">서버가 볼 수 없음</span></div>
+              <div class="cipher-box user-secret" id="hrPlainText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Encrypt<br>Compute</span><span class="ko-only">암호화<br>연산</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">🔐 <span class="en-only">Browser-computed ciphertext</span><span class="ko-only">브라우저가 계산한 암호문</span></div>
+              <div class="cipher-box fhe-compute" id="hrHexText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Server<br>Decrypt</span><span class="ko-only">서버<br>복호화</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">✓ <span class="en-only">Inside server</span><span class="ko-only">서버 내부</span></div>
+              <div class="cipher-box server-out" id="hrResultBox">
+                <span class="so-label"><span class="en-only">Decrypt with secret key</span><span class="ko-only">비밀키로 복호화</span></span>
+                <span class="so-bit" id="hrResultBit">-</span>
+                <span class="so-note"><span class="en-only">User inputs unknown</span><span class="ko-only">사용자 입력값 모름</span></span>
+              </div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Response<br>Deliver</span><span class="ko-only">응답<br>전달</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">📨 <span class="en-only">What browser receives</span><span class="ko-only">브라우저가 받는 것</span></div>
+              <div class="cipher-box server-resp" id="hrRespBox">
+                <span class="sr-label"><span class="en-only">Result</span><span class="ko-only">연산 결과</span></span>
+                <span class="sr-result-bit" id="hrRespBit">-</span>
+                <span class="sr-label" style="margin-top:4px"><span class="en-only">Demo receipt</span><span class="ko-only">데모 응답 영수증</span></span>
+                <div class="sr-proof-box" id="hrProofVal">-</div>
+                <span class="sr-verify" id="hrVerifyNote">-</span>
+              </div>
+            </div>
+          </div>
+          <div class="cipher-hidden-note">
+            <span>🙈 <span class="en-only">User cannot see: server's screening criteria</span><span class="ko-only">사용자가 볼 수 없음: 서버의 심사 기준</span></span>
+            <span>🙈 <span class="en-only">Server cannot see: user's original inputs</span><span class="ko-only">서버가 볼 수 없음: 사용자 원본 입력</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ CREDIT SCENARIO -->
+    <div class="scenario-panel" id="panel-credit">
+      <!-- Company criteria -->
+      <div class="company-panel">
+        <div class="company-header">
+          <h3><span class="en-only">Financial Institution Criteria</span><span class="ko-only">금융기관 심사 기준</span></h3>
+          <span class="badge-done"><span class="en-only">Pre-encrypted ✓</span><span class="ko-only">사전 암호화 완료 ✓</span></span>
+        </div>
+        <div class="criteria-bar">
+          <span class="crit-chip enc"><span class="en-only">Income min 🔐</span><span class="ko-only">소득 구간 최솟값 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Debt max 🔐</span><span class="ko-only">부채 구간 최댓값 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Employment min 🔐</span><span class="ko-only">재직기간 최솟값 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Combined condition 🔐</span><span class="ko-only">결합 조건 🔐</span></span>
+        </div>
+        <p class="company-note"><span class="en-only">In production, income/debt/employment thresholds and limit grade criteria are server-only. Applicant figures are never sent to the server.</span><span class="ko-only">실서비스에서는 소득·부채·재직기간 threshold와 한도 등급 기준은 금융기관 서버만 보관합니다. 신청자의 원본 수치는 서버에 전달되지 않습니다.</span></p>
+        <p class="company-note" style="margin-top:6px"><span class="demo-chip">⚠ <span class="en-only">Demo mode: criteria are preset for demonstration</span><span class="ko-only">데모 모드: 기준값이 시연용으로 사전 설정되어 있습니다</span></span></p>
+      </div>
+
+      <!-- Credit form -->
+      <div class="form-panel">
+        <h2><span class="en-only">Loan Prequalification</span><span class="ko-only">대출 사전 자격 확인</span></h2>
+        <p class="form-intro"><span class="en-only">Select a bracket instead of exact amounts. Original figures never leave the browser.</span><span class="ko-only">정확한 금액 대신 해당 구간을 선택하세요. 원본 수치는 브라우저 밖으로 나가지 않습니다.</span></p>
+        <div class="privacy-strip">
+          <span class="pbadge enc">🔐 <span class="en-only">My data is encrypted</span><span class="ko-only">내 정보는 암호화됩니다</span></span>
+          <span class="pbadge"><span class="en-only">Original figures not sent to server</span><span class="ko-only">원본 수치는 서버로 전달되지 않음</span></span>
+          <span class="pbadge"><span class="en-only">Only pass/fail and limit grade returned</span><span class="ko-only">통과 여부와 한도 등급만 알 수 있음</span></span>
+        </div>
+        <form id="creditForm">
+          <div class="input-grid">
+            <div class="input-field">
+              <label><span class="en-only">Monthly Income Bracket</span><span class="ko-only">월 소득 구간</span> <span class="enc-tag">🔐</span></label>
+              <select class="sel-input" id="creditIncomeBkt" required>
+                <option value="0" data-en="None (0)" data-ko="없음 (0원)">None (0)</option>
+                <option value="1" data-en="&lt;1M KRW" data-ko="100만원 미만">&lt;1M KRW</option>
+                <option value="2" data-en="1–2M KRW" data-ko="100~200만원">1–2M KRW</option>
+                <option value="3" data-en="2–3M KRW" data-ko="200~300만원">2–3M KRW</option>
+                <option value="4" selected data-en="3–4M KRW" data-ko="300~400만원">3–4M KRW</option>
+                <option value="5" data-en="4–5M KRW" data-ko="400~500만원">4–5M KRW</option>
+                <option value="6" data-en="5M+ KRW" data-ko="500만원 이상">5M+ KRW</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label><span class="en-only">Monthly Debt Bracket</span><span class="ko-only">월 부채상환 구간</span> <span class="enc-tag">🔐</span></label>
+              <select class="sel-input" id="creditDebtBkt" required>
+                <option value="0" data-en="None (0)" data-ko="없음 (0원)">None (0)</option>
+                <option value="1" selected data-en="&lt;400K KRW" data-ko="40만원 미만">&lt;400K KRW</option>
+                <option value="2" data-en="400K–800K KRW" data-ko="40~80만원">400K–800K KRW</option>
+                <option value="3" data-en="800K–1M KRW" data-ko="80~100만원">800K–1M KRW</option>
+                <option value="4" data-en="1–1.5M KRW" data-ko="100~150만원">1–1.5M KRW</option>
+                <option value="5" data-en="1.5M+ KRW" data-ko="150만원 이상">1.5M+ KRW</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label><span class="en-only">Employment Duration</span><span class="ko-only">재직기간 구간</span> <span class="enc-tag">🔐</span></label>
+              <select class="sel-input" id="creditEmpBkt" required>
+                <option value="0" data-en="&lt;6 months" data-ko="6개월 미만">&lt;6 months</option>
+                <option value="1" data-en="6 mo – 1 yr" data-ko="6개월~1년">6 mo – 1 yr</option>
+                <option value="2" selected data-en="1–3 years" data-ko="1~3년">1–3 years</option>
+                <option value="3" data-en="3–5 years" data-ko="3~5년">3–5 years</option>
+                <option value="4" data-en="5+ years" data-ko="5년 이상">5+ years</option>
+              </select>
+            </div>
+          </div>
+          <p class="time-hint"><span class="en-only">Estimated time: <strong>~0.1–0.3 s</strong> (signed predicate bit + encrypted AND gates)</span><span class="ko-only">예상 소요 시간: <strong>약 0.1~0.3초</strong> (signed predicate bit + encrypted AND gates)</span></p>
+          <button type="submit" class="submit-btn" id="creditSubmitBtn" disabled>🔐 <span class="en-only">Encrypt &amp; Submit Prequalification</span><span class="ko-only">암호화하여 사전 심사 제출</span></button>
+        </form>
+      </div>
+
+      <!-- Credit progress steps -->
+      <div class="progress-panel" id="crProgress" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <h2 style="margin:0"><span class="en-only">FHE Computation Running</span><span class="ko-only">FHE 연산 진행 중</span></h2>
+          <span class="elapsed-badge" id="crElapsed">0s</span>
+        </div>
+        <div class="step-row"><div class="step-circle" id="crC-1">1</div><div class="step-label"><span class="en-only">Encrypt income data</span><span class="ko-only">소득 정보 암호화</span></div><span class="step-status waiting" id="crS-1"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-2">2</div><div class="step-label"><span class="en-only">Encrypt debt data</span><span class="ko-only">부채 정보 암호화</span></div><span class="step-status waiting" id="crS-2"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-3">3</div><div class="step-label"><span class="en-only">Encrypt employment duration</span><span class="ko-only">재직기간 암호화</span></div><span class="step-status waiting" id="crS-3"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-4">4</div><div class="step-label"><span class="en-only">Receive income predicate label</span><span class="ko-only">소득 predicate label 수신</span> <span class="tech-tag">server-only threshold</span></div><span class="step-status waiting" id="crS-4"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-5">5</div><div class="step-label"><span class="en-only">Receive debt predicate label</span><span class="ko-only">부채 predicate label 수신</span> <span class="tech-tag">server-only threshold</span></div><span class="step-status waiting" id="crS-5"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-6">6</div><div class="step-label"><span class="en-only">Receive employment predicate label</span><span class="ko-only">재직 predicate label 수신</span> <span class="tech-tag">server-only threshold</span></div><span class="step-status waiting" id="crS-6"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-7">7</div><div class="step-label"><span class="en-only">Combine conditions for eligibility</span><span class="ko-only">조건 종합 자격 판정</span> <span class="tech-tag">AND gates</span></div><span class="step-status waiting" id="crS-7"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="crC-8">8</div><div class="step-label"><span class="en-only">Compute limit grade</span><span class="ko-only">한도 등급 산정</span> <span class="tech-tag">encrypted bits</span></div><span class="step-status waiting" id="crS-8"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+      </div>
+
+      <!-- Credit result -->
+      <div class="result-panel" id="crResult" style="display:none">
+        <div class="r-emoji"  id="crEmoji"></div>
+        <div class="r-verdict" id="crVerdict"></div>
+        <div class="r-detail"  id="crDetail"></div>
+        <div class="r-limit"   id="crLimitBucket" style="display:none"><span class="en-only">Limit grade</span><span class="ko-only">한도 등급</span> <strong id="crLimitBucketVal"></strong></div>
+        <span class="r-time"   id="crTime"></span>
+        <div class="cipher-card" id="crCipherCard" style="display:none">
+          <div class="cipher-card-title"><span class="en-only">What Happened in the Browser</span><span class="ko-only">브라우저 안에서 일어난 일</span></div>
+          <div class="cipher-flow">
+            <div class="cipher-col">
+              <div class="cipher-col-label">🙈 <span class="en-only">Hidden from server</span><span class="ko-only">서버가 볼 수 없음</span></div>
+              <div class="cipher-box user-secret" id="crPlainText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Encrypt<br>Compute</span><span class="ko-only">암호화<br>연산</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">🔐 <span class="en-only">Browser-computed ciphertext</span><span class="ko-only">브라우저가 계산한 암호문</span></div>
+              <div class="cipher-box fhe-compute" id="crHexText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Server<br>Decrypt</span><span class="ko-only">서버<br>복호화</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">✓ <span class="en-only">Inside server</span><span class="ko-only">서버 내부</span></div>
+              <div class="cipher-box server-out" id="crResultBox">
+                <span class="so-label"><span class="en-only">Decrypt with secret key</span><span class="ko-only">비밀키로 복호화</span></span>
+                <span class="so-bit" id="crResultBit">-</span>
+                <span class="so-note"><span class="en-only">User inputs unknown</span><span class="ko-only">사용자 입력값 모름</span></span>
+              </div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Response<br>Deliver</span><span class="ko-only">응답<br>전달</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">📨 <span class="en-only">What browser receives</span><span class="ko-only">브라우저가 받는 것</span></div>
+              <div class="cipher-box server-resp" id="crRespBox">
+                <span class="sr-label"><span class="en-only">Result</span><span class="ko-only">연산 결과</span></span>
+                <span class="sr-result-bit" id="crRespBit">-</span>
+                <span class="sr-label" style="margin-top:4px"><span class="en-only">Demo receipt</span><span class="ko-only">데모 응답 영수증</span></span>
+                <div class="sr-proof-box" id="crProofVal">-</div>
+                <span class="sr-verify" id="crVerifyNote">-</span>
+              </div>
+            </div>
+          </div>
+          <div class="cipher-hidden-note">
+            <span>🙈 <span class="en-only">User cannot see: server's income/debt criteria</span><span class="ko-only">사용자가 볼 수 없음: 서버의 소득·부채 기준</span></span>
+            <span>🙈 <span class="en-only">Server cannot see: user's original figures</span><span class="ko-only">서버가 볼 수 없음: 사용자 원본 수치</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ EDR SCENARIO -->
+    <div class="scenario-panel" id="panel-edr">
+      <!-- Company criteria -->
+      <div class="company-panel">
+        <div class="company-header">
+          <h3><span class="en-only">Security Vendor Detection Policy</span><span class="ko-only">보안 벤더 탐지 정책</span></h3>
+          <span class="badge-done"><span class="en-only">Pre-encrypted ✓</span><span class="ko-only">사전 암호화 완료 ✓</span></span>
+        </div>
+        <div class="criteria-bar">
+          <span class="crit-chip enc"><span class="en-only">Pattern A combination 🔐</span><span class="ko-only">패턴 A 조합 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Pattern B combination 🔐</span><span class="ko-only">패턴 B 조합 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Event threshold 🔐</span><span class="ko-only">이벤트 임계값 🔐</span></span>
+          <span class="crit-chip enc"><span class="en-only">Severity grade criteria 🔐</span><span class="ko-only">심각도 등급 기준 🔐</span></span>
+        </div>
+        <p class="company-note"><span class="en-only">In production, detection rule combinations, event thresholds, and severity criteria are vendor-server-only. Endpoints receive only the final alert/severity.</span><span class="ko-only">실서비스에서는 탐지 룰 조합, 이벤트 임계값, 심각도 기준은 보안 벤더 서버만 보관합니다. 엔드포인트는 최종 alert/severity만 받습니다.</span></p>
+        <p class="company-note" style="margin-top:6px"><span class="demo-chip">⚠ <span class="en-only">Demo mode: detection patterns are preset for demonstration</span><span class="ko-only">데모 모드: 탐지 패턴이 시연용으로 사전 설정되어 있습니다</span></span></p>
+      </div>
+
+      <!-- EDR form -->
+      <div class="form-panel">
+        <h2><span class="en-only">Endpoint Event Report</span><span class="ko-only">엔드포인트 이벤트 신고</span></h2>
+        <p class="form-intro"><span class="en-only">Select events detected on the endpoint. They are encrypted in-browser immediately on submit.</span><span class="ko-only">엔드포인트에서 감지된 이벤트를 선택하세요. 제출 시 브라우저에서 즉시 암호화됩니다.</span></p>
+        <div class="privacy-strip">
+          <span class="pbadge enc">🔐 <span class="en-only">Event data is encrypted</span><span class="ko-only">이벤트 정보는 암호화됩니다</span></span>
+          <span class="pbadge"><span class="en-only">Raw events not sent to server</span><span class="ko-only">원본 이벤트는 서버로 전달되지 않음</span></span>
+          <span class="pbadge"><span class="en-only">Only detection flag and severity returned</span><span class="ko-only">탐지 여부와 심각도만 알 수 있음</span></span>
+        </div>
+        <form id="edrForm">
+          <div class="edr-features" id="edrFeatureGrid">
+            <label class="edr-toggle checked"><input type="checkbox" name="unsignedBinary" checked><span><span class="en-only">Unsigned binary</span><span class="ko-only">서명 없는 실행 파일</span></span></label>
+            <label class="edr-toggle checked"><input type="checkbox" name="rareParent" checked><span><span class="en-only">Rare parent process</span><span class="ko-only">희귀 부모 프로세스</span></span></label>
+            <label class="edr-toggle checked"><input type="checkbox" name="suspiciousOutbound" checked><span><span class="en-only">Suspicious outbound</span><span class="ko-only">의심스러운 외부 통신</span></span></label>
+            <label class="edr-toggle"><input type="checkbox" name="privilegeEscalation"><span><span class="en-only">Privilege escalation</span><span class="ko-only">권한 상승 시도</span></span></label>
+            <label class="edr-toggle"><input type="checkbox" name="scriptSpawn"><span><span class="en-only">Script engine spawn</span><span class="ko-only">스크립트 엔진 실행</span></span></label>
+            <label class="edr-toggle"><input type="checkbox" name="sensitivePath"><span><span class="en-only">Sensitive path access</span><span class="ko-only">민감 경로 접근</span></span></label>
+          </div>
+          <div class="input-field" style="margin-top:16px">
+            <label><span class="en-only">Event count bucket</span><span class="ko-only">관련 이벤트 발생 횟수</span> <span class="enc-tag">🔐</span></label>
+            <select class="sel-input" id="edrCountBkt">
+              <option value="0" data-en="None (0)" data-ko="없음 (0건)">None (0)</option>
+              <option value="1" data-en="1–2 events" data-ko="1~2건">1–2 events</option>
+              <option value="2" selected data-en="3–5 events" data-ko="3~5건">3–5 events</option>
+              <option value="3" data-en="6–10 events" data-ko="6~10건">6–10 events</option>
+              <option value="4" data-en="10+ events" data-ko="10건 이상">10+ events</option>
+            </select>
+          </div>
+          <p class="time-hint"><span class="en-only">Estimated time: <strong>~0.2–0.4 s</strong> (telemetry predicate bit + encrypted rule gates)</span><span class="ko-only">예상 소요 시간: <strong>약 0.2~0.4초</strong> (telemetry predicate bit + encrypted rule gates)</span></p>
+          <button type="submit" class="submit-btn" id="edrSubmitBtn" disabled>🔐 <span class="en-only">Encrypt &amp; Submit for Threat Detection</span><span class="ko-only">암호화하여 위협 탐지 제출</span></button>
+        </form>
+      </div>
+
+      <!-- EDR progress steps -->
+      <div class="progress-panel" id="edrProgress" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <h2 style="margin:0"><span class="en-only">FHE Computation Running</span><span class="ko-only">FHE 연산 진행 중</span></h2>
+          <span class="elapsed-badge" id="edrElapsed">0s</span>
+        </div>
+        <div class="step-row"><div class="step-circle" id="edrC-1">1</div><div class="step-label"><span class="en-only">Encrypt security events 1–4</span><span class="ko-only">보안 이벤트 1~4 암호화</span></div><span class="step-status waiting" id="edrS-1"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-2">2</div><div class="step-label"><span class="en-only">Encrypt security events 5–7</span><span class="ko-only">보안 이벤트 5~7 암호화</span></div><span class="step-status waiting" id="edrS-2"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-3">3</div><div class="step-label"><span class="en-only">Receive event count predicate label</span><span class="ko-only">이벤트 횟수 predicate label 수신</span> <span class="tech-tag">server-only threshold</span></div><span class="step-status waiting" id="edrS-3"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-4">4</div><div class="step-label"><span class="en-only">Pattern A: first condition</span><span class="ko-only">패턴 A: 첫 번째 조건 결합</span> <span class="tech-tag">AND gate</span></div><span class="step-status waiting" id="edrS-4"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-5">5</div><div class="step-label"><span class="en-only">Pattern A: second condition</span><span class="ko-only">패턴 A: 두 번째 조건 결합</span> <span class="tech-tag">AND gate</span></div><span class="step-status waiting" id="edrS-5"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-6">6</div><div class="step-label"><span class="en-only">Pattern B: first condition</span><span class="ko-only">패턴 B: 첫 번째 조건 결합</span> <span class="tech-tag">AND gate</span></div><span class="step-status waiting" id="edrS-6"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-7">7</div><div class="step-label"><span class="en-only">Pattern B: threshold/privilege condition</span><span class="ko-only">패턴 B: 임계/권한 조건 결합</span> <span class="tech-tag">AND gates</span></div><span class="step-status waiting" id="edrS-7"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+        <div class="step-row"><div class="step-circle" id="edrC-8">8</div><div class="step-label"><span class="en-only">Final threat verdict</span><span class="ko-only">최종 위협 판정</span> <span class="tech-tag">OR gate</span></div><span class="step-status waiting" id="edrS-8"><span class="en-only">Waiting</span><span class="ko-only">대기</span></span></div>
+      </div>
+
+      <!-- EDR result -->
+      <div class="result-panel" id="edrResult" style="display:none">
+        <div class="r-emoji"  id="edrEmoji"></div>
+        <div class="r-verdict" id="edrVerdict"></div>
+        <div id="edrSeverityBadge"></div>
+        <div class="r-detail"  id="edrDetail"></div>
+        <span class="r-time"   id="edrTime"></span>
+        <div class="cipher-card" id="edrCipherCard" style="display:none">
+          <div class="cipher-card-title"><span class="en-only">What Happened in the Browser</span><span class="ko-only">브라우저 안에서 일어난 일</span></div>
+          <div class="cipher-flow">
+            <div class="cipher-col">
+              <div class="cipher-col-label">🙈 <span class="en-only">Hidden from server</span><span class="ko-only">서버가 볼 수 없음</span></div>
+              <div class="cipher-box user-secret" id="edrPlainText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Encrypt<br>Compute</span><span class="ko-only">암호화<br>연산</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">🔐 <span class="en-only">Browser-computed ciphertext</span><span class="ko-only">브라우저가 계산한 암호문</span></div>
+              <div class="cipher-box fhe-compute" id="edrHexText">-</div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Server<br>Decrypt</span><span class="ko-only">서버<br>복호화</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">✓ <span class="en-only">Inside server</span><span class="ko-only">서버 내부</span></div>
+              <div class="cipher-box server-out" id="edrResultBox">
+                <span class="so-label"><span class="en-only">Decrypt with secret key</span><span class="ko-only">비밀키로 복호화</span></span>
+                <span class="so-bit" id="edrResultBit">-</span>
+                <span class="so-note"><span class="en-only">User event list unknown</span><span class="ko-only">사용자 이벤트 목록 모름</span></span>
+              </div>
+            </div>
+            <div class="cipher-flow-arrow">→<div class="fa-label"><span class="en-only">Response<br>Deliver</span><span class="ko-only">응답<br>전달</span></div></div>
+            <div class="cipher-col">
+              <div class="cipher-col-label">📨 <span class="en-only">What browser receives</span><span class="ko-only">브라우저가 받는 것</span></div>
+              <div class="cipher-box server-resp" id="edrRespBox">
+                <span class="sr-label"><span class="en-only">Result</span><span class="ko-only">연산 결과</span></span>
+                <span class="sr-result-bit" id="edrRespBit">-</span>
+                <span class="sr-label" style="margin-top:4px"><span class="en-only">Demo receipt</span><span class="ko-only">데모 응답 영수증</span></span>
+                <div class="sr-proof-box" id="edrProofVal">-</div>
+                <span class="sr-verify" id="edrVerifyNote">-</span>
+              </div>
+            </div>
+          </div>
+          <div class="cipher-hidden-note">
+            <span>🙈 <span class="en-only">User cannot see: server's detection rule combinations</span><span class="ko-only">사용자가 볼 수 없음: 서버의 탐지 룰 조합</span></span>
+            <span>🙈 <span class="en-only">Server cannot see: user's raw events</span><span class="ko-only">서버가 볼 수 없음: 사용자 원본 이벤트</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Runtime log -->
+    <div class="log-panel" style="margin-top:8px">
+      <div class="panel-head">
+        <button class="log-toggle" id="logToggle" type="button">▼ Runtime Log</button>
+        <button id="clearLogBtn" type="button" style="min-height:32px;padding:0 10px">Clear</button>
+      </div>
+      <pre id="logOutput"></pre>
+    </div>
+    <!-- ===== merged from Private Policy: product / market context ===== -->
+    <section class="hero" style="min-height:120px;margin-top:28px;border-top:2px solid var(--line);padding-top:22px">
+      <div class="hero-copy">
+        <p class="eyebrow">waLLLnut Private Policy Evaluation</p>
+        <h1><span class="en-only">Pre-decision SDK that hides both user data and server screening criteria</span><span class="ko-only">사용자 데이터와 서버 심사 기준을 둘 다 숨기는 사전결정 SDK</span></h1>
+        <p class="summary"><span class="en-only">FHE16 apps split into server-side FHE (the server computes on ciphertext) and browser-side FHE (the browser computes on ciphertext and sends only the result to the server). This page is a browser-side private policy demo, but location search and ad/offer matching fit server-side FHE better.</span><span class="ko-only">FHE16 앱은 서버가 암호문을 계산하는 server-side FHE와 브라우저가 암호문을 계산한 뒤 결과를 서버에 보내는 browser-side FHE로 나뉩니다. 이 페이지는 browser-side private policy demo지만, 위치 검색과 광고/offer matching은 server-side FHE가 더 맞습니다.</span></p>
+      </div>
+    </section>
+    <section class="section grid-3">
+      <div class="fit-card"><span class="score">35%</span><strong><span class="en-only">Finance/insurance prequalification</span><span class="ko-only">금융/보험 prequalification</span></strong><p class="band-sub"><span class="en-only">The first market to sell. A clear two-party secret problem: receive less raw financial data and hide the lender threshold.</span><span class="ko-only">가장 먼저 팔 시장. raw 금융 데이터를 덜 받고, lender threshold도 숨기는 명확한 양쪽 비밀 문제가 있습니다.</span></p></div>
+      <div class="fit-card"><span class="score warn">30%</span><strong>EDR private rule evaluation</strong><p class="band-sub"><span class="en-only">Strong revenue signal but agent integration is heavy. Start with security vendors who have regulated-customer blockers.</span><span class="ko-only">돈 냄새는 강하지만 agent 통합이 무겁습니다. regulated customer blocker가 있는 보안 벤더부터 접근해야 합니다.</span></p></div>
+      <div class="fit-card"><span class="score bad">20%</span><strong><span class="en-only">Clinical trial private matching</span><span class="ko-only">임상시험 private matching</span></strong><p class="band-sub"><span class="en-only">The problem is real but CRO, IRB, and legal cycles are long — too slow for a first revenue market.</span><span class="ko-only">문제는 진짜지만 CRO, IRB, 법무 사이클이 길어 첫 매출 시장으로는 느립니다.</span></p></div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">FHE16 app mode classification</span><span class="ko-only">FHE16 앱 모드 분류</span></h2>
+      <p class="band-sub"><span class="en-only">The product story becomes clearest when you categorize apps by where computation happens. If the server holds the catalog/model/ranking, use server-side FHE. If the browser evaluates policy and sends only the result, use browser-side FHE.</span><span class="ko-only">앱을 계산 위치로 나눠야 제품 이야기가 선명해집니다. 서버가 catalog/model/ranking을 갖고 있으면 server-side FHE, 사용자의 브라우저에서 policy를 평가하고 결과만 서버가 받아야 하면 browser-side FHE입니다.</span></p>
+      <div class="deal-grid">
+        <div class="deal-card"><h3>Server-side FHE</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Server, GPU/FPGA, cloud worker, or FHE coprocessor computes on ciphertext.</span><span class="ko-only">서버, GPU/FPGA, cloud worker, FHE coprocessor가 암호문을 계산합니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Nearby restaurant/shop search without location sharing, privacy-preserving ads, offer eligibility, private ranking/recommendation.</span><span class="ko-only">위치 공유 없이 주변 음식점/매장 찾기, privacy-preserving ads, offer eligibility, private ranking/recommendation.</span></dd></div><div><dt>Why</dt><dd><span class="en-only">The server holds catalog, campaign, inventory, and ranking rules, so the browser only needs to encrypt and send location/query/profile.</span><span class="ko-only">서버가 catalog, campaign, inventory, ranking rule을 갖고 있으므로 브라우저는 위치/query/profile만 암호화해 보내면 됩니다.</span></dd></div></dl></div>
+        <div class="deal-card"><h3>Browser-side FHE</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Browser worker combines encrypted policy and user predicate.</span><span class="ko-only">브라우저 worker가 encrypted policy와 user predicate를 조합합니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Finance/insurance prequalification, clinical trial/HR self-check, consent-gated eligibility, endpoint local rule evaluation.</span><span class="ko-only">금융/보험 사전심사, 임상시험/HR self-check, consent-gated eligibility, endpoint local rule evaluation.</span></dd></div><div><dt>Why</dt><dd><span class="en-only">Server receives no raw user data, browser never sees server thresholds in plaintext, server receives only enc_result for decrypt/sign.</span><span class="ko-only">서버는 raw user data를 받지 않고, 브라우저는 서버 threshold를 평문으로 보지 않으며, 서버는 enc_result만 받아 decrypt/sign합니다.</span></dd></div></dl></div>
+        <div class="deal-card"><h3>Outsourced FHE / MPC hybrid</h3><dl><div><dt>Compute</dt><dd><span class="en-only">Baseline is FHE outsourcing: external pool computes on ciphertext and public/template circuit without SK.</span><span class="ko-only">기본형은 외부 pool이 SK 없이 ciphertext와 공개/템플릿 circuit을 계산하는 FHE outsourcing입니다.</span></dd></div><div><dt>MPC line</dt><dd><span class="en-only">When the circuit itself or both inputs need stronger hiding, escalate to MPC, 2PC, PFE, or FHE+MPC hybrid.</span><span class="ko-only">회로 자체나 양쪽 입력을 더 강하게 숨겨야 하면 MPC, 2PC, PFE 또는 FHE+MPC hybrid로 넘어갑니다.</span></dd></div><div><dt>Apps</dt><dd><span class="en-only">Heavy EDR/private rule evaluation, batch risk scoring, blockchain confidential execution, third-party audit compute.</span><span class="ko-only">무거운 EDR/private rule evaluation, batch risk scoring, blockchain confidential execution, third-party audit compute.</span></dd></div></dl></div>
+      </div>
+    </section>
+
+
+    <section class="section band">
+      <h2><span class="en-only">Honest sellability verdict</span><span class="ko-only">솔직한 sellability 판정</span></h2>
+      <p class="band-sub"><span class="en-only">Positioning this as a general-purpose browser FHE platform will not sell. The winning positioning is "private decisioning SDK" with computation limited to small predicate circuits.</span><span class="ko-only">이건 범용 브라우저 FHE 플랫폼으로 팔면 안 팔립니다. 팔리는 포장은 "private decisioning SDK"이고, 계산은 작은 predicate circuit으로 제한해야 합니다.</span></p>
+      <div class="verdict-grid">
+        <div class="verdict-card"><h3><span class="en-only">Sellable conditions</span><span class="ko-only">팔리는 조건</span></h3><ul><li><span class="en-only">The customer's actual revenue/approval is blocked due to data minimization requirements or model IP exposure</span><span class="ko-only">고객이 데이터 최소수집이나 모델 IP 노출 때문에 실제 매출/심사가 막혀 있음</span></li><li><span class="en-only">Result is small: yes/no, risk bucket, limit bucket</span><span class="ko-only">결과가 yes/no, risk bucket, limit bucket처럼 작음</span></li><li><span class="en-only">Policy fits within 10–50 predicates</span><span class="ko-only">정책이 10-50개 predicate 안에 들어옴</span></li><li><span class="en-only">Inputs can be received as signed claims or telemetry bits from issuer/API/device</span><span class="ko-only">입력은 issuer/API/device가 만든 signed claim 또는 telemetry bit로 받을 수 있음</span></li></ul></div>
+        <div class="verdict-card"><h3><span class="en-only">Unsellable conditions</span><span class="ko-only">안 팔리는 조건</span></h3><ul><li><span class="en-only">Trying to run 32-bit multiplication, division, or full model inference in browser</span><span class="ko-only">32-bit 곱셈, 나눗셈, full model inference를 브라우저에서 돌리려 함</span></li><li><span class="en-only">Requiring Level 3 PFE (server must fully hide the whole circuit) as MVP</span><span class="ko-only">서버가 회로 전체를 완전히 숨겨야 하는 Level 3 PFE를 MVP로 요구함</span></li><li><span class="en-only">Architecture requires trusting user-entered values directly</span><span class="ko-only">사용자가 직접 입력한 값을 믿어야 하는 구조임</span></li><li><span class="en-only">Approaching as a free PoC or research demo only</span><span class="ko-only">무료 PoC 또는 연구 데모로만 접근함</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Concrete sales scenarios</span><span class="ko-only">구체적 판매 시나리오</span></h2>
+      <div class="deal-grid">
+        <div class="deal-card"><h3><span class="en-only">Lender / Insurer</span><span class="ko-only">Lender / 보험사</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Receiving raw financial data at pre-screen creates consent, retention, and breach liability.</span><span class="ko-only">pre-screen 단계에서 raw 금융 데이터를 받으면 동의, 보관, 유출 책임이 커짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Return only a pre-approval bit and limit bucket using signed income/debt predicates + private lender policy.</span><span class="ko-only">signed income/debt predicate + private lender policy로 사전승인 bit와 한도 bucket만 반환.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">8–12 week PoC ₩30M–₩100M; production ₩150M–₩500M/year.</span><span class="ko-only">8-12주 PoC 3천만-1억원, production 1.5억-5억원/year.</span></dd></div></dl></div>
+        <div class="deal-card"><h3><span class="en-only">EDR / MDR vendor</span><span class="ko-only">EDR / MDR 벤더</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Deploying detection rules to customer endpoints makes rule reverse-engineering and bypass easier.</span><span class="ko-only">탐지 룰을 고객 endpoint에 배포하면 rule reverse engineering과 우회가 쉬워짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Hide endpoint telemetry bits; evaluate vendor rule pack as private policy; return only alert bucket.</span><span class="ko-only">endpoint telemetry bit는 숨기고, 벤더 rule pack은 private policy로 평가해 alert bucket만 반환.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">Regulated customer pilot ₩70M–₩200M; OEM SDK ₩200M–₩700M/year.</span><span class="ko-only">regulated customer pilot 7천만-2억원, OEM SDK 2억-7억원/year.</span></dd></div></dl></div>
+        <div class="deal-card"><h3><span class="en-only">CRO / Hospital network</span><span class="ko-only">CRO / 병원 네트워크</span></h3><dl><div><dt>Pain</dt><dd><span class="en-only">Collecting PHI first for trial matching lengthens IRB, HIPAA, and DUA review.</span><span class="ko-only">trial matching에 PHI를 먼저 모으면 IRB, HIPAA, DUA 검토가 길어짐.</span></dd></div><div><dt>Offer</dt><dd><span class="en-only">Compute only a match bit using lab/diagnosis predicate bits and private inclusion criteria.</span><span class="ko-only">lab/diagnosis predicate bit와 private inclusion criteria로 match bit만 계산.</span></dd></div><div><dt>Price</dt><dd><span class="en-only">Research-funded pilot is possible but too slow for first revenue.</span><span class="ko-only">연구비 기반 pilot은 가능하지만 첫 매출 시장으로는 느림.</span></dd></div></dl></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Information only the server knows in production</span><span class="ko-only">운영 시 서버만 아는 정보</span></h2>
+      <p class="band-sub"><span class="en-only">This page is a demo — the worker simulates the server role. In actual production, this information never leaves the server process and HSM/secret store.</span><span class="ko-only">현재 페이지는 데모라 worker 안에서 서버 역할을 흉내냅니다. 실제 운영에서는 이 정보가 서버 프로세스와 HSM/secret store 밖으로 나가지 않습니다.</span></p>
+      <div class="verdict-grid">
+        <div class="verdict-card"><h3>Server-only</h3><ul><li>FHE secret key</li><li><span class="en-only">plaintext threshold, weight, detection rule</span><span class="ko-only">평문 threshold, weight, detection rule</span></li><li><span class="en-only">policy compiler source and versioned rule pack</span><span class="ko-only">policy compiler source와 versioned rule pack</span></li><li>decrypt API result, query budget, audit log</li></ul></div>
+        <div class="verdict-card"><h3>Browser-visible</h3><ul><li>public/evaluation key</li><li>encrypted policy blob</li><li>encrypted user predicate labels</li><li><span class="en-only">final result bit/bucket and server-signed receipt</span><span class="ko-only">최종 result bit/bucket과 서버 서명 receipt</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Why it sells technically</span><span class="ko-only">기술적으로 팔리는 이유</span></h2>
+      <p class="band-sub"><span class="en-only">Plain local JS exposes server rules. The FHE16 server-key structure treats both user input and server thresholds as ciphertext while keeping the secret key and plaintext policy on the server. Full circuit hiding is deferred to 2PC/PFE phase 2.</span><span class="ko-only">단순 local JS는 서버 rule을 노출합니다. FHE16 server-key 구조는 사용자 입력과 서버 threshold를 모두 암호문으로 다루면서, 서버가 secret key와 평문 policy를 계속 보관하게 해줍니다. full circuit hiding은 2PC/PFE phase 2로 미룹니다.</span></p>
+      <div class="flow">
+        <div class="flow-box"><h3>User private input</h3><ul><li>income/debt buckets</li><li>endpoint telemetry bits</li><li>PHI/lab result buckets</li></ul><div class="pill-row"><span class="pill good">not sent raw</span><span class="pill">bucketized</span></div></div>
+        <div class="flow-arrow">to</div>
+        <div class="flow-box"><h3>FHE16 server-key runtime</h3><ul><li>public/evaluation key in browser</li><li>encrypted policy blob</li><li>server-only SK and plaintext rules</li></ul><div class="pill-row"><span class="pill warn">Level 1-2 hiding</span><span class="pill">no 32-bit multiply</span></div></div>
+        <div class="flow-arrow">to</div>
+        <div class="flow-box"><h3>Minimum result</h3><ul><li>prequalified yes/no</li><li>limit or severity bucket</li><li>policy version receipt</li></ul><div class="pill-row"><span class="pill good">workflow ready</span><span class="pill">auditable</span></div></div>
+      </div>
+    </section>
+    <section class="section grid-2">
+      <div class="price-card"><strong>Recommended first offer</strong><table class="small-table"><tr><th>Package</th><th>Price</th></tr><tr><td>8-12 week PoC</td><td><span class="en-only">₩30M–₩100M</span><span class="ko-only">3천만-1억원</span></td></tr><tr><td>Regulated pilot</td><td><span class="en-only">₩70M–₩200M</span><span class="ko-only">7천만-2억원</span></td></tr><tr><td>Production SDK</td><td><span class="en-only">₩150M–₩700M/year</span><span class="ko-only">1.5억-7억원/year</span></td></tr></table></div>
+      <div class="price-card"><strong>Technical sellability verdict</strong><p class="band-sub"><span class="en-only">It can sell — but you must lead with FHE16 server-key-based private thresholds plus encrypted predicate composition, not full PFE or general-purpose FHE. Requirements: p95 ≤ 5 s demo, 10–50 predicates, no encrypted integer comparison, no 32-bit multiplication.</span><span class="ko-only">팔릴 수 있습니다. 단, full PFE나 범용 FHE가 아니라 FHE16 server-key 기반 private thresholds plus encrypted predicate composition부터 팔아야 합니다. p95 5초 이하 데모, 10-50 predicate, no encrypted integer compare, no 32-bit multiplication 조건을 지켜야 합니다.</span></p><div class="pill-row"><span class="pill good">finance first</span><span class="pill warn">EDR second</span><span class="pill">paid PoC only</span></div></div>
+    </section>
+  </main>
+
+  <script type="module" src="./walllnut-hr.js"></script>
+  <script>
+  /* Company weights are blurred by default; press-and-hold the reveal button to show them briefly. */
+  (function () {
+    document.querySelectorAll('.criteria-bar').forEach(function (bar) {
+      if (!bar.querySelector('.wb')) return;                      // only the bar with real weights (HR)
+      var panel = bar.closest('.company-panel');
+      var hdr = panel && panel.querySelector('.company-header');
+      if (hdr && !hdr.querySelector('.reveal-wts-btn')) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'reveal-wts-btn';
+        b.innerHTML = '👁 <span class="en-only">Hold to reveal weights</span><span class="ko-only">누르고 있는 동안 가중치 보기</span>';
+        hdr.appendChild(b);
+      }
+    });
+    var on  = function () { document.body.classList.add('weights-revealed'); };
+    var off = function () { document.body.classList.remove('weights-revealed'); };
+    document.addEventListener('pointerdown', function (e) { if (e.target.closest('.reveal-wts-btn')) { e.preventDefault(); on(); } });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { document.addEventListener(ev, off); });
+  })();
+  </script>
+</body>
+</html>
