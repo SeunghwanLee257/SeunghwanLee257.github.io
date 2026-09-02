@@ -87,6 +87,18 @@
     .cipher-hex-dump { font-family: monospace; font-size: 11px; color: #a0d4f0; background: #060d14; border-radius: 6px; padding: 10px 12px; white-space: pre; line-height: 1.6; max-height: 160px; overflow-y: auto; margin: 0 0 12px; }
     .decrypt-reveal-btn { padding: 7px 16px; font-size: 13px; font-weight: 700; border: 1px solid #3b82f6; border-radius: 6px; background: transparent; color: #3b82f6; cursor: pointer; }
     .decrypt-reveal-btn:hover { background: #3b82f6; color: #fff; }
+    /* merged from outsourced-compute: production topology + FHE/MPC boundary */
+    .arch-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .arch-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 13px; min-height: 142px; }
+    .arch-card strong { display: block; font-size: 14px; margin-bottom: 8px; }
+    .arch-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .arch-card.pool { background: #f0fbf4; border-color: #b8e0db; }
+    .arch-card.zk { background: #fff8e7; border-color: #e8d080; }
+    .hybrid-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .hybrid-card { border: 1px solid var(--line); border-radius: 8px; background: #fbfcff; padding: 14px; }
+    .hybrid-card strong { display: block; font-size: 15px; margin-bottom: 7px; }
+    .hybrid-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 13px; }
+    @media (max-width: 980px) { .arch-grid, .hybrid-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -97,8 +109,8 @@
       <span style="width:1px;height:22px;background:var(--line);margin:0 4px"></span>
       <a href="./walllnut-hr.html" style="text-decoration:none"><button type="button">HR</button></a>
       <a href="./private-policy.html" style="text-decoration:none"><button type="button">Private Policy</button></a>
-      <a href="./outsourced-compute.html" style="text-decoration:none"><button type="button">Outsourced</button></a>
       <a href="./aes-to-fhe.html" style="text-decoration:none"><button type="button">AES &#8594; FHE</button></a>
+      <a href="../Auction/index.html" style="text-decoration:none"><button type="button">Auction</button></a>
       <button class="lang-toggle" type="button" style="margin-left:auto">한국어</button>
     </nav>
 
@@ -126,6 +138,28 @@
       </div>
     </section>
 
+
+    <section class="section band">
+      <h2><span class="en-only">The boundary between FHE outsourcing and MPC hybrid</span><span class="ko-only">FHE outsourcing과 MPC hybrid의 경계</span></h2>
+      <p class="band-sub"><span class="en-only">Using an external compute pool does not make something MPC. The protocol depends on what needs to be hidden.</span><span class="ko-only">외부 compute pool을 쓴다고 전부 MPC는 아닙니다. 무엇을 숨기는지에 따라 프로토콜이 달라집니다.</span></p>
+      <div class="hybrid-grid">
+        <div class="hybrid-card"><strong>FHE outsourcing</strong><p><span class="en-only">The external worker sees only ciphertext, evaluation key, and a public or template circuit. It never sees the SK or plaintext input/policy, and returns only enc_result.</span><span class="ko-only">외부 worker는 ciphertext, evaluation key, 공개 또는 템플릿 circuit만 봅니다. SK와 plaintext input/policy는 보지 못하고 enc_result만 반환합니다.</span></p></div>
+        <div class="hybrid-card"><strong>MPC / 2PC / PFE</strong><p><span class="en-only">Required when the server's private circuit/function itself or both inputs need stronger hiding. The private circuit provider model is closer to this family than simple FHE outsourcing.</span><span class="ko-only">서버의 private circuit/function 자체나 양쪽 입력을 더 강하게 숨겨야 할 때 필요합니다. private circuit provider 모델은 단순 FHE outsourcing보다 이 계열에 가깝습니다.</span></p></div>
+        <div class="hybrid-card"><strong>FHE + MPC hybrid</strong><p><span class="en-only">FHE handles ciphertext evaluation; MPC handles private circuit labels, threshold decryption, key custody, verifiable receipt, and parts of settlement. Cost increases but trust separation is stronger.</span><span class="ko-only">FHE가 암호문 평가를 맡고, MPC는 private circuit labels, threshold decrypt, key custody, verifiable receipt, settlement 일부를 맡습니다. 비용은 늘지만 신뢰 분리가 강해집니다.</span></p></div>
+      </div>
+    </section>
+
+    <section class="section band">
+      <h2><span class="en-only">Production topology</span><span class="ko-only">실제 운영 토폴로지</span></h2>
+      <p class="band-sub"><span class="en-only">Blockchain is best used as a commitment/audit/settlement layer, not a compute engine. Heavy FHE computation is handled by an external compute pool or coprocessor; only the server holds the SK and plaintext policy. Note: this baseline is FHE outsourcing, not MPC.</span><span class="ko-only">블록체인은 계산 엔진이 아니라 commitment/audit/settlement layer로 쓰는 편이 맞습니다. 무거운 FHE 연산은 외부 compute pool 또는 coprocessor가 수행하고, SK와 평문 policy는 서버만 보유합니다. 단, 이 baseline은 MPC가 아니라 FHE outsourcing입니다.</span></p>
+      <div class="arch-grid">
+        <div class="arch-card"><strong>1. Browser</strong><ul><li>user input encrypt</li><li><span class="en-only">generate ciphertext bundle</span><span class="ko-only">ciphertext bundle 생성</span></li><li><span class="en-only">raw input not sent</span><span class="ko-only">raw input 미전송</span></li></ul></div>
+        <div class="arch-card"><strong>2. Policy Server</strong><ul><li><span class="en-only">holds SK</span><span class="ko-only">SK 보관</span></li><li><span class="en-only">holds plaintext threshold/rule</span><span class="ko-only">평문 threshold/rule 보관</span></li><li><span class="en-only">distributes encrypted policy blob</span><span class="ko-only">encrypted policy blob 배포</span></li></ul></div>
+        <div class="arch-card pool"><strong>3. Compute Pool</strong><ul><li><span class="en-only">receives ciphertext + circuit</span><span class="ko-only">ciphertext + circuit 수신</span></li><li><span class="en-only">no SK</span><span class="ko-only">SK 없음</span></li><li><span class="en-only">returns enc_result only</span><span class="ko-only">enc_result만 반환</span></li></ul></div>
+        <div class="arch-card"><strong>4. Decrypt API</strong><ul><li><span class="en-only">decrypts enc_result</span><span class="ko-only">enc_result 복호화</span></li><li><span class="en-only">returns bit/bucket only</span><span class="ko-only">bit/bucket만 반환</span></li><li><span class="en-only">issues server signature</span><span class="ko-only">server signature 발급</span></li></ul></div>
+        <div class="arch-card zk"><strong>5. ZK / MPC — T.B.O</strong><ul><li><span class="en-only">outsourced to external ZK stacks</span><span class="ko-only">외부 ZK 스택에 위임</span></li><li>RISC Zero / SP1 / Halo2</li><li><span class="en-only">not built in-house</span><span class="ko-only">자체 구현 아님</span></li></ul></div>
+      </div>
+    </section>
 
     <section class="section band">
       <h2><span class="en-only">Honest sellability verdict</span><span class="ko-only">솔직한 sellability 판정</span></h2>
