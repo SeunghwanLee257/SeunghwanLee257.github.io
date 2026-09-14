@@ -43,6 +43,15 @@ button:hover{filter:brightness(1.08)}
 .primary{background:var(--sky);color:#fff}
 .dark{background:var(--ink);color:#fff}
 .ghost{background:#EEF3F6;color:var(--ink2)}
+.keybar{display:flex;gap:10px;align-items:center;margin-top:10px;padding-top:12px;
+  border-top:1px solid var(--line);flex-wrap:wrap}
+button.key{background:#0A5C80;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.engine-status{font-size:12.5px;color:var(--muted);padding:4px 10px;border-radius:99px;
+  background:#F3F6F8}
+.engine-status.busy{background:#FFF4E0;color:#8A5A00}
+.engine-status.ready{background:#E6F6EE;color:var(--ok)}
+.engine-status.err{background:#FDECEC;color:var(--err)}
 .result{font-family:var(--mono);font-size:32px;font-weight:600;padding:14px 0;
   letter-spacing:-.02em;color:var(--muted)}
 .result.ok{color:var(--sky3)}
@@ -112,9 +121,14 @@ footer{color:var(--muted);font-size:12.5px;padding:20px 28px;max-width:1240px;ma
       </div>
       <div class="row">
         <button class="ghost" id="run-plain">평문으로 확인</button>
-        <button class="primary" id="run-enc">암호문에서 실행</button>
         <button class="dark" id="show-circuit">회로 보기</button>
       </div>
+      <div class="keybar">
+        <button class="key" id="gen-keys">평가키 생성</button>
+        <button class="primary" id="run-enc">암호문에서 실행</button>
+        <span class="engine-status" id="engine-status">평가키 없음</span>
+      </div>
+      <p class="muted" style="margin:8px 0 0">평가키 생성은 한 번만 하면 된다. 엔진 내려받기까지 40초쯤 걸린다.</p>
     </div>
 
     <div class="card limits">
@@ -175,6 +189,18 @@ e = b * 3
         파라미터 앞에 <code>secret</code> 또는 <code>public</code> 을 붙인다. 생략하면 <code>secret</code>.
         공개 값은 회로에 상수로 접히므로 반복 횟수나 임계값에 쓴다.
       </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>결과</h2>
+      <div class="result" id="result">—</div>
+      <div id="console"></div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h2>회로 연산</h2>
+      <div id="ops"><div class="muted">실행하면 어떤 연산이 몇 번 불렸는지 나온다</div></div>
     </div>
   </div>
 </div>

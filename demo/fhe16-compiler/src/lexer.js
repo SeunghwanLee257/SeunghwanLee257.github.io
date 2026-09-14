@@ -87,10 +87,12 @@ export function tokenize(source) {
       continue;
     }
 
-    if (/[A-Za-z_$]/.test(ch)) {
+    // 식별자 — 자바스크립트가 허용하는 유니코드 글자를 받는다.
+    // 한글·한자 변수명이 그대로 쓰인다.
+    if (/[A-Za-z_$\u00C0-\uFFFF]/.test(ch)) {
       const sl = line, sc = col;
       let j = i;
-      while (j < n && /[A-Za-z0-9_$]/.test(source[j])) j++;
+      while (j < n && /[A-Za-z0-9_$\u00C0-\uFFFF]/.test(source[j])) j++;
       const word = source.slice(i, j);
       push(KEYWORDS.has(word) ? 'keyword' : 'name', word, sl, sc);
       col += j - i;

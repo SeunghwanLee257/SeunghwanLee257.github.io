@@ -114,30 +114,65 @@ async function runPlain() {
   }
 }
 
-async function loadEngine() {
-  if (fhe16Backend) return fhe16Backend;
-  log('FHE16 WASM 불러오는 중…');
-  const mod = await import('../fhe16-playground/dist/fhe16-web.mjs');
-  const loaded = await mod.loadFHE16({ baseUrl: '../fhe16-playground/' });
-  fhe16Module = loaded.module || loaded;
-  const report = inspectFHE16(fhe16Module);
-  log(`연결된 연산 ${report.present.length}종 · 빠진 것 ${report.missing.length}종`);
-  if (report.missing.length) log(`대체 경로로 처리: ${report.missing.slice(0, 6).join(', ')}`, 'muted');
-  fhe16Backend = createFHE16Backend(fhe16Module);
-  log(`백엔드 준비 — ${fhe16Backend.describe()}`, 'ok');
-  return fhe16Backend;
+let keysReady = false;
+
+function setEngineStatus(text, cls) {
+  const el = $('engine-status');
+  if (!el) return;
+  el.textContent = text;
+  el.className = 'engine-status' + (cls ? ' ' + cls : '');
+}
+
+/** 엔진을 내려받고 평가키를 만든다. 버튼으로만 부른다. */
+async function prepareEngine() {
+  const btn = $('gen-keys');
+  if (keysReady) { log('평가키가 이미 준비돼 있다', 'muted'); return fhe16Backend; }
+  btn.disabled = true;
+  try {
+    setEngineStatus('엔진 내려받는 중…', 'busy');
+    log('FHE16 WASM 불러오는 중 — 40초쯤 걸린다');
+    const t0 = performance.now();
+    const mod = await import('../fhe16-playground/dist/fhe16-web.mjs');
+    const loaded = await mod.loadFHE16({ baseUrl: '../fhe16-playground/' });
+    fhe16Module = loaded.module || loaded;
+    log(`엔진 로드 ${((performance.now() - t0) / 1000).toFixed(1)}초`, 'ok');
+
+    const report = inspectFHE16(fhe16Module);
+    log(`연결된 연산 ${report.present.length}종 · 빠진 것 ${report.missing.length}종`);
+    if (report.missing.length) log(`대체 경로로 처리: ${report.missing.slice(0, 6).join(', ')}`, 'muted');
+
+    fhe16Backend = createFHE16Backend(fhe16Module);
+    setEngineStatus('평가키 생성 중…', 'busy');
+    log('평가키 생성 중…');
+    const t1 = performance.now();
+    fhe16Backend.prepare();
+    log(`평가키 ${((performance.now() - t1) / 1000).toFixed(1)}초`, 'ok');
+
+    keysReady = true;
+    setEngineStatus('준비 완료 · ' + fhe16Backend.describe(), 'ready');
+    $('run-enc').disabled = false;
+    btn.textContent = '평가키 재생성';
+    btn.disabled = false;
+    return fhe16Backend;
+  } catch (e) {
+    setEngineStatus('실패 — ' + e.message, 'err');
+    log(e.message, 'err');
+    btn.disabled = false;
+    throw e;
+  }
 }
 
 async function runEncrypted() {
   clearLog();
   const src = $('code').value;
   try {
-    const args = parseArgs($('args').value);
-    const backend = await loadEngine();
-    if (typeof fhe16Module._FHE16_GenEval === 'function') {
-      log('평가키 생성 중…');
-      fhe16Module._FHE16_GenEval();
+    if (!keysReady) {
+      log('먼저 평가키를 생성한다', 'err');
+      setEngineStatus('평가키가 필요하다', 'err');
+      return;
     }
+    const args = parseArgs($('args').value);
+    const backend = fhe16Backend;
     const prog = compile(src);
     const sink = {};
     log('암호문 위에서 실행 중…');
@@ -216,8 +251,11 @@ function init() {
   $('run-plain').addEventListener('click', runPlain);
   $('run-enc').addEventListener('click', runEncrypted);
   $('show-circuit').addEventListener('click', showCircuit);
+  $('gen-keys').addEventListener('click', () => prepareEngine().catch(() => {}));
+  $('run-enc').disabled = true;
   load('risk');
-  log('평문 실행으로 회로를 먼저 확인한 뒤, 암호문 실행을 누른다.');
+  setEngineStatus('평가키 없음', '');
+  log('함수를 고쳐 쓴 뒤 평문으로 확인한다. 암호문 실행은 평가키를 만든 뒤에 쓴다.');
 }
 
 document.addEventListener('DOMContentLoaded', init);
