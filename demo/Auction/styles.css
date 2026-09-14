@@ -1159,3 +1159,44 @@ html, body {
         max-height: 300px;
     }
 }
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .header-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .key-status,
+    .kyc-box {
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .status-dot {
+        flex: none;
+    }
+
+    .main-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel {
+        min-width: 0;
+    }
+
+    .winner-info .info-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .winner-info .info-row .value {
+        overflow-wrap: anywhere;
+    }
+}

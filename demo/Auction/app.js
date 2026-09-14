@@ -1,7 +1,8 @@
 /**
  * Confidential Auction Demo Application
- * FHE16 시뮬레이션 - AES-256-GCM 사용
+ * SELLAN SDK + FHE16 browser diagnostic. No real identity, payment or privacy claim.
  */
+import { cryptoEngine } from './auction-sdk.js';
 
 class AuctionApp {
     constructor() {
@@ -11,14 +12,16 @@ class AuctionApp {
         this.currentUserId = 'user_' + Math.random().toString(36).substring(7);
         this.isKYCVerified = false;
         this.timerInterval = null;
+        this.submitting = false;
+        this.resolving = false;
+        this.previewVersion = 0;
     }
 
     async initialize() {
         console.log('[App] Initializing Confidential Auction Demo...');
 
-        // Initialize crypto engine
-        await cryptoEngine.initialize();
-        console.log('[App] Crypto engine ready');
+        // FHE assets load only when the SDK actually compares bids.
+        console.log('[App] SELLAN auction SDK ready');
 
         // Load sample lots
         await this.loadSampleLots();
@@ -118,7 +121,7 @@ class AuctionApp {
         for (let i = 0; i < numBids; i++) {
             const bidAmount = lot.startingBid + Math.floor(Math.random() * (lot.estimate.low - lot.startingBid));
             const fakeBidderId = 'bidder_' + Math.random().toString(36).substring(7);
-            const encryptedBid = await cryptoEngine.createEncryptedBid(bidAmount, fakeBidderId);
+            const encryptedBid = await cryptoEngine.createBid(bidAmount, fakeBidderId);
             bids.push(encryptedBid);
         }
     }
@@ -245,7 +248,7 @@ class AuctionApp {
 
         // Clear bid input
         document.getElementById('bidAmount').value = '';
-        document.getElementById('previewCode').textContent = '금액을 입력하면 암호화된 값이 표시됩니다';
+        document.getElementById('previewCode').textContent = '금액을 입력하면 기록 해시가 표시됩니다';
 
         // Update stats
         this.updateStats();
@@ -256,21 +259,24 @@ class AuctionApp {
         const code = document.getElementById('previewCode');
         if (!code) return;
 
-        const amount = parseInt(value);
-        if (isNaN(amount) || amount <= 0) {
-            code.textContent = '금액을 입력하면 암호화된 값이 표시됩니다';
+        const version = ++this.previewVersion;
+        const amount = Number(value);
+        if (!Number.isSafeInteger(amount) || amount <= 0 || amount > 2147483647) {
+            code.textContent = '1~2,147,483,647원 사이의 정수를 입력해주세요';
             return;
         }
 
-        const encrypted = await cryptoEngine.encrypt({ amount, preview: true });
-        code.textContent = cryptoEngine.formatForDisplay(encrypted, 50);
+        try {
+            const commitment = await cryptoEngine.preview(amount);
+            if (version === this.previewVersion) code.textContent = cryptoEngine.formatForDisplay(commitment, 50);
+        } catch (error) { if (version === this.previewVersion) code.textContent = error.message; }
     }
 
     addBidAmount(amount) {
         const input = document.getElementById('bidAmount');
         if (!input) return;
 
-        const current = parseInt(input.value) || 0;
+        const current = Number(input.value) || 0;
         input.value = current + amount;
         this.updateEncryptionPreview(input.value);
     }
@@ -281,25 +287,26 @@ class AuctionApp {
         const submitBtn = document.getElementById('submitBidBtn');
         const bidNotice = document.getElementById('bidNotice');
 
-        kycStatus.textContent = '인증 중...';
+        kycStatus.textContent = '체험 준비 중...';
         kycBtn.disabled = true;
 
         setTimeout(() => {
             this.isKYCVerified = true;
-            kycStatus.textContent = '인증 완료';
+            kycStatus.textContent = '체험 가능';
             kycStatus.classList.add('verified');
             kycBtn.style.display = 'none';
             submitBtn.disabled = false;
             bidNotice.textContent = '입찰 준비 완료';
             bidNotice.style.color = 'var(--accent)';
 
-            console.log('[App] KYC verified');
+            console.log('[App] Demo participation enabled (no real KYC)');
         }, 1500);
     }
 
     async submitBid() {
+        if (this.submitting || this.resolving) return;
         if (!this.isKYCVerified) {
-            alert('먼저 KYC 인증을 완료해주세요.');
+            alert('먼저 체험 시작 버튼을 눌러주세요.');
             return;
         }
 
@@ -309,20 +316,18 @@ class AuctionApp {
         }
 
         const input = document.getElementById('bidAmount');
-        const amount = parseInt(input.value);
+        const amount = Number(input.value);
 
-        if (isNaN(amount) || amount < this.currentLot.startingBid) {
+        if (!Number.isSafeInteger(amount) || amount < this.currentLot.startingBid || amount > 2147483647) {
             alert(`최소 입찰가는 ${this.formatCurrency(this.currentLot.startingBid)}입니다.`);
             return;
         }
 
-        // Animate FHE flow
-        await this.animateFHEFlow();
-
-        // Create encrypted bid
-        const encryptedBid = await cryptoEngine.createEncryptedBid(amount, this.currentUserId);
-        const bids = this.bids.get(this.currentLot.id);
-        bids.push(encryptedBid);
+        this.submitting = true;
+        const lotId = this.currentLot.id;
+        try {
+        const bid = await cryptoEngine.createBid(amount, this.currentUserId);
+        this.bids.get(lotId).push(bid);
 
         // Update UI
         this.renderLotList();
@@ -331,13 +336,15 @@ class AuctionApp {
 
         // Reset form
         input.value = '';
-        document.getElementById('previewCode').textContent = '금액을 입력하면 암호화된 값이 표시됩니다';
+        document.getElementById('previewCode').textContent = '금액을 입력하면 기록 해시가 표시됩니다';
 
         // Reset flow animation
         document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active', 'complete'));
 
-        alert('입찰이 암호화되어 제출되었습니다!');
+        alert('체험 입찰을 기록했습니다. 승자 확인 시 FHE16으로 비교합니다.');
         console.log('[App] Bid submitted');
+        } catch (error) { alert(error.message); }
+        finally { this.submitting = false; }
     }
 
     async animateFHEFlow() {
@@ -363,6 +370,7 @@ class AuctionApp {
     }
 
     async determineWinner() {
+        if (this.resolving || this.submitting) return;
         if (!this.currentLot) {
             alert('작품을 선택해주세요.');
             return;
@@ -374,7 +382,12 @@ class AuctionApp {
             return;
         }
 
-        console.log('[App] Determining winner...');
+        this.resolving = true;
+        const button = document.getElementById('determineWinnerBtn');
+        const lotId = this.currentLot.id;
+        button.disabled = true;
+        button.textContent = 'SDK에서 FHE16 비교 중…';
+        try {
 
         // Animate FHE flow
         const steps = document.querySelectorAll('.flow-step');
@@ -386,7 +399,7 @@ class AuctionApp {
         steps[0].classList.remove('active');
 
         steps[1].classList.add('active');
-        const result = await cryptoEngine.computeOnEncryptedBids(bids, 'findWinner');
+        const winnerData = await cryptoEngine.computeWinner(bids);
         await this.delay(800);
         steps[1].classList.add('complete');
         steps[1].classList.remove('active');
@@ -396,9 +409,17 @@ class AuctionApp {
         steps[2].classList.add('complete');
         steps[2].classList.remove('active');
 
-        // Decrypt result
-        const winnerData = await cryptoEngine.decrypt(result.encryptedResult);
-        this.showWinnerModal(winnerData);
+        if (this.currentLot.id === lotId) this.showWinnerModal(winnerData);
+        button.dataset.status = 'passed';
+        } catch (error) {
+            button.dataset.status = 'failed';
+            document.querySelectorAll('.flow-step').forEach(step => step.classList.remove('active', 'complete'));
+            alert('FHE16 비교를 완료하지 못했습니다. 승자를 확정하지 않았습니다. ' + error.message);
+        } finally {
+            this.resolving = false;
+            button.disabled = false;
+            button.textContent = 'SDK로 승자 확인';
+        }
     }
 
     showWinnerModal(winnerData) {
@@ -452,8 +473,8 @@ class AuctionApp {
 
         content.innerHTML = `
             <div class="encrypted-section">
-                <h4>암호화된 입찰 데이터 (${bids.length}건)</h4>
-                <p class="section-desc">모든 입찰가는 AES-256-GCM으로 암호화되어 저장됩니다.</p>
+                <h4>입찰 기록 해시 (${bids.length}건)</h4>
+                <p class="section-desc">아래 문자열은 SHA-256 기록 해시입니다. 암호문이 아니며, 이 체험의 원금액은 브라우저 메모리에서 처리합니다.</p>
                 <div class="encrypted-list">
                     ${bids.map((bid, i) => `
                         <div class="encrypted-item">
@@ -462,30 +483,30 @@ class AuctionApp {
                                 <span class="bid-time">${new Date(bid.timestamp).toLocaleString('ko-KR')}</span>
                             </div>
                             <div class="encrypted-value">
-                                <code>${cryptoEngine.formatForDisplay(bid.encryptedAmount, 80)}</code>
+                                <code>${cryptoEngine.formatForDisplay(bid.commitment, 80)}</code>
                             </div>
                             <div class="commitment">
                                 <span class="label">커밋먼트: </span>
-                                <code>${bid.publicCommitment}</code>
+                                <code>${bid.id}</code>
                             </div>
                         </div>
                     `).join('')}
                 </div>
             </div>
             <div class="encrypted-section">
-                <h4>FHE 시뮬레이션 정보</h4>
+                <h4>SDK 실행 정보</h4>
                 <div class="info-grid">
                     <div class="info-item">
                         <span class="label">알고리즘</span>
-                        <span class="value">AES-256-GCM</span>
+                        <span class="value">SELLAN SDK · FHE16 진단</span>
                     </div>
                     <div class="info-item">
-                        <span class="label">Secret Key</span>
-                        <span class="value">브라우저 메모리</span>
+                        <span class="label">실행 환경</span>
+                        <span class="value">SDK가 Worker·키 생성 관리</span>
                     </div>
                     <div class="info-item">
                         <span class="label">연산 방식</span>
-                        <span class="value">복호화 - 연산 - 재암호화</span>
+                        <span class="value">원 단위 FHE MAX · ${cryptoEngine.lastCompute?.comparisons ?? 0}회 비교</span>
                     </div>
                 </div>
             </div>
@@ -552,18 +573,13 @@ class AuctionApp {
                     <span>${bid.bidderId === this.currentUserId ? '본인' : bid.bidderId.substring(0, 8) + '...'}</span>
                     <span>${this.formatTime(bid.timestamp)}</span>
                 </div>
-                <div class="bid-status">암호화됨</div>
+                <div class="bid-status">체험 기록</div>
             </div>
         `).join('');
     }
 
     formatCurrency(amount) {
-        if (amount >= 100000000) {
-            return `${(amount / 100000000).toFixed(1)}억원`;
-        } else if (amount >= 10000) {
-            return `${Math.round(amount / 10000).toLocaleString()}만원`;
-        }
-        return `${amount.toLocaleString()}원`;
+        return `${amount.toLocaleString('ko-KR')}원`;
     }
 
     formatTime(timestamp) {
@@ -583,5 +599,7 @@ class AuctionApp {
 let app;
 document.addEventListener('DOMContentLoaded', async () => {
     app = new AuctionApp();
-    await app.initialize();
+    window.app = app;
+    try { await app.initialize(); }
+    catch (error) { console.error('[App] SDK initialization failed'); alert('SDK 체험을 시작하지 못했습니다. ' + error.message); }
 });

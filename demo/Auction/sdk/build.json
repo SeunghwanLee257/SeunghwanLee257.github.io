@@ -1,0 +1,8 @@
+{
+  "package": "@sellan/sdk",
+  "version": "0.1.0",
+  "entrypoint": "@sellan/sdk/demo/auction",
+  "assurance": "diagnostic-only",
+  "bytes": 5292,
+  "sha256": "2c98f1f22893e3741023c7d422d8cd4beb7cb8a2cd8a89c8bf1991a43eccbf66"
+}

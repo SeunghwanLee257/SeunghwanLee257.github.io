@@ -20,7 +20,7 @@
             <line x1="12" y1="8" x2="12" y2="12"></line>
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
-        <span>DEMO — 브라우저에서 진짜 FHE16 WASM으로 실행 (승자 판정 = 실제 FHE 비교, UNSAFE 데모 파라미터 · 보안 없음)</span>
+        <span>SELLAN SDK 연동 체험 — 실제 FHE16으로 원 단위 비교 · 공개 진단용 빌드 · 실제 인증·결제·입찰 비밀성 보장 없음</span>
     </div>
 
     <!-- Examples nav (consistent across all FHE16 demos) -->
@@ -52,12 +52,12 @@
         <div class="header-actions">
             <div class="key-status">
                 <span class="status-dot"></span>
-                <span>Secret Key Loaded</span>
+                <span>SELLAN SDK · 실행 시 FHE 로딩</span>
             </div>
             <div class="kyc-box" id="kycBox">
-                <span class="kyc-label">KYC 상태</span>
-                <span class="kyc-status" id="kycStatus">미인증</span>
-                <button class="btn btn-small" id="verifyKycBtn" onclick="app.verifyKYC()">인증하기</button>
+                <span class="kyc-label">체험 상태</span>
+                <span class="kyc-status" id="kycStatus">시작 전</span>
+                <button class="btn btn-small" id="verifyKycBtn" onclick="app.verifyKYC()">체험 시작</button>
             </div>
         </div>
     </header>
@@ -157,9 +157,9 @@
                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                 </svg>
-                                암호화 미리보기
+                                입찰 기록 해시 미리보기
                             </div>
-                            <code id="previewCode">금액을 입력하면 암호화된 값이 표시됩니다</code>
+                            <code id="previewCode">금액을 입력하면 기록 해시가 표시됩니다</code>
                         </div>
 
                         <button class="btn btn-primary btn-large" id="submitBidBtn" onclick="app.submitBid()" disabled>
@@ -169,7 +169,7 @@
                             </svg>
                             Sealed Bid 제출
                         </button>
-                        <p class="bid-notice" id="bidNotice">KYC 인증 후 입찰할 수 있습니다</p>
+                        <p class="bid-notice" id="bidNotice">체험 시작 버튼을 누르면 입찰할 수 있습니다</p>
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                             </svg>
                         </div>
-                        <span>암호화</span>
+                        <span>입찰 기록</span>
                     </div>
                     <div class="flow-arrow">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -198,7 +198,7 @@
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
-                        <span>Sealed</span>
+                        <span>FHE 비교</span>
                     </div>
                     <div class="flow-arrow">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -262,8 +262,8 @@
                         </div>
                         <div class="stat-row">
                             <span class="label">입찰 금액</span>
-                            <span class="value encrypted">암호화됨</span>
-                            <span class="visibility private">PRIVATE</span>
+                            <span class="value encrypted">브라우저에서 처리</span>
+                            <span class="visibility private">DEMO</span>
                         </div>
                     </div>
                 </div>
@@ -286,10 +286,10 @@
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
-                    암호화 데이터 보기
+                    입찰 기록 보기
                 </button>
 
-                <button class="btn btn-accent btn-full" onclick="app.determineWinner()" style="margin-top:8px;">
+                <button class="btn btn-accent btn-full" id="determineWinnerBtn" onclick="app.determineWinner()" style="margin-top:8px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                     </svg>
@@ -304,7 +304,7 @@
         <div class="modal-overlay" onclick="app.closeModal('encryptedDataModal')"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h3>암호화된 입찰 데이터</h3>
+                <h3>입찰 기록과 SDK 실행 정보</h3>
                 <button class="close-modal" onclick="app.closeModal('encryptedDataModal')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -337,7 +337,6 @@
         </div>
     </div>
 
-    <script src="crypto.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
