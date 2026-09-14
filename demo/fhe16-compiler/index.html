@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FHE16 컴파일러 — 자바스크립트 함수를 암호문 위에서</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111318; --ink2:#3A4A55; --muted:#8FA0AC; --line:#E1E7EB;
+  --sky:#2BA6DF; --sky2:#55C7F5; --sky3:#0A5C80; --bg:#F7F9FA;
+  --ok:#0A7D4F; --err:#C0392B; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.sitebar{background:#0A0E12;color:#8FA0AC;font-size:12.5px;padding:8px 28px;
+  display:flex;align-items:center;gap:8px}
+.sitebar a{color:#8FA0AC;text-decoration:none}
+.sitebar a:hover{color:#55C7F5}
+.sitebar b{color:#fff;font-weight:600}
+header{background:var(--ink);color:#fff;padding:22px 28px}
+header .pill{display:inline-block;padding:4px 12px;border-radius:99px;background:#22323C;
+  color:var(--sky2);font-size:11px;font-weight:700;letter-spacing:.08em}
+header h1{margin:10px 0 4px;font-size:24px;font-weight:700;letter-spacing:-.02em}
+header p{margin:0;color:#C6D3DA;font-size:14px}
+main{max-width:1240px;margin:0 auto;padding:24px 28px 60px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start}
+@media(max-width:940px){.grid{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h2{margin:0 0 12px;font-size:14px;font-weight:700;color:var(--sky3);letter-spacing:.04em}
+textarea{width:100%;min-height:280px;padding:14px;border:1px solid var(--line);border-radius:8px;
+  font-family:var(--mono);font-size:13.5px;line-height:1.65;resize:vertical;color:var(--ink);background:#FCFDFE}
+textarea:focus{outline:2px solid var(--sky);border-color:var(--sky)}
+.row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+label{font-size:13px;color:var(--ink2);font-weight:500}
+input[type=text],select{padding:8px 11px;border:1px solid var(--line);border-radius:7px;
+  font-family:var(--mono);font-size:13px;background:#fff;color:var(--ink)}
+input[type=text]{flex:1;min-width:150px}
+button{padding:9px 16px;border:0;border-radius:7px;font-weight:700;font-size:13.5px;
+  cursor:pointer;font-family:inherit;transition:filter .12s}
+button:hover{filter:brightness(1.08)}
+.primary{background:var(--sky);color:#fff}
+.dark{background:var(--ink);color:#fff}
+.ghost{background:#EEF3F6;color:var(--ink2)}
+.result{font-family:var(--mono);font-size:32px;font-weight:600;padding:14px 0;
+  letter-spacing:-.02em;color:var(--muted)}
+.result.ok{color:var(--sky3)}
+.result.err{color:var(--err)}
+#console{background:#0E1418;color:#C6D3DA;border-radius:8px;padding:12px 14px;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;min-height:118px;max-height:210px;overflow:auto}
+#console .ok{color:#6EE7A8}
+#console .err{color:#FF9A90}
+#console .muted{color:#7A8A94}
+table.ops{width:100%;border-collapse:collapse;font-size:13px}
+table.ops td{padding:4px 8px 4px 0;vertical-align:middle}
+table.ops td.num{font-family:var(--mono);text-align:right;width:44px;color:var(--sky3);font-weight:600}
+.bar{height:7px;background:var(--sky);border-radius:4px;min-width:3px}
+code{font-family:var(--mono);font-size:12.5px;background:#EEF3F6;padding:1px 5px;border-radius:4px}
+.muted{color:var(--muted);font-size:12.5px}
+pre.trace{font-family:var(--mono);font-size:12px;line-height:1.7;background:#F3F6F8;
+  padding:12px;border-radius:8px;max-height:340px;overflow:auto;margin:0}
+.limits{margin-top:20px}
+.limits table{width:100%;border-collapse:collapse;font-size:13.5px}
+.limits th,.limits td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.limits th{background:#F3F6F8;font-weight:700;font-size:12.5px;color:var(--ink2)}
+.lead{margin:0 0 14px;font-size:13.5px;color:var(--ink2);line-height:1.65}
+.fold{display:flex;align-items:center;gap:12px;margin:6px 0 4px}
+.fold-side{flex:1;min-width:0}
+.fold-tag{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
+.fold-tag.on{color:var(--sky3)}
+.fold-arrow{color:var(--sky);font-size:20px;font-weight:700;flex:0 0 auto}
+pre.mini{font-family:var(--mono);font-size:12px;line-height:1.65;background:#F3F6F8;
+  padding:10px 12px;border-radius:8px;margin:0;overflow-x:auto}
+.fold-side:last-child pre.mini{background:#EEF6FB;border:1px solid #CDE7F5}
+pre.mini b{color:var(--sky3);font-weight:600}
+@media(max-width:700px){.fold{flex-direction:column;align-items:stretch}.fold-arrow{transform:rotate(90deg);text-align:center}}
+.note{margin-top:14px;padding:12px 14px;background:#EEF6FB;border-left:3px solid var(--sky);
+  border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink2)}
+footer{color:var(--muted);font-size:12.5px;padding:20px 28px;max-width:1240px;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="sitebar">
+  <a href="../../index.html">waLLLnut</a>
+  <span>·</span>
+  <a href="../../fhe16.html">FHE16</a>
+  <span>·</span>
+  <a href="../fhe16-playground/">플레이그라운드</a>
+  <span>·</span>
+  <b>JS 컴파일러</b>
+</div>
+<header>
+  <span class="pill">FHE16 · COMPILER</span>
+  <h1>자바스크립트 함수를 암호문 위에서 그대로</h1>
+  <p>입력은 암호화된 채 들어가고, 나오는 것은 결과 한 값 · 원문은 브라우저를 떠나지 않는다</p>
+</header>
+
+<main>
+<div class="grid">
+  <div>
+    <div class="card">
+      <h2>함수</h2>
+      <div class="row" style="margin:0 0 10px">
+        <label for="sample">예제</label>
+        <select id="sample"></select>
+      </div>
+      <textarea id="code" spellcheck="false"></textarea>
+      <div class="row">
+        <label for="args">인자</label>
+        <input type="text" id="args" spellcheck="false">
+      </div>
+      <div class="row">
+        <button class="ghost" id="run-plain">평문으로 확인</button>
+        <button class="primary" id="run-enc">암호문에서 실행</button>
+        <button class="dark" id="show-circuit">회로 보기</button>
+      </div>
+    </div>
+
+    <div class="card limits">
+      <h2>분기 — 갈라진 상태를 하나로 합친다</h2>
+      <p class="lead">암호문 조건은 어느 쪽이 참인지 볼 수 없다. 그래서 <b>가지를 고르지 않는다.</b>
+      양쪽을 다 계산한 뒤, 합류 지점에서 <b>변수 하나마다 상태를 하나로 합친다.</b>
+      컴파일러 용어로 SSA의 φ 노드이고, 암호문에서는 이 φ 를 산술로 만든다.</p>
+      <div class="fold">
+        <div class="fold-side">
+          <div class="fold-tag">쓴 코드</div>
+<pre class="mini">let s = a;
+if (a &gt; b) {
+  s = a * 2;
+} else {
+  s = b * 3;
+}</pre>
+        </div>
+        <div class="fold-arrow">→</div>
+        <div class="fold-side">
+          <div class="fold-tag on">합류된 상태</div>
+<pre class="mini">c = a &gt; b
+t = a * 2
+e = b * 3
+<b>s = φ(c, t, e)</b></pre>
+        </div>
+      </div>
+      <div class="note">
+        <b>분기에서 바뀐 변수마다 합류가 하나씩 생긴다.</b> 안 바뀐 변수는 합치지 않는다.
+        중첩된 <code>if</code> 는 안쪽부터 합쳐진다.
+      </div>
+
+      <h2 style="margin-top:22px">합류를 만드는 방법은 여러 가지다</h2>
+      <p class="lead">삼항연산자 <code>c ? t : e</code> 는 합류를 적는 한 가지 표기일 뿐이다.
+      실제 회로는 모양을 보고 더 싼 쪽을 고른다.</p>
+      <table>
+        <tr><th>합류 모양</th><th>회로</th><th>비용</th></tr>
+        <tr><td><code>φ(c, t, e)</code> 일반형</td><td><code>e + c·(t−e)</code></td><td>뺄셈·곱셈·덧셈 3연산</td></tr>
+        <tr><td><code>φ(c, t, 0)</code></td><td><code>c·t</code></td><td><b>곱셈 1연산</b></td></tr>
+        <tr><td><code>φ(c, 0, e)</code></td><td><code>(1−c)·e</code></td><td>뺄셈·곱셈 2연산</td></tr>
+        <tr><td><code>φ(c, 1, 0)</code></td><td><code>c</code></td><td><b>연산 없음</b></td></tr>
+        <tr><td><code>φ(c, x, x)</code></td><td><code>x</code></td><td><b>합류 자체를 지운다</b></td></tr>
+        <tr><td>양쪽이 상수</td><td>상수 접기</td><td>암호문 연산 없음</td></tr>
+      </table>
+      <div class="note">
+        <b>대가는 양쪽 계산 비용을 둘 다 낸다는 것이다.</b> 쓰지 않을 가지도 실제로 돈다.
+        분기가 깊어질수록 비용이 곱으로 늘어나므로, 깊은 분기보다 산술식이 유리하다.
+      </div>
+
+      <h2 style="margin-top:22px">그래도 막히는 것</h2>
+      <table>
+        <tr><th>막히는 것</th><th>이유</th><th>컴파일러가 하는 일</th></tr>
+        <tr><td><code>if (secret)</code></td><td>어느 가지로 갈지 모른다</td><td>양쪽을 계산하고 상태를 합친다</td></tr>
+        <tr><td><code>for (i &lt; secret)</code></td><td>종료 시점을 모른다</td><td>거절한다. 상한을 공개 값으로 둔다</td></tr>
+        <tr><td><code>arr[secret]</code></td><td>어느 칸인지 모른다</td><td>거절한다</td></tr>
+        <tr><td>문자열 · 객체</td><td>회로로 내려가지 않는다</td><td>거절한다</td></tr>
+      </table>
+      <div class="note">
+        파라미터 앞에 <code>secret</code> 또는 <code>public</code> 을 붙인다. 생략하면 <code>secret</code>.
+        공개 값은 회로에 상수로 접히므로 반복 횟수나 임계값에 쓴다.
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  컴파일러는 FHE16을 직접 부르지 않는다 · <code>src/backend.js</code> 의 규약만 부르고,
+  엔진 연결은 <code>backends/fhe16.js</code> 한 파일이 맡는다 · 엔진이 바뀌면 그 파일만 새로 쓴다
+</footer>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
