@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FHE16 컴파일러 — 자바스크립트 함수를 암호문 위에서</title>
+<title data-en="FHE16 Compiler — run JavaScript on ciphertext" data-ko="FHE16 컴파일러 — 자바스크립트를 암호문 위에서">FHE16 Compiler — run JavaScript on ciphertext</title>
+<script src="../fhe16-playground/i18n.js?v=58"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -22,6 +23,9 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .sitebar a:hover{color:#55C7F5;border-color:#2B4A5C}
 .sitebar b{color:#0A0E12;background:#55C7F5;border-color:#55C7F5;font-weight:700}
 .sitebar .sep{width:1px;height:18px;background:#22303C;margin:0 3px}
+.sitebar .lang-toggle{margin-left:auto;background:transparent;color:#8FA0AC;
+  border:1px solid #22303C;padding:5px 11px;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer}
+.sitebar .lang-toggle:hover{color:#55C7F5}
 header{background:var(--ink);color:#fff;padding:22px 28px}
 header .pill{display:inline-block;padding:4px 12px;border-radius:99px;background:#22323C;
   color:var(--sky2);font-size:11px;font-weight:700;letter-spacing:.08em}
@@ -103,47 +107,49 @@ footer{color:var(--muted);font-size:12.5px;padding:20px 28px;max-width:1240px;ma
   <a href="../Auction/">Auction</a>
   <a href="../fhe16-playground/aes-to-fhe.html">AES → FHE</a>
   <a href="../fhe16-playground/private-policy.html">Private Policy</a>
+  <button class="lang-toggle" type="button">한국어</button>
 </div>
 <header>
   <span class="pill">FHE16 · COMPILER</span>
-  <h1>자바스크립트 함수를 암호문 위에서 그대로</h1>
-  <p>입력은 암호화된 채 들어가고, 나오는 것은 결과 한 값 · 원문은 브라우저를 떠나지 않는다</p>
+  <h1 data-en="Write a function. Run it on ciphertext." data-ko="함수를 쓴다. 암호문 위에서 돈다.">Write a function. Run it on ciphertext.</h1>
+  <p data-en="Inputs go in encrypted. One result comes out. The plaintext never leaves your browser." data-ko="입력은 암호화된 채 들어가고 결과 하나가 나온다. 원문은 브라우저를 떠나지 않는다.">Inputs go in encrypted. One result comes out. The plaintext never leaves your browser.</p>
 </header>
 
 <main>
 <div class="grid">
   <div>
     <div class="card">
-      <h2>함수</h2>
+      <h2 data-en="Function" data-ko="함수">Function</h2>
       <div class="row" style="margin:0 0 10px">
-        <label for="sample">예제</label>
+        <label for="sample" data-en="Example" data-ko="예제">Example</label>
         <select id="sample"></select>
       </div>
       <textarea id="code" spellcheck="false"></textarea>
       <div class="row">
-        <label for="args">인자</label>
+        <label for="args" data-en="Arguments" data-ko="인자">Arguments</label>
         <input type="text" id="args" spellcheck="false">
       </div>
       <div class="row">
-        <button class="ghost" id="run-plain">평문으로 확인</button>
-        <button class="dark" id="show-circuit">회로 보기</button>
+        <button class="ghost" id="run-plain" data-en="Check in plaintext" data-ko="평문으로 확인">Check in plaintext</button>
+        <button class="dark" id="show-circuit" data-en="Show circuit" data-ko="회로 보기">Show circuit</button>
       </div>
       <div class="keybar">
-        <button class="key" id="gen-keys">평가키 생성</button>
-        <button class="primary" id="run-enc">암호문에서 실행</button>
-        <span class="engine-status" id="engine-status">평가키 없음</span>
+        <button class="key" id="gen-keys" data-en="Generate keys" data-ko="평가키 생성">Generate keys</button>
+        <button class="primary" id="run-enc" data-en="Run on ciphertext" data-ko="암호문에서 실행">Run on ciphertext</button>
+        <span class="engine-status" id="engine-status" data-en="No keys" data-ko="평가키 없음">No keys</span>
       </div>
-      <p class="muted" style="margin:8px 0 0">평가키 생성은 한 번만 하면 된다. 엔진 내려받기까지 40초쯤 걸린다.</p>
+      <p class="muted" style="margin:8px 0 0" data-en="Keys are generated once. Downloading the engine takes about 40 seconds." data-ko="평가키 생성은 한 번만 하면 된다. 엔진 내려받기까지 40초쯤 걸린다.">Keys are generated once. Downloading the engine takes about 40 seconds.</p>
     </div>
 
     <div class="card limits">
-      <h2>분기 — 갈라진 상태를 하나로 합친다</h2>
-      <p class="lead">암호문 조건은 어느 쪽이 참인지 볼 수 없다. 그래서 <b>가지를 고르지 않는다.</b>
-      양쪽을 다 계산한 뒤, 합류 지점에서 <b>변수 하나마다 상태를 하나로 합친다.</b>
-      컴파일러 용어로 SSA의 φ 노드이고, 암호문에서는 이 φ 를 산술로 만든다.</p>
+      <h2 data-en="What the compiler does" data-ko="컴파일러가 하는 일">What the compiler does</h2>
+      <p class="lead" data-en="It turns your function into a fixed sequence of arithmetic on encrypted values. Every step is decided before anything runs, because on ciphertext there is nothing to look at and branch on."
+         data-ko="함수를 암호문 위 산술의 고정된 순서로 바꾼다. 암호문에서는 값을 들여다보고 갈라질 수 없으므로, 모든 단계가 실행 전에 정해진다.">
+        It turns your function into a fixed sequence of arithmetic on encrypted values. Every step is decided before anything runs, because on ciphertext there is nothing to look at and branch on.</p>
+
       <div class="fold">
         <div class="fold-side">
-          <div class="fold-tag">쓴 코드</div>
+          <div class="fold-tag" data-en="What you write" data-ko="쓴 코드">What you write</div>
 <pre class="mini">let s = a;
 if (a &gt; b) {
   s = a * 2;
@@ -153,68 +159,68 @@ if (a &gt; b) {
         </div>
         <div class="fold-arrow">→</div>
         <div class="fold-side">
-          <div class="fold-tag on">합류된 상태</div>
+          <div class="fold-tag on" data-en="What runs" data-ko="도는 회로">What runs</div>
 <pre class="mini">c = a &gt; b
 t = a * 2
 e = b * 3
-<b>s = φ(c, t, e)</b></pre>
+<b>s = merge(c, t, e)</b></pre>
         </div>
       </div>
-      <div class="note">
-        <b>분기에서 바뀐 변수마다 합류가 하나씩 생긴다.</b> 안 바뀐 변수는 합치지 않는다.
-        중첩된 <code>if</code> 는 안쪽부터 합쳐진다.
-      </div>
+      <div class="note" data-en="Both sides are computed, then merged into one value per variable. Variables the branch never touched are left alone. The cost is that you pay for both paths — deep nesting multiplies work, so arithmetic beats nesting."
+           data-ko="양쪽을 다 계산한 뒤 변수마다 하나로 합친다. 분기가 건드리지 않은 변수는 그대로 둔다. 대가는 양쪽 비용을 모두 내는 것이다. 중첩이 깊어지면 비용이 곱으로 늘어나므로 산술이 유리하다.">
+        Both sides are computed, then merged into one value per variable. Variables the branch never touched are left alone. The cost is that you pay for both paths — deep nesting multiplies work, so arithmetic beats nesting.</div>
 
-      <h2 style="margin-top:22px">합류를 만드는 방법은 여러 가지다</h2>
-      <p class="lead">삼항연산자 <code>c ? t : e</code> 는 합류를 적는 한 가지 표기일 뿐이다.
-      실제 회로는 모양을 보고 더 싼 쪽을 고른다.</p>
+      <h2 style="margin-top:22px" data-en="What it supports" data-ko="쓸 수 있는 것">What it supports</h2>
       <table>
-        <tr><th>합류 모양</th><th>회로</th><th>비용</th></tr>
-        <tr><td><code>φ(c, t, e)</code> 일반형</td><td><code>e + c·(t−e)</code></td><td>뺄셈·곱셈·덧셈 3연산</td></tr>
-        <tr><td><code>φ(c, t, 0)</code></td><td><code>c·t</code></td><td><b>곱셈 1연산</b></td></tr>
-        <tr><td><code>φ(c, 0, e)</code></td><td><code>(1−c)·e</code></td><td>뺄셈·곱셈 2연산</td></tr>
-        <tr><td><code>φ(c, 1, 0)</code></td><td><code>c</code></td><td><b>연산 없음</b></td></tr>
-        <tr><td><code>φ(c, x, x)</code></td><td><code>x</code></td><td><b>합류 자체를 지운다</b></td></tr>
-        <tr><td>양쪽이 상수</td><td>상수 접기</td><td>암호문 연산 없음</td></tr>
+        <tr><th data-en="Category" data-ko="구분">Category</th><th data-en="Supported" data-ko="지원">Supported</th></tr>
+        <tr><td data-en="Parameters" data-ko="파라미터"><code>secret</code> · <code>public</code></td>
+            <td data-en="Default is secret. Public values fold into the circuit as constants — use them for loop counts and thresholds."
+                data-ko="기본은 secret. public 값은 회로에 상수로 접히므로 반복 횟수나 임계값에 쓴다.">Default is secret. Public values fold into the circuit as constants — use them for loop counts and thresholds.</td></tr>
+        <tr><td data-en="Types" data-ko="타입"><code>i8 i16 i32 i64</code> · <code>u8 … u64</code> · <code>bool</code> · <code>f64</code></td>
+            <td data-en="Written as a: i32. Omit it and the parameter is i32." data-ko="a: i32 형태로 쓴다. 생략하면 i32.">Written as <code>a: i32</code>. Omit it and the parameter is <code>i32</code>.</td></tr>
+        <tr><td data-en="Operators" data-ko="연산자"><code>+ - * / %</code> · <code>&lt; &lt;= &gt; &gt;= == !=</code> · <code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code> · <code>&amp;&amp; || !</code></td>
+            <td data-en="Plus ternary, increment, and compound assignment." data-ko="삼항·증감·복합대입도 된다.">Plus ternary, increment, and compound assignment.</td></tr>
+        <tr><td data-en="Control flow" data-ko="제어 흐름"><code>if / else</code> · <code>for</code></td>
+            <td data-en="Loops unroll, so the iteration count must be a public value." data-ko="루프는 펼쳐지므로 반복 횟수가 공개 값이어야 한다.">Loops unroll, so the iteration count must be a public value.</td></tr>
+        <tr><td data-en="Built-ins" data-ko="내장 함수"><code>min max abs select</code></td>
+            <td data-en="Math.min, Math.max, Math.abs, Math.floor, Math.ceil, Math.round, Math.trunc" data-ko="Math.min, Math.max, Math.abs, Math.floor, Math.ceil, Math.round, Math.trunc">Math.min, Math.max, Math.abs, Math.floor, Math.ceil, Math.round, Math.trunc</td></tr>
+        <tr><td data-en="Identifiers" data-ko="식별자"><code>Unicode</code></td>
+            <td data-en="Korean and other non-Latin variable names work, the same as in JavaScript." data-ko="자바스크립트와 같이 한글 변수명이 그대로 쓰인다.">Korean and other non-Latin variable names work, the same as in JavaScript.</td></tr>
       </table>
-      <div class="note">
-        <b>대가는 양쪽 계산 비용을 둘 다 낸다는 것이다.</b> 쓰지 않을 가지도 실제로 돈다.
-        분기가 깊어질수록 비용이 곱으로 늘어나므로, 깊은 분기보다 산술식이 유리하다.
-      </div>
 
-      <h2 style="margin-top:22px">그래도 막히는 것</h2>
+      <h2 style="margin-top:22px" data-en="What it rejects" data-ko="거절하는 것">What it rejects</h2>
       <table>
-        <tr><th>막히는 것</th><th>이유</th><th>컴파일러가 하는 일</th></tr>
-        <tr><td><code>if (secret)</code></td><td>어느 가지로 갈지 모른다</td><td>양쪽을 계산하고 상태를 합친다</td></tr>
-        <tr><td><code>for (i &lt; secret)</code></td><td>종료 시점을 모른다</td><td>거절한다. 상한을 공개 값으로 둔다</td></tr>
-        <tr><td><code>arr[secret]</code></td><td>어느 칸인지 모른다</td><td>거절한다</td></tr>
-        <tr><td>문자열 · 객체</td><td>회로로 내려가지 않는다</td><td>거절한다</td></tr>
+        <tr><th data-en="Rejected" data-ko="거절">Rejected</th><th data-en="Why" data-ko="이유">Why</th></tr>
+        <tr><td><code>for (i &lt; secret)</code></td>
+            <td data-en="The stopping point is unknown. Put a public upper bound and decide inside the loop."
+                data-ko="종료 시점을 알 수 없다. 공개 상한을 두고 안쪽에서 판정한다.">The stopping point is unknown. Put a public upper bound and decide inside the loop.</td></tr>
+        <tr><td><code>arr[secret]</code></td>
+            <td data-en="The index is unknown, so every slot would have to be read." data-ko="어느 칸인지 알 수 없어 전부 훑어야 한다.">The index is unknown, so every slot would have to be read.</td></tr>
+        <tr><td data-en="Strings · objects · closures" data-ko="문자열 · 객체 · 클로저">Strings · objects · closures</td>
+            <td data-en="They do not lower to arithmetic. Rejected with a line number." data-ko="산술로 내려가지 않는다. 줄 번호와 함께 거절한다.">They do not lower to arithmetic. Rejected with a line number.</td></tr>
       </table>
-      <div class="note">
-        파라미터 앞에 <code>secret</code> 또는 <code>public</code> 을 붙인다. 생략하면 <code>secret</code>.
-        공개 값은 회로에 상수로 접히므로 반복 횟수나 임계값에 쓴다.
-      </div>
+
+      <div class="note" data-en="The compiler never calls the engine directly — it calls a fixed set of operation names. Swapping the FHE backend means writing one adapter, not touching the compiler."
+           data-ko="컴파일러는 엔진을 직접 부르지 않고 정해진 연산 이름만 부른다. 백엔드를 바꿀 때는 어댑터 하나만 새로 쓴다.">
+        The compiler never calls the engine directly — it calls a fixed set of operation names. Swapping the FHE backend means writing one adapter, not touching the compiler.</div>
     </div>
   </div>
 
   <div>
     <div class="card">
-      <h2>결과</h2>
+      <h2 data-en="Result" data-ko="결과">Result</h2>
       <div class="result" id="result">—</div>
       <div id="console"></div>
     </div>
     <div class="card" style="margin-top:20px">
-      <h2>회로 연산</h2>
-      <div id="ops"><div class="muted">실행하면 어떤 연산이 몇 번 불렸는지 나온다</div></div>
+      <h2 data-en="Circuit operations" data-ko="회로 연산">Circuit operations</h2>
+      <div id="ops"><div class="muted" data-en="Run it to see which operations were called and how many times" data-ko="실행하면 어떤 연산이 몇 번 불렸는지 나온다">Run it to see which operations were called and how many times</div></div>
     </div>
   </div>
 </div>
 </main>
 
-<footer>
-  컴파일러는 FHE16을 직접 부르지 않는다 · <code>src/backend.js</code> 의 규약만 부르고,
-  엔진 연결은 <code>backends/fhe16.js</code> 한 파일이 맡는다 · 엔진이 바뀌면 그 파일만 새로 쓴다
-</footer>
+<footer data-en="The compiler calls only the operation names in src/backend.js. Engine wiring lives in one adapter file — swap the engine, rewrite that file." data-ko="컴파일러는 src/backend.js 의 연산 이름만 부른다. 엔진 연결은 어댑터 한 파일이 맡는다.">The compiler calls only the operation names in <code>src/backend.js</code>. Engine wiring lives in one adapter file — swap the engine, rewrite that file.</footer>
 
 <script type="module" src="./app.js"></script>
 </body>
