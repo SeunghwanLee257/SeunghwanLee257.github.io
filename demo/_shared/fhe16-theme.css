@@ -1,0 +1,81 @@
+/* FHE16 데모 공용 테마 — 2026-09-15
+ *
+ * JS 컴파일러 화면의 색과 서체를 기준으로 삼는다.
+ * 플레이그라운드 계열은 자기 변수 이름을 그대로 쓰면서 값만 여기서 받는다.
+ */
+:root {
+  color-scheme: light;
+
+  /* 바탕과 글자 */
+  --bg:     #F7F9FA;
+  --panel:  #FFFFFF;
+  --ink:    #111318;
+  --ink2:   #3A4A55;
+  --muted:  #8FA0AC;
+  --line:   #E1E7EB;
+
+  /* 강조 — 하늘색 계열 하나로 통일 */
+  --sky:    #2BA6DF;
+  --sky2:   #55C7F5;
+  --sky3:   #0A5C80;
+
+  /* 플레이그라운드가 쓰던 이름을 같은 값에 잇는다 */
+  --accent:        var(--sky);
+  --accent-strong: var(--sky3);
+  --blue:          var(--sky3);
+
+  /* 상태 */
+  --ok:   #0A7D4F;
+  --good: #0A7D4F;
+  --err:  #C0392B;
+  --bad:  #C0392B;
+  --warn: #8A5A00;
+
+  /* 어두운 면 — 툴바·코드 패널 */
+  --dark:      #111318;
+  --dark2:     #0A0E12;
+  --dark-line: #22303C;
+  --dark-ink:  #C6D3DA;
+
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+}
+
+body { font-family: var(--sans); }
+
+/* 상단 툴바 — 여섯 데모가 같은 모양을 쓴다 */
+.fhe16-bar {
+  background: var(--dark2);
+  font-size: 12.5px;
+  padding: 9px 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fhe16-bar a,
+.fhe16-bar b,
+.fhe16-bar button {
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12.5px;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px solid var(--dark-line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.fhe16-bar a:hover,
+.fhe16-bar button:hover { color: var(--sky2); border-color: #2B4A5C; }
+.fhe16-bar b,
+.fhe16-bar [aria-current="page"] {
+  color: var(--dark2);
+  background: var(--sky2);
+  border-color: var(--sky2);
+  font-weight: 700;
+}
+.fhe16-bar .sep { width: 1px; height: 18px; background: var(--dark-line); margin: 0 3px; border: 0; padding: 0; }
+.fhe16-bar .spacer { margin-left: auto; }

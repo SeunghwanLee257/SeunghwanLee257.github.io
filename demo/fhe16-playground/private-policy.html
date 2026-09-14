@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Private Policy Evaluation SDK | waLLLnut</title>
+  <link rel="stylesheet" href="../_shared/fhe16-theme.css?v=1">
   <link rel="stylesheet" href="./styles.css?v=58">
   <script src="./i18n.js?v=58"></script>
   <style>
@@ -83,7 +84,7 @@
     .runtime-note { border-left: 4px solid #e8a020; background: #fff8e5; border-radius: 8px; padding: 12px 14px; margin-top: 12px; color: #604000; font-size: 13px; line-height: 1.55; }
     @media (max-width: 900px) { .grid-3, .grid-2, .demo-layout, .flow, .input-grid, .verdict-grid, .deal-grid { grid-template-columns: 1fr; } .flow-arrow { min-height: 28px; } }
     .result-box.cipher-pending { background: #0e1822; border-color: #2a4a6b; }
-    .cipher-hex-label { font-size: 12px; font-weight: 700; color: #7ec8e3; margin-bottom: 8px; }
+    .cipher-hex-label { font-size: 12px; font-weight: 700; color: var(--sky2); margin-bottom: 8px; }
     .cipher-hex-dump { font-family: monospace; font-size: 11px; color: #a0d4f0; background: #060d14; border-radius: 6px; padding: 10px 12px; white-space: pre; line-height: 1.6; max-height: 160px; overflow-y: auto; margin: 0 0 12px; }
     .decrypt-reveal-btn { padding: 7px 16px; font-size: 13px; font-weight: 700; border: 1px solid #3b82f6; border-radius: 6px; background: transparent; color: #3b82f6; cursor: pointer; }
     .decrypt-reveal-btn:hover { background: #3b82f6; color: #fff; }
@@ -103,17 +104,17 @@
 </head>
 <body>
   <main class="shell">
-        <nav class="toolbar" style="gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
-      <a href="../../index.html" style="text-decoration:none"><button type="button">← waLLLnut</button></a>
-      <a href="../../fhe16.html" style="text-decoration:none"><button type="button">FHE16</button></a>
-      <span style="width:1px;height:22px;background:var(--line);margin:0 4px"></span>
-      <a href="./index.html" style="text-decoration:none"><button type="button">Playground</button></a>
-      <a href="../fhe16-compiler/" style="text-decoration:none"><button type="button">JS Compiler</button></a>
-      <a href="./walllnut-hr.html" style="text-decoration:none"><button type="button">HR</button></a>
-      <a href="../Auction/index.html" style="text-decoration:none"><button type="button">Auction</button></a>
-      <a href="./aes-to-fhe.html" style="text-decoration:none"><button type="button">AES &#8594; FHE</button></a>
-      <a href="./private-policy.html" style="text-decoration:none"><button type="button" aria-current="page">Private Policy</button></a>
-      <button class="lang-toggle" type="button" style="margin-left:auto">한국어</button>
+        <nav class="fhe16-bar">
+      <a href="../../index.html">← waLLLnut</a>
+      <a href="../../fhe16.html">FHE16</a>
+      <span class="sep"></span>
+      <a href="./index.html">Playground</a>
+      <a href="../fhe16-compiler/">JS Compiler</a>
+      <a href="./walllnut-hr.html">HR</a>
+      <a href="../Auction/index.html">Auction</a>
+      <a href="./aes-to-fhe.html">AES &#8594; FHE</a>
+      <b>Private Policy</b>
+      <button class="lang-toggle spacer" type="button">한국어</button>
     </nav>
 
     <section class="hero private-hero">

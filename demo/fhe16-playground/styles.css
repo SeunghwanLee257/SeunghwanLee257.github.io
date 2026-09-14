@@ -15,22 +15,9 @@
   color: var(--muted, #647083);
   flex-shrink: 0;
 }
-.lang-toggle:hover { border-color: var(--accent, #0b7a75); color: var(--accent, #0b7a75); }
+.lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-:root {
-  color-scheme: light;
-  --bg: #f5f7fb;
-  --ink: #17202a;
-  --muted: #647083;
-  --line: #d7deea;
-  --panel: #ffffff;
-  --accent: #0b7a75;
-  --accent-strong: #075f5b;
-  --blue: #315fbd;
-  --warn: #b45b18;
-  --good: #117743;
-  --bad: #a63131;
-}
+/* 색·서체는 ../_shared/fhe16-theme.css 가 정한다 (2026-09-15) */
 
 * {
   box-sizing: border-box;
