@@ -14,11 +14,14 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px;line-height:1.6}
-.sitebar{background:#0A0E12;color:#8FA0AC;font-size:12.5px;padding:8px 28px;
-  display:flex;align-items:center;gap:8px}
-.sitebar a{color:#8FA0AC;text-decoration:none}
-.sitebar a:hover{color:#55C7F5}
-.sitebar b{color:#fff;font-weight:600}
+.sitebar{background:#0A0E12;font-size:12.5px;padding:9px 28px;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sitebar a,.sitebar b{padding:5px 11px;border-radius:6px;font-weight:600;
+  text-decoration:none;border:1px solid #22303C}
+.sitebar a{color:#8FA0AC}
+.sitebar a:hover{color:#55C7F5;border-color:#2B4A5C}
+.sitebar b{color:#0A0E12;background:#55C7F5;border-color:#55C7F5;font-weight:700}
+.sitebar .sep{width:1px;height:18px;background:#22303C;margin:0 3px}
 header{background:var(--ink);color:#fff;padding:22px 28px}
 header .pill{display:inline-block;padding:4px 12px;border-radius:99px;background:#22323C;
   color:var(--sky2);font-size:11px;font-weight:700;letter-spacing:.08em}
@@ -91,13 +94,15 @@ footer{color:var(--muted);font-size:12.5px;padding:20px 28px;max-width:1240px;ma
 </head>
 <body>
 <div class="sitebar">
-  <a href="../../index.html">waLLLnut</a>
-  <span>·</span>
+  <a href="../../index.html">← waLLLnut</a>
   <a href="../../fhe16.html">FHE16</a>
-  <span>·</span>
-  <a href="../fhe16-playground/">플레이그라운드</a>
-  <span>·</span>
-  <b>JS 컴파일러</b>
+  <span class="sep"></span>
+  <a href="../fhe16-playground/">Playground</a>
+  <b>JS Compiler</b>
+  <a href="../fhe16-playground/walllnut-hr.html">HR</a>
+  <a href="../Auction/">Auction</a>
+  <a href="../fhe16-playground/aes-to-fhe.html">AES → FHE</a>
+  <a href="../fhe16-playground/private-policy.html">Private Policy</a>
 </div>
 <header>
   <span class="pill">FHE16 · COMPILER</span>
