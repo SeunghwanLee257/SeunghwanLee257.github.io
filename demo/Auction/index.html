@@ -11,12 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
       rel="stylesheet"
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../_shared/fhe16-theme.css?v=1" />
-    <link rel="stylesheet" href="styles.css?v=browser-2" />
+    <link rel="stylesheet" href="styles.css?v=overlay-3" />
   </head>
   <body>
     <nav class="fhe16-bar" aria-label="FHE16 데모 메뉴">
@@ -31,19 +31,49 @@
       <a href="../fhe16-playground/private-policy.html">Private Policy</a>
     </nav>
     <main class="browser-surface" aria-labelledby="browserTitle">
-      <div class="browser-placeholder">
-        <svg class="browser-icon" viewBox="0 0 80 64" fill="none" aria-hidden="true">
-          <rect x="2" y="2" width="76" height="60" rx="7" />
-          <path d="M2 17h76" />
-          <circle cx="10" cy="9.5" r="1" />
-          <circle cx="16" cy="9.5" r="1" />
-          <circle cx="22" cy="9.5" r="1" />
-        </svg>
-        <h1 id="browserTitle">기존 브라우저</h1>
-        <p>우측 하단 Sellan 버튼을 누르면<br />이 화면 위에서 경매에 참여할 수 있어요.</p>
+      <div class="browser-preview" aria-hidden="true" inert>
+        <div class="browser-chrome">
+          <span class="window-dots"><i></i><i></i><i></i></span>
+          <span class="address-bar"><span>▣</span> 내 브랜드의 웹사이트</span>
+          <span class="window-menu">···</span>
+        </div>
+        <div class="website-backdrop">
+          <div class="website-nav">
+            <strong>YOUR BRAND</strong>
+            <div><span>Home</span><span>Collection</span><span>About</span></div>
+            <span class="profile-placeholder"></span>
+          </div>
+          <div class="website-content">
+            <div class="website-hero">
+              <div class="website-copy">
+                <span class="skeleton eyebrow-line"></span>
+                <span class="skeleton headline-line"></span>
+                <span class="skeleton headline-line short"></span>
+                <span class="skeleton copy-line"></span>
+                <span class="skeleton copy-line short"></span>
+                <span class="skeleton action-placeholder"></span>
+              </div>
+              <div class="visual-placeholder"><span></span><i></i></div>
+            </div>
+            <div class="website-section-title"><span class="skeleton"></span><span class="skeleton"></span></div>
+            <div class="website-grid">
+              <div class="website-card"><div class="card-visual first"></div><span class="skeleton"></span><span class="skeleton short"></span></div>
+              <div class="website-card"><div class="card-visual second"></div><span class="skeleton"></span><span class="skeleton short"></span></div>
+              <div class="website-card"><div class="card-visual third"></div><span class="skeleton"></span><span class="skeleton short"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="browser-wash"></div>
+      </div>
+      <div class="browser-label">
+        <span class="browser-label-icon" aria-hidden="true">▣</span>
+        <div>
+          <h1 id="browserTitle">기존 브라우저</h1>
+          <p>이 화면 위에서 Sellan 경매가 열립니다.</p>
+        </div>
       </div>
       <noscript><p>경매 체험을 위해 JavaScript를 켜주세요.</p></noscript>
     </main>
-    <script async src="./sdk/auction-widget.js?v=browser-2" data-sellan-demo="./catalog.json"></script>
+    <script async src="./sdk/auction-widget.js?v=overlay-3" data-sellan-demo="./catalog.json"></script>
   </body>
 </html>

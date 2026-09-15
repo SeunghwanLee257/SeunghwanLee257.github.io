@@ -1,8 +1,11 @@
 # waLLLnut Auction — Sellan 플로팅 SDK
 
-첫 화면에는 기존 FHE16 공용 상단 메뉴, ‘기존 브라우저’ 배경 안내와 우측 하단 Sellan 버튼을 표시한다.
+첫 화면에는 기존 FHE16 공용 상단 메뉴, 블러 처리한 웹페이지 예시, 선명한 ‘기존 브라우저’
+표시와 우측 하단 Sellan 버튼을 배치한다. 배경 예시는 HTML/CSS로 만든 비활성 화면이며
+입찰 동작은 SDK가 담당한다. 블러는 배경 페이지에만 적용한다.
 버튼을 누르면 SDK의 Shadow DOM 창에서 상품 선택·입찰 입력·FHE 결과 확인을 진행한다.
 상단 메뉴는 `../_shared/fhe16-theme.css`로 다른 FHE16 데모와 같은 모양을 유지한다.
+SDK는 월넛의 남색·하늘색 계열과 간결한 경매 목록·입력 패널을 사용한다.
 
 ```html
 <script async src="./sdk/auction-widget.js" data-sellan-demo="./catalog.json"></script>
