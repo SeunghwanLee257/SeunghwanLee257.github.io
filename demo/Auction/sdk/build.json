@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "entrypoint": "@sellan/sdk/demo/auction",
   "assurance": "diagnostic-only",
+  "storefront": "arttoy-v1",
   "bytes": 5292,
-  "sha256": "2c98f1f22893e3741023c7d422d8cd4beb7cb8a2cd8a89c8bf1991a43eccbf66"
+  "sha256": "2c98f1f22893e3741023c7d422d8cd4beb7cb8a2cd8a89c8bf1991a43eccbf66",
+  "widget": {
+    "entrypoint": "@sellan/sdk/demo/auction-widget",
+    "file": "auction-widget.js",
+    "bytes": 24962,
+    "sha256": "f199daf6a5fa26a7c87875c48d3b8d194a142e467b664fce5cd1c2b615431a36"
+  }
 }

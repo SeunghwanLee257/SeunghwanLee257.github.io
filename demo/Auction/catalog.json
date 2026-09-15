@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "purpose": "diagnostic",
+  "merchantName": "waLLLnut objects",
+  "products": [
+    {
+      "id": "moon-blue",
+      "title": "Moon Explorer",
+      "subtitle": "문 익스플로러 · Blue Hour",
+      "artist": "STUDIO WALLLNUT",
+      "description": "작은 달을 품에 안은 탐험가. 고요한 블루 컬러와 둥근 실루엣이 나의 공간에 작은 세계를 만듭니다.",
+      "image": "./assets/blue.webp",
+      "category": "art-toy",
+      "edition": "DEMO EDITION 01",
+      "material": "소프트 비닐 콘셉트",
+      "size": "H 180 mm · 디자인 예시",
+      "startingBid": 80000,
+      "sampleBids": [80000, 80001]
+    },
+    {
+      "id": "pebble-cream",
+      "title": "Little Pebble",
+      "subtitle": "리틀 페블 · Warm Ivory",
+      "artist": "STUDIO WALLLNUT",
+      "description": "손 안에 들어온 작은 돌의 온기. 부드러운 아이보리와 테라코타의 조합을 담은 조형 오브제입니다.",
+      "image": "./assets/cream.webp",
+      "category": "object",
+      "edition": "DEMO EDITION 02",
+      "material": "레진 콘셉트",
+      "size": "H 150 mm · 디자인 예시",
+      "startingBid": 65000,
+      "sampleBids": [66000, 69000]
+    },
+    {
+      "id": "sprout-coral",
+      "title": "Sunday Sprout",
+      "subtitle": "선데이 스프라우트 · Soft Coral",
+      "artist": "STUDIO WALLLNUT",
+      "description": "느긋한 일요일처럼 앉아 있는 작은 새싹. 따뜻한 코랄 빛으로 책상 위에 가벼운 미소를 더합니다.",
+      "image": "./assets/coral.webp",
+      "category": "art-toy",
+      "edition": "DEMO EDITION 03",
+      "material": "소프트 비닐 콘셉트",
+      "size": "H 160 mm · 디자인 예시",
+      "startingBid": 72000,
+      "sampleBids": [75000, 78000]
+    },
+    {
+      "id": "moss-green",
+      "title": "Moss Companion",
+      "subtitle": "모스 컴패니언 · Sage Green",
+      "artist": "STUDIO WALLLNUT",
+      "description": "숲에서 만난 듯한 부드러운 형태. 이끼의 차분한 색과 구름을 닮은 곡선을 소장해보세요.",
+      "image": "./assets/moss.webp",
+      "category": "object",
+      "edition": "DEMO EDITION 04",
+      "material": "레진 콘셉트",
+      "size": "H 170 mm · 디자인 예시",
+      "startingBid": 88000,
+      "sampleBids": [90000, 93000]
+    }
+  ]
+}

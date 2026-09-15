@@ -1,342 +1,246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Cross-origin isolation for FHE16 WASM threads (Pages can't send COOP/COEP itself) -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f8f3" />
+    <meta
+      name="description"
+      content="waLLLnut objects. 취향을 닮은 아트토이를 만나고, Sellan 경매를 체험해보세요."
+    />
     <script src="coi-serviceworker.js"></script>
-    <title>Confidential Auction Network | FHE16 Demo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../_shared/fhe16-theme.css?v=1">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Demo Banner -->
-    <div class="demo-banner">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-        </svg>
-        <span>SELLAN SDK 연동 체험 — 실제 FHE16으로 원 단위 비교 · 공개 진단용 빌드 · 실제 인증·결제·입찰 비밀성 보장 없음</span>
+    <title>waLLLnut objects — 작은 작품, 나만의 세계</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css?v=artshop-1" />
+  </head>
+  <body>
+    <a class="skip-link" href="#collection">컬렉션으로 바로가기</a>
+    <div class="announcement">
+      <span class="dot"></span> 취향을 소장하는 새로운 방법
+      <span class="announcement-divider">/</span> Sellan 옥션 체험
     </div>
-
-    <!-- Examples nav (consistent across all FHE16 demos) -->
-    <nav class="fhe16-bar">
-      <a href="../../index.html">← waLLLnut</a>
-      <a href="../../fhe16.html">FHE16</a>
-      <span class="sep"></span>
-      <a href="../fhe16-playground/index.html">Playground</a>
-      <a href="../fhe16-compiler/">JS Compiler</a>
-      <a href="../fhe16-playground/walllnut-hr.html">HR</a>
-      <b>Auction</b>
-      <a href="../fhe16-playground/aes-to-fhe.html">AES &#8594; FHE</a>
-      <a href="../fhe16-playground/private-policy.html">Private Policy</a>
-    </nav>
-
-    <!-- Header -->
-    <header class="header">
-        <div class="logo">
-            <div class="logo-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
-            </div>
-            <span class="logo-text">Confidential Auction</span>
-            <span class="logo-badge">FHE16</span>
-        </div>
-        <div class="header-actions">
-            <div class="key-status">
-                <span class="status-dot"></span>
-                <span>SELLAN SDK · 실행 시 FHE 로딩</span>
-            </div>
-            <div class="kyc-box" id="kycBox">
-                <span class="kyc-label">체험 상태</span>
-                <span class="kyc-status" id="kycStatus">시작 전</span>
-                <button class="btn btn-small" id="verifyKycBtn" onclick="app.verifyKYC()">체험 시작</button>
-            </div>
-        </div>
+    <header class="site-header">
+      <a class="wordmark" href="./" aria-label="waLLLnut objects 홈"
+        >waLLLnut<span>objects</span></a
+      >
+      <nav aria-label="상점 메뉴">
+        <a href="#collection" class="active">Collection</a><a href="#our-story">Our story</a
+        ><button type="button" data-open-info>How it works <span>↗</span></button>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          type="button"
+          id="searchToggle"
+          aria-label="작품 검색"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" />
+          </svg></button
+        ><button class="my-collection" type="button" data-sellan-auction>
+          내 참여 <span id="participationCount">0</span>
+        </button>
+      </div>
     </header>
-
-    <!-- Main Container -->
-    <main class="main-container">
-        <!-- Left Panel: Lot List -->
-        <section class="panel lot-panel">
-            <div class="panel-header">
-                <h2>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                    경매 작품 목록
-                </h2>
+    <main>
+      <section class="hero container" aria-labelledby="heroHeading">
+        <div class="hero-gallery">
+          <div class="hero-image-wrap">
+            <span class="image-tag">THE COLLECTOR’S EDIT · 01</span
+            ><img
+              id="heroImage"
+              src="./assets/blue.webp"
+              alt="작은 달을 안고 있는 푸른색 Moon Explorer 아트토이"
+              fetchpriority="high"
+              width="1254"
+              height="1254"
+            /><span class="image-caption">SMALL OBJECTS, BIG PERSONALITY.</span>
+          </div>
+          <div class="gallery-bottom">
+            <span>〈 작은 세계를 모으는 일 〉</span>
+            <div class="gallery-thumbs" id="galleryThumbs" aria-label="대표 작품 선택"></div>
+          </div>
+        </div>
+        <div class="hero-copy">
+          <div>
+            <p class="eyebrow">ART TOYS & COLLECTIBLE OBJECTS</p>
+            <h1 id="heroHeading">작은 작품,<br />나만의 세계.</h1>
+            <p class="hero-description">
+              공간 한 켠, 오래 바라보고 싶은 존재.<br />당신의 취향과 닮은 작은 작품을 만나보세요.
+            </p>
+          </div>
+          <div class="featured-product">
+            <p class="artist">STUDIO WALLLNUT <span>DEMO COLLECTION</span></p>
+            <h2 id="featuredTitle">Moon Explorer</h2>
+            <p id="featuredSubtitle">문 익스플로러 · Blue Hour</p>
+            <div class="featured-price">
+              <span>시작 입찰가</span><strong id="featuredPrice">80,000<span>원</span></strong>
             </div>
-            <div class="lot-list" id="lotList">
-                <!-- Rendered by JS -->
-            </div>
-            <div class="lot-legend">
-                <div class="legend-item"><span class="legend-dot hot"></span><span>인기</span></div>
-                <div class="legend-item"><span class="legend-dot warm"></span><span>관심</span></div>
-                <div class="legend-item"><span class="legend-dot cool"></span><span>기회</span></div>
-            </div>
-        </section>
-
-        <!-- Center Panel: Bid Interface -->
-        <section class="panel bid-panel">
-            <div class="panel-header">
-                <h2>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                    Sealed Bid 입찰
-                </h2>
-                <div class="timer-box">
-                    <span class="timer-label">남은시간</span>
-                    <span class="timer-value" id="auctionTimer">--:--:--</span>
-                </div>
-            </div>
-
-            <!-- No Selection State -->
-            <div class="bid-content" id="bidContent">
-                <div class="no-selection" id="noSelection">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                    </svg>
-                    <p>왼쪽에서 작품을 선택하세요</p>
-                </div>
-
-                <!-- Selected Lot Info -->
-                <div class="selected-lot-section" id="selectedLotSection" style="display:none;">
-                    <div class="lot-detail-card">
-                        <div class="lot-detail-header">
-                            <span class="lot-number" id="lotNumber">LOT 001</span>
-                            <span class="lot-status-badge" id="lotStatusBadge">진행중</span>
-                        </div>
-                        <h3 class="lot-detail-title" id="lotTitle">-</h3>
-                        <p class="lot-detail-artist" id="lotArtist">-</p>
-                        <div class="lot-detail-meta">
-                            <span id="lotYear">-</span> | <span id="lotMedium">-</span> | <span id="lotSize">-</span>
-                        </div>
-                        <div class="lot-estimate-box">
-                            <div class="estimate-item">
-                                <span class="label">추정가</span>
-                                <span class="value" id="lotEstimate">-</span>
-                            </div>
-                            <div class="estimate-item">
-                                <span class="label">시작가</span>
-                                <span class="value" id="lotStarting">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bid Form -->
-                    <div class="bid-form-section">
-                        <label class="bid-label">입찰 금액 (KRW)</label>
-                        <div class="bid-input-wrapper">
-                            <span class="currency-symbol">₩</span>
-                            <input type="number" id="bidAmount" placeholder="금액 입력" min="0" step="1000000">
-                        </div>
-                        <div class="bid-presets">
-                            <button type="button" onclick="app.addBidAmount(10000000)">+1천만</button>
-                            <button type="button" onclick="app.addBidAmount(50000000)">+5천만</button>
-                            <button type="button" onclick="app.addBidAmount(100000000)">+1억</button>
-                            <button type="button" onclick="app.addBidAmount(500000000)">+5억</button>
-                        </div>
-
-                        <!-- Encryption Preview -->
-                        <div class="encryption-preview" id="encryptionPreview">
-                            <div class="preview-header">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                                입찰 기록 해시 미리보기
-                            </div>
-                            <code id="previewCode">금액을 입력하면 기록 해시가 표시됩니다</code>
-                        </div>
-
-                        <button class="btn btn-primary btn-large" id="submitBidBtn" onclick="app.submitBid()" disabled>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 2L11 13"></path>
-                                <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
-                            </svg>
-                            Sealed Bid 제출
-                        </button>
-                        <p class="bid-notice" id="bidNotice">체험 시작 버튼을 누르면 입찰할 수 있습니다</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FHE Flow Visualization -->
-            <div class="fhe-flow" id="fheFlow">
-                <h4>FHE16 처리 플로우</h4>
-                <div class="flow-steps">
-                    <div class="flow-step" data-step="1">
-                        <div class="step-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </div>
-                        <span>입찰 기록</span>
-                    </div>
-                    <div class="flow-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </div>
-                    <div class="flow-step" data-step="2">
-                        <div class="step-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                        </div>
-                        <span>FHE 비교</span>
-                    </div>
-                    <div class="flow-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </div>
-                    <div class="flow-step" data-step="3">
-                        <div class="step-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                        </div>
-                        <span>완료</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Right Panel: Stats -->
-        <section class="panel stats-panel">
-            <div class="panel-header">
-                <h2>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 20V10"></path>
-                        <path d="M12 20V4"></path>
-                        <path d="M6 20v-6"></path>
-                    </svg>
-                    Public Stats
-                </h2>
-                <span class="public-tag">PUBLIC</span>
-            </div>
-
-            <div class="stats-content">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-value" id="totalLots">0</span>
-                        <span class="stat-label">총 작품</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value" id="activeAuctions">0</span>
-                        <span class="stat-label">진행중</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value" id="totalBids">0</span>
-                        <span class="stat-label">총 입찰</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value" id="yourBids">0</span>
-                        <span class="stat-label">내 입찰</span>
-                    </div>
-                </div>
-
-                <div class="selected-lot-stats" id="selectedLotStats" style="display:none;">
-                    <h4 id="selectedLotTitle">선택된 작품</h4>
-                    <div class="lot-stats-detail">
-                        <div class="stat-row">
-                            <span class="label">입찰 수</span>
-                            <span class="value" id="lotBidCount">-</span>
-                            <span class="visibility">PUBLIC</span>
-                        </div>
-                        <div class="stat-row">
-                            <span class="label">입찰 금액</span>
-                            <span class="value encrypted">브라우저에서 처리</span>
-                            <span class="visibility private">DEMO</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recent-bids-section">
-                    <h4>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        최근 입찰
-                    </h4>
-                    <div class="recent-bids-list" id="recentBidsList">
-                        <div class="empty-message">아직 입찰이 없습니다</div>
-                    </div>
-                </div>
-
-                <button class="btn btn-secondary btn-full" id="viewEncryptedBtn" onclick="app.showEncryptedData()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
-                    입찰 기록 보기
-                </button>
-
-                <button class="btn btn-accent btn-full" id="determineWinnerBtn" onclick="app.determineWinner()" style="margin-top:8px;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                    </svg>
-                    낙찰자 결정 (Demo)
-                </button>
-            </div>
-        </section>
+            <button
+              id="featuredBid"
+              class="button-primary"
+              type="button"
+              data-sellan-auction="moon-blue"
+            >
+              이 작품에 입찰하기 <span aria-hidden="true">↗</span>
+            </button>
+            <p class="experience-note">
+              <span class="dot"></span> 실제 결제 없이 Sellan으로 참여해보세요.
+            </p>
+          </div>
+          <a class="collection-link" href="#collection">컬렉션 모두 보기 <span>↓</span></a>
+        </div>
+      </section>
+      <div class="collection-divider container">
+        <span>CURATED WITH CURIOSITY.</span><span>ART · OBJECTS · YOUR OWN WORLD</span>
+      </div>
+      <section class="collection container" id="collection" aria-labelledby="collectionHeading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FIND YOUR NEXT FAVORITE</p>
+            <h2 id="collectionHeading">The collection<span id="collectionCount">04</span></h2>
+          </div>
+          <p>마음에 닿는 작품에, 나만의 가격을.</p>
+        </div>
+        <div class="collection-toolbar">
+          <div class="filters" role="group" aria-label="작품 종류">
+            <button type="button" class="selected" data-filter="all" aria-pressed="true">
+              전체 보기</button
+            ><button type="button" data-filter="art-toy" aria-pressed="false">아트토이</button
+            ><button type="button" data-filter="object" aria-pressed="false">오브제</button
+            ><button type="button" data-filter="saved" aria-pressed="false">
+              관심 작품 <span id="savedCount">0</span>
+            </button>
+          </div>
+          <label class="sort-control"
+            ><span class="visually-hidden">작품 정렬</span
+            ><select id="sortSelect">
+              <option value="curated">추천순</option>
+              <option value="price-low">낮은 시작가순</option>
+              <option value="price-high">높은 시작가순</option>
+            </select></label
+          >
+        </div>
+        <div id="searchPanel" class="search-panel" hidden>
+          <label for="searchInput">어떤 작품을 찾으세요?</label
+          ><input
+            id="searchInput"
+            type="search"
+            placeholder="작품명 또는 색상 검색"
+            autocomplete="off"
+          /><button type="button" id="clearSearch">검색 지우기</button>
+        </div>
+        <div class="product-grid" id="productGrid" aria-live="polite">
+          <p class="loading-message">작품을 준비하고 있어요.</p>
+        </div>
+        <p class="catalog-note">
+          이 컬렉션은 경매 체험을 위해 만든 가상 상품과 AI 생성 이미지로 구성됩니다.
+        </p>
+      </section>
+      <section class="story container" id="our-story" aria-labelledby="storyHeading">
+        <div class="story-copy">
+          <p class="eyebrow">LITTLE THINGS, LASTING CONNECTIONS</p>
+          <h2 id="storyHeading">작품을 만나는 순간이<br />조금 더 가까워지도록.</h2>
+          <p>
+            좋아하는 작품을 발견하고, 소장하고 싶은 가격을 제안하는 일.<br />익숙한 상점 안에서
+            Sellan과 함께 경험해보세요.
+          </p>
+          <button type="button" class="text-button" data-open-info>
+            참여 방법 알아보기 <span>↗</span>
+          </button>
+          <div class="story-signature">
+            <span class="small-wordmark">waLLLnut objects</span><span>×</span
+            ><span class="sellan-wordmark">sellan.</span>
+          </div>
+        </div>
+        <div class="story-visual">
+          <img
+            src="./assets/moss.webp"
+            alt="구름을 닮은 세이지 그린 Moss Companion 오브제"
+            loading="lazy"
+            width="1254"
+            height="1254"
+          /><span>MAKE ROOM FOR WHAT YOU LOVE.</span>
+        </div>
+      </section>
     </main>
-
-    <!-- Encrypted Data Modal -->
-    <div class="modal" id="encryptedDataModal">
-        <div class="modal-overlay" onclick="app.closeModal('encryptedDataModal')"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>입찰 기록과 SDK 실행 정보</h3>
-                <button class="close-modal" onclick="app.closeModal('encryptedDataModal')">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body" id="encryptedDataContent">
-                <!-- Filled by JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Winner Modal -->
-    <div class="modal" id="winnerModal">
-        <div class="modal-overlay" onclick="app.closeModal('winnerModal')"></div>
-        <div class="modal-content modal-winner">
-            <div class="modal-header">
-                <h3 id="winnerTitle">낙찰 결과</h3>
-                <button class="close-modal" onclick="app.closeModal('winnerModal')">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body" id="winnerDetails">
-                <!-- Filled by JS -->
-            </div>
-        </div>
-    </div>
-
-    <script type="module" src="app.js"></script>
-</body>
+    <footer class="site-footer container">
+      <div>
+        <a class="wordmark" href="./">waLLLnut<span>objects</span></a>
+        <p>작은 작품으로 채우는, 당신만의 세계.</p>
+        <small>© 2026 waLLLnut. Art toy auction experience.</small>
+      </div>
+      <div class="footer-links">
+        <a href="../../">waLLLnut 소개 ↗</a><button type="button" data-open-info>체험 안내</button
+        ><a href="./README.md">SDK 연결 문서 ↗</a>
+        <p>실제 결제·배송 없음 · 공개 FHE16 진단용 체험</p>
+      </div>
+    </footer>
+    <dialog id="infoDialog" class="info-dialog" aria-labelledby="infoTitle">
+      <div class="info-header">
+        <span>SELLAN EXPERIENCE</span
+        ><button id="closeInfo" class="icon-button" type="button" aria-label="체험 안내 닫기">
+          ×
+        </button>
+      </div>
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2 id="infoTitle">마음에 드는 작품,<br />세 단계로 만나보세요.</h2>
+      <ol>
+        <li>
+          <span>01</span>
+          <div>
+            <strong>작품을 선택하세요.</strong>
+            <p>상품의 ‘입찰하기’ 또는 우측 Sellan 버튼을 눌러요.</p>
+          </div>
+        </li>
+        <li>
+          <span>02</span>
+          <div>
+            <strong>나만의 가격을 제안하세요.</strong>
+            <p>시작 입찰가 이상으로 원하는 금액을 입력해요.</p>
+          </div>
+        </li>
+        <li>
+          <span>03</span>
+          <div>
+            <strong>결과를 확인하세요.</strong>
+            <p>예시 입찰과 내 입찰을 FHE16으로 비교해요.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="info-notice">
+        가상 상품과 예시 입찰을 사용하는 체험입니다. 실제 결제·배송이 발생하지 않으며, 공개 FHE
+        빌드는 비밀 입찰이나 독립 검증을 보장하지 않습니다.
+      </div>
+      <details>
+        <summary>이 페이지에 설치된 SDK 코드</summary>
+        <code
+          >&lt;script async src="./sdk/auction-widget.js"
+          data-sellan-demo="./catalog.json"&gt;&lt;/script&gt;</code
+        >
+        <p>
+          상점 화면 위에 입찰창을 띄우는 정적 데모용 설치 코드입니다. 운영용 설치는 판매자
+          인증·호스팅 서비스 연결이 필요합니다.
+        </p>
+      </details>
+      <button id="startFromInfo" class="button-primary" type="button">
+        컬렉션 둘러보기 <span>↗</span>
+      </button>
+    </dialog>
+    <noscript><p class="noscript">작품 조회와 경매 체험을 위해 JavaScript를 켜주세요.</p></noscript>
+    <script type="module" src="app.js?v=artshop-1"></script>
+    <script
+      async
+      src="./sdk/auction-widget.js?v=artshop-1"
+      data-sellan-demo="./catalog.json"
+    ></script>
+  </body>
 </html>
