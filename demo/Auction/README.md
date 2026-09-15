@@ -1,23 +1,23 @@
-# waLLLnut objects — 아트토이 상점 + Sellan SDK
+# waLLLnut Auction — Sellan 플로팅 SDK
 
-상점은 상품 소개·검색·정렬·관심 작품을 담당한다. 상품의 입찰 버튼을 누르면 SDK가
-독립된 Shadow DOM 창을 띄우고 입찰 입력부터 FHE 결과까지 처리한다.
+첫 화면에는 기존 FHE16 공용 상단 메뉴와 우측 하단 Sellan 버튼만 표시한다.
+버튼을 누르면 SDK의 Shadow DOM 창에서 상품 선택·입찰 입력·FHE 결과 확인을 진행한다.
+상단 메뉴는 `../_shared/fhe16-theme.css`로 다른 FHE16 데모와 같은 모양을 유지한다.
 
 ```html
 <script async src="./sdk/auction-widget.js" data-sellan-demo="./catalog.json"></script>
 ```
 
-상품 버튼에는 `data-sellan-auction="moon-blue"`처럼 catalog의 상품 ID를 연결한다.
-값이 비어 있으면 전체 작품 선택 창이 열린다. 우측 Sellan 버튼은 SDK가 직접 생성한다.
+위 태그 하나로 SDK가 플로팅 버튼과 입찰창을 직접 생성한다. 별도의 페이지 JavaScript나
+상품 목록 UI가 필요하지 않다. 상품 설정과 예시 이미지는 SDK 창에서만 사용한다.
+다른 상점에 상품별 진입 버튼이 필요하면 `data-sellan-auction="moon-blue"`처럼
+catalog의 상품 ID를 연결할 수 있다.
 
 `auction-widget.js` → `@sellan/sdk/demo/auction-widget` → `@sellan/sdk/demo/auction`
-→ 같은 사이트의 FHE16 v58 순서다. `app.js`에는 입찰·Worker·FHE 코드를 넣지 않는다.
+→ 같은 사이트의 FHE16 v58 순서다. 페이지의 `app.js`는 제거했다.
 이 설치는 같은 origin에서 실행하는 **정적 체험용**이며 운영용 인증·호스팅 설치와 다르다.
 
-페이지 구성은 사용자가 제공한 [NOW&NEVER](https://nowandnever.co.kr/shop_view/?idx=22)의
-상품 상세, [이글루토이](https://iglootoy.com/category/art-toy/135/)의 상품 목록,
-[HAOR](https://haor.kr/shop)의 여백과 필터를 참고했다. 이미지는 이 데모를 위해 생성한
-가상 토이 4종이다. 참조 상점의 상품 사진이나 브랜드를 복제하지 않았다.
+SDK 내부의 상품 이미지는 이 데모를 위해 생성한 가상 토이 4종이다.
 
 - 초기 화면과 입찰 제출은 FHE 자산을 읽지 않는다. 승자 계산 시 처음 로딩한다.
 - 같은 페이지에서 창을 닫아도 입력·입찰·계산 결과가 유지된다. 계산 중 닫아도 계속 실행한다.
