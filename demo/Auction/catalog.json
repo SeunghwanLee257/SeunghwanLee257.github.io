@@ -109,7 +109,7 @@
     {
       "id": "gacha-demo",
       "mode": "gacha",
-      "title": "캡슐 가차",
+      "title": "캡슐 가챠",
       "unitAmount": 3000,
       "drawCounts": [
         1,
