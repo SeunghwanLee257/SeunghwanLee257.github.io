@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../_shared/fhe16-theme.css?v=1" />
-    <link rel="stylesheet" href="styles.css?v=floating-1" />
+    <link rel="stylesheet" href="styles.css?v=browser-2" />
   </head>
   <body>
     <nav class="fhe16-bar" aria-label="FHE16 데모 메뉴">
@@ -30,10 +30,20 @@
       <a href="../fhe16-playground/aes-to-fhe.html">AES &#8594; FHE</a>
       <a href="../fhe16-playground/private-policy.html">Private Policy</a>
     </nav>
-    <main aria-label="Sellan 옥션 데모">
-      <h1 class="visually-hidden">Sellan 플로팅 옥션 SDK</h1>
+    <main class="browser-surface" aria-labelledby="browserTitle">
+      <div class="browser-placeholder">
+        <svg class="browser-icon" viewBox="0 0 80 64" fill="none" aria-hidden="true">
+          <rect x="2" y="2" width="76" height="60" rx="7" />
+          <path d="M2 17h76" />
+          <circle cx="10" cy="9.5" r="1" />
+          <circle cx="16" cy="9.5" r="1" />
+          <circle cx="22" cy="9.5" r="1" />
+        </svg>
+        <h1 id="browserTitle">기존 브라우저</h1>
+        <p>우측 하단 Sellan 버튼을 누르면<br />이 화면 위에서 경매에 참여할 수 있어요.</p>
+      </div>
       <noscript><p>경매 체험을 위해 JavaScript를 켜주세요.</p></noscript>
     </main>
-    <script async src="./sdk/auction-widget.js?v=floating-1" data-sellan-demo="./catalog.json"></script>
+    <script async src="./sdk/auction-widget.js?v=browser-2" data-sellan-demo="./catalog.json"></script>
   </body>
 </html>

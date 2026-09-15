@@ -12,8 +12,37 @@ body {
   color: var(--ink);
 }
 
-main {
+.browser-surface {
   flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 64px 24px 140px;
+}
+
+.browser-placeholder {
+  text-align: center;
+}
+
+.browser-icon {
+  width: 80px;
+  height: 64px;
+  stroke: #a8b8c3;
+  stroke-width: 1.5;
+}
+
+.browser-placeholder h1 {
+  margin: 22px 0 12px;
+  color: var(--ink2);
+  font-size: clamp(26px, 4vw, 32px);
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.browser-placeholder p {
+  margin: 0;
+  color: #6b7f8d;
+  font-size: 14px;
+  line-height: 1.9;
 }
 
 .fhe16-bar a:focus-visible {
@@ -21,19 +50,7 @@ main {
   outline-offset: 3px;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-noscript p,
-[data-sellan-auction-error] {
+noscript p {
   margin: 24px 28px;
   font-size: 14px;
   line-height: 1.7;

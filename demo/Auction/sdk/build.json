@@ -9,7 +9,7 @@
   "widget": {
     "entrypoint": "@sellan/sdk/demo/auction-widget",
     "file": "auction-widget.js",
-    "bytes": 24962,
-    "sha256": "f199daf6a5fa26a7c87875c48d3b8d194a142e467b664fce5cd1c2b615431a36"
+    "bytes": 26244,
+    "sha256": "cadbefc54c1a4f773377d3beade6f16db3622639d099b383b9c4f76f46c15b86"
   }
 }
