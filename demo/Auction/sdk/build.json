@@ -4,12 +4,40 @@
   "entrypoint": "@sellan/sdk/demo/auction",
   "assurance": "diagnostic-only",
   "presentation": "floating-sdk-v1",
+  "experiences": [
+    "auction",
+    "kuji",
+    "gacha"
+  ],
   "bytes": 5292,
   "sha256": "2c98f1f22893e3741023c7d422d8cd4beb7cb8a2cd8a89c8bf1991a43eccbf66",
   "widget": {
-    "entrypoint": "@sellan/sdk/demo/auction-widget",
-    "file": "auction-widget.js",
-    "bytes": 28214,
-    "sha256": "665a2cd3b4a84d0a7c1433d2d6ca8535ec6ed94fc202865daaf13849a081818d"
+    "entrypoint": "@sellan/sdk/demo/widget",
+    "file": "sellan-widget.js",
+    "legacyFile": "auction-widget.js",
+    "bytes": 47230,
+    "sha256": "c459005aaffa33b11a248e763fa37d57544018d8c9bdff7fac28566db41eb1f9"
+  },
+  "vld": {
+    "file": "vld.js",
+    "protocol": "VLD-1",
+    "source": "FHE16_GATCHA",
+    "bytes": 22175,
+    "sha256": "307a84a0fb1ec1057928fa64bd4988f5bcfe60cdfdfe14d2c8e2560024c41f0f",
+    "sourceHashes": {
+      "encoding.js": "42d5877cd431c2bdec89eb8eb3316efdb4d2df54b41e766ea1afad7f7538a21e",
+      "hash.js": "449f7e0f7c1377d730c3262c500776d2b2d9ad2c0b82270bbef7abf333ac29d5",
+      "config.js": "a89eaadb4471ded36792b9b8b8ae938bf294ee52f03d79ebcd9e9fdc8846af26",
+      "protocol.js": "3ead36297335593a767815d980ea675189b97bf48f5f869e4be0c4ba4f6747af",
+      "receipt.js": "35bc1cd974275618e46b02518118d119059fce08b86ad58a2157fe4bf9224092",
+      "sampler.js": "0d08bf3162e017852542ac17a7dbbb76bde6f632d30c211d172699beeaea5482",
+      "merkle.js": "847d7ba66d8989e2326b7fd6a2124cbe91412a540ecd6393ba527d1d783035ed"
+    }
+  },
+  "draws": {
+    "entrypoint": "@sellan/sdk/demo/draws",
+    "file": "draws.js",
+    "bytes": 6054,
+    "sha256": "48691b99e23de88ed3ebe584d4158bd7d47a80eaa388e5a9fa9c34e4ca57e157"
   }
 }
