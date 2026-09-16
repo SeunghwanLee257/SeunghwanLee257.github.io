@@ -174,6 +174,14 @@ export function createFHE16Backend(module, options = {}) {
   const backend = {
     name: 'fhe16',
     describe: () => `FHE16 WASM · ${useBigInt ? 'BigInt ABI' : 'lo/hi ABI'}`,
+    /**
+     * 비교 결과가 일반 정수 0/1 인가.
+     *
+     * 산술 비교(arithCmp)를 쓰면 정수다. 네이티브 비교(FHE16_SELECT 빌드)를
+     * 쓰면 비교 결과는 조건 전용 도메인이라 산술에 섞을 수 없다 — 그때는
+     * 컴파일러가 값으로 쓰기 전에 select(c, 1, 0) 으로 정수화한다.
+     */
+    get conditionIsInteger() { return !has('FHE16_SELECT') && !options.rawCompare; },
     module,
 
     encrypt(value, type) {

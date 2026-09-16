@@ -16,6 +16,9 @@ const CASES = [
   { name: '공개 파라미터', src: 'function f(secret a, public k){ let s=0; for(let i=0;i<k;i++){ s+=a; } return s; }', ref:(a,k)=>{let s=0;for(let i=0;i<k;i++)s+=a;return s;} },
   { name: '단항',        src: 'function f(a,b){ return -a + (!(a>b) ? 10 : 20) + (~b); }', ref:(a,b)=>-a+((!(a>b))?10:20)+(~b) },
   { name: '증감',        src: 'function f(a,b){ let x=a; x++; ++x; x+=b; return x; }',  ref:(a,b)=>{let x=a;x++;++x;x+=b;return x;} },
+  // 비교 결과를 값으로 쓴다 — 1비트로 접히면 안 된다.
+  { name: '비교값 산술',  src: 'function f(a,b){ return (a < b) * 5 + (a == b); }',     ref:(a,b)=>(a<b?1:0)*5+(a===b?1:0) },
+  { name: '조건 합',      src: 'function f(a,b){ const s = a == b ? 1 : 0; const n = abs(a-b) < 3 ? 1 : 0; return s + n; }', ref:(a,b)=>(a===b?1:0)+(Math.abs(a-b)<3?1:0) },
 ];
 
 function randInt() { return BigInt(Math.floor(Math.random()*41) - 20); }

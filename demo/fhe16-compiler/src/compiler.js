@@ -157,6 +157,27 @@ function execute(fn, paramTypes, backend, args, runOptions) {
   };
   const isPlain = cell => cell.handle === undefined;
 
+  // 백엔드의 비교 결과가 정수 0/1 인가. 아니면(네이티브 비교 도메인) 조건은
+  // select 의 조건 자리에만 들어갈 수 있고, 값으로 쓰려면 정수화해야 한다.
+  const condIsInt = backend.conditionIsInteger !== false;
+  const isCond = cell => !isPlain(cell) && (cell.type === BOOL_TYPE || (cell.type.bits === 1 && !cell.type.float));
+
+  /**
+   * 조건(비교 결과)을 값으로 쓸 때.
+   *
+   * 조건은 1비트 폭(BOOL_TYPE)으로 표시된다. 그대로 산술에 넣으면 결과도
+   * 1비트로 접혀 (a<b)*5 가 1 이 된다. 값으로 쓸 때는 함수 기본 폭으로 넓힌다.
+   *
+   * 정수 도메인 백엔드는 조건이 이미 0/1 정수라 폭 표시만 바꾼다.
+   * 네이티브 비교 도메인에서는 select(c, 1, 0) 으로 정수 0/1 을 만든다.
+   */
+  function asValue(cell, type) {
+    if (!isCond(cell)) return cell;
+    const t = type && !type.float ? type : NAT;
+    if (condIsInt) return { handle: cell.handle, type: t };
+    return { handle: backend.select(cell.handle, backend.constant(1n, t), backend.constant(0n, t), t), type: t };
+  }
+
   /**
    * 결과 폭을 정한다.
    * 평문 리터럴은 폭이 없는 값으로 본다. 한쪽만 암호문이면 그쪽 폭을 따른다.
@@ -170,6 +191,8 @@ function execute(fn, paramTypes, backend, args, runOptions) {
   }
 
   function binary(op, L, R, line) {
+    // && || 는 조건을 조건으로 쓰므로 그대로 둔다. 나머지는 값으로 쓴다.
+    if (op !== '&&' && op !== '||') { L = asValue(L); R = asValue(R); }
     const type = resultType(L, R);
 
     // 양쪽이 평문이면 회로를 만들지 않는다. 상수 접기.
@@ -259,7 +282,7 @@ function execute(fn, paramTypes, backend, args, runOptions) {
         return binary(node.operator, evalExpr(node.left), evalExpr(node.right), node.line);
 
       case 'Unary': {
-        const v = evalExpr(node.argument);
+        const v = node.operator === '!' ? evalExpr(node.argument) : asValue(evalExpr(node.argument));
         if (node.operator === '+') return v;
         if (node.operator === '-') {
           if (isPlain(v)) return { plain: v.type.float ? -Number(v.plain) : -BigInt(v.plain), type: v.type };
@@ -268,6 +291,10 @@ function execute(fn, paramTypes, backend, args, runOptions) {
         if (node.operator === '!') {
           const b = truthy(v);
           if (isPlain(b)) return { plain: b.plain ? 0n : 1n, type: b.type };
+          if (!condIsInt) {
+            // 조건 도메인에는 뺄셈이 없다. select(c, 0, 1) 로 뒤집으면서 정수화한다.
+            return { handle: backend.select(b.handle, backend.constant(0n, NAT), backend.constant(1n, NAT), NAT), type: NAT };
+          }
           // 0/1 뒤집기는 1 − c. XOR 은 비트 단위가 아닐 수 있어 쓰지 않는다.
           const one = backend.constant(1n, b.type);
           return { handle: backend.sub(one, b.handle, b.type), type: b.type };
@@ -314,10 +341,11 @@ function execute(fn, paramTypes, backend, args, runOptions) {
         if (node.args.length !== spec.arity) {
           throw new CompileError(`${node.callee} 는 인자 ${spec.arity}개를 받는다`, node.line);
         }
-        const vals = node.args.map(evalExpr);
+        let vals = node.args.map(evalExpr);
         if (spec.special === 'select') {
           return phi(truthy(vals[0]), vals[1], vals[2]);
         }
+        vals = vals.map(v => asValue(v));
         const encrypted = vals.filter(v => !isPlain(v));
         const type = (encrypted.length ? encrypted : vals)
           .reduce((acc, v) => (acc ? unify(acc, v.type) : v.type), null);
@@ -450,6 +478,8 @@ function execute(fn, paramTypes, backend, args, runOptions) {
    * 모양을 보고 가장 싼 회로를 고른다. 삼항연산자는 이 중 일반형 하나일 뿐이다.
    */
   function phi(cond, t, e) {
+    // 가지의 값이 조건 암호문이면 값으로 쓸 수 있게 정수화한다.
+    t = asValue(t); e = asValue(e);
     // 양쪽이 리터럴이면 함수 기본 폭을 쓴다.
     let type = resultType(t, e);
     if (isPlain(t) && isPlain(e) && !type.float && type.bits < NAT.bits) {
@@ -479,7 +509,9 @@ function execute(fn, paramTypes, backend, args, runOptions) {
     const zero = v => isPlain(v) && (type.float ? Number(v.plain) === 0 : BigInt(v.plain) === 0n);
     const one  = v => isPlain(v) && (type.float ? Number(v.plain) === 1 : BigInt(v.plain) === 1n);
 
-    if (!type.float) {
+    // 아래 지름길은 조건이 정수 0/1 일 때만 성립한다. 네이티브 비교 도메인에서는
+    // c 를 값으로 쓸 수 없으므로 항상 select 로 내린다.
+    if (!type.float && condIsInt) {
       // φ(c, 1, 0) = c
       if (one(t) && zero(e)) { merges.free++; return { handle: c, type: BOOL_TYPE }; }
       // φ(c, 0, 1) = 1 - c
@@ -516,5 +548,6 @@ function execute(fn, paramTypes, backend, args, runOptions) {
   }
 
   if (isPlain(result)) return { value: result.plain, type: result.type, encrypted: false, merges };
+  result = asValue(result);   // 조건 암호문을 그대로 복호하면 정수가 아니다
   return { value: backend.decrypt(result.handle, result.type), type: result.type, encrypted: true, merges };
 }
