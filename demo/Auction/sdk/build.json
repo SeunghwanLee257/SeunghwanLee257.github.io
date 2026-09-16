@@ -15,14 +15,14 @@
     "kuji": "kuji.html",
     "gacha": "gacha.html"
   },
-  "bytes": 5292,
-  "sha256": "2c98f1f22893e3741023c7d422d8cd4beb7cb8a2cd8a89c8bf1991a43eccbf66",
+  "bytes": 5443,
+  "sha256": "98c6e524992b5c74fcadfd5c07d433d4bdc67769dffbd6f666ce25c1022815ba",
   "widget": {
     "entrypoint": "@sellan/sdk/demo/widget",
     "file": "sellan-widget.js",
     "legacyFile": "auction-widget.js",
-    "bytes": 46407,
-    "sha256": "307ffb18d9f6f1462267f0105ec9041f1b23854c5ea960de96d115eb80e9f640"
+    "bytes": 46693,
+    "sha256": "2f7236ca6151001d77d97c62e4f8893b05ffc4e6c02f5304cdf1333ce45be2f2"
   },
   "vld": {
     "file": "vld.js",
