@@ -85,6 +85,7 @@ node scripts/smoke-walllnut-auction.mjs --url https://walllnut.com/demo/Auction/
 `sdk/build.json`의 SHA-256으로 SDK와 VLD 엔진을 확인한다. VLD 빌드에는 인접 원본 저장소가
 필요하며 배포 실행에는 필요하지 않다. 원본 파일 해시도 manifest에 기록한다.
 `sdk/VLD-NOTICES.txt`에 SHA-256 구현의 라이선스를 포함한다.
-생성된 JS는 직접 수정하지 않는다. FHE16의 기존 `dist/`·`build/` 자산은 별도로 유지한다.
+생성된 JS는 직접 수정하지 않는다. SDK가 import하는 `dist/fhe16-web.mjs`는 사이트 루트의
+단일 파일 라이브러리 `/fhe16.js`를 그대로 re-export하는 shim이며, 엔진 빌드는 그 파일 안에 들어 있다.
 `kuji.html`·`gacha.html`은 경매 페이지를 기준으로 빌드 스크립트가 생성한다.
 브라우저 검증에는 Puppeteer와 Chrome이 필요하다.
