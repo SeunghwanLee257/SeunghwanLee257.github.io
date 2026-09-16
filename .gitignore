@@ -5,3 +5,6 @@ deck/*/*/node_modules/
 
 # Confidential demo files
 demo/chung26/
+
+# local editor/tool settings
+settings.local.json

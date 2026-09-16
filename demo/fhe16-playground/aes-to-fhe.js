@@ -1,4 +1,4 @@
-import { loadFHE16Worker } from './dist/fhe16-web.mjs?v=58';
+import { loadFHE16Worker } from '../../fhe16.js?v=58';
 
 // ── i18n ─────────────────────────────────────────────────────────────────────
 function t(en, ko) {

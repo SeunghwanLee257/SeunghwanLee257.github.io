@@ -176,8 +176,10 @@ async function prepareEngine() {
     setEngineStatus(t('Downloading engine…', '엔진 내려받는 중…'), 'busy');
     log(t('Loading FHE16 WASM — about 40 seconds', 'FHE16 WASM 불러오는 중 — 40초쯤 걸린다'));
     const t0 = performance.now();
-    const mod = await import('../fhe16-playground/dist/fhe16-web.mjs');
-    const loaded = await mod.loadFHE16({ baseUrl: '../fhe16-playground/' });
+    const mod = await import('../../fhe16.js?v=58');
+    // The interpreter calls the engine synchronously on the main thread, so it
+    // uses the single-thread build: pthread builds must not block the main thread.
+    const loaded = await mod.loadFHE16({ build: 'avx6st' });
     fhe16Module = loaded.module || loaded;
     log(t('Engine loaded in ', '엔진 로드 ') + ((performance.now() - t0) / 1000).toFixed(1) + t(' s', '초'), 'ok');
 
