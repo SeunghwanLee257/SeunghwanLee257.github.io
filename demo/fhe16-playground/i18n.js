@@ -41,6 +41,12 @@
     applyLang(isKo ? 'ko' : 'en');
   });
 
+  // ?lang=en / ?lang=ko in the URL is treated as an explicit choice and stored.
+  try {
+    var fromUrl = new URLSearchParams(window.location.search).get('lang');
+    if (fromUrl === 'en' || fromUrl === 'ko') localStorage.setItem(LANG_KEY, fromUrl);
+  } catch (e) { /* ignore */ }
+
   // Apply stored preference immediately (before DOMContentLoaded) to avoid flash
   var stored = localStorage.getItem(LANG_KEY);
   if (stored !== 'en') {  // ko-first: default Korean unless user explicitly chose English
